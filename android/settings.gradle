@@ -1,3 +1,3 @@
-rootProject.name = 'fudao'
+rootProject.name = 'FuDao'
 
 include ':app'
