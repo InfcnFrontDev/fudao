@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-export default class fudao extends Component {
+export default class Fudao extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('fudao', () => fudao);
+AppRegistry.registerComponent('Fudao', () => Fudao);
