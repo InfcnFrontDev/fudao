@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {BackAndroid, Navigator, Platform, View, ToastAndroid} from "react-native";
-import IndexView from "./views/IndexView";
+import StartView from "./views/StartView";
 import BackButton from "./components/BackButton";
 import global from "./utils/global";
 import configureRealm from "./realm/configureRealm";
@@ -26,7 +26,7 @@ export default class Root extends Component {
             <View style={styles.container}>
                 <Navigator
                     ref='navigator'
-                    initialRoute={{component: IndexView, name: 'Index'}}
+                    initialRoute={{component: StartView}}
                     configureScene={this.configureScene}
                     renderScene={this.renderScene}
                 />

@@ -3,8 +3,9 @@ import {StyleSheet, View, Text} from "react-native";
 import NavBarView from "../components/NavBarView";
 
 /**
+ * 组件列表
  */
-class DynamicView extends Component {
+class MyView extends Component {
     constructor(props) {
         super(props);
     }
@@ -12,10 +13,10 @@ class DynamicView extends Component {
     render() {
         return (
             <NavBarView {...this.props}>
-                <Text>DynamicView</Text>
+                <Text>MyView</Text>
             </NavBarView>
         )
     }
 }
 
-export default (DynamicView);
+export default (MyView);

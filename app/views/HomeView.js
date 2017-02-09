@@ -4,7 +4,7 @@ import NavBarView from "../components/NavBarView";
 
 /**
  */
-class DynamicView extends Component {
+class HomeView extends Component {
     constructor(props) {
         super(props);
     }
@@ -12,10 +12,10 @@ class DynamicView extends Component {
     render() {
         return (
             <NavBarView {...this.props}>
-                <Text>DynamicView</Text>
+                <Text>HomeView</Text>
             </NavBarView>
         )
     }
 }
 
-export default (DynamicView);
+export default (HomeView);
