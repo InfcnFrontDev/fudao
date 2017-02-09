@@ -7,4 +7,4 @@ import React, {Component} from "react";
 import {AppRegistry} from "react-native";
 import App from "./app";
 
-AppRegistry.registerComponent('Fudao', (s) => App);
+AppRegistry.registerComponent('FuDao', () => App);
