@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {StyleSheet, View, Text} from "react-native";
 import TabNavigator from "react-native-tab-navigator";
+import Icon from "react-native-vector-icons/Ionicons";
 import iconfont from "../utils/iconfont";
 import globalStyles from "../utils/globalStyles";
 import HomeView from "../views/HomeView";
@@ -14,27 +15,27 @@ export default class IndexView extends Component {
         this.state = {
             tabs: [{
                 id: 'home',
-                title: '微信',
-                icon: 'message',
-                selectedIcon: 'message_fill',
+                title: '首页',
+                icon: 'ios-home-outline',
+                selectedIcon: 'ios-home',
                 component: HomeView
             }, {
                 id: 'article',
-                title: '通讯录',
-                icon: 'friend',
-                selectedIcon: 'friend_fill',
+                title: '资讯',
+                icon: 'ios-list-box-outline',
+                selectedIcon: 'ios-list-box',
                 component: ArticleView
             }, {
                 id: 'dynamic',
-                title: '朋友圈',
-                icon: 'discover_line',
-                selectedIcon: 'discover_shape',
+                title: '动态',
+                icon: 'ios-compass-outline',
+                selectedIcon: 'ios-compass',
                 component: DynamicView
             }, {
                 id: 'my',
-                title: '我的',
-                icon: 'my',
-                selectedIcon: 'my_fill',
+                title: '我',
+                icon: 'ios-person-outline',
+                selectedIcon: 'ios-person',
                 component: MyView
             }],
             selectedTab: 'home'
@@ -77,7 +78,7 @@ export default class IndexView extends Component {
 
     renderIcon(icon, selected = false) {
         return (
-            <Text style={[styles.tabIcon, selected ? styles.tabIconSelected : {}]}>{iconfont[icon]}</Text>
+            <Icon name={icon} style={[styles.tabIcon, selected ? styles.tabIconSelected : {}]}/>
         )
     }
 }
@@ -94,15 +95,14 @@ const styles = StyleSheet.create({
     },
     titleStyle: {
         color: '#929292',
-        fontSize: 10
+        fontSize: 12
     },
     titleStyleSelected: {
         color: '#2BA245'
     },
     tabIcon: {
-        ...globalStyles.iconfont,
         color: '#929292',
-        fontSize: 22
+        fontSize: 24
     },
     tabIconSelected: {
         color: '#2BA245'
