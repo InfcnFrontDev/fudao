@@ -1,16 +1,7 @@
-import React, {
-	Component
-} from 'react'
-
-import {
-	View,
-	Text,
-	TouchableOpacity,
-	Platform
-} from 'react-native'
-
-import NavigationBar from 'react-native-navbar'
-import global from '../utils/global'
+import React, {Component} from "react";
+import {View, Text, TouchableOpacity, Platform} from "react-native";
+import NavigationBar from "react-native-navbar";
+import global from "../utils/global";
 
 
 export default class NavBar extends Component {
