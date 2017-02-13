@@ -3,7 +3,7 @@
 import Realm from "realm";
 import schema from "./schema";
 import uuid from "uuid";
-import * as schemaConstants from '../constants/schemaConstants'
+import * as schemaConstants from './schemaConstants'
 
 
 let init = function (realm) {

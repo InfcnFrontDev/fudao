@@ -1,5 +1,5 @@
 'use strict';
-import * as TYPES from '../constants/actionTypes';
+import * as TYPES from '../actions/actionTypes';
 
 const initialState = {
 	isLoggedIn: false,

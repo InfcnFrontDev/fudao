@@ -1,5 +1,5 @@
 'use strict';
-import * as TYPES from '../constants/actionTypes';
+import * as TYPES from './actionTypes';
 import request from '../utils/request';
 
 export function fetchMessageList(userId) {

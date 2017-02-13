@@ -1,6 +1,6 @@
 'use strict';
 import React, {ListView} from "react-native";
-import * as TYPES from "../constants/actionTypes";
+import * as TYPES from "../actions/actionTypes";
 var dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 const initialState = {

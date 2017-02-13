@@ -7,7 +7,7 @@ import configureRealm from "./realm/configureRealm";
 
 
 var firstClick = 0
-export default class Root extends Component {
+export default class AppNavigator extends Component {
 
     constructor(props) {
         super(props);
