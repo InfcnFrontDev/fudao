@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {StyleSheet, View, Image} from "react-native";
-import IndexView from "../views/IndexView";
+import IndexView from "../index/index";
 
 var Dimensions = require('Dimensions');
 var {width, height} = Dimensions.get('window');
@@ -16,7 +16,7 @@ class StartView extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image source={require('../assets/images/start.png')} style={styles.image}/>
+                <Image source={require('../../assets/images/start.png')} style={styles.image}/>
             </View>
         )
     }

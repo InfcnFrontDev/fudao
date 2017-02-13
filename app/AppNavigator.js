@@ -1,9 +1,12 @@
 import React, {Component} from "react";
 import {BackAndroid, Navigator, Platform, View, ToastAndroid} from "react-native";
-import StartView from "./views/StartView";
 import BackButton from "./components/BackButton";
 import global from "./utils/global";
 import configureRealm from "./realm/configureRealm";
+import {StyleProvider} from "native-base";
+import getTheme from "./theme/components";
+import material from "./theme/variables/material";
+import IndexView from "./views/index";
 
 
 var firstClick = 0
@@ -23,14 +26,16 @@ export default class AppNavigator extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Navigator
-                    ref='navigator'
-                    initialRoute={{component: StartView}}
-                    configureScene={this.configureScene}
-                    renderScene={this.renderScene}
-                />
-            </View>
+            <StyleProvider style={getTheme(material)}>
+                <View style={styles.container}>
+                    <Navigator
+                        ref='navigator'
+                        initialRoute={{component: IndexView}}
+                        configureScene={this.configureScene}
+                        renderScene={this.renderScene}
+                    />
+                </View>
+            </StyleProvider>
         )
     }
 

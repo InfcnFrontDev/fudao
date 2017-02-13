@@ -2,12 +2,11 @@ import React, {Component} from "react";
 import {StyleSheet, View, Text} from "react-native";
 import TabNavigator from "react-native-tab-navigator";
 import Icon from "react-native-vector-icons/Ionicons";
-import iconfont from "../utils/iconfont";
-import globalStyles from "../utils/globalStyles";
-import HomeView from "../views/HomeView";
-import ArticleView from "../views/ArticleView";
-import DynamicView from "../views/DynamicView";
-import MyView from "../views/MyView";
+import globalStyles from "../../utils/globalStyles";
+import HomeView from "../home";
+import ArticleView from "../article";
+import DynamicView from "../dynamic";
+import MyView from "../my";
 
 export default class IndexView extends Component {
     constructor(props) {
@@ -38,7 +37,7 @@ export default class IndexView extends Component {
                 selectedIcon: 'ios-person',
                 component: MyView
             }],
-            selectedTab: 'home'
+            selectedTab: 'my'
         };
     }
 
