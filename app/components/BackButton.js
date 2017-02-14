@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {View, Text, TouchableOpacity} from "react-native";
 import global from "../utils/global";
-import iconfont from "../utils/iconfont";
 
 export default class BackButton extends Component {
 

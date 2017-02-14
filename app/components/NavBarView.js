@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {StyleSheet, View, ScrollView, Text, Image} from "react-native";
-import globalStyles from "../utils/globalStyles";
 import NavBar from "./NavBar";
 
 export default class NavView extends Component {
@@ -10,9 +9,9 @@ export default class NavView extends Component {
 
 	render() {
 		return (
-			<View style={styles.rootContainer}>
+			<View style={styles.rootView}>
 				<NavBar {...this.props}/>
-				<View style={styles.mainContainer}>
+				<View style={styles.contentView}>
 					{this.props.children}
 				</View>
 			</View>
@@ -22,13 +21,11 @@ export default class NavView extends Component {
 
 
 const styles = StyleSheet.create({
-	rootContainer: {
-		flexGrow: 1,
-		flex: 1
+	rootView: {
+		flexGrow: 1
 	},
-	mainContainer: {
-		...globalStyles.container,
+	contentView: {
 		flexGrow: 1,
-		flex: 1
+		backgroundColor: '#EAEAEA'
 	}
 });
