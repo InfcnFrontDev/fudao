@@ -1,20 +1,18 @@
 import React, {Component} from "react";
 import {StyleSheet, View, TouchableNativeFeedback} from "react-native";
 import {
-	Content,
-	Left,
-	Body,
-	Right,
-	Thumbnail,
-	Text,
-	Separator,
-	List,
-	ListItem,
-	Switch,
-	Icon,
-	Grid,
-	Col,
-	Button
+    Container,
+    Content,
+    Left,
+    Body,
+    Right,
+    Thumbnail,
+    Text,
+    Separator,
+    Icon,
+    ListItem,
+    Grid,
+    Col
 } from "native-base";
 import NavBarView from "../components/NavBarView";
 
@@ -22,203 +20,137 @@ import NavBarView from "../components/NavBarView";
  * 我的
  */
 class MyView extends Component {
-	constructor(props) {
-		super(props);
-	}
+    constructor(props) {
+        super(props);
+    }
 
-	render() {
-		return (
-			<NavBarView {...this.props}>
-				<Content>
-					<View style={styles.myView}>
-						<View style={styles.thumbnailView}>
-							<Thumbnail square size={80} source={require('../assets/logo.png')}/>
-						</View>
-					</View>
+    render() {
+        return (
+            <NavBarView {...this.props}>
+                <Container>
+                    <Content>
+                        {this.renderMyView()}
+                        {this.renderGridView()}
+                        {this.renderSeparator()}
+                        {this.renderListView()}
+                    </Content>
+                </Container>
+            </NavBarView>
+        )
+    }
 
-					{this.renderGridMenu()}
+    renderMyView() {
+        return (
+            <View style={styles.myView}>
+                <View style={styles.thumbnailView}>
+                    <Thumbnail square size={80} source={require('../assets/logo.png')}/>
+                </View>
+            </View>
+        )
+    }
 
-					<Separator>
-						<Text>FORWARD</Text>
-					</Separator>
+    renderGridView() {
+        return (
+            <Grid style={{backgroundColor: '#fff', height: 80}}>
+                {this.renderGridItem({
+                    icon: 'ios-star',
+                    iconColor: '#DAA520',
+                    text: '收藏'
+                })}
+                {this.renderGridItem({
+                    icon: 'ios-pie',
+                    iconColor: '#79CDCD',
+                    text: '好友'
+                })}
+                {this.renderGridItem({
+                    icon: 'ios-settings',
+                    iconColor: '#A2B5CD',
+                    text: '设置'
+                })}
+            </Grid>
+        )
+    }
 
-					<View style={{backgroundColor: '#fff'}}>
-						<ListItem icon>
-							<Left>
-								<Icon name="plane"/>
-							</Left>
-							<Body>
-							<Text>Airplane Mode</Text>
-							</Body>
-							<Right>
-								<Switch valur={false}/>
-							</Right>
-						</ListItem>
-						<ListItem icon>
-							<Left>
-								<Icon name="wifi"/>
-							</Left>
-							<Body>
-							<Text>Wi-Fi</Text>
-							</Body>
-							<Right>
-								<Text>GeekyAnts</Text>
-								<Icon name="arrow-forward"/>
-							</Right>
-						</ListItem>
-						<ListItem icon>
-							<Left>
-								<Icon name="bluetooth"/>
-							</Left>
-							<Body style={{borderWidth: 0}}>
-							<Text>Bluetooth</Text>
-							</Body>
-							<Right style={{borderWidth: 0}}>
-								<Text>On</Text>
-								<Icon name="arrow-forward"/>
-							</Right>
-						</ListItem>
-					</View>
+    renderGridItem(item) {
+        let colStyle = {justifyContent: 'center', alignItems: 'center'},
+            iconStyle = {fontSize: 40, color: item.iconColor};
+        return (
+            <TouchableNativeFeedback onPress={()=>this._onPressButton(item)}>
+                <Col style={colStyle}>
+                    <Icon name={item.icon} style={iconStyle}/>
+                    <Text>{item.text}</Text>
+                </Col>
+            </TouchableNativeFeedback>
+        )
+    }
 
-					<Separator>
-						<Text>FORWARD</Text>
-					</Separator>
+    renderListView() {
+        return (
+            <View style={{backgroundColor: '#fff'}}>
+                {this.renderListItem({
+                    icon: 'ios-list-box-outline',
+                    text: '基本信息',
+                    bordered: true
+                })}
+                {this.renderListItem({
+                    icon: 'ios-stopwatch-outline',
+                    text: '体检信息',
+                    bordered: true
+                })}
+                {this.renderListItem({
+                    icon: 'ios-tablet-portrait-outline',
+                    text: '智能设备',
+                    bordered: true
+                })}
+                {this.renderListItem({
+                    icon: 'ios-chatboxes-outline',
+                    text: '推送通知',
+                    bordered: true
+                })}
+                {this.renderListItem({
+                    icon: 'ios-information-circle-outline',
+                    text: '关于福道',
+                    bordered: false
+                })}
+            </View>
+        )
+    }
 
-					<View style={{backgroundColor: '#fff'}}>
-						<ListItem icon>
-							<Left>
-								<Icon name="plane"/>
-							</Left>
-							<Body>
-							<Text>Airplane Mode</Text>
-							</Body>
-							<Right>
-								<Switch valur={false}/>
-							</Right>
-						</ListItem>
-						<ListItem icon>
-							<Left>
-								<Icon name="wifi"/>
-							</Left>
-							<Body>
-							<Text>Wi-Fi</Text>
-							</Body>
-							<Right>
-								<Text>GeekyAnts</Text>
-								<Icon name="arrow-forward"/>
-							</Right>
-						</ListItem>
-						<ListItem icon>
-							<Left>
-								<Icon name="bluetooth"/>
-							</Left>
-							<Body style={{borderWidth: 0}}>
-							<Text>Bluetooth</Text>
-							</Body>
-							<Right style={{borderWidth: 0}}>
-								<Text>On</Text>
-								<Icon name="arrow-forward"/>
-							</Right>
-						</ListItem>
-					</View>
-					<Separator>
-						<Text>FORWARD</Text>
-					</Separator>
+    renderListItem(item) {
+        return (
+            <ListItem icon onPress={()=>this._onPressButton({})}>
+                <Left>
+                    <Icon name={item.icon}/>
+                </Left>
+                <Body style={item.bordered?{}:{borderBottomWidth:0}}>
+                <Text>{item.text}</Text>
+                </Body>
+                <Right style={item.bordered?{}:{borderBottomWidth:0}}>
+                    <Icon name="ios-arrow-forward"/>
+                </Right>
+            </ListItem>
+        )
+    }
 
-					<View style={{backgroundColor: '#fff'}}>
-						<ListItem icon>
-							<Left>
-								<Icon name="plane"/>
-							</Left>
-							<Body>
-							<Text>Airplane Mode</Text>
-							</Body>
-							<Right>
-								<Switch valur={false}/>
-							</Right>
-						</ListItem>
-						<ListItem icon>
-							<Left>
-								<Icon name="wifi"/>
-							</Left>
-							<Body>
-							<Text>Wi-Fi</Text>
-							</Body>
-							<Right>
-								<Text>GeekyAnts</Text>
-								<Icon name="arrow-forward"/>
-							</Right>
-						</ListItem>
-						<ListItem icon>
-							<Left>
-								<Icon name="bluetooth"/>
-							</Left>
-							<Body style={{borderWidth: 0}}>
-							<Text>Bluetooth</Text>
-							</Body>
-							<Right style={{borderWidth: 0}}>
-								<Text>On</Text>
-								<Icon name="arrow-forward"/>
-							</Right>
-						</ListItem>
-					</View>
-				</Content>
-			</NavBarView>
-		)
-	}
+    renderSeparator() {
+        return (
+            <View style={{height:20}}/>
+        )
+    }
 
-	renderGridMenu() {
-		return (
-			<Grid style={{backgroundColor: '#fff'}}>
-				{this.renderGridMenuItem({
-					icon: 'logo-apple',
-					iconColor: '#DAA520',
-					text: '收藏'
-				})}
-				{this.renderGridMenuItem({
-					icon: 'pie',
-					iconColor: '#79CDCD',
-					text: '好友'
-				})}
-				{this.renderGridMenuItem({
-					icon: 'settings',
-					iconColor: '#A2B5CD',
-					text: '设置'
-				})}
-			</Grid>
-		)
-	}
-
-	renderGridMenuItem(item) {
-		let colStyle = {justifyContent: 'center', alignItems: 'center'},
-			itemStyle = {width: 80, height: 80, justifyContent: 'center', alignItems: 'center'},
-			iconStyle = {fontSize: 40, color: item.iconColor};
-		return (
-			<Col style={colStyle}>
-				<TouchableNativeFeedback onPress={()=>this._onPressButton(item)}>
-					<View style={itemStyle}>
-						<Icon name={item.icon} style={iconStyle}/>
-						<Text>{item.text}</Text>
-					</View>
-				</TouchableNativeFeedback>
-			</Col>
-		)
-	}
-
-	_onPressButton(item) {
-		alert(item.text);
-	}
+    _onPressButton(item) {
+    }
 }
 
 const styles = StyleSheet.create({
-	myView: {
-		backgroundColor: '#2BA245',
-		alignItems: 'center',
-	},
-	thumbnailView: {
-		marginTop: 10,
-		marginBottom: 10,
-	}
+    myView: {
+        backgroundColor: '#1874CD',
+        alignItems: 'center',
+    },
+    thumbnailView: {
+        marginTop: 10,
+        marginBottom: 10,
+    }
 });
 
 export default (MyView);
