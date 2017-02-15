@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {StyleSheet, View, TouchableNativeFeedback} from "react-native";
+import {StyleSheet, View, TouchableNativeFeedback, TouchableHighlight} from "react-native";
 import {
     Container,
     Content,
@@ -43,7 +43,9 @@ class MyView extends Component {
         return (
             <View style={styles.myView}>
                 <View style={styles.thumbnailView}>
-                    <Thumbnail square size={80} source={require('../assets/logo.png')}/>
+                    <TouchableNativeFeedback onPress={()=>this._onPressButton()}>
+                        <Thumbnail size={100} source={require('../assets/photo.jpg')} style={{ marginBottom: 10 }}/>
+                    </TouchableNativeFeedback>
                 </View>
             </View>
         )
@@ -145,11 +147,11 @@ class MyView extends Component {
 const styles = StyleSheet.create({
     myView: {
         backgroundColor: '#1874CD',
-        alignItems: 'center',
+        flex: 1
     },
     thumbnailView: {
-        marginTop: 10,
-        marginBottom: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 
