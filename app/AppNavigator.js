@@ -5,7 +5,7 @@ import global from "./utils/global";
 import {StyleProvider} from "native-base";
 import getTheme from "./theme/components";
 import material from "./theme/variables/material";
-import SplashScreenView from "./views/SplashScreenView";
+import SplashScreenView from "./views/IndexView";
 
 var firstClick = 0;
 export default class AppNavigator extends Component {

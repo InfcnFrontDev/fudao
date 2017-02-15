@@ -14,7 +14,9 @@ import {
     Grid,
     Col
 } from "native-base";
+import global from "../utils/global";
 import NavBarView from "../components/NavBarView";
+import AboutView from "./AboutView";
 
 /**
  * 我的
@@ -92,27 +94,42 @@ class MyView extends Component {
                 {this.renderListItem({
                     icon: 'ios-list-box-outline',
                     text: '基本信息',
-                    bordered: true
+                    bordered: true,
+                    onPress: function () {
+                    }
                 })}
                 {this.renderListItem({
                     icon: 'ios-stopwatch-outline',
                     text: '体检信息',
-                    bordered: true
+                    bordered: true,
+                    onPress: function () {
+                    }
                 })}
                 {this.renderListItem({
                     icon: 'ios-tablet-portrait-outline',
                     text: '智能设备',
-                    bordered: true
+                    bordered: true,
+                    onPress: function () {
+                    }
                 })}
                 {this.renderListItem({
                     icon: 'ios-chatboxes-outline',
                     text: '推送通知',
-                    bordered: true
+                    bordered: true,
+                    onPress: function () {
+                    }
                 })}
                 {this.renderListItem({
                     icon: 'ios-information-circle-outline',
                     text: '关于福道',
-                    bordered: false
+                    bordered: false,
+                    onPress: function () {
+                        let title = this.text;
+                        global.navigator.push({
+                            title: title,
+                            component: AboutView
+                        })
+                    }
                 })}
             </View>
         )
@@ -120,7 +137,7 @@ class MyView extends Component {
 
     renderListItem(item) {
         return (
-            <ListItem icon onPress={()=>this._onPressButton({})}>
+            <ListItem icon onPress={()=>item.onPress()}>
                 <Left>
                     <Icon name={item.icon}/>
                 </Left>
@@ -141,6 +158,7 @@ class MyView extends Component {
     }
 
     _onPressButton(item) {
+        global.navigator.push({component: AboutView});
     }
 }
 
