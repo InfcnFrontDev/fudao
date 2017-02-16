@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import {StyleSheet, View, Text} from "react-native";
-import NavBarView from "../components/NavBarView";
+import NavBarView from "../../components/NavBarView";
 
 /**
  * 主页
  */
-class HomeView extends Component {
+class Home extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -13,10 +13,10 @@ class HomeView extends Component {
 	render() {
 		return (
 			<NavBarView {...this.props}>
-				<Text>ArticleView</Text>
+				<Text>Home</Text>
 			</NavBarView>
 		)
 	}
 }
 
-export default (HomeView);
+export default (Home);

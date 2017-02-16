@@ -2,15 +2,17 @@ import React, {Component} from "react";
 import {StyleSheet, View, Text} from "react-native";
 import TabNavigator from "react-native-tab-navigator";
 import Icon from "react-native-vector-icons/Ionicons";
-import HomeView from "./HomeView";
-import ArticleView from "./ArticleView";
-import DynamicView from "./DynamicView";
-import MyView from "./MyView";
+import styles from "./styles";
+// tab components
+import Home from "../home/";
+import Article from "../article/";
+import Dynamic from "../dynamic/";
+import My from "../my/";
 
 /**
  * 首页
  */
-class IndexView extends Component {
+class Index extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,27 +21,27 @@ class IndexView extends Component {
                 title: '主页',
                 icon: 'ios-home-outline',
                 selectedIcon: 'ios-home',
-                component: HomeView
+                component: Home
             }, {
                 id: 'article',
                 title: '资讯',
                 icon: 'ios-list-box-outline',
                 selectedIcon: 'ios-list-box',
-                component: ArticleView
+                component: Article
             }, {
                 id: 'dynamic',
                 title: '动态',
                 icon: 'ios-compass-outline',
                 selectedIcon: 'ios-compass',
-                component: DynamicView
+                component: Dynamic
             }, {
                 id: 'my',
                 title: '我的',
                 icon: 'ios-person-outline',
                 selectedIcon: 'ios-person',
-                component: MyView
+                component: My
             }],
-            selectedTab: 'my'
+            selectedTab: 'home'
         };
     }
 
@@ -84,26 +86,4 @@ class IndexView extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flexGrow: 1
-    },
-    tabBarStyle: {},
-    sceneStyle: {},
-    titleStyle: {
-        color: '#333333',
-        fontSize: 12
-    },
-    titleStyleSelected: {
-        color: '#1874CD'
-    },
-    tabIcon: {
-        color: '#333333',
-        fontSize: 24
-    },
-    tabIconSelected: {
-        color: '#1874CD'
-    }
-});
-
-export default (IndexView);
+export default (Index);

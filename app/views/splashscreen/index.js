@@ -1,14 +1,12 @@
 import React, {Component} from "react";
 import {StyleSheet, View, Image, StatusBar} from "react-native";
-import IndexView from "./IndexView";
-
-var Dimensions = require('Dimensions');
-var {width, height} = Dimensions.get('window');
+import IndexView from "../index/index";
+import styles from "./styles";
 
 /**
  * 启动页
  */
-class SplashScreenView extends Component {
+class SplashScreen extends Component {
     constructor(props) {
         super(props);
     }
@@ -21,7 +19,7 @@ class SplashScreenView extends Component {
                     hidden={true}
                     animated={true}
                 />
-                <Image source={require('../assets/images/start.png')} style={styles.image}/>
+                <Image source={require('../../assets/images/start.png')} style={styles.image}/>
             </View>
         )
     }
@@ -37,15 +35,4 @@ class SplashScreenView extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    image: {
-        width: width,
-        height: width / (440 / 766)
-    }
-})
-
-export default (SplashScreenView);
+export default (SplashScreen);

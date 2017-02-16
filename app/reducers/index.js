@@ -1,9 +1,13 @@
-'use strict';
-import {combineReducers} from 'redux';
-import user from './user';
-import messageList from './messageList';
+
+import { combineReducers } from 'redux';
+
+import drawer from './drawer';
+import routes from './routes';
+import cardNavigation from './cardNavigation';
 
 export default combineReducers({
-	user,
-	messageList
+
+  drawer,
+  cardNavigation,
+  routes
 });
