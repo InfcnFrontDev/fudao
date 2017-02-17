@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Container, Title, Content, Left, Right, Body, Text} from "native-base";
+import {Container, Title, Content, Left, Right, Body, Form, Input, Item} from "native-base";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import Header from "../../components/header/";
 import styles from "./styles";
@@ -21,9 +21,14 @@ class Home extends Component {
                 </Header>
 
                 <Content padder>
-                    <Text>
-                        Header With multiple Icon Buttons
-                    </Text>
+                    <Form>
+                        <Item>
+                            <Input placeholder="Username"/>
+                        </Item>
+                        <Item>
+                            <Input placeholder="Password"/>
+                        </Item>
+                    </Form>
                 </Content>
             </Container>
         )

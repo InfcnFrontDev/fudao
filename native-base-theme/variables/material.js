@@ -146,12 +146,13 @@ export default {
   topTabBarActiveTextColor: '#fff',
   topTabActiveBgColor: undefined,
   topTabBarBorderColor: '#fff',
+  topTabBarActiveBorderColor: '#fff',
 
 
     // Header
   toolbarBtnColor: '#fff',
   toolbarDefaultBg: '#3F51B5',
-  toolbarHeight: (platform === 'ios') ? 64 : 56,
+  toolbarHeight: (platform === 'ios') ? 76 : 56,
   toolbarIconSize: (platform === 'ios') ? 20 : 22,
   toolbarSearchIconSize: (platform === 'ios') ? 20 : 23,
   toolbarInputColor: '#fff',
@@ -159,6 +160,7 @@ export default {
   toolbarInverseBg: '#222',
   toolbarTextColor: '#fff',
   toolbarDefaultBorder: '#3F51B5',
+  iosStatusbar: 'light-content',
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hexString();
   },

@@ -23,6 +23,8 @@ import textTheme from './Text';
 import tabTheme from './Tab';
 import tabBarTheme from './TabBar';
 import viewTheme from './View';
+import tabContainerTheme from './TabContainer';
+import tabHeadingTheme from './TabHeading';
 import iconTheme from './Icon';
 import spinnerTheme from './Spinner';
 import cardItemTheme from './CardItem';
@@ -203,11 +205,19 @@ export default (variables = variable) => {
     'NativeBase.ViewNB': {
       ...viewTheme(variables),
     },
+    'NativeBase.TabHeading': {
+      ...tabHeadingTheme(variables),
+    },
+    'NativeBase.TabContainer': {
+      ...tabContainerTheme(variables),
+    },
     'NativeBase.Switch': {
       marginVertical: -5,
     },
     'NativeBase.Separator': {
       ...separatorTheme(variables),
+    },
+    'NativeBase.Tabs': {
     },
 
   };
