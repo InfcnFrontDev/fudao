@@ -1,77 +1,78 @@
 import React, {Component} from "react";
-import {BackAndroid, StatusBar, Navigator, Platform, View, ToastAndroid} from "react-native";
-import BackButton from "./components/BackButton";
-import global from "./utils/global";
-import {StyleProvider} from "native-base";
-import getTheme from "./theme/components";
-import material from "./theme/variables/material";
-import SplashScreenView from "./views/IndexView";
+import {BackAndroid, StatusBar, NavigationExperimental, Platform} from "react-native";
+import {StyleProvider, Drawer} from "native-base";
+import {connect} from "react-redux";
+import {Router, Scene} from "react-native-router-flux";
+import {openDrawer, closeDrawer} from "./actions/drawer";
+import getTheme from "../native-base-theme/components/";
+import material from "./themes/material";
+import SideBar from "./views/sidebar/";
+//
+import Index from "./views/index/";
+import About from "./views/about/";
+import Protocol from "./views/protocol/";
+import Declare from "./views/declare/";
+import Search from "./views/search/"
 
-var firstClick = 0;
-export default class AppNavigator extends Component {
+const RouterWithRedux = connect()(Router);
 
-    constructor(props) {
-        super(props);
-        this.handleBack = this.handleBack.bind(this);
+class AppNavigator extends Component {
+
+    componentDidUpdate() {
+        if (this.props.drawerState === 'opened') {
+            this._drawer._root.open();
+        }
+
+        if (this.props.drawerState === 'closed') {
+            this._drawer._root.close();
+        }
     }
 
-    componentWillUnmount() {
-        BackAndroid.removeEventListener('hardwareBackPress', this.handleBack);
+    openDrawer() {
+        this._drawer._root.open();
+    }
 
-        global.realm = configureRealm('yangkk');
-
+    closeDrawer() {
+        if (this.props.drawerState === 'opened') {
+            this.props.closeDrawer();
+        }
     }
 
     render() {
         return (
             <StyleProvider style={getTheme(material)}>
-                <View style={{flexGrow:1}}>
+                <Drawer
+                    ref={(ref) => { this._drawer = ref; }}
+                    content={<SideBar navigator={this._navigator} />}
+                    onClose={() => this.closeDrawer()}
+                >
                     <StatusBar
-                        backgroundColor='#1E90FF'
+                        hidden={(this.props.drawerState === 'opened' && Platform.OS === 'ios') ? true : false}
+                        backgroundColor={material.statusBarColor}
                     />
-                    <Navigator
-                        ref='navigator'
-                        initialRoute={{component: SplashScreenView}}
-                        configureScene={this._configureScene}
-                        renderScene={this._renderScene}
-                    />
-                </View>
+                    <RouterWithRedux>
+                        <Scene key="root">
+                            <Scene key="index" component={Index} hideNavBar initial={true}/>
+                            <Scene key="about" component={About}/>
+                            <Scene key="protocol" component={Protocol}/>
+                            <Scene key="declare" component={Declare}/>
+                            <Scene key="search" component={Search}/>
+                        </Scene>
+                    </RouterWithRedux>
+                </Drawer>
             </StyleProvider>
         )
     }
 
-    componentDidMount() {
-        BackAndroid.addEventListener('hardwareBackPress', this.handleBack)
-
-        global.navigator = this.refs.navigator;
-        global.backButton = <BackButton />;
-    }
-
-    handleBack() {
-        const {navigator} = this.refs;
-        if (navigator && navigator.getCurrentRoutes().length > 1) {
-            navigator.pop();
-            return true;
-        } else {
-            var timestamp = (new Date()).valueOf();
-            if (timestamp - firstClick > 2000) {
-                firstClick = timestamp;
-                ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT)
-                return true
-            } else {
-                return false
-            }
-        }
-    }
-
-    _renderScene(route, navigator) {
-        let Component = route.component;
-        return (
-            <Component navigator={navigator} route={route} {...route}/>
-        )
-    }
-
-    _configureScene(route, routeStack) {
-        return route.sceneConfig || Navigator.SceneConfigs.PushFromRight
-    }
 }
+
+const bindAction = dispatch => ({
+    openDrawer: () => dispatch(openDrawer()),
+    closeDrawer: () => dispatch(closeDrawer()),
+});
+
+const mapStateToProps = state => ({
+    drawerState: state.drawer.drawerState,
+});
+
+export default connect(mapStateToProps, bindAction)(AppNavigator);
