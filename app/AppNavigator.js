@@ -3,7 +3,7 @@ import {BackAndroid, StatusBar, NavigationExperimental, Platform} from "react-na
 import {StyleProvider, getTheme, variables, Drawer} from "native-base";
 import {connect} from "react-redux";
 import {Router, Scene} from "react-native-router-flux";
-import {closeDrawer} from "./actions/drawer";
+import {openDrawer, closeDrawer} from "./actions/drawer";
 import material from "./themes/material";
 import SideBar from "./views/sidebar/";
 //
@@ -16,22 +16,9 @@ const RouterWithRedux = connect()(Router);
 
 class AppNavigator extends Component {
 
-    componentDidMount() {
-        BackAndroid.addEventListener('hardwareBackPress', () => {
-            const routes = this.props.navigation.routes;
-
-            if (routes[routes.length - 1].key === 'home') {
-                return false;
-            }
-
-            this.props.popRoute(this.props.navigation.key);
-            return true;
-        });
-    }
-
     componentDidUpdate() {
         if (this.props.drawerState === 'opened') {
-            this.openDrawer();
+            this._drawer._root.open();
         }
 
         if (this.props.drawerState === 'closed') {
@@ -77,12 +64,12 @@ class AppNavigator extends Component {
 }
 
 const bindAction = dispatch => ({
+    openDrawer: () => dispatch(openDrawer()),
     closeDrawer: () => dispatch(closeDrawer()),
 });
 
 const mapStateToProps = state => ({
     drawerState: state.drawer.drawerState,
-    navigation: state.cardNavigation,
 });
 
 export default connect(mapStateToProps, bindAction)(AppNavigator);
