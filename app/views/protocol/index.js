@@ -1,16 +1,15 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
-import {Container, Content, Left, Right, Body, Text, Row, Thumbnail, Col, Button} from "native-base";
+import {Container, Content, Left, Right, Body, Text, Row, Thumbnail, Col} from "native-base";
 import Header from "../../components/header/base";
-import styles from "./styles";
+import styles from "../about/styles";
 
-class About extends Component {  // eslint-disable-line
+class Protocol extends Component {
 
     render() {
         return (
             <Container style={styles.container}>
-                <Header title="关于福道"/>
+                <Header title="用户协议"/>
                 <Content padder>
                     <Row style={styles.title}>
                         <Col></Col>
@@ -47,14 +46,6 @@ class About extends Component {  // eslint-disable-line
                     <Row>
                         <Text>商务合作：fudao@infcn.com.cn</Text>
                     </Row>
-                    <Row>
-                        <Col>
-                            <Button light onPress={()=>Actions['protocol']()}><Text>隐式声明</Text></Button>
-                        </Col>
-                        <Col>
-                            <Button light onPress={()=>Actions['protocol']()}><Text>用户协议</Text></Button>
-                        </Col>
-                    </Row>
                 </Content>
             </Container>
         );
@@ -66,4 +57,4 @@ function bindAction(dispatch) {
 }
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(About);
+export default connect(mapStateToProps, bindAction)(Protocol);

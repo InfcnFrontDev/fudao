@@ -2,37 +2,18 @@ import React, {Component} from "react";
 import {BackAndroid, StatusBar, NavigationExperimental, Platform} from "react-native";
 import {StyleProvider, getTheme, variables, Drawer} from "native-base";
 import {connect} from "react-redux";
-import {actions} from "react-native-navigation-redux-helpers";
 import {Router, Scene} from "react-native-router-flux";
-import {openDrawer, closeDrawer} from "./actions/drawer";
+import {closeDrawer} from "./actions/drawer";
 import material from "./themes/material";
 import SideBar from "./views/sidebar/";
 //
 import Index from "./views/index/";
 import About from "./views/about/";
-
-const {
-    popRoute,
-} = actions;
+import Protocol from "./views/protocol/";
 
 const RouterWithRedux = connect()(Router);
 
-const {
-    CardStack: NavigationCardStack,
-} = NavigationExperimental;
-
 class AppNavigator extends Component {
-
-    static propTypes = {
-        drawerState: React.PropTypes.string,
-        popRoute: React.PropTypes.func,
-        closeDrawer: React.PropTypes.func,
-        themeState: React.PropTypes.string,
-        navigation: React.PropTypes.shape({
-            key: React.PropTypes.string,
-            routes: React.PropTypes.array,
-        }),
-    }
 
     componentDidMount() {
         BackAndroid.addEventListener('hardwareBackPress', () => {
@@ -55,10 +36,6 @@ class AppNavigator extends Component {
         if (this.props.drawerState === 'closed') {
             this._drawer._root.close();
         }
-    }
-
-    popRoute() {
-        this.props.popRoute();
     }
 
     openDrawer() {
@@ -87,6 +64,7 @@ class AppNavigator extends Component {
                         <Scene key="root">
                             <Scene key="index" component={Index} hideNavBar initial={true}/>
                             <Scene key="about" component={About}/>
+                            <Scene key="protocol" component={Protocol}/>
                         </Scene>
                     </RouterWithRedux>
                 </Drawer>
@@ -97,9 +75,7 @@ class AppNavigator extends Component {
 }
 
 const bindAction = dispatch => ({
-    openDrawer: () => dispatch(openDrawer()),
     closeDrawer: () => dispatch(closeDrawer()),
-    popRoute: key => dispatch(popRoute(key)),
 });
 
 const mapStateToProps = state => ({

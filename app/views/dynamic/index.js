@@ -1,24 +1,41 @@
 import React, {Component} from "react";
-import {StyleSheet, View, Text} from "react-native";
-import NavBarView from "../../components/NavBarView";
-import Icon from "react-native-vector-icons/FontAwesome";
+import {connect} from "react-redux";
+import {Container, Title, Content, Left, Right, Body, Text} from "native-base";
+import {openDrawer, closeDrawer} from "../../actions/drawer";
+import Header from "../../components/header/";
+import styles from "./styles";
+
 
 /**
  * 动态
  */
 class Dynamic extends Component {
-	constructor(props) {
-		super(props);
-	}
+    constructor(props) {
+        super(props);
+    }
 
-	render() {
-		return (
-			<NavBarView {...this.props}>
-				<Text>Dynamic</Text>
-				<Icon name="qq" size={30} color="#52C0FE"/>
-			</NavBarView>
-		)
-	}
+    render() {
+        return (
+            <Container style={styles.container}>
+                <Header>
+                    <Title>{this.props.title}</Title>
+                </Header>
+
+                <Content padder>
+                    <Text>
+                        Header With multiple Icon Buttons
+                    </Text>
+                </Content>
+            </Container>
+        );
+    }
+}
+function bindAction(dispatch) {
+    return {
+        openDrawer: () => dispatch(openDrawer()),
+        closeDrawer: key => dispatch(closeDrawer()),
+    };
 }
 
-export default (Dynamic);
+const mapStateToProps = state => ({});
+export default connect(mapStateToProps, bindAction)(Dynamic);
