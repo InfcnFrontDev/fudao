@@ -1,6 +1,8 @@
+//noinspection JSAnnotator
 import React, {Component} from "react";
 import {StyleSheet, View, Text} from "react-native";
 import NavBarView from "../../components/NavBarView";
+import CommitButton from "../../components/CommitButton";
 
 /**
  * 主页
@@ -13,7 +15,7 @@ class Home extends Component {
 	render() {
 		return (
 			<NavBarView {...this.props}>
-				<Text>Home</Text>
+				<CommitButton />
 			</NavBarView>
 		)
 	}
