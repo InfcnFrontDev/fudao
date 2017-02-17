@@ -1,6 +1,9 @@
 import React, {Component} from "react";
-import {StyleSheet, View, Text} from "react-native";
-import NavBarView from "../../components/NavBarView";
+import {connect} from "react-redux";
+import {Container, Title, Content, Left, Right, Body, Form, Item, Input} from "native-base";
+import {openDrawer, closeDrawer} from "../../actions/drawer";
+import Header from "../../components/header/";
+import styles from "./styles";
 
 /**
  * 资讯
@@ -12,11 +15,31 @@ class Article extends Component {
 
     render() {
         return (
-            <NavBarView {...this.props}>
-                <Text>Article</Text>
-            </NavBarView>
+            <Container style={styles.container}>
+                <Header>
+                    <Title>{this.props.title}</Title>
+                </Header>
+
+                <Content>
+                    <Form>
+                        <Item>
+                            <Input placeholder="Username"/>
+                        </Item>
+                        <Item>
+                            <Input placeholder="Password"/>
+                        </Item>
+                    </Form>
+                </Content>
+            </Container>
         )
     }
 }
+function bindAction(dispatch) {
+    return {
+        openDrawer: () => dispatch(openDrawer()),
+        closeDrawer: key => dispatch(closeDrawer()),
+    };
+}
 
-export default (Article);
+const mapStateToProps = state => ({});
+export default connect(mapStateToProps, bindAction)(Article);
