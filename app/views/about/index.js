@@ -5,6 +5,9 @@ import {Container, Content, Left, Right, Body, Text, Row, Thumbnail, Col, Button
 import Header from "../../components/header/base";
 import styles from "./styles";
 
+/**
+ * 关于福道
+ */
 class About extends Component {  // eslint-disable-line
     render() {
         return (

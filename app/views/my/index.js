@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import {View, TouchableNativeFeedback} from "react-native";
 import {connect} from "react-redux";
-import {Container, Title, Content, Icon, Left, Right, Body, Text, Thumbnail, Grid, Col, ListItem} from "native-base";
+import {Container, Title, Content, Left, Right, Body, Separator} from "native-base";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import Header from "../../components/header/";
 import styles from "./styles";
+import PhotoMenu from "./photo-menu";
 import ListMenu from "./list-menu";
 import GridMenu from "./grid-menu";
 
@@ -21,30 +22,13 @@ class My extends Component {
                 </Header>
 
                 <Content style={styles.content}>
-                    {this.renderMyView()}
+                    <PhotoMenu/>
                     <GridMenu/>
-                    {this.renderSeparator()}
+                    <Separator bordered/>
                     <ListMenu />
+                    <Separator bordered noBottomBorder/>
                 </Content>
             </Container>
-        )
-    }
-
-    renderMyView() {
-        return (
-            <View style={styles.myView}>
-                <View style={styles.thumbnailView}>
-                    <TouchableNativeFeedback onPress={()=> Actions['about']()}>
-                        <Thumbnail size={100} source={require('../../assets/photo.jpg')}/>
-                    </TouchableNativeFeedback>
-                </View>
-            </View>
-        )
-    }
-
-    renderSeparator() {
-        return (
-            <View style={{height:20}}/>
         )
     }
 }

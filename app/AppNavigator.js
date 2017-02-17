@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import {BackAndroid, StatusBar, NavigationExperimental, Platform} from "react-native";
-import {StyleProvider, getTheme, variables, Drawer} from "native-base";
+import {StyleProvider, Drawer} from "native-base";
 import {connect} from "react-redux";
 import {Router, Scene} from "react-native-router-flux";
 import {openDrawer, closeDrawer} from "./actions/drawer";
+import getTheme from "../native-base-theme/components/";
 import material from "./themes/material";
 import SideBar from "./views/sidebar/";
 //
@@ -11,6 +12,7 @@ import Index from "./views/index/";
 import About from "./views/about/";
 import Protocol from "./views/protocol/";
 import Declare from "./views/declare/";
+import Search from "./views/search/"
 
 const RouterWithRedux = connect()(Router);
 
@@ -54,6 +56,7 @@ class AppNavigator extends Component {
                             <Scene key="about" component={About}/>
                             <Scene key="protocol" component={Protocol}/>
                             <Scene key="declare" component={Declare}/>
+                            <Scene key="search" component={Search}/>
                         </Scene>
                     </RouterWithRedux>
                 </Drawer>
