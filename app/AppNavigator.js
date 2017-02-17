@@ -10,6 +10,7 @@ import SideBar from "./views/sidebar/";
 import Index from "./views/index/";
 import About from "./views/about/";
 import Protocol from "./views/protocol/";
+import Declare from "./views/declare/";
 
 const RouterWithRedux = connect()(Router);
 
@@ -65,6 +66,7 @@ class AppNavigator extends Component {
                             <Scene key="index" component={Index} hideNavBar initial={true}/>
                             <Scene key="about" component={About}/>
                             <Scene key="protocol" component={Protocol}/>
+                            <Scene key="declare" component={Declare}/>
                         </Scene>
                     </RouterWithRedux>
                 </Drawer>
