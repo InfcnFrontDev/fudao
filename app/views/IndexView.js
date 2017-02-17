@@ -39,7 +39,7 @@ class IndexView extends Component {
                 selectedIcon: 'ios-person',
                 component: MyView
             }],
-            selectedTab: 'my'
+            selectedTab: 'dynamic'
         };
     }
 
