@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import {BackAndroid, StatusBar, NavigationExperimental, Platform} from "react-native";
-import {StyleProvider, getTheme, variables, Drawer} from "native-base";
+import {StyleProvider, Drawer} from "native-base";
 import {connect} from "react-redux";
 import {Router, Scene} from "react-native-router-flux";
 import {openDrawer, closeDrawer} from "./actions/drawer";
+import getTheme from "../native-base-theme/components/";
 import material from "./themes/material";
 import SideBar from "./views/sidebar/";
 //
