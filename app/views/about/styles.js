@@ -1,4 +1,4 @@
-export default {
+const styles = {
     title:{
         alignItems: 'center',
         justifyContent: 'center',
@@ -14,3 +14,5 @@ export default {
         fontWeight: 'bold'
     },
 };
+
+export default styles;

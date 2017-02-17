@@ -1,4 +1,4 @@
-export default {
+const styles = {
     container: {
         flexGrow: 1
     },
@@ -18,4 +18,6 @@ export default {
     tabIconSelected: {
         color: '#1874CD'
     }
-}
+};
+
+export default styles;

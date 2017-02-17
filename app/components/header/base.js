@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Header, Button, Icon, Left, Right, Body, Title} from "native-base";
 import {Actions} from "react-native-router-flux";
+import {Header, Button, Icon, Left, Right, Body, Title} from "native-base";
+
 
 class BaseHeader extends Component {
     constructor(props) {
