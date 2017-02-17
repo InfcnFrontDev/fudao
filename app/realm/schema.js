@@ -80,16 +80,20 @@ const MyGroup = {
 /**
  * 动态信息
  */
-const Dynamic = {
-    name: 'Dynamic',
-    properties: {
-        id: 'string',// 动态ID
-        userId: 'string', // 发表人
-        content: 'string',// 动态内容
-        type: 'string', // 类型，1文字、2图片、3链接、4视频
-        publishTime: 'date',// 发表时间
-    }
-};
+ const Dynamic = {
+   name: 'Dynamic',
+   primaryKey: 'id',
+   properties: {
+     id: 'int',// 动态ID
+     username: 'string', // 发表人
+     name: 'string', // 发表人
+     content: 'string',// 动态内容
+     suports:  {type: 'list',objectType:'DynamicPraise', optional: true},
+     createtime: 'int',// 发表时间,
+     photo: {type: 'string', optional: true},
+     urls: {type: 'string', optional: true}
+   }
+ };
 
 /**
  * 动态的评论信息
@@ -125,10 +129,8 @@ const DynamicPicture = {
 const DynamicPraise = {
     name: 'DynamicPraise',
     properties: {
-        id: 'string', // 关系ID
         dynamicId: 'string', // 动态ID
         userId: 'string',// 点赞人ID
-        createTime: 'date', // 点赞时间
     }
 };
 

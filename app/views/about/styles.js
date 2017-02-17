@@ -7,12 +7,14 @@ const styles = {
         fontSize: 28
     },
     desc: {
-        marginTop: 10,
-        marginBottom: 10
+       lineHeight:24
     },
     bold: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop:10,
+        marginBottom:10
     },
+
 };
 
 export default styles;

@@ -9,7 +9,6 @@ import styles from "./styles";
  * 关于福道
  */
 class About extends Component {  // eslint-disable-line
-
     render() {
         return (
             <Container style={styles.container}>
@@ -50,12 +49,20 @@ class About extends Component {  // eslint-disable-line
                     <Row>
                         <Text>商务合作：fudao@infcn.com.cn</Text>
                     </Row>
-                    <Row>
-                        <Col>
-                            <Button light onPress={()=>Actions['protocol']()}><Text>隐式声明</Text></Button>
+                    <Row style={{marginTop:30}}>
+                        <Col >
+                        </Col >
+                        <Col style={{width:240}}>
+                            <Row>
+                                <Col>
+                                    <Button light onPress={()=>Actions['declare']()}><Text>隐式声明</Text></Button>
+                                </Col>
+                                <Col >
+                                    <Button light onPress={()=>Actions['protocol']()}><Text>用户协议</Text></Button>
+                                </Col>
+                            </Row>
                         </Col>
                         <Col>
-                            <Button light onPress={()=>Actions['protocol']()}><Text>用户协议</Text></Button>
                         </Col>
                     </Row>
                 </Content>
