@@ -16,7 +16,7 @@ class My extends Component {
 
     render() {
         return (
-            <Container style={styles.container}>
+            <Container>
                 <Header>
                     <Title>{this.props.title}</Title>
                 </Header>

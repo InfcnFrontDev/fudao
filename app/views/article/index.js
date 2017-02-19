@@ -1,48 +1,52 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Container, Content, Title, Left, Right, Body, Form, Item, Text} from "native-base";
+import {Container, Title, Left, Right, Body, Form, Item} from "native-base";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import Header from "../../components/header/";
 import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-view";
+import TabList from "./tab-list";
 import styles from "./styles";
 
 /**
  * 资讯
  */
 class Article extends Component {
-    constructor(props) {
-        super(props);
-    }
+	constructor(props) {
+		super(props);
+	}
 
-    render() {
-        return (
-            <Container style={styles.container}>
-                <Header>
-                    <Title>{this.props.title}</Title>
-                </Header>
+	render() {
+		return (
+			<Container>
+				<Header>
+					<Title>{this.props.title}</Title>
+				</Header>
 
-                <Content>
-                    <ScrollableTabView
-                        style={{marginTop: 20, }}
-                        initialPage={2}
-                        renderTabBar={() => <ScrollableTabBar />}
-                    >
-                        <Text tabLabel='Tab #1'>My</Text>
-                        <Text tabLabel='Tab #2 word word'>favorite</Text>
-                        <Text tabLabel='Tab #3 word word word'>project</Text>
-                        <Text tabLabel='Tab #4 word word word word'>favorite</Text>
-                        <Text tabLabel='Tab #5'>project</Text>
-                    </ScrollableTabView>
-                </Content>
-            </Container>
-        )
-    }
+				<ScrollableTabView
+					style={styles.tabView}
+					renderTabBar={() => <ScrollableTabBar />}
+					locked={true}
+				>
+					<TabList tabLabel='推荐'/>
+					<TabList tabLabel='热点'/>
+					<TabList tabLabel='社会'/>
+					<TabList tabLabel='娱乐'/>
+					<TabList tabLabel='问答'/>
+					<TabList tabLabel='图片'/>
+					<TabList tabLabel='科技'/>
+					<TabList tabLabel='汽车'/>
+					<TabList tabLabel='体育'/>
+					<TabList tabLabel='财经'/>
+				</ScrollableTabView>
+			</Container>
+		)
+	}
 }
 function bindAction(dispatch) {
-    return {
-        openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: key => dispatch(closeDrawer()),
-    };
+	return {
+		openDrawer: () => dispatch(openDrawer()),
+		closeDrawer: key => dispatch(closeDrawer()),
+	};
 }
 
 const mapStateToProps = state => ({});
