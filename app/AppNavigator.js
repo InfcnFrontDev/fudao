@@ -12,7 +12,8 @@ import Index from "./views/index/";
 import About from "./views/about/";
 import Protocol from "./views/protocol/";
 import Declare from "./views/declare/";
-import Search from "./views/search/"
+import Search from "./views/search/";
+import Picture from "./views/picture/";
 
 const RouterWithRedux = connect()(Router);
 
@@ -57,6 +58,7 @@ class AppNavigator extends Component {
                             <Scene key="protocol" component={Protocol}/>
                             <Scene key="declare" component={Declare}/>
                             <Scene key="search" component={Search}/>
+                            <Scene key="picture" component={Picture}/>
                         </Scene>
                     </RouterWithRedux>
                 </Drawer>
