@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {TouchableHighlight} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Left, Right, Body, View, Thumbnail, Item} from "native-base";
+import {Left, Right, Body, Grid, Col, Thumbnail, Item, Text, Icon} from "native-base";
 import styles from "./styles";
 
 /**
@@ -14,9 +14,17 @@ class PhotoMenu extends Component {
 
         return (
             <Item style={styles.photoMenu} onPress={()=> Actions.about()}>
-                <View style={styles.thumbnailView}>
-                    <Thumbnail size={100} source={require('../../assets/photo.jpg')}/>
-                </View>
+                <Grid>
+                    <Col style={styles.myPhoto}>
+                        <Thumbnail size={80} source={require('../../assets/photo.jpg')}/>
+                    </Col>
+                    <Col style={styles.myTitle}>
+                        <Text style={styles.myTitleText}>可可杨</Text>
+                    </Col>
+                    <Col style={styles.myForward}>
+                        <Icon name="ios-arrow-forward" style={styles.myForwardIcon}/>
+                    </Col>
+                </Grid>
             </Item>
         )
     }

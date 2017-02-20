@@ -4,7 +4,10 @@ const initialState = {
     key: 'global',
     index: 0,
     routes: [
-
+        {
+            key: 'home',
+            index: 0,
+        },
     ],
 };
 

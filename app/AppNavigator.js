@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {BackAndroid, StatusBar, NavigationExperimental, Platform} from "react-native";
+import {BackAndroid, StatusBar, NavigationExperimental, Platform, ToastAndroid} from "react-native";
 import {StyleProvider, Drawer} from "native-base";
 import {connect} from "react-redux";
 import {Router, Scene} from "react-native-router-flux";
@@ -16,8 +16,30 @@ import Search from "./views/search/";
 import ArticleDetail from "./views/article-detail/";
 
 const RouterWithRedux = connect()(Router);
+const {
+    CardStack: NavigationCardStack,
+} = NavigationExperimental;
 
+var lastBackPressed = 0;
 class AppNavigator extends Component {
+
+    // componentDidMount() {
+    //     BackAndroid.addEventListener('hardwareBackPress', this.handleBack);
+    // }
+    //
+    // handleBack() {
+    //     try {
+    //         Actions.pop({});
+    //     } catch (e) {
+    //         if (lastBackPressed && lastBackPressed + 2000 >= Date.now()) {
+    //             return false;
+    //         }
+    //
+    //         lastBackPressed = Date.now();
+    //         ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
+    //     }
+    //     return true;
+    // };
 
     componentDidUpdate() {
         if (this.props.drawerState === 'opened') {
@@ -53,7 +75,7 @@ class AppNavigator extends Component {
                         hidden={(this.props.drawerState === 'opened' && Platform.OS === 'ios') ? true : false}
                         backgroundColor={material.statusBarColor}
                     />
-                    <RouterWithRedux>
+                    <RouterWithRedux >
                         <Scene key="root">
                             {/*首页*/}
                             <Scene key="index" component={Index} hideNavBar initial={true}/>
