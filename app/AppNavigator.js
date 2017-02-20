@@ -13,8 +13,17 @@ import About from "./views/about/";
 import Protocol from "./views/protocol/";
 import Declare from "./views/declare/";
 import Search from "./views/search/";
+<<<<<<< HEAD
 import Picture from "./views/picture/";
+=======
+
+import Start from "./views/start/";
+import Login from "./views/login/";
+import Register from "./views/register/";
+
+>>>>>>> fc2b87273885db648b20ed2afe9c7d4d55d5e0b5
 import ArticleDetail from "./views/article-detail/";
+
 
 const RouterWithRedux = connect()(Router);
 const {
@@ -85,6 +94,12 @@ class AppNavigator extends Component {
                             <Scene key="search" component={Search} title="搜索"/>
                             <Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
                             <Scene key="picture" component={Picture} title="图片预览"/>
+                            {/*启动后开始页*/}
+                            <Scene key="start" component={Start} />
+                            {/*登录页*/}
+                            <Scene key="login" component={Login}/>
+                            {/*注册页*/}
+                            <Scene key="register" component={Register}/>
                         </Scene>
                     </RouterWithRedux>
                 </Drawer>
