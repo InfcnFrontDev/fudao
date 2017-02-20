@@ -16,17 +16,18 @@ class My extends Component {
 
     render() {
         return (
-            <Container style={styles.container}>
+            <Container>
                 <Header>
                     <Title>{this.props.title}</Title>
                 </Header>
 
                 <Content style={styles.content}>
                     <PhotoMenu/>
+                    <Separator/>
                     <GridMenu/>
-                    <Separator bordered/>
+                    <Separator/>
                     <ListMenu />
-                    <Separator bordered noBottomBorder/>
+                    <Separator/>
                 </Content>
             </Container>
         )

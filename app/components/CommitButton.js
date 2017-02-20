@@ -3,7 +3,7 @@
  */
 import React, {Component} from "react";
 import {View, Text, TouchableOpacity} from "react-native";
-import global from "../utils/global";
+import config from "../utils/config";
 
 export default class CommitButton extends Component {
 
@@ -25,7 +25,7 @@ export default class CommitButton extends Component {
     }
 
     handler() {
-        global.navigator.pop();
+        config.navigator.pop();
     }
 }
 
