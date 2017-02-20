@@ -1,3 +1,4 @@
+import config from "../../utils/config";
 const styles = {
     container: {
         flexGrow: 1
@@ -5,18 +6,19 @@ const styles = {
     tabBarStyle: {},
     sceneStyle: {},
     titleStyle: {
-        color: '#333333',
+        color: config.navTabColor,
         fontSize: 12
     },
     titleStyleSelected: {
-        color: '#1874CD'
+        color: config.navTabSelectedColor
     },
     tabIcon: {
-        color: '#333333',
-        fontSize: 24
+        color: config.navTabColor,
+        fontSize: 28,
+        marginBottom: -3
     },
     tabIconSelected: {
-        color: '#1874CD'
+        color: config.navTabSelectedColor
     }
 };
 

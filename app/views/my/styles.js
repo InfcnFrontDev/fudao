@@ -1,11 +1,13 @@
+import config from "../../utils/config";
 const styles = {
     content: {
-        backgroundColor: '#F0EFF5',
+        backgroundColor: config.contentBgColor,
     },
     photoMenu: {
-        backgroundColor: '#1874CD',
         flex: 1,
-        height: 120
+        height: 100,
+        backgroundColor: '#FFFFFF',
+        borderBottomWidth: 0,
     },
     myPhoto: {
         flex: 4,
@@ -18,7 +20,7 @@ const styles = {
         justifyContent: 'center',
     },
     myTitleText: {
-        color: '#FFFFFF'
+        color: '#333333'
     },
     myForward: {
         flex: 1,
@@ -26,7 +28,7 @@ const styles = {
         alignItems: 'center',
     },
     myForwardIcon: {
-        color: '#FFFFFF'
+        color: '#c6c6c6'
     },
     gridCol: {
         justifyContent: 'center',

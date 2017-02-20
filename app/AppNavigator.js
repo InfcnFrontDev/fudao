@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {BackAndroid, StatusBar, NavigationExperimental, Platform, ToastAndroid} from "react-native";
 import {StyleProvider, Drawer} from "native-base";
 import {connect} from "react-redux";
-import {Router, Scene} from "react-native-router-flux";
+import {Router, Scene, Actions} from "react-native-router-flux";
 import {openDrawer, closeDrawer} from "./actions/drawer";
 import getTheme from "../native-base-theme/components/";
 import material from "./themes/material";
@@ -23,23 +23,23 @@ const {
 var lastBackPressed = 0;
 class AppNavigator extends Component {
 
-    // componentDidMount() {
-    //     BackAndroid.addEventListener('hardwareBackPress', this.handleBack);
-    // }
-    //
-    // handleBack() {
-    //     try {
-    //         Actions.pop({});
-    //     } catch (e) {
-    //         if (lastBackPressed && lastBackPressed + 2000 >= Date.now()) {
-    //             return false;
-    //         }
-    //
-    //         lastBackPressed = Date.now();
-    //         ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
-    //     }
-    //     return true;
-    // };
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBack);
+    }
+
+    handleBack() {
+        try {
+            Actions.pop({});
+        } catch (e) {
+            if (lastBackPressed && lastBackPressed + 2000 >= Date.now()) {
+                return false;
+            }
+
+            lastBackPressed = Date.now();
+            ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
+        }
+        return true;
+    };
 
     componentDidUpdate() {
         if (this.props.drawerState === 'opened') {
@@ -78,17 +78,17 @@ class AppNavigator extends Component {
                     <RouterWithRedux >
                         <Scene key="root">
                             {/*首页*/}
-                            <Scene key="index" component={Index} hideNavBar initial={true}/>
+                            <Scene key="index" component={Index} hideNavBar initial={true} title="首页"/>
                             {/*关于*/}
-                            <Scene key="about" component={About}/>
+                            <Scene key="about" component={About} title="关于福道"/>
                             {/*协议*/}
-                            <Scene key="protocol" component={Protocol}/>
+                            <Scene key="protocol" component={Protocol} title="用户协议"/>
                             {/*声明*/}
-                            <Scene key="declare" component={Declare}/>
+                            <Scene key="declare" component={Declare} title="隐式声明"/>
                             {/*搜索*/}
-                            <Scene key="search" component={Search}/>
+                            <Scene key="search" component={Search} title="搜索"/>
                             {/*资讯细览*/}
-                            <Scene key="articleDetailc -" component={ArticleDetail}/>
+                            <Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
                         </Scene>
                     </RouterWithRedux>
                 </Drawer>

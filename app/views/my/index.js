@@ -23,10 +23,11 @@ class My extends Component {
 
                 <Content style={styles.content}>
                     <PhotoMenu/>
+                    <Separator/>
                     <GridMenu/>
-                    <Separator bordered/>
+                    <Separator/>
                     <ListMenu />
-                    <Separator bordered noBottomBorder/>
+                    <Separator/>
                 </Content>
             </Container>
         )
