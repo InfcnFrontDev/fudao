@@ -33,7 +33,7 @@ class MyList extends Component {
                     icon: 'ios-chatboxes-outline',
                     text: '推送通知',
                     bordered: true,
-                    route: 'about'
+                    route: 'start'
                 })}
                 {this.renderItem({
                     icon: 'ios-information-circle-outline',
