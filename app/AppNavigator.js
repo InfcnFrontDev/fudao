@@ -12,13 +12,9 @@ import Index from "./views/index/";
 import About from "./views/about/";
 import Protocol from "./views/protocol/";
 import Declare from "./views/declare/";
-<<<<<<< .mine
 import Search from "./views/search/";
 import Picture from "./views/picture/";
-=======
-import Search from "./views/search/";
 import ArticleDetail from "./views/article-detail/";
->>>>>>> .theirs
 
 const RouterWithRedux = connect()(Router);
 const {
@@ -82,19 +78,13 @@ class AppNavigator extends Component {
                     />
                     <RouterWithRedux >
                         <Scene key="root">
-                            {/*首页*/}
                             <Scene key="index" component={Index} hideNavBar initial={true} title="首页"/>
-                            {/*关于*/}
                             <Scene key="about" component={About} title="关于福道"/>
-                            {/*协议*/}
                             <Scene key="protocol" component={Protocol} title="用户协议"/>
-                            {/*声明*/}
                             <Scene key="declare" component={Declare} title="隐式声明"/>
-                            {/*搜索*/}
                             <Scene key="search" component={Search} title="搜索"/>
-                            {/*资讯细览*/}
                             <Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
-                            <Scene key="picture" component={Picture}/>
+                            <Scene key="picture" component={Picture} title="图片预览"/>
                         </Scene>
                     </RouterWithRedux>
                 </Drawer>
