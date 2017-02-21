@@ -54,10 +54,10 @@ class About extends Component {  // eslint-disable-line
                     </Row>
                     <Row style={{marginTop:30}}>
                         <Col style={styles.center}>
-                            <Button primary onPress={()=>Actions['declare']()}><Text>隐式声明</Text></Button>
+                            <Button primary onPress={()=>Actions.declare()}><Text>隐式声明</Text></Button>
                         </Col>
                         <Col style={styles.center}>
-                            <Button primary onPress={()=>Actions['protocol']()}><Text>用户协议</Text></Button>
+                            <Button primary onPress={()=>Actions.protocol()}><Text>用户协议</Text></Button>
                         </Col>
                     </Row>
                 </Content>

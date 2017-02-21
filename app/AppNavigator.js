@@ -18,6 +18,7 @@ import Start from "./views/start/";
 import Login from "./views/login/";
 import Register from "./views/register/";
 import ArticleDetail from "./views/article-detail/";
+import MyInfo from "./views/my-info/";
 
 
 const RouterWithRedux = connect()(Router);
@@ -95,6 +96,7 @@ class AppNavigator extends Component {
                             <Scene key="login" component={Login}/>
                             {/*注册页*/}
                             <Scene key="register" component={Register}/>
+                            <Scene key="myInfo" component={MyInfo} title="个人信息"/>
                         </Scene>
                     </RouterWithRedux>
                 </Drawer>

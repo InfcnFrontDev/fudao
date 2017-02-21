@@ -149,8 +149,8 @@ export default {
 
     // Header
     toolbarBtnColor: '#fff',
-    toolbarDefaultBg: '#2B9EF3',
-    toolbarHeight: (platform === 'ios') ? 64 : 56,
+    toolbarDefaultBg: '#363636',
+    toolbarHeight: (platform === 'ios') ? 64 : 50,
     toolbarIconSize: (platform === 'ios') ? 20 : 22,
     toolbarSearchIconSize: (platform === 'ios') ? 20 : 23,
     toolbarInputColor: '#fff',
@@ -204,7 +204,7 @@ export default {
     // List
     listBorderColor: '#c9c9c9',
     listDividerBg: '#f4f4f4',
-    listItemHeight: 45,
+    listItemHeight: 40,
 
     // Card
     cardBorderColor: '#ccc',
@@ -285,5 +285,12 @@ export default {
     // new
     contentBgColor: '#F0EFF5',
     navTabColor: '#868686',
-    navTabActiveColor: '#2B9EF3',
+    navTabActiveColor: '#9FCC2D',
+
+    content: {
+        backgroundColor: '#F0EFF5'
+    },
+    contentView: {
+        backgroundColor: '#FFFFFF'
+    },
 };

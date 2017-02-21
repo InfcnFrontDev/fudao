@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {ScrollView, ListView, View} from "react-native";
-import {Left, Right, Body, Form, Item} from "native-base";
+import {Left, Right, Body, Form, Item, Text} from "native-base";
 import GiftedListView from "../../components/listview/gifted";
 import ItemPicture from "./item-picture";
 
