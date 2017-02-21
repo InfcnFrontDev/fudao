@@ -153,19 +153,10 @@ var GiftedListView = React.createClass({
   headerView() {
     // console.log("headerView");
     if (this.state.paginationStatus === 'firstLoad' || !this.props.headerView){
-      return (
-        <View>
-            <View style={this.defaultStyles.content1}>
-              <Image  source={require('../assets/dy2.jpg')} style={this.defaultStyles.bgImg}/>
-            </View>
-            <View style={this.defaultStyles.person}>
-              <Text>福大爷</Text>
-            </View>
-            <Image  source={require('../assets/photo.jpg')} style={this.defaultStyles.touxiang}/>
-       </View>
-      );
+      return  this.props.headerView();
     }
-    return this.props.headerView();
+    // return this.props.headerView();
+    return (null);
   },
   emptyView(refreshCallback) {
     if (this.props.emptyView) {
@@ -378,29 +369,6 @@ var GiftedListView = React.createClass({
 
 
   defaultStyles: {
-    content1:{
-      height:180,
-      marginBottom:24,
-    },
-    bgImg:{
-      flex:1,
-      alignItems:'center',
-      justifyContent:'center',
-      width:null,
-      height:null,
-    },
-    person:{
-      position:'absolute',
-      top:160,
-      right:100,
-    },
-    touxiang:{
-      width:80,
-      height:80,
-      position:'absolute',
-      top:120,
-      right:10,
-    },
     separator: {
       height: 1,
       backgroundColor: '#CCC'
