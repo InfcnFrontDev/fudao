@@ -13,15 +13,10 @@ import About from "./views/about/";
 import Protocol from "./views/protocol/";
 import Declare from "./views/declare/";
 import Search from "./views/search/";
-<<<<<<< HEAD
 import Picture from "./views/picture/";
-=======
-
 import Start from "./views/start/";
 import Login from "./views/login/";
 import Register from "./views/register/";
-
->>>>>>> fc2b87273885db648b20ed2afe9c7d4d55d5e0b5
 import ArticleDetail from "./views/article-detail/";
 
 

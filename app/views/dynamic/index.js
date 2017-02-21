@@ -3,12 +3,15 @@ import {connect} from "react-redux";
 import {Container, Title, Content, Left, Right, Body} from "native-base";
 import { Platform, View,Text, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
-import Header from "../../components/header/";
 import styles from "./styles";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import DynamicList from '../../components/DynamicList';
 import moment from 'moment'
 import {Actions} from "react-native-router-flux";
+import Header from "../../components/header/";
+import DynamicList from '../../components/listview/gifted';
+import DynamicHeader from './dynamic-header';
+import DynamicImage from './dynamic-image';
+
 
 /**
  * 动态
@@ -27,6 +30,7 @@ class Dynamic extends Component {
 	}
 
     render() {
+      ToastAndroid.show("render", ToastAndroid.SHORT);
       let input = (null);
       if(this.state.commentShow){
         input = (
@@ -46,6 +50,7 @@ class Dynamic extends Component {
                     <Title>{this.props.title}</Title>
                 </Header>
                 <DynamicList
+                  renderHeader={this._renderHeader.bind(this)}
                   enableEmptySections={true}
                   rowView={this._renderRowView.bind(this)}
                   onFetch={this._onFetch.bind(this)}
@@ -61,9 +66,7 @@ class Dynamic extends Component {
 
 
     	_renderRowView(info,sectionID,rowID){
-
-    		// ToastAndroid.show(JSON.stringify(rowID), ToastAndroid.SHORT);
-
+        // ToastAndroid.show("renderrow", ToastAndroid.SHORT);
     		if(info.photo){
     			var id = info.photo;
     		}else{
@@ -76,12 +79,12 @@ class Dynamic extends Component {
     				</View>
     				<View style={styles.dynamicDetail}>
     					<Text style={styles.dynamicName}>{info.name}</Text>
-    					<Text style={styles.dynamicContent}>{info.content}</Text>
-    					{this._renderMsgImage(info)}
+    					<Text style={[styles.dynamicContent,styles.color000]}>{info.content}</Text>
+    					<DynamicImage urls={info.urls}/>
     					<View style={styles.dynamic}>
     						<Text style={styles.time}> {moment(info.createtime).fromNow()}</Text>
-    						{this._showOrHidden(rowID)}
-    						<TouchableHighlight style={styles.dynamicMessage} onPress={this._show.bind(this,rowID)}>
+    						{this._showOrHidden(info.id)}
+    						<TouchableHighlight style={styles.dynamicMessage} onPress={this._show.bind(this,info.id)}>
     							<Image source={{uri: 'http://192.168.10.58:9095/api/BaseApi/getImage?id='+id+'&w=&h='}}  style={styles.dynamicMessageImage}/>
     						</TouchableHighlight>
     					</View>
@@ -90,6 +93,12 @@ class Dynamic extends Component {
     			</View>
     		)
     	}
+
+      _renderHeader(){
+      return  (
+        <DynamicHeader />
+        );
+      }
 
       _renderComment(info){
         if(true) {
@@ -115,26 +124,8 @@ class Dynamic extends Component {
         }
       }
 
-    	_renderMsgImage(info) {
-    			if(info.urls) {
-    					var arr_pic = info.urls.split(',');
-    					let pic = arr_pic.map((p, i) => {
-                // <TouchableHighlight key={i} onPress={this._openPhotoBrowser.bind(this, arr_pic,i)} style={styles.imageTouch}>
-    						return (
-                  <TouchableHighlight key={i} onPress={()=> Actions['picture']({image:info.urls,i:i})} style={styles.imageTouch}>
-    									<Image source={{uri: 'http://192.168.10.58:9095/api/BaseApi/getImage?id='+p+'&w=600&h=600'}} style={styles.msgImage}  resizeMode= 'stretch' />
-    							</TouchableHighlight>
-    						)
-    					})
-    					return (
-    							<View style={styles.allImage}>
-    							{pic}
-    							</View>
-    					)
-    			}
-    	}
-    	_showOrHidden(rowID){
-    		if(this.state.someShow==rowID+1){
+    	_showOrHidden(infoid){
+    		if(this.state.someShow==infoid){
     			return (
     				<View  style={styles.show}>
     					<TouchableHighlight onPress={this._zan.bind(this)} underlayColor='#fff' style={styles.showone}>
@@ -151,9 +142,9 @@ class Dynamic extends Component {
 
     	}
 
-    	_show(rowID){
-        var id=rowID+1;
-        if(this.state.someShow==id){
+    	_show(infoid){
+        var id=infoid;
+        if(this.state.someShow==infoid){
           id=0;
         }
         this.setState({
@@ -190,18 +181,17 @@ class Dynamic extends Component {
         })
       }
 
-    	_openPhotoBrowser(arr_pic,i) {
-
-    	}
     	_onFetch(page = 1, callback, options,flag){
 
     		if(page === 1 && options.firstLoad) {
-    			fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id=84&nav=0&size=5&username=chenxx',{
+          ToastAndroid.show("aaa", ToastAndroid.SHORT);
+
+    			fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id=&nav=1&size=5&username=chenxx',{
     				method:'POST',
     				headers:{
     					'Accept': 'application/json',
     					'Content-Type': 'application/json',
-    					'authorization':'94fb124d-6bb4-41f0-ac1f-53bb0322139d'
+    					'authorization':'545f57eb-29d8-4827-a7dc-7c9002e3397e'
     				}
     			})
     			.then((res) => res.json())
@@ -212,15 +202,53 @@ class Dynamic extends Component {
     						this.setState({
     							dynamic:res.obj
     						})
-    						callback(res.obj,{
-    							allLoaded: true
-    						});
+    						callback(res.obj);
     					}
     			})
     		}else if(page === 1&&!options.firstLoad&&flag==false) {
+          ToastAndroid.show("bbb", ToastAndroid.SHORT);
 
+          // fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id=84&nav=0&size=5&username=chenxx',{
+          //   method:'POST',
+          //   headers:{
+          //     'Accept': 'application/json',
+          //     'Content-Type': 'application/json',
+          //     'authorization':'545f57eb-29d8-4827-a7dc-7c9002e3397e'
+          //   }
+          // })
+          // .then((res) => res.json())
+          // .then((res) => {
+          //   console.log(res);
+          //     if(!res.err_code) {
+          //       // ToastAndroid.show(JSON.stringify(res), ToastAndroid.SHORT);
+          //       this.setState({
+    			// 				dynamic:res.obj.concat(this.state.dynamic)
+    			// 			})
+          //       callback(res.obj.concat(this.state.dynamic));
+          //     }
+          // })
     		}else{
+          ToastAndroid.show("ccc", ToastAndroid.SHORT);
 
+          fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id=84&nav=0&size=5&username=chenxx',{
+            method:'POST',
+            headers:{
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'authorization':'545f57eb-29d8-4827-a7dc-7c9002e3397e'
+            }
+          })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res);
+              if(!res.err_code) {
+                // ToastAndroid.show(JSON.stringify(res), ToastAndroid.SHORT);
+                this.setState({
+                  dynamic:this.state.dynamic.concat(res.obj)
+                })
+                callback(res.obj);
+              }
+          })
     		}
     	}
 }
