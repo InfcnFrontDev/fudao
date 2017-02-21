@@ -90,7 +90,7 @@ class AppNavigator extends Component {
                             <Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
                             <Scene key="picture" component={Picture} title="图片预览"/>
                             {/*启动后开始页*/}
-                            <Scene key="start" component={Start} />
+                            <Scene key="start" component={Start}/>
                             {/*登录页*/}
                             <Scene key="login" component={Login}/>
                             {/*注册页*/}

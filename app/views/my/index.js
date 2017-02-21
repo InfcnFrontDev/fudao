@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import {View, TouchableNativeFeedback} from "react-native";
 import {connect} from "react-redux";
-import {Container, Title, Content, Left, Right, Body, Separator} from "native-base";
+import {Container, Title, Content, Left, Right, Body} from "native-base";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import Header from "../../components/header/";
+import Separator from "../../components/separator/";
 import styles from "./styles";
 import PhotoMenu from "./photo-menu";
 import ListMenu from "./list-menu";
