@@ -1,7 +1,7 @@
-import config from "../../utils/config";
+import theme from "../../themes/material";
 const styles = {
     content: {
-        backgroundColor: config.contentBgColor,
+        backgroundColor: theme.contentBgColor,
     },
     photoMenu: {
         flex: 1,
