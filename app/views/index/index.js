@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {StyleSheet, View, Text} from "react-native";
 import TabNavigator from "react-native-tab-navigator";
+import SplashScreen from 'react-native-splash-screen'
 import Icon from "react-native-vector-icons/Ionicons";
 import styles from "./styles";
 // tab components
@@ -83,6 +84,10 @@ class Index extends Component {
         return (
             <Icon name={icon} style={[styles.tabIcon, selected ? styles.tabIconSelected : {}]}/>
         )
+    }
+
+    componentDidMount(){
+        SplashScreen.hide();
     }
 }
 
