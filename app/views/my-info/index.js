@@ -5,7 +5,6 @@ import Header from "../../components/header/base";
 import Separator from "../../components/separator/";
 import GiftedListView from "../../components/listview/gifted";
 import MyInfoItem from "./item";
-import Dialog from "react-native-dialogs";
 
 const groups = {
     '基本信息': [
@@ -121,19 +120,6 @@ class MyInfo extends Component {
         return (
             <Separator title={sectionID}/>
         )
-    }
-
-    _onOpenDialog() {
-        var options = {
-            title: 'Hello, World!',
-            content: 'I\'m just simple Dialog',
-            positiveText: 'OK',
-            negativeText: 'Cancel'
-        };
-
-        var dialog = new Dialog();
-        dialog.set(options);
-        dialog.show();
     }
 }
 
