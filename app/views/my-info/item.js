@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {ToastAndroid} from "react-native";
 import {Left, Right, Body, ListItem, Text, Icon} from "native-base";
-import {dialogs, tools} from "../../utils/";
+import {dialogs} from "../../utils/";
 
 
 /**
@@ -13,7 +13,7 @@ class MyInfoItem extends Component {
     render() {
         let {data} = this.props;
         return (
-            <ListItem icon onPress={()=>this.openDialog()}>
+            <ListItem icon onPress={()=>this.onPressItem()}>
                 <Body>
                 <Text>{data.text}</Text>
                 </Body>
@@ -25,12 +25,45 @@ class MyInfoItem extends Component {
         );
     }
 
-    openDialog() {
+    onPressItem() {
+        let {data} = this.props;
+
+        switch (data.text) {
+            case '姓名':
+                this.updateUsername(data);
+                break;
+            case '性别':
+                this.updateSex(data);
+                break;
+            case '出生日期':
+
+                break;
+            case '身高':
+
+                break;
+        }
+
+    }
+
+
+    updateSex(data) {
         dialogs.showDialog({
-            title: "性别",
+            title: data.text,
+            items: [
+                "男",
+                "女"
+            ],
+            selectedIndex: 0,
+            itemsCallbackSingleChoice: (id, text) => ToastAndroid.show(id + ": " + text, ToastAndroid.SHORT)
+        })
+    }
+
+    updateUsername(data) {
+        dialogs.showDialog({
+            title: data.text,
             input: {
                 hint: 'User Name',
-                prefill: tools.uuid(),
+                prefill: '',
                 allowEmptyInput: false,
                 maxLength: 10,
                 callback: (id, text) => ToastAndroid.show(id + ": " + text, ToastAndroid.SHORT),
@@ -72,18 +105,6 @@ class MyInfoItem extends Component {
             selectedIndices: [0, 1],
             positiveText: "确定",
             itemsCallbackMultiChoice: (id, text) => ToastAndroid.show(id + ": " + text, ToastAndroid.SHORT),
-        })
-    }
-
-    singleChoiceDialog() {
-        dialogs.showDialog({
-            title: "性别",
-            items: [
-                "男",
-                "女"
-            ],
-            selectedIndex: 0,
-            itemsCallbackSingleChoice: (id, text) => ToastAndroid.show(id + ": " + text, ToastAndroid.SHORT)
         })
     }
 }
