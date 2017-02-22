@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Container, Content, Left, Right, Body, View, Text} from "native-base";
+import {Container, Content, Left, Right, Body} from "native-base";
 import Header from "../../components/header/base";
 import Separator from "../../components/separator/";
 import GiftedListView from "../../components/listview/gifted";
 import MyInfoItem from "./item";
-import PopupDialog , { DialogTitle } from "react-native-popup-dialog";
+import Dialog from "react-native-dialogs";
 
 const groups = {
     '基本信息': [
@@ -102,14 +102,6 @@ class MyInfo extends Component {
                         sectionHeaderView={this._renderSectionHeaderView.bind(this)}
                         pagination={false}
                     />
-                    <PopupDialog
-                        dialogTitle={<DialogTitle title="Dialog Title" />}
-                        ref={(popupDialog) => { this.popupDialog = popupDialog; }}
-                    >
-                        <View>
-                            <Text>Hello</Text>
-                        </View>
-                    </PopupDialog>
                 </Content>
             </Container>
         );
@@ -122,13 +114,26 @@ class MyInfo extends Component {
     }
 
     _renderRowView(rowData) {
-        return <MyInfoItem data={rowData} onPress={()=> this.popupDialog.openDialog()}/>
+        return <MyInfoItem data={rowData} onPress={()=> this._onOpenDialog()}/>
     }
 
     _renderSectionHeaderView(sectionData, sectionID) {
         return (
             <Separator title={sectionID}/>
         )
+    }
+
+    _onOpenDialog() {
+        var options = {
+            title: 'Hello, World!',
+            content: 'I\'m just simple Dialog',
+            positiveText: 'OK',
+            negativeText: 'Cancel'
+        };
+
+        var dialog = new Dialog();
+        dialog.set(options);
+        dialog.show();
     }
 }
 
