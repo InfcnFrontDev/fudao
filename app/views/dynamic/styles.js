@@ -3,12 +3,16 @@ const styles = {
     // backgroundColor:'#444',
     // flexDirection:'column',
   },
+  color000:{
+    color:'#000',
+  },
   contain1:{
     backgroundColor:'#fff',
     flex:1,
   },
   content1:{
     height:180,
+    marginBottom:30,
   },
   bgImg:{
     flex:1,

@@ -21,6 +21,7 @@ import SetPassword from "./views/set-password/";
 import ArticleDetail from "./views/article-detail/";
 import PasswordSuccess from "./views/password-success/";
 import StartInformation from "./views/start-information/";
+import MyInfo from "./views/my-info/";
 
 
 const RouterWithRedux = connect()(Router);
@@ -93,7 +94,7 @@ class AppNavigator extends Component {
                             <Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
                             <Scene key="picture" component={Picture} title="图片预览"/>
                             {/*启动后开始页*/}
-                            <Scene key="start" component={Start} />
+                            <Scene key="start" component={Start}/>
                             {/*登录页*/}
                             <Scene key="login" component={Login}/>
                             {/*注册页*/}
@@ -104,6 +105,7 @@ class AppNavigator extends Component {
                             <Scene key="passwordSuccess" component={PasswordSuccess}/>
                             {/*首次登录添个人信息*/}
                             <Scene key="startInformation" component={StartInformation}/>
+                            <Scene key="myInfo" component={MyInfo} title="个人信息"/>
                         </Scene>
                     </RouterWithRedux>
                 </Drawer>

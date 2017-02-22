@@ -13,7 +13,7 @@ class PhotoMenu extends Component {
     render() {
 
         return (
-            <Item style={styles.photoMenu} onPress={()=> Actions.about()}>
+            <Item style={styles.photoMenu} onPress={()=> Actions.myInfo()}>
                 <Grid>
                     <Col style={styles.myPhoto}>
                         <Thumbnail size={80} source={require('../../assets/photo.jpg')}/>
