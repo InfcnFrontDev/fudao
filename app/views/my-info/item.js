@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {ToastAndroid} from "react-native";
 import {Left, Right, Body, ListItem, Text, Icon} from "native-base";
 import {dialogs} from "../../utils/";
@@ -8,7 +8,7 @@ import {dialogs} from "../../utils/";
  * InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD = 0x90
  * InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD = 0x81
  */
-class MyInfoItem extends Component {
+class MyInfoItem extends PureComponent {
 
     render() {
         let {data} = this.props;
