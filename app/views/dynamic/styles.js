@@ -85,7 +85,7 @@ const styles = {
   show:{
     flexDirection:'row',
     position:'absolute',
-    right:24,
+    right:10,
 
   },
   showone:{
