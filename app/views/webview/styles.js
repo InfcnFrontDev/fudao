@@ -1,11 +1,9 @@
 const styles = {
-    errorView: {
-        flex: 1,
-        alignItems: 'center'
-    },
-    errorImage: {
-        marginTop: 100
-    },
+	errorView: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	}
 };
 
 export default styles;
