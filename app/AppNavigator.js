@@ -17,7 +17,10 @@ import Picture from "./views/picture/";
 import Start from "./views/start/";
 import Login from "./views/login/";
 import Register from "./views/register/";
+import SetPassword from "./views/set-password/";
 import ArticleDetail from "./views/article-detail/";
+import PasswordSuccess from "./views/password-success/";
+import StartInformation from "./views/start-information/";
 import MyInfo from "./views/my-info/";
 import Webview from "./views/webview/";
 
@@ -97,6 +100,12 @@ class AppNavigator extends Component {
                             <Scene key="login" component={Login}/>
                             {/*注册页*/}
                             <Scene key="register" component={Register}/>
+                            {/*设置密码*/}
+                            <Scene key="setPassword" component={SetPassword}/>
+                            {/*注册成功*/}
+                            <Scene key="passwordSuccess" component={PasswordSuccess}/>
+                            {/*首次登录添个人信息*/}
+                            <Scene key="startInformation" component={StartInformation}/>
                             <Scene key="myInfo" component={MyInfo} title="个人信息"/>
                             <Scene key="webview" component={Webview}/>
                         </Scene>

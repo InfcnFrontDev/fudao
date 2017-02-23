@@ -17,7 +17,6 @@ const styles = {
         marginTop:-80,
         width:300,
         height:500,
-
         resizeMode:'contain',
     },
     viewButton:{
