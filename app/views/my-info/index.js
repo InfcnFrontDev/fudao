@@ -1,11 +1,10 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Content, Left, Right, Body, View, Text} from "native-base";
+import {Container, Content, Left, Right, Body} from "native-base";
 import Header from "../../components/header/base";
 import Separator from "../../components/separator/";
 import GiftedListView from "../../components/listview/gifted";
 import MyInfoItem from "./item";
-import PopupDialog , { DialogTitle } from "react-native-popup-dialog";
 
 const groups = {
     '基本信息': [
@@ -81,11 +80,7 @@ const groups = {
 /**
  * 我的基本信息
  */
-class MyInfo extends Component {
-
-    constructor(props) {
-        super(props);
-    }
+class MyInfo extends PureComponent {
 
     render() {
         return (
@@ -102,14 +97,6 @@ class MyInfo extends Component {
                         sectionHeaderView={this._renderSectionHeaderView.bind(this)}
                         pagination={false}
                     />
-                    <PopupDialog
-                        dialogTitle={<DialogTitle title="Dialog Title" />}
-                        ref={(popupDialog) => { this.popupDialog = popupDialog; }}
-                    >
-                        <View>
-                            <Text>Hello</Text>
-                        </View>
-                    </PopupDialog>
                 </Content>
             </Container>
         );
@@ -122,7 +109,7 @@ class MyInfo extends Component {
     }
 
     _renderRowView(rowData) {
-        return <MyInfoItem data={rowData} onPress={()=> this.popupDialog.openDialog()}/>
+        return <MyInfoItem data={rowData} onPress={()=> this._onOpenDialog()}/>
     }
 
     _renderSectionHeaderView(sectionData, sectionID) {

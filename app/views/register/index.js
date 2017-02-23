@@ -2,13 +2,13 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
-import {View, Alert} from "react-native";
+import {View, Alert,TextInput,TouchableOpacity} from "react-native";
 import styles from "./styles";
 
 /**
- * 关于福道
+ * 注册
  */
-var alertMessage = '我们将发送验证码到这个号码+86 138********';
+
 class About extends Component {  // eslint-disable-line
     render() {
         return (
@@ -25,24 +25,24 @@ class About extends Component {  // eslint-disable-line
                                 <Text>+86</Text>
                             </View>
                             <View>
-                                <Form style={{width:200}}>
-                                    <Item>
-                                        <Input />
-                                    </Item>
-                                </Form>
+                                <TextInput style={styles.inputNum}  keyboardType='numeric' underlineColorAndroid='transparent'></TextInput>
+                            </View>
+                        </View>
+                        <View  style={styles.box3}>
+                            <View style={styles.border1}>
+                                <Text>验证码</Text>
+                            </View>
+                            <View>
+                                <TextInput style={styles.inputYan}  keyboardType='numeric' underlineColorAndroid='transparent'placeholder={'输入验证码'}></TextInput>
+                            </View>
+                            <View>
+                                <Button light style={styles.btnYan}>
+                                    <Text>获取验证码</Text>
+                                </Button >
                             </View>
                         </View>
 
-                        <Button block success onPress={()=>{
-                            Alert.alert(
-                                '确认手机号码',
-                                alertMessage,
-                                [
-                                    {text: '确认', onPress: () => console.log('OK Pressed!')},
-                                    {text: '取消', onPress: () => console.log('OK Pressed!')}
-                                ]
-                            )
-                        }} style={{marginTop:50}}>
+                        <Button block success onPress={()=>Actions['setPassword']()} style={{marginTop:40}}>
                             <Text>注册</Text>
                         </Button>
                     </View>
