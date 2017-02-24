@@ -12,7 +12,7 @@ export default (variables = variable) => {
       '.noBottomBorder': {
         borderBottomWidth: 0,
       },
-      height:null,
+      height: 35,
       paddingVertical: variables.listItemPadding + 1,
       borderBottomWidth: variables.borderWidth,
       borderTopWidth: variables.borderWidth,
@@ -27,7 +27,7 @@ export default (variables = variable) => {
     '.noBottomBorder': {
       borderBottomWidth: 0,
     },
-    height: 12,
+    height: 38,
     backgroundColor: '#F0EFF5',
     flex: 1,
     justifyContent: 'center',
