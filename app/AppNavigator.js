@@ -12,7 +12,14 @@ import Index from "./views/index/";
 import About from "./views/about/";
 import Protocol from "./views/protocol/";
 import Declare from "./views/declare/";
+// Search
 import Search from "./views/search/";
+import SearchSymptomProblem from "./views/search/symptom-problem/";
+import SearchDailyLife from "./views/search/daily-life/";
+import SearchFriendsCircle from "./views/search/friends-circle/";
+import SearchHealthCare from "./views/search/health-care/";
+import SearchInformation from "./views/search/information/";
+import SearchOfflineService from "./views/search/offline-service/";
 import Picture from "./views/picture/";
 import Start from "./views/start/";
 import Login from "./views/login/";
@@ -91,7 +98,15 @@ class AppNavigator extends Component {
                             <Scene key="about" component={About} title="关于福道"/>
                             <Scene key="protocol" component={Protocol} title="用户协议"/>
                             <Scene key="declare" component={Declare} title="隐式声明"/>
+
                             <Scene key="search" component={Search} title="搜索"/>
+                            <Scene key="searchDailyLife" component={SearchDailyLife} title="日常生活"/>
+                            <Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈"/>
+                            <Scene key="searchHealthCare" component={SearchHealthCare} title="保健方法"/>
+                            <Scene key="searchInformation" component={SearchInformation} title="资讯"/>
+                            <Scene key="searchOfflineService" component={SearchOfflineService} title="隐式声明"/>
+                            <Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="隐式声明"/>
+
                             <Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
                             <Scene key="picture" component={Picture} title="图片预览"/>
                             {/*启动后开始页*/}

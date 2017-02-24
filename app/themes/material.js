@@ -33,10 +33,18 @@ export default {
     CheckboxIconSize: (platform === 'ios') ? 18 : 14,
     CheckboxIconMarginTop: (platform === 'ios') ? undefined : 1,
     CheckboxFontSize: (platform === 'ios') ? 21 : 18,
-    DefaultFontSize: 17,
+    DefaultFontSize: 14,
     checkboxBgColor: '#039BE5',
     checkboxSize: 20,
     checkboxTickColor: '#fff',
+
+    // Segment
+    segmentBackgroundColor: '#3F51B5',
+    segmentActiveBackgroundColor: '#fff',
+    segmentTextColor: '#fff',
+    segmentActiveTextColor: '#3F51B5',
+    segmentBorderColor: '#fff',
+    segmentBorderColorMain: '#3F51B5',
 
     // New Variable
     get defaultTextColor() {
@@ -105,7 +113,7 @@ export default {
     // Color
     brandPrimary: '#2B9EF3',
     brandInfo: '#3F57D3',
-    brandSuccess: '#06B76F',
+    brandSuccess: '#5cb85c',
     brandDanger: '#d9534f',
     brandWarning: '#f0ad4e',
     brandSidebar: '#252932',
@@ -145,12 +153,13 @@ export default {
     topTabBarActiveTextColor: '#fff',
     topTabActiveBgColor: undefined,
     topTabBarBorderColor: '#fff',
+    topTabBarActiveBorderColor: '#fff',
 
 
     // Header
     toolbarBtnColor: '#fff',
-    toolbarDefaultBg: '#363636',
-    toolbarHeight: (platform === 'ios') ? 64 : 50,
+    toolbarDefaultBg: '#3C3C40',
+    toolbarHeight: (platform === 'ios') ? 76 : 56,
     toolbarIconSize: (platform === 'ios') ? 20 : 22,
     toolbarSearchIconSize: (platform === 'ios') ? 20 : 23,
     toolbarInputColor: '#fff',
@@ -158,6 +167,7 @@ export default {
     toolbarInverseBg: '#222',
     toolbarTextColor: '#fff',
     toolbarDefaultBorder: '#3F51B5',
+    iosStatusbar: 'light-content',
     get statusBarColor() {
         return color(this.toolbarDefaultBg).darken(0.2).hexString();
     },
@@ -167,7 +177,7 @@ export default {
     iconFamily: 'Ionicons',
     iconFontSize: (platform === 'ios') ? 30 : 28,
     iconMargin: 7,
-    iconHeaderSize: (platform === 'ios') ? 29 : 28,
+    iconHeaderSize: (platform === 'ios') ? 29 : 24,
 
 
     // InputGroup
@@ -205,6 +215,7 @@ export default {
     listBorderColor: '#c9c9c9',
     listDividerBg: '#f4f4f4',
     listItemHeight: 40,
+    listBtnUnderlayColor: '#DDD',
 
     // Card
     cardBorderColor: '#ccc',
@@ -283,7 +294,7 @@ export default {
     inputGroupRoundedBorderRadius: 30,
 
     // new
-    contentBgColor: '#F0EFF5',
+    contentBgColor: '#EDEDED',
     navTabColor: '#868686',
     navTabActiveColor: '#9FCC2D',
 

@@ -1,4 +1,4 @@
-import theme from "../../themes/material";
+import theme from "../../../themes/material";
 const styles = {
     content: {
         backgroundColor: theme.contentBgColor,

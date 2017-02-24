@@ -20,7 +20,8 @@ const styles = {
         justifyContent: 'center',
     },
     myTitleText: {
-        color: '#333333'
+        color: '#333333',
+        fontSize: theme.DefaultFontSize + 2,
     },
     myForward: {
         flex: 1,
@@ -33,6 +34,9 @@ const styles = {
     gridCol: {
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    listText: {
+        fontSize: theme.DefaultFontSize,
     }
 };
 export default styles;
