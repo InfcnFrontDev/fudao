@@ -42,7 +42,7 @@ class Index extends Component {
                 selectedIcon: 'ios-person',
                 component: My
             }],
-            selectedTab: 'my'
+            selectedTab: 'dynamic'
         };
     }
 
