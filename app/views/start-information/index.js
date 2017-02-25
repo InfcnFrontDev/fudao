@@ -30,8 +30,8 @@ class Home extends Component {
                         </View>
 
                         <View style={styles.right}>
-                            <Thumbnail  size={80} source={require('../../assets/photo.jpg')}/>
-                            <Thumbnail  size={80} source={require('../../assets/photo.jpg')}/>
+                            <Thumbnail  size={80} source={require('../../assets/my-photos/photo.jpg')}/>
+                            <Thumbnail  size={80} source={require('../../assets/my-photos/photo.jpg')}/>
                         </View>
 
                     </View>
