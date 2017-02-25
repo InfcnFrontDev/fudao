@@ -16,7 +16,7 @@ class SearchHealthCare extends PureComponent {
     render() {
         return (
             <Container>
-                <Header/>
+                <Header placeholder="搜索保健方法" />
                 <Content padder style={styles.content}>
                     <Text>保健方法</Text>
                 </Content>

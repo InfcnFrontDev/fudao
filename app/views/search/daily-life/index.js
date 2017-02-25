@@ -16,7 +16,7 @@ class SearchDailyLife extends PureComponent {
     render() {
         return (
             <Container>
-                <Header/>
+                <Header placeholder="搜索日常生活" />
                 <Content padder style={styles.content}>
                     <Text>日常生活</Text>
                 </Content>

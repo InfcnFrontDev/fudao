@@ -1,5 +1,5 @@
-import color from 'color';
-import {Platform, Dimensions, PixelRatio} from 'react-native';
+import color from "color";
+import {Platform, Dimensions, PixelRatio} from "react-native";
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
@@ -33,7 +33,7 @@ export default {
 	CheckboxIconSize: (platform === 'ios') ? 18 : 14,
 	CheckboxIconMarginTop: (platform === 'ios') ? undefined : 1,
 	CheckboxFontSize: (platform === 'ios') ? 21 : 18,
-	DefaultFontSize: 17,
+	DefaultFontSize: 14,
 	checkboxBgColor: '#039BE5',
 	checkboxSize: 20,
 	checkboxTickColor: '#fff',
@@ -111,7 +111,7 @@ export default {
 
 
 	// Color
-	brandPrimary: '#3F51B5',
+	brandPrimary: '#2B9EF3',
 	brandInfo: '#3F57D3',
 	brandSuccess: '#5cb85c',
 	brandDanger: '#d9534f',
@@ -158,7 +158,7 @@ export default {
 
 	// Header
 	toolbarBtnColor: '#fff',
-	toolbarDefaultBg: '#3F51B5',
+	toolbarDefaultBg: '#3C3C40',
 	toolbarHeight: (platform === 'ios') ? 76 : 56,
 	toolbarIconSize: (platform === 'ios') ? 20 : 22,
 	toolbarSearchIconSize: (platform === 'ios') ? 20 : 23,
@@ -214,7 +214,7 @@ export default {
 	// List
 	listBorderColor: '#c9c9c9',
 	listDividerBg: '#f4f4f4',
-	listItemHeight: 45,
+	listItemHeight: 40,
 	listBtnUnderlayColor: '#DDD',
 
 	// Card
@@ -292,4 +292,16 @@ export default {
 
 	// New Variable
 	inputGroupRoundedBorderRadius: 30,
+
+	// new
+	contentBgColor: '#EDEDED',
+	navTabColor: '#868686',
+	navTabActiveColor: '#9FCC2D',
+
+	content: {
+		backgroundColor: '#F0EFF5'
+	},
+	contentView: {
+		backgroundColor: '#FFFFFF'
+	},
 };

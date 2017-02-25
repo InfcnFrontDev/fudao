@@ -16,7 +16,7 @@ class SearchOfflineService extends PureComponent {
     render() {
         return (
             <Container>
-                <Header/>
+                <Header placeholder="搜索线下服务" />
                 <Content padder style={styles.content}>
                     <Text>线下服务</Text>
                 </Content>

@@ -5,7 +5,7 @@ import SplashScreen from 'react-native-splash-screen'
 import Icon from "react-native-vector-icons/Ionicons";
 import styles from "./styles";
 // tab components
-import Home from "../home/";
+import Home from "../search/";
 import Article from "../article/";
 import Dynamic from "../dynamic/";
 import My from "../my/";
@@ -42,7 +42,7 @@ class Index extends Component {
                 selectedIcon: 'ios-person',
                 component: My
             }],
-            selectedTab: 'dynamic'
+            selectedTab: 'home'
         };
     }
 

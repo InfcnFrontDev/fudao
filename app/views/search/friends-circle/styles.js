@@ -1,7 +1,5 @@
-import theme from "../../../themes/material";
 const styles = {
     content: {
-        backgroundColor: theme.contentBgColor,
         padding: 20,
     },
     grid: {

@@ -16,7 +16,7 @@ class SearchFriendsCircle extends PureComponent {
     render() {
         return (
             <Container>
-                <Header/>
+                <Header placeholder="搜索朋友圈" />
                 <Content padder style={styles.content}>
                     <Text>朋友圈</Text>
                 </Content>

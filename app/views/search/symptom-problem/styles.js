@@ -1,26 +1,18 @@
-import theme from "../../../themes/material";
 const styles = {
-    content: {
-        backgroundColor: theme.contentBgColor,
-        padding: 20,
-    },
-    grid: {
-        marginTop: 40,
-    },
-    col: {},
-    row: {
-        paddingBottom: 20,
-    },
-    iconContainer: {
-        alignItems: 'center',
-    },
-    icon: {
-        fontSize: 32,
-        color: '#6c6c6c'
-    },
-    iconText: {
-        color: "#6c6c6c"
-    },
+	itemContainer: {
+		padding: 14,
+		backgroundColor: '#FFFFFF',
+		flexDirection: 'row',
+		flexWrap: 'wrap'
+	},
+	item: {
+		backgroundColor: '#eeeeee',
+		margin: 5,
+		padding: 10,
+		height: 30,
+		justifyContent: 'center',
+		borderRadius: 5,
+	}
 };
 
 export default styles;

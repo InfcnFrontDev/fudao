@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import {Container, Content, Left, Right, Body, Text} from "native-base";
 import Header from "../../../components/header/search";
+import Result from "./result";
 import styles from "./styles";
 
 /**
@@ -16,9 +17,9 @@ class SearchInformation extends PureComponent {
     render() {
         return (
             <Container>
-                <Header/>
-                <Content padder style={styles.content}>
-                    <Text>资讯</Text>
+                <Header placeholder="搜索资讯" />
+                <Content>
+                    <Result/>
                 </Content>
             </Container>
         );

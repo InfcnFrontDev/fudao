@@ -1,11 +1,10 @@
-import color from 'color';
-
-import {Platform, Dimensions, PixelRatio} from 'react-native';
+import color from "color";
+import {Platform, Dimensions, PixelRatio} from "react-native";
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 const platform = Platform.OS;
-const platformStyle = undefined;
+const platformStyle = "material";
 
 export default {
 	platformStyle,
@@ -34,7 +33,7 @@ export default {
 	CheckboxIconSize: (platform === 'ios') ? 21 : 14,
 	CheckboxIconMarginTop: (platform === 'ios') ? undefined : 1,
 	CheckboxFontSize: (platform === 'ios') ? (23 / 0.9) : 18,
-	DefaultFontSize: 17,
+	DefaultFontSize: 14,
 	checkboxBgColor: '#039BE5',
 	checkboxSize: 20,
 	checkboxTickColor: '#fff',
@@ -159,7 +158,7 @@ export default {
 
 	// Header
 	toolbarBtnColor: (platform === 'ios') ? '#007aff' : '#fff',
-	toolbarDefaultBg: (platform === 'ios') ? '#F8F8F8' : '#3F51B5',
+	toolbarDefaultBg: (platform === 'ios') ? '#F8F8F8' : '#3C3C40',
 	toolbarHeight: (platform === 'ios') ? 64 : 56,
 	toolbarIconSize: (platform === 'ios') ? 20 : 22,
 	toolbarSearchIconSize: (platform === 'ios') ? 20 : 23,
@@ -182,7 +181,7 @@ export default {
 
 
 	// InputGroup
-	inputFontSize: 17,
+	inputFontSize: 14,
 	inputBorderColor: '#D9D5DC',
 	inputSuccessBorderColor: '#2b8339',
 	inputErrorBorderColor: '#ed2f2f',
@@ -293,4 +292,9 @@ export default {
 
 	// New Variable
 	inputGroupRoundedBorderRadius: 30,
+
+	// fudao
+	contentBgColor: '#EDEDED',
+	navTabColor: '#868686',
+	navTabActiveColor: '#9FCC2D',
 };
