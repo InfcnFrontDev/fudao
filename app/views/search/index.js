@@ -7,6 +7,7 @@ import Header from "../../components/header/search";
 import styles from "./styles";
 import Category from "./category";
 import Result from "./result";
+import {request, urls} from "../../utils/";
 
 /**
  * 搜索
