@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {BackAndroid, StatusBar, NavigationExperimental, Platform, ToastAndroid} from "react-native";
 import {StyleProvider, Drawer} from "native-base";
 import {connect} from "react-redux";
-import {Router, Scene, Actions} from "react-native-router-flux";
+import {Router, Scene, Reducer, Actions} from "react-native-router-flux";
 import {openDrawer, closeDrawer} from "./actions/drawer";
 import getTheme from "../native-base-theme/components/";
 import SideBar from "./views/sidebar/";
@@ -32,31 +32,13 @@ import MyInfo from "./views/my-info/";
 import Webview from "./views/webview/";
 
 
-const RouterWithRedux = connect()(Router);
+const AppRouter = connect()(Router);
 const {
 	CardStack: NavigationCardStack,
 } = NavigationExperimental;
 
-var lastBackPressed = 0;
+var lastBackPressTime = 0;
 class AppNavigator extends Component {
-
-	componentDidMount() {
-		BackAndroid.addEventListener('hardwareBackPress', this.handleBack);
-	}
-
-	handleBack() {
-		try {
-			Actions.pop({});
-		} catch (e) {
-			if (lastBackPressed && lastBackPressed + 2000 >= Date.now()) {
-				return false;
-			}
-
-			lastBackPressed = Date.now();
-			ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
-		}
-		return true;
-	};
 
 	componentDidUpdate() {
 		if (this.props.drawerState === 'opened') {
@@ -86,14 +68,13 @@ class AppNavigator extends Component {
 						this._drawer = ref;
 					}}
 					content={<SideBar navigator={this._navigator}/>}
-					onClose={() => this.closeDrawer()}
-				>
+					onClose={() => this.closeDrawer()}>
 					<StatusBar
 						hidden={(this.props.drawerState === 'opened' && Platform.OS === 'ios') ? true : false}
-						backgroundColor={theme.statusBarColor}
-						style={{color:'#ffffff'}}
-					/>
-					<RouterWithRedux >
+						backgroundColor={theme.statusBarColor}/>
+					<AppRouter
+						createReducer={this.reducerCreate.bind(this)}
+						onExitApp={this.appExit.bind(this)}>
 						<Scene key="root">
 							<Scene key="index" component={Index} hideNavBar initial={true} title="首页"/>
 							<Scene key="about" component={About} title="关于福道"/>
@@ -123,14 +104,31 @@ class AppNavigator extends Component {
 							{/*首次登录添个人信息*/}
 							<Scene key="startInformation" component={StartInformation}/>
 							<Scene key="myInfo" component={MyInfo} title="个人信息"/>
-							<Scene key="webview" component={Webview}/>
+							<Scene key="webview" component={Webview} title="WebView"/>
 						</Scene>
-					</RouterWithRedux>
+					</AppRouter>
 				</Drawer>
 			</StyleProvider>
 		)
 	}
 
+	reducerCreate(params) {
+		const defaultReducer = Reducer(params)
+		return (state, action) => {
+			// console.log(state);
+			// console.log(action);
+			return defaultReducer(state, action)
+		}
+	}
+
+	appExit() {
+		if (lastBackPressTime && lastBackPressTime + 2000 >= Date.now()) {
+			return false;
+		}
+		lastBackPressTime = Date.now();
+		ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
+		return true;
+	}
 }
 
 const bindAction = dispatch => ({
