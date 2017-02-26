@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {BackAndroid, StatusBar, NavigationExperimental, Platform, ToastAndroid} from "react-native";
 import {StyleProvider, Drawer} from "native-base";
+import SplashScreen from 'react-native-splash-screen'
 import {connect} from "react-redux";
 import {Router, Scene, Reducer, Actions} from "react-native-router-flux";
 import {openDrawer, closeDrawer} from "./actions/drawer";
@@ -76,7 +77,7 @@ class AppNavigator extends Component {
 						createReducer={this.reducerCreate.bind(this)}
 						onExitApp={this.appExit.bind(this)}>
 						<Scene key="root">
-							<Scene key="index" component={Index} hideNavBar initial={true} title="首页"/>
+							<Scene key="index" component={Index} hideNavBar tabs initial={true} title="首页"/>
 							<Scene key="about" component={About} title="关于福道"/>
 							<Scene key="protocol" component={Protocol} title="用户协议"/>
 							<Scene key="declare" component={Declare} title="隐式声明"/>
@@ -110,6 +111,10 @@ class AppNavigator extends Component {
 				</Drawer>
 			</StyleProvider>
 		)
+	}
+
+	componentDidMount() {
+		SplashScreen.hide();
 	}
 
 	reducerCreate(params) {
