@@ -10,9 +10,9 @@ import styles from "./styles";
 
 
 /**
- * 主页
+ * 开始页
  */
-class Home extends Component {
+class Start extends Component {
     constructor(props) {
         super(props);
     }
@@ -24,8 +24,8 @@ class Home extends Component {
                <View style={styles.view}>
                    <Image source={require('../../assets/logo.png')}  style={styles.img} />
                    <View style={styles.viewButton}>
-                       <Button  light onPress={()=>Actions['login']()}><Text>登录</Text></Button>
-                       <Button  light onPress={()=>Actions['register']()}><Text>注册</Text></Button>
+                       <Button  success  bordered onPress={()=>Actions['login']()}><Text>登录</Text></Button>
+                       <Button  success  onPress={()=>Actions['register']()}><Text>注册</Text></Button>
                    </View>
 
                </View>
@@ -42,4 +42,4 @@ function bindAction(dispatch) {
 }
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(Home);
+export default connect(mapStateToProps, bindAction)(Start);

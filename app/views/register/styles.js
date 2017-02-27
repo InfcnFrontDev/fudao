@@ -1,41 +1,24 @@
+import themes from "../../themes/material"
+
 const styles = {
-    container:{
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    view:{
-        width:300,
-        height:400,
-    },
-    titleText:{
-        textAlign:'center',
-        fontSize: 28
-    },
-    inputNum:{height: 40,
-       width:200,
-    },
-    inputYan:{
-        width:100,
+    inputNum:{
+        flex:1,
+        height: 40,
     },
     box1:{
         flexDirection:'row',
-        marginTop:40,
         marginBottom:20
-
     },
     box2:{
-
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center',
         borderColor:'#D4D4D4',
-        borderTopWidth:1,
         borderBottomWidth:1,
 
     },
     box3:{
         flexDirection:'row',
-
         justifyContent:'space-between',
         alignItems:'center',
       /*  paddingTop:10,
@@ -52,10 +35,12 @@ const styles = {
         borderRightColor:"#D4D4D4",
 
     },
-    btnYan:{
-
-    },
-
+   tiaokuan:{
+        fontSize:themes.DefaultFontSize-5,
+       textAlign:'center',
+       marginTop:6,
+       color:'#666'
+    }
 };
 
 export default styles;

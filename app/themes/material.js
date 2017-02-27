@@ -34,7 +34,8 @@ export default {
     CheckboxIconMarginTop: (platform === 'ios') ? undefined : 1,
     CheckboxFontSize: (platform === 'ios') ? 21 : 18,
     DefaultFontSize: 17,
-    checkboxBgColor: '#039BE5',
+    /*checkboxBgColor: '#039BE5',*/
+    checkboxBgColor: '#06B76F',
     checkboxSize: 20,
     checkboxTickColor: '#fff',
 
