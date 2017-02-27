@@ -92,7 +92,8 @@ const MyGroup = {
      comments: {type:'list',objectType:'DynamicComment' },
      createtime: 'int',// 发表时间,
      photo: {type: 'string', optional: true},
-     urls: {type: 'string', optional: true}
+     urls: {type: 'string', optional: true},
+     flag: {type: 'bool', optional: true},
    }
  };
 
@@ -170,7 +171,7 @@ const ChatMessage = {
 
 module.exports = {
     schema: [Dynamic,DynamicPraise,DynamicComment],
-    schemaVersion: 10,
+    schemaVersion: 12,
     migration: () => {
     }
 };

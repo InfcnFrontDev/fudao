@@ -1,10 +1,9 @@
+import theme from "../../themes/material";
+
 const styles = {
   contain:{
     // backgroundColor:'#444',
     // flexDirection:'column',
-  },
-  color000:{
-    color:'#000',
   },
   contain1:{
     backgroundColor:'#fff',
@@ -23,21 +22,26 @@ const styles = {
   },
   person:{
     position:'absolute',
-    top:160,
-    right:100,
+    top:185,
+    right:95,
   },
   touxiang:{
-    width:80,
-    height:80,
+    width:78,
+    height:78,
     position:'absolute',
-    top:120,
+    top:150,
     right:10,
   },
   dynamic:{
     flexDirection:'row',
     marginRight:8,
-    marginBottom:13,
-    marginTop:6,
+    marginBottom:20,
+    marginTop:20,
+    marginLeft:20,
+  },
+  time:{
+    color:'#999',
+    fontSize:theme.DefaultFontSize-3,
   },
   dynamicDetail:{
     flex:1,
@@ -53,7 +57,6 @@ const styles = {
     fontSize:17,
   },
   dynamicContent:{
-    fontSize:15,
     marginTop:8,
   },
   imageTouch:{
@@ -82,17 +85,25 @@ const styles = {
     width:16,
     height:16,
   },
+  showContain:{
+    height:20,
+    marginBottom:6,
+  },
   show:{
     flexDirection:'row',
     position:'absolute',
-    right:10,
-
+    right:12,
   },
-  showone:{
-    width:42,
+  divid:{
+    paddingLeft:8,
+    paddingRight:8,
+    paddingTop:0,
+    height:24,
   },
   showoneText:{
     textAlign:'center',
+    color:'#999',
+    fontSize:theme.DefaultFontSize-4,
   },
   textInputContain:{
     paddingTop:10,
@@ -117,19 +128,42 @@ const styles = {
     backgroundColor:'#eee',
     paddingLeft:10,
     marginRight:16,
-    paddingBottom:8,
+    // paddingBottom:8,
   },
   oneComment:{
     flexDirection:'row',
+    flexWrap:'wrap',
+    alignItems:'center',
+justifyContent:'flex-start',
+    // backgroundColor:'#000'
+    marginBottom:4,
   },
   commentName:{
     color:'#0f9dc9',
     lineHeight:25,
+    fontSize:theme.DefaultFontSize-3,
     marginRight:6,
   },
   commentContent:{
     lineHeight:25,
   },
+  allSupports:{
+    backgroundColor:'#eee',
+    paddingLeft:10,
+    marginRight:16,
+    paddingBottom:8,
+    flexDirection:'row',
+    borderBottomWidth:1,
+    borderBottomColor:'#ccc',
+    flexWrap:'wrap',
+    alignItems:'center',
+  },
+  xin:{
+    marginTop:6,
+    marginRight:4,
+    width:20,
+    height:20,
+  }
 };
 
 export default styles;

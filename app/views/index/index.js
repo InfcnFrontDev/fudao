@@ -42,7 +42,7 @@ class Index extends Component {
                 selectedIcon: 'ios-person',
                 component: My
             }],
-            selectedTab: 'dynamic'
+            selectedTab: 'my'
         };
     }
 
@@ -87,7 +87,7 @@ class Index extends Component {
     }
 
     componentDidMount(){
-        SplashScreen.hide();
+        // SplashScreen.hide();
     }
 }
 
