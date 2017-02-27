@@ -12,6 +12,7 @@ class Webview extends PureComponent {
             <Container>
                 <Header {...this.props}/>
                 <WebView
+                    ref="webview"
                     source={{...this.props}}
                     startInLoadingState={true}
                     javaScriptEnabled={true}
@@ -22,5 +23,6 @@ class Webview extends PureComponent {
             </Container>
         );
     }
+
 }
 export default (Webview);

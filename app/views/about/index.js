@@ -53,10 +53,10 @@ class About extends PureComponent {
                     </Row>
                     <Row style={{marginTop:30}}>
                         <Col style={styles.center}>
-                            <Button primary onPress={()=> this.declare()}><Text>隐式声明</Text></Button>
+                            <Button onPress={()=> this.declare()}><Text>隐式声明</Text></Button>
                         </Col>
                         <Col style={styles.center}>
-                            <Button primary onPress={()=> this.protocol()}><Text>用户协议</Text></Button>
+                            <Button onPress={()=> this.protocol()}><Text>用户协议</Text></Button>
                         </Col>
                     </Row>
                 </Content>
@@ -67,7 +67,7 @@ class About extends PureComponent {
     declare() {
         Actions.webview({
             title: '隐式声明',
-            uri: urls.declare,
+            uri: urls.declare + "?userId=1",
         })
     }
 

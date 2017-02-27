@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {View, Icon, Left, Right, Body, Text, ListItem} from "native-base";
+import styles from "./styles";
 
 /**
  * my datas menu
@@ -53,7 +54,7 @@ class MyList extends Component {
                     <Icon name={item.icon}/>
                 </Left>
                 <Body style={item.bordered?{}:{borderBottomWidth:0}}>
-                <Text>{item.text}</Text>
+                <Text style={styles.listText}>{item.text}</Text>
                 </Body>
                 <Right style={item.bordered?{}:{borderBottomWidth:0}}>
                     <Icon name="ios-arrow-forward"/>
