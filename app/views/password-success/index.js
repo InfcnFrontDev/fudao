@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
@@ -8,7 +8,7 @@ import styles from "./styles";
 /**
  * 设置密码
  */
-class SetPassword extends Component {
+class SetPassword extends PureComponent {
     constructor(props){
         super(props);
         this.state={

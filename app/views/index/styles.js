@@ -19,7 +19,7 @@ const styles = {
 	},
 	tabIconSelected: {
 		color: theme.navTabActiveColor
-	}
+	},
 };
 
 export default styles;

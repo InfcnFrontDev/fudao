@@ -97,13 +97,13 @@ class AppNavigator extends Component {
 							{/*启动后开始页*/}
 							<Scene key="start" component={Start}/>
 							{/*登录页*/}
-							<Scene key="login" component={Login}/>
+							<Scene key="login" component={Login} title="登录"/>
 							{/*注册页*/}
-							<Scene key="register" component={Register}/>
+							<Scene key="register" component={Register} title="注册"/>
 							{/*设置密码*/}
-							<Scene key="setPassword" component={SetPassword}/>
+							<Scene key="setPassword" component={SetPassword} title="设置密码"/>
 							{/*注册成功*/}
-							<Scene key="passwordSuccess" component={PasswordSuccess}/>
+							<Scene key="passwordSuccess" component={PasswordSuccess} title="基本信息"/>
 							{/*首次登录添个人信息*/}
 							<Scene key="startInformation" component={StartInformation}/>
 							<Scene key="myInfo" component={MyInfo} title="个人信息"/>
