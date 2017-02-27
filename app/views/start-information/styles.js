@@ -1,20 +1,23 @@
 const styles = {
-    container:{
-
-
-    },
-    view:{
-        width:280,
-        backgroundColor:'red',
-    },
-    content:{
+    bigBox:{
+        flexDirection:'row',
         justifyContent:'center',
+        alignItems:'center'
     },
-    row:{
+    box:{
+        width:280,
+        height:500,
+    },
+    photo:{
         marginTop:20,
         flexDirection:'row',
        justifyContent:'space-around',
 
+    },
+    touxiang:{
+        width:80,
+        height:80,
+        borderRadius:40,
     },
     row1:{
         marginTop:20,

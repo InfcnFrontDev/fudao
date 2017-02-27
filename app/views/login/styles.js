@@ -45,6 +45,10 @@ const styles = {
         fontSize:themes.DefaultFontSize-2,
         color:'#666',
         textDecorationLine:'underline'
+    },
+    check:{
+        width:20,
+        height:20
     }
 
 };

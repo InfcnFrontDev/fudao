@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
@@ -10,7 +10,7 @@ import styles from "./styles";
  * 注册
  */
 
-class Register extends Component {  // eslint-disable-line
+class Register extends PureComponent {  // eslint-disable-line
     constructor(props){
         super(props);
         this.state={

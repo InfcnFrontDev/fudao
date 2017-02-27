@@ -1,5 +1,5 @@
 //noinspection JSAnnotator
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Title, Content, Left, Right, Body, Form, Input, Item,Thumbnail,Button,Text} from "native-base";
@@ -13,7 +13,7 @@ import styles from "./styles";
 /**
  * 首次登录设置个人信息页
  */
-class StartInformation extends Component {
+class StartInformation extends PureComponent {
     constructor(props) {
         super(props);
     }
@@ -22,27 +22,26 @@ class StartInformation extends Component {
         return (
             <Container style={styles.container}>
                 <Header></Header>
-                <Content padder>
-                    <View style={styles.row}>
-                        <View  style={styles.left}>
-                            <Text>您的性别</Text>
+                <Content padder >
+                    <View style={styles.bigBox}>
+                        <View style={styles.box}>
+                            <View style={styles.photo}>
+                                <Thumbnail style={styles.touxiang} size={80} source={require('../../assets/my-photos/photo.jpg')}/>
+                                <Thumbnail style={styles.touxiang} size={80} source={require('../../assets/my-photos/photo.jpg')}/>
+                            </View>
+                            <View  style={styles.row1}>
+                                <Text style={{textAlign:'center'}}>请选择出生日</Text>
+                                <View style={{height:200}}></View>
+                            </View>
+                            <Button>
+                                <Text>正在定位你的位置</Text>
+                            </Button>
+                            <Button block success>
+                                <Text>提交</Text>
+                            </Button>
                         </View>
-
-                        <View style={styles.right}>
-                            <Thumbnail  size={80} source={require('../../assets/my-photos/photo.jpg')}/>
-                            <Thumbnail  size={80} source={require('../../assets/my-photos/photo.jpg')}/>
-                        </View>
-                        <View  style={styles.row1}>
-                            <Text style={{textAlign:'center'}}>请选择出生日</Text>
-                            <View style={{height:200}}></View>
-                        </View>
-                        <Button>
-                            <Text>正在定位你的位置</Text>
-                        </Button>
-                        <Button block success>
-                            <Text>提交</Text>
-                        </Button>
                     </View>
+
 
                 </Content>
             </Container>

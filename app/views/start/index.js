@@ -1,5 +1,5 @@
 //noinspection JSAnnotator
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
@@ -12,7 +12,7 @@ import styles from "./styles";
 /**
  * 开始页
  */
-class Start extends Component {
+class Start extends PureComponent {
     constructor(props) {
         super(props);
     }
