@@ -4,7 +4,7 @@ import TabNavigator from "react-native-tab-navigator";
 import Icon from "react-native-vector-icons/Ionicons";
 import styles from "./styles";
 // tab components
-import Home from "../search/";
+import Home from "../home/";
 import Article from "../article/";
 import Dynamic from "../dynamic/";
 import My from "../my/";

@@ -22,7 +22,7 @@ class DynamicHeader extends Component {
             <Image  source={require('../../assets/dy2.jpg')} style={styles.bgImg}/>
           </View>
           <View style={styles.person}>
-            <Text>福大爷</Text>
+            <Text style={styles.color9b}>福大爷</Text>
           </View>
           <Image source={require('../../assets/my-photos/photo.jpg')} style={styles.touxiang}/>
      </View>
