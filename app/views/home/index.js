@@ -38,11 +38,6 @@ class Home extends Component {
             </Container>
         )
     }
-
-    componentDidMount(){
-
-      Actions['myEmotion']()
-    }
 }
 function bindAction(dispatch) {
     return {

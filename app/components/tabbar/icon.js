@@ -2,18 +2,21 @@ import React, {Component} from "react";
 import {StyleSheet} from "react-native";
 import {Left, Right, Body, View, Icon, Text} from "native-base";
 
-class TabBar extends Component {
+class TabBarIcon extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        let param = this.data[this.props.sceneKey];
-        let activeStyle = this.props.selected ? {color: "#3399FF"} : {};
+        let {selected, title, iconName, selectedIconName} = this.props;
+        let activeStyle = selected ? {color: "#3399FF"} : {};
+        if (selected) {
+            iconName = selectedIconName;
+        }
         return (
             <View style={{alignItems:'center'}}>
-                <Icon name={this.props.iconName} color={activeStyle.color} size={25}/>
-                <Text style={[activeStyle,styles.tabbarItem]}>{this.props.title}</Text>
+                <Icon name={iconName} color={activeStyle.color} size={25}/>
+                <Text style={[activeStyle,styles.tabbarItem]}>{title}</Text>
             </View>
         )
     }
@@ -32,4 +35,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default (TabBar)
+export default (TabBarIcon)
