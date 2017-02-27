@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {View,Text,Image} from "react-native";
+import {Text} from "native-base";
+import {View,Image} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import styles from "./styles";
 
@@ -23,7 +24,7 @@ class DynamicHeader extends Component {
           <View style={styles.person}>
             <Text>福大爷</Text>
           </View>
-          <Image  source={require('../../assets/photo.jpg')} style={styles.touxiang}/>
+          <Image source={require('../../assets/my-photos/photo.jpg')} style={styles.touxiang}/>
      </View>
     )
   }

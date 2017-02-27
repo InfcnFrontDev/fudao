@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Content, Left, Right, Body} from "native-base";
 import Header from "../../components/header/base";
@@ -80,11 +80,7 @@ const groups = {
 /**
  * 我的基本信息
  */
-class MyInfo extends Component {
-
-    constructor(props) {
-        super(props);
-    }
+class MyInfo extends PureComponent {
 
     render() {
         return (

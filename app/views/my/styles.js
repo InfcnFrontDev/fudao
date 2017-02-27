@@ -1,38 +1,23 @@
-import theme from "../../themes/material";
+import {theme} from "../../utils/";
 const styles = {
-    content: {
-        backgroundColor: theme.contentBgColor,
-    },
-    photoMenu: {
-        flex: 1,
-        height: 100,
-        backgroundColor: '#FFFFFF',
-        borderBottomWidth: 0,
-    },
-    myPhoto: {
-        flex: 4,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    myTitle: {
-        flex: 7,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-    },
-    myTitleText: {
-        color: '#333333'
-    },
-    myForward: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    myForwardIcon: {
-        color: '#c6c6c6'
-    },
-    gridCol: {
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
+	myCover: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: theme.deviceWidth + 3,
+		height: 180,
+	},
+	myPhoto: {
+		width: 80,
+		height: 80,
+		borderRadius: 40,
+	},
+	gridCol: {
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	listText: {
+		fontSize: theme.DefaultFontSize,
+	}
 };
 export default styles;

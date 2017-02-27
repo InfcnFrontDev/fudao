@@ -1,15 +1,14 @@
-import React, {Component} from "react";
-import {connect} from "react-redux";
+import React, {PureComponent} from "react";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body, Text, Row, Thumbnail, Col, Button} from "native-base";
 import Header from "../../components/header/base";
-import config from "../../utils/config";
+import {config, urls} from "../../utils/";
 import styles from "./styles";
 
 /**
  * 关于福道
  */
-class About extends Component {  // eslint-disable-line
+class About extends PureComponent {
     render() {
         return (
             <Container style={styles.container}>
@@ -54,21 +53,31 @@ class About extends Component {  // eslint-disable-line
                     </Row>
                     <Row style={{marginTop:30}}>
                         <Col style={styles.center}>
-                            <Button primary onPress={()=>Actions.declare()}><Text>隐式声明</Text></Button>
+                            <Button onPress={()=> this.declare()}><Text>隐式声明</Text></Button>
                         </Col>
                         <Col style={styles.center}>
-                            <Button primary onPress={()=>Actions.protocol()}><Text>用户协议</Text></Button>
+                            <Button onPress={()=> this.protocol()}><Text>用户协议</Text></Button>
                         </Col>
                     </Row>
                 </Content>
             </Container>
         );
     }
+
+    declare() {
+        Actions.webview({
+            title: '隐式声明',
+            uri: urls.declare + "?userId=1",
+        })
+    }
+
+    protocol() {
+        Actions.webview({
+            title: '用户协议',
+            uri: urls.protocol,
+        })
+    }
+
 }
 
-function bindAction(dispatch) {
-    return {};
-}
-
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(About);
+export default (About);

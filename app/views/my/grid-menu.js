@@ -15,18 +15,18 @@ class GridMenu extends Component {
         return (
             <Grid style={{backgroundColor: '#fff', height: 80}}>
                 {this.renderItem({
-                    icon: 'ios-star',
-                    iconColor: '#DAA520',
+                    icon: 'heart',
+                    iconColor: '#EC6149',
                     text: '收藏'
                 })}
                 {this.renderItem({
-                    icon: 'ios-pie',
+                    icon: 'people',
                     iconColor: '#79CDCD',
                     text: '好友'
                 })}
                 {this.renderItem({
                     icon: 'ios-settings',
-                    iconColor: '#A2B5CD',
+                    iconColor: '#868686',
                     text: '设置'
                 })}
             </Grid>

@@ -23,10 +23,14 @@ class StartInformation extends Component {
             <Container style={styles.container}>
                 <Header></Header>
                 <Content padder>
-                    <View style={styles.view}>
-                        <View style={styles.row}>
-                            <Thumbnail  size={80} source={require('../../assets/photo.jpg')}/>
-                            <Thumbnail  size={80} source={require('../../assets/photo.jpg')}/>
+                    <View style={styles.row}>
+                        <View  style={styles.left}>
+                            <Text>您的性别</Text>
+                        </View>
+
+                        <View style={styles.right}>
+                            <Thumbnail  size={80} source={require('../../assets/my-photos/photo.jpg')}/>
+                            <Thumbnail  size={80} source={require('../../assets/my-photos/photo.jpg')}/>
                         </View>
                         <View  style={styles.row1}>
                             <Text style={{textAlign:'center'}}>请选择出生日</Text>

@@ -88,11 +88,26 @@ const MyGroup = {
      username: 'string', // 发表人
      name: 'string', // 发表人
      content: 'string',// 动态内容
-     suports:  {type: 'list',objectType:'DynamicPraise', optional: true},
+     suports:  {type: 'list',objectType:'DynamicPraise' },
+     comments: {type:'list',objectType:'DynamicComment' },
      createtime: 'int',// 发表时间,
      photo: {type: 'string', optional: true},
-     urls: {type: 'string', optional: true}
+     urls: {type: 'string', optional: true},
+     flag: {type: 'bool', optional: true},
    }
+ };
+
+ /**
+  * 动态的点赞信息
+  */
+ const DynamicPraise = {
+     name: 'DynamicPraise',
+     properties: {
+         createTime:'int',
+         id: 'int', // 动态ID
+         publishId: 'int', // 动态ID
+         username: 'string',// 点赞人ID
+     }
  };
 
 /**
@@ -101,13 +116,12 @@ const MyGroup = {
 const DynamicComment = {
     name: 'DynamicComment',
     properties: {
-        id: 'string',// 评论ID
-        dynamicId: 'string', // 动态ID
-        userId: 'string', // 评论用户ID
+        // id: 'string',// 评论ID
+        // dynamicId: 'string', // 动态ID
+        // userId: 'string', // 评论用户ID
+        name:'string',
+        username:'string',
         content: 'string',// 评论内容
-        atUserId: 'string', // @用户ID
-        commentTime: 'date',// 评论时间
-        status: 'string', // 状态
     }
 };
 
@@ -123,16 +137,7 @@ const DynamicPicture = {
     }
 };
 
-/**
- * 动态的点赞信息
- */
-const DynamicPraise = {
-    name: 'DynamicPraise',
-    properties: {
-        dynamicId: 'string', // 动态ID
-        userId: 'string',// 点赞人ID
-    }
-};
+
 
 /**
  * 聊天信息
@@ -165,8 +170,8 @@ const ChatMessage = {
 };
 
 module.exports = {
-    schema: [User, Group, GroupMember, MyContacts, MyGroup, Dynamic, DynamicComment, DynamicPicture, DynamicPraise, Chat, ChatMessage],
-    schemaVersion: 1,
+    schema: [Dynamic,DynamicPraise,DynamicComment],
+    schemaVersion: 12,
     migration: () => {
     }
 };

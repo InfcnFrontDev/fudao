@@ -22,9 +22,8 @@ class My extends Component {
                     <Title>{this.props.title}</Title>
                 </Header>
 
-                <Content style={styles.content}>
+                <Content>
                     <PhotoMenu/>
-                    <Separator/>
                     <GridMenu/>
                     <Separator/>
                     <ListMenu />

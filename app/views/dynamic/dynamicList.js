@@ -289,17 +289,18 @@ var GiftedListView = React.createClass({
 
   _updateRows(rows = [], options = {}) {
     // console.log("update data");
+    var data = rows.slice(0);
     if (rows !== null) {
       this._setRows(rows);
       if (this.props.withSections === true) {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRowsAndSections(rows),
+          dataSource: this.state.dataSource.cloneWithRowsAndSections(data),
           isRefreshing: false,
           paginationStatus: (options.allLoaded === true ? 'allLoaded' : 'waiting'),
         });
       } else {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(rows),
+          dataSource: this.state.dataSource.cloneWithRows(data),
           isRefreshing: false,
           paginationStatus: (options.allLoaded === true ? 'allLoaded' : 'waiting'),
         });
@@ -357,9 +358,9 @@ var GiftedListView = React.createClass({
         scrollEnabled={this.props.scrollEnabled}
         canCancelContentTouches={true}
         refreshControl={this.props.refreshable === true ? this.renderRefreshControl() : null}
+        {...this.props}
         onEndReachedThreshold={0.000001}
         onEndReached={this._onPaginate}
-        {...this.props}
         style={this.props.style}
       />
     );

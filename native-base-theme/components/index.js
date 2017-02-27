@@ -22,10 +22,11 @@ import textAreaTheme from './Textarea';
 import textTheme from './Text';
 import tabTheme from './Tab';
 import tabBarTheme from './TabBar';
-import viewTheme from './View';
 import tabContainerTheme from './TabContainer';
+import viewTheme from './View';
 import tabHeadingTheme from './TabHeading';
 import iconTheme from './Icon';
+import segmentTheme from './Segment';
 import spinnerTheme from './Spinner';
 import cardItemTheme from './CardItem';
 import listItemTheme from './ListItem';
@@ -195,6 +196,10 @@ export default (variables = variable) => {
      ...tabTheme(variables),
     },
 
+    'NativeBase.Segment': {
+     ...segmentTheme(variables),
+    },
+
     'NativeBase.STabs': {
       flex: 1,
     },
@@ -218,6 +223,24 @@ export default (variables = variable) => {
       ...separatorTheme(variables),
     },
     'NativeBase.Tabs': {
+    },
+    'NativeBase.Thumbnail': {
+      '.square': {
+        borderRadius: 0,
+      },
+      '.small': {
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+      },
+      '.large': {
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+      },
+      width: 56,
+      height: 56,
+      borderRadius: 28,
     },
 
   };

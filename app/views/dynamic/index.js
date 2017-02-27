@@ -1,43 +1,56 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Title, Content, Left, Right, Body} from "native-base";
-import { Platform, View,Text, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput} from "react-native";
+import {Container, Title, Content, Left, Right, Body,Text,Button} from "native-base";
+import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import styles from "./styles";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment'
 import {Actions} from "react-native-router-flux";
 import Header from "../../components/header/";
-import DynamicList from '../../components/listview/gifted';
+import DynamicList from './dynamicList';
+// import DynamicList from '../../components/listview/gifted';
 import DynamicHeader from './dynamic-header';
 import DynamicImage from './dynamic-image';
-
+import DynamicComment from './dynamic-comments';
+import DynamicSupport from './dynamic-supports';
+const dismissKeyboard = require('dismissKeyboard');
+import {store} from '../../store/configureStore.js';
+import {newRealm} from '../../actions/realm.js'
+import schema from '../../realm/schema.js'
 
 /**
  * 动态
  */
-class Dynamic extends Component {
+class Dynamic extends PureComponent {
   constructor(props) {
 		super(props);
 		// moment.locale('zh-cn');
+    this.props.newRealm();
+    this.dynamic=[];
+    this.endID=0;
+    this.length = 0;
+    this.startID = 0;
+
 		this.state={
-			dynamic:[],
 			someShow:0,
       commentShow:false,
-      text:'',
-      comment:[{name:'zhangs',content:'你好，王五'},{name:'lis',content:'你好，王五'}]
+      text:''
 		}
 	}
 
     render() {
-      ToastAndroid.show("render", ToastAndroid.SHORT);
       let input = (null);
       if(this.state.commentShow){
         input = (
           <View style={styles.textInputContain}>
             <TextInput
               placeholder='评论' autoFocus={true}
-              onEndEditing={this._onBlur.bind(this)}
+              onEndEditing={()=>{
+                this.setState({
+                  commentShow:false,
+                })
+              }}
               onSubmitEditing={this._onSubmitEditing.bind(this)}
               style={styles.textInput}
               underlineColorAndroid='transparent'/>
@@ -58,6 +71,7 @@ class Dynamic extends Component {
                   pagination={true}
                   refreshable={true}
                   withSections={false}
+                  ref="gifted"
                 />
                {input}
             </Container>
@@ -66,12 +80,25 @@ class Dynamic extends Component {
 
 
     	_renderRowView(info,sectionID,rowID){
-        // ToastAndroid.show("renderrow", ToastAndroid.SHORT);
+        console.log(info);
     		if(info.photo){
     			var id = info.photo;
     		}else{
     			var id = 256;
     		}
+        if(info.flag){
+          var zan =(
+            <Button onPress={this._zan.bind(this,info)} transparent dark style={styles.divid} >
+              <Text style={styles.showoneText}>取消</Text>
+            </Button>
+          )
+        }else{
+          var zan=(
+            <Button onPress={this._zan.bind(this,info)} transparent dark style={styles.divid} >
+              <Text style={styles.showoneText}>点赞</Text>
+            </Button>
+          )
+        }
     		return (
     			<View style={styles.dynamic}>
     				<View>
@@ -79,102 +106,95 @@ class Dynamic extends Component {
     				</View>
     				<View style={styles.dynamicDetail}>
     					<Text style={styles.dynamicName}>{info.name}</Text>
-    					<Text style={[styles.dynamicContent,styles.color000]}>{info.content}</Text>
+    					<Text style={styles.dynamicContent}>{info.content}</Text>
     					<DynamicImage urls={info.urls}/>
-    					<View style={styles.dynamic}>
-    						<Text style={styles.time}> {moment(info.createtime).fromNow()}</Text>
-    						{this._showOrHidden(info.id)}
-    						<TouchableHighlight style={styles.dynamicMessage} onPress={this._show.bind(this,info.id)}>
-    							<Image source={{uri: 'http://192.168.10.58:9095/api/BaseApi/getImage?id='+id+'&w=&h='}}  style={styles.dynamicMessageImage}/>
-    						</TouchableHighlight>
-    					</View>
-              {this._renderComment(info)}
+              <View style={styles.showContain}>
+                <View  style={styles.show}>
+                {zan}
+                <Text style={styles.showoneText}>|</Text>
+                <Button onPress={this._comment.bind(this,info.id)} transparent dark style={styles.divid} >
+                <Text style={styles.showoneText}>评论</Text>
+                </Button>
+                </View>
+              </View>
+              <DynamicSupport zan={info.suports} />
+              <DynamicComment comments={info.comments} />
     				</View>
     			</View>
     		)
     	}
 
       _renderHeader(){
-      return  (
-        <DynamicHeader />
-        );
+          return  (
+            <DynamicHeader />
+          );
       }
 
-      _renderComment(info){
-        if(true) {
-            var arr_comment = this.state.comment;
-            let comment = arr_comment.map((p, i) => {
-              // <TouchableHighlight key={i} onPress={this._openPhotoBrowser.bind(this, arr_pic,i)} style={styles.imageTouch}>
-              return (
-                <View key={i} style={styles.oneComment}>
-                  <Text style={styles.commentName}>
-                    {p.name}:
-                  </Text>
-                  <Text style={styles.commentContent}>
-                    {p.content}
-                  </Text>
-                </View>
-              )
-            })
-            return (
-                <View style={styles.allComments}>
-                {comment}
-                </View>
-            )
+
+    	_zan(info){
+        let realm_dynamic = this.props.realm.objects('Dynamic').sorted('id');
+        let data = realm_dynamic.filtered('id=='+info.id)[0];
+        let suports = data.suports;
+        let arraySuports =Array.prototype.slice.call(suports, 0);
+        if(info.flag){
+          for(var j=0;j<arraySuports.length;j++){
+            if(arraySuports[j].username=='chenxx'){
+              arraySuports.splice(j,1);
+              break;
+            }
+          }
+        }else{
+          arraySuports[arraySuports.length]={createTime:Date.parse(new Date()),username:'chenxx',id:110,publishId:info.id};
         }
-      }
+        this.props.realm.write(()=>{
+            this.props.realm.create('Dynamic',{
+              id:info.id,
+              suports:arraySuports,
+              flag:!info.flag,
+            },true)
+        })
 
-    	_showOrHidden(infoid){
-    		if(this.state.someShow==infoid){
-    			return (
-    				<View  style={styles.show}>
-    					<TouchableHighlight onPress={this._zan.bind(this)} underlayColor='#fff' style={styles.showone}>
-    						<Text style={styles.showoneText}>点赞</Text>
-    					</TouchableHighlight>
-    					<Text>|</Text>
-    					<TouchableHighlight onPress={this._comment.bind(this)} underlayColor='#fff' style={styles.showone}>
-    						<Text style={styles.showoneText}>评论</Text>
-    					</TouchableHighlight>
-    				</View>
-    			)
-    		}
-    		return (null)
-
-    	}
-
-    	_show(infoid){
-        var id=infoid;
-        if(this.state.someShow==infoid){
-          id=0;
+        for(var i=0;i<this.dynamic.length;i++){
+          if(this.dynamic[i].id==info.id){
+            this.dynamic[i]=data;
+            break;
+          }
         }
-        this.setState({
-          someShow:id
-        })
+        this.refs.gifted._postRefresh(this.dynamic);
     	}
 
-    	_zan(){
+      //显示评论输入框
+    	_comment(infoid){
         this.setState({
-          someShow:0
-        })
-    	}
-
-    	_comment(){
-        this.setState({
-          someShow:0,
           commentShow:true,
         })
+        this.commentID = infoid;
     	}
 
-      _onBlur(){
-        this.setState({
-          commentShow:false,
-        })
-      }
-
+      //发表评论
       _onSubmitEditing(event){
         // event.nativeEvent.text
         if(event.nativeEvent.text){
-          ToastAndroid.show(event.nativeEvent.text, ToastAndroid.SHORT);
+          let realm_dynamic = this.props.realm.objects('Dynamic').sorted('id');
+          let Comments = realm_dynamic.filtered('id=='+this.commentID)[0].comments;
+          let arrayComments =Array.prototype.slice.call(Comments, 0);
+          arrayComments[arrayComments.length]={username:'chenxx',name:'陈欣欣',content:event.nativeEvent.text}
+          this.props.realm.write(()=>{
+              this.props.realm.create('Dynamic',{
+                id:this.commentID,
+                comments:arrayComments,
+              },true)
+          })
+          for(var i=0;i<this.dynamic.length;i++){
+            if(this.dynamic[i].id==this.commentID){
+              this.dynamic[i]=realm_dynamic.filtered('id=='+this.commentID)[0];
+              break;
+            }
+          }
+          this.refs.gifted._postRefresh(this.dynamic);
+          /*
+          暂缺提交给后台
+          */
         }
         this.setState({
           commentShow:false,
@@ -182,82 +202,169 @@ class Dynamic extends Component {
       }
 
     	_onFetch(page = 1, callback, options,flag){
-
-    		if(page === 1 && options.firstLoad) {
-          ToastAndroid.show("aaa", ToastAndroid.SHORT);
-
-    			fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id=&nav=1&size=5&username=chenxx',{
-    				method:'POST',
-    				headers:{
-    					'Accept': 'application/json',
-    					'Content-Type': 'application/json',
-    					'authorization':'545f57eb-29d8-4827-a7dc-7c9002e3397e'
-    				}
-    			})
-    			.then((res) => res.json())
-    			.then((res) => {
-    				console.log(res);
-    					if(!res.err_code) {
-    						// ToastAndroid.show(JSON.stringify(res), ToastAndroid.SHORT);
-    						this.setState({
-    							dynamic:res.obj
-    						})
-    						callback(res.obj);
-    					}
-    			})
-    		}else if(page === 1&&!options.firstLoad&&flag==false) {
-          ToastAndroid.show("bbb", ToastAndroid.SHORT);
-
-          // fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id=84&nav=0&size=5&username=chenxx',{
-          //   method:'POST',
-          //   headers:{
-          //     'Accept': 'application/json',
-          //     'Content-Type': 'application/json',
-          //     'authorization':'545f57eb-29d8-4827-a7dc-7c9002e3397e'
-          //   }
-          // })
-          // .then((res) => res.json())
-          // .then((res) => {
-          //   console.log(res);
-          //     if(!res.err_code) {
-          //       // ToastAndroid.show(JSON.stringify(res), ToastAndroid.SHORT);
-          //       this.setState({
-    			// 				dynamic:res.obj.concat(this.state.dynamic)
-    			// 			})
-          //       callback(res.obj.concat(this.state.dynamic));
-          //     }
-          // })
-    		}else{
-          ToastAndroid.show("ccc", ToastAndroid.SHORT);
-
-          fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id=84&nav=0&size=5&username=chenxx',{
+        if(page === 1 && options.firstLoad) {
+          fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id=&nav=1&size=5&username=chenxx',{
             method:'POST',
             headers:{
               'Accept': 'application/json',
               'Content-Type': 'application/json',
-              'authorization':'545f57eb-29d8-4827-a7dc-7c9002e3397e'
+              'authorization':'41374f9d-1b1a-4b64-b202-a54d66cf83c8'
             }
           })
           .then((res) => res.json())
           .then((res) => {
-            console.log(res);
-              if(!res.err_code) {
-                // ToastAndroid.show(JSON.stringify(res), ToastAndroid.SHORT);
-                this.setState({
-                  dynamic:this.state.dynamic.concat(res.obj)
+            if(!res.err_code&&res.ok==true&&res.obj.length>0) {
+              this.dynamic=res.obj;
+              this.length = res.obj.length;
+              this.endID = res.obj[res.obj.length-1].id;
+              this.startID = res.obj[0].id;
+              callback(res.obj);
+              this.props.realm.write(()=>{
+                for(let i=0;i<res.obj.length;i++){
+                  this.props.realm.create('Dynamic',{
+                    id:res.obj[i].id,
+                    username:res.obj[i].username,
+                    name:res.obj[i].name,
+                    content:res.obj[i].content,
+                    createtime:res.obj[i].createtime,
+                    suports:res.obj[i].suports,
+                    comments:[],
+                    photo:res.obj[i].photo,
+                    urls:res.obj[i].urls,
+                    flag:res.obj[i].flag,
+                  },true)
+                }
+              })
+              let realm_res = this.props.realm.objects('Dynamic').sorted('id');
+              this.min_realm = realm_res[0].id;
+              this.max_realm = realm_res[realm_res.length-1].id;
+            }else{
+              let res = this.props.realm.objects('Dynamic').sorted('id');
+              console.log(res);
+              if(res){
+                if(res.length>6){
+                  var firstres = res.slice(res.length-6,res.length-1);
+                }else{
+                  var firstres = res;
+                }
+                this.length = firstres.length;
+                this.min_realm = res[0].id;
+                this.max_realm = res[res.length-1].id;
+                this.endID=firstres[0].id
+                this.dynamic=firstres.reverse();
+                callback(this.dynamic);
+              }
+            }
+          })
+        }else if(page === 1&&!options.firstLoad&&flag==false) {
+
+          fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id='+this.startID+'&nav=0&size=5&username=chenxx',{
+            method:'POST',
+            headers:{
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'authorization':'41374f9d-1b1a-4b64-b202-a54d66cf83c8'
+            }
+          })
+          .then((res) => res.json())
+          .then((res) => {
+              if(!res.err_code&&res.ok==true&&res.obj.length>0) {
+          			this.dynamic=res.obj.concat(this.dynamic)
+                callback(this.dynamic);
+                this.props.realm.write(()=>{
+                  for(let i=0;i<res.obj.length;i++){
+                    this.props.realm.create('Dynamic',{
+                      id:res.obj[i].id,
+                      username:res.obj[i].username,
+                      name:res.obj[i].name,
+                      content:res.obj[i].content,
+                      createtime:res.obj[i].createtime,
+                      suports:res.obj[i].suports,
+                      comments:[],
+                      photo:res.obj[i].photo,
+                      urls:res.obj[i].urls,
+                      flag:res.obj[i].flag,
+                    },true)
+                  }
                 })
-                callback(res.obj);
+                this.length +=res.obj.length;
+                this.startID = res.obj[0].obj;
+              }else{
+                callback(this.dynamic)
               }
           })
-    		}
-    	}
+        } else{
+            let realm_res = this.props.realm.objects('Dynamic').sorted('id');
+            if(realm_res.length>this.length+1){
+              if(realm_res.length>this.length+5){
+                var render_realm_res = realm_res.slice(realm_res.length-this.length-6,realm_res.length-this.length-1);
+              }else{
+                var render_realm_res = realm_res.slice(0,realm_res.length-this.length-1);
+              }
+              this.dynamic = this.dynamic.concat(render_realm_res.reverse());
+              this.length+=render_realm_res.length;
+              this.endID = render_realm_res[render_realm_res.length-1].id;
+              callback(this.dynamic);
+            }else{
+
+              this._loadMore(callback);
+            }
+
+
+        }
+      }
+
+      _loadMore(callback){
+        fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id='+this.endID+'&nav=0&size=5&username=chenxx',{
+          method:'POST',
+          headers:{
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'authorization':'41374f9d-1b1a-4b64-b202-a54d66cf83c8'
+          }
+        })
+        .then((res) => res.json())
+        .then((res) => {
+          //上拉加载更多
+          if(!res.err_code&&res.ok&&res.obj.length>0) {
+            this.props.realm.write(()=>{
+              for(let i=0;i<res.obj.length;i++){
+                this.props.realm.create('Dynamic',{
+                  id:res.obj[i].id,
+                  username:res.obj[i].username,
+                  name:res.obj[i].name,
+                  content:res.obj[i].content,
+                  createtime:res.obj[i].createtime,
+                  suports:res.obj[i].suports,
+                  comments:[],
+                  photo:res.obj[i].photo,
+                  urls:res.obj[i].urls,
+                  flag:res.obj[i].flag,
+                },true)
+              }
+            })
+            this.endID=res.obj[res.obj.length-1].id
+            this.dynamic=this.dynamic.concat(res.obj);
+            this.length+=res.obj.length;
+            callback(this.dynamic);
+          }else{
+            callback(this.dynamic,{
+              allLoaded:true,
+            });
+          }
+        })
+
+      }
 }
 function bindAction(dispatch) {
     return {
+        newRealm: ()=>dispatch(newRealm(schema)),
         openDrawer: () => dispatch(openDrawer()),
         closeDrawer: key => dispatch(closeDrawer()),
     };
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  realm:state.realm
+});
 export default connect(mapStateToProps, bindAction)(Dynamic);
