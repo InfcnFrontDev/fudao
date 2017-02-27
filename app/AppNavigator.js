@@ -79,10 +79,8 @@ class AppNavigator extends Component {
 					<StatusBar
 						hidden={(this.props.drawerState === 'opened' && Platform.OS === 'ios') ? true : false}
 						backgroundColor={theme.statusBarColor}/>
-					<AppRouter
-						createReducer={this.reducerCreate.bind(this)}
-						onExitApp={this.appExit.bind(this)}>
-						<Scene key="root" hideNavBar>
+					<AppRouter createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
+						<Scene key="root">
 
 							<Scene key="tabbar" tabs initial hideNavBar tabBarStyle={theme.tabBarStyle}>
 								<Scene key="home" component={Home} title="主页" icon={TabBarIcon} hideNavBar
@@ -96,7 +94,7 @@ class AppNavigator extends Component {
 							</Scene>
 
 							<Scene key="index" component={Index} title="首页"/>
-							<Scene key="about" component={About} title="关于福道"/>
+							<Scene key="about" component={About} title="关于福道" type="actionSheet"/>
 							<Scene key="protocol" component={Protocol} title="用户协议"/>
 							<Scene key="declare" component={Declare} title="隐式声明"/>
 
@@ -105,8 +103,8 @@ class AppNavigator extends Component {
 							<Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈"/>
 							<Scene key="searchHealthCare" component={SearchHealthCare} title="保健方法"/>
 							<Scene key="searchInformation" component={SearchInformation} title="资讯"/>
-							<Scene key="searchOfflineService" component={SearchOfflineService} title="隐式声明"/>
-							<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="隐式声明"/>
+							<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务"/>
+							<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"/>
 
 							<Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
 							<Scene key="picture" component={Picture} title="图片预览"/>
