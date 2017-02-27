@@ -1,4 +1,4 @@
-import theme from "../../themes/material";
+import {theme} from "../../utils/";
 
 const styles = {
   contain:{
@@ -25,6 +25,10 @@ const styles = {
     top:185,
     right:95,
   },
+  color9b:{
+    color:'#9b9b9b',
+    fontSize:theme.DefaultFontSize+1,
+  },
   touxiang:{
     width:78,
     height:78,
@@ -41,7 +45,7 @@ const styles = {
   },
   time:{
     color:'#999',
-    fontSize:theme.DefaultFontSize-3,
+    fontSize:theme.DefaultFontSize,
   },
   dynamicDetail:{
     flex:1,
@@ -58,6 +62,8 @@ const styles = {
   },
   dynamicContent:{
     marginTop:8,
+    color:'#9b9b9b',
+    fontSize:theme.DefaultFontSize,
   },
   imageTouch:{
     marginRight:7,
@@ -88,9 +94,14 @@ const styles = {
   showContain:{
     height:20,
     marginBottom:6,
+    marginTop:4,
   },
   show:{
     flexDirection:'row',
+    position:'absolute',
+    right:34,
+  },
+  showMessage:{
     position:'absolute',
     right:12,
   },
@@ -103,7 +114,7 @@ const styles = {
   showoneText:{
     textAlign:'center',
     color:'#999',
-    fontSize:theme.DefaultFontSize-4,
+    fontSize:theme.DefaultFontSize,
   },
   textInputContain:{
     paddingTop:10,
@@ -141,7 +152,7 @@ justifyContent:'flex-start',
   commentName:{
     color:'#0f9dc9',
     lineHeight:25,
-    fontSize:theme.DefaultFontSize-3,
+    fontSize:theme.DefaultFontSize,
     marginRight:6,
   },
   commentContent:{
