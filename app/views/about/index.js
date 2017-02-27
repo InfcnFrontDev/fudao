@@ -11,7 +11,7 @@ import styles from "./styles";
 class About extends PureComponent {
     render() {
         return (
-            <Container style={styles.container}>
+            <Container>
                 <Header {...this.props}/>
                 <Content padder>
                     <Row style={styles.title}>
