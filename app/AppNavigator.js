@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {BackAndroid, StatusBar, NavigationExperimental, Platform, ToastAndroid} from "react-native";
-import {StyleProvider, Drawer} from "native-base";
+import {StyleProvider, Drawer, View, Text} from "native-base";
 import SplashScreen from "react-native-splash-screen";
 import {connect} from "react-redux";
 import {Router, Scene, Reducer} from "react-native-router-flux";
@@ -83,14 +83,30 @@ class AppNavigator extends Component {
                         onExitApp={this.appExit.bind(this)}>
                         <Scene key="root">
 
-                            <Scene key="tabbar" duration={0} tabs initial>
-                                <Scene key="home" duration={0} component={Home} title="主页"/>
-                                <Scene key="article" duration={0} component={Article} title="资讯"/>
-                                <Scene key="dynamic" duration={0} component={Dynamic} title="动态"/>
-                                <Scene key="my" duration={0} component={My} title="我的"/>
+                            <Scene key="tabbar" tabs initial tabBarStyle={{ backgroundColor: '#FFFFFF' }}>
+                                <Scene key="home" component={Home} title="主页" hideNavBar
+                                       icon={this.renderTabIcon.bind(this)}
+                                       iconName='ios-home-outline'
+                                       selectedIconName='ios-home'
+                                />
+                                <Scene key="article" component={Article} title="资讯" hideNavBar
+                                       icon={this.renderTabIcon.bind(this)}
+                                       iconName='ios-home-outline'
+                                       selectedIconName='ios-home'
+                                />
+                                <Scene key="dynamic" component={Dynamic} title="动态" hideNavBar
+                                       icon={this.renderTabIcon.bind(this)}
+                                       iconName='ios-home-outline'
+                                       selectedIconName='ios-home'
+                                />
+                                <Scene key="my" component={My} title="我的" hideNavBar
+                                       icon={this.renderTabIcon.bind(this)}
+                                       iconName='ios-home-outline'
+                                       selectedIconName='ios-home'
+                                />
                             </Scene>
 
-                            <Scene key="index" component={Index} hideNavBar tabs initial={true} title="首页"/>
+                            <Scene key="index" component={Index} hideNavBar title="首页"/>
                             <Scene key="about" component={About} title="关于福道"/>
                             <Scene key="protocol" component={Protocol} title="用户协议"/>
                             <Scene key="declare" component={Declare} title="隐式声明"/>
@@ -108,13 +124,13 @@ class AppNavigator extends Component {
                             {/*启动后开始页*/}
                             <Scene key="start" component={Start}/>
                             {/*登录页*/}
-                            <Scene key="login" component={Login}/>
+                            <Scene key="login" component={Login} title="登录"/>
                             {/*注册页*/}
-                            <Scene key="register" component={Register}/>
+                            <Scene key="register" component={Register} title="注册"/>
                             {/*设置密码*/}
-                            <Scene key="setPassword" component={SetPassword}/>
+                            <Scene key="setPassword" component={SetPassword} title="设置密码"/>
                             {/*注册成功*/}
-                            <Scene key="passwordSuccess" component={PasswordSuccess}/>
+                            <Scene key="passwordSuccess" component={PasswordSuccess} title="基本信息"/>
                             {/*首次登录添个人信息*/}
                             <Scene key="startInformation" component={StartInformation}/>
                             <Scene key="myInfo" component={MyInfo} title="个人信息"/>
@@ -125,28 +141,18 @@ class AppNavigator extends Component {
             </StyleProvider>
         )
     }
-							<Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
-							<Scene key="picture" component={Picture} title="图片预览"/>
-							{/*启动后开始页*/}
-							<Scene key="start" component={Start}/>
-							{/*登录页*/}
-							<Scene key="login" component={Login} title="登录"/>
-							{/*注册页*/}
-							<Scene key="register" component={Register} title="注册"/>
-							{/*设置密码*/}
-							<Scene key="setPassword" component={SetPassword} title="设置密码"/>
-							{/*注册成功*/}
-							<Scene key="passwordSuccess" component={PasswordSuccess} title="基本信息"/>
-							{/*首次登录添个人信息*/}
-							<Scene key="startInformation" component={StartInformation}/>
-							<Scene key="myInfo" component={MyInfo} title="个人信息"/>
-							<Scene key="webview" component={Webview} title="WebView"/>
-						</Scene>
-					</AppRouter>
-				</Drawer>
-			</StyleProvider>
-		)
-	}
+
+    renderTabIcon({selected, title, iconName, selectedIconName}) {
+        if (selected) {
+            iconName = selectedIconName;
+        }
+        return (
+            <View style={{alignItems:'center'}}>
+                <Icon name={iconName} color={activeStyle.color} size={25}/>
+                <Text style={[activeStyle,styles.tabbarItem]}>{title}</Text>
+            </View>
+        )
+    }
 
     componentDidMount() {
         SplashScreen.hide();
@@ -172,12 +178,12 @@ class AppNavigator extends Component {
 }
 
 const bindAction = dispatch => ({
-	openDrawer: () => dispatch(openDrawer()),
-	closeDrawer: () => dispatch(closeDrawer()),
+    openDrawer: () => dispatch(openDrawer()),
+    closeDrawer: () => dispatch(closeDrawer()),
 });
 
 const mapStateToProps = state => ({
-	drawerState: state.drawer.drawerState,
+    drawerState: state.drawer.drawerState,
 });
 
 export default connect(mapStateToProps, bindAction)(AppNavigator);

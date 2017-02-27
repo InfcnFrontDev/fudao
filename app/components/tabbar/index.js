@@ -1,84 +1,35 @@
 import React, {Component} from "react";
-import {Left, Right, Body, View, Text} from "native-base";
-import {theme} from "../../utils/";
+import {StyleSheet} from "react-native";
+import {Left, Right, Body, View, Icon, Text} from "native-base";
 
-class Separator extends Component {
+class TabBar extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-	render() {
-		let {bgColor, bordered, noTopBorder, noBottomBorder, height, flex, title, fontSize} = this.props;
-		let style = {}, textStyle = {};
-
-		if (bgColor) {
-			style.backgroundColor = bgColor;
-		}
-
-		if (bordered) {
-			style.borderTopWidth = theme.borderWidth;
-			style.borderTopColor = theme.listBorderColor;
-			style.borderBottomWidth = theme.borderWidth;
-			style.borderBottomColor = theme.listBorderColor;
-		}
-
-		if (noTopBorder) {
-			style.borderTopWidth = 0;
-		}
-
-		if (noBottomBorder) {
-			style.borderBottomWidth = 0;
-		}
-
-		if (height) {
-			style.height = height;
-		}
-
-		if (title) {
-			style.paddingLeft = 18;
-			style.justifyContent = 'center';
-			style.height = 30;
-		}
-
-		if (fontSize) {
-			textStyle.fontSize = fontSize;
-		}
-
-		if (flex) {
-			style.height = undefined;
-			style.flex = 1;
-		}
-
-
-		return (
-			<View style={style}>
-				<Text style={textStyle}>{title}</Text>
-			</View>
-		)
-	}
-
-	shouldComponentUpdate() {
-		return false
-	}
+    render() {
+        let param = this.data[this.props.sceneKey];
+        let activeStyle = this.props.selected ? {color: "#3399FF"} : {};
+        return (
+            <View style={{alignItems:'center'}}>
+                <Icon name={this.props.iconName} color={activeStyle.color} size={25}/>
+                <Text style={[activeStyle,styles.tabbarItem]}>{this.props.title}</Text>
+            </View>
+        )
+    }
 }
 
-Separator.propTypes = {
-	bgColor: React.PropTypes.string,
-	bordered: React.PropTypes.bool,
-	noTopBorder: React.PropTypes.bool,
-	noBottomBorder: React.PropTypes.bool,
-	height: React.PropTypes.number,
-	title: React.PropTypes.string,
-	fontSize: React.PropTypes.number,
-	flex: React.PropTypes.number,
-}
+const styles = StyleSheet.create({
+    tabbarContainer: {
+        flex: 1,
+        backgroundColor: "#f6f6f6",
+    },
+    tabbarItem: {
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        marginLeft: -3
+    }
+})
 
-Separator.defaultProps = {
-	bgColor: theme.contentBgColor,
-	bordered: false,
-	noTopBorder: false,
-	noBottomBorder: false,
-	height: 15,
-	title: '',
-	fontSize: 12,
-	flex: undefined,
-}
-
-export default (Separator)
+export default (TabBar)
