@@ -1,4 +1,4 @@
-import themes from "../../themes/material"
+import {theme} from "../../utils/"
 const styles = {
     inputNum:{
         flex:1,
@@ -38,11 +38,11 @@ const styles = {
         justifyContent:'space-between',
     },
     text1:{
-        fontSize:themes.DefaultFontSize-2,
+        fontSize:theme.DefaultFontSize-2,
         color:'#666'
     },
     text2:{
-        fontSize:themes.DefaultFontSize-2,
+        fontSize:theme.DefaultFontSize-2,
         color:'#666',
         textDecorationLine:'underline'
     },
