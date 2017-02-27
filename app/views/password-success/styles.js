@@ -1,3 +1,4 @@
+import   themes from '../../themes/material'
 const styles = {
     container:{
         justifyContent:'center',
@@ -9,7 +10,7 @@ const styles = {
     },
     titleText:{
         textAlign:'center',
-        fontSize: 28
+        fontSize: themes.DefaultFontSize+8
     },
     box2:{
         marginTop:40,

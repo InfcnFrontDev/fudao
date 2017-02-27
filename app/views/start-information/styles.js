@@ -3,13 +3,23 @@ const styles = {
 
 
     },
-    row:{
-        flexDirection:'row',
-        alignItems:'center',
-marginTop:20,
+    view:{
+        width:280,
+        backgroundColor:'red',
     },
-    left:{
-        width:100,
+    content:{
+        justifyContent:'center',
+    },
+    row:{
+        marginTop:20,
+        flexDirection:'row',
+       justifyContent:'space-around',
+
+    },
+    row1:{
+        marginTop:20,
+        justifyContent:'center',
+        backgroundColor:'red',
     },
     right:{
         flex:1,
