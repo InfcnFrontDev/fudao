@@ -85,7 +85,9 @@ class Index extends Component {
 		)
 	}
 
-
+    componentDidMount(){
+        // SplashScreen.hide();
+    }
 }
 
 export default (Index);
