@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form,CheckBox} from "native-base";
@@ -9,7 +9,7 @@ import styles from "./styles";
 /**
  * 登录
  */
-class Login extends Component {
+class Login extends PureComponent {
     constructor(props){
         super(props);
         this.state={
@@ -63,7 +63,7 @@ class Login extends Component {
                     </Button>
                       <View style={styles.textdoc}>
                             <View style={{flexDirection:'row'}}>
-                                <CheckBox  checked={this.state.check} onPress={(checked)=>{
+                                <CheckBox style={styles.check}  checked={this.state.check} onPress={(checked)=>{
                                     this.setState({
                                         check:!this.state.check
                                     })

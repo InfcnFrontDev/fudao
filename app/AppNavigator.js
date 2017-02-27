@@ -125,6 +125,28 @@ class AppNavigator extends Component {
             </StyleProvider>
         )
     }
+							<Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
+							<Scene key="picture" component={Picture} title="图片预览"/>
+							{/*启动后开始页*/}
+							<Scene key="start" component={Start}/>
+							{/*登录页*/}
+							<Scene key="login" component={Login} title="登录"/>
+							{/*注册页*/}
+							<Scene key="register" component={Register} title="注册"/>
+							{/*设置密码*/}
+							<Scene key="setPassword" component={SetPassword} title="设置密码"/>
+							{/*注册成功*/}
+							<Scene key="passwordSuccess" component={PasswordSuccess} title="基本信息"/>
+							{/*首次登录添个人信息*/}
+							<Scene key="startInformation" component={StartInformation}/>
+							<Scene key="myInfo" component={MyInfo} title="个人信息"/>
+							<Scene key="webview" component={Webview} title="WebView"/>
+						</Scene>
+					</AppRouter>
+				</Drawer>
+			</StyleProvider>
+		)
+	}
 
     componentDidMount() {
         SplashScreen.hide();
@@ -150,12 +172,12 @@ class AppNavigator extends Component {
 }
 
 const bindAction = dispatch => ({
-    openDrawer: () => dispatch(openDrawer()),
-    closeDrawer: () => dispatch(closeDrawer()),
+	openDrawer: () => dispatch(openDrawer()),
+	closeDrawer: () => dispatch(closeDrawer()),
 });
 
 const mapStateToProps = state => ({
-    drawerState: state.drawer.drawerState,
+	drawerState: state.drawer.drawerState,
 });
 
 export default connect(mapStateToProps, bindAction)(AppNavigator);

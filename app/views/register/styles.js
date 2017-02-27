@@ -1,4 +1,4 @@
-import themes from "../../themes/material"
+import {theme} from "../../utils/";
 
 const styles = {
     inputNum:{
@@ -36,7 +36,7 @@ const styles = {
 
     },
    tiaokuan:{
-        fontSize:themes.DefaultFontSize-5,
+        fontSize:theme.DefaultFontSize-5,
        textAlign:'center',
        marginTop:6,
        color:'#666'
