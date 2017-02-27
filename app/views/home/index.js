@@ -6,6 +6,7 @@ import {Container, Title, Content, Left, Right, Body, Form, Input, Item} from "n
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import Header from "../../components/header/";
 import styles from "./styles";
+import {Actions} from "react-native-router-flux";
 
 
 /**
@@ -36,6 +37,11 @@ class Home extends Component {
                 </Content>
             </Container>
         )
+    }
+
+    componentDidMount(){
+
+      Actions['myEmotion']()
     }
 }
 function bindAction(dispatch) {

@@ -31,6 +31,8 @@ import PasswordSuccess from "./views/password-success/";
 import StartInformation from "./views/start-information/";
 import MyInfo from "./views/my-info/";
 import Webview from "./views/webview/";
+import MyEmotion from "./views/my-emotion/";
+import MyEmotionSolve from "./views/my-emotion-solve/";
 
 
 const AppRouter = connect()(Router);
@@ -106,6 +108,9 @@ class AppNavigator extends Component {
 							<Scene key="startInformation" component={StartInformation}/>
 							<Scene key="myInfo" component={MyInfo} title="个人信息"/>
 							<Scene key="webview" component={Webview} title="WebView"/>
+							<Scene key="myEmotion" component={MyEmotion} title="我的情绪"/>
+							<Scene key="myEmotionSolve" component={MyEmotionSolve}/>
+
 						</Scene>
 					</AppRouter>
 				</Drawer>
@@ -114,7 +119,7 @@ class AppNavigator extends Component {
 	}
 
 	componentDidMount() {
-		SplashScreen.hide();
+		// SplashScreen.hide();
 	}
 
 	reducerCreate(params) {

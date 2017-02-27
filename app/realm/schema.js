@@ -94,6 +94,7 @@ const MyGroup = {
      photo: {type: 'string', optional: true},
      urls: {type: 'string', optional: true},
      flag: {type: 'bool', optional: true},
+     show:{type:'bool',optional: true,default:false},
    }
  };
 
@@ -171,7 +172,7 @@ const ChatMessage = {
 
 module.exports = {
     schema: [Dynamic,DynamicPraise,DynamicComment],
-    schemaVersion: 12,
+    schemaVersion: 14,
     migration: () => {
     }
 };

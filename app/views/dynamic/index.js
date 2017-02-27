@@ -31,9 +31,8 @@ class Dynamic extends PureComponent {
     this.endID=0;
     this.length = 0;
     this.startID = 0;
-
+    this.nowShow =0;
 		this.state={
-			someShow:0,
       commentShow:false,
       text:''
 		}
@@ -99,6 +98,19 @@ class Dynamic extends PureComponent {
             </Button>
           )
         }
+        if(info.show){
+          var show = (
+            <View  style={styles.show}>
+              {zan}
+              <Text style={styles.showoneText}>|</Text>
+              <Button onPress={this._comment.bind(this,info.id)} transparent dark style={styles.divid} >
+                <Text style={styles.showoneText}>评论</Text>
+              </Button>
+            </View>
+          )
+        }else{
+          var show =(null);
+        }
     		return (
     			<View style={styles.dynamic}>
     				<View>
@@ -109,13 +121,10 @@ class Dynamic extends PureComponent {
     					<Text style={styles.dynamicContent}>{info.content}</Text>
     					<DynamicImage urls={info.urls}/>
               <View style={styles.showContain}>
-                <View  style={styles.show}>
-                {zan}
-                <Text style={styles.showoneText}>|</Text>
-                <Button onPress={this._comment.bind(this,info.id)} transparent dark style={styles.divid} >
-                <Text style={styles.showoneText}>评论</Text>
-                </Button>
-                </View>
+                {show}
+                <TouchableHighlight style={styles.showMessage} onPress={this._onMessage.bind(this,info.id)} underlayColor='#fafafa'>
+                  <Image source={require('../../assets/message.png')}/>
+                </TouchableHighlight>
               </View>
               <DynamicSupport zan={info.suports} />
               <DynamicComment comments={info.comments} />
@@ -130,6 +139,46 @@ class Dynamic extends PureComponent {
           );
       }
 
+      _onMessage(id){
+        var add=2;
+        var timer = 0;
+        if(this.nowShow==id){
+          this.props.realm.write(()=>{
+              this.props.realm.create('Dynamic',{ id:id, show:false, },true)
+          })
+          add = 1;
+        }else{
+          this.props.realm.write(()=>{
+              this.props.realm.create('Dynamic',{ id:id, show:true,},true)
+              if(this.nowShow!=0){
+                this.props.realm.create('Dynamic',{ id:this.nowShow, show:false,},true)
+              }
+          })
+        }
+        let realm_dynamic = this.props.realm.objects('Dynamic').sorted('id');
+        for(var i=0;i<this.dynamic.length;i++){
+          if(this.dynamic[i].id==this.nowShow){
+            this.dynamic[i]=realm_dynamic.filtered('id=='+this.nowShow)[0];
+            if(add==1){
+              break;
+            }
+            timer++;
+          }
+          if(this.dynamic[i].id==id){
+            this.dynamic[i]=realm_dynamic.filtered('id=='+id)[0];
+            timer++;
+          }
+          if(timer==add){
+            break;
+          }
+        }
+        if(this.nowShow==id){
+          this.nowShow=0;
+        }else{
+          this.nowShow = id;
+        }
+        this.refs.gifted._postRefresh(this.dynamic);
+      }
 
     	_zan(info){
         let realm_dynamic = this.props.realm.objects('Dynamic').sorted('id');
@@ -151,8 +200,10 @@ class Dynamic extends PureComponent {
               id:info.id,
               suports:arraySuports,
               flag:!info.flag,
+              show:false,
             },true)
         })
+        this.nowShow=0;
 
         for(var i=0;i<this.dynamic.length;i++){
           if(this.dynamic[i].id==info.id){
@@ -183,8 +234,10 @@ class Dynamic extends PureComponent {
               this.props.realm.create('Dynamic',{
                 id:this.commentID,
                 comments:arrayComments,
+                show:false,
               },true)
           })
+          this.nowShow = 0;
           for(var i=0;i<this.dynamic.length;i++){
             if(this.dynamic[i].id==this.commentID){
               this.dynamic[i]=realm_dynamic.filtered('id=='+this.commentID)[0];
@@ -214,7 +267,7 @@ class Dynamic extends PureComponent {
           .then((res) => res.json())
           .then((res) => {
             if(!res.err_code&&res.ok==true&&res.obj.length>0) {
-              this.dynamic=res.obj;
+              // this.dynamic=res.obj;
               this.length = res.obj.length;
               this.endID = res.obj[res.obj.length-1].id;
               this.startID = res.obj[0].id;
@@ -236,6 +289,7 @@ class Dynamic extends PureComponent {
                 }
               })
               let realm_res = this.props.realm.objects('Dynamic').sorted('id');
+              this.dynamic = realm_res.slice(realm_res.length-6,realm_res.length-1);
               this.min_realm = realm_res[0].id;
               this.max_realm = realm_res[realm_res.length-1].id;
             }else{
