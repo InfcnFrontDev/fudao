@@ -1,38 +1,36 @@
 import React, {Component} from "react";
-import {StyleSheet} from "react-native";
-import {Left, Right, Body, View, Icon, Text} from "native-base";
+import {StyleSheet, View} from "react-native";
+import {Left, Right, Body, Icon, Text} from "native-base";
+import {theme} from "../../utils/"
 
 class TabBarIcon extends Component {
-    constructor(props) {
-        super(props);
-    }
+	constructor(props) {
+		super(props);
+	}
 
-    render() {
-        let {selected, title, iconName, selectedIconName} = this.props;
-        let activeStyle = selected ? {color: "#3399FF"} : {};
-        if (selected) {
-            iconName = selectedIconName;
-        }
-        return (
-            <View style={{alignItems:'center'}}>
-                <Icon name={iconName} color={activeStyle.color} size={25}/>
-                <Text style={[activeStyle,styles.tabbarItem]}>{title}</Text>
-            </View>
-        )
-    }
+	render() {
+		let {selected, title, iconName, selectedIconName} = this.props,
+			colorStyle = {color: theme.tabBarTextColor};
+
+		if (selected) {
+			iconName = selectedIconName;
+			colorStyle = {color: theme.tabBarActiveTextColor};
+		}
+		return (
+			<View style={styles.tabbarItem}>
+				<Icon name={iconName} size={25} style={colorStyle}/>
+				<Text style={colorStyle}>{title}</Text>
+			</View>
+		)
+	}
 }
 
 const styles = StyleSheet.create({
-    tabbarContainer: {
-        flex: 1,
-        backgroundColor: "#f6f6f6",
-    },
-    tabbarItem: {
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        marginLeft: -3
-    }
+	tabbarItem: {
+		alignItems: 'center',
+		justifyContent: 'center'
+
+	},
 })
 
 export default (TabBarIcon)

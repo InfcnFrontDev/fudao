@@ -136,15 +136,15 @@ export default {
 
 	// Footer
 	footerHeight: 55,
-	footerDefaultBg: (platform === 'ios') ? '#F8F8F8' : '#4179F7',
+	footerDefaultBg: (platform === 'ios') ? '#F8F8F8' : '#FAFBFD',
 
 
 	// FooterTab
-	tabBarTextColor: (platform === 'ios') ? '#6b6b6b' : '#b3c7f9',
+	tabBarTextColor: (platform === 'ios') ? '#6b6b6b' : '#868686',
 	tabBarTextSize: (platform === 'ios') ? 14 : 11,
 	activeTab: (platform === 'ios') ? '#007aff' : '#fff',
 	sTabBarActiveTextColor: '#007aff',
-	tabBarActiveTextColor: (platform === 'ios') ? '#007aff' : '#fff',
+	tabBarActiveTextColor: (platform === 'ios') ? '#007aff' : '#9FCC2D',
 	tabActiveBgColor: (platform === 'ios') ? '#cde1f9' : '#3F51B5',
 
 	// Tab
@@ -297,4 +297,10 @@ export default {
 	contentBgColor: '#EDEDED',
 	navTabColor: '#868686',
 	navTabActiveColor: '#9FCC2D',
+
+	tabBarStyle: {
+		backgroundColor: '#FAFBFD',
+		borderTopWidth: (1 / PixelRatio.getPixelSizeForLayoutSize(1)),
+		borderTopColor: '#c9c9c9',
+	},
 };
