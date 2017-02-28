@@ -1,13 +1,12 @@
 import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import {Container, Content, Left, Right, Body, Grid, Row, Col, Icon, Text, View} from "native-base";
-import {Actions} from "react-native-router-flux";
+import {Container, Content, Left, Right, Body} from "native-base";
 import Header from "../../components/header/search";
 import styles from "./styles";
 import Category from "./category";
 import Result from "./result";
-import {request, urls} from "../../utils/";
+
 
 /**
  * 搜索
@@ -45,9 +44,7 @@ class Search extends PureComponent {
 	}
 }
 
-function bindAction(dispatch) {
-	return {};
-}
-
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(Search);
+const mapStateToProps = state => ({
+	search: state.search,
+});
+export default connect(mapStateToProps)(Search);

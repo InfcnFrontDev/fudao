@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import {Left, Right, Body, Text, View} from "native-base";
+import {Left, Right, Body, View} from "native-base";
 import Separator from "../../../components/separator/";
 import ItemPicture from "../../article/item-picture";
 import styles from "./styles";
@@ -17,7 +17,7 @@ class Result extends PureComponent {
 	}
 
 	render() {
-
+		let {list} = this.props;
 		let datas = [
 			{
 				text: '李维嘉发伤心感慨 节目现场崩溃大哭 何炅谢娜话里露玄机',
@@ -55,6 +55,16 @@ class Result extends PureComponent {
 				</View>
 			</View>
 		)
+	}
+
+	// 搜索
+	search(keyword) {
+		const {dispatch} = this.props;
+		if (keyword == '') {
+			dispatch(clearSearchResult())
+		} else {
+			dispatch(searchSymptomProblem(keyword))
+		}
 	}
 
 }

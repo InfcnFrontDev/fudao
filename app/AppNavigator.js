@@ -3,7 +3,7 @@ import {BackAndroid, StatusBar, NavigationExperimental, Platform, ToastAndroid, 
 import {StyleProvider, Drawer} from "native-base";
 import SplashScreen from "react-native-splash-screen";
 import {connect} from "react-redux";
-import {Router, Scene, Reducer} from "react-native-router-flux";
+import {Router, Scene, Reducer, ActionConst} from "react-native-router-flux";
 import {openDrawer, closeDrawer} from "./actions/drawer";
 import getTheme from "../native-base-theme/components/";
 import SideBar from "./views/sidebar/";
@@ -82,18 +82,33 @@ class AppNavigator extends Component {
 					<AppRouter createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
 						<Scene key="root">
 							{/*首页1*/}
-							<Scene key="index" component={Index} title="首页" hideNavBar/>
+							<Scene key="index" component={Index} title="首页" hideNavBar
+								   type={ActionConst.REPLACE}/>
 
 							{/*首页2*/}
-							<Scene key="tabbar" tabs initial hideNavBar tabBarStyle={styles.tabBarStyle}>
-								<Scene key="home" component={Home} title="主页" icon={TabBarIcon} hideNavBar
-									   iconName='ios-home-outline' selectedIconName='ios-home'/>
-								<Scene key="article" component={Article} title="资讯" icon={TabBarIcon} hideNavBar
-									   iconName='ios-list-box-outline' selectedIconName='ios-list-box'/>
-								<Scene key="dynamic" component={Dynamic} title="动态" icon={TabBarIcon} hideNavBar
-									   iconName='ios-compass-outline' selectedIconName='ios-compass'/>
-								<Scene key="my" component={My} title="我的" icon={TabBarIcon} hideNavBar
-									   iconName='ios-person-outline' selectedIconName='ios-person'/>
+							<Scene key="tabbar" tabs hideNavBar pressOpacity={0.8}
+								   tabBarStyle={styles.tabBarStyle}
+								   type={ActionConst.REPLACE}>
+								<Scene key="home" component={Home} title="主页" hideNavBar
+									   icon={TabBarIcon}
+									   iconName='ios-home-outline'
+									   selectedIconName='ios-home'
+								/>
+								<Scene key="article" component={Article} title="资讯" hideNavBar
+									   icon={TabBarIcon}
+									   iconName='ios-list-box-outline'
+									   selectedIconName='ios-list-box'
+								/>
+								<Scene key="dynamic" component={Dynamic} title="动态" hideNavBar
+									   icon={TabBarIcon}
+									   iconName='ios-compass-outline'
+									   selectedIconName='ios-compass'
+								/>
+								<Scene key="my" component={My} title="我的" hideNavBar
+									   icon={TabBarIcon}
+									   iconName='ios-person-outline'
+									   selectedIconName='ios-person'
+								/>
 							</Scene>
 
 
@@ -109,7 +124,7 @@ class AppNavigator extends Component {
 
 
 							{/*搜索*/}
-							<Scene key="search" component={Search} title="搜索" hideNavBar/>
+							<Scene key="search" component={Search} title="搜索" hideNavBar initial/>
 							<Scene key="searchDailyLife" component={SearchDailyLife} title="日常生活" hideNavBar/>
 							<Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈" hideNavBar/>
 							<Scene key="searchHealthCare" component={SearchHealthCare} title="保健方法" hideNavBar/>

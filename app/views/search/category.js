@@ -1,11 +1,10 @@
 import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
-import {connect} from "react-redux";
-import {Container, Content, Left, Right, Body, Grid, Row, Col, Icon, Text, View} from "native-base";
 import {Actions} from "react-native-router-flux";
-import Header from "../../components/header/search";
+import {connect} from "react-redux";
+import {Left, Right, Body, Grid, Row, Col, Icon, Text, View} from "native-base";
 import styles from "./styles";
-
+import {search} from "../../actions/search";
 /**
  * category
  */
@@ -91,9 +90,7 @@ class Category extends PureComponent {
 	}
 }
 
-function bindAction(dispatch) {
-	return {};
-}
-
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(Category);
+const mapStateToProps = state => ({
+	search: state.search,
+});
+export default connect(mapStateToProps)(Category);

@@ -1,4 +1,24 @@
+/**
+ * Created by yangkk on 17/2/28.
+ * action类型
+ */
+
+// 侧边栏 actions
 export const OPEN_DRAWER = 'OPEN_DRAWER';
 export const CLOSE_DRAWER = 'CLOSE_DRAWER';
 export const CHANGE_MATERIAL = 'CHANGE_MATERIAL';
 export const CHANGE_PLATFORM = 'CHANGE_PLATFORM';
+
+// 搜索 actions ////////////////////////////////////////
+
+// 搜索全部
+export const SEARCH_ALL_FETCH_LIST = 'SEARCH_ALL_FETCH_LIST';
+export const SEARCH_ALL_RECEIVE_LIST = 'SEARCH_ALL_RECEIVE_LIST';
+export const CLEAR_SEARCH_RESULT = 'CLEAR_SEARCH_RESULT';
+
+// 搜索症状和问题
+export const SEARCH_SYMPTOM_PROBLEM_FETCH_LIST = 'SEARCH_SYMPTOM_PROBLEM_FETCH_LIST';
+export const SEARCH_SYMPTOM_PROBLEM_RECEIVE_LIST = 'SEARCH_SYMPTOM_PROBLEM_RECEIVE_LIST';
+// 搜索资讯
+export const SEARCH_INFORMATION_FETCH_LIST = 'SEARCH_INFORMATION_FETCH_LIST';
+export const SEARCH_INFORMATION_RECEIVE_LIST = 'SEARCH_INFORMATION_RECEIVE_LIST';
