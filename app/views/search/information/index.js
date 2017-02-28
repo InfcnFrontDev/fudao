@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
 import {Container, Content, Left, Right, Body} from "native-base";
 import Header from "../../../components/header/search";
-import {clearSearchResult} from "../../../actions/search";
+import {searchInformation, clearInformation} from "../../../actions/search";
 import Result from "./result";
 
 /**
@@ -10,11 +11,12 @@ import Result from "./result";
 class SearchInformation extends PureComponent {
 
 	render() {
+		let {isLoading, information} = this.props;
 		return (
 			<Container>
 				<Header placeholder="搜索资讯" onSearch={this.search.bind(this)}/>
 				<Content>
-					<Result/>
+					{information.list.length > 0 ? <Result list={information.list}/> : null}
 				</Content>
 			</Container>
 		);
@@ -24,7 +26,7 @@ class SearchInformation extends PureComponent {
 	search(keyword) {
 		const {dispatch} = this.props;
 		if (keyword == '') {
-			dispatch(clearSearchResult())
+			dispatch(clearInformation())
 		} else {
 			dispatch(searchInformation(keyword))
 		}
@@ -32,6 +34,7 @@ class SearchInformation extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-	search: state.search,
+	isLoading: state.search.isLoading,
+	information: state.search.information,
 });
 export default connect(mapStateToProps)(SearchInformation);

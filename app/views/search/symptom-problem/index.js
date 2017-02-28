@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Left, Right, Body, View} from "native-base";
 import Header from "../../../components/header/search";
-import {searchSymptomProblem, clearSearchResult} from "../../../actions/search";
+import {searchSymptomProblem, clearSymptomProblem} from "../../../actions/search";
 import Result from "./result";
 import styles from "./styles";
 /**
@@ -11,12 +11,12 @@ import styles from "./styles";
 class SearchSymptomProblem extends PureComponent {
 
 	render() {
-		const {dispatch, search} = this.props;
+		let {isLoading, symptomProblem} = this.props;
 		return (
 			<Container>
 				<Header placeholder="搜索症状和问题" onSearch={this.search.bind(this)}/>
 				<View style={styles.content}>
-					{search.list.length > 0 ? <Result list={search.list}/> : null}
+					{symptomProblem.list.length > 0 ? <Result list={symptomProblem.list}/> : null}
 				</View>
 			</Container>
 		);
@@ -26,7 +26,7 @@ class SearchSymptomProblem extends PureComponent {
 	search(keyword) {
 		const {dispatch} = this.props;
 		if (keyword == '') {
-			dispatch(clearSearchResult())
+			dispatch(clearSymptomProblem())
 		} else {
 			dispatch(searchSymptomProblem(keyword))
 		}
@@ -34,6 +34,7 @@ class SearchSymptomProblem extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-	search: state.search
+	isLoading: state.search.isLoading,
+	symptomProblem: state.search.symptomProblem,
 });
 export default connect(mapStateToProps)(SearchSymptomProblem);
