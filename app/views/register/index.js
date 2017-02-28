@@ -5,7 +5,7 @@ import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import Header from "../../components/header/base";
 import styles from "./styles";
-
+import {request,urls} from "../../utils/";
 /**
  * 注册
  */
@@ -77,7 +77,21 @@ class Register extends PureComponent {  // eslint-disable-line
         if(phone.toString().length<11||phone.toString().length>11){
             ToastAndroid.show("请填入正确的手机号", ToastAndroid.SHORT);
         }else{
-            ToastAndroid.show("发送验证码。。。", ToastAndroid.SHORT);
+            ToastAndroid.show(""+phone, ToastAndroid.SHORT);
+            request.getJson(urls.CHECKPHONE,{
+                    phone:phone ,
+                    type:'reg'
+            },function(data){
+                ToastAndroid.show("。。。", ToastAndroid.SHORT);
+                console.log('123445')
+                if(data.success && "existence" == data.msg) {
+                    ToastAndroid.show("手机号已被注册", ToastAndroid.SHORT);
+                    document.activeElement.blur();
+                } else if(data.success && "existence" != data.msg) {
+                    ToastAndroid.show("正在发送验证码...", ToastAndroid.SHORT);
+                }
+                }
+            )
         }
     }
     _zhuce(){
@@ -88,6 +102,7 @@ class Register extends PureComponent {  // eslint-disable-line
         }else if(yannum==""){
             ToastAndroid.show("验证码不能为空", ToastAndroid.SHORT);
         }else{
+            /*接口*/
             Actions['setPassword']();
         }
     }
