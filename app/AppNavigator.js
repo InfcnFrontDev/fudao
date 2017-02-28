@@ -42,7 +42,6 @@ import MyEmotion from "./views/my-emotion";
 import MyEmotionSolve from "./views/my-emotion-solve";
 
 
-
 const AppRouter = connect()(Router);
 const {
 	CardStack: NavigationCardStack,
@@ -90,7 +89,7 @@ class AppNavigator extends Component {
 								   type={ActionConst.REPLACE}/>
 
 							{/*首页2*/}
-							<Scene key="tabbar" tabs hideNavBar pressOpacity={0.8}
+							<Scene key="tabbar" tabs initial hideNavBar pressOpacity={0.8}
 								   tabBarStyle={styles.tabBarStyle}
 								   type={ActionConst.REPLACE}>
 								<Scene key="home" component={Home} title="主页" hideNavBar
@@ -130,7 +129,7 @@ class AppNavigator extends Component {
 
 
 							{/*搜索*/}
-							<Scene key="search" component={Search} title="搜索" hideNavBar initial/>
+							<Scene key="search" component={Search} title="搜索" hideNavBar/>
 							<Scene key="searchDailyLife" component={SearchDailyLife} title="日常生活" hideNavBar/>
 							<Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈" hideNavBar/>
 							<Scene key="searchHealthCare" component={SearchHealthCare} title="保健方法" hideNavBar/>
