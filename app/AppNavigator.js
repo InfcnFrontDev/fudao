@@ -37,6 +37,10 @@ import PasswordSuccess from "./views/password-success/";
 import StartInformation from "./views/start-information/";
 import MyInfo from "./views/my-info/";
 import Webview from "./views/webview/";
+//Home
+import MyEmotion from "./views/my-emotion";
+import MyEmotionSolve from "./views/my-emotion-solve";
+
 
 
 const AppRouter = connect()(Router);
@@ -106,6 +110,8 @@ class AppNavigator extends Component {
 							<Scene key="startInformation" component={StartInformation} hideNavBar/>
 
 							{/*首页*/}
+							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
+							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
 
 
 							{/*搜索*/}
