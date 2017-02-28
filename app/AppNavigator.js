@@ -98,40 +98,41 @@ class AppNavigator extends Component {
 
 
 							{/*启动注册*/}
-							<Scene key="start" component={Start} title="启动开始页"/>
-							<Scene key="login" component={Login} title="登录"/>
-							<Scene key="register" component={Register} title="注册"/>
-							<Scene key="setPassword" component={SetPassword} title="设置密码"/>
-							<Scene key="passwordSuccess" component={PasswordSuccess} title="基本信息"/>
-							<Scene key="startInformation" component={StartInformation}/>
+							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
+							<Scene key="login" component={Login} title="登录" hideNavBar/>
+							<Scene key="register" component={Register} title="注册" hideNavBar/>
+							<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
+							<Scene key="passwordSuccess" component={PasswordSuccess} title="基本信息" hideNavBar/>
+							<Scene key="startInformation" component={StartInformation} hideNavBar/>
 
 							{/*首页*/}
 
 
 							{/*搜索*/}
-							<Scene key="search" component={Search} title="搜索"/>
-							<Scene key="searchDailyLife" component={SearchDailyLife} title="日常生活"/>
-							<Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈"/>
-							<Scene key="searchHealthCare" component={SearchHealthCare} title="保健方法"/>
-							<Scene key="searchInformation" component={SearchInformation} title="资讯"/>
-							<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务"/>
-							<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"/>
+							<Scene key="search" component={Search} title="搜索" hideNavBar/>
+							<Scene key="searchDailyLife" component={SearchDailyLife} title="日常生活" hideNavBar/>
+							<Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈" hideNavBar/>
+							<Scene key="searchHealthCare" component={SearchHealthCare} title="保健方法" hideNavBar/>
+							<Scene key="searchInformation" component={SearchInformation} title="资讯" hideNavBar/>
+							<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务" hideNavBar/>
+							<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
+								   hideNavBar/>
 
 							{/*资讯*/}
-							<Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
+							<Scene key="articleDetail" component={ArticleDetail} title="资讯详情" hideNavBar/>
 
 							{/*动态*/}
-							<Scene key="picture" component={Picture} title="图片预览"/>
+							<Scene key="picture" component={Picture} title="图片预览" hideNavBar/>
 
 
 							{/*我的*/}
-							<Scene key="myInfo" component={MyInfo} title="个人信息"/>
-							<Scene key="about" component={About} title="关于福道"/>
-							<Scene key="protocol" component={Protocol} title="用户协议"/>
-							<Scene key="declare" component={Declare} title="隐式声明"/>
+							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
+							<Scene key="about" component={About} title="关于福道" hideNavBar/>
+							<Scene key="protocol" component={Protocol} title="用户协议" hideNavBar/>
+							<Scene key="declare" component={Declare} title="隐式声明" hideNavBar/>
 
 							{/*其他*/}
-							<Scene key="webview" component={Webview} title="WebView"/>
+							<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
 						</Scene>
 					</AppRouter>
 				</Drawer>
