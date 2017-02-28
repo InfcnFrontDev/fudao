@@ -84,7 +84,7 @@ export default {
 	},
 	get btnTextSize() {
 		return (platform === 'ios') ? this.fontSizeBase * 1.1 :
-		this.fontSizeBase - 1;
+			this.fontSizeBase - 1;
 	},
 	get btnTextSizeLarge() {
 		return this.fontSizeBase * 1.5;
@@ -295,12 +295,12 @@ export default {
 
 	// fudao
 	contentBgColor: '#EDEDED',
-	navTabColor: '#868686',
-	navTabActiveColor: '#9FCC2D',
 
-	tabBarStyle: {
-		backgroundColor: '#FAFBFD',
-		borderTopWidth: (1 / PixelRatio.getPixelSizeForLayoutSize(1)),
-		borderTopColor: '#c9c9c9',
-	},
+
+	navTabBarBgColor: '#FAFBFD',
+	navTabBarBorderWidth: (1 / PixelRatio.getPixelSizeForLayoutSize(1)),
+	navTabBarBorderColor: '#c9c9c9',
+	navTabBarTextColor: '#868686',
+	navTabBarActiveTextColor: '#9FCC2D',
+
 };

@@ -81,8 +81,11 @@ class AppNavigator extends Component {
 						backgroundColor={theme.statusBarColor}/>
 					<AppRouter createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
 						<Scene key="root">
+							{/*首页1*/}
+							<Scene key="index" component={Index} title="首页" hideNavBar/>
 
-							<Scene key="tabbar" tabs initial hideNavBar tabBarStyle={theme.tabBarStyle}>
+							{/*首页2*/}
+							<Scene key="tabbar" tabs initial hideNavBar tabBarStyle={styles.tabBarStyle}>
 								<Scene key="home" component={Home} title="主页" icon={TabBarIcon} hideNavBar
 									   iconName='ios-home-outline' selectedIconName='ios-home'/>
 								<Scene key="article" component={Article} title="资讯" icon={TabBarIcon} hideNavBar
@@ -93,11 +96,19 @@ class AppNavigator extends Component {
 									   iconName='ios-person-outline' selectedIconName='ios-person'/>
 							</Scene>
 
-							<Scene key="index" component={Index} title="首页"/>
-							<Scene key="about" component={About} title="关于福道" type="actionSheet"/>
-							<Scene key="protocol" component={Protocol} title="用户协议"/>
-							<Scene key="declare" component={Declare} title="隐式声明"/>
 
+							{/*启动注册*/}
+							<Scene key="start" component={Start} title="启动开始页"/>
+							<Scene key="login" component={Login} title="登录"/>
+							<Scene key="register" component={Register} title="注册"/>
+							<Scene key="setPassword" component={SetPassword} title="设置密码"/>
+							<Scene key="passwordSuccess" component={PasswordSuccess} title="基本信息"/>
+							<Scene key="startInformation" component={StartInformation}/>
+
+							{/*首页*/}
+
+
+							{/*搜索*/}
 							<Scene key="search" component={Search} title="搜索"/>
 							<Scene key="searchDailyLife" component={SearchDailyLife} title="日常生活"/>
 							<Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈"/>
@@ -106,21 +117,20 @@ class AppNavigator extends Component {
 							<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务"/>
 							<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"/>
 
+							{/*资讯*/}
 							<Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
+
+							{/*动态*/}
 							<Scene key="picture" component={Picture} title="图片预览"/>
-							{/*启动后开始页*/}
-							<Scene key="start" component={Start}/>
-							{/*登录页*/}
-							<Scene key="login" component={Login} title="登录"/>
-							{/*注册页*/}
-							<Scene key="register" component={Register} title="注册"/>
-							{/*设置密码*/}
-							<Scene key="setPassword" component={SetPassword} title="设置密码"/>
-							{/*注册成功*/}
-							<Scene key="passwordSuccess" component={PasswordSuccess} title="基本信息"/>
-							{/*首次登录添个人信息*/}
-							<Scene key="startInformation" component={StartInformation}/>
+
+
+							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息"/>
+							<Scene key="about" component={About} title="关于福道"/>
+							<Scene key="protocol" component={Protocol} title="用户协议"/>
+							<Scene key="declare" component={Declare} title="隐式声明"/>
+
+							{/*其他*/}
 							<Scene key="webview" component={Webview} title="WebView"/>
 						</Scene>
 					</AppRouter>
@@ -151,6 +161,14 @@ class AppNavigator extends Component {
 		return true;
 	}
 }
+
+const styles = StyleSheet.create({
+	tabBarStyle: {
+		backgroundColor: theme.navTabBarBgColor,
+		borderTopWidth: theme.navTabBarBorderWidth,
+		borderTopColor: theme.navTabBarBorderColor,
+	},
+})
 
 const bindAction = dispatch => ({
 	openDrawer: () => dispatch(openDrawer()),

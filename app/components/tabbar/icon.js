@@ -6,11 +6,11 @@ import {theme} from "../../utils/";
 class TabBarIcon extends PureComponent {
 	render() {
 		let {selected, title, iconName, selectedIconName} = this.props,
-			colorStyle = {color: theme.navTabColor};
+			colorStyle = {color: theme.navTabBarTextColor};
 
 		if (selected) {
 			iconName = selectedIconName;
-			colorStyle = {color: theme.navTabActiveColor};
+			colorStyle = {color: theme.navTabBarActiveTextColor};
 		}
 		return (
 			<View style={ {alignItems: 'center', justifyContent: 'center'}}>

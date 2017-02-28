@@ -6,19 +6,19 @@ const styles = {
 	tabBarStyle: {},
 	sceneStyle: {},
 	titleStyle: {
-		color: theme.navTabColor,
+		color: theme.navTabBarTextColor,
 		fontSize: 12
 	},
 	titleStyleSelected: {
-		color: theme.navTabActiveColor
+		color: theme.navTabBarActiveTextColor
 	},
 	tabIcon: {
-		color: theme.navTabColor,
+		color: theme.navTabBarTextColor,
 		fontSize: 28,
 		marginBottom: -3
 	},
 	tabIconSelected: {
-		color: theme.navTabActiveColor
+		color: theme.navTabBarActiveTextColor
 	},
 };
 
