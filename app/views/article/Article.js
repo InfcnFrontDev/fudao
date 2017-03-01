@@ -4,6 +4,11 @@ import {Container, Title, Left, Right, Body, Form, Item} from "native-base";
 import Header from "../../components/header/IndexHeader";
 import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-view";
 import TabList from "./components/TabList";
+import ArticleList from "./components/ArticleList";
+import FeedsCategoryBar from "./components/FeedsCategoryBar"
+
+
+const titles = ['推荐', '热点', '社会', '图片', '科技', '汽车', '体育', '财经'];
 
 /**
  * 资讯
@@ -22,19 +27,15 @@ class Article extends Component {
 
 				<ScrollableTabView
 					style={styles.tabView}
-					renderTabBar={() => <ScrollableTabBar />}
-					locked={true}
+					renderTabBar={() => <ScrollableTabBar/>}
+					tabBarPosition='top'
+					scrollWithoutAnimation={false}
+					onChangeTab={(obj)=> {
+						console.log(obj);
+						return false;
+					}}
 				>
-					<TabList tabLabel='推荐'/>
-					<TabList tabLabel='热点'/>
-					<TabList tabLabel='社会'/>
-					<TabList tabLabel='娱乐'/>
-					<TabList tabLabel='问答'/>
-					<TabList tabLabel='图片'/>
-					<TabList tabLabel='科技'/>
-					<TabList tabLabel='汽车'/>
-					<TabList tabLabel='体育'/>
-					<TabList tabLabel='财经'/>
+					{titles.map((title)=> <TabList key={title} tabLabel={title}/>)}
 				</ScrollableTabView>
 			</Container>
 		)

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Left, Right, Body, Grid, Item, Text, Row} from "native-base";
 
-class TextItem extends Component {
+class ArticleTextItem extends Component {
 
 	render() {
 		let {data} = this.props;
@@ -42,4 +42,4 @@ const styles = {
 		marginLeft: 15
 	}
 };
-export default (TextItem);
+export default (ArticleTextItem);
