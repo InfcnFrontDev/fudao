@@ -13,8 +13,6 @@ class DynamicHeader extends Component {
     super(props);
   }
 
-
-
   render(){
     return (
       <View>

@@ -13,8 +13,6 @@ class DynamicComments extends Component {
     super(props);
   }
 
-
-
   render(){
     if(this.props.comments) {
         let comment = this.props.comments.map((p, i) => {
