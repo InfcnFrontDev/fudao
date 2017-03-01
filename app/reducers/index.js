@@ -6,5 +6,5 @@ import search from "./search";
 export default combineReducers({
 	drawer,
 	realm,
-	search
+	search,
 });

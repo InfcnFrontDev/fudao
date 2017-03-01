@@ -25,7 +25,6 @@ const request = {
 		}
 	},
 
-
 	/**
 	 * GET请求，返回Text数据。
 	 *

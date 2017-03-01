@@ -1,4 +1,4 @@
-import {theme} from "../../utils/";
+import {theme} from "../../../utils/";
 const styles = {
     container:{
         justifyContent:'center',

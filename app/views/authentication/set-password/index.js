@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body, Text, Button,Form} from "native-base";
 import {View,TextInput,ToastAndroid} from "react-native";
-import Header from "../../components/header/base";
+import Header from "../../../components/header/base";
 import styles from "./styles";
 
 /**
