@@ -5,9 +5,9 @@ import {connect} from "react-redux";
 import {Container, Header, Title, Content, ListItem, Text, Left, Button, Icon, Body, Right} from "native-base";
 import {View,Image,DeviceEventEmitter} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
-import styles from "./styles";
-import ItemEmotion from './item-emotion';
+import ItemEmotion from './ItemEmotion';
 import {Actions} from "react-native-router-flux";
+import {theme} from "../../utils/";
 
 /**
  * 我的情绪
@@ -74,6 +74,43 @@ class MyEmotion extends PureComponent {
       })
     }
 }
+
+
+const styles = {
+  container:{
+    backgroundColor:'#fff',
+  },
+  content:{
+    paddingTop:10,
+    paddingRight:12,
+    paddingLeft:12,
+    backgroundColor:'#fff',
+  },
+  divideList:{
+    backgroundColor:'#fff',
+  },
+  divideTitle:{
+    color:'#2e7fae',
+    fontSize:theme.DefaultFontSize+2,
+  },
+  right:{
+    paddingTop:0,
+  },
+  selectedEmotion:{
+    flexDirection:'column',
+    marginTop:0,
+  },
+  selectedEmotionImg:{
+    width:36,
+    height:36,
+  },
+  selectedEmotionTitle:{
+    color:'#fff',
+    marginLeft:7,
+  }
+};
+
+
 function bindAction(dispatch) {
     return {
         openDrawer: () => dispatch(openDrawer()),
@@ -81,6 +118,5 @@ function bindAction(dispatch) {
     };
 
 }
-
 const mapStateToProps = state => ({});
 export default connect(mapStateToProps, bindAction)(MyEmotion);

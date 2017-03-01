@@ -35,9 +35,10 @@ import StartInformation from "./views/authentication/StartInformation";
 import MyInfo from "./views/my-info/";
 import Webview from "./views/webview/";
 //Home
-import MyEmotion from "./views/my-emotion";
-import MyEmotionSolve from "./views/my-emotion-solve";
-import MyQuestion from "./views/my-question";
+import MyEmotion from "./views/my-emotion/MyEmotion";
+import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
+import MyQuestion from "./views/my-question/MyQuestion";
+import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
 
 
 const AppRouter = connect()(Router);
@@ -87,7 +88,7 @@ class AppNavigator extends Component {
 								   type={ActionConst.REPLACE}/>
 
 							{/*首页2*/}
-							<Scene key="tabbar" tabs initial hideNavBar pressOpacity={0.8}
+							<Scene key="tabbar" initial tabs hideNavBar pressOpacity={0.8}
 								   tabBarStyle={styles.tabBarStyle}
 								   type={ActionConst.REPLACE}>
 								<Scene key="home" component={Home} title="主页" hideNavBar
@@ -124,6 +125,7 @@ class AppNavigator extends Component {
 							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
 							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
+							<Scene key="myQuestionDetail"  component={MyQuestionDetail} title="问题详情" hideNavBar/>
 
 
 							{/*搜索*/}

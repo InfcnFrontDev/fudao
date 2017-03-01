@@ -5,8 +5,8 @@ import {connect} from "react-redux";
 import {Container, Header, Title, Content, ListItem, Text, Left, Button, Icon, Body, Right} from "native-base";
 import {View,Image,DeviceEventEmitter,TouchableHighlight} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
-import styles from "./styles";
 import {Actions} from "react-native-router-flux";
+import {theme} from "../../utils/";
 
 /**
  * 我的情绪
@@ -32,6 +32,31 @@ class MyEmotionSolve extends PureComponent {
     }
 
 }
+
+const styles = {
+    container:{
+      justifyContent:'center',
+      alignItems:'center',
+    },
+    View:{
+      flex:1,
+      flexDirection:'column',
+      justifyContent:'center',
+      alignItems:'center',
+      marginBottom:30,
+    },
+    title:{
+      textAlign:'center',
+      fontSize:theme.DefaultFontSize+6,
+      marginBottom:60,
+    },
+    content:{
+      fontSize:theme.DefaultFontSize+2,
+      marginLeft:30,
+      marginRight:30,
+      lineHeight:28,
+    },
+};
 function bindAction(dispatch) {
     return {
         openDrawer: () => dispatch(openDrawer()),

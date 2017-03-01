@@ -3,10 +3,8 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter,TouchableHighlight} from "react-native";
-import styles from "./styles";
-
 /**
-* 动态
+* 问题列表
 */
 class QuestionList extends PureComponent {
   constructor(props) {
@@ -63,6 +61,46 @@ class QuestionList extends PureComponent {
   }
 
 }
+
+const styles = {
+  contentList:{
+    borderWidth:0,
+    paddingRight:0,
+    paddingTop:0,
+    paddingBottom:0,
+    marginLeft:6,
+    marginRight:6,
+  },
+  oneQuestion:{
+    marginBottom:0,
+    marginTop:0,
+    marginRight:6,
+    marginLeft:6,
+    paddingLeft:6,
+    paddingRight:6,
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'flex-start',
+    backgroundColor:'#F1F7EE',
+    marginBottom:16,
+  },
+  oneTitle:{
+    color:'#000',
+    flex:1,
+  },
+  img:{
+    width:36,
+    height:36,
+    marginRight:8,
+  },
+  choose:{
+    width:20,
+    height:20,
+    justifyContent:'flex-end',
+  }
+};
+
 function bindAction(dispatch) {
   return {
     openDrawer: () => dispatch(openDrawer()),

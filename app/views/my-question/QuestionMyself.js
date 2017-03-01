@@ -4,10 +4,10 @@ import {Actions} from "react-native-router-flux";
 import Swiper from 'react-native-swiper'
 import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter} from "react-native";
-import styles from "./styles";
+import {theme} from "../../utils/";
 
 /**
-* 动态
+* 我所选的问题
 */
 class QuestionMyself extends PureComponent {
   constructor(props) {
@@ -30,8 +30,6 @@ class QuestionMyself extends PureComponent {
     )
   }
 
-
-
   renderPage(){
     var pages = [];
       for(var i=0;i<2;i++){
@@ -45,6 +43,23 @@ class QuestionMyself extends PureComponent {
   }
 
 }
+
+const styles = {
+  myQuestion:{
+    height:200,
+    backgroundColor:'#F0F0F0',
+    borderBottomColor:'#D8D8D8',
+  },
+  title:{
+    fontSize:theme.DefaultFontSize+2,
+    color:'#000',
+    fontWeight:'400',
+    textAlign:'center',
+    marginTop:16,
+    marginBottom:16,
+  },
+};
+
 function bindAction(dispatch) {
   return {
     openDrawer: () => dispatch(openDrawer()),
