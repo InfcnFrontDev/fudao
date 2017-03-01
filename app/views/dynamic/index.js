@@ -7,7 +7,7 @@ import styles from "./styles";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment'
 import {Actions} from "react-native-router-flux";
-import Header from "../../components/header/";
+import Header from "../../components/header/IndexHeader";
 import DynamicList from './dynamicList';
 // import DynamicList from '../../components/listview/gifted';
 import DynamicHeader from './dynamic-header';

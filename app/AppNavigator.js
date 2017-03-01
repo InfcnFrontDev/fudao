@@ -88,7 +88,7 @@ class AppNavigator extends Component {
 								   type={ActionConst.REPLACE}/>
 
 							{/*首页2*/}
-							<Scene key="tabbar" initial tabs hideNavBar pressOpacity={0.8}
+							<Scene key="tabbar" tabs hideNavBar pressOpacity={0.8}
 								   tabBarStyle={styles.tabBarStyle}
 								   type={ActionConst.REPLACE}>
 								<Scene key="home" component={Home} title="主页" hideNavBar
@@ -125,7 +125,7 @@ class AppNavigator extends Component {
 							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
 							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
-							<Scene key="myQuestionDetail"  component={MyQuestionDetail} title="问题详情" hideNavBar/>
+							<Scene key="myQuestionDetail"  initial component={MyQuestionDetail} title="问题详情" hideNavBar/>
 
 
 							{/*搜索*/}

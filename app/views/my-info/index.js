@@ -1,9 +1,9 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Content, Left, Right, Body} from "native-base";
-import Header from "../../components/header/base";
-import Separator from "../../components/separator/";
-import GiftedListView from "../../components/listview/gifted";
+import Header from "../../components/header/BaseHeader";
+import Separator from "../../components/Separator";
+import GiftedListView from "../../components/GiftedListView";
 import MyInfoItem from "./item";
 
 const groups = {

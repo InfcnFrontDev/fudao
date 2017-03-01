@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {WebView} from "react-native";
 import {Container} from "native-base";
-import Header from "../../components/header/base";
+import Header from "../../components/header/BaseHeader";
 import Error from "./error";
 
 class Webview extends PureComponent {
