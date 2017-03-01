@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
-import styles from "./styles";
+import {theme} from "../../../utils/";
 
 /**
  * 设置密码
@@ -24,7 +24,7 @@ class SetPassword extends PureComponent {
                     <Text style={styles.titleText}>恭喜你注册成功</Text>
                     <Text style={{textAlign:'center',marginTop:120}}>{this.state.number}s后自动登录...</Text>
                     <Button block success style={{marginTop:10}}
-                    onPress={()=>Actions['startInformation']()}
+                            onPress={()=>Actions['startInformation']()}
                     >
                         <Text>登录</Text>
                     </Button>
@@ -49,13 +49,37 @@ class SetPassword extends PureComponent {
         },1000)
     }
 }
+const styles = {
+    container:{
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    view:{
+        width:300,
+        height:300,
+    },
+    titleText:{
+        textAlign:'center',
+        fontSize: theme.DefaultFontSize+8
+    },
+    box2:{
+        marginTop:40,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        borderColor:'#D4D4D4',
+        borderTopWidth:1,
+        borderBottomWidth:1,
+    },
 
+};
 function bindAction(dispatch) {
     return {};
 }
 
 const mapStateToProps = state => ({});
 export default connect(mapStateToProps, bindAction)(SetPassword);
+
 
 
 

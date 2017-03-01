@@ -1,10 +1,13 @@
+/**
+ * Created by Administrator on 2017/3/1.
+ */
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import Header from "../../../components/header/BaseHeader";
-import styles from "./styles";
+import {theme} from "../../../utils/";
 import {request,urls} from "../../../utils/";
 /**
  * 注册
@@ -81,15 +84,15 @@ class Register extends PureComponent {  // eslint-disable-line
             request.getJson(urls.CHECKPHONE,{
                     phone:phone ,
                     type:'reg'
-            },function(data){
-                ToastAndroid.show("。。。", ToastAndroid.SHORT);
-                console.log('123445')
-                if(data.success && "existence" == data.msg) {
-                    ToastAndroid.show("手机号已被注册", ToastAndroid.SHORT);
-                    document.activeElement.blur();
-                } else if(data.success && "existence" != data.msg) {
-                    ToastAndroid.show("正在发送验证码...", ToastAndroid.SHORT);
-                }
+                },function(data){
+                    ToastAndroid.show("。。。", ToastAndroid.SHORT);
+                    console.log('123445')
+                    if(data.success && "existence" == data.msg) {
+                        ToastAndroid.show("手机号已被注册", ToastAndroid.SHORT);
+                        document.activeElement.blur();
+                    } else if(data.success && "existence" != data.msg) {
+                        ToastAndroid.show("正在发送验证码...", ToastAndroid.SHORT);
+                    }
                 }
             )
         }
@@ -108,51 +111,94 @@ class Register extends PureComponent {  // eslint-disable-line
     }
     _gotoIndex(){
 
-       /* var user = {
-            phone:this.state.phone,
-            yannum:this.state.yannum,
-            /!*concat:this.state.concat?this.state.concat:null*!/
-        }
-        if(user.phone==''){
+        /* var user = {
+         phone:this.state.phone,
+         yannum:this.state.yannum,
+         /!*concat:this.state.concat?this.state.concat:null*!/
+         }
+         if(user.phone==''){
 
-        }else if(user.yannum==''){
-m  -
-        }else{*/
+         }else if(user.yannum==''){
+         m  -
+         }else{*/
 
-           /* fetch('http://192.168.10.58:9095/api/LoginAction/register?User='+user)
-                .then((res) => res.json())
-                .then((res) => {
-                    if(!res.err_code) {
-                        if(res.ok){
-                            this.props.navigator.push({
-                                id: 'index',
-                                index:0,
-                                name:'indexView',
-                                params:{
-                                    user:{
-                                        username:this.state.username,
-                                        tokenStr:''
-                                    }
-                                }
-                            })
-                            // this.props.navigator.push({
-                            //   id:'login'
-                            // });
-                        }else{
-                            Alert.alert(
-                                '提示',
-                                "很遗憾，注册失败了......",
-                                [
-                                    {text: '确定'}
-                                ]
-                            )
-                        }
-                    }
-                })*/
+        /* fetch('http://192.168.10.58:9095/api/LoginAction/register?User='+user)
+         .then((res) => res.json())
+         .then((res) => {
+         if(!res.err_code) {
+         if(res.ok){
+         this.props.navigator.push({
+         id: 'index',
+         index:0,
+         name:'indexView',
+         params:{
+         user:{
+         username:this.state.username,
+         tokenStr:''
+         }
+         }
+         })
+         // this.props.navigator.push({
+         //   id:'login'
+         // });
+         }else{
+         Alert.alert(
+         '提示',
+         "很遗憾，注册失败了......",
+         [
+         {text: '确定'}
+         ]
+         )
+         }
+         }
+         })*/
 
-   /*     }*/
+        /*     }*/
     }
 }
+
+const styles = {
+    inputNum:{
+        flex:1,
+        height: 40,
+    },
+    box1:{
+        flexDirection:'row',
+        marginBottom:20
+    },
+    box2:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        borderColor:'#D4D4D4',
+        borderBottomWidth:1,
+
+    },
+    box3:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        /*  paddingTop:10,
+         paddingBottom:10,*/
+        borderColor:'#D4D4D4',
+        borderBottomWidth:1,
+
+    },
+    border1:{
+        width:80,
+        flexDirection:'row',
+        justifyContent:'center',
+        borderRightWidth:1,
+        borderRightColor:"#D4D4D4",
+
+    },
+    tiaokuan:{
+        fontSize:theme.DefaultFontSize-3,
+        textAlign:'center',
+        marginTop:6,
+        color:'#666'
+    }
+};
 
 function bindAction(dispatch) {
     return {};

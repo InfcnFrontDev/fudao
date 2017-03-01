@@ -4,7 +4,8 @@ import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form,CheckBox} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import Header from "../../../components/header/BaseHeader";
-import styles from "./styles";
+import {theme} from "../../../utils/"
+
 
 /**
  * 登录
@@ -61,17 +62,17 @@ class Login extends PureComponent {
                     <Button block success onPress={()=>Actions['startInformation']()} style={{marginTop:20}}>
                         <Text>登录</Text>
                     </Button>
-                      <View style={styles.textdoc}>
-                            <View style={{flexDirection:'row'}}>
-                                <CheckBox style={styles.check}  checked={this.state.check} onPress={(checked)=>{
-                                    this.setState({
-                                        check:!this.state.check
-                                    })
-                                }}></CheckBox>
-                                <Text style={styles.text1}>记住密码</Text>
-                            </View>
-                            <Text  style={styles.text2}>忘记密码</Text>
+                    <View style={styles.textdoc}>
+                        <View style={{flexDirection:'row'}}>
+                            <CheckBox style={styles.check}  checked={this.state.check} onPress={(checked)=>{
+                                this.setState({
+                                    check:!this.state.check
+                                })
+                            }}></CheckBox>
+                            <Text style={styles.text1}>记住密码</Text>
                         </View>
+                        <Text  style={styles.text2}>忘记密码</Text>
+                    </View>
                 </Content>
             </Container>
         );
@@ -97,10 +98,65 @@ class Login extends PureComponent {
     }
 }
 
+const styles = {
+    inputNum:{
+        flex:1,
+        height: 40,
+    },
+    box1:{
+        flexDirection:'row',
+        marginBottom:20
+    },
+    box2:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        borderColor:'#D4D4D4',
+        borderBottomWidth:1,
 
+    },
+    box3:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        borderColor:'#D4D4D4',
+        borderBottomWidth:1,
+
+    },
+    border1:{
+        width:80,
+        flexDirection:'row',
+        justifyContent:'center',
+        borderRightWidth:1,
+        borderRightColor:"#D4D4D4",
+
+    },
+    textdoc:{
+        marginTop:10,
+        flexDirection:'row',
+        justifyContent:'space-between',
+    },
+    text1:{
+        fontSize:theme.DefaultFontSize-2,
+        color:'#666'
+    },
+    text2:{
+        fontSize:theme.DefaultFontSize-2,
+        color:'#666',
+        textDecorationLine:'underline'
+    },
+    check:{
+        width:20,
+        height:20
+    }
+
+};
 function bindAction(dispatch) {
     return {};
 }
 
 const mapStateToProps = state => ({});
 export default connect(mapStateToProps, bindAction)(Login);
+
+
+

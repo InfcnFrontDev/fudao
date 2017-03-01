@@ -4,7 +4,6 @@ import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body, Text, Button,Form} from "native-base";
 import {View,TextInput,ToastAndroid} from "react-native";
 import Header from "../../../components/header/BaseHeader";
-import styles from "./styles";
 
 /**
  * 设置密码
@@ -28,11 +27,11 @@ class SetPassword extends PureComponent {
                         </View>
                         <View style={{flex:1}}>
                             <TextInput underlineColorAndroid='transparent' placeholder={'至少6位数字/字母/_'}
-                            onChangeText={(value)=>{
-                                this.setState({
-                                    password:value
-                                })
-                            }}
+                                       onChangeText={(value)=>{
+                                           this.setState({
+                                               password:value
+                                           })
+                                       }}
                             ></TextInput>
                         </View>
                     </View>
@@ -74,12 +73,47 @@ class SetPassword extends PureComponent {
 
     }
 }
+const styles = {
 
+    titleText:{
+        textAlign:'center',
+        fontSize: 28
+    },
+    box2:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        borderColor:'#D4D4D4',
+        borderBottomWidth:1,
+
+    },
+    box3:{
+        flexDirection:'row',
+
+        justifyContent:'space-between',
+        alignItems:'center',
+        /*  paddingTop:10,
+         paddingBottom:10,*/
+        borderColor:'#D4D4D4',
+        borderBottomWidth:1,
+
+    },
+    border1:{
+        width:80,
+        flexDirection:'row',
+        justifyContent:'center',
+        borderRightWidth:1,
+        borderRightColor:"#D4D4D4",
+
+    },
+
+};
 function bindAction(dispatch) {
     return {};
 }
 
 const mapStateToProps = state => ({});
 export default connect(mapStateToProps, bindAction)(SetPassword);
+
 
 
