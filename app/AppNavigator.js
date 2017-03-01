@@ -1,40 +1,37 @@
 import React, {Component} from "react";
 import {BackAndroid, StatusBar, NavigationExperimental, Platform, ToastAndroid, StyleSheet} from "react-native";
 import {StyleProvider, Drawer} from "native-base";
-import SplashScreen from "react-native-splash-screen";
 import {connect} from "react-redux";
 import {Router, Scene, Reducer, ActionConst} from "react-native-router-flux";
 import {openDrawer, closeDrawer} from "./actions/drawer";
 import getTheme from "../native-base-theme/components/";
 import SideBar from "./views/sidebar/";
-import TabBarIcon from "./components/tabbar/icon";
+import TabBarIcon from "./components/TabBarIcon";
 import {theme} from "./utils/";
 //
 import Index from "./views/index/";
 // tabs
 import Home from "./views/home/";
-import Article from "./views/article/";
+import Article from "./views/article/Article";
 import Dynamic from "./views/dynamic/";
 import My from "./views/my/";
-import About from "./views/about/";
-import Protocol from "./views/protocol/";
-import Declare from "./views/declare/";
+import About from "./views/system/About";
 // Search
-import Search from "./views/search/";
-import SearchSymptomProblem from "./views/search/symptom-problem/";
-import SearchDailyLife from "./views/search/daily-life/";
-import SearchFriendsCircle from "./views/search/friends-circle/";
-import SearchHealthCare from "./views/search/health-care/";
-import SearchInformation from "./views/search/information/";
-import SearchOfflineService from "./views/search/offline-service/";
+import Search from "./views/search/Search";
+import SearchSymptomProblem from "./views/search/SearchSymptomProblem";
+import SearchDailyLife from "./views/search/SearchDailyLife";
+import SearchFriendsCircle from "./views/search/SearchFriendsCircle";
+import SearchHealthCare from "./views/search/SearchHealthCare";
+import SearchInformation from "./views/search/SearchInformation";
+import SearchOfflineService from "./views/search/SearchOfflineService";
 import Picture from "./views/picture/";
-import Start from "./views/start/";
-import Login from "./views/login/";
-import Register from "./views/register/";
-import SetPassword from "./views/set-password/";
-import ArticleDetail from "./views/article-detail/";
-import PasswordSuccess from "./views/password-success/";
-import StartInformation from "./views/start-information/";
+import Start from "./views/authentication/start/";
+import Login from "./views/authentication/login/";
+import Register from "./views/authentication/register/";
+import SetPassword from "./views/authentication/set-password/";
+import ArticleDetail from "./views/article/ArticleDetail";
+import PasswordSuccess from "./views/authentication/password-success/";
+import StartInformation from "./views/authentication/start-information/";
 import MyInfo from "./views/my-info/";
 import Webview from "./views/webview/";
 //Home
@@ -115,18 +112,19 @@ class AppNavigator extends Component {
 									   selectedIconName='ios-person'
 								/>
 							</Scene>
+
 							{/*启动注册*/}
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
 							<Scene key="login" component={Login} title="登录" hideNavBar/>
-							<Scene key="register" initial component={Register} title="注册" hideNavBar/>
+							<Scene key="register" component={Register} title="注册" hideNavBar/>
 							<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
-							<Scene key="passwordSuccess" component={PasswordSuccess}  hideNavBar/>
-							<Scene key="startInformation"   component={StartInformation} title="基本信息" hideNavBar/>
+							<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
+							<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
 
 							{/*首页*/}
 							<Scene key="myEmotion"  component={MyEmotion} title="我的情绪" hideNavBar/>
-							<Scene key="myEmotionSolve" initial component={MyEmotionSolve} title="情绪干预" hideNavBar/>
-							<Scene key="myQuestion" initial  component={MyQuestion} title="我的问题" hideNavBar/>
+							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
+							<Scene key="myQuestion"  component={MyQuestion} title="我的问题" hideNavBar/>
 							<Scene key="myQuestionDetail"  component={MyQuestionDetail} title="问题详情" hideNavBar/>
 
 
@@ -150,8 +148,6 @@ class AppNavigator extends Component {
 							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
 							<Scene key="about" component={About} title="关于福道" hideNavBar/>
-							<Scene key="protocol" component={Protocol} title="用户协议" hideNavBar/>
-							<Scene key="declare" component={Declare} title="隐式声明" hideNavBar/>
 
 							{/*其他*/}
 							<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
