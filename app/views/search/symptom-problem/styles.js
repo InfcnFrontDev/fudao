@@ -1,4 +1,9 @@
+import {theme} from "../../../utils/";
 const styles = {
+	content:{
+		flex:1,
+		backgroundColor: theme.contentBgColor,
+	},
 	itemContainer: {
 		padding: 14,
 		backgroundColor: '#FFFFFF',
