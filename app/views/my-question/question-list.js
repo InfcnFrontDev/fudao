@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {ListItem, Text, Button,} from "native-base";
-import {View,Image,ToastAndroid,DeviceEventEmitter} from "react-native";
+import {View,Image,ToastAndroid,DeviceEventEmitter,TouchableHighlight} from "react-native";
 import styles from "./styles";
 
 /**
@@ -37,10 +37,12 @@ class QuestionList extends PureComponent {
     var new_list = this.props.data.slice(i,i+2);
     var click = new_list.map((p,i)=>{
       return(
-        <Button transparent key={i} style={styles.oneQuestion} onPress={this.solve.bind(this,p)}>
+        <Button transparent key={i} style={styles.oneQuestion} onPress={this.gotoDetail.bind(this,p)}>
           <Image source={p.icon} style={styles.img}/>
           <Text style={styles.oneTitle}>{p.title}</Text>
-          <Image source={p.icon} style={styles.choose}/>
+          <TouchableHighlight  onPress={this.choose.bind(this)} underlayColor='#fafafa'>
+            <Image source={require('../../assets/arrows_square_plus.png')} style={styles.choose}/>
+          </TouchableHighlight>
         </Button>
       )
     })
@@ -51,10 +53,13 @@ class QuestionList extends PureComponent {
     )
   }
 
-  solve(p){
-    // DeviceEventEmitter.emit('change',p);
-    // ToastAndroid.show(JSON.stringify(p),ToastAndroid.SHORT);
-    // Actions['myEmotionSolve']();
+  gotoDetail(p){
+    Actions['myQuestionDetail']({question_title:p.title});
+
+  }
+
+  choose(){
+    ToastAndroid.show("aaa",ToastAndroid.SHORT);
   }
 
 }

@@ -41,6 +41,7 @@ import Webview from "./views/webview/";
 import MyEmotion from "./views/my-emotion";
 import MyEmotionSolve from "./views/my-emotion-solve";
 import MyQuestion from "./views/my-question";
+import MyQuestionDetail from "./views/my-question-detail";
 
 
 const AppRouter = connect()(Router);
@@ -90,7 +91,7 @@ class AppNavigator extends Component {
 								   type={ActionConst.REPLACE}/>
 
 							{/*首页2*/}
-							<Scene key="tabbar" tabs initial hideNavBar pressOpacity={0.8}
+							<Scene key="tabbar" tabs hideNavBar pressOpacity={0.8}
 								   tabBarStyle={styles.tabBarStyle}
 								   type={ActionConst.REPLACE}>
 								<Scene key="home" component={Home} title="主页" hideNavBar
@@ -113,7 +114,7 @@ class AppNavigator extends Component {
 									   iconName='ios-person-outline'
 									   selectedIconName='ios-person'
 								/>
-
+							</Scene>
 							{/*启动注册*/}
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
 							<Scene key="login" component={Login} title="登录" hideNavBar/>
@@ -123,9 +124,10 @@ class AppNavigator extends Component {
 							<Scene key="startInformation"   component={StartInformation} title="基本信息" hideNavBar/>
 
 							{/*首页*/}
-							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
-							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
-							<Scene key="myQuestion"  component={MyQuestion} title="我的问题" hideNavBar/>
+							<Scene key="myEmotion"  component={MyEmotion} title="我的情绪" hideNavBar/>
+							<Scene key="myEmotionSolve" initial component={MyEmotionSolve} title="情绪干预" hideNavBar/>
+							<Scene key="myQuestion" initial  component={MyQuestion} title="我的问题" hideNavBar/>
+							<Scene key="myQuestionDetail"  component={MyQuestionDetail} title="问题详情" hideNavBar/>
 
 
 							{/*搜索*/}
