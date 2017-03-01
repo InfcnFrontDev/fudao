@@ -5,7 +5,6 @@ import {Container, Content, Left, Right, Body} from "native-base";
 import Header from "../../components/header/search";
 import styles from "./styles";
 import Category from "./category";
-import Result from "./result";
 import {searchAll, clearAll} from "../../actions/search";
 import SymptomProblemResult from "./symptom-problem/result";
 import InformationResult from "./information/result";
@@ -27,13 +26,13 @@ class Search extends PureComponent {
 	render() {
 		let {symptomProblem, information, dailyLife, friendsCircle, healthCare, offlineService} = this.props.search,
 			results = [];
-		if(symptomProblem.list.length > 0){
+		if (symptomProblem.list.length > 0) {
 			results.push(<SymptomProblemResult key="symptomproblem" list={symptomProblem.list}/>)
 		}
-		if(information.list.length > 0){
+		if (information.list.length > 0) {
 			results.push(<InformationResult key="information" list={information.list}/>)
 		}
-		if(results.length==0){
+		if (results.length == 0) {
 			results.push(<Category key="category"/>)
 		}
 		return (
