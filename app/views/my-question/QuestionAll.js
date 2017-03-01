@@ -4,13 +4,13 @@ import {Actions} from "react-native-router-flux";
 import Swiper from 'react-native-swiper'
 import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter} from "react-native";
-import styles from "./styles";
-import {questions} from './question-data';
-import QuestionList from './question-list'
+import {theme} from "../../utils/";
+import {questions} from './Data';
+import QuestionList from './QuestionList'
 /**
-* 动态
+* 所有问题
 */
-class QuestionMyself extends PureComponent {
+class QuestionAll extends PureComponent {
   constructor(props) {
     super(props);
     this.problem = questions[0].alltypes;
@@ -38,6 +38,22 @@ class QuestionMyself extends PureComponent {
   }
 
 }
+
+const styles = {
+  types:{
+    borderBottomColor:'#F0F0F0',
+    borderBottomWidth:1,
+  },
+  title:{
+    fontSize:theme.DefaultFontSize+2,
+    color:'#000',
+    fontWeight:'400',
+    textAlign:'center',
+    marginTop:16,
+    marginBottom:16,
+  },
+};
+
 function bindAction(dispatch) {
   return {
     openDrawer: () => dispatch(openDrawer()),
@@ -46,4 +62,4 @@ function bindAction(dispatch) {
 }
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(QuestionMyself);
+export default connect(mapStateToProps, bindAction)(QuestionAll);

@@ -5,18 +5,16 @@ import {connect} from "react-redux";
 import {Container, Header, Title, Content, ListItem, Text, Left, Button, Icon, Body, Right} from "native-base";
 import {View,Image,DeviceEventEmitter} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
-import styles from "./styles";
 import {Actions} from "react-native-router-flux";
 import {store} from '../../store/configureStore.js';
 import {newRealm} from '../../actions/realm.js'
 import schema from '../../realm/schema.js'
-//我的问题公共部分，结构待调整
-import QuestionMyself from './question-myself'
+import QuestionMyself from './QuestionMyself'
 
 /**
  * 我的问题
  */
-class MyQuestion extends PureComponent {
+class MyQuestionDetail extends PureComponent {
     constructor(props) {
         super(props);
         this.props.newRealm();
@@ -32,9 +30,9 @@ class MyQuestion extends PureComponent {
                       </Button>
                   </Left>
                   <Body>
-                      <Title>{this.props.title}</Title>
+                      <Title style={styles.title}>{this.props.question_title}</Title>
                   </Body>
-                  <Right style={styles.right}>
+                  <Right>
                   </Right>
               </Header>
               <Content style={styles.content}>
@@ -43,8 +41,17 @@ class MyQuestion extends PureComponent {
             </Container>
         )
     }
-
 }
+
+const styles = {
+  container:{
+    backgroundColor:'#fff',
+  },
+  content:{
+    backgroundColor:'#fff',
+  },
+};
+
 function bindAction(dispatch) {
     return {
         newRealm: ()=>dispatch(newRealm(schema)),
@@ -55,4 +62,4 @@ function bindAction(dispatch) {
 }
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(MyQuestion);
+export default connect(mapStateToProps, bindAction)(MyQuestionDetail);

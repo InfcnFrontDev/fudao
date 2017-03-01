@@ -3,11 +3,11 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter} from "react-native";
-import styles from "./styles";
-import {good,calm,bad} from './item-data';
+import {good,calm,bad} from './Data';
+import {theme} from "../../utils/";
 
 /**
-* 动态
+* 情绪列表
 */
 class ItemEmotion extends PureComponent {
   constructor(props) {
@@ -65,6 +65,36 @@ class ItemEmotion extends PureComponent {
   }
 
 }
+
+
+const styles = {
+  contentList:{
+    borderColor:'#fff',
+    paddingTop:0,
+    paddingBottom:0,
+
+  },
+  oneEmotion:{
+    marginBottom:0,
+    marginTop:0,
+    marginRight:0,
+    marginLeft:0,
+    flex:1,
+    flexDirection:'column',
+    alignItems:'flex-start',
+    height:80,
+  },
+  oneEmotionImg:{
+    width:50,
+    height:50,
+  },
+  oneEmotionTitle:{
+    color:'#9b9b9b',
+    textAlign:'center',
+    marginLeft:13,
+  },
+};
+
 function bindAction(dispatch) {
   return {
     openDrawer: () => dispatch(openDrawer()),
