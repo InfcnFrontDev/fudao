@@ -3,7 +3,7 @@ import {WebView, Dimensions} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Left, Right, Body, Form, Item} from "native-base";
-import Header from "../../components/header/base";
+import Header from "../../components/header/BaseHeader";
 
 
 const {width, height} = Dimensions.get('window');

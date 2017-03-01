@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Title, Content, Left, Right, Body, Form, Input, Item,Thumbnail,Button,Text,Icon} from "native-base";
 import {View,Image,TouchableOpacity,TouchableHighlight,ToastAndroid, DatePickerAndroid,} from "react-native";
-import Header from "../../../components/header/title";
+import Header from "../../../components/header/TitleHeader";
 import {openDrawer, closeDrawer} from "../../../actions/drawer";
 import styles from "./styles";
 

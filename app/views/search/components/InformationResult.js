@@ -1,14 +1,13 @@
 import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
 import {Left, Right, Body, View} from "native-base";
-import Separator from "../../../components/separator/";
+import Separator from "../../../components/Separator";
 import ItemPicture from "../../article/item-picture";
-import styles from "./styles";
 
 /**
  * result
  */
-class Result extends PureComponent {
+class InformationResult extends PureComponent {
 
 	render() {
 		let {list} = this.props;
@@ -24,4 +23,11 @@ class Result extends PureComponent {
 		)
 	}
 }
-export default (Result);
+
+const styles = {
+	itemContainer: {
+		backgroundColor: '#FFFFFF'
+	},
+};
+
+export default (InformationResult);

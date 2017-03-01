@@ -3,8 +3,7 @@ import {TouchableOpacity} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {connect} from "react-redux";
 import {Left, Right, Body, Grid, Row, Col, Icon, Text, View} from "native-base";
-import styles from "./styles";
-import {search} from "../../actions/search";
+import {search} from "../../../actions/search";
 /**
  * category
  */
@@ -89,6 +88,27 @@ class Category extends PureComponent {
 		Actions['search' + category]();
 	}
 }
+
+const styles = {
+	grid: {
+		marginTop: 60,
+		marginLeft: 30,
+		marginRight: 30,
+	},
+	row: {
+		paddingBottom: 20,
+	},
+	iconContainer: {
+		alignItems: 'center',
+	},
+	icon: {
+		fontSize: 32,
+		color: '#6c6c6c'
+	},
+	iconText: {
+		color: "#6c6c6c"
+	},
+};
 
 const mapStateToProps = state => ({
 	search: state.search,

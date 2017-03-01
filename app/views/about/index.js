@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body, Text, Row, Thumbnail, Col, Button} from "native-base";
-import Header from "../../components/header/base";
+import Header from "../../components/header/BaseHeader";
 import {config, urls} from "../../utils/";
 import styles from "./styles";
 

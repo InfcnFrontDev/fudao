@@ -1,10 +1,11 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Left, Right, Body, View} from "native-base";
-import Header from "../../../components/header/search";
-import {searchSymptomProblem, clearSymptomProblem} from "../../../actions/search";
-import Result from "./result";
-import styles from "./styles";
+import Header from "../../components/header/SearchHeader";
+import {searchSymptomProblem, clearSymptomProblem} from "../../actions/search";
+import Result from "./components/SymptomProblemResult";
+import {theme} from "../../utils/";
+
 /**
  * 搜索 -> 症状和问题
  */
@@ -32,6 +33,13 @@ class SearchSymptomProblem extends PureComponent {
 		}
 	}
 }
+
+const styles = {
+	content: {
+		flex: 1,
+		backgroundColor: theme.contentBgColor,
+	},
+};
 
 const mapStateToProps = state => ({
 	isLoading: state.search.isLoading,

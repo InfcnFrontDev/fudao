@@ -2,12 +2,11 @@ import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
 import {Container, Content, Left, Right, Body} from "native-base";
-import Header from "../../components/header/search";
-import styles from "./styles";
-import Category from "./category";
+import Header from "../../components/header/SearchHeader";
+import Category from "./components/SearchCategory";
 import {searchAll, clearAll} from "../../actions/search";
-import SymptomProblemResult from "./symptom-problem/result";
-import InformationResult from "./information/result";
+import SymptomProblemResult from "./components/SymptomProblemResult";
+import InformationResult from "./components/InformationResult";
 
 
 /**
@@ -38,7 +37,7 @@ class Search extends PureComponent {
 		return (
 			<Container>
 				<Header placeholder="搜索" onSearch={this.search.bind(this)}/>
-				<Content style={styles.content}>
+				<Content>
 					{results}
 				</Content>
 			</Container>

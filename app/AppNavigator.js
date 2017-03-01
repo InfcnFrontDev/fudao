@@ -1,13 +1,12 @@
 import React, {Component} from "react";
 import {BackAndroid, StatusBar, NavigationExperimental, Platform, ToastAndroid, StyleSheet} from "react-native";
 import {StyleProvider, Drawer} from "native-base";
-import SplashScreen from "react-native-splash-screen";
 import {connect} from "react-redux";
 import {Router, Scene, Reducer, ActionConst} from "react-native-router-flux";
 import {openDrawer, closeDrawer} from "./actions/drawer";
 import getTheme from "../native-base-theme/components/";
 import SideBar from "./views/sidebar/";
-import TabBarIcon from "./components/tabbar/icon";
+import TabBarIcon from "./components/TabBarIcon";
 import {theme} from "./utils/";
 //
 import Index from "./views/index/";
@@ -20,13 +19,13 @@ import About from "./views/about/";
 import Protocol from "./views/protocol/";
 import Declare from "./views/declare/";
 // Search
-import Search from "./views/search/";
-import SearchSymptomProblem from "./views/search/symptom-problem/";
-import SearchDailyLife from "./views/search/daily-life/";
-import SearchFriendsCircle from "./views/search/friends-circle/";
-import SearchHealthCare from "./views/search/health-care/";
-import SearchInformation from "./views/search/information/";
-import SearchOfflineService from "./views/search/offline-service/";
+import Search from "./views/search/Search";
+import SearchSymptomProblem from "./views/search/SearchSymptomProblem";
+import SearchDailyLife from "./views/search/SearchDailyLife";
+import SearchFriendsCircle from "./views/search/SearchFriendsCircle";
+import SearchHealthCare from "./views/search/SearchHealthCare";
+import SearchInformation from "./views/search/SearchInformation";
+import SearchOfflineService from "./views/search/SearchOfflineService";
 import Picture from "./views/picture/";
 import Start from "./views/authentication/start/";
 import Login from "./views/authentication/login/";
@@ -120,13 +119,13 @@ class AppNavigator extends Component {
 							<Scene key="login" component={Login} title="登录" hideNavBar/>
 							<Scene key="register" component={Register} title="注册" hideNavBar/>
 							<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
-							<Scene key="passwordSuccess" component={PasswordSuccess}  hideNavBar/>
-							<Scene key="startInformation"   component={StartInformation} title="基本信息" hideNavBar/>
+							<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
+							<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
 
 							{/*首页*/}
 							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
-							<Scene key="myQuestion"  component={MyQuestion} title="我的问题" hideNavBar/>
+							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
 
 
 							{/*搜索*/}

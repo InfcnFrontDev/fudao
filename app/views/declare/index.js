@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {WebView} from "react-native";
 import {Container, Left, Right, Body} from "native-base";
-import Header from "../../components/header/base";
+import Header from "../../components/header/BaseHeader";
 import html from "./html";
 
 class Declare extends Component {

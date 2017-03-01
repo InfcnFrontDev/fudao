@@ -1,8 +1,7 @@
 import React, {PureComponent} from "react";
-import {TouchableOpacity} from "react-native";
+import {TouchableOpacity, StyleSheet} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Header, Icon, Left, Right, Body, Form, Input, Item, Button, Grid, Row, Col} from "native-base";
-import styles from "./styles";
 
 class SearchHeader extends PureComponent {
 
@@ -20,7 +19,7 @@ class SearchHeader extends PureComponent {
 
 		if (text.length > 0) {
 			clearIcon = (
-				<Icon name="close" style={styles.search.inputIcon} onPress={() => this.changeText('')}/>
+				<Icon name="close" style={styles.inputIcon} onPress={() => this.changeText('')}/>
 			);
 		}
 
@@ -28,21 +27,21 @@ class SearchHeader extends PureComponent {
 			<Header>
 				<Grid>
 					<Row>
-						<Col style={styles.search.backCol}>
-							<Button transparent onPress={() => Actions.pop()} style={styles.search.backButton}>
+						<Col style={styles.backCol}>
+							<Button transparent onPress={() => Actions.pop()} style={styles.backButton}>
 								<Icon name="arrow-back"/>
 							</Button>
 						</Col>
-						<Col style={styles.search.inputCol}>
-							<Item rounded style={styles.search.inputGroup}>
-								<Icon name="search" style={styles.search.inputIcon}/>
+						<Col style={styles.inputCol}>
+							<Item rounded style={styles.inputGroup}>
+								<Icon name="search" style={styles.inputIcon}/>
 								<Input
 									placeholder={placeholder}
 									onChangeText={(text) => this.changeText(text)}
 									value={text}
 									autoFocus={autoFocus}
 									onSubmitEditing={(text) => this.submitEditing(text)}
-									style={styles.search.inputText}/>
+									style={styles.inputText}/>
 								{clearIcon}
 							</Item>
 						</Col>
@@ -69,6 +68,15 @@ class SearchHeader extends PureComponent {
 
 
 }
+
+const styles = {
+	backCol: {width: 35, justifyContent: 'center'},
+	inputCol: {justifyContent: 'center'},
+	backButton: {marginLeft: -10},
+	inputGroup: {height: 35, backgroundColor: '#ffffff'},
+	inputIcon: {color: '#666666'},
+	inputText: {color: '#666666', marginBottom: 2},
+};
 
 SearchHeader.propsType = {
 	placeholder: React.PropTypes.string,

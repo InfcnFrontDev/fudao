@@ -1,9 +1,9 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Content, Left, Right, Body} from "native-base";
-import Header from "../../../components/header/search";
-import {searchInformation, clearInformation} from "../../../actions/search";
-import Result from "./result";
+import Header from "../../components/header/SearchHeader";
+import {searchInformation, clearInformation} from "../../actions/search";
+import Result from "./components/InformationResult";
 
 /**
  * 搜索 -> 资讯

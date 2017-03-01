@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {StyleSheet, View} from "react-native";
 import {Icon, Text} from "native-base";
-import {theme} from "../../utils/";
+import {theme} from "../utils/";
 
 class TabBarIcon extends PureComponent {
 	render() {

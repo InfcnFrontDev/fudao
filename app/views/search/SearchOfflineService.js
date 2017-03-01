@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import {Container, Content, Left, Right, Body, Text} from "native-base";
-import Header from "../../../components/header/search";
-import styles from "./styles";
+import Header from "../../components/header/SearchHeader";
 
 /**
  * 搜索 -> 线下服务
@@ -17,7 +16,7 @@ class SearchOfflineService extends PureComponent {
         return (
             <Container>
                 <Header placeholder="搜索线下服务" />
-                <Content padder style={styles.content}>
+                <Content>
                     <Text>线下服务</Text>
                 </Content>
             </Container>
