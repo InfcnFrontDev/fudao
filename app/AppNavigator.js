@@ -118,10 +118,10 @@ class AppNavigator extends Component {
 							{/*启动注册*/}
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
 							<Scene key="login" component={Login} title="登录" hideNavBar/>
-							<Scene key="register" component={Register} title="注册" hideNavBar/>
+							<Scene key="register" initial component={Register} title="注册" hideNavBar/>
 							<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
-							<Scene key="passwordSuccess" component={PasswordSuccess} title="基本信息" hideNavBar/>
-							<Scene key="startInformation" component={StartInformation} hideNavBar/>
+							<Scene key="passwordSuccess" component={PasswordSuccess}  hideNavBar/>
+							<Scene key="startInformation"   component={StartInformation} title="基本信息" hideNavBar/>
 
 							{/*首页*/}
 							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
