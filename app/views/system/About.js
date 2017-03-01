@@ -3,7 +3,6 @@ import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body, Text, Row, Thumbnail, Col, Button} from "native-base";
 import Header from "../../components/header/BaseHeader";
 import {config, urls} from "../../utils/";
-import styles from "./styles";
 
 /**
  * 关于福道
@@ -79,5 +78,27 @@ class About extends PureComponent {
 	}
 
 }
+
+const styles = {
+	title: {
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	titleText: {
+		fontSize: 28
+	},
+	desc: {
+		lineHeight: 24
+	},
+	bold: {
+		fontWeight: 'bold',
+		marginTop: 10,
+		marginBottom: 10
+	},
+	center: {
+		flexDirection: "row",
+		justifyContent: 'center',
+	}
+};
 
 export default (About);

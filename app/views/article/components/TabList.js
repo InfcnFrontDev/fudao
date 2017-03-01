@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {ScrollView, ListView, View} from "react-native";
 import {Left, Right, Body, Form, Item, Text} from "native-base";
-import GiftedListView from "../../components/GiftedListView";
-import ItemPicture from "./item-picture";
+import GiftedListView from "../../../components/GiftedListView";
+import ItemPicture from "./PictureItem";
 
 const datas = [
     {

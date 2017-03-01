@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
 import {Left, Right, Body, View} from "native-base";
 import Separator from "../../../components/Separator";
-import ItemPicture from "../../article/item-picture";
+import ItemPicture from "../../article/components/PictureItem";
 
 /**
  * result

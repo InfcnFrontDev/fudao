@@ -1,11 +1,9 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Container, Title, Left, Right, Body, Form, Item} from "native-base";
-import {openDrawer, closeDrawer} from "../../actions/drawer";
 import Header from "../../components/header/IndexHeader";
 import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-view";
-import TabList from "./tab-list";
-import styles from "./styles";
+import TabList from "./components/TabList";
 
 /**
  * 资讯
@@ -42,12 +40,11 @@ class Article extends Component {
 		)
 	}
 }
-function bindAction(dispatch) {
-	return {
-		openDrawer: () => dispatch(openDrawer()),
-		closeDrawer: key => dispatch(closeDrawer()),
-	};
-}
+const styles = {
+	tabView: {
+		flex: 1,
+	},
+};
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(Article);
+export default connect(mapStateToProps)(Article);

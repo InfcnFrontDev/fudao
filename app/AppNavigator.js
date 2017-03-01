@@ -12,12 +12,10 @@ import {theme} from "./utils/";
 import Index from "./views/index/";
 // tabs
 import Home from "./views/home/";
-import Article from "./views/article/";
+import Article from "./views/article/Article";
 import Dynamic from "./views/dynamic/";
 import My from "./views/my/";
-import About from "./views/about/";
-import Protocol from "./views/protocol/";
-import Declare from "./views/declare/";
+import About from "./views/system/About";
 // Search
 import Search from "./views/search/Search";
 import SearchSymptomProblem from "./views/search/SearchSymptomProblem";
@@ -31,7 +29,7 @@ import Start from "./views/authentication/start/";
 import Login from "./views/authentication/login/";
 import Register from "./views/authentication/register/";
 import SetPassword from "./views/authentication/set-password/";
-import ArticleDetail from "./views/article-detail/";
+import ArticleDetail from "./views/article/ArticleDetail";
 import PasswordSuccess from "./views/authentication/password-success/";
 import StartInformation from "./views/authentication/start-information/";
 import MyInfo from "./views/my-info/";
@@ -148,8 +146,6 @@ class AppNavigator extends Component {
 							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
 							<Scene key="about" component={About} title="关于福道" hideNavBar/>
-							<Scene key="protocol" component={Protocol} title="用户协议" hideNavBar/>
-							<Scene key="declare" component={Declare} title="隐式声明" hideNavBar/>
 
 							{/*其他*/}
 							<Scene key="webview" component={Webview} title="WebView" hideNavBar/>

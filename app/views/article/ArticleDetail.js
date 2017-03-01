@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {WebView, Dimensions} from "react-native";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
 import {Container, Left, Right, Body, Form, Item} from "native-base";
 import Header from "../../components/header/BaseHeader";
 
@@ -49,25 +48,22 @@ const html = `
  */
 class ArticleDetail extends Component {
 
-    render() {
-        return (
-            <Container>
-                <Header {...this.props}/>
-                <WebView
-                    style={{flex:1}}
-                    source={{html:html,method: 'GET'}}
-                    javaScriptEnabled={true}
-                    domStorageEnabled={true}
-                    scalesPageToFit={false}
-                    onMessage={(event)=> alert(event.nativeEvent.data)}
-                />
-            </Container>
-        )
-    }
+	render() {
+		return (
+			<Container>
+				<Header {...this.props}/>
+				<WebView
+					style={{flex:1}}
+					source={{html:html,method: 'GET'}}
+					javaScriptEnabled={true}
+					domStorageEnabled={true}
+					scalesPageToFit={false}
+					onMessage={(event)=> alert(event.nativeEvent.data)}
+				/>
+			</Container>
+		)
+	}
 }
-function bindAction(dispatch) {
-    return {};
-}
-
+const styles = {};
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(ArticleDetail);
+export default connect(mapStateToProps)(ArticleDetail);

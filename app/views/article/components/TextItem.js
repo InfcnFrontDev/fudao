@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import {Left, Right, Body, Grid, Item, Text, Row} from "native-base";
-import styles from "./styles";
 
-class ItemText extends Component {
+class TextItem extends Component {
 
 	render() {
 		let {data} = this.props;
@@ -22,5 +21,25 @@ class ItemText extends Component {
 		)
 	}
 }
-
-export default (ItemText);
+const styles = {
+	tabView: {
+		flex: 1,
+	},
+	tabPanel: {
+		flex: 1,
+		flexGrow: 1,
+	},
+	title: {
+		fontSize: 16
+	},
+	from: {
+		fontSize: 12,
+		color: '#888888'
+	},
+	timeDiff: {
+		fontSize: 12,
+		color: '#888888',
+		marginLeft: 15
+	}
+};
+export default (TextItem);

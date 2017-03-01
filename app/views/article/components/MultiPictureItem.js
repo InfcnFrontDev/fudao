@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import {Left, Right, Body, Grid, Item, Text, Row, Col, Thumbnail} from "native-base";
-import styles from "./styles";
 
-class ItemMultiPicture extends Component {
+class MultiPictureItem extends Component {
 
 	render() {
 		let {data} = this.props;
@@ -14,15 +13,15 @@ class ItemMultiPicture extends Component {
 					</Row>
 					<Row>
 						<Col>
-							<Thumbnail square source={require('../../../img/web-cover1.jpg')}
+							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
 									   style={{width: 110, height: 70}}/>
 						</Col>
 						<Col>
-							<Thumbnail square source={require('../../../img/web-cover1.jpg')}
+							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
 									   style={{width: 110, height: 70}}/>
 						</Col>
 						<Col>
-							<Thumbnail square source={require('../../../img/web-cover1.jpg')}
+							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
 									   style={{width: 110, height: 70}}/>
 						</Col>
 					</Row>
@@ -36,5 +35,25 @@ class ItemMultiPicture extends Component {
 		)
 	}
 }
-
-export default (ItemMultiPicture);
+const styles = {
+	tabView: {
+		flex: 1,
+	},
+	tabPanel: {
+		flex: 1,
+		flexGrow: 1,
+	},
+	title: {
+		fontSize: 16
+	},
+	from: {
+		fontSize: 12,
+		color: '#888888'
+	},
+	timeDiff: {
+		fontSize: 12,
+		color: '#888888',
+		marginLeft: 15
+	}
+};
+export default (MultiPictureItem);
