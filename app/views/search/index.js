@@ -1,13 +1,15 @@
 import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import {Container, Content, Left, Right, Body, Grid, Row, Col, Icon, Text, View} from "native-base";
-import {Actions} from "react-native-router-flux";
+import {Container, Content, Left, Right, Body} from "native-base";
 import Header from "../../components/header/search";
 import styles from "./styles";
 import Category from "./category";
 import Result from "./result";
-import {request, urls} from "../../utils/";
+import {searchAll, clearAll} from "../../actions/search";
+import SymptomProblemResult from "./symptom-problem/result";
+import InformationResult from "./information/result";
+
 
 /**
  * 搜索
@@ -23,31 +25,39 @@ class Search extends PureComponent {
 	}
 
 	render() {
-		let {results} = this.state;
+		let {symptomProblem, information, dailyLife, friendsCircle, healthCare, offlineService} = this.props.search,
+			results = [];
+		if(symptomProblem.list.length > 0){
+			results.push(<SymptomProblemResult key="symptomproblem" list={symptomProblem.list}/>)
+		}
+		if(information.list.length > 0){
+			results.push(<InformationResult key="information" list={information.list}/>)
+		}
+		if(results.length==0){
+			results.push(<Category key="category"/>)
+		}
 		return (
 			<Container>
-				<Header placeholder="搜索" onSearch={(query) => this.onSearch(query)}/>
+				<Header placeholder="搜索" onSearch={this.search.bind(this)}/>
 				<Content style={styles.content}>
-					{results ? <Result/> : <Category />}
+					{results}
 				</Content>
 			</Container>
 		)
 	}
 
-	onSearch(query) {
-		let results = null;
-		if (query.length > 0) {
-			results = [];
+	// 搜索
+	search(keyword) {
+		const {dispatch} = this.props;
+		if (keyword == '') {
+			dispatch(clearAll())
+		} else {
+			dispatch(searchAll(keyword))
 		}
-		this.setState({
-			query, results
-		});
 	}
 }
 
-function bindAction(dispatch) {
-	return {};
-}
-
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(Search);
+const mapStateToProps = state => ({
+	search: state.search,
+});
+export default connect(mapStateToProps)(Search);

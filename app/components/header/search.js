@@ -1,8 +1,7 @@
 import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
-import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Header, Icon, Left, Right, Body, Form, Input, Item, Button, Grid, Row, Col, Text} from "native-base";
+import {Header, Icon, Left, Right, Body, Form, Input, Item, Button, Grid, Row, Col} from "native-base";
 import styles from "./styles";
 
 class SearchHeader extends PureComponent {
@@ -15,13 +14,13 @@ class SearchHeader extends PureComponent {
 	}
 
 	render() {
-		let {placeholder} = this.props,
+		let {placeholder, autoFocus} = this.props,
 			{text} = this.state,
 			clearIcon = null;
 
 		if (text.length > 0) {
 			clearIcon = (
-				<Icon name="close" style={styles.search.inputIcon} onPress={() => this.setState({text: ''})}/>
+				<Icon name="close" style={styles.search.inputIcon} onPress={() => this.changeText('')}/>
 			);
 		}
 
@@ -39,8 +38,10 @@ class SearchHeader extends PureComponent {
 								<Icon name="search" style={styles.search.inputIcon}/>
 								<Input
 									placeholder={placeholder}
-									onChangeText={(text) => this.onChangeText(text)}
+									onChangeText={(text) => this.changeText(text)}
 									value={text}
+									autoFocus={autoFocus}
+									onSubmitEditing={(text) => this.submitEditing(text)}
 									style={styles.search.inputText}/>
 								{clearIcon}
 							</Item>
@@ -51,28 +52,33 @@ class SearchHeader extends PureComponent {
 		)
 	}
 
-	onChangeText(text) {
-		let {onSearch} = this.props;
-
+	changeText(text) {
 		this.setState({text});
+		if (text == '') {
+			this.submitEditing(text);
+		}
 
+	}
+
+	submitEditing(text) {
+		let {onSearch} = this.props;
 		if (onSearch) {
 			onSearch(text);
 		}
 	}
+
+
 }
 
 SearchHeader.propsType = {
 	placeholder: React.PropTypes.string,
 	onSearch: React.PropTypes.func,
+	autoFocus: React.PropTypes.bool,
 };
 SearchHeader.defaultProps = {
 	placeholder: '搜索',
+	autoFocus: false,
 };
 
-function bindAction(dispatch) {
-	return {};
-}
 
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(SearchHeader)
+export default (SearchHeader)
