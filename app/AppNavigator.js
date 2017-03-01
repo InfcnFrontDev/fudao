@@ -122,7 +122,7 @@ class AppNavigator extends Component {
 							<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
 
 							{/*首页*/}
-							<Scene key="myEmotion"  component={MyEmotion} title="我的情绪" hideNavBar/>
+							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
 							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
 							<Scene key="myQuestionDetail"  component={MyQuestionDetail} title="问题详情" hideNavBar/>

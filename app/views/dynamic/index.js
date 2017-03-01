@@ -1,19 +1,23 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Title, Left, Right, Body, Text, Button} from "native-base";
-import {Platform, View, ToastAndroid, Image, ScrollView, TouchableHighlight, TextInput, NetInfo} from "react-native";
+import {Container, Title, Content, Left, Right, Body,Text,Button} from "native-base";
+import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import styles from "./styles";
-import Header from "../../components/header/IndexHeader";
-import DynamicList from "./dynamicList";
-import DynamicHeader from "./dynamic-header";
-import DynamicImage from "./dynamic-image";
-import DynamicComment from "./dynamic-comments";
-import DynamicSupport from "./dynamic-supports";
-import {store} from "../../store/configureStore.js";
-import {newRealm} from "../../actions/realm.js";
-import schema from "../../realm/schema.js";
+import Icon from 'react-native-vector-icons/FontAwesome';
+import moment from 'moment'
+import {Actions} from "react-native-router-flux";
+import Header from "../../components/header/";
+import DynamicList from './dynamicList';
+// import DynamicList from '../../components/listview/gifted';
+import DynamicHeader from './dynamic-header';
+import DynamicImage from './dynamic-image';
+import DynamicComment from './dynamic-comments';
+import DynamicSupport from './dynamic-supports';
 const dismissKeyboard = require('dismissKeyboard');
+import {store} from '../../store/configureStore.js';
+import {newRealm} from '../../actions/realm.js'
+import schema from '../../realm/schema.js'
 
 /**
  * 动态
