@@ -40,6 +40,7 @@ import Webview from "./views/webview/";
 //Home
 import MyEmotion from "./views/my-emotion";
 import MyEmotionSolve from "./views/my-emotion-solve";
+import MyQuestion from "./views/my-question";
 
 
 
@@ -89,7 +90,7 @@ class AppNavigator extends Component {
 							<Scene key="index" component={Index} title="首页" hideNavBar/>
 
 							{/*首页2*/}
-							<Scene key="tabbar" tabs initial hideNavBar tabBarStyle={styles.tabBarStyle}>
+							<Scene key="tabbar" tabs hideNavBar initial tabBarStyle={styles.tabBarStyle}>
 								<Scene key="home" component={Home} title="主页" icon={TabBarIcon} hideNavBar
 									   iconName='ios-home-outline' selectedIconName='ios-home'/>
 								<Scene key="article" component={Article} title="资讯" icon={TabBarIcon} hideNavBar
@@ -112,6 +113,7 @@ class AppNavigator extends Component {
 							{/*首页*/}
 							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
+							<Scene key="myQuestion"  component={MyQuestion} title="我的问题" hideNavBar/>
 
 
 							{/*搜索*/}
@@ -147,7 +149,7 @@ class AppNavigator extends Component {
 	}
 
 	componentDidMount() {
-		SplashScreen.hide();
+		// SplashScreen.hide();
 	}
 
 	reducerCreate(params) {
