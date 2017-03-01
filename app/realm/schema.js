@@ -78,55 +78,6 @@ const MyGroup = {
 };
 
 /**
- * 动态信息
- */
- const Dynamic = {
-   name: 'Dynamic',
-   primaryKey: 'id',
-   properties: {
-     id: 'int',// 动态ID
-     username: 'string', // 发表人
-     name: 'string', // 发表人
-     content: 'string',// 动态内容
-     suports:  {type: 'list',objectType:'DynamicPraise' },
-     comments: {type:'list',objectType:'DynamicComment' },
-     createtime: 'int',// 发表时间,
-     photo: {type: 'string', optional: true},
-     urls: {type: 'string', optional: true},
-     flag: {type: 'bool', optional: true},
-     show:{type:'bool',optional: true,default:false},
-   }
- };
-
- /**
-  * 动态的点赞信息
-  */
- const DynamicPraise = {
-     name: 'DynamicPraise',
-     properties: {
-         createTime:'int',
-         id: 'int', // 动态ID
-         publishId: 'int', // 动态ID
-         username: 'string',// 点赞人ID
-     }
- };
-
-/**
- * 动态的评论信息
- */
-const DynamicComment = {
-    name: 'DynamicComment',
-    properties: {
-        // id: 'string',// 评论ID
-        // dynamicId: 'string', // 动态ID
-        // userId: 'string', // 评论用户ID
-        name:'string',
-        username:'string',
-        content: 'string',// 评论内容
-    }
-};
-
-/**
  * 动态的图片信息
  */
 const DynamicPicture = {
@@ -170,9 +121,71 @@ const ChatMessage = {
     }
 };
 
+/***************************************************************************/
+//以下为已用数据库表
+/**
+ * 动态信息,已用
+ */
+ const Dynamic = {
+   name: 'Dynamic',
+   primaryKey: 'id',
+   properties: {
+     id: 'int',// 动态ID
+     username: 'string', // 发表人
+     name: 'string', // 发表人
+     content: 'string',// 动态内容
+     suports:  {type: 'list',objectType:'DynamicPraise' },
+     comments: {type:'list',objectType:'DynamicComment' },
+     createtime: 'int',// 发表时间,
+     photo: {type: 'string', optional: true},
+     urls: {type: 'string', optional: true},
+     flag: {type: 'bool', optional: true},
+     show:{type:'bool',optional: true,default:false},
+   }
+ };
+
+ /**
+  * 动态的点赞信息,已用
+  */
+ const DynamicPraise = {
+     name: 'DynamicPraise',
+     properties: {
+         createTime:'int',
+         id: 'int', // 动态ID
+         publishId: 'int', // 动态ID
+         username: 'string',// 点赞人ID
+     }
+ };
+
+/**
+ * 动态的评论信息,已用
+ */
+const DynamicComment = {
+    name: 'DynamicComment',
+    properties: {
+        // id: 'string',// 评论ID
+        // dynamicId: 'string', // 动态ID
+        // userId: 'string', // 评论用户ID
+        name:'string',
+        username:'string',
+        content: 'string',// 评论内容
+    }
+};
+/**
+ * 我的问题,已用
+ */
+const MyQuestion = {
+    name: 'MyQuestionSelected',
+    properties: {
+        title:'string',
+    }
+};
+
+
+
 module.exports = {
-    schema: [Dynamic,DynamicPraise,DynamicComment],
-    schemaVersion: 14,
+    schema: [Dynamic,DynamicPraise,DynamicComment,MyQuestion],
+    schemaVersion: 15,
     migration: () => {
     }
 };

@@ -40,6 +40,7 @@ import Webview from "./views/webview/";
 //Home
 import MyEmotion from "./views/my-emotion";
 import MyEmotionSolve from "./views/my-emotion-solve";
+import MyQuestion from "./views/my-question";
 
 
 const AppRouter = connect()(Router);
@@ -112,8 +113,6 @@ class AppNavigator extends Component {
 									   iconName='ios-person-outline'
 									   selectedIconName='ios-person'
 								/>
-							</Scene>
-
 
 							{/*启动注册*/}
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
@@ -126,6 +125,7 @@ class AppNavigator extends Component {
 							{/*首页*/}
 							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
+							<Scene key="myQuestion"  component={MyQuestion} title="我的问题" hideNavBar/>
 
 
 							{/*搜索*/}
@@ -161,7 +161,7 @@ class AppNavigator extends Component {
 	}
 
 	componentDidMount() {
-		SplashScreen.hide();
+		// SplashScreen.hide();
 	}
 
 	reducerCreate(params) {
