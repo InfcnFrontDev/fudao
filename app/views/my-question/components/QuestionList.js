@@ -39,7 +39,7 @@ class QuestionList extends PureComponent {
           <Image source={p.icon} style={styles.img}/>
           <Text style={styles.oneTitle}>{p.title}</Text>
           <TouchableHighlight  onPress={this.choose.bind(this)} underlayColor='#fafafa'>
-            <Image source={require('../../assets/arrows_square_plus.png')} style={styles.choose}/>
+            <Image source={require('../assets/arrows_square_plus.png')} style={styles.choose}/>
           </TouchableHighlight>
         </Button>
       )

@@ -9,8 +9,8 @@ import {Actions} from "react-native-router-flux";
 import {store} from '../../store/configureStore.js';
 import {newRealm} from '../../actions/realm.js'
 import schema from '../../realm/schema.js'
-import QuestionMyself from './QuestionMyself'
-import QuestionAll from './QuestionAll'
+import QuestionMyself from './components/QuestionMyself'
+import QuestionAll from './components/QuestionAll'
 
 /**
  * 我的问题

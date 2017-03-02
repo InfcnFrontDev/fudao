@@ -10,9 +10,8 @@ import SideBar from "./views/sidebar/";
 import TabBarIcon from "./components/TabBarIcon";
 import {theme} from "./utils/";
 //
-import Index from "./views/index/";
 // tabs
-import Home from "./views/home/";
+import Home from "./views/home/Home";
 import Article from "./views/article/Article";
 import Dynamic from "./views/dynamic/";
 import My from "./views/my/";
@@ -34,6 +33,7 @@ import MyEmotion from "./views/my-emotion/MyEmotion";
 import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
+import TreatmentDetail from "./views/my-question/TreatmentDetail";
 
 
 //注册登录
@@ -90,11 +90,8 @@ class AppNavigator extends Component {
 						backgroundColor={theme.statusBarColor}/>
 					<AppRouter createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
 						<Scene key="root">
-							{/*首页1*/}
-							<Scene key="index" component={Index} title="首页" hideNavBar
-								   type={ActionConst.REPLACE}/>
 
-							{/*首页2*/}
+							{/*首页*/}
 							<Scene key="tabbar" tabs hideNavBar pressOpacity={0.8} initial
 								   tabBarStyle={styles.tabBarStyle}
 								   type={ActionConst.REPLACE}>
@@ -133,7 +130,8 @@ class AppNavigator extends Component {
 							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
 							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
-							<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
+							<Scene key="myQuestionDetail"  component={MyQuestionDetail} title="问题详情" hideNavBar/>
+							<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
 
 
 							{/*搜索*/}

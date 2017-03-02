@@ -9,7 +9,8 @@ import {Actions} from "react-native-router-flux";
 import {store} from '../../store/configureStore.js';
 import {newRealm} from '../../actions/realm.js'
 import schema from '../../realm/schema.js'
-import QuestionMyself from './QuestionMyself'
+import QuestionMyself from './components/QuestionMyself'
+import QuestionTab from './components/QuestionTab'
 
 /**
  * 我的问题
@@ -37,6 +38,7 @@ class MyQuestionDetail extends PureComponent {
               </Header>
               <Content style={styles.content}>
                 <QuestionMyself />
+                <QuestionTab />
               </Content>
             </Container>
         )
@@ -49,6 +51,7 @@ const styles = {
   },
   content:{
     backgroundColor:'#fff',
+    flexDirection:'column',
   },
 };
 

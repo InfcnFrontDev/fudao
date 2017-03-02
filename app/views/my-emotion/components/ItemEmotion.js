@@ -4,7 +4,7 @@ import {Actions} from "react-native-router-flux";
 import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter} from "react-native";
 import {good,calm,bad} from './Data';
-import {theme} from "../../utils/";
+import {theme} from "../../../utils/";
 
 /**
 * 情绪列表

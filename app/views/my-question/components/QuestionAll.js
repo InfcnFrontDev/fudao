@@ -4,7 +4,7 @@ import {Actions} from "react-native-router-flux";
 import Swiper from 'react-native-swiper'
 import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter} from "react-native";
-import {theme} from "../../utils/";
+import {theme} from "../../../utils/";
 import {questions} from './Data';
 import QuestionList from './QuestionList'
 /**

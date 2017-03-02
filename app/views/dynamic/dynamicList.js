@@ -119,7 +119,6 @@ var GiftedListView = React.createClass({
     );
   },
   paginationAllLoadedView() {
-    // console.log("paginationAllLoadedView");
     if (this.props.paginationAllLoadedView) {
       return this.props.paginationAllLoadedView();
     }
@@ -133,7 +132,6 @@ var GiftedListView = React.createClass({
     );
   },
   paginationWaitingView(paginateCallback) {
-    // console.log("paginationWaitingView");
     if (this.props.paginationWaitingView) {
       return this.props.paginationWaitingView(paginateCallback);
     }
@@ -145,7 +143,7 @@ var GiftedListView = React.createClass({
       style={[this.defaultStyles.paginationView, this.props.customStyles.paginationView]}
       >
       <Text style={[this.defaultStyles.actionsLabel, this.props.customStyles.actionsLabel]}>
-      加载更多...
+      正在加载更多...
       </Text>
       </TouchableHighlight>
     );
@@ -378,10 +376,11 @@ var GiftedListView = React.createClass({
       fontSize: 12,
     },
     paginationView: {
-      height: 44,
+      // height: 44,
       justifyContent: 'center',
       alignItems: 'center',
-      // backgroundColor: '#FFF',
+      // backgroundColor: '#FF0',
+      marginBottom:55,
     },
     defaultView: {
       justifyContent: 'center',
