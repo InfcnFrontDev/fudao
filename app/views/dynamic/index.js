@@ -261,7 +261,7 @@ class Dynamic extends PureComponent {
             headers:{
               'Accept': 'application/json',
               'Content-Type': 'application/json',
-              'authorization':'41374f9d-1b1a-4b64-b202-a54d66cf83c8'
+              'authorization':'39d1e72e-e5b2-454b-80c0-7dc6416d6279'
             }
           })
           .then((res) => res.json())
@@ -317,7 +317,7 @@ class Dynamic extends PureComponent {
             headers:{
               'Accept': 'application/json',
               'Content-Type': 'application/json',
-              'authorization':'41374f9d-1b1a-4b64-b202-a54d66cf83c8'
+              'authorization':'39d1e72e-e5b2-454b-80c0-7dc6416d6279'
             }
           })
           .then((res) => res.json())
@@ -374,7 +374,7 @@ class Dynamic extends PureComponent {
           headers:{
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'authorization':'41374f9d-1b1a-4b64-b202-a54d66cf83c8'
+            'authorization':'39d1e72e-e5b2-454b-80c0-7dc6416d6279'
           }
         })
         .then((res) => res.json())

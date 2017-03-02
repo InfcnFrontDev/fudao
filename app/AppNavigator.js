@@ -26,12 +26,6 @@ import SearchHealthCare from "./views/search/SearchHealthCare";
 import SearchInformation from "./views/search/SearchInformation";
 import SearchOfflineService from "./views/search/SearchOfflineService";
 import Picture from "./views/picture/";
-import Start from "./views/authentication/start/";
-import Login from "./views/authentication/login/";
-import Register from "./views/authentication/register/";
-import SetPassword from "./views/authentication/set-password/";
-import PasswordSuccess from "./views/authentication/password-success/";
-import StartInformation from "./views/authentication/start-information/";
 import MyInfo from "./views/my-info/";
 import Webview from "./views/webview/";
 //Home
@@ -39,7 +33,20 @@ import MyEmotion from "./views/my-emotion/MyEmotion";
 import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
+import TreatmentDetail from "./views/my-question/TreatmentDetail";
 
+
+//注册登录
+import Start from "./views/authentication/Start";
+import Login from "./views/authentication/Login";
+import Register from "./views/authentication/Register";
+import SetPassword from "./views/authentication/SetPassword";
+import PasswordSuccess from "./views/authentication/PasswordSuccess";
+import StartInformation from "./views/authentication/StartInformation";
+import RebuildPassword from "./views/authentication/RebuildPassword";
+
+//消息
+import Message  from "./views/message/message";
 
 const AppRouter = connect()(Router);
 const {
@@ -89,14 +96,18 @@ class AppNavigator extends Component {
 								   type={ActionConst.REPLACE}/>
 
 							{/*首页*/}
-
-							<Scene key="tabbar" tabs hideNavBar pressOpacity={0.8}
+							<Scene key="tabbar" tabs hideNavBar pressOpacity={0.8} initial
 								   tabBarStyle={styles.tabBarStyle}
 								   type={ActionConst.REPLACE}>
 								<Scene key="home" component={Home} title="主页" hideNavBar
 									   icon={TabBarIcon}
 									   iconName='ios-home-outline'
 									   selectedIconName='ios-home'
+								/>
+								<Scene key="article" component={Article} title="资讯" hideNavBar
+									   icon={TabBarIcon}
+									   iconName='ios-list-box-outline'
+									   selectedIconName='ios-list-box'
 								/>
 								<Scene key="dynamic" component={Dynamic} title="动态" hideNavBar
 									   icon={TabBarIcon}
@@ -110,18 +121,12 @@ class AppNavigator extends Component {
 								/>
 							</Scene>
 
-
-							<Scene key="article" component={Article} title="资讯" hideNavBar
-								   icon={TabBarIcon}
-								   iconName='ios-list-box-outline'
-								   selectedIconName='ios-list-box'
-							/>
-
 							{/*启动注册*/}
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
 							<Scene key="login" component={Login} title="登录" hideNavBar/>
-							<Scene key="register" component={Register} title="注册" hideNavBar/>
+							<Scene key="register"  component={Register} title="注册" hideNavBar/>
 							<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
+							<Scene key="rebuildPassword"  component={RebuildPassword} title="密码重设" hideNavBar/>
 							<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
 							<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
 
@@ -129,7 +134,8 @@ class AppNavigator extends Component {
 							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
 							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
-							<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
+							<Scene key="myQuestionDetail"  component={MyQuestionDetail} title="问题详情" hideNavBar/>
+							<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
 
 
 							{/*搜索*/}
@@ -137,10 +143,13 @@ class AppNavigator extends Component {
 							<Scene key="searchDailyLife" component={SearchDailyLife} title="日常生活" hideNavBar/>
 							<Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈" hideNavBar/>
 							<Scene key="searchHealthCare" component={SearchHealthCare} title="保健方法" hideNavBar/>
-							<Scene key="searchInformation" component={SearchInformation} title="资讯" hideNavBar/>
+							<Scene key="searchInformation"  component={SearchInformation} title="资讯" hideNavBar/>
 							<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务" hideNavBar/>
 							<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
 								   hideNavBar/>
+
+							{/*资讯*/}
+							<Scene key="articleDetail"  component={ArticleDetail} title="资讯详情" hideNavBar/>
 
 							{/*动态*/}
 							<Scene key="picture" component={Picture} title="图片预览" hideNavBar/>
@@ -152,6 +161,8 @@ class AppNavigator extends Component {
 
 							{/*其他*/}
 							<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
+							{/*消息*/}
+							<Scene key="message" component={Message} title="消息" hideNavBar/>
 						</Scene>
 					</AppRouter>
 				</Drawer>

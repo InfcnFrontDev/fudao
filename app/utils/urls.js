@@ -39,7 +39,9 @@ const urls = {
 		ARTICLE_DETAIL: apiPath + 'app/myTerritoryAction!detail.action',
 
 		// 注册登录
-		CHECKPHONE: apiPath + 'app/phoneVerificationAction!checkPhone.action',
+		CHECK_PHONE : apiPath +'app/phoneVerificationAction!checkPhone.action',
+		CHECK_CODE : apiPath +"app/accountInfoAction!registerBefore.action",
+		REG: apiPath +"app/accountInfoAction!register.action",
 	},
 
 	/**
