@@ -6,9 +6,12 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
-import Header from "../../../components/header/BaseHeader";
-import {theme} from "../../../utils/";
-import {request,urls} from "../../../utils/";
+import Header from "../../components/header/BaseHeader";
+import {theme} from "../../utils/";
+import {request,urls} from "../../utils/";
+import  CommitButton from "./components/CommitButton";
+import  UrseInput from "./components/UrseInput"
+
 /**
  * 注册
  */
@@ -26,50 +29,21 @@ class Register extends PureComponent {  // eslint-disable-line
             <Container>
                 <Header {...this.props}></Header>
                 <Content padder>
-                    <View style={styles.box2}>
-                        <View style={styles.border1}>
-                            <Text>手机号</Text>
-                        </View>
-                        <View style={{flex:1}}>
-                            <TextInput style={styles.inputNum}
-                                       keyboardType='numeric'
-                                       underlineColorAndroid='transparent'
-                                       placeholder='输入手机号'
-                                       onChangeText={(value)=>{
-                                           this.setState({
-                                               phone:value
-                                           })
-                                       }}
-                            ></TextInput>
-                        </View>
-                    </View>
-                    <View  style={styles.box3}>
-                        <View style={styles.border1}>
-                            <Text>验证码</Text>
-                        </View>
-                        <View style={{flex:1}}>
-                            <TextInput style={styles.inputYan}
-                                       keyboardType='numeric'
-                                       underlineColorAndroid='transparent'
-                                       placeholder={'输入验证码'}
-                                       onChangeText={(value)=>{
-                                           this.setState({
-                                               yannum:value
-                                           })
-                                       }}
-                            ></TextInput>
-                        </View>
-                        <View>
-                            <Button success bordered  style={styles.btnYan}
-                                    onPress={this._yzm.bind(this)} >
-                                <Text>获取验证码</Text>
-                            </Button >
-                        </View>
-                    </View>
-
-                    <Button block success style={{marginTop:20}} onPress={this._zhuce.bind(this)} >
-                        <Text>注册</Text>
-                    </Button>
+                    <UrseInput text="手机号" btn={false}
+                               onChangeText={(value)=>{
+                                   this.setState({
+                                       phone:value
+                                   })
+                               }}/>
+                    <UrseInput text="验证码"  title="获取验证码" top={2} btn={true}
+                               onChangeText={(value)=>{
+                                   this.setState({
+                                       yannum:value
+                                   })
+                               }}
+                               onPress={this._yzm.bind(this)}
+                    />
+                    <CommitButton title="注册" block={true} border={false} top={20}  onPress={this._zhuce.bind(this)} />
                     <Text style={styles.tiaokuan}>点击注册代表您已同意《福道健康使用协议和隐私条款》</Text>
                 </Content>
             </Container>
@@ -81,7 +55,7 @@ class Register extends PureComponent {  // eslint-disable-line
             ToastAndroid.show("请填入正确的手机号", ToastAndroid.SHORT);
         }else{
             ToastAndroid.show(""+phone, ToastAndroid.SHORT);
-            request.getJson(urls.CHECKPHONE,{
+            request.getJson(urls.CHECK_PHONE,{
                     phone:phone ,
                     type:'reg'
                 },function(data){
@@ -99,99 +73,37 @@ class Register extends PureComponent {  // eslint-disable-line
     }
     _zhuce(){
         let phone = this.state.phone;
-        let yannum = this.state.yannum;
+        let code = this.state.yannum;
         if(phone==""){
             ToastAndroid.show("手机号不能为空", ToastAndroid.SHORT);
-        }else if(yannum==""){
+        }else if(code==""){
             ToastAndroid.show("验证码不能为空", ToastAndroid.SHORT);
         }else{
             /*接口*/
-            Actions['setPassword']();
+            request.getJson(urls.CHECK_CODE,{
+                    account: phone,
+                    code: code,
+                    type: "reg"
+                },function(data){
+                    ToastAndroid.show("走接口...", ToastAndroid.SHORT);
+                    if(data.success) {
+                        ToastAndroid.show("验证码正确", ToastAndroid.SHORT);
+                        Actions['setPassword']({phone:phone});
+                    } else {
+                        ToastAndroid.show("验证码错误...", ToastAndroid.SHORT);
+                    }
+                }
+            )
+
         }
     }
-    _gotoIndex(){
+    _gotoIndex() {
 
-        /* var user = {
-         phone:this.state.phone,
-         yannum:this.state.yannum,
-         /!*concat:this.state.concat?this.state.concat:null*!/
-         }
-         if(user.phone==''){
 
-         }else if(user.yannum==''){
-         m  -
-         }else{*/
-
-        /* fetch('http://192.168.10.58:9095/api/LoginAction/register?User='+user)
-         .then((res) => res.json())
-         .then((res) => {
-         if(!res.err_code) {
-         if(res.ok){
-         this.props.navigator.push({
-         id: 'index',
-         index:0,
-         name:'indexView',
-         params:{
-         user:{
-         username:this.state.username,
-         tokenStr:''
-         }
-         }
-         })
-         // this.props.navigator.push({
-         //   id:'login'
-         // });
-         }else{
-         Alert.alert(
-         '提示',
-         "很遗憾，注册失败了......",
-         [
-         {text: '确定'}
-         ]
-         )
-         }
-         }
-         })*/
-
-        /*     }*/
     }
 }
 
 const styles = {
-    inputNum:{
-        flex:1,
-        height: 40,
-    },
-    box1:{
-        flexDirection:'row',
-        marginBottom:20
-    },
-    box2:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        borderColor:'#D4D4D4',
-        borderBottomWidth:1,
-
-    },
-    box3:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        /*  paddingTop:10,
-         paddingBottom:10,*/
-        borderColor:'#D4D4D4',
-        borderBottomWidth:1,
-
-    },
-    border1:{
-        width:80,
-        flexDirection:'row',
-        justifyContent:'center',
-        borderRightWidth:1,
-        borderRightColor:"#D4D4D4",
-
-    },
     tiaokuan:{
         fontSize:theme.DefaultFontSize-3,
         textAlign:'center',

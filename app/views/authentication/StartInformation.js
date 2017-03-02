@@ -8,9 +8,10 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Title, Content, Left, Right, Body, Form, Input, Item,Thumbnail,Button,Text,Icon} from "native-base";
 import {View,Image,TouchableOpacity,TouchableHighlight,ToastAndroid, DatePickerAndroid,} from "react-native";
-import Header from "../../../components/header/TitleHeader";
-import {openDrawer, closeDrawer} from "../../../actions/drawer";
-import {theme} from "../../../utils/";
+import Header from "../../components/header/TitleHeader";
+import {openDrawer, closeDrawer} from "../../actions/drawer";
+import {theme} from "../../utils/";
+import  CommitButton from "./components/CommitButton"
 
 
 /**
@@ -51,7 +52,7 @@ class StartInformation extends PureComponent {
                     language:12
                 })
             }}>
-                <Thumbnail style={styles.touxiang} size={80} source={require('../../../assets/my-photos/man.png')}/>
+                <Thumbnail style={styles.touxiang} size={80} source={require('./assets/man.png')}/>
             </TouchableOpacity>
         );
         var mbW=(
@@ -60,7 +61,7 @@ class StartInformation extends PureComponent {
                     showM:false,
                 })
             }}>
-                <Thumbnail style={styles.touxiang} size={80} source={require('../../../assets/my-photos/woman.png')}/>
+                <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
             </TouchableOpacity>
         );
 
@@ -72,7 +73,7 @@ class StartInformation extends PureComponent {
                     })
                 }}>
                     <View style={styles.mb}></View>
-                    <Thumbnail style={styles.touxiang} size={80} source={require('../../../assets/my-photos/woman.png')}/>
+                    <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/woman.png')}/>
                 </TouchableOpacity>
             )
         }else{
@@ -83,7 +84,7 @@ class StartInformation extends PureComponent {
                     })
                 }}>
                     <View style={styles.mb}></View>
-                    <Thumbnail style={styles.touxiang} size={80} source={require('../../../assets/my-photos/man.png')}/>
+                    <Thumbnail style={styles.touxiang} size={80} source={require('./assets/man.png')}/>
                 </TouchableOpacity>
             )
         }
@@ -107,9 +108,7 @@ class StartInformation extends PureComponent {
                                 <Icon  name='navigate' />
                                 <Text  style={styles.text3}>正在定位你的位置...</Text>
                             </TouchableOpacity>
-                            <Button block style={{marginTop:20}} >
-                                <Text>提交</Text>
-                            </Button>
+                            <CommitButton  border={false} block={true} top={20} title="提交" onPress={()=>Actions['login']()}/>
                         </View>
                     </View>
                 </Content>

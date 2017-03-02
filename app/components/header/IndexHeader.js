@@ -22,7 +22,7 @@ class IndexHeader extends Component {
                 </Body>
                 <Right>
                     <Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
-                    <Button transparent><Icon name="ios-chatboxes"/></Button>
+                    <Button transparent onPress={()=>Actions['message']()}><Icon name="ios-chatboxes"/></Button>
                 </Right>
             </Header>
         )

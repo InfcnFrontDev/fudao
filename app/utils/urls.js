@@ -1,5 +1,5 @@
-const apiPath = 'http://192.168.3.137:3000/';
-const apiPath1 = 'http://103.254.113.11:8080/jkst2/';
+/*const apiPath = 'http://192.168.3.137:3000/';*/
+const apiPath = 'http://103.254.113.11:8080/jkst2/';
 const urls = {
 	// 页面
 	declare: apiPath + 'declare.html',
@@ -13,6 +13,8 @@ const urls = {
 	// 接口
 
 	// 注册登录
-	CHECKPHONE : apiPath1 +'app/phoneVerificationAction!checkPhone.action',
+	CHECK_PHONE : apiPath +'app/phoneVerificationAction!checkPhone.action',
+    CHECK_CODE : apiPath +"app/accountInfoAction!registerBefore.action",
+     REG: apiPath +"app/accountInfoAction!register.action",
 };
 export default urls;
