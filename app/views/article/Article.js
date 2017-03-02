@@ -3,12 +3,10 @@ import {connect} from "react-redux";
 import {Container, Title, Left, Right, Body, Form, Item} from "native-base";
 import Header from "../../components/header/IndexHeader";
 import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-view";
-import TabList from "./components/TabList";
 import ArticleList from "./components/ArticleList";
-import FeedsCategoryBar from "./components/FeedsCategoryBar"
 
 
-const titles = ['推荐', '热点', '社会', '图片', '科技', '汽车', '体育', '财经'];
+const LABELS = ['健康饮食', '健康常识', '疾病偏方', '疾病预防', '美容美体', '养生方法'];
 
 /**
  * 资讯
@@ -26,16 +24,11 @@ class Article extends Component {
 				</Header>
 
 				<ScrollableTabView
-					style={styles.tabView}
 					renderTabBar={() => <ScrollableTabBar/>}
 					tabBarPosition='top'
-					scrollWithoutAnimation={false}
-					onChangeTab={(obj)=> {
-						console.log(obj);
-						return false;
-					}}
+					style={styles.tabView}
 				>
-					{titles.map((title)=> <TabList key={title} tabLabel={title}/>)}
+					{LABELS.map((label) => <ArticleList key={label} tabLabel={label} label={label}/>)}
 				</ScrollableTabView>
 			</Container>
 		)

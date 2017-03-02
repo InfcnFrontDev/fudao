@@ -17,12 +17,12 @@ var {
 function MergeRecursive(obj1, obj2) {
 	for (var p in obj2) {
 		try {
-			if ( obj2[p].constructor==Object ) {
+			if (obj2[p].constructor == Object) {
 				obj1[p] = MergeRecursive(obj1[p], obj2[p]);
 			} else {
 				obj1[p] = obj2[p];
 			}
-		} catch(e) {
+		} catch (e) {
 			obj1[p] = obj2[p];
 		}
 	}
@@ -48,15 +48,17 @@ var GiftedListView = React.createClass({
 			sectionHeaderView: null,
 			scrollEnabled: true,
 			withSections: false,
-			onFetch(page, callback, options) { callback([]); },
+			onFetch(page, callback, options) {
+				callback([]);
+			},
 
 			paginationFetchingView: null,
 			paginationAllLoadedView: null,
 			paginationWaitingView: null,
 			emptyView: null,
 			renderSeparator: null,
-			rowHasChanged:null,
-			distinctRows:null,
+			rowHasChanged: null,
+			distinctRows: null,
 		};
 	},
 
@@ -84,14 +86,22 @@ var GiftedListView = React.createClass({
 		emptyView: React.PropTypes.func,
 		renderSeparator: React.PropTypes.func,
 
-		rowHasChanged:React.PropTypes.func,
-		distinctRows:React.PropTypes.func,
+		rowHasChanged: React.PropTypes.func,
+		distinctRows: React.PropTypes.func,
 	},
 
-	_setPage(page) { this._page = page; },
-	_getPage() { return this._page; },
-	_setRows(rows) { this._rows = rows; },
-	_getRows() { return this._rows; },
+	_setPage(page) {
+		this._page = page;
+	},
+	_getPage() {
+		return this._page;
+	},
+	_setRows(rows) {
+		this._rows = rows;
+	},
+	_getRows() {
+		return this._rows;
+	},
 
 
 	paginationFetchingView() {
@@ -136,7 +146,7 @@ var GiftedListView = React.createClass({
 		);
 	},
 	headerView() {
-		if (this.state.paginationStatus === 'firstLoad' || !this.props.headerView){
+		if (this.state.paginationStatus === 'firstLoad' || !this.props.headerView) {
 			return null;
 		}
 		return this.props.headerView();
@@ -169,7 +179,7 @@ var GiftedListView = React.createClass({
 		}
 
 		return (
-			<View style={[this.defaultStyles.separator, this.props.customStyles.separator]} />
+			<View style={[this.defaultStyles.separator, this.props.customStyles.separator]}/>
 		);
 	},
 
@@ -180,7 +190,7 @@ var GiftedListView = React.createClass({
 		var ds = null;
 		if (this.props.withSections === true) {
 			ds = new ListView.DataSource({
-				rowHasChanged: this.props.rowHasChanged?this.props.rowHasChanged:(row1, row2) => row1 !== row2,
+				rowHasChanged: this.props.rowHasChanged ? this.props.rowHasChanged : (row1, row2) => row1 !== row2,
 				sectionHeaderHasChanged: (section1, section2) => section1 !== section2,
 			});
 			return {
@@ -190,7 +200,7 @@ var GiftedListView = React.createClass({
 			};
 		} else {
 			ds = new ListView.DataSource({
-				rowHasChanged: this.props.rowHasChanged?this.props.rowHasChanged:(row1, row2) => row1 !== row2,
+				rowHasChanged: this.props.rowHasChanged ? this.props.rowHasChanged : (row1, row2) => row1 !== row2,
 			});
 			return {
 				dataSource: ds.cloneWithRows(this._getRows()),
@@ -229,9 +239,9 @@ var GiftedListView = React.createClass({
 	},
 
 	_onPaginate() {
-		if(this.state.paginationStatus==='allLoaded'){
+		if (this.state.paginationStatus === 'allLoaded') {
 			return null
-		}else {
+		} else {
 			this.setState({
 				paginationStatus: 'fetching',
 			});
@@ -248,7 +258,7 @@ var GiftedListView = React.createClass({
 			mergedRows = this._getRows().concat(rows);
 		}
 
-		if(this.props.distinctRows){
+		if (this.props.distinctRows) {
 			mergedRows = this.props.distinctRows(mergedRows);
 		}
 
@@ -295,7 +305,7 @@ var GiftedListView = React.createClass({
 
 	renderRefreshControl() {
 		if (this.props.renderRefreshControl) {
-			return this.props.renderRefreshControl({ onRefresh: this._onRefresh });
+			return this.props.renderRefreshControl({onRefresh: this._onRefresh});
 		}
 		return (
 			<RefreshControl
@@ -325,7 +335,7 @@ var GiftedListView = React.createClass({
 				scrollEnabled={this.props.scrollEnabled}
 				canCancelContentTouches={true}
 				refreshControl={this.props.refreshable === true ? this.renderRefreshControl() : null}
-				onEndReachedThreshold={1}
+				onEndReachedThreshold={30}
 				onEndReached={this._onPaginate}
 
 				{...this.props}

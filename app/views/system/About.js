@@ -66,14 +66,14 @@ class About extends PureComponent {
 	declare() {
 		Actions.webview({
 			title: '隐式声明',
-			uri: urls.declare + "?userId=1",
+			uri: urls.pages.DECLARE,
 		})
 	}
 
 	protocol() {
 		Actions.webview({
 			title: '用户协议',
-			uri: urls.protocol,
+			uri: urls.pages.PROTOCOL,
 		})
 	}
 

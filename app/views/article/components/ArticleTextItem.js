@@ -4,17 +4,16 @@ import {Left, Right, Body, Grid, Item, Text, Row} from "native-base";
 class ArticleTextItem extends Component {
 
 	render() {
-		let {data} = this.props;
+		let {article, onPress} = this.props;
 		return (
-			<Item style={{margin: 10}}>
+			<Item style={styles.item} onPress={()=> onPress && onPress(article)}>
 				<Grid>
-					<Row>
-						<Text style={styles.title}>{data.text}</Text>
+					<Row style={styles.row1}>
+						<Text style={styles.title}>{article.title}</Text>
 					</Row>
-					<Row>
-						<Text>{1}</Text>
-						<Text>{2}</Text>
-						<Text>{3}</Text>
+					<Row style={{height:30}}>
+						<Text style={styles.from}>来自：{article.source}</Text>
+						<Text style={styles.timeDiff}>{article.updatetime}</Text>
 					</Row>
 				</Grid>
 			</Item>
@@ -22,24 +21,30 @@ class ArticleTextItem extends Component {
 	}
 }
 const styles = {
-	tabView: {
-		flex: 1,
+	item: {
+		margin: 5,
+		padding: 5,
 	},
-	tabPanel: {
-		flex: 1,
-		flexGrow: 1,
+	row1: {
+		marginBottom: 5,
 	},
 	title: {
-		fontSize: 16
+		fontSize: 14,
 	},
 	from: {
 		fontSize: 12,
-		color: '#888888'
+		color: '#AAAAAA'
 	},
 	timeDiff: {
 		fontSize: 12,
-		color: '#888888',
+		color: '#AAAAAA',
 		marginLeft: 15
 	}
 };
+
+ArticleTextItem.propTypes = {
+	article: React.PropTypes.object, // 资讯
+	onPress: React.PropTypes.func,
+}
+
 export default (ArticleTextItem);
