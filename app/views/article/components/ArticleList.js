@@ -3,6 +3,7 @@ import {ScrollView, ListView, View, Text} from "react-native";
 import {Left, Right, Body, Form, Item} from "native-base";
 import {Actions} from "react-native-router-flux";
 import GiftedListView from "../../../components/GiftedListView";
+// import GiftedListView from "react-native-gifted-listview";
 import ArticleTextItem from "./ArticleTextItem";
 import ArticleSingleImageItem from "./ArticleSingleImageItem";
 import ArticleMultiImageItem from "./ArticleMultiImageItem";
@@ -49,6 +50,25 @@ class ArticleList extends Component {
 			return <ArticleMultiImageItem article={rowData} onPress={this._onPress.bind(this)}/>
 		else
 			return <ArticleSingleImageItem article={rowData} onPress={this._onPress.bind(this)}/>
+	}
+
+
+	_renderPaginationAllLoadedView() {
+		return (
+			<Text>END</Text>
+		)
+	}
+
+	_paginationFetchingView() {
+		return (
+			<Text>_paginationFetchingView</Text>
+		)
+	}
+
+	_paginationWaitingView() {
+		return (
+			<Text>Waiting</Text>
+		)
 	}
 
 	_onPress(article) {

@@ -9,7 +9,8 @@ import getTheme from "../native-base-theme/components/";
 import SideBar from "./views/sidebar/";
 import TabBarIcon from "./components/TabBarIcon";
 import {theme} from "./utils/";
-//
+// index
+import Index from "./views/index/Index";
 // tabs
 import Home from "./views/home/Home";
 import Article from "./views/article/Article";
@@ -29,7 +30,6 @@ import Start from "./views/authentication/start/";
 import Login from "./views/authentication/login/";
 import Register from "./views/authentication/register/";
 import SetPassword from "./views/authentication/set-password/";
-import ArticleDetail from "./views/article/ArticleDetail";
 import PasswordSuccess from "./views/authentication/password-success/";
 import StartInformation from "./views/authentication/start-information/";
 import MyInfo from "./views/my-info/";
@@ -84,19 +84,19 @@ class AppNavigator extends Component {
 					<AppRouter createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
 						<Scene key="root">
 
+							{/*首页1*/}
+							<Scene key="index" component={Index} title="首页" hideNavBar initial
+								   type={ActionConst.REPLACE}/>
+
 							{/*首页*/}
-							<Scene key="tabbar" tabs hideNavBar pressOpacity={0.8} initial
+
+							<Scene key="tabbar" tabs hideNavBar pressOpacity={0.8}
 								   tabBarStyle={styles.tabBarStyle}
 								   type={ActionConst.REPLACE}>
 								<Scene key="home" component={Home} title="主页" hideNavBar
 									   icon={TabBarIcon}
 									   iconName='ios-home-outline'
 									   selectedIconName='ios-home'
-								/>
-								<Scene key="article" component={Article} title="资讯" hideNavBar
-									   icon={TabBarIcon}
-									   iconName='ios-list-box-outline'
-									   selectedIconName='ios-list-box'
 								/>
 								<Scene key="dynamic" component={Dynamic} title="动态" hideNavBar
 									   icon={TabBarIcon}
@@ -109,6 +109,13 @@ class AppNavigator extends Component {
 									   selectedIconName='ios-person'
 								/>
 							</Scene>
+
+
+							<Scene key="article" component={Article} title="资讯" hideNavBar
+								   icon={TabBarIcon}
+								   iconName='ios-list-box-outline'
+								   selectedIconName='ios-list-box'
+							/>
 
 							{/*启动注册*/}
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
@@ -134,9 +141,6 @@ class AppNavigator extends Component {
 							<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务" hideNavBar/>
 							<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
 								   hideNavBar/>
-
-							{/*资讯*/}
-							<Scene key="articleDetail" component={ArticleDetail} title="资讯详情" hideNavBar/>
 
 							{/*动态*/}
 							<Scene key="picture" component={Picture} title="图片预览" hideNavBar/>

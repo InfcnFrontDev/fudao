@@ -299,7 +299,7 @@ export default {
 
 	navTabBarBgColor: '#FAFBFD',
 	navTabBarBorderWidth: (1 / PixelRatio.getPixelSizeForLayoutSize(1)),
-	navTabBarBorderColor: '#c9c9c9',
+	navTabBarBorderColor: '#d9d9d9',
 	navTabBarTextColor: '#868686',
 	navTabBarActiveTextColor: '#9FCC2D',
 

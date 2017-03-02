@@ -3,10 +3,14 @@
 // const apiPath = 'http://192.168.10.61:8080/jkst2/'; // 内网服务器
 const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
 
+// web服务器地址
+const webPath = 'http://192.168.3.137:3000/';
+
+// 认证服务器地址
+const authPath = 'http://192.168.3.137:3000/';
+
 // 图片服务器地址
 const picPath = 'http://192.168.10.61:8080/jkst2/';
-
-const webPath = 'http://192.168.3.137:3000/';
 
 const urls = {
 	apiPath,
