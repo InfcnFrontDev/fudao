@@ -3,6 +3,7 @@ import {BackAndroid, StatusBar, NavigationExperimental, Platform, ToastAndroid, 
 import {StyleProvider, Drawer} from "native-base";
 import {connect} from "react-redux";
 import {Router, Scene, Reducer, ActionConst} from "react-native-router-flux";
+import SplashScreen from "react-native-splash-screen";
 import {openDrawer, closeDrawer} from "./actions/drawer";
 import getTheme from "../native-base-theme/components/";
 import SideBar from "./views/sidebar/";
@@ -39,6 +40,7 @@ import MyEmotion from "./views/my-emotion/MyEmotion";
 import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
+import TreatmentDetail from "./views/my-question/TreatmentDetail";
 
 
 const AppRouter = connect()(Router);
@@ -125,7 +127,8 @@ class AppNavigator extends Component {
 							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
 							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
-							<Scene key="myQuestionDetail"  initial component={MyQuestionDetail} title="问题详情" hideNavBar/>
+							<Scene key="myQuestionDetail" initial component={MyQuestionDetail} title="问题详情" hideNavBar/>
+							<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
 
 
 							{/*搜索*/}
@@ -159,7 +162,7 @@ class AppNavigator extends Component {
 	}
 
 	componentDidMount() {
-		// SplashScreen.hide();
+		SplashScreen.hide();
 	}
 
 	reducerCreate(params) {

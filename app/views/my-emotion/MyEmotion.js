@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {Container, Header, Title, Content, ListItem, Text, Left, Button, Icon, Body, Right} from "native-base";
 import {View,Image,DeviceEventEmitter} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
-import ItemEmotion from './ItemEmotion';
+import ItemEmotion from './components/ItemEmotion';
 import {Actions} from "react-native-router-flux";
 import {theme} from "../../utils/";
 
@@ -19,7 +19,7 @@ class MyEmotion extends PureComponent {
           emotion:{
             name:'pingjing',
             title:'平静',
-            img:require('../../assets/my-emotion/5pingjing.png')
+            img:require('./assets/5pingjing.png')
           }
         }
     }
