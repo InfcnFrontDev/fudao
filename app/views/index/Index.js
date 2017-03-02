@@ -1,27 +1,26 @@
 import React, {PureComponent} from "react";
 import {StyleSheet, View, Text} from "react-native";
 import ScrollableTabView from "react-native-scrollable-tab-view";
-import TabBar from "./components/TabBar";
-import {theme} from "../../utils/";
+import TabBar from "./TabBar";
+import {theme} from "../../utils/index";
 // tab components
-import Home from "../../views/home/Home";
-import Article from "../../views/article/Article";
+import Home from "../home/Home";
+import Article from "../article/Article";
 import Dynamic from "../../views/dynamic/";
-import My from "../../views/my/";
+import My from "../../views/my/My";
 
-const tabTitles = ['主页', '资讯', '动态', '我的']
+const tabTitles = [
+	'主页', '资讯', '动态', '我的'
+];
 const tabIcons = [
-	'ios-home-outline',
-	'ios-list-box-outline',
-	'ios-compass-outline',
-	'ios-person-outline'
-]
+	'ios-home-outline', 'ios-list-box-outline', 'ios-compass-outline', 'ios-person-outline'
+];
 const tabSelectedIcon = [
-	'ios-home',
-	'ios-list-box',
-	'ios-compass',
-	'ios-person'
-]
+	'ios-home', 'ios-list-box', 'ios-compass', 'ios-person'
+];
+const tabComponents = [
+	Home, Article, Dynamic, My
+];
 
 /**
  * 首页
@@ -30,9 +29,6 @@ class Index extends PureComponent {
 
 	_renderTabBar = () => <TabBar tabNames={tabTitles} tabIconNames={tabIcons} selectedTabIconNames={tabSelectedIcon}/>
 
-	_onChangeTab = () => {
-	}
-
 	render() {
 		return (
 			<ScrollableTabView
@@ -40,12 +36,10 @@ class Index extends PureComponent {
 				tabBarPosition='bottom'
 				locked
 				scrollWithoutAnimation
-				onChangeTab={this._onChangeTab}
 			>
-				<Home tabLabel="Food"/>
-				<Article tabLabel="Home"/>
-				<Dynamic tabLabel="Profile"/>
-				<My tabLabel="Profile"/>
+				{tabComponents.map((Component, i)=>(
+					<Component key={tabTitles[i]} title={tabTitles[i]}/>
+				))}
 
 			</ScrollableTabView>
 		)
