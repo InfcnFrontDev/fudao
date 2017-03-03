@@ -79,7 +79,6 @@ class Dynamic extends PureComponent {
 
 
     	_renderRowView(info,sectionID,rowID){
-        console.log(info);
     		if(info.photo){
     			var id = info.photo;
     		}else{
@@ -87,21 +86,19 @@ class Dynamic extends PureComponent {
     		}
         if(info.flag){
           var zan =(
-            <Button onPress={this._zan.bind(this,info)} transparent dark style={styles.divid} >
               <Text style={styles.showoneText}>取消</Text>
-            </Button>
           )
         }else{
           var zan=(
-            <Button onPress={this._zan.bind(this,info)} transparent dark style={styles.divid} >
               <Text style={styles.showoneText}>点赞</Text>
-            </Button>
           )
         }
         if(info.show){
           var show = (
             <View  style={styles.show}>
-              {zan}
+              <Button onPress={this._zan.bind(this,info)} transparent dark style={styles.divid} >
+                {zan}
+              </Button>
               <Text style={styles.showoneText}>|</Text>
               <Button onPress={this._comment.bind(this,info.id)} transparent dark style={styles.divid} >
                 <Text style={styles.showoneText}>评论</Text>
@@ -261,7 +258,7 @@ class Dynamic extends PureComponent {
             headers:{
               'Accept': 'application/json',
               'Content-Type': 'application/json',
-              'authorization':'39d1e72e-e5b2-454b-80c0-7dc6416d6279'
+              'authorization':'4a80e13d-95ee-4bad-90e8-02ace2c4d893'
             }
           })
           .then((res) => res.json())
@@ -317,7 +314,7 @@ class Dynamic extends PureComponent {
             headers:{
               'Accept': 'application/json',
               'Content-Type': 'application/json',
-              'authorization':'39d1e72e-e5b2-454b-80c0-7dc6416d6279'
+              'authorization':'4a80e13d-95ee-4bad-90e8-02ace2c4d893'
             }
           })
           .then((res) => res.json())
@@ -374,7 +371,7 @@ class Dynamic extends PureComponent {
           headers:{
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'authorization':'39d1e72e-e5b2-454b-80c0-7dc6416d6279'
+            'authorization':'4a80e13d-95ee-4bad-90e8-02ace2c4d893'
           }
         })
         .then((res) => res.json())

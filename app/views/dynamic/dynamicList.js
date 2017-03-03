@@ -380,7 +380,7 @@ var GiftedListView = React.createClass({
       justifyContent: 'center',
       alignItems: 'center',
       // backgroundColor: '#FF0',
-      marginBottom:55,
+      marginBottom:10,
     },
     defaultView: {
       justifyContent: 'center',

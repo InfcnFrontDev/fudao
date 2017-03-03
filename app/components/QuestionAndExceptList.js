@@ -6,7 +6,7 @@ import {View,Image,ToastAndroid,DeviceEventEmitter,TouchableHighlight} from "rea
 /**
 * 问题列表
 */
-class QuestionList extends PureComponent {
+class QuestionAndExceptList extends PureComponent {
   constructor(props) {
     super(props);
   }
@@ -35,7 +35,7 @@ class QuestionList extends PureComponent {
     var new_list = this.props.data.slice(i,i+2);
     var click = new_list.map((p,i)=>{
       return(
-        <Button transparent key={i} style={styles.oneQuestion} onPress={this.gotoDetail.bind(this,p)}>
+        <Button transparent key={i} style={styles.oneQuestion} onPress={()=>Actions[this.props.type]({question_title:p.title})}>
           <Image source={p.icon} style={styles.img}/>
           <Text style={styles.oneTitle}>{p.title}</Text>
           <TouchableHighlight  onPress={this.choose.bind(this)} underlayColor='#fafafa'>
@@ -51,10 +51,10 @@ class QuestionList extends PureComponent {
     )
   }
 
-  gotoDetail(p){
-    Actions['myQuestionDetail']({question_title:p.title});
-
-  }
+  // gotoDetail(p){
+  //   Actions[this.props.type]({question_title:p.title});
+  //
+  // }
 
   choose(){
     ToastAndroid.show("aaa",ToastAndroid.SHORT);
@@ -64,12 +64,13 @@ class QuestionList extends PureComponent {
 
 const styles = {
   contentList:{
-    borderWidth:0,
+    borderBottomWidth:0,
     paddingRight:0,
     paddingTop:0,
     paddingBottom:0,
     marginLeft:6,
     marginRight:6,
+
   },
   oneQuestion:{
     marginBottom:0,
@@ -109,4 +110,4 @@ function bindAction(dispatch) {
 }
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(QuestionList);
+export default connect(mapStateToProps, bindAction)(QuestionAndExceptList);

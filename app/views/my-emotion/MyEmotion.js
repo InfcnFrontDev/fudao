@@ -81,7 +81,7 @@ const styles = {
     backgroundColor:'#fff',
   },
   content:{
-    paddingTop:10,
+    paddingTop:4,
     paddingRight:12,
     paddingLeft:12,
     backgroundColor:'#fff',

@@ -6,11 +6,11 @@ import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter} from "react-native";
 import {theme} from "../../../utils/";
 import {questions} from './Data';
-import QuestionList from '../../../components/QuestionAndExceptList'
+import QuestionAndExceptList from '../../../components/QuestionAndExceptList'
 /**
 * 所有问题
 */
-class QuestionAll extends PureComponent {
+class ExpectAll extends PureComponent {
   constructor(props) {
     super(props);
     this.problem = questions[0].alltypes;
@@ -30,7 +30,7 @@ class QuestionAll extends PureComponent {
       return (
         <View key={i} style={styles.types}>
             <Text style={styles.title}>{p.type}</Text>
-            <QuestionList data={p.question} type='myQuestionDetail' />
+            <QuestionAndExceptList data={p.question} type='myQuestionDetail'/>
         </View>
       )
     })
@@ -62,4 +62,4 @@ function bindAction(dispatch) {
 }
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(QuestionAll);
+export default connect(mapStateToProps, bindAction)(ExpectAll);
