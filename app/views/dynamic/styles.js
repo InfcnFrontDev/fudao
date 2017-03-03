@@ -123,7 +123,7 @@ const styles = {
     paddingRight:10,
     position:'absolute',
     zIndex:99,
-    bottom:44,
+    bottom:0,
     flexDirection:'row',
     backgroundColor:'#fff',
   },

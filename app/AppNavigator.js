@@ -37,6 +37,8 @@ import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
 import TreatmentDetail from "./views/my-question/TreatmentDetail";
+import TreatmentDailyDetail from "./views/my-question/TreatmentDailyDetail";
+import MyExpect from "./views/my-expect/MyExpect";
 
 
 //注册登录
@@ -111,6 +113,8 @@ class AppNavigator extends Component {
 							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
 							<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
 							<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
+							<Scene key="treatmentDailyDetail" component={TreatmentDailyDetail} title="疗法详情" hideNavBar/>
+							<Scene key="myExpect" component={MyExpect} title="我的期望" hideNavBar/>
 
 
 							{/*搜索*/}
