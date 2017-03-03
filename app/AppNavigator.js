@@ -95,30 +95,7 @@ class AppNavigator extends Component {
 						<Scene key="root">
 
 							{/*首页*/}
-							<Scene key="tabbar" tabs hideNavBar pressOpacity={0.8}  initial
-								   tabBarStyle={styles.tabBarStyle}
-								   type={ActionConst.REPLACE}>
-								<Scene key="home" component={Home} title="主页" hideNavBar
-									   icon={TabBarIcon}
-									   iconName='ios-home-outline'
-									   selectedIconName='ios-home'
-								/>
-								<Scene key="article" component={Article} title="资讯" hideNavBar
-									   icon={TabBarIcon}
-									   iconName='ios-list-box-outline'
-									   selectedIconName='ios-list-box'
-								/>
-								<Scene key="dynamic" component={Dynamic} title="动态" hideNavBar
-									   icon={TabBarIcon}
-									   iconName='ios-compass-outline'
-									   selectedIconName='ios-compass'
-								/>
-								<Scene key="my" component={My} title="我的" hideNavBar
-									   icon={TabBarIcon}
-									   iconName='ios-person-outline'
-									   selectedIconName='ios-person'
-								/>
-							</Scene>
+							<Scene key="index" component={Index} title="首页" hideNavBar initial/>
 
 							{/*启动注册*/}
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
