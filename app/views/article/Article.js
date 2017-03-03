@@ -1,17 +1,17 @@
-import React, {Component} from "react";
-import {connect} from "react-redux";
-import {Container, Title, Left, Right, Body, Form, Item} from "native-base";
+import React, {PureComponent} from "react";
+import {Container, Title, Left, Right, Body} from "native-base";
 import Header from "../../components/header/IndexHeader";
 import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-view";
-import TabList from "./components/TabList";
+import ArticleList from "./components/ArticleList";
+import {theme} from "../../utils/";
+
+
+const LABELS = ['健康饮食', '健康常识', '疾病偏方', '疾病预防', '美容美体', '养生方法'];
 
 /**
  * 资讯
  */
-class Article extends Component {
-	constructor(props) {
-		super(props);
-	}
+class Article extends PureComponent {
 
 	render() {
 		return (
@@ -21,20 +21,17 @@ class Article extends Component {
 				</Header>
 
 				<ScrollableTabView
+					renderTabBar={() => (
+						<ScrollableTabBar
+							activeTextColor={theme.navTabBarActiveTextColor}
+							underlineStyle={{backgroundColor:theme.navTabBarActiveTextColor}}
+						/>
+					)}
+					tabBarPosition='top'
+					scrollWithoutAnimation={false}
 					style={styles.tabView}
-					renderTabBar={() => <ScrollableTabBar />}
-					locked={true}
 				>
-					<TabList tabLabel='推荐'/>
-					<TabList tabLabel='热点'/>
-					<TabList tabLabel='社会'/>
-					<TabList tabLabel='娱乐'/>
-					<TabList tabLabel='问答'/>
-					<TabList tabLabel='图片'/>
-					<TabList tabLabel='科技'/>
-					<TabList tabLabel='汽车'/>
-					<TabList tabLabel='体育'/>
-					<TabList tabLabel='财经'/>
+					{LABELS.map((label) => <ArticleList key={label} tabLabel={label} label={label}/>)}
 				</ScrollableTabView>
 			</Container>
 		)
@@ -43,8 +40,8 @@ class Article extends Component {
 const styles = {
 	tabView: {
 		flex: 1,
+		flexGrow: 1,
 	},
 };
 
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps)(Article);
+export default (Article);

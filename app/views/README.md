@@ -17,3 +17,7 @@
 资讯（杨）               /article
 动态（陈）               /dynamic
 我的（杨）               /my
+
+/my-info 个人信息
+/my-collection  我的收藏
+/my-friends 我的好友

@@ -2,23 +2,21 @@ import React, {Component} from "react";
 import {Actions} from "react-native-router-flux";
 import {Left, Right, Body, Grid, Item, Text, Row, Col, Thumbnail} from "native-base";
 
-class PictureItem extends Component {
+class ArticleSingleImageItem extends Component {
 
 	render() {
-		let {data} = this.props;
+		let {article, onPress} = this.props;
 		return (
-			<Item style={{marginLeft: 10, marginRight: 10, paddingTop: 10, paddingBottom: 10}}
-				  onPress={()=> this._onPress(data)}
-			>
+			<Item style={styles.item} onPress={()=> onPress && onPress(article)}>
 				<Grid>
 					<Row>
 						<Col>
 							<Row>
-								<Text style={styles.title}>{data.text}</Text>
+								<Text style={styles.title}>{article.title}</Text>
 							</Row>
-							<Row>
-								<Text style={styles.from}>来自：养生堂</Text>
-								<Text style={styles.timeDiff}>15分钟前</Text>
+							<Row style={{height:30}}>
+								<Text style={styles.from}>来自：{article.source}</Text>
+								<Text style={styles.timeDiff}>{article.updatetime}</Text>
 							</Row>
 						</Col>
 						<Col style={{width: 115, justifyContent: 'flex-end', flexDirection: 'row'}}>
@@ -30,30 +28,30 @@ class PictureItem extends Component {
 			</Item>
 		)
 	}
-
-	_onPress(data) {
-		Actions.articleDetail(data);
-	}
 }
 const styles = {
-	tabView: {
-		flex: 1,
-	},
-	tabPanel: {
-		flex: 1,
-		flexGrow: 1,
+	item: {
+		margin: 5,
+		padding: 5,
+		height: 90,
 	},
 	title: {
-		fontSize: 16
+		fontSize: 14,
 	},
 	from: {
 		fontSize: 12,
-		color: '#888888'
+		color: '#AAAAAA'
 	},
 	timeDiff: {
 		fontSize: 12,
-		color: '#888888',
+		color: '#AAAAAA',
 		marginLeft: 15
 	}
 };
-export default (PictureItem);
+
+ArticleSingleImageItem.propTypes = {
+	article: React.PropTypes.object,
+	onPress: React.PropTypes.func,
+}
+
+export default (ArticleSingleImageItem);

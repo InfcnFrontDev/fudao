@@ -1,34 +1,33 @@
 import React, {Component} from "react";
 import {Left, Right, Body, Grid, Item, Text, Row, Col, Thumbnail} from "native-base";
 
-class MultiPictureItem extends Component {
+class ArticleMultiImageItem extends Component {
 
 	render() {
-		let {data} = this.props;
+		let {article, onPress} = this.props;
 		return (
-			<Item style={{margin: 10, marginBottom: 0}}>
+			<Item style={styles.item} onPress={()=> onPress && onPress(article)}>
 				<Grid>
 					<Row>
-						<Text style={styles.title}>{data.text}</Text>
+						<Text style={styles.title}>{article.title}</Text>
+					</Row>
+					<Row style={styles.row2}>
+						<Col>
+							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
+									   style={{width: 110, height: 70}}/>
+						</Col>
+						<Col>
+							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
+									   style={{width: 110, height: 70}}/>
+						</Col>
+						<Col>
+							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
+									   style={{width: 110, height: 70}}/>
+						</Col>
 					</Row>
 					<Row>
-						<Col>
-							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
-									   style={{width: 110, height: 70}}/>
-						</Col>
-						<Col>
-							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
-									   style={{width: 110, height: 70}}/>
-						</Col>
-						<Col>
-							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
-									   style={{width: 110, height: 70}}/>
-						</Col>
-					</Row>
-					<Row>
-						<Text>{1}</Text>
-						<Text>{2}</Text>
-						<Text>{3}</Text>
+						<Text style={styles.from}>来自：{article.source}</Text>
+						<Text style={styles.timeDiff}>{article.updatetime}</Text>
 					</Row>
 				</Grid>
 			</Item>
@@ -36,24 +35,32 @@ class MultiPictureItem extends Component {
 	}
 }
 const styles = {
-	tabView: {
-		flex: 1,
+	item: {
+		marginLeft: 10,
+		marginRight: 10,
+		paddingTop: 10,
+		paddingBottom: 10,
 	},
-	tabPanel: {
-		flex: 1,
-		flexGrow: 1,
+	row2: {
+		paddingTop: 5, paddingBottom: 5
 	},
 	title: {
-		fontSize: 16
+		fontSize: 14,
 	},
 	from: {
 		fontSize: 12,
-		color: '#888888'
+		color: '#AAAAAA'
 	},
 	timeDiff: {
 		fontSize: 12,
-		color: '#888888',
+		color: '#AAAAAA',
 		marginLeft: 15
 	}
 };
-export default (MultiPictureItem);
+
+ArticleMultiImageItem.propTypes = {
+	article: React.PropTypes.object,
+	onPress: React.PropTypes.func,
+}
+
+export default (ArticleMultiImageItem);
