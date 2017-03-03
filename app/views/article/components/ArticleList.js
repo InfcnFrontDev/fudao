@@ -1,12 +1,8 @@
 import React, {Component} from "react";
 import {ScrollView, ListView, View, Text} from "react-native";
 import {Left, Right, Body, Form, Item} from "native-base";
-import {Actions} from "react-native-router-flux";
 import GiftedListView from "../../../components/GiftedListView";
-// import GiftedListView from "react-native-gifted-listview";
-import ArticleTextItem from "./ArticleTextItem";
-import ArticleSingleImageItem from "./ArticleSingleImageItem";
-import ArticleMultiImageItem from "./ArticleMultiImageItem";
+import ArticleItem from "./ArticleItem";
 import {request, urls} from "../../../utils/";
 
 class ArticleList extends Component {
@@ -37,19 +33,9 @@ class ArticleList extends Component {
 	}
 
 	_renderRowView(rowData) {
-		rowData.imgs = [];
-		if (rowData.img) {
-			rowData.imgs = rowData.img.split(',')
-		}
-
-		// 图片个数
-		let imgLen = rowData.imgs.length;
-		if (imgLen == 0)
-			return <ArticleTextItem article={rowData} onPress={this._onPress.bind(this)}/>
-		else if (imgLen >= 3)
-			return <ArticleMultiImageItem article={rowData} onPress={this._onPress.bind(this)}/>
-		else
-			return <ArticleSingleImageItem article={rowData} onPress={this._onPress.bind(this)}/>
+		return (
+			<ArticleItem article={rowData}/>
+		)
 	}
 
 
@@ -69,13 +55,6 @@ class ArticleList extends Component {
 		return (
 			<Text>Waiting</Text>
 		)
-	}
-
-	_onPress(article) {
-		Actions.webview({
-			title: '资讯详情',
-			uri: urls.pages.ARTICLE_DETAIL + "?id=" + article.id,
-		})
 	}
 
 }
