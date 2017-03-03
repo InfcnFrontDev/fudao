@@ -43,15 +43,6 @@ const urls = {
 		CHECK_PHONE: apiPath + 'app/phoneVerificationAction!checkPhone.action',
 		CHECK_CODE: apiPath + "app/accountInfoAction!registerBefore.action",
 		REG: apiPath + "app/accountInfoAction!register.action",
-	},
-
-	/**
-	 *  test
-	 */
-	test: 'http://wordnet.infcn.com.cn/user/login?username=admin&password=admin',
-	json: 'http://192.168.1.137:3000/data.json',
-	login: 'http://192.168.10.9:7071/qdeMods/login',
-
-
+	}
 };
 export default urls;
