@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body, Text, Button,Form} from "native-base";
 import {View,TextInput,ToastAndroid} from "react-native";
+import {theme,request,urls} from "../../utils/";
 import Header from "../../components/header/BaseHeader";
 import  CommitButton from "./components/CommitButton"
 import  UrseInput from "./components/UrseInput"

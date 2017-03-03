@@ -27,7 +27,7 @@ class Start extends PureComponent {
                     <Image source={require('./assets/logo.png')}  style={styles.img} />
                     <View style={styles.viewButton}>
                         <CommitButton  border={true} block={false} title="登录" onPress={()=>Actions['login']()}/>
-                        <CommitButton  border={false} block={false} title="注册" onPress={()=>Actions['register']()}/>
+                        <CommitButton  border={false} block={false} title="注册" onPress={()=>Actions['register']({text:'注册'},{title:'注册'})}/>
                     </View>
 
                 </View>

@@ -47,7 +47,7 @@ import SetPassword from "./views/authentication/SetPassword";
 import PasswordSuccess from "./views/authentication/PasswordSuccess";
 import StartInformation from "./views/authentication/StartInformation";
 import RebuildPassword from "./views/authentication/RebuildPassword";
-import Picker from "./views/authentication/components/Picker";
+/*import Picker from "./views/authentication/components/Picker";*/
 //消息
 import Message  from "./views/message/message";
 
@@ -103,7 +103,7 @@ class AppNavigator extends Component {
 							<Scene key="rebuildPassword" component={RebuildPassword} title="密码重设" hideNavBar/>
 							<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
 							<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
-							<Scene key="picker" initial component={Picker} title="城市列表" hideNavBar/>
+							{/*<Scene key="picker"  component={Picker} title="城市列表" hideNavBar/>*/}
 
 							{/*首页*/}
 							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>

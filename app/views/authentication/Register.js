@@ -7,8 +7,7 @@ import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import Header from "../../components/header/BaseHeader";
-import {theme} from "../../utils/";
-import {request,urls} from "../../utils/";
+import {theme,request,urls} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput"
 
@@ -22,12 +21,14 @@ class Register extends PureComponent {  // eslint-disable-line
         this.state={
             phone:'',
             yannum:'',
+            title:this.props.title,
+            text:this.props.text
         }
     }
     render() {
         return (
             <Container>
-                <Header {...this.props}></Header>
+                <Header title={this.state.title}></Header>
                 <Content padder>
                     <UrseInput text="手机号" btn={false}
                                onChangeText={(value)=>{
@@ -43,7 +44,7 @@ class Register extends PureComponent {  // eslint-disable-line
                                }}
                                onPress={this._yzm.bind(this)}
                     />
-                    <CommitButton title="注册" block={true} border={false} top={20}  onPress={this._zhuce.bind(this)} />
+                    <CommitButton title={this.state.text} block={true} border={false} top={20}  onPress={this._zhuce.bind(this)} />
                     <Text style={styles.tiaokuan}>点击注册代表您已同意《福道健康使用协议和隐私条款》</Text>
                 </Content>
             </Container>
@@ -54,16 +55,14 @@ class Register extends PureComponent {  // eslint-disable-line
         if(phone.toString().length<11||phone.toString().length>11){
             ToastAndroid.show("请填入正确的手机号", ToastAndroid.SHORT);
         }else{
-            ToastAndroid.show(""+phone, ToastAndroid.SHORT);
-            request.getJson(urls.CHECK_PHONE,{
+            ToastAndroid.show(""+urls.apis.CHECK_PHONE, ToastAndroid.SHORT);
+            request.getJson(urls.apis.CHECK_PHONE,{
                     phone:phone ,
                     type:'reg'
                 },function(data){
                     ToastAndroid.show("。。。", ToastAndroid.SHORT);
-                    console.log('123445')
                     if(data.success && "existence" == data.msg) {
                         ToastAndroid.show("手机号已被注册", ToastAndroid.SHORT);
-                        document.activeElement.blur();
                     } else if(data.success && "existence" != data.msg) {
                         ToastAndroid.show("正在发送验证码...", ToastAndroid.SHORT);
                     }
@@ -80,7 +79,7 @@ class Register extends PureComponent {  // eslint-disable-line
             ToastAndroid.show("验证码不能为空", ToastAndroid.SHORT);
         }else{
             /*接口*/
-            request.getJson(urls.CHECK_CODE,{
+            request.getJson(urls.apis.CHECK_CODE,{
                     account: phone,
                     code: code,
                     type: "reg"

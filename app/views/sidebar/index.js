@@ -22,6 +22,7 @@ import {Actions} from 'react-native-router-flux';
 import material from '../../../native-base-theme/variables/material';
 import {changePlatform, changeMaterial, closeDrawer} from '../../actions/drawer';
 import styles from './style';
+import {urls} from "../../utils/";
 
 const drawerCover = require('../../../img/drawer-cover.png');
 
@@ -29,34 +30,34 @@ const drawerImage = require('../../../img/logo-kitchen-sink.png');
 
 const datas = [
 	{
-		name: 'Anatomy',
-		route: 'anatomy',
+		name: '我的时间',
+		route: 'MY_TIME',
 		icon: 'phone-portrait',
 		bg: '#C5F442',
 	},
 	{
-		name: 'Header',
-		route: 'header',
+		name: '健康测评',
+		route: 'HEALTH_APPRAISAL',
 		icon: 'phone-portrait',
 		bg: '#477EEA',
 		types: '8',
 	},
 	{
-		name: 'Footer',
-		route: 'footer',
+		name: '健康圈',
+		route: 'HEALTH_CIRCLE',
 		icon: 'phone-portrait',
 		bg: '#DA4437',
 		types: '4',
 	},
 	{
-		name: 'Badge',
-		route: 'badge',
+		name: '生命周期',
+		route: 'LIFE_CYCLE',
 		icon: 'notifications',
 		bg: '#4DCAE0',
 	},
 	{
-		name: 'Button',
-		route: 'button',
+		name: 'ABC',
+		route: 'ABC',
 		icon: 'radio-button-off',
 		bg: '#1EBC7C',
 		types: '9',
@@ -206,7 +207,10 @@ class SideBar extends Component {
 					<List
 						dataArray={datas} renderRow={data =>
 						<ListItem button noBorder onPress={() => {
-							Actions[data.route]();
+							Actions.webview({
+								title:data.name,
+								uri:urls.pages[data.route]
+							})
 							this.props.closeDrawer()
 						}}>
 							<Left>

@@ -4,10 +4,10 @@ import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form,CheckBox} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import Header from "../../components/header/BaseHeader";
-import {theme} from "../../utils/"
+import {theme,request,urls,} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput"
-
+import  {hex_md5} from "./components/md5"
 
 
 /**
@@ -42,14 +42,9 @@ class Login extends PureComponent {
                     <CommitButton title="登录" block={true} border={false}  top={20}  onPress={this._login.bind(this)} />
                     <View style={styles.textdoc}>
                         <View style={{flexDirection:'row'}}>
-                            <CheckBox checked={this.state.check}  onPress={(checked)=>{
-                                this.setState({
-                                    check:!this.state.check
-                                })
-                            }}></CheckBox>
-                            <Text style={styles.text1}>记住密码</Text>
                         </View>
-                        <TouchableOpacity onPress={()=>Actions['rebuildPassword']()}>
+                        <TouchableOpacity onPress={()=>Actions['register']({text:'找回密码',
+                        title:'通过验证码找回密码'})}>
                             <Text  style={styles.text2}>忘记密码</Text>
                         </TouchableOpacity>
                     </View>
@@ -58,18 +53,33 @@ class Login extends PureComponent {
         );
     }
     _login(){
-        var user = {
-            phone:this.state.phone,
-            password:this.state.password,
+             let  phone=this.state.phone;
+             let  password=this.state.password;
             /*concat:this.state.concat?this.state.concat:null*/
-        }
-        if(user.phone==''){
+
+        if(phone==''){
             ToastAndroid.show("用户名不能为空", ToastAndroid.SHORT);
-        }else if(user.password==''){
+        }else if(password==''){
             ToastAndroid.show("密码不能为空", ToastAndroid.SHORT);
         }else{
             //接口
-            Actions['startInformation']()
+            ToastAndroid.show("zoujiekou", ToastAndroid.SHORT);
+            request.getJson(urls.apis.LOGIN,{
+                    account:phone,
+                    pwd:hex_md5(phone+password),
+                },function(data){
+                    ToastAndroid.show("", ToastAndroid.SHORT);
+                    if(data.success) {
+                        ToastAndroid.show("登录", ToastAndroid.SHORT);
+                        setTimeout(function() {
+                            Actions['passwordSuccess']({text:"恭喜您成功"})
+                        }, 1000);
+                    }else{
+                        ToastAndroid.show("失败..", ToastAndroid.SHORT);
+                    }
+                }
+            )
+           /* Actions['startInformation']()*/
         }
     }
 }

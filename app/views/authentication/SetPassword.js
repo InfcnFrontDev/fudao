@@ -6,6 +6,8 @@ import {View,TextInput,ToastAndroid} from "react-native";
 import Header from "../../components/header/BaseHeader";
 import  CommitButton from "./components/CommitButton"
 import  UrseInput from "./components/UrseInput"
+import {theme,request,urls,tools} from "../../utils/";
+import  {hex_md5} from "./components/md5"
 
 /**
  * 设置密码
@@ -41,29 +43,32 @@ class SetPassword extends PureComponent {
         );
     }
     _yzpassword(){
-        let phone = this.state.password;
         let password = this.state.password;
         let password1= this.state.password1;
         if(password1!=password){
             ToastAndroid.show("两次输入密码不一致", ToastAndroid.SHORT);
         }else{
            //接口
-            request.getJson(urls.REG,{
-                    phone:this.props.phone ,
+            ToastAndroid.show("走接口。。", ToastAndroid.SHORT);
+            Actions['passwordSuccess']({text:"恭喜您注册成功"})
+            /*request.getJson(urls.apis.REG,{
+                        appid:tools.uuid(),
+                        account: this.props.phone,
+                        pwd: password
 
-                    pwd: hex_md5(_phone + passwordValue)
                 },function(data){
                     ToastAndroid.show("。。。", ToastAndroid.SHORT);
-                    console.log('123445')
-                    if(data.success && "existence" == data.msg) {
-                        ToastAndroid.show("手机号已被注册", ToastAndroid.SHORT);
-                        document.activeElement.blur();
-                    } else if(data.success && "existence" != data.msg) {
-                        ToastAndroid.show("正在发送验证码...", ToastAndroid.SHORT);
+                    if(data.success) {
+                        ToastAndroid.show("注册完成，请登录..", ToastAndroid.SHORT);
+                        setTimeout(function() {
+
+                        }, 1000);
+                    }else{
+                        ToastAndroid.show("注册失败..", ToastAndroid.SHORT);
                     }
                 }
-            )
-            Actions['passwordSuccess']({text:"恭喜您注册成功"})
+            )*/
+
         }
 
 
