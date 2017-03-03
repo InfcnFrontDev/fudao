@@ -10,7 +10,8 @@ const webPath = 'http://192.168.3.137:3000/';
 const authPath = 'http://192.168.3.137:3000/';
 
 // 图片服务器地址
-const picPath = 'http://192.168.10.61:8080/jkst2/';
+const picPath = 'http://192.168.10.69:9191/';
+// http://192.168.10.69:9191/api/ImgApi/getImage?req%EF%BC%9D&id=0&filePath=/uploadimg/867200022156895102484607.jpeg&w=0&h=0
 
 const urls = {
 	apiPath,
@@ -33,11 +34,16 @@ const urls = {
 	 *  接口
 	 */
 	apis: {
+		// 图片接口
+		IMAGE: picPath + 'api/ImgApi/getImage',
+
 		// 资讯 ----------------------------------------------------------------------
 		//资讯列表
 		ARTICLE_LIST: apiPath + 'app/myTerritoryAction!list.action',
 		//资讯详细
 		ARTICLE_DETAIL: apiPath + 'app/myTerritoryAction!detail.action',
+		//我的收藏列表, 参数（appid, page, pageSize）
+		MY_COLLECTION_LIST: apiPath + 'app/collectionAction!getMyCollection.action',
 
 		// 注册登录
 		CHECK_PHONE: apiPath + 'app/phoneVerificationAction!checkPhone.action',

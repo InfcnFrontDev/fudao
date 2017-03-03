@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Left, Right, Body, Grid, Item, Text, Row, Col, Thumbnail} from "native-base";
+import {urls} from "../../../utils/index";
 
 class ArticleMultiImageItem extends Component {
 
@@ -13,15 +14,15 @@ class ArticleMultiImageItem extends Component {
 					</Row>
 					<Row style={styles.row2}>
 						<Col>
-							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
+							<Thumbnail square source={{uri: urls.apis.IMAGE + '?filePath=' + article.imgs[0]}}
 									   style={{width: 110, height: 70}}/>
 						</Col>
 						<Col>
-							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
+							<Thumbnail square source={{uri: urls.apis.IMAGE + '?filePath=' + article.imgs[1]}}
 									   style={{width: 110, height: 70}}/>
 						</Col>
 						<Col>
-							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
+							<Thumbnail square source={{uri: urls.apis.IMAGE + '?filePath=' + article.imgs[2]}}
 									   style={{width: 110, height: 70}}/>
 						</Col>
 					</Row>

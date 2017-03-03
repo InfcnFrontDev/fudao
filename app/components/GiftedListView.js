@@ -123,7 +123,7 @@ var GiftedListView = React.createClass({
 		return (
 			<View style={[this.defaultStyles.paginationView, this.props.customStyles.paginationView]}>
 				<Text style={[this.defaultStyles.actionsLabel, this.props.customStyles.actionsLabel]}>
-					~
+					没有更多了
 				</Text>
 			</View>
 		);

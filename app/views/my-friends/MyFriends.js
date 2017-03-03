@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
-import {Container, Title, Content, Left, Right, Body} from "native-base";
+import {connect} from "react-redux";
+import {Container, Content, Left, Right, Body} from "native-base";
 import Header from "../../components/header/BaseHeader";
 
 
@@ -19,4 +20,7 @@ class MyFriends extends PureComponent {
 	}
 }
 
-export default (MyFriends);
+const mapStateToProps = state => ({
+	account: state.account
+});
+export default connect(mapStateToProps)(MyFriends);

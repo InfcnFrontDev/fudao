@@ -4,7 +4,7 @@ import {Actions} from "react-native-router-flux";
 import ArticleTextItem from "./ArticleTextItem";
 import ArticleSingleImageItem from "./ArticleSingleImageItem";
 import ArticleMultiImageItem from "./ArticleMultiImageItem";
-import {urls} from "../../../utils/";
+import {urls} from "../../../utils/index";
 
 class ArticleItem extends Component {
 
