@@ -1,11 +1,11 @@
 import React, {PureComponent} from "react";
-import {StyleSheet, ListView, View, RefreshControl} from "react-native";
+import {StyleSheet, View} from "react-native";
 import {connect} from "react-redux";
-import {Container, Left, Right, Body, Text} from "native-base";
+import {Container, Left, Right, Body} from "native-base";
+import GiftedListView from "../../components/GiftedListView";
 import Header from "../../components/header/BaseHeader";
-import Loading from "../../components/Loading";
-import {fetchMyCollectionList, refreshMyCollectionList} from "../../actions/collection";
 import ArticleItem from "../article/components/ArticleItem";
+import {request, urls} from "../../utils/";
 
 
 /**
@@ -13,73 +13,48 @@ import ArticleItem from "../article/components/ArticleItem";
  */
 class MyCollection extends PureComponent {
 
-	state = {
-		dataSource: new ListView.DataSource({
-			rowHasChanged: (row1, row2) => row1 !== row2,
-		})
-	}
-
 	render() {
-		let {account, collection} = this.props;
-		let {isFetching, isRefreshing, collectionList} = collection;
 		return (
 			<Container>
 				<Header {...this.props}/>
 				<View style={styles.listView}>
-					{!isFetching &&
-					<ListView
-						dataSource={this.state.dataSource.cloneWithRows(collectionList)}
-						renderRow={this._renderRow}
-						renderFooter={this._renderFooter}
-						enableEmptySections
-						initialListSize={3}
-						onScroll={this._onScroll}
-						onEndReached={this._onEndReach}
-						onEndReachedThreshold={30}
-						refreshControl={
-                        <RefreshControl
-                            refreshing={isRefreshing}
-                            onRefresh={this._onRefresh}
-                            colors={['rgb(217, 51, 58)']}
-                        />
-                    }
+					<GiftedListView
+						onFetch={this._onFetch.bind(this)}
+						rowView={this._renderRowView.bind(this)}
 					/>
-					}
-					<Loading isShow={isFetching}/>
 				</View>
 			</Container>
 		)
 	}
 
-	componentDidMount() {
-		let {dispatch, account} = this.props;
-		dispatch(fetchMyCollectionList('86516602126601339963921'));
+	_onFetch(page = 1, callback, options) {
+		let {account} = this.props;
+		request.getJson(urls.apis.MY_COLLECTION_LIST, {
+			appid: account.accountInfo.appid,
+			page
+		}, (result) => {
+			let {datas, totalPages} = result.obj;
+			setTimeout(() => {
+				callback(datas, page === totalPages ? {allLoaded: true} : {});
+			}, options.firstLoad ? 300 : 0)
+		});
 	}
 
-	_onRefresh = () => {
-		let {dispatch} = this.props;
-		dispatch(refreshMyCollectionList());
-	}
-	_onEndReach = () => {
-
-	}
-
-	_renderFooter = () => {
-		return <Text>load more</Text>
-	}
-	_renderRow = article => {
-		return <ArticleItem article={article}/>
+	_renderRowView(rowData) {
+		return (
+			<ArticleItem article={rowData}/>
+		)
 	}
 }
 const styles = StyleSheet.create({
 	listView: {
 		flex: 1,
-		backgroundColor: '#f5f5f5'
+		paddingLeft: 5,
+		paddingRight: 5,
 	}
 })
 
 const mapStateToProps = state => ({
 	account: state.account,
-	collection: state.collection,
 });
 export default connect(mapStateToProps)(MyCollection);

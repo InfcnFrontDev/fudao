@@ -76,7 +76,6 @@ const request = {
 			.then((responseData) => callback(responseData))
 			.catch((error) => {
 				console.error(error);
-				alert('get error');
 			})
 			.done();
 	},
@@ -155,7 +154,6 @@ const request = {
 			.then((responseData) => callback(responseData))
 			.catch((error) => {
 				console.error(error);
-				alert('post error');
 			})
 			.done();
 

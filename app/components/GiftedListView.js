@@ -10,6 +10,7 @@ var {
 	Text,
 	RefreshControl,
 	ActivityIndicator,
+	Image,
 } = require('react-native');
 
 
@@ -59,6 +60,9 @@ var GiftedListView = React.createClass({
 			renderSeparator: null,
 			rowHasChanged: null,
 			distinctRows: null,
+
+			//
+			enableEmptySections: true,
 		};
 	},
 
@@ -111,7 +115,8 @@ var GiftedListView = React.createClass({
 
 		return (
 			<View style={[this.defaultStyles.paginationView, this.props.customStyles.paginationView]}>
-				<ActivityIndicator />
+				{/*<ActivityIndicator />*/}
+				<Image source={require('../assets/loading.gif')} style={{width: 40,height:40}}/>
 			</View>
 		);
 	},
