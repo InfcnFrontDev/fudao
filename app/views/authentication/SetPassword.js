@@ -45,29 +45,32 @@ class SetPassword extends PureComponent {
     _yzpassword(){
         let password = this.state.password;
         let password1= this.state.password1;
+        let phone = this.props.phone;
         if(password1!=password){
             ToastAndroid.show("两次输入密码不一致", ToastAndroid.SHORT);
+            ToastAndroid.show(" "+hex_md5(phone+password), ToastAndroid.SHORT);
+            ToastAndroid.show(" "+tools.uuid(), ToastAndroid.SHORT);
+
         }else{
            //接口
             ToastAndroid.show("走接口。。", ToastAndroid.SHORT);
-            Actions['passwordSuccess']({text:"恭喜您注册成功"})
-            /*request.getJson(urls.apis.REG,{
+            request.getJson(urls.apis.REG,{
                         appid:tools.uuid(),
-                        account: this.props.phone,
-                        pwd: password
-
+                        account: phone,
+                        pwd: hex_md5(phone+password)
                 },function(data){
                     ToastAndroid.show("。。。", ToastAndroid.SHORT);
                     if(data.success) {
                         ToastAndroid.show("注册完成，请登录..", ToastAndroid.SHORT);
                         setTimeout(function() {
-
+                            Actions['passwordSuccess']({text:"恭喜您注册成功",
+                            type:'reg',phone:phone,password:password})
                         }, 1000);
                     }else{
                         ToastAndroid.show("注册失败..", ToastAndroid.SHORT);
                     }
                 }
-            )*/
+            )
 
         }
 

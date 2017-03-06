@@ -4,7 +4,7 @@
  const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
 // const apiPath = 'http://192.168.3.241:8080/center/ifcuas/'; // txh
 //  const apiPath = 'http://192.168.3.241:8080/center/ifcuas/'; // txh
-http://192.168.10.69:8080/center/ajaxtest.jsp
+// http://192.168.10.69:8080/center/ajaxtest.jsp
 
 // web服务器地址
 const webPath = 'http://192.168.3.204:3000/';
@@ -59,6 +59,7 @@ const urls = {
 		CHECK_CODE: apiPath + "app/accountInfoAction!registerBefore.action",
 		REG: apiPath + "app/accountInfoAction!register.action",
 	 	LOGIN : apiPath + "app/accountInfoAction!login.action",
+		NEW_PASSWORD : apiPath +"app/accountInfoAction!retrievePassword.action"
 
 		// 注册登录(新)
 

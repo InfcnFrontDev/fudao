@@ -28,9 +28,13 @@ class StartInformation extends PureComponent {
         }
     }
     async showPicker(stateKey, options) {
+        let option={
+            options,
+            mode:'spinner'
+        }
         try {
             var newState = {};
-            const {action, year, month, day} = await DatePickerAndroid.open(options);
+            const {action, year, month, day} = await DatePickerAndroid.open(option);
             if (action === DatePickerAndroid.dismissedAction) {
                 newState[stateKey + 'Text'] = 'dismissed';
             } else {

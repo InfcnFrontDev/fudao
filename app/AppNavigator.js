@@ -37,8 +37,6 @@ import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
 import TreatmentDetail from "./views/my-question/TreatmentDetail";
-import TreatmentDailyDetail from "./views/my-question/TreatmentDailyDetail";
-import MyExpect from "./views/my-expect/MyExpect";
 
 
 //注册登录
@@ -49,6 +47,7 @@ import SetPassword from "./views/authentication/SetPassword";
 import PasswordSuccess from "./views/authentication/PasswordSuccess";
 import StartInformation from "./views/authentication/StartInformation";
 import RebuildPassword from "./views/authentication/RebuildPassword";
+import PasswordValidate from "./views/authentication/PasswordValidate";
 /*import Picker from "./views/authentication/components/Picker";*/
 //消息
 import Message  from "./views/message/message";
@@ -99,12 +98,13 @@ class AppNavigator extends Component {
 
 							{/*启动注册*/}
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
-							<Scene key="login" component={Login} title="登录" hideNavBar/>
-							<Scene key="register" component={Register} title="注册" hideNavBar/>
-							<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
-							<Scene key="rebuildPassword" component={RebuildPassword} title="密码重设" hideNavBar/>
+							<Scene key="login"  component={Login} title="登录" hideNavBar/>
+							<Scene key="register"  component={Register} title="注册" hideNavBar/>
+							<Scene key="setPassword"  component={SetPassword} title="设置密码" hideNavBar/>
+							<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 							<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
-							<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
+							<Scene key="startInformation" component={StartInformation} initial title="基本信息" hideNavBar/>
+							<Scene key="passwordValidate" component={PasswordValidate} title="通过验证码找回密码" hideNavBar/>
 							{/*<Scene key="picker"  component={Picker} title="城市列表" hideNavBar/>*/}
 
 							{/*首页*/}
@@ -113,8 +113,6 @@ class AppNavigator extends Component {
 							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
 							<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
 							<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
-							<Scene key="treatmentDailyDetail" component={TreatmentDailyDetail} title="疗法详情" hideNavBar/>
-							<Scene key="myExpect" component={MyExpect} title="我的期望" hideNavBar/>
 
 
 							{/*搜索*/}

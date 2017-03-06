@@ -1,15 +1,14 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form,CheckBox} from "native-base";
+import {Container, Content,Text, Thumbnail, Button,CheckBox} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import Header from "../../components/header/BaseHeader";
 import {theme,request,urls,} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
-import  UrseInput from "./components/UrseInput"
-import  {hex_md5} from "./components/md5"
-
-
+import  UrseInput from "./components/UrseInput";
+import  {hex_md5} from "./components/md5";
+import  {login} from "./components/public";
 /**
  * 登录
  */
@@ -43,8 +42,7 @@ class Login extends PureComponent {
                     <View style={styles.textdoc}>
                         <View style={{flexDirection:'row'}}>
                         </View>
-                        <TouchableOpacity onPress={()=>Actions['register']({text:'找回密码',
-                        title:'通过验证码找回密码'})}>
+                        <TouchableOpacity onPress={()=>Actions['passwordValidate']()}>
                             <Text  style={styles.text2}>忘记密码</Text>
                         </TouchableOpacity>
                     </View>
@@ -55,31 +53,13 @@ class Login extends PureComponent {
     _login(){
              let  phone=this.state.phone;
              let  password=this.state.password;
-            /*concat:this.state.concat?this.state.concat:null*/
-
         if(phone==''){
             ToastAndroid.show("用户名不能为空", ToastAndroid.SHORT);
         }else if(password==''){
             ToastAndroid.show("密码不能为空", ToastAndroid.SHORT);
         }else{
-            //接口
-            ToastAndroid.show("zoujiekou", ToastAndroid.SHORT);
-            request.getJson(urls.apis.LOGIN,{
-                    account:phone,
-                    pwd:hex_md5(phone+password),
-                },function(data){
-                    ToastAndroid.show("", ToastAndroid.SHORT);
-                    if(data.success) {
-                        ToastAndroid.show("登录", ToastAndroid.SHORT);
-                        setTimeout(function() {
-                            Actions['passwordSuccess']({text:"恭喜您成功"})
-                        }, 1000);
-                    }else{
-                        ToastAndroid.show("失败..", ToastAndroid.SHORT);
-                    }
-                }
-            )
-           /* Actions['startInformation']()*/
+            //检测是否有基本信息
+            login(phone,password)
         }
     }
 }

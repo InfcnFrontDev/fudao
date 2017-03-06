@@ -10,7 +10,7 @@ import {theme,request,urls} from "../../utils/";
 import Header from "../../components/header/BaseHeader";
 import  CommitButton from "./components/CommitButton"
 import  UrseInput from "./components/UrseInput"
-
+import  {hex_md5} from "./components/md5"
 /**
  * 设置密码
  */
@@ -20,6 +20,7 @@ class RebuildPassword extends PureComponent {
         this.state={
             password:'',
             password1:'',
+            phone:this.props.phone
         }
     }
     render() {
@@ -27,7 +28,7 @@ class RebuildPassword extends PureComponent {
             <Container>
                 <Header {...this.props}></Header>
                 <Content padder>
-                    <UrseInput text="设置密码" placeholder={"至少6位数字/字母/_"}
+                    <UrseInput text="新密码" placeholder={""}
                                onChangeText={(value)=>{
                                    this.setState({
                                        password:value
@@ -45,6 +46,8 @@ class RebuildPassword extends PureComponent {
         );
     }
     _yzpassword(){
+        let phone= this.state.phone;
+        let type = this.state.type
         let password = this.state.password;
         let password1= this.state.password1;
         if(password1!=password){
@@ -53,7 +56,19 @@ class RebuildPassword extends PureComponent {
                 password1:''
             })
         }else{
-            Actions['passwordSuccess']({text:"设置密码成功！"})
+            request.getJson(urls.apis.NEW_PASSWORD,{
+                    phone: phone,
+                    pwd: hex_md5(phone+password)
+                },function(data){
+                    if(data.success) {
+                        setTimeout(function() {
+                            Actions['passwordSuccess']({text:"密码设置成功",phone:phone,password:password})
+                        }, 1000);
+                    }else{
+                        ToastAndroid.show("修改失败.", ToastAndroid.SHORT);
+                    }
+                }
+            )
         }
 
 
