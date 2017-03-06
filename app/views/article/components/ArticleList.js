@@ -28,7 +28,13 @@ class ArticleList extends Component {
 			name: label,
 			page
 		}, (result) => {
-			callback(result.obj);
+			if (page === result.obj.totalPages) {
+				callback(result.obj.datas, {
+					allLoaded: true
+				});
+			} else {
+				callback(result.obj.datas);
+			}
 		});
 	}
 

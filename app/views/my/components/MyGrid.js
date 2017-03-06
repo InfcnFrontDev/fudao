@@ -15,17 +15,20 @@ class MyGrid extends PureComponent {
 				{this.renderItem({
 					icon: 'heart',
 					iconColor: '#EC6149',
-					text: '收藏'
+					text: '收藏',
+					route: 'myCollection',
 				})}
 				{this.renderItem({
 					icon: 'people',
 					iconColor: '#79CDCD',
-					text: '好友'
+					text: '好友',
+					route: 'myFriends',
 				})}
 				{this.renderItem({
 					icon: 'ios-settings',
 					iconColor: '#868686',
-					text: '设置'
+					text: '设置',
+					route: 'settings',
 				})}
 			</Grid>
 		)
@@ -35,7 +38,7 @@ class MyGrid extends PureComponent {
 	renderItem(item) {
 		let iconStyle = {fontSize: 40, color: item.iconColor};
 		return (
-			<TouchableNativeFeedback key={item.text} onPress={()=> Actions['about']()}>
+			<TouchableNativeFeedback key={item.text} onPress={()=> Actions[item.route]()}>
 				<Col style={styles.gridCol}>
 					<Icon name={item.icon} style={iconStyle}/>
 					<Text>{item.text}</Text>

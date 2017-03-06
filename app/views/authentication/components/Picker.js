@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/3/2.
  */
 
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {
     View,
     Text,
@@ -32,10 +32,10 @@ function createAreaData(callback){
     callback(data);
 
 };
-export default class Picker extends Component {
+ class Picker extends PureComponent {
 
-    constructor(props, context) {
-        super(props, context);
+    constructor(props ) {
+        super(props);
     }
 
 
@@ -132,3 +132,13 @@ const styles = StyleSheet.create({
     selectCity:{color:'gray',fontSize:16},
     footer:{position:'absolute',left:0,right:0,bottom:20,width:width}
 })
+function bindAction(dispatch) {
+    return {
+        openDrawer: () => dispatch(openDrawer()),
+        closeDrawer: key => dispatch(closeDrawer()),
+    };
+
+}
+
+const mapStateToProps = state => ({});
+export default connect(mapStateToProps, bindAction)(Picker);

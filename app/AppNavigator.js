@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {BackAndroid, StatusBar, NavigationExperimental, Platform, ToastAndroid, StyleSheet} from "react-native";
 import {StyleProvider, Drawer} from "native-base";
 import {connect} from "react-redux";
-import {Router, Scene, Reducer, ActionConst} from "react-native-router-flux";
+import {Router, Scene, Reducer} from "react-native-router-flux";
 import SplashScreen from "react-native-splash-screen";
 import {openDrawer, closeDrawer} from "./actions/drawer";
 import getTheme from "../native-base-theme/components/";
@@ -18,19 +18,17 @@ import SearchFriendsCircle from "./views/search/SearchFriendsCircle";
 import SearchHealthCare from "./views/search/SearchHealthCare";
 import SearchInformation from "./views/search/SearchInformation";
 import SearchOfflineService from "./views/search/SearchOfflineService";
-
-//
+// 资讯
 import ArticleDetail from "./views/article/ArticleDetail";
+// 系统
+import Settings from "./views/system/Settings";
 import About from "./views/system/About";
-import Webview from "./views/webview/";
 //
 import Picture from "./views/picture/";
-
 // My
 import MyInfo from "./views/my-info/";
 import MyFriends from "./views/my-friends/MyFriends";
 import MyCollection from "./views/my-collection/MyCollection";
-
 //Home
 import MyEmotion from "./views/my-emotion/MyEmotion";
 import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
@@ -49,9 +47,11 @@ import SetPassword from "./views/authentication/SetPassword";
 import PasswordSuccess from "./views/authentication/PasswordSuccess";
 import StartInformation from "./views/authentication/StartInformation";
 import RebuildPassword from "./views/authentication/RebuildPassword";
-
+/*import Picker from "./views/authentication/components/Picker";*/
 //消息
-import Message  from "./views/message/message";
+import Message from "./views/message/message";
+// 其他
+import Webview from "./views/webview/";
 
 //Dynamic
 import NewDynamic from "./views/dynamic/NewDynamic"
@@ -109,8 +109,9 @@ class AppNavigator extends Component {
 							<Scene key="rebuildPassword" component={RebuildPassword} title="密码重设" hideNavBar/>
 							<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
 							<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
+							{/*<Scene key="picker"  component={Picker} title="城市列表" hideNavBar/>*/}
 
-							{/*首页*/}
+							{/*主页*/}
 							<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 							<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
 							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
@@ -140,14 +141,18 @@ class AppNavigator extends Component {
 
 							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
-							<Scene key="myFriends" component={MyFriends} title="我的好友" hideNavBar/>
+							<Scene key="myFriends" component={MyFriends} title="我的好友" hideNavBar />
 							<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
+
+							{/*系统*/}
+							<Scene key="settings" component={Settings} title="系统设置" hideNavBar/>
 							<Scene key="about" component={About} title="关于福道" hideNavBar/>
+
+							{/*消息*/}
+							<Scene key="message" component={Message} title="消息" hideNavBar/>
 
 							{/*其他*/}
 							<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
-							{/*消息*/}
-							<Scene key="message" component={Message} title="消息" hideNavBar/>
 						</Scene>
 					</AppRouter>
 				</Drawer>
