@@ -11,7 +11,7 @@ const styles = {
   },
   content1:{
     height:180,
-    marginBottom:30,
+    marginBottom:20,
   },
   bgImg:{
     flex:1,
@@ -22,67 +22,38 @@ const styles = {
   },
   person:{
     position:'absolute',
-    top:185,
-    right:95,
+    top:145,
+    right:100,
+
   },
   color9b:{
-    color:'#9b9b9b',
+    color:'#000',
     fontSize:theme.DefaultFontSize+1,
   },
   touxiang:{
     width:78,
     height:78,
     position:'absolute',
-    top:150,
+    top:120,
     right:10,
+    borderColor:'#fff',
+    borderWidth:2.5,
   },
   dynamic:{
-    flexDirection:'row',
-    marginRight:8,
-    marginBottom:20,
-    marginTop:20,
-    marginLeft:20,
+    borderBottomColor:'#E0E0E2',
+    borderBottomWidth:1,
+    paddingRight:8,
+    paddingBottom:16,
+    marginTop:16,
+    paddingLeft:8,
   },
+
   time:{
     color:'#999',
     fontSize:theme.DefaultFontSize,
   },
-  dynamicDetail:{
-    flex:1,
-  },
-  dynamicTouxiang:{
-    width:44,
-    height:44,
-    marginLeft:12,
-    marginRight:12,
-  },
-  dynamicName:{
-    color:'#0f9dc9',
-    fontSize:17,
-  },
-  dynamicContent:{
-    marginTop:8,
-    color:'#9b9b9b',
-    fontSize:theme.DefaultFontSize,
-  },
-  imageTouch:{
-    marginRight:7,
-    marginTop:8,
-    height: 120,
-    width:78,
-    height:78,
-  },
-  allImage:{
-    flexDirection:'row',
-    flexWrap:'wrap',
-  },
-  msgImage: {
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center',
-    width:null,
-    height:null,
-  },
+
+
   dynamicMessage:{
     position:'absolute',
     right:0,
@@ -94,7 +65,6 @@ const styles = {
   showContain:{
     height:20,
     marginBottom:6,
-    marginTop:4,
   },
   show:{
     flexDirection:'row',
@@ -103,7 +73,7 @@ const styles = {
   },
   showMessage:{
     position:'absolute',
-    right:12,
+    right:0,
   },
   divid:{
     paddingLeft:8,
@@ -136,9 +106,9 @@ const styles = {
     paddingLeft:12,
   },
   allComments:{
-    backgroundColor:'#eee',
+    backgroundColor:'#F3F3F5',
     paddingLeft:10,
-    marginRight:16,
+    marginLeft:50,
     // paddingBottom:8,
   },
   oneComment:{
@@ -146,26 +116,27 @@ const styles = {
     flexWrap:'wrap',
     alignItems:'center',
 justifyContent:'flex-start',
-    // backgroundColor:'#000'
     marginBottom:4,
   },
   commentName:{
-    color:'#0f9dc9',
+    color:'#5E7192',
     lineHeight:25,
     fontSize:theme.DefaultFontSize,
     marginRight:6,
   },
   commentContent:{
     lineHeight:25,
+    color:'#060608',
+
   },
   allSupports:{
-    backgroundColor:'#eee',
+    backgroundColor:'#F3F3F5',
     paddingLeft:10,
-    marginRight:16,
+    marginLeft:50,
     paddingBottom:8,
     flexDirection:'row',
-    borderBottomWidth:1,
-    borderBottomColor:'#ccc',
+    borderBottomWidth:0.3,
+    borderBottomColor:'#E0E0E2',
     flexWrap:'wrap',
     alignItems:'center',
   },

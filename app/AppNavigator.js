@@ -53,6 +53,10 @@ import RebuildPassword from "./views/authentication/RebuildPassword";
 //消息
 import Message  from "./views/message/message";
 
+//Dynamic
+import NewDynamic from "./views/dynamic/NewDynamic"
+
+
 const AppRouter = connect()(Router);
 const {
 	CardStack: NavigationCardStack,
@@ -131,6 +135,7 @@ class AppNavigator extends Component {
 
 							{/*动态*/}
 							<Scene key="picture" component={Picture} title="图片预览" hideNavBar/>
+							<Scene key="newDynamic" component={NewDynamic} title="发表文字"  hideNavBar/>
 
 
 							{/*我的*/}

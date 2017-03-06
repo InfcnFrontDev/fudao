@@ -8,17 +8,16 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment'
 import {Actions} from "react-native-router-flux";
 import Header from "../../components/header/IndexHeader";
-import DynamicList from './dynamicList';
+import DynamicList from './components/DynamicList';
 // import DynamicList from '../../components/listview/gifted';
-import DynamicHeader from './dynamic-header';
-import DynamicImage from './dynamic-image';
-import DynamicComment from './dynamic-comments';
-import DynamicSupport from './dynamic-supports';
+import DynamicHeader from './components/DynamicHeader';
+import DynamicComment from './components/DynamicComments';
+import DynamicSupport from './components/DynamicSupports';
 const dismissKeyboard = require('dismissKeyboard');
 import {store} from '../../store/configureStore.js';
 import {newRealm} from '../../actions/realm.js'
 import schema from '../../realm/schema.js'
-
+import DynamicCommon from '../../components/DynamicCommon'
 /**
  * 动态
  */
@@ -45,11 +44,7 @@ class Dynamic extends PureComponent {
           <View style={styles.textInputContain}>
             <TextInput
               placeholder='评论' autoFocus={true}
-              onEndEditing={()=>{
-                this.setState({
-                  commentShow:false,
-                })
-              }}
+              onEndEditing={()=>{ this.setState({ commentShow:false}) }}
               onSubmitEditing={this._onSubmitEditing.bind(this)}
               style={styles.textInput}
               underlineColorAndroid='transparent'/>
@@ -79,11 +74,6 @@ class Dynamic extends PureComponent {
 
 
     	_renderRowView(info,sectionID,rowID){
-    		if(info.photo){
-    			var id = info.photo;
-    		}else{
-    			var id = 256;
-    		}
         if(info.flag){
           var zan =(
               <Text style={styles.showoneText}>取消</Text>
@@ -109,14 +99,8 @@ class Dynamic extends PureComponent {
           var show =(null);
         }
     		return (
-    			<View style={styles.dynamic}>
-    				<View>
-    					<Image source={{uri: 'http://192.168.10.58:9095/api/BaseApi/getImage?id='+id+'&w=&h='}}  style={styles.dynamicTouxiang}/>
-    				</View>
-    				<View style={styles.dynamicDetail}>
-    					<Text style={styles.dynamicName}>{info.name}</Text>
-    					<Text style={styles.dynamicContent}>{info.content}</Text>
-    					<DynamicImage urls={info.urls}/>
+    			<View  style={styles.dynamic}>
+              <DynamicCommon info={info} />
               <View style={styles.showContain}>
                 {show}
                 <TouchableHighlight style={styles.showMessage} onPress={this._onMessage.bind(this,info.id)} underlayColor='#fafafa'>
@@ -125,7 +109,6 @@ class Dynamic extends PureComponent {
               </View>
               <DynamicSupport zan={info.suports} />
               <DynamicComment comments={info.comments} />
-    				</View>
     			</View>
     		)
     	}
@@ -201,7 +184,6 @@ class Dynamic extends PureComponent {
             },true)
         })
         this.nowShow=0;
-
         for(var i=0;i<this.dynamic.length;i++){
           if(this.dynamic[i].id==info.id){
             this.dynamic[i]=data;
@@ -264,7 +246,6 @@ class Dynamic extends PureComponent {
           .then((res) => res.json())
           .then((res) => {
             if(!res.err_code&&res.ok==true&&res.obj.length>0) {
-              // this.dynamic=res.obj;
               this.length = res.obj.length;
               this.endID = res.obj[res.obj.length-1].id;
               this.startID = res.obj[0].id;
@@ -287,8 +268,6 @@ class Dynamic extends PureComponent {
               })
               let realm_res = this.props.realm.objects('Dynamic').sorted('id');
               this.dynamic = realm_res.slice(realm_res.length-6,realm_res.length-1);
-              this.min_realm = realm_res[0].id;
-              this.max_realm = realm_res[realm_res.length-1].id;
             }else{
               let res = this.props.realm.objects('Dynamic').sorted('id');
               console.log(res);
@@ -299,8 +278,6 @@ class Dynamic extends PureComponent {
                   var firstres = res;
                 }
                 this.length = firstres.length;
-                this.min_realm = res[0].id;
-                this.max_realm = res[res.length-1].id;
                 this.endID=firstres[0].id
                 this.dynamic=firstres.reverse();
                 callback(this.dynamic);
@@ -357,7 +334,6 @@ class Dynamic extends PureComponent {
               this.endID = render_realm_res[render_realm_res.length-1].id;
               callback(this.dynamic);
             }else{
-
               this._loadMore(callback);
             }
 
@@ -406,6 +382,7 @@ class Dynamic extends PureComponent {
         })
 
       }
+
 }
 function bindAction(dispatch) {
     return {
