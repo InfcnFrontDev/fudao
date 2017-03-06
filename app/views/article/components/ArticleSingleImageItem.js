@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import {Actions} from "react-native-router-flux";
 import {Left, Right, Body, Grid, Item, Text, Row, Col, Thumbnail} from "native-base";
+import {urls} from "../../../utils/index";
 
 class ArticleSingleImageItem extends Component {
 
@@ -20,7 +20,7 @@ class ArticleSingleImageItem extends Component {
 							</Row>
 						</Col>
 						<Col style={{width: 115, justifyContent: 'flex-end', flexDirection: 'row'}}>
-							<Thumbnail square source={require('../../../../img/web-cover1.jpg')}
+							<Thumbnail square source={{uri: urls.apis.IMAGE + '?filePath=' + article.img}}
 									   style={{width: 110, height: 70}}/>
 						</Col>
 					</Row>

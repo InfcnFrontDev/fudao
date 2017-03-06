@@ -6,7 +6,7 @@ import {theme} from "../../utils/index";
 // tab components
 import Home from "../home/Home";
 import Article from "../article/Article";
-import Dynamic from "../../views/dynamic/";
+import Dynamic from "../../views/dynamic/Dynamic";
 import My from "../../views/my/My";
 
 const tabTitles = [

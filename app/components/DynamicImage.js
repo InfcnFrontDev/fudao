@@ -3,8 +3,6 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 
 import {View,TouchableHighlight,Image} from "react-native";
-import {openDrawer, closeDrawer} from "../../actions/drawer";
-import styles from "./styles";
 
 /**
 * 动态
@@ -36,13 +34,31 @@ class DynamicImage extends Component {
     return ( null );
 
   }
-
-
 }
+
+const styles ={
+  imageTouch:{
+    marginRight:7,
+    height: 120,
+    width:78,
+    height:78,
+  },
+  allImage:{
+    flexDirection:'row',
+    flexWrap:'wrap',
+  },
+  msgImage: {
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center',
+    width:null,
+    height:null,
+  },
+}
+
+
 function bindAction(dispatch) {
   return {
-    openDrawer: () => dispatch(openDrawer()),
-    closeDrawer: key => dispatch(closeDrawer()),
   };
 }
 
