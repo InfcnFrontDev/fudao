@@ -1,14 +1,16 @@
 import React, {PureComponent} from "react";
-import {View} from "react-native";
+import {ScrollView, View, RefreshControl} from "react-native";
 import {connect} from "react-redux";
+import {bindActionCreators} from 'redux';
 import {Container, Left, Right, Body} from "native-base";
 import Header from "../../components/header/BaseHeader";
 import Content from "../../components/Content";
 import Loading from "../../components/Loading";
-import {fetchMyFriendsList} from "../../actions/friends";
+import * as Actions from "../../actions/friends";
 import FriendList from "./components/FriendList";
 import {config} from "../../utils/index";
-import {PullView} from "react-native-pullview";
+import PullView from "../../components/PullView";
+// import {PullView} from "react-native-pull";
 
 /**
  * 我的好友
@@ -20,27 +22,27 @@ class MyFriends extends PureComponent {
 	}
 
 	componentWillMount() {
-		this.props.dispatch(fetchMyFriendsList('86516602126601339963921'));
+		this.props.fetchMyFriendsList('86516602126601339963921');
 	}
 
-	onPullRelease(resolve) {
+	_onPullRelease(resolve) {
 
-		this.props.dispatch(fetchMyFriendsList('86516602126601339963921'));
+		this.props.fetchMyFriendsList('86516602126601339963921');
 
 		setTimeout(() => {
-			//resolve();
-		}, 2000);
+			resolve();
+		}, 5000);
 	}
 
 	render() {
 		let {isLoading} = this.state;
-		let {isFetching, friendList} = this.props.friends;
+		let {isFetching, isRefreshing, friendList} = this.props.friends;
 		return (
 			<Container>
 				<Header {...this.props}/>
 				<Content>
 					{(isLoading || isFetching) ? <Loading/> :
-						<PullView onPullRelease={this.onPullRelease.bind(this)}>
+						<PullView onPullRelease={this._onPullRelease.bind(this)}>
 							<FriendList list={friendList}/>
 						</PullView>
 					}
@@ -62,4 +64,7 @@ const mapStateToProps = state => ({
 	account: state.account,
 	friends: state.friends,
 });
-export default connect(mapStateToProps)(MyFriends);
+const mapDispatchToProps = dispatch => ({
+	...bindActionCreators(Actions, dispatch)
+});
+export default connect(mapStateToProps, mapDispatchToProps)(MyFriends);

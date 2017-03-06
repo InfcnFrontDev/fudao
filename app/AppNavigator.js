@@ -95,7 +95,7 @@ class AppNavigator extends Component {
 						<Scene key="root">
 
 							{/*首页*/}
-							<Scene key="index" component={Index} title="首页" hideNavBar initial/>
+							<Scene key="index" component={Index} title="首页" hideNavBar />
 
 							{/*启动注册*/}
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
@@ -136,7 +136,7 @@ class AppNavigator extends Component {
 
 							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
-							<Scene key="myFriends" component={MyFriends} title="我的好友" hideNavBar/>
+							<Scene key="myFriends" component={MyFriends} title="我的好友" hideNavBar initial/>
 							<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 
 							{/*系统*/}
