@@ -1,24 +1,19 @@
 import * as types from "../actions/types";
 const initialState = {
-	isLoading: false,
-	accountInfo: {
-		appid: '86516602126601339963921'
-	},
+	isFetching: false,
+	friendList: [],
 };
 export default function (state = initialState, {type, payload}) {
 	switch (type) {
-		case types.USER_LOGGING:
+		case types.MY_FRIENDS_FETCH_LIST:
 			return Object.assign({}, state, {
-				isLoading: true,
-				userInfo: null,
+				isFetching: true,
 			});
-		case types.USER_LOGIN:
+		case types.MY_FRIENDS_RECEIVE_LIST:
 			return Object.assign({}, state, {
-				isLoading: false,
+				isFetching: false,
 				...payload
 			});
-		case types.USER_LOGOUT:
-			return initialState;
 		default:
 			return state;
 

@@ -1,105 +1,14 @@
 import React, {PureComponent} from "react";
 import {View} from "react-native";
 import {connect} from "react-redux";
-import {Container, Content, Left, Right, Body} from "native-base";
+import {Container, Left, Right, Body} from "native-base";
 import Header from "../../components/header/BaseHeader";
-import Separator from "../../components/Separator";
-import {List, ListItem} from "react-native-elements";
-import groupBy from "lodash/groupBy";
-import {tools} from "../../utils/index";
-
-const list = [
-	{
-		name: '杨可可',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-		subtitle: 'Vice President'
-	},
-	{
-		name: '郭小敏',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-		subtitle: 'Vice Chairman'
-	},
-	{
-		name: '王朋',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-		subtitle: 'Vice President'
-	},
-	{
-		name: 'Jackson',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-		subtitle: 'Vice Chairman'
-	},
-	{
-		name: '小仔仔',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-		subtitle: 'Vice President'
-	},
-	{
-		name: '陈欣欣',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-		subtitle: 'Vice Chairman'
-	},
-	{
-		name: '宋淼',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-		subtitle: 'Vice President'
-	},
-	{
-		name: '谢鹏',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-		subtitle: 'Vice Chairman'
-	},
-	{
-		name: '张歆艺',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-		subtitle: 'Vice President'
-	},
-	{
-		name: '李小龙',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-		subtitle: 'Vice Chairman'
-	},
-	{
-		name: '巴洛克',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-		subtitle: 'Vice President'
-	},
-	{
-		name: 'Chris',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-		subtitle: 'Vice Chairman'
-	},
-	{
-		name: '斯洛克',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-		subtitle: 'Vice President'
-	},
-	{
-		name: '邸晓芳',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-		subtitle: 'Vice Chairman'
-	},
-	{
-		name: 'Amy',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-		subtitle: 'Vice President'
-	},
-	{
-		name: '周大福',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-		subtitle: 'Vice Chairman'
-	},
-	{
-		name: '刘德华',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-		subtitle: 'Vice President'
-	},
-	{
-		name: '张学友',
-		avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-		subtitle: 'Vice Chairman'
-	},
-]
+import Content from "../../components/Content";
+import Loading from "../../components/Loading";
+import {fetchMyFriendsList} from "../../actions/friends";
+import FriendList from "./components/FriendList";
+import {config} from "../../utils/index";
+import {PullView} from "react-native-pullview";
 
 /**
  * 我的好友
@@ -107,21 +16,33 @@ const list = [
 class MyFriends extends PureComponent {
 
 	state = {
-		indexes: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
-		contacts: {}
-	};
+		isLoading: true
+	}
+
+	componentWillMount() {
+		this.props.dispatch(fetchMyFriendsList('86516602126601339963921'));
+	}
+
+	onPullRelease(resolve) {
+
+		this.props.dispatch(fetchMyFriendsList('86516602126601339963921'));
+
+		setTimeout(() => {
+			//resolve();
+		}, 2000);
+	}
 
 	render() {
-		let {indexes, contacts} = this.state;
-		console.log(contacts);
+		let {isLoading} = this.state;
+		let {isFetching, friendList} = this.props.friends;
 		return (
 			<Container>
 				<Header {...this.props}/>
 				<Content>
-					{
-						indexes.map((index) => (
-							contacts.hasOwnProperty(index) ? this.renderFriends(index, contacts[index]) : null
-						))
+					{(isLoading || isFetching) ? <Loading/> :
+						<PullView onPullRelease={this.onPullRelease.bind(this)}>
+							<FriendList list={friendList}/>
+						</PullView>
 					}
 				</Content>
 			</Container>
@@ -129,51 +50,16 @@ class MyFriends extends PureComponent {
 	}
 
 	componentDidMount() {
-		// alert(tools.getFirstChar('杨可可'));
-		let contacts = groupBy(list, contact => {
-			return tools.getFirstChar(contact.name)
-		})
-
-		this.setState({
-			contacts
-		})
-
-	}
-
-	renderFriends(firstChar, friends) {
-		return (
-			<View key={firstChar}>
-				<Separator title={firstChar}/>
-				<List containerStyle={styles.list}>
-					{
-						friends.map((l, j) => (
-							<ListItem
-								key={j}
-								avatar={{uri: l.avatar_url}}
-								roundAvatar
-								title={l.name}
-								containerStyle={(j < friends.length - 1) ? styles.listItem : styles.lastListItem}
-							/>
-						))
-					}
-				</List>
-			</View>
-		)
+		setTimeout(() => {
+			this.setState({isLoading: false});
+		}, config.loadingDelayTime);
 	}
 }
 
-const styles = {
-	list: {
-		marginTop: 0,
-		paddingLeft: 15,
-	},
-	listItem: {},
-	lastListItem: {
-		borderBottomWidth: 0
-	},
-}
+const styles = {}
 
 const mapStateToProps = state => ({
-	account: state.account
+	account: state.account,
+	friends: state.friends,
 });
 export default connect(mapStateToProps)(MyFriends);

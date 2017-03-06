@@ -136,7 +136,7 @@ class AppNavigator extends Component {
 
 							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
-							<Scene key="myFriends" component={MyFriends} title="我的好友" hideNavBar />
+							<Scene key="myFriends" component={MyFriends} title="我的好友" hideNavBar/>
 							<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 
 							{/*系统*/}

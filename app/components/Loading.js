@@ -1,23 +1,18 @@
 import React from "react";
-import {StyleSheet, View, Text, ActivityIndicator} from "react-native";
+import {StyleSheet, View, Text, Image} from "react-native";
+import {theme} from "../utils/index";
 
 export default class Loading extends React.Component {
 	render() {
-		if (!this.props.isShow) return null;
-
 		return (
 			<View style={styles.container}>
 				<View style={styles.loading}>
-					<ActivityIndicator color="white"/>
-					<Text style={styles.loadingTitle}>加载中……</Text>
+					<Image source={require('../assets/loading.gif')} style={{width: 40,height:40}}/>
+					<Text style={styles.loadingTitle}>加载中...</Text>
 				</View>
 			</View>
 		)
 	}
-}
-
-Loading.propTypes = {
-	isShow: React.PropTypes.bool
 }
 
 const styles = StyleSheet.create({
@@ -25,22 +20,24 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		top: 0,
 		left: 0,
-		right: 0,
-		bottom: 0,
+		width: theme.deviceWidth,
+		height: theme.deviceHeight - 50,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
 	loading: {
-		backgroundColor: 'gray',
+		backgroundColor: '#FFFFFF',
 		height: 80,
 		width: 100,
 		borderRadius: 10,
 		justifyContent: 'center',
 		alignItems: 'center',
+		borderWidth: 1,
+		borderColor: '#eaeaea'
 	},
 	loadingTitle: {
 		marginTop: 10,
 		fontSize: 14,
-		color: 'white'
+		color: '#000'
 	}
 })
