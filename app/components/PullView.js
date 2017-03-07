@@ -3,20 +3,15 @@ import {StyleSheet, ScrollView, Text, RefreshControl} from "react-native";
 
 export default class Loading extends PureComponent {
 
-	state = {
-		isRefreshing: false
-	}
-
 	render() {
-		let {isRefreshing} =  this.state;
-		let {children} = this.props;
+		let {isRefreshing, children} =  this.props;
 		return (
 			<ScrollView
 				refreshControl={
 					<RefreshControl
 						refreshing={isRefreshing}
 						onRefresh={this._onRefresh.bind(this)}
-						colors={['rgb(217, 51, 58)', '#000000', 'rgb(0, 51, 58)']}
+						colors={['#E24329', '#51C332', '#3296FF']}
 					/>
 				}
 			>
@@ -26,24 +21,11 @@ export default class Loading extends PureComponent {
 	}
 
 	_onRefresh() {
-		this.setState({
-			isRefreshing: true
-		});
-
-		let {onPullRelease} = this.props;
-		if (onPullRelease) {
-			onPullRelease(this.resolve.bind(this));
-		} else {
-			this.resolve();
+		let {onRefresh} = this.props;
+		if (onRefresh) {
+			onRefresh();
 		}
 	}
-
-	resolve() {
-		this.setState({
-			isRefreshing: false
-		})
-	}
-
 
 }
 

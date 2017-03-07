@@ -3,12 +3,11 @@ import {request, urls} from "../utils/index";
 
 
 //
-export function fetchMyFriendsList(appid) {
+export function fetchMyFriendsList(appid, callback) {
 	return (dispatch) => {
 		dispatch({
-			type: types.MY_FRIENDS_FETCH_LIST,
+			type: types.MY_FRIEND_FETCH_LIST,
 		});
-
 
 		// 请求数据
 		request.getJson(urls.apis.MY_FRIENDS_LIST, {
@@ -139,11 +138,13 @@ export function fetchMyFriendsList(appid) {
 			];
 
 			dispatch({
-				type: types.MY_FRIENDS_RECEIVE_LIST,
+				type: types.MY_FRIEND_RECEIVE_LIST,
 				payload: {
 					friendList
 				}
 			});
+			if (callback)
+				callback(friendList);
 		});
 	}
 }

@@ -3,7 +3,7 @@ const config = {
     appVersion: 'v1.0.3',
 
     // 页面加载延迟时间
-	loadingDelayTime: 370,
+	loadingDelayTime: 400,
 };
 
 export default config;

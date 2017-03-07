@@ -1,14 +1,14 @@
 // 接口服务器地址
-const apiPath = 'http://103.254.113.11:8080/fudao-svc/'; // 外网
-// const apiPath = 'http://192.168.10.69:8080/fudao-svc/'; // 内网服务器
+// const apiPath = 'http://103.254.113.11:8080/fudao-svc/'; // 外网
+const apiPath = 'http://192.168.10.69:8080/fudao-svc/'; // 内网服务器
 // const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
 
 // web服务器地址
 const webPath = 'http://192.168.10.69:3000/';
 
 // 图片服务器地址
-const picPath = 'http://103.254.113.11:9191/';
-// const picPath = 'http://192.168.10.69:9191/';
+// const picPath = 'http://103.254.113.11:9191/';
+const picPath = 'http://192.168.10.69:9191/';
 // http://192.168.10.69:9191/api/ImgApi/getImage?filePath=/uploadimg/867200022156895102484607.jpeg&w=0&h=0
 
 const urls = {

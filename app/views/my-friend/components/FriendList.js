@@ -17,7 +17,7 @@ class FriendList extends PureComponent {
 
 		// 按首字母分组
 		let listGroupBy = groupBy(props.list, (friend) => {
-			return tools.getFirstChar(friend.name)
+			return tools.getFirstChar(friend.name).toUpperCase()
 		})
 
 		this.state = {
