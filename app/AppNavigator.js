@@ -107,7 +107,7 @@ class AppNavigator extends Component {
 							<Scene key="setPassword"  component={SetPassword} title="设置密码" hideNavBar/>
 							<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 							<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
-							<Scene key="startInformation" component={StartInformation} initial title="基本信息" hideNavBar/>
+							<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
 							<Scene key="passwordValidate" component={PasswordValidate} title="通过验证码找回密码" hideNavBar/>
 							{/*<Scene key="picker"  component={Picker} title="城市列表" hideNavBar/>*/}
 
