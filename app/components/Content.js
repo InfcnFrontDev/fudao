@@ -4,19 +4,24 @@ import {theme} from "../utils/index";
 
 export default class Content extends PureComponent {
 	render() {
-		let {children} = this.props;
+		let {children, gray, white} = this.props,
+			contentStyle = {flex: 1};
+
+		if (gray) {
+			contentStyle.backgroundColor = theme.contentBgColor;
+		}
+
 		return (
-			<View style={styles.content}>
+			<View style={contentStyle}>
 				{children}
 			</View>
 		)
 	}
 }
 
-
-const styles = StyleSheet.create({
-	content: {
-		backgroundColor: theme.contentBgColor,
-		flex: 1,
-	}
-})
+Content.propTypes = {
+	gray: React.PropTypes.bool,
+}
+Content.defaultProps = {
+	gray: false,
+}

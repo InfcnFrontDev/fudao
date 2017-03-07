@@ -2,11 +2,10 @@ import React, {PureComponent} from "react";
 import {ScrollView, View, ToastAndroid} from "react-native";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, PullView} from "../../components/index";
 import {Button, Icon} from "native-base";
 import FriendList from "./components/FriendList";
-import * as friendActions from "../../actions/friend";
+import * as Actions from "../../actions/friend";
 
 /**
  * 我的好友
@@ -18,7 +17,7 @@ class MyFriend extends PureComponent {
 		return (
 			<Container>
 				<Header back {...this.props} rightCmp={
-					<Button transparent onPress={() => Actions.searchUser()}>
+					<Button transparent onPress={() => {}}>
 						<Icon name="add"/>
 					</Button>
 				}/>
@@ -53,6 +52,6 @@ const mapStateToProps = state => ({
 	friend: state.friend,
 });
 const mapDispatchToProps = dispatch => ({
-	...bindActionCreators(friendActions, dispatch)
+	...bindActionCreators(Actions, dispatch)
 });
 export default connect(mapStateToProps, mapDispatchToProps)(MyFriend);
