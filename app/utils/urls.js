@@ -56,6 +56,10 @@ const urls = {
 		//我的收藏列表, 参数（appid, page, pageSize）
 		MY_COLLECTION_LIST: apiPath + 'app/collectionAction!getMyCollection.action',
 
+		//搜索------------------------------------------------------------------------
+		//全部搜索
+        SEARCH_ALL: apiPath + 'app/searchAction!searchAll.action?type=woman&page=1&pageSize=10&keyword=',
+
 		// 注册登录(老)
 		//验证手机号
 		CHECK_PHONE: apiPath + 'app/phoneVerificationAction!checkPhone.action',
