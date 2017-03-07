@@ -13,25 +13,25 @@ class MyList extends PureComponent {
 			<View style={styles.myList}>
 				{this.renderItem({
 					icon: 'ios-list-box-outline',
-					text: '基本信息',
+					text: '我的基本信息',
 					bordered: true,
 					route: 'myInfo'
 				})}
 				{this.renderItem({
 					icon: 'ios-stopwatch-outline',
-					text: '体检信息',
+					text: '我的体检信息',
 					bordered: true,
 					route: 'about'
 				})}
 				{this.renderItem({
 					icon: 'ios-tablet-portrait-outline',
-					text: '智能设备',
+					text: '我的方案与效果',
 					bordered: true,
 					route: 'about'
 				})}
 				{this.renderItem({
 					icon: 'ios-chatboxes-outline',
-					text: '推送通知',
+					text: '消息通知',
 					bordered: true,
 					route: 'start'
 				})}

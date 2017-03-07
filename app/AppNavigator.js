@@ -143,7 +143,7 @@ class AppNavigator extends Component {
 							<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 
 							{/*系统*/}
-							<Scene key="settings" component={Settings} title="系统设置" hideNavBar/>
+							<Scene key="settings" component={Settings} title="系统设置" hideNavBar />
 							<Scene key="about" component={About} title="关于福道" hideNavBar/>
 
 							{/*消息*/}
