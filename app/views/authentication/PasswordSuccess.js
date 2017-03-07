@@ -5,7 +5,7 @@ import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import {theme} from "../../utils/";
 import  CommitButton from "./components/CommitButton"
-
+import  {login} from "./components/public"
 
 /**
  * 设置密码
@@ -16,6 +16,8 @@ class SetPassword extends PureComponent {
         this.state={
             number:'3',
             text:this.props.text,
+            phone:this.props.phone,
+            password:this.props.password,
         }
     }
     render() {
@@ -28,7 +30,7 @@ class SetPassword extends PureComponent {
                 <View style={styles.view}>
                     {title}
                     <Text style={{textAlign:'center',marginTop:120}}>{this.state.number}s后自动登录...</Text>
-                    <CommitButton title="登录" block={true} border={false} top={20}  onPress={()=>Actions['startInformation']()} />
+                    <CommitButton title="登录" block={true} border={false} top={20}  onPress={login(this.state.phone,this.state.password)} />
                 </View>
             </Container>
         );
@@ -39,7 +41,7 @@ class SetPassword extends PureComponent {
         let num = self.state.number;
         var c=setInterval(function(){
             if(num==0){
-                Actions['startInformation']();
+                login(self.state.phone,self.state.password)
                 clearInterval(c);
             }else{
                 num--;

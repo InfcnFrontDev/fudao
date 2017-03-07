@@ -21,14 +21,12 @@ class Register extends PureComponent {  // eslint-disable-line
         this.state={
             phone:'',
             yannum:'',
-            title:this.props.title,
-            text:this.props.text
         }
     }
     render() {
         return (
             <Container>
-                <Header title={this.state.title}></Header>
+                <Header {...this.props}></Header>
                 <Content padder>
                     <UrseInput text="手机号" btn={false}
                                onChangeText={(value)=>{
@@ -44,8 +42,7 @@ class Register extends PureComponent {  // eslint-disable-line
                                }}
                                onPress={this._yzm.bind(this)}
                     />
-                    <CommitButton title='注册' block={true} border={false} top={20}  onPress={this._zhuce.bind(this)} />
-                    <Text style={styles.tiaokuan}>点击注册代表您已同意《福道健康使用协议和隐私条款》</Text>
+                    <CommitButton title='找回密码' block={true} border={false} top={20}  onPress={this._find.bind(this)} />
                 </Content>
             </Container>
         );
@@ -55,10 +52,9 @@ class Register extends PureComponent {  // eslint-disable-line
         if(phone.toString().length<11||phone.toString().length>11){
             ToastAndroid.show("请填入正确的手机号", ToastAndroid.SHORT);
         }else{
-            ToastAndroid.show(""+urls.apis.CHECK_PHONE, ToastAndroid.SHORT);
             request.getJson(urls.apis.CHECK_PHONE,{
                     phone:phone ,
-                    type:'reg'
+                    type:'findPwd'
                 },function(data){
                     ToastAndroid.show("。。。", ToastAndroid.SHORT);
                     if(data.success && "existence" == data.msg) {
@@ -70,7 +66,7 @@ class Register extends PureComponent {  // eslint-disable-line
             )
         }
     }
-    _zhuce(){
+    _find(){
         let phone = this.state.phone;
         let code = this.state.yannum;
         if(phone==""){
@@ -82,12 +78,12 @@ class Register extends PureComponent {  // eslint-disable-line
             request.getJson(urls.apis.CHECK_CODE,{
                     account: phone,
                     code: code,
-                    type: "reg"
+                    type: 'findPwd'
                 },function(data){
-                    ToastAndroid.show("走接口...", ToastAndroid.SHORT);
                     if(data.success) {
+                        Actions['rebuildPassword']({phone:phone});
                         ToastAndroid.show("验证码正确", ToastAndroid.SHORT);
-                        Actions['setPassword']({phone:phone});
+
                     } else {
                         ToastAndroid.show("验证码错误...", ToastAndroid.SHORT);
                     }
@@ -95,10 +91,6 @@ class Register extends PureComponent {  // eslint-disable-line
             )
 
         }
-    }
-    _gotoIndex() {
-
-
     }
 }
 

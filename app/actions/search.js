@@ -9,8 +9,9 @@ export function searchAll(keyword) {
 		});
 
 		// 请求数据
-		request.getJson(urls.test, (result) => {
-			result = {
+		request.getJson(urls.apis.SEARCH_ALL, (result) => {
+			result = result.obj;
+			/*result = {
 				symptomProblem: {
 					list: [
 						"默认", "情况下", "项目", "都排在一条线", "又称轴线", "flex-wrap", "属性定义", "如果", "一条轴线",
@@ -34,7 +35,7 @@ export function searchAll(keyword) {
 						}
 					]
 				}
-			};
+			};*/
 
 			dispatch({
 				type: types.SEARCH_ALL_RECEIVE_LIST,

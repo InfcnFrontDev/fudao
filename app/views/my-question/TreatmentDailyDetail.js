@@ -61,7 +61,6 @@ const styles = {
       color:'#333'
     },
     image:{
-      backgroundColor:'#ff0',
       marginTop:20,
       marginBottom:20,
     }

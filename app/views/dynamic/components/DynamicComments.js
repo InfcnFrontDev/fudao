@@ -1,9 +1,8 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {} from "native-base";
-import {View,Image,Text} from "react-native";
-import {openDrawer, closeDrawer} from "../../actions/drawer";
-import styles from "./styles";
+import {Text} from "native-base";
+import {View,Image,} from "react-native";
+import styles from "../styles";
 
 /**
 * 动态
@@ -40,8 +39,6 @@ class DynamicComments extends Component {
 }
 function bindAction(dispatch) {
   return {
-    openDrawer: () => dispatch(openDrawer()),
-    closeDrawer: key => dispatch(closeDrawer()),
   };
 }
 

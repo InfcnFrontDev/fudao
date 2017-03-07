@@ -2,8 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Text} from "native-base";
 import {View,Image} from "react-native";
-import {openDrawer, closeDrawer} from "../../actions/drawer";
-import styles from "./styles";
+import styles from "../styles";
 
 /**
 * 动态
@@ -20,7 +19,7 @@ class DynamicSupports extends Component {
           if(i==0){
             return (
               <View key={i} style={{flexDirection:'row'}}>
-                <Image source={require('../../assets/xin.png')} style={styles.xin} />
+                <Image source={require('../../../assets/xin.png')} style={styles.xin} />
                 <Text style={styles.commentName}>
                 {p.username}
                 </Text>
@@ -45,8 +44,6 @@ class DynamicSupports extends Component {
 }
 function bindAction(dispatch) {
   return {
-    openDrawer: () => dispatch(openDrawer()),
-    closeDrawer: key => dispatch(closeDrawer()),
   };
 }
 
