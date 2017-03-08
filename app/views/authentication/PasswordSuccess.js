@@ -30,12 +30,11 @@ class SetPassword extends PureComponent {
                 <View style={styles.view}>
                     {title}
                     <Text style={{textAlign:'center',marginTop:120}}>{this.state.number}s后自动登录...</Text>
-                    <CommitButton title="登录" block={true} border={false} top={20}  onPress={login(this.state.phone,this.state.password)} />
+                    <CommitButton title="登录" block={true} border={false} top={20}  onPress={this._login.bind(this)} />
                 </View>
             </Container>
         );
     }
-
     interval(){
         let self=this;
         let num = self.state.number;
@@ -50,6 +49,11 @@ class SetPassword extends PureComponent {
                 })
             }
         },1000)
+    }
+    _login(){
+        let phone = this.this.state.phone;
+        let password = this.this.state.password;
+        login(phone,password)
     }
 }
 const styles = {
