@@ -1,23 +1,18 @@
 import React from "react";
-import {StyleSheet, View, Text, ActivityIndicator} from "react-native";
+import {StyleSheet, View, Text, Image, ActivityIndicator} from "react-native";
+import {theme} from "../utils/index";
 
 export default class Loading extends React.Component {
 	render() {
-		if (!this.props.isShow) return null;
-
+		let {text} = this.props;
 		return (
 			<View style={styles.container}>
 				<View style={styles.loading}>
-					<ActivityIndicator color="white"/>
-					<Text style={styles.loadingTitle}>加载中……</Text>
+					<ActivityIndicator/><Text style={styles.loadingTitle}>{text}</Text>
 				</View>
 			</View>
 		)
 	}
-}
-
-Loading.propTypes = {
-	isShow: React.PropTypes.bool
 }
 
 const styles = StyleSheet.create({
@@ -25,22 +20,32 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		top: 0,
 		left: 0,
-		right: 0,
-		bottom: 0,
+		width: theme.deviceWidth,
+		height: theme.deviceHeight - 50,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
 	loading: {
-		backgroundColor: 'gray',
+		backgroundColor: '#373737',
 		height: 80,
 		width: 100,
 		borderRadius: 10,
 		justifyContent: 'center',
 		alignItems: 'center',
+		opacity: 0.8,
 	},
 	loadingTitle: {
 		marginTop: 10,
 		fontSize: 14,
-		color: 'white'
+		color: '#FFFFFF'
 	}
 })
+
+
+Loading.propTypes = {
+	text: React.PropTypes.string,
+}
+
+Loading.defaultProps = {
+	text: '正在加载...'
+}

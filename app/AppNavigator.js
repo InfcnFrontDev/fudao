@@ -18,6 +18,7 @@ import SearchFriendsCircle from "./views/search/SearchFriendsCircle";
 import SearchHealthCare from "./views/search/SearchHealthCare";
 import SearchInformation from "./views/search/SearchInformation";
 import SearchOfflineService from "./views/search/SearchOfflineService";
+import SearchUser from "./views/search/SearchUser";
 // 资讯
 import ArticleDetail from "./views/article/ArticleDetail";
 // 系统
@@ -27,7 +28,9 @@ import About from "./views/system/About";
 import Picture from "./views/picture/";
 // My
 import MyInfo from "./views/my-info/";
-/*import MyFriends from "./views/my-friends/MyFriends";*/
+
+import MyFriend from "./views/my-friend/MyFriend";
+
 import MyCollection from "./views/my-collection/MyCollection";
 //Home
 import MyEmotion from "./views/my-emotion/MyEmotion";
@@ -35,8 +38,6 @@ import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
 import TreatmentDetail from "./views/my-question/TreatmentDetail";
-
-
 //注册登录
 import Start from "./views/authentication/Start";
 import Login from "./views/authentication/Login";
@@ -51,9 +52,8 @@ import PasswordValidate from "./views/authentication/PasswordValidate";
 import Message from "./views/message/message";
 // 其他
 import Webview from "./views/webview/";
-
 //Dynamic
-import NewDynamic from "./views/dynamic/NewDynamic"
+import NewDynamic from "./views/dynamic/NewDynamic";
 
 
 const AppRouter = connect()(Router);
@@ -98,9 +98,10 @@ class AppNavigator extends Component {
 						<Scene key="root">
 
 							{/*首页*/}
-							<Scene key="index" component={Index} title="首页" hideNavBar initial/>
+							<Scene key="index" component={Index} title="首页" hideNavBar/>
 
 							{/*启动注册*/}
+
 							<Scene key="start"  component={Start} title="启动开始页" hideNavBar/>
 							<Scene key="login"   component={Login} title="登录" hideNavBar/>
 							<Scene key="register"  component={Register} title="注册" hideNavBar/>
@@ -128,18 +129,20 @@ class AppNavigator extends Component {
 							<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务" hideNavBar/>
 							<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
 								   hideNavBar/>
+							<Scene key="searchUser" component={SearchUser} title="用户" hideNavBar initial/>
 
 							{/*资讯*/}
 							<Scene key="articleDetail" component={ArticleDetail} title="资讯详情" hideNavBar/>
 
 							{/*动态*/}
 							<Scene key="picture" component={Picture} title="图片预览" hideNavBar/>
-							<Scene key="newDynamic" component={NewDynamic} title="发表文字"  hideNavBar/>
+							<Scene key="newDynamic" component={NewDynamic} title="发表文字" hideNavBar/>
 
 
 							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
-							{/*<Scene key="myFriends" component={MyFriends} title="我的好友" hideNavBar />*/}
+							<Scene key="myFriend" component={MyFriend} title="我的好友" hideNavBar />
+
 							<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 
 							{/*系统*/}

@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {Actions} from "react-native-router-flux";
-import {Container, Content, Left, Right, Body, Text, Row, Thumbnail, Col, Button} from "native-base";
+import {Container, Content, Text, Row, Thumbnail, Col, Button} from "native-base";
 import Header from "../../components/header/BaseHeader";
 import {config, urls} from "../../utils/";
 
@@ -12,7 +12,7 @@ class About extends PureComponent {
 		return (
 			<Container>
 				<Header {...this.props}/>
-				<Content padder>
+				<Content padder style={{backgroundColor:'#FFFFFF'}}>
 					<Row style={styles.title}>
 						<Col/>
 						<Col style={{width:230}}>

@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
 import {Left, Right, Body, View} from "native-base";
 import Separator from "../../../components/Separator";
-import ArticleSingleImageItem from "../../article/components/ArticleSingleImageItem";
+import ArticleItem from "../../article/components/ArticleItem";
 
 /**
  * result
@@ -16,8 +16,9 @@ class InformationResult extends PureComponent {
 				<Separator title="资讯"/>
 				<View style={styles.itemContainer}>
 					{list.map((data) => (
-						<ArticleSingleImageItem key={data.text} data={data}/>
+						<ArticleItem key={data.title} article={data}/>
 					))}
+
 				</View>
 			</View>
 		)

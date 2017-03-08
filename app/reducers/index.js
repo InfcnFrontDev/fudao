@@ -2,13 +2,13 @@ import {combineReducers} from "redux";
 import drawer from "./drawer";
 import realm from "./realm";
 import search from "./search";
-import account from "./account";
-import collection from "./collection";
+import user from "./user";
+import friend from "./friend";
 
 export default combineReducers({
 	drawer,
 	realm,
 	search,
-	account,
-	collection,
+	user,
+	friend,
 });
