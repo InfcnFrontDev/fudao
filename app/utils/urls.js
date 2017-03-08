@@ -49,14 +49,14 @@ const urls = {
 		ARTICLE_LIST: apiPath + 'app/myTerritoryAction!list.action',
 		//资讯详细
 		ARTICLE_DETAIL: apiPath + 'app/myTerritoryAction!detail.action',
-		//我的收藏列表, 参数（appid, page, pageSize）
+		//我的收藏列表
 		MY_COLLECTION_LIST: apiPath + 'app/collectionAction!getMyCollection.action',
-		//我的好友列表, 参数（appid）
+		//我的好友列表
 		MY_FRIENDS_LIST: apiPath + 'app/collectionAction!getMyCollection.action',
 
 		//搜索------------------------------------------------------------------------
 		//全部搜索
-        SEARCH_ALL: apiPath + 'app/searchAction!searchAll.action?type=woman&page=1&pageSize=10&keyword=',
+		SEARCH_ALL: apiPath + 'app/searchAction!searchAll.action?type=woman&page=1&pageSize=10&keyword=',
 
 		// 注册登录(老)
 		//验证手机号
@@ -64,8 +64,8 @@ const urls = {
 		//验证验证码
 		CHECK_CODE: apiPath + "app/accountInfoAction!registerBefore.action",
 		REG: apiPath + "app/accountInfoAction!register.action",
-	 	LOGIN : apiPath + "app/accountInfoAction!login.action",
-		NEW_PASSWORD : apiPath +"app/accountInfoAction!retrievePassword.action"
+		LOGIN: apiPath + "app/accountInfoAction!login.action",
+		NEW_PASSWORD: apiPath + "app/accountInfoAction!retrievePassword.action"
 
 
 		// 注册登录(新)
