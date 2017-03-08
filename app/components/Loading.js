@@ -8,7 +8,8 @@ export default class Loading extends React.Component {
 		return (
 			<View style={styles.container}>
 				<View style={styles.loading}>
-					<ActivityIndicator/><Text style={styles.loadingTitle}>{text}</Text>
+					<ActivityIndicator color={'#FFFFFF'}/>
+					<Text style={styles.loadingTitle}>{text}</Text>
 				</View>
 			</View>
 		)
@@ -18,21 +19,22 @@ export default class Loading extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		position: 'absolute',
+		backgroundColor: '#EDEDED',
 		top: 0,
 		left: 0,
-		width: theme.deviceWidth,
-		height: theme.deviceHeight - 50,
+		bottom:0,
+		right:0,
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		opacity: 0.8,
 	},
 	loading: {
-		backgroundColor: '#373737',
+		backgroundColor: '#393939',
 		height: 80,
 		width: 100,
 		borderRadius: 10,
 		justifyContent: 'center',
 		alignItems: 'center',
-		opacity: 0.8,
 	},
 	loadingTitle: {
 		marginTop: 10,
