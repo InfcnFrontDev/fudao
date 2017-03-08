@@ -11,7 +11,6 @@ export const CHANGE_PLATFORM = 'CHANGE_PLATFORM';
 
 
 // user actions ////////////////////////////////////////
-export const USER_LOGGING = 'USER_LOGGING';
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
 

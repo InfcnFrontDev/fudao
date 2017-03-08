@@ -9,6 +9,6 @@ export default combineReducers({
 	drawer,
 	realm,
 	search,
-	user,
+	userStore: user,
 	friend,
 });

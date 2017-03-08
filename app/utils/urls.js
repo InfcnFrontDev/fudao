@@ -1,7 +1,7 @@
 // 接口服务器地址
 // const apiPath = 'http://103.254.113.11:8080/fudao-svc/'; // 外网
-// const apiPath = 'http://192.168.10.69:8080/fudao-svc/'; // 内网服务器
-const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
+const apiPath = 'http://192.168.10.69:8080/fudao-svc/'; // 内网服务器
+// const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
 
 // web服务器地址
 const webPath = 'http://192.168.3.204:3000/';
@@ -63,7 +63,7 @@ const urls = {
 		//验证验证码
 		CHECK_CODE: apiPath + "app/accountInfoAction!registerBefore.action",
 		REG: apiPath + "app/accountInfoAction!register.action",
-		LOGIN: apiPath + "app/accountInfoAction!login.action",
+		USER_LOGIN: apiPath + "app/accountInfoAction!login.action",
 		NEW_PASSWORD: apiPath + "app/accountInfoAction!retrievePassword.action"
 
 

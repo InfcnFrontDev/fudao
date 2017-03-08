@@ -1,3 +1,4 @@
+import {ToastAndroid} from "react-native";
 /**
  * network request
  */
@@ -75,7 +76,8 @@ const request = {
 			})
 			.then((responseData) => callback(responseData))
 			.catch((error) => {
-				console.error(error);
+				console.log(error);
+				ToastAndroid.show('服务器异常，请重试!', ToastAndroid.SHORT);
 			})
 			.done();
 	},
