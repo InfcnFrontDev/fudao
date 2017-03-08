@@ -8,7 +8,7 @@ export function login(phoneVale,passwordVale){
         let  phone=phoneVale;
         let  password=passwordVale;
         ToastAndroid.show("进来了", ToastAndroid.SHORT);
-        request.getJson(urls.apis.LOGIN,{
+        request.getJson(urls.apis.USER_LOGIN,{
             account:phone,
             pwd:hex_md5(phone+password),
         },function(data){

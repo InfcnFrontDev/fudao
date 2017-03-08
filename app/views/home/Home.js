@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Title, Content, Left, Right, Body, Text, Button} from "native-base";
+import {Container, Title, Content, Text} from "native-base";
 import Header from "../../components/header/IndexHeader";
 import MyEnter from "./components/MyEnter.js";
 import Headline from "./components/Headline.js";
@@ -16,6 +16,7 @@ class Home extends PureComponent {
 
 
 	render() {
+		let {user} = this.props;
 		return (
 			<Container>
 				<Header>
@@ -25,16 +26,19 @@ class Home extends PureComponent {
 				<Content style={styles.content}>
 					<Headline />
 					<MyEnter />
+					<Text>{user.id}</Text>
 				</Content>
 			</Container>
 		)
 	}
 }
 
-const styles ={
-	content:{
-		backgroundColor:'#fff'
+const styles = {
+	content: {
+		backgroundColor: '#fff'
 	}
 }
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	...state.userStore
+});
 export default connect(mapStateToProps)(Home);

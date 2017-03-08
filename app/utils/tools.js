@@ -1,3 +1,4 @@
+import {ToastAndroid} from "react-native";
 import uuid from "uuid";
 import pinyin from "./pinyin";
 const tools = {
@@ -23,6 +24,14 @@ const tools = {
 	 */
 	getFirstChar(str){
 		return pinyin.getFullChars(str).substring(0, 1);
+	},
+
+	/**
+	 * ToastAndroid.show
+	 * @param text
+	 */
+	toast(text){
+		ToastAndroid.show(text, ToastAndroid.SHORT);
 	}
 };
 export default tools;
