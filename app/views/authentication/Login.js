@@ -7,7 +7,7 @@ import Header from "../../components/header/BaseHeader";
 import {theme,request,urls,} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput";
-import {login} from "../../actions/account";
+import {login} from "../../actions/user";
 import {checkPhone} from "./components/public";
 
 /**
@@ -97,7 +97,7 @@ const styles = {
 };
 // const mapStateToProps = (state => state);
 const mapStateToProps = state => ({
-    obj: state.account.obj,
+	userInfo: state.user.userInfo,
 });
 
 export default connect(mapStateToProps)(Login);

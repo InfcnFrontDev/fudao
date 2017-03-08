@@ -2,7 +2,9 @@ import * as types from "../actions/types";
 const initialState = {
 	isLoading: false,
 	userInfo: {
-		id: '86516602126601339963921'
+		id: '86516602126601339963921',
+		name: '',
+		sex: '',
 	}
 };
 export default function (state = initialState, {type, payload}) {
