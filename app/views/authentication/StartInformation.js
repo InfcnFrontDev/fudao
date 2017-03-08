@@ -121,9 +121,7 @@ class StartInformation extends PureComponent {
         )
     }
     _tijiao(){
-        let sex = null;
-        let birth = null;
-        let position = null;
+        let sex,birth,position = null;
         if(this.state.showM){
             sex = 1
         }else{

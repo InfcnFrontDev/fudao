@@ -18,8 +18,6 @@ class Start extends PureComponent {
     constructor(props) {
         super(props);
     }
-
-
     render() {
         return (
             <Container style={styles.container}>
@@ -40,15 +38,10 @@ const styles = {
         flexDirection: 'row',
         justifyContent:'center',
         alignItems:'center'
-
     },
     view:{
-        /*justifyContent:'center',
-         alignItems:'center',*/
         width:300,
         height:500,
-        /* backgroundColor:'red'*/
-
     },
     img:{
         marginTop:-80,
@@ -57,7 +50,6 @@ const styles = {
         resizeMode:'contain',
     },
     viewButton:{
-        /*   marginTop:-60,*/
         flexDirection: 'row',
         justifyContent:'space-around',
     }

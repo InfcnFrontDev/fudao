@@ -60,12 +60,15 @@ const urls = {
 
 		// 注册登录(老)
 		//验证手机号
-		CHECK_PHONE: apiPath + 'app/phoneVerificationAction!checkPhone.action',
+		USER_CHECK_PHONE: apiPath + 'app/phoneVerificationAction!checkPhone.action',
 		//验证验证码
-		CHECK_CODE: apiPath + "app/accountInfoAction!registerBefore.action",
-		REG: apiPath + "app/accountInfoAction!register.action",
-	 	LOGIN : apiPath + "app/accountInfoAction!login.action",
-		NEW_PASSWORD : apiPath +"app/accountInfoAction!retrievePassword.action"
+		USER_CHECK_CODE: apiPath + "app/accountInfoAction!registerBefore.action",
+		//注册
+		USER_REG: apiPath + "app/accountInfoAction!register.action",
+		//登录
+		USER_LOGIN : apiPath + "app/accountInfoAction!login.action",
+		//设置新密码
+		USER_NEW_PASSWORD : apiPath +"app/accountInfoAction!retrievePassword.action"
 
 
 		// 注册登录(新)

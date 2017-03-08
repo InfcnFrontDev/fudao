@@ -3,7 +3,7 @@ import {ToastAndroid} from "react-native";
 import {request, urls} from "../utils/";
 import  {hex_md5} from "../views/authentication/components/md5"
 // 登录
-export function login(phoneVale,passwordVale,d){
+export function   login(phoneVale,passwordVale,d){
 			return (dispatch) => {
 				dispatch({
 					type: types.USER_LOGGING,

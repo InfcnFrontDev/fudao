@@ -20,7 +20,7 @@ class Register extends PureComponent {  // eslint-disable-line
         super(props);
         this.state={
             phone:'',
-            yannum:'',
+            code:'',
             title:this.props.title,
             text:this.props.text
         }
@@ -39,7 +39,7 @@ class Register extends PureComponent {  // eslint-disable-line
                     <UrseInput text="验证码"  title="获取验证码" top={2} btn={true}
                                onChangeText={(value)=>{
                                    this.setState({
-                                       yannum:value
+                                       code:value
                                    })
                                }}
                                onPress={this._yzm.bind(this)}
@@ -59,7 +59,6 @@ class Register extends PureComponent {  // eslint-disable-line
                     phone:phone ,
                     type:'reg'
                 },function(data){
-                    ToastAndroid.show("。。。", ToastAndroid.SHORT);
                     if(data.success && "existence" == data.msg) {
                         ToastAndroid.show("手机号已被注册", ToastAndroid.SHORT);
                     } else if(data.success && "existence" != data.msg) {
@@ -70,20 +69,19 @@ class Register extends PureComponent {  // eslint-disable-line
         }
     }
     _zhuce(){
-        let phone = this.state.phone;
-        let code = this.state.yannum;
+        let {phone,yannum} = this.state;
+
         if(phone==""){
             ToastAndroid.show("手机号不能为空", ToastAndroid.SHORT);
-        }else if(code==""){
+        }else if(yannum==""){
             ToastAndroid.show("验证码不能为空", ToastAndroid.SHORT);
         }else{
             /*接口*/
             request.getJson(urls.apis.CHECK_CODE,{
                     account: phone,
-                    code: code,
+                    code: yannum,
                     type: "reg"
                 },function(data){
-                    ToastAndroid.show("走接口...", ToastAndroid.SHORT);
                     if(data.success) {
                         ToastAndroid.show("验证码正确", ToastAndroid.SHORT);
                         Actions['setPassword']({phone:phone});

@@ -20,7 +20,7 @@ class Register extends PureComponent {  // eslint-disable-line
         super(props);
         this.state={
             phone:'',
-            yannum:'',
+            code:'',
         }
     }
     render() {
@@ -37,7 +37,7 @@ class Register extends PureComponent {  // eslint-disable-line
                     <UrseInput text="验证码"  title="获取验证码" top={2} btn={true}
                                onChangeText={(value)=>{
                                    this.setState({
-                                       yannum:value
+                                      code:value
                                    })
                                }}
                                onPress={this._yzm.bind(this)}
@@ -48,7 +48,7 @@ class Register extends PureComponent {  // eslint-disable-line
         );
     }
     _yzm(){
-        let phone = this.state.phone;
+        let {phone} = this.state;
         if(phone.toString().length<11||phone.toString().length>11){
             ToastAndroid.show("请填入正确的手机号", ToastAndroid.SHORT);
         }else{
@@ -67,8 +67,7 @@ class Register extends PureComponent {  // eslint-disable-line
         }
     }
     _find(){
-        let phone = this.state.phone;
-        let code = this.state.yannum;
+        let {phone,code} = this.state;
         if(phone==""){
             ToastAndroid.show("手机号不能为空", ToastAndroid.SHORT);
         }else if(code==""){
@@ -78,12 +77,11 @@ class Register extends PureComponent {  // eslint-disable-line
             request.getJson(urls.apis.CHECK_CODE,{
                     account: phone,
                     code: code,
-                    type: 'findPwd'
+                    type: 'findPwd',
                 },function(data){
                     if(data.success) {
                         Actions['rebuildPassword']({phone:phone});
                         ToastAndroid.show("验证码正确", ToastAndroid.SHORT);
-
                     } else {
                         ToastAndroid.show("验证码错误...", ToastAndroid.SHORT);
                     }
