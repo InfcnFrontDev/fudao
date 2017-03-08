@@ -3,13 +3,12 @@
  */
 //noinspection JSAnnotator
 import React, {PureComponent} from "react";
-
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container, Title, Content, Left, Right, Body, Form, Input, Item,Thumbnail,Button,Text} from "native-base";
-import {View,Image} from "react-native";
+import {Container, Left, Right, Body, Form, Item} from "native-base";
+import {View, Image} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
-import  CommitButton from "./components/CommitButton"
+import CommitButton from "./components/CommitButton";
 
 /**
  * 开始页
