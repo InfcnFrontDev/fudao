@@ -61,9 +61,7 @@ class RebuildPassword extends PureComponent {
                     pwd: hex_md5(phone+password)
                 },function(data){
                     if(data.success) {
-                        setTimeout(function() {
                             Actions['passwordSuccess']({text:"密码设置成功",phone:phone,password:password})
-                        }, 1000);
                     }else{
                         ToastAndroid.show("修改失败.", ToastAndroid.SHORT);
                     }

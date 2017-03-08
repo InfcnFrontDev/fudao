@@ -8,7 +8,7 @@
 
 
 // web服务器地址
-const webPath = 'http://192.168.10.69:3000/';
+const webPath = 'http://192.168.3.204:3000/';
 
 // 图片服务器地址
 const picPath = 'http://103.254.113.11:9191/';

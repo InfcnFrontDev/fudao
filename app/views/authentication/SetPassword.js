@@ -63,15 +63,13 @@ class SetPassword extends PureComponent {
                     if(data.success) {
                         ToastAndroid.show("注册完成，请登录..", ToastAndroid.SHORT);
                         setTimeout(function() {
-                            Actions['passwordSuccess']({text:"恭喜您注册成功",
-                            type:'reg',phone:phone,password:password})
+                            Actions['passwordSuccess']({text:"恭喜您注册成功",phone:phone,password:password})
                         }, 1000);
                     }else{
                         ToastAndroid.show("注册失败..", ToastAndroid.SHORT);
                     }
                 }
             )
-
         }
 
 

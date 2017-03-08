@@ -27,7 +27,7 @@ import About from "./views/system/About";
 import Picture from "./views/picture/";
 // My
 import MyInfo from "./views/my-info/";
-import MyFriends from "./views/my-friends/MyFriends";
+/*import MyFriends from "./views/my-friends/MyFriends";*/
 import MyCollection from "./views/my-collection/MyCollection";
 //Home
 import MyEmotion from "./views/my-emotion/MyEmotion";
@@ -101,13 +101,13 @@ class AppNavigator extends Component {
 							<Scene key="index" component={Index} title="首页" hideNavBar initial/>
 
 							{/*启动注册*/}
-							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
-							<Scene key="login"  component={Login} title="登录" hideNavBar/>
+							<Scene key="start"  component={Start} title="启动开始页" hideNavBar/>
+							<Scene key="login"   component={Login} title="登录" hideNavBar/>
 							<Scene key="register"  component={Register} title="注册" hideNavBar/>
 							<Scene key="setPassword"  component={SetPassword} title="设置密码" hideNavBar/>
 							<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 							<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
-							<Scene key="startInformation" component={StartInformation} initial title="基本信息" hideNavBar/>
+							<Scene key="startInformation"  component={StartInformation}  title="基本信息" hideNavBar/>
 							<Scene key="passwordValidate" component={PasswordValidate} title="通过验证码找回密码" hideNavBar/>
 							{/*<Scene key="picker"  component={Picker} title="城市列表" hideNavBar/>*/}
 
@@ -139,7 +139,7 @@ class AppNavigator extends Component {
 
 							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
-							<Scene key="myFriends" component={MyFriends} title="我的好友" hideNavBar />
+							{/*<Scene key="myFriends" component={MyFriends} title="我的好友" hideNavBar />*/}
 							<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 
 							{/*系统*/}

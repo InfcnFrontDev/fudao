@@ -27,6 +27,7 @@ class StartInformation extends PureComponent {
             simpleText:"03/22/06",
         }
     }
+
     async showPicker(stateKey, options) {
         let option={
             options,
@@ -112,12 +113,24 @@ class StartInformation extends PureComponent {
                                 <Icon  name='navigate' />
                                 <Text  style={styles.text3}>正在定位你的位置...</Text>
                             </TouchableOpacity>
-                            <CommitButton  border={false} block={true} top={20} title="提交" onPress={()=>Actions['login']()}/>
+                            <CommitButton  border={false} block={true} top={20} title="提交" onPress={this._tijiao.bind(this)}/>
                         </View>
                     </View>
                 </Content>
             </Container>
         )
+    }
+    _tijiao(){
+        let sex = null;
+        let birth = null;
+        let position = null;
+        if(this.state.showM){
+            sex = 1
+        }else{
+            sex = 0
+        }
+        birth = this.state.simpleText;
+        //获取地理位置
     }
 }
 const styles = {
@@ -193,25 +206,7 @@ const styles = {
         top:0,
         zIndex:1000
     },
-
-    /*button: {
-     margin:5,
-     backgroundColor: 'white',
-     padding: 15,
-     borderBottomColor: '#cdcdcd',
-     }*/
-
-
 };
-
-function bindAction(dispatch) {
-    return {
-        openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: key => dispatch(closeDrawer()),
-    };
-
-}
-
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(StartInformation);
+export default connect(mapStateToProps)(StartInformation);
 

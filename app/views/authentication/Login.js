@@ -7,8 +7,9 @@ import Header from "../../components/header/BaseHeader";
 import {theme,request,urls,} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput";
-import  {hex_md5} from "./components/md5";
-import  {login} from "./components/public";
+import {login} from "../../actions/account";
+import {checkPhone} from "./components/public";
+
 /**
  * 登录
  */
@@ -18,7 +19,6 @@ class Login extends PureComponent {
         this.state={
             phone:'',
             password:'',
-            check:true,
         }
     }
     render() {
@@ -51,15 +51,30 @@ class Login extends PureComponent {
         );
     }
     _login(){
-             let  phone=this.state.phone;
-             let  password=this.state.password;
+        let  phone=this.state.phone;
+        let  password=this.state.password;
+
         if(phone==''){
             ToastAndroid.show("用户名不能为空", ToastAndroid.SHORT);
+        }else if(!checkPhone(phone)){
+            ToastAndroid.show("请输入正确的用户名", ToastAndroid.SHORT);
         }else if(password==''){
             ToastAndroid.show("密码不能为空", ToastAndroid.SHORT);
         }else{
-            //检测是否有基本信息
-            login(phone,password)
+            const {dispatch} = this.props;
+            dispatch(login(phone,password,this.d.bind(this)));
+        }
+    }
+
+    //根据是否有基本信息选择跳转页面
+    d(){
+        let {obj} = this.props;
+        ToastAndroid.show(JSON.stringify(obj.userInformation), ToastAndroid.SHORT);
+        var userInformation = obj.userInformation;
+        if(userInformation != undefined) { //基本信息已经添加完成
+            Actions['search']()
+        } else { //没有基本信息表示第一次登录需要添写信息
+            Actions['startInformation']()
         }
     }
 }
@@ -80,12 +95,12 @@ const styles = {
         textDecorationLine:'underline'
     },
 };
-function bindAction(dispatch) {
-    return {};
-}
+// const mapStateToProps = (state => state);
+const mapStateToProps = state => ({
+    obj: state.account.obj,
+});
 
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(Login);
+export default connect(mapStateToProps)(Login);
 
 
 

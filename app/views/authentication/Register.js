@@ -10,7 +10,7 @@ import Header from "../../components/header/BaseHeader";
 import {theme,request,urls} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput"
-
+import {checkPhone} from "./components/public";
 /**
  * 注册
  */
@@ -52,10 +52,9 @@ class Register extends PureComponent {  // eslint-disable-line
     }
     _yzm(){
         let phone = this.state.phone;
-        if(phone.toString().length<11||phone.toString().length>11){
+        if(!checkPhone(phone)){
             ToastAndroid.show("请填入正确的手机号", ToastAndroid.SHORT);
         }else{
-            ToastAndroid.show(""+urls.apis.CHECK_PHONE, ToastAndroid.SHORT);
             request.getJson(urls.apis.CHECK_PHONE,{
                     phone:phone ,
                     type:'reg'
