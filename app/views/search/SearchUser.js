@@ -1,8 +1,7 @@
 import React, {PureComponent} from "react";
-import {connect} from "react-redux";
+import {StyleSheet, View, Text, Image, ActivityIndicator} from "react-native";
 import {Container, Content, Loading} from "../../components/index";
 import Header from "../../components/header/SearchHeader";
-import {searchSymptomProblem, clearSymptomProblem} from "../../actions/search";
 import {theme} from "../../utils/";
 
 /**
@@ -11,28 +10,38 @@ import {theme} from "../../utils/";
 class SearchUser extends PureComponent {
 
 	state = {
-		isLoading: true,
-	}
+		isFetching: false,
+		inSearch: false,
+		user: null
+	};
 
 	render() {
-		let {isLoading} = this.state;
+		let {isFetching, inSearch, user} = this.state;
 		return (
 			<Container>
 				<Header placeholder="搜索" onSearch={this.search.bind(this)}/>
 				<Content gray>
-					{isLoading ? <Loading text="正在查找..."/> : null}
+					{isFetching ? <Loading text="正在查找..."/> : (inSearch && user) ? null : this.renderNoUser() }
 				</Content>
 			</Container>
 		);
+	}
+
+	renderNoUser() {
+		return (
+			<View style={styles.noUserView}>
+				<Text>该用户不存在</Text>
+			</View>
+		)
 	}
 
 	// 搜索
 	search(keyword) {
 		const {dispatch} = this.props;
 		if (keyword == '') {
-			dispatch(clearSymptomProblem())
+			// dispatch(clearSymptomProblem())
 		} else {
-			dispatch(searchSymptomProblem(keyword))
+			// dispatch(searchSymptomProblem(keyword))
 		}
 	}
 }
@@ -42,10 +51,11 @@ const styles = {
 		flex: 1,
 		backgroundColor: theme.contentBgColor,
 	},
+	noUserView: {
+		height: 100,
+		alignItems: 'center',
+		justifyContent: 'center'
+	}
 };
 
-const mapStateToProps = state => ({
-	isLoading: state.search.isLoading,
-	symptomProblem: state.search.symptomProblem,
-});
-export default connect(mapStateToProps)(SearchUser);
+export default (SearchUser);

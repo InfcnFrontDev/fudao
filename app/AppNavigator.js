@@ -98,7 +98,7 @@ class AppNavigator extends Component {
 						<Scene key="root">
 
 							{/*首页*/}
-							<Scene key="index" component={Index} title="首页" hideNavBar/>
+							<Scene key="index" component={Index} title="首页" hideNavBar initial/>
 
 							{/*启动注册*/}
 
@@ -129,7 +129,9 @@ class AppNavigator extends Component {
 							<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务" hideNavBar/>
 							<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
 								   hideNavBar/>
-							<Scene key="searchUser" component={SearchUser} title="用户" hideNavBar/>
+
+							<Scene key="searchUser" component={SearchUser} title="用户" hideNavBar />
+
 
 							{/*资讯*/}
 							<Scene key="articleDetail" component={ArticleDetail} title="资讯详情" hideNavBar/>

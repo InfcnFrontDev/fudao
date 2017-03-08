@@ -3,8 +3,8 @@ const initialState = {
 	isLoading: false,
 	userInfo: {
 		id: '86516602126601339963921',
-	},
-	account:{
+		name: '',
+		sex: '',
 
 	}
 };
