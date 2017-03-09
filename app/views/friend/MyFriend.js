@@ -2,8 +2,8 @@ import React, {PureComponent} from "react";
 import {ScrollView, View, ToastAndroid} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container, Content, Header, List, PullView} from "../../components/index";
-import {Left, Body, Right, ListItem, Button, Icon, Text} from "native-base";
+import {Container, Content, Header, List, PullView, HeaderIcon, HeaderButton} from "../../components/index";
+import {Left, Body, Right, ListItem, Item,Button, Icon, Text} from "native-base";
 import FriendList from "./components/FriendList";
 import {fetchMyFriendsList} from "../../actions/friend";
 import {toast} from "../../utils/index";
@@ -18,9 +18,9 @@ class MyFriend extends PureComponent {
 		return (
 			<Container>
 				<Header back {...this.props} right={
-					<Button transparent onPress={() => Actions.searchUser()}>
-						<Icon name="add"/>
-					</Button>
+					<View style={{flexDirection:'row',justifyContent:'flex-start'}}>
+						<HeaderIcon iconName="add" onPress={() => Actions.searchUser()}/>
+					</View>
 				}/>
 				<Content>
 					<PullView isRefreshing={isFetching} onRefresh={this._onRefresh.bind(this)}>

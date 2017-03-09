@@ -7,6 +7,8 @@ import List from "./List";
 import Separator from "./Separator";
 import Loading from "./Loading";
 import PullView from "./PullView";
+import HeaderIcon from "./HeaderIcon";
+import HeaderButton from "./HeaderButton";
 
 const Elements = {
 	Container,
@@ -18,6 +20,8 @@ const Elements = {
 	Separator,
 	Loading,
 	PullView,
+	HeaderIcon,
+	HeaderButton,
 }
 
 module.exports = Elements

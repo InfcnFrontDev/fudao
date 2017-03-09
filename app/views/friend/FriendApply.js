@@ -2,10 +2,10 @@ import React, {PureComponent} from "react";
 import {Alert} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container, Content, Header, List, Separator} from "../../components/index";
+import {Container, Content, Header, List, Separator, HeaderButton} from "../../components/index";
 import {Text, Button, ListItem, Item, Input} from "native-base";
 import {showLoading, hideLoading} from "../../actions/loading";
-import {request, urls, tools,toast} from "../../utils/index";
+import {request, urls, tools, toast} from "../../utils/index";
 
 /**
  * 好友申请
@@ -26,13 +26,11 @@ class FriendApply extends PureComponent {
 		return (
 			<Container>
 				<Header back {...this.props} right={
-					<Button small block style={styles.button} onPress={this._addApplyFriend.bind(this)}>
-						<Text>发送</Text>
-					</Button>
+					<HeaderButton text="发送" onPress={this._addApplyFriend.bind(this)}/>
 				}/>
 
 				<Content gray>
-					<List style={{padding:10}}>
+					<List style={{padding: 10}}>
 						<Text note>你需要发送验证申请，等对方通过</Text>
 						<Item underline success>
 							<Input onChangeText={(myIntro) => this.setState({myIntro})}
@@ -41,7 +39,7 @@ class FriendApply extends PureComponent {
 						</Item>
 					</List>
 					<Separator/>
-					<List style={{padding:10}}>
+					<List style={{padding: 10}}>
 						<Text note>为好友设置备注</Text>
 						<Item underline success>
 							<Input onChangeText={(friendRemark) => this.setState({friendRemark})}
@@ -49,7 +47,7 @@ class FriendApply extends PureComponent {
 						</Item>
 					</List>
 					<Separator/>
-					<List style={{padding:10}}>
+					<List style={{padding: 10}}>
 						<Text note>设置朋友圈权限</Text>
 						<ListItem last>
 							<Text>设置朋友圈权限</Text>
@@ -88,18 +86,6 @@ class FriendApply extends PureComponent {
 }
 
 const styles = {
-	button: {
-		width: 60
-	},
-	manIcon: {
-		fontSize: 15,
-		color: '#50A1F2'
-	},
-	womanIcon: {
-		fontSize: 15,
-		color: '#EF7155'
-	},
-
 };
 
 FriendApply.propTypes = {

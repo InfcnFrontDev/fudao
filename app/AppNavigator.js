@@ -103,7 +103,7 @@ class AppNavigator extends Component {
 
 							{/*首页*/}
 							<Scene key="index" component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar
-
+								   initial
 							/>
 
 							{/*启动注册*/}
@@ -148,7 +148,7 @@ class AppNavigator extends Component {
 
 							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
-							<Scene key="myFriend" component={MyFriend} title="我的好友" hideNavBar initial/>
+							<Scene key="myFriend" component={MyFriend} title="我的好友" hideNavBar/>
 
 							<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 

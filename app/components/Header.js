@@ -53,12 +53,12 @@ class Header_ extends PureComponent {
 
 
 Header_.propTypes = {
-	back: React.PropTypes.bool,
-	menu: React.PropTypes.bool,
-	title: React.PropTypes.string,
-	left: React.PropTypes.any,
-	center: React.PropTypes.any,
-	right: React.PropTypes.any,
+	back: React.PropTypes.bool,// 返回按钮
+	menu: React.PropTypes.bool, // 有菜单按钮
+	title: React.PropTypes.string, // 标题
+	left: React.PropTypes.any, // left
+	center: React.PropTypes.any, // center
+	right: React.PropTypes.any, // right
 }
 
 Header_.defaultProps = {
