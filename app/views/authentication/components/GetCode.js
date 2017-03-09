@@ -36,7 +36,7 @@ class GetCode extends PureComponent {
             this.state.text+this.state.number1
         );
         return (
-            <Button block={this.props.block} disabled={this.state.disabled}  bordered={this.props.border} style={{marginTop:this.props.top}} onPress={this.props.onPress} >
+            <Button block={this.props.block} disabled={this.state.disabled}  bordered={this.props.border} style={{marginTop: 4}} onPress={this.props.onPress} >
                 <Text>{title}</Text>
             </Button>
         )

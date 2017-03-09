@@ -129,7 +129,7 @@ const styles = {
         color:'#666'
     },
     box:{
-        height:46,
+        height:54,
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center',

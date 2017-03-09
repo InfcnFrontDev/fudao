@@ -5,9 +5,10 @@ import {theme} from "../utils/index";
 export default class List extends PureComponent {
 
 	render() {
-		let {children} = this.props;
+		let {children, style} = this.props;
+		let listStyle = Object.assign({}, styles.list, style || {});
 		return (
-			<View style={styles.list}>
+			<View style={listStyle}>
 				{children}
 			</View>
 		)
@@ -16,11 +17,15 @@ export default class List extends PureComponent {
 }
 
 
-const styles = StyleSheet.create({
+const styles = {
 	list: {
 		backgroundColor: '#FFFFFF',
 		borderTopWidth: theme.borderWidth,
 		borderBottomWidth: theme.borderWidth,
 		borderColor: '#cbd2d9',
 	}
-})
+}
+
+List.propTypes = {
+	style: React.PropTypes.object
+}
