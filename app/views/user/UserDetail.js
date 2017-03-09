@@ -1,27 +1,14 @@
 import React, {PureComponent} from "react";
 import {Alert} from "react-native";
 import {connect} from "react-redux";
-import {Actions, ActionConst} from "react-native-router-flux";
 import {Container, Content, List, Separator} from "../../components/index";
 import Header from "../../components/header/BaseHeader";
-import {Body, Right, Switch, ListItem, Text} from "native-base";
-import {logout} from "../../actions/user";
-
-const list = [
-	{
-		name: 'Amy Farha',
-		subtitle: 'Vice President'
-	},
-	{
-		name: 'Chris Jackson',
-		subtitle: 'Vice Chairman'
-	},
-]
+import {Body, Left, Right, ListItem, Text, Button, Thumbnail, Icon} from "native-base";
 
 /**
- * 系统设置
+ * 用户详情
  */
-class Settings extends PureComponent {
+class UserDetail extends PureComponent {
 	render() {
 		return (
 			<Container>
@@ -29,50 +16,66 @@ class Settings extends PureComponent {
 				<Content gray>
 					<Separator/>
 					<List>
-						<ListItem last>
+						<ListItem avatar last>
+							<Left>
+								<Thumbnail square
+										   source={{uri:'http://touxiang.qqzhi.com/uploads/2012-11/1111135112148.jpg'}}/>
+							</Left>
 							<Body>
-							<Text>是否推送</Text>
+							<Text>
+								海龟大神
+								&nbsp;
+								<Icon name="man" style={styles.manIcon}/>
+								<Icon name="woman" style={styles.womanIcon}/>
+							</Text>
+
+							<Text note style={{paddingBottom:20}}>昵称：杨可可</Text>
 							</Body>
 							<Right>
-								<Switch value={true}/>
 							</Right>
 						</ListItem>
 					</List>
 					<Separator/>
 					<List>
-						<ListItem last onPress={this.quitAlert.bind(this)}>
-							<Body style={{alignItems: 'center'}}>
-							<Text>退出</Text>
+						<ListItem last>
+							<Body>
+							<Text>设置备注和标签</Text>
 							</Body>
+							<Right>
+							</Right>
 						</ListItem>
 					</List>
+					<Separator/>
+					<Button block style={styles.button}>
+						<Text>添加为我的好友</Text>
+					</Button>
 				</Content>
 			</Container>
 		);
 	}
-
-	quitAlert() {
-		Alert.alert('提示信息', '确定要退出吗？', [
-			{text: '确定', onPress: () => this.quit()},
-			{text: '取消'},
-		])
-	}
-
-	quit() {
-		this.props.dispatch(logout());
-		Actions.login({
-			type: ActionConst.POP_AND_REPLACE
-		});
-	}
 }
 
 const styles = {
-	list: {
-		marginTop: 20,
-		borderTopWidth: 0,
-		borderBottomWidth: 0
+	button: {
+		marginLeft: 15,
+		marginRight: 15
 	},
-	listItem: {}
+	manIcon:{
+		fontSize: 16,
+	},
+	womanIcon:{
+		fontSize: 16,
+	},
+
 };
+
+UserDetail.propTypes = {
+	userId: React.PropTypes.string, // 用户ID
+}
+
+UserDetail.defaultProps = {
+	userId: '867200022156895,86720002215690321000493'
+}
+
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps)(Settings);
+export default connect(mapStateToProps)(UserDetail);
