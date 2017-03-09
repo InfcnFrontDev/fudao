@@ -53,7 +53,7 @@ import Webview from "./views/webview/";
 //Dynamic
 import NewDynamic from "./views/dynamic/NewDynamic";
 // User
-/*import UserDetail from "./views/user/UserDetail";*/
+import UserDetail from "./views/user/UserDetail";
 
 
 const AppRouter = connect()(Router);
@@ -108,7 +108,7 @@ class AppNavigator extends Component {
 
 							<Scene key="start" initial component={Start} title="启动开始页" hideNavBar/>
 							<Scene key="login"   component={Login} title="登录" hideNavBar/>
-							<Scene key="register" component={Register} title="注册" hideNavBar/>
+							<Scene key="register"  component={Register} title="注册" hideNavBar/>
 							<Scene key="setPassword"  component={SetPassword} title="设置密码" hideNavBar/>
 							<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 							<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
@@ -163,7 +163,7 @@ class AppNavigator extends Component {
 							<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
 
 							{/*用户*/}
-							{/*<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar />*/}
+							<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
 						</Scene>
 					</AppRouter>
 				</Drawer>
