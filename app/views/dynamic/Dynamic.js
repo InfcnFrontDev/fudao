@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Title, Content, Left, Right, Body,Text,Button} from "native-base";
 import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo} from "react-native";
-import styles from "./styles";
+import styles from "./assets/styles";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment'
 import {Actions} from "react-native-router-flux";

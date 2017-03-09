@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Text} from "native-base";
 import {View,Image,ToastAndroid} from "react-native";
-import styles from "../styles";
+import styles from "../assets/styles";
 
 /**
 * 动态
