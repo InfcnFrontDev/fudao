@@ -52,14 +52,14 @@ class GetCode extends PureComponent {
     interval(){
         let self=this;
         let {number} = self.state;
-        var c=setInterval(function(){
+        let timer = setInterval(function(){
             if(number==1){
                 self.setState({
                     disabled:false,
                     text:self.props.title,
                     number1:''
                 });
-                clearInterval(c);
+                clearInterval(timer);
             }else{
                 number--;
                 if(number>=10){
@@ -73,7 +73,11 @@ class GetCode extends PureComponent {
                 }
 
             }
-        },1000)
+        },1000);
+        this.timer = timer;
+    }
+    clearTimer(){
+        clearInterval(this.timer);
     }
 }
 

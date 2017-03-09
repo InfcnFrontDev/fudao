@@ -13,7 +13,7 @@ class DynamicCommon extends Component {
 	}
 
 	render() {
-		var id=259;
+		var id=305;
 		if(this.props.info.photo){
 			id = this.props.info.photo;
 		}
@@ -23,9 +23,9 @@ class DynamicCommon extends Component {
           <Image source={{uri: 'http://192.168.10.58:9095/api/BaseApi/getImage?id='+id+'&w=&h='}}  style={styles.dynamicTouxiang}/>
         </View>
         <View style={styles.dynamicDetail}>
-          <Text style={styles.dynamicName}>{this.props.info.name}</Text>
+          <Text style={styles.dynamicName}>{this.props.info.nick}</Text>
           <Text style={styles.dynamicContent}>{this.props.info.content}</Text>
-          <DynamicImage urls={this.props.info.urls}/>
+          <DynamicImage urls={this.props.info.dynamicImg}/>
         </View>
       </View>
     )
@@ -47,12 +47,12 @@ const styles={
 	},
 	dynamicName:{
 		color:'#5E7192',
-		fontSize:theme.DefaultFontSize,
+		fontSize:theme.DefaultFontSize-2,
 	},
 	dynamicContent:{
 		marginTop:6,
 		color:'#282828',
-		fontSize:theme.DefaultFontSize,
+		fontSize:theme.DefaultFontSize-2,
 	},
 }
 

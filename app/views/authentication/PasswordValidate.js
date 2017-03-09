@@ -4,9 +4,10 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Text,  Button,Item,Label,Input} from "native-base";
+import {Container,Content,Text,  Button,Item,Label,Input} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import Header from "../../components/header/BaseHeader";
+import {showLoading, hideLoading} from "../../actions/loading";
 import {theme,request,urls,tools} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput";
@@ -39,7 +40,7 @@ class Register extends PureComponent {  // eslint-disable-line
                         <View style={styles.border}>
                             <Text>验证码</Text>
                         </View>
-                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric'
+                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            code:value
@@ -60,24 +61,23 @@ class Register extends PureComponent {  // eslint-disable-line
         if(phone.toString().length<11||phone.toString().length>11){
             tools.toast("请填入正确的手机号");
         }else{
-            const {dispatch} = this.props;
-            dispatch(showLoading());
             request.getJson(urls.apis.AUTH_CHECK_PHONE,{
                     phone:phone ,
                     type:'findPwd'
                 }).then((data)=>{
-                dispatch(hideLoading());
                     if(data.success && "existence" == data.msg) {
-                        tools.toast("手机号已被注册");
+
                     } else if(data.success && "existence" != data.msg) {
                         tools.toast("正在发送验证码...");
+                        this._getGode._click();
                     }
                 },(error)=>{
-                dispatch(hideLoading());
+
                 })
         }
     }
     _find(){
+        const {dispatch} = this.props;
         let {phone,code} = this.state;
         if(phone==""){
             ToastAndroid.show("手机号不能为空", ToastAndroid.SHORT);
@@ -85,19 +85,25 @@ class Register extends PureComponent {  // eslint-disable-line
             ToastAndroid.show("验证码不能为空", ToastAndroid.SHORT);
         }else{
             /*接口*/
+            dispatch(showLoading());
             request.getJson(urls.apis.AUTH_CHECK_CODE,{
                     account: phone,
                     code: code,
                     type: 'findPwd',
-                },function(data){
+                }).then((data)=>{
+                    dispatch(hideLoading());
                     if(data.success) {
+                        this._getGode.clearTimer();
                         Actions['rebuildPassword']({phone:phone});
                     } else {
                         tools.toast("验证码错误...");
+                        this.setState({
+                            code:'',
+                        })
                     }
-                }
-            )
-
+                },(error)=>{
+                    dispatch(hideLoading());
+                })
         }
     }
 }

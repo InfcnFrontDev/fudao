@@ -34,7 +34,10 @@ const urls = {
 		// 健康圈
 		HEALTH_CIRCLE: webPath + 'healthCircle.html',
 		// 生命周期
-		LIFE_CYCLE: webPath + 'lifeCycle.html'
+		LIFE_CYCLE: webPath + 'lifeCycle.html',
+		// 我的位置
+		MY_LOCATION: webPath + 'myLocation.html'
+
 	},
 	/**
 	 *  接口
@@ -83,7 +86,7 @@ const urls = {
 		//登录
 		AUTH_LOGIN : apiPath + "app/accountInfoAction!login.action",
 		//设置新密码
-		AUTH_NEW_PASSWORD : apiPath +"app/accountInfoAction!retrievePassword.action"
+		AUTH_NEW_PASSWORD : apiPath +"app/accountInfoAction!retrievePassword.action",
 
 
 
@@ -108,6 +111,9 @@ const urls = {
 		 //获取用户信息
 		 USER_INFO: apiPath + 'userinfo',*/
 
+
+		 	// 动态 ---------------------------------------------------------
+			DYNAMIC_LIST:apiPath + 'app/friendDynamicAction!getDynamics.action'
 	}
 
 };

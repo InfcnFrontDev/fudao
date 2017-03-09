@@ -7,8 +7,7 @@ class TabListMeridian extends PureComponent {
 
     render() {
         return (
-
-          <View style={styles.tablist}>
+          <View>
           <Text>fffff</Text>
           </View>
         )
@@ -18,6 +17,7 @@ class TabListMeridian extends PureComponent {
 const styles ={
   tablist:{
     flex:1,
+    backgroundColor:'#ff0'
   }
 }
 export default (TabListMeridian);

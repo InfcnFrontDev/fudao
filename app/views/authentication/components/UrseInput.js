@@ -32,7 +32,7 @@ class UrseInput extends PureComponent {
                 <View style={styles.border}>
                     <Text>{this.props.text}</Text>
                 </View>
-                <TextInput style={{flex:1}} underlineColorAndroid='transparent' placeholder={this.props.placeholder} keyboardType={key} secureTextEntry={this.props.secureTextEntry}
+                <TextInput style={{flex:1}} underlineColorAndroid='transparent' placeholder={this.props.placeholder} keyboardType={key} secureTextEntry={this.props.secureTextEntry} value={this.props.value}
                            onChangeText={this.props.onChangeText}
                 ></TextInput>
             </View>

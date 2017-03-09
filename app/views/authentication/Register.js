@@ -3,7 +3,7 @@
  */
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
+import {Actions, ActionConst} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import {showLoading, hideLoading} from "../../actions/loading";
@@ -43,7 +43,7 @@ class Register extends PureComponent {  // eslint-disable-line
                         <View style={styles.border}>
                             <Text>验证码</Text>
                         </View>
-                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric'
+                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            code:value
@@ -64,17 +64,13 @@ class Register extends PureComponent {  // eslint-disable-line
     }
     _yzm(){
         let phone = this.state.phone;
-
         if(!checkPhone(phone)){
             tools.toast("请填入正确的手机号");
         }else{
-            const {dispatch} = this.props;
-            dispatch(showLoading());
             request.getJson(urls.apis.AUTH_CHECK_PHONE,{
                     phone:phone ,
                     type:'reg'
                 }).then((data)=>{
-                    dispatch(hideLoading());
                     if(data.success && "existence" == data.msg) {
                         tools.toast("手机号已被注册");
                     } else if(data.success && "existence" != data.msg) {
@@ -82,14 +78,14 @@ class Register extends PureComponent {  // eslint-disable-line
                         this._getGode._click();
                     }
                 },(error)=>{
-                    dispatch(hideLoading());
+
                 })
 
         }
     }
     _zhuce(){
         let {phone,code} = this.state;
-
+        const {dispatch} = this.props;
         if(phone==""){
             tools.toast("手机号不能为空");
 
@@ -97,18 +93,26 @@ class Register extends PureComponent {  // eslint-disable-line
             tools.toast("验证码不能为空");
         }else{
             /*接口*/
+            dispatch(showLoading());
             request.getJson(urls.apis.AUTH_CHECK_CODE,{
                     account: phone,
                     code: code,
                     type: "reg"
                 }).then((data)=>{
+                    dispatch(hideLoading());
                     if(data.success) {
-                        Actions['setPassword']({phone:phone});
+                        this._getGode.clearTimer();
+                        Actions['setPassword']({
+                            phone:phone,
+                        });
                     } else {
                         tools.toast("验证码错误...");
+                        this.setState({
+                            code:''
+                        })
                     }
                 },(error)=>{
-
+                    dispatch(hideLoading());
                 })
         }
     }

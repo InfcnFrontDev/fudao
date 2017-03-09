@@ -27,13 +27,13 @@ class SetPassword extends PureComponent {
             <Container>
                 <Header {...this.props}></Header>
                 <Content padder>
-                    <UrseInput text="设置密码" placeholder={"至少6位数字/字母/_"} secureTextEntry={true}
+                    <UrseInput text="设置密码" placeholder={"至少6位，由数字/字母/_组成"} secureTextEntry={true}  value={this.state.password}
                                onChangeText={(value)=>{
                                     this.setState({
                                         password:value
                                     })
                     }}/>
-                    <UrseInput text="重复密码" secureTextEntry={true}
+                    <UrseInput text="重复密码" secureTextEntry={true} value={this.state.password1}
                                onChangeText={(value)=>{
                                    this.setState({
                                        password1:value
@@ -47,8 +47,14 @@ class SetPassword extends PureComponent {
     _yzPassword(){
         let {password,password1} = this.state;
         let {phone} = this.props;
-        if(password1!=password){
+        if(password==""&& password==""){
+            tools.toast("请设置密码");
+        }else if(password1!=password){
             tools.toast("两次输入密码不一致");
+            this.setState({
+                password:'',
+                password1:''
+            })
         }else{
             const {dispatch} = this.props;
             dispatch(showLoading());

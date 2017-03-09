@@ -7,11 +7,10 @@ import {request,urls,} from "../../../utils/";
 export function login(phoneVale,passwordVale){
         let  phone=phoneVale;
         let  password=passwordVale;
-
         request.getJson(urls.apis.AUTH_LOGIN,{
             account:phone,
             pwd:hex_md5(phone+password),
-        },function(data){
+        }).then((data)=>{
             if(data.success) {
                 var userInformation = data.obj.userInformation;
                 if(userInformation != undefined) { //基本信息已经添加完成
@@ -22,6 +21,8 @@ export function login(phoneVale,passwordVale){
             }else{
                 ToastAndroid.show("密码不正确", ToastAndroid.SHORT);
             }
+        },(error)=>{
+
         })
 
 }

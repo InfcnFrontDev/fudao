@@ -29,13 +29,13 @@ class RebuildPassword extends PureComponent {
             <Container>
                 <Header {...this.props}></Header>
                 <Content padder>
-                    <UrseInput text="新密码" placeholder={""}
+                    <UrseInput text="新密码" placeholder={"至少6位，由数字/字母/_组成"}  value={this.state.password}
                                onChangeText={(value)=>{
                                    this.setState({
                                        password:value
                                    })
                                }}/>
-                    <UrseInput text="重复密码"
+                    <UrseInput text="重复密码" value={this.state.password1}
                                onChangeText={(value)=>{
                                    this.setState({
                                        password1:value
@@ -48,9 +48,12 @@ class RebuildPassword extends PureComponent {
     }
     _yzPassword(){
         let {phone,password,password1}= this.state;
-        if(password1!=password){
+        if(password==""&& password==""){
+            tools.toast("请设置密码");
+        }else if(password1!=password){
             tools.toast("两次输入密码不一致");
             this.setState({
+                password:'',
                 password1:''
             })
         }else{
@@ -74,11 +77,7 @@ class RebuildPassword extends PureComponent {
 
     }
 }
-const styles = {
 
-
-
-};
 
 const mapStateToProps = state => ({});
 export default connect(mapStateToProps)(RebuildPassword);

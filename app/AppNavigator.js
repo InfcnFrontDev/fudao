@@ -107,10 +107,11 @@ class AppNavigator extends Component {
 							/>
 
 							{/*启动注册*/}
+
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
-							<Scene key="login" component={Login} title="登录" hideNavBar/>
-							<Scene key="register" component={Register} title="注册" hideNavBar initial/>
-							<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
+							<Scene key="login"   initialcomponent={Login} title="登录" hideNavBar/>
+							<Scene key="register"  component={Register} title="注册" hideNavBarinitial/>
+							<Scene key="setPassword"  component={SetPassword} title="设置密码" hideNavBar/>
 							<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 							<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
 							<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
@@ -134,7 +135,6 @@ class AppNavigator extends Component {
 							<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务" hideNavBar/>
 							<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
 								   hideNavBar/>
-
 							<Scene key="searchUser" component={SearchUser} title="用户" hideNavBar/>
 
 

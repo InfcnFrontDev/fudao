@@ -240,7 +240,8 @@ var GiftedListView = React.createClass({
         isRefreshing: true,
       });
       // this._setPage(1);
-      this.props.onFetch(1, this._postRefresh, options,false);
+
+      this.props.onFetch(1, this._postRefresh, {refresh:true},false);
     }
   },
 
@@ -262,7 +263,7 @@ var GiftedListView = React.createClass({
       this.setState({
         paginationStatus: 'fetching',
       });
-      this.props.onFetch(1, this._postPaginate, {});
+      this.props.onFetch(1, this._postPaginate, {loadMore:true});
     }
   },
 
@@ -381,6 +382,7 @@ var GiftedListView = React.createClass({
       alignItems: 'center',
       // backgroundColor: '#FF0',
       marginBottom:10,
+      marginTop:10,
     },
     defaultView: {
       justifyContent: 'center',
