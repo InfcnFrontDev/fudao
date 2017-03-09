@@ -14,7 +14,7 @@ export default {
   drawerCover: {
     alignSelf: 'stretch',
     // resizeMode: 'cover',
-    height: deviceHeight / 3.5,
+    height: deviceHeight / 3,
     width: null,
     position: 'relative',
     marginBottom: 10,

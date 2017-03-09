@@ -1,8 +1,11 @@
 import React, {PureComponent} from "react";
 import {Alert} from "react-native";
+import {connect} from "react-redux";
+import {Actions} from "react-native-router-flux";
 import {Container, Content, List, Separator} from "../../components/index";
 import Header from "../../components/header/BaseHeader";
 import {Body, Right, Switch, ListItem, Text} from "native-base";
+import {logout} from "../../actions/user";
 
 const list = [
 	{
@@ -23,7 +26,7 @@ class Settings extends PureComponent {
 		return (
 			<Container>
 				<Header {...this.props}/>
-				<Content>
+				<Content gray>
 					<Separator/>
 					<List>
 						<ListItem last>
@@ -37,7 +40,7 @@ class Settings extends PureComponent {
 					</List>
 					<Separator/>
 					<List>
-						<ListItem last onPress={()=>{Alert.alert('提示信息', '确定要退出吗？')}}>
+						<ListItem last onPress={this.quitAlert.bind(this)}>
 							<Body style={{alignItems:'center'}}>
 							<Text>退出</Text>
 							</Body>
@@ -48,6 +51,17 @@ class Settings extends PureComponent {
 		);
 	}
 
+	quitAlert() {
+		Alert.alert('提示信息', '确定要退出吗？', [
+			{text: '确定', onPress: () => this.quit()},
+			{text: '取消'},
+		])
+	}
+
+	quit() {
+		this.props.dispatch(logout());
+		Actions.login();
+	}
 }
 
 const styles = {
@@ -58,5 +72,5 @@ const styles = {
 	},
 	listItem: {}
 };
-
-export default (Settings);
+const mapStateToProps = state => ({});
+export default connect(mapStateToProps)(Settings);
