@@ -3,7 +3,7 @@
  */
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
+import {Actions, ActionConst} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import {showLoading, hideLoading} from "../../actions/loading";
@@ -43,7 +43,7 @@ class Register extends PureComponent {  // eslint-disable-line
                         <View style={styles.border}>
                             <Text>验证码</Text>
                         </View>
-                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric'
+                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            code:value
@@ -101,9 +101,15 @@ class Register extends PureComponent {  // eslint-disable-line
                 }).then((data)=>{
                     dispatch(hideLoading());
                     if(data.success) {
-                        Actions['setPassword']({phone:phone});
+                        this._getGode.clearTimer();
+                        Actions['setPassword']({
+                            phone:phone,
+                        });
                     } else {
                         tools.toast("验证码错误...");
+                        this.setState({
+                            code:''
+                        })
                     }
                 },(error)=>{
                     dispatch(hideLoading());

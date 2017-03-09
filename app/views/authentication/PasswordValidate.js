@@ -4,7 +4,7 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Text,  Button,Item,Label,Input} from "native-base";
+import {Container,Content,Text,  Button,Item,Label,Input} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import Header from "../../components/header/BaseHeader";
 import {showLoading, hideLoading} from "../../actions/loading";
@@ -40,7 +40,7 @@ class Register extends PureComponent {  // eslint-disable-line
                         <View style={styles.border}>
                             <Text>验证码</Text>
                         </View>
-                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric'
+                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            code:value
@@ -66,9 +66,10 @@ class Register extends PureComponent {  // eslint-disable-line
                     type:'findPwd'
                 }).then((data)=>{
                     if(data.success && "existence" == data.msg) {
-                        tools.toast("手机号已被注册");
+
                     } else if(data.success && "existence" != data.msg) {
                         tools.toast("正在发送验证码...");
+                        this._getGode._click();
                     }
                 },(error)=>{
 
@@ -92,9 +93,13 @@ class Register extends PureComponent {  // eslint-disable-line
                 }).then((data)=>{
                     dispatch(hideLoading());
                     if(data.success) {
+                        this._getGode.clearTimer();
                         Actions['rebuildPassword']({phone:phone});
                     } else {
                         tools.toast("验证码错误...");
+                        this.setState({
+                            code:'',
+                        })
                     }
                 },(error)=>{
                     dispatch(hideLoading());
