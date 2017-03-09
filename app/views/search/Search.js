@@ -23,7 +23,7 @@ class Search extends PureComponent {
 	}
 
 	render() {
-		let {symptomProblem, information, dailyLife, friendsCircle, healthCare, offlineService} = this.props.search,
+		let {symptomProblem, information, dailyLife, friendsCircle, healthCare, offlineService} = this.props._onSearch,
 			results = [];
 		if (symptomProblem.list.length > 0) {
 			results.push(<SymptomProblemResult key="symptomproblem" list={symptomProblem.list}/>)
@@ -56,6 +56,6 @@ class Search extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-	search: state.search,
+	search: state._onSearch,
 });
 export default connect(mapStateToProps)(Search);

@@ -111,6 +111,6 @@ const styles = {
 };
 
 const mapStateToProps = state => ({
-	search: state.search,
+	search: state._onSearch,
 });
 export default connect(mapStateToProps)(Category);
