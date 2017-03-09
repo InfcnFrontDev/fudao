@@ -18,7 +18,6 @@ import {login} from "../../actions/user";
  */
 class Login extends PureComponent {
 
-
 	state = {
 		isFetching: false,
 		phone: '',
@@ -59,8 +58,6 @@ class Login extends PureComponent {
 
 	_login() {
 		let {phone, password} = this.state;
-		phone = '15901097191';
-		password = '123456';
 
 		if (phone == '') {
 			tools.toast("用户名不能为空");
@@ -74,6 +71,7 @@ class Login extends PureComponent {
 			tools.toast("密码不能为空");
 			return;
 		}
+
 		this.showLoading();
 
 		// 提交登录

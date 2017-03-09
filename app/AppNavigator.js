@@ -52,6 +52,8 @@ import Message from "./views/message/message";
 import Webview from "./views/webview/";
 //Dynamic
 import NewDynamic from "./views/dynamic/NewDynamic";
+// User
+import UserDetail from "./views/user/UserDetail";
 
 
 const AppRouter = connect()(Router);
@@ -99,7 +101,8 @@ class AppNavigator extends Component {
 
 							{/*首页*/}
 							<Scene key="index" component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar
-								   initial/>
+
+							/>
 
 							{/*启动注册*/}
 
@@ -158,6 +161,9 @@ class AppNavigator extends Component {
 
 							{/*其他*/}
 							<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
+
+							{/*用户*/}
+							<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar initial/>
 						</Scene>
 					</AppRouter>
 				</Drawer>

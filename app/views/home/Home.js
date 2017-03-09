@@ -14,7 +14,6 @@ class Home extends PureComponent {
 		super(props);
 	}
 
-
 	render() {
 		let {user} = this.props;
 		return (
@@ -26,7 +25,6 @@ class Home extends PureComponent {
 				<Content style={styles.content}>
 					<Headline />
 					<MyEnter />
-					<Text>{user.id}</Text>
 				</Content>
 			</Container>
 		)

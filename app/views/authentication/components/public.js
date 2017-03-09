@@ -15,7 +15,7 @@ export function login(phoneVale,passwordVale){
             if(data.success) {
                 var userInformation = data.obj.userInformation;
                 if(userInformation != undefined) { //基本信息已经添加完成
-                    Actions['search']()
+                    Actions['_onSearch']()
                 } else { //没有基本信息表示第一次登录需要添写信息
                     Actions['startInformation']()
                 }

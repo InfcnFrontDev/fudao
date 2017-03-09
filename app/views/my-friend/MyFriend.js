@@ -1,12 +1,12 @@
 import React, {PureComponent} from "react";
 import {ScrollView, View, ToastAndroid} from "react-native";
 import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, PullView} from "../../components/index";
 import {Button, Icon} from "native-base";
 import FriendList from "./components/FriendList";
-import * as friendActions from "../../actions/friend";
+import {fetchMyFriendsList} from "../../actions/friend";
+import {tools} from "../../utils/index";
 
 /**
  * 我的好友
@@ -14,7 +14,7 @@ import * as friendActions from "../../actions/friend";
 class MyFriend extends PureComponent {
 
 	render() {
-		let {isFetching, friendList} = this.props.friend;
+		let {isFetching, friendList} = this.props;
 		return (
 			<Container>
 				<Header back {...this.props} rightCmp={
@@ -32,27 +32,24 @@ class MyFriend extends PureComponent {
 	}
 
 	componentDidMount() {
-		let {userInfo, fetchMyFriendsList, friend} = this.props;
-		if (friend.friendList.length == 0) {
-			fetchMyFriendsList(userInfo.id);
+		let {dispatch, user, friendList} = this.props;
+		if (friendList.length == 0) {
+			dispatch(fetchMyFriendsList(user.id));
 		}
 	}
 
 	_onRefresh() {
-		let {userInfo, fetchMyFriendsList} = this.props;
-		fetchMyFriendsList(userInfo.id, () => {
-			ToastAndroid.show('刷新成功', ToastAndroid.SHORT);
-		});
+		let {user, dispatch} = this.props;
+		dispatch(fetchMyFriendsList(user.id, () => {
+			tools.toast('刷新成功');
+		}));
 	}
 }
 
 const styles = {}
 
 const mapStateToProps = state => ({
-	userInfo: state.user.userInfo,
-	friend: state.friend,
+	user: state.userStore.user,
+	...state.friendStore,
 });
-const mapDispatchToProps = dispatch => ({
-	...bindActionCreators(friendActions, dispatch)
-});
-export default connect(mapStateToProps, mapDispatchToProps)(MyFriend);
+export default connect(mapStateToProps)(MyFriend);

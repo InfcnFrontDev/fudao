@@ -1,4 +1,4 @@
-import {ToastAndroid} from "react-native";
+import tools from "./tools";
 /**
  * network request
  */
@@ -15,15 +15,8 @@ const request = {
 	 * @param params 请求类型，type：json
 	 * @param callback 回调方法， type: function
 	 */
-	getJson(url, params, callback){
-		let len = arguments.length;
-		if (len <= 1) {
-			console.error('arguments length mismatch.');
-		} else if (len == 2) {
-			this.fetchGet(url, null, params, 'json');
-		} else {
-			this.fetchGet(url, params, callback, 'json');
-		}
+	getJson(url, params){
+		return this.fetchGet(url, params, 'json');
 	},
 
 	/**
@@ -35,20 +28,12 @@ const request = {
 	 *
 	 * @param url 请求地址，type：string
 	 * @param params 请求类型，type：json
-	 * @param callback 回调方法， type: function
 	 */
-	getText(url, params, callback){
-		let len = arguments.length;
-		if (len <= 1) {
-			console.error('arguments length mismatch.');
-		} else if (len == 2) {
-			this.fetchGet(url, null, params, 'text');
-		} else {
-			this.fetchGet(url, params, callback, 'text');
-		}
+	getText(url, params){
+		return this.fetchGet(url, params, 'text');
 	},
 
-	fetchGet(url, params, callback, type){
+	fetchGet(url, params, type){
 		if (params) {
 			let paramsArray = []
 			Object.keys(params).forEach(key => paramsArray.push(key + '=' + encodeURIComponent(params[key])))
@@ -60,27 +45,30 @@ const request = {
 			}
 		}
 
-		console.log('GET:' + url);
+		// console.log('GET:' + url);
 
-		fetch(url, {
-			method: 'GET',
-			headers: {
-				'Cache-Control': 'no-cache',
-			}
-		})
-			.then((response) => {
-				if (type == 'text') {
-					return response.text();
+		return new Promise(function (resolve, reject) {
+			fetch(url, {
+				method: 'GET',
+				headers: {
+					'Cache-Control': 'no-cache',
 				}
-				return response.json();
 			})
-			.then((responseData) => callback(responseData))
-			.catch((error) => {
-				console.log(error);
-				ToastAndroid.show('服务器异常，请重试!', ToastAndroid.SHORT);
-			})
-			.done();
+				.then((response) => type == 'text' ? response.text() : response.json())
+				.then((result) => {
+					if (resolve)
+						resolve(result)
+				})
+				.catch((error) => {
+					console.log(error);
+					tools.toast('服务器异常，请重试!');
+					if (reject) {
+						reject(error);
+					}
+				}).done();
+		})
 	},
+
 
 	/**
 	 * POST请求，返回Json数据。
@@ -95,17 +83,8 @@ const request = {
 	 * @param body 请求类型，type：string or json
 	 * @param callback 回调方法， type: function
 	 */
-	postJson(url, headers, body, callback){
-		let len = arguments.length;
-		if (len <= 1) {
-			console.error('arguments length mismatch.');
-		} else if (len == 2) {
-			this.fetchPost(url, null, null, headers, 'json');
-		} else if (len == 3) {
-			this.fetchPost(url, null, headers, body, 'json');
-		} else {
-			this.fetchPost(url, headers, body, callback, 'json');
-		}
+	postJson(url, params){
+		return this.fetchPost(url, params, 'json');
 	},
 
 	/**
@@ -121,44 +100,50 @@ const request = {
 	 * @param body 请求类型，type：string or json
 	 * @param callback 回调方法， type: function
 	 */
-	postText(url, headers, body, callback){
-		let len = arguments.length;
-		if (len <= 1) {
-			console.error('arguments length mismatch.');
-		} else if (len == 2) {
-			this.fetchPost(url, null, null, headers, 'text');
-		} else if (len == 3) {
-			this.fetchPost(url, null, headers, body, 'text');
-		} else {
-			this.fetchPost(url, headers, body, callback, 'text');
-		}
+	postText(url, params){
+		return this.fetchPost(url, params, 'text');
 	},
 
-	fetchPost(url, headers, body, callback, type){
+	fetchPost(url, params, type){
+		let headers = {},
+			body = null;
 
-		if (body) {
-			if (typeof body == 'object' && body.constructor == Object) {
-				body = JSON.stringify(body);
+		if (params) {
+			if (typeof params == 'object' && params.constructor == Object) {
+				let paramsArray = []
+				Object.keys(params).forEach(key => paramsArray.push(key + '=' + encodeURIComponent(params[key])))
+				body = paramsArray.join('&');
+				headers = {
+					"Content-Type": "application/x-www-form-urlencoded"
+				};
+			} else {
+				body = params;
 			}
 		}
 
-		fetch(url, {
-			method: 'POST',
-			headers,
-			body,
-		})
-			.then((response) => {
-				if (type == 'text') {
-					return response.text();
-				}
-				return response.json();
-			})
-			.then((responseData) => callback(responseData))
-			.catch((error) => {
-				console.error(error);
-			})
-			.done();
 
+		// console.log('GET:' + url);
+		// console.log('Body:' + body);
+
+		return new Promise(function (resolve, reject) {
+			fetch(url, {
+				method: 'POST',
+				headers,
+				body
+			})
+				.then((response) => type == 'text' ? response.text() : response.json())
+				.then((result) => {
+					if (resolve)
+						resolve(result)
+				})
+				.catch((error) => {
+					console.log(error);
+					tools.toast('服务器异常，请重试!');
+					if (reject) {
+						reject(error);
+					}
+				}).done();
+		})
 	},
 };
 export default request;

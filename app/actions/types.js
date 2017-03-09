@@ -10,6 +10,10 @@ export const CHANGE_MATERIAL = 'CHANGE_MATERIAL';
 export const CHANGE_PLATFORM = 'CHANGE_PLATFORM';
 
 
+// loading ////////////////////////////////////////
+export const LOADING_SHOW = 'LOADING_SHOW';
+export const LOADING_HIDE = 'LOADING_HIDE';
+
 // user actions ////////////////////////////////////////
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
