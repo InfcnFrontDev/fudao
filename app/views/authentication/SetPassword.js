@@ -46,7 +46,7 @@ class SetPassword extends PureComponent {
         let {password,password1} = this.state;
         let {phone} = this.props;
         if(password1!=password){
-            ToastAndroid.show("两次输入密码不一致", ToastAndroid.SHORT);
+            tools.toast("两次输入密码不一致");
         }else{
             request.getJson(urls.apis.AUTH_REG,{
                         appid:tools.uuid(),
@@ -58,7 +58,7 @@ class SetPassword extends PureComponent {
                             Actions['passwordSuccess']({text:"恭喜您注册成功",phone:phone,password:password})
                         }, 1000);
                     }else{
-                        ToastAndroid.show("注册失败..", ToastAndroid.SHORT);
+                        tools.toast("注册失败");
                     }
                 }
             )

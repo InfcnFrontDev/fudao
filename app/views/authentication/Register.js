@@ -7,7 +7,7 @@ import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import Header from "../../components/header/BaseHeader";
-import {theme,request,urls} from "../../utils/";
+import {theme,request,urls,tools} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput"
 import {checkPhone} from "./components/public";
@@ -64,7 +64,7 @@ class Register extends PureComponent {  // eslint-disable-line
     _yzm(){
         let phone = this.state.phone;
         if(!checkPhone(phone)){
-            ToastAndroid.show("请填入正确的手机号", ToastAndroid.SHORT);
+            tools.toast("请填入正确的手机号");
         }else{
             request.getJson(urls.apis.AUTH_CHECK_PHONE,{
                     phone:phone ,
@@ -72,9 +72,9 @@ class Register extends PureComponent {  // eslint-disable-line
                 },function(data){
 
                     if(data.success && "existence" == data.msg) {
-                        ToastAndroid.show("手机号已被注册", ToastAndroid.SHORT);
+                        tools.toast("手机号已被注册");
                     } else if(data.success && "existence" != data.msg) {
-                        ToastAndroid.show("正在发送验证码...", ToastAndroid.SHORT);
+                        tools.toast("正在发送验证码");
                         this._getGode._click();
                     }
                 }.bind(this)
@@ -85,20 +85,21 @@ class Register extends PureComponent {  // eslint-disable-line
         let {phone,code} = this.state;
 
         if(phone==""){
-            ToastAndroid.show("手机号不能为空", ToastAndroid.SHORT);
+            tools.toast("手机号不能为空");
+
         }else if(code==""){
-            ToastAndroid.show("验证码不能为空", ToastAndroid.SHORT);
+            tools.toast("验证码不能为空");
         }else{
             /*接口*/
             request.getJson(urls.apis.AUTH_CHECK_CODE,{
                     account: phone,
                     code: code,
                     type: "reg"
-                },function(data){
+                }).then(),function(data){
                     if(data.success) {
                         Actions['setPassword']({phone:phone});
                     } else {
-                        ToastAndroid.show("验证码错误...", ToastAndroid.SHORT);
+                        tools.toast("验证码错误...");
                     }
                 }
             )

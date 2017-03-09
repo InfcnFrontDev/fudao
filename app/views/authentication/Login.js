@@ -77,10 +77,10 @@ class Login extends PureComponent {
 		this.showLoading();
 
 		// 提交登录
-		request.getJson(urls.apis.USER_LOGIN, {
+		request.getJson(urls.apis.AUTH_LOGIN, {
 				account: phone,
 				pwd: hex_md5(phone + password),
-			}, (data) => {
+			}).then((data) => {
 				this.hideLoading();
 				if (data.success) {
 					tools.toast("登录成功");
@@ -96,7 +96,7 @@ class Login extends PureComponent {
 					tools.toast("密码错误");
 				}
 			}
-		)
+		);
 	}
 
 	showLoading() {

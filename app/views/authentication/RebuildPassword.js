@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body, Text, Button,Form} from "native-base";
 import {View,TextInput,ToastAndroid} from "react-native";
-import {theme,request,urls} from "../../utils/";
+import {theme,request,urls,tools} from "../../utils/";
 import Header from "../../components/header/BaseHeader";
 import  CommitButton from "./components/CommitButton"
 import  UrseInput from "./components/UrseInput"
@@ -48,7 +48,7 @@ class RebuildPassword extends PureComponent {
     _yzPassword(){
         let {phone,password,password1}= this.state;
         if(password1!=password){
-            ToastAndroid.show("两次输入密码不一致", ToastAndroid.SHORT);
+            tools.toast("两次输入密码不一致");
             this.setState({
                 password1:''
             })
@@ -60,7 +60,7 @@ class RebuildPassword extends PureComponent {
                     if(data.success) {
                             Actions['passwordSuccess']({text:"密码设置成功",phone:phone,password:password})
                     }else{
-                        ToastAndroid.show("修改失败...", ToastAndroid.SHORT);
+                        tools.toast("修改失败...");
                     }
                 }
             )
