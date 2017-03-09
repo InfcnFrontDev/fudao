@@ -2,10 +2,10 @@ import React, {PureComponent} from "react";
 import {View, Alert, TextInput, TouchableOpacity, ToastAndroid} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Text} from "native-base";
-import {Container, Content, Loading} from "../../components/index";
+import {Container, Content,Text} from "native-base";
 import Header from "../../components/header/BaseHeader";
 import {theme} from "../../utils/";
+import {showLoading, hideLoading} from "../../actions/loading";
 import CommitButton from "./components/CommitButton";
 import UrseInput from "./components/UrseInput";
 import {checkPhone} from "./components/public";
@@ -36,8 +36,8 @@ class Login extends PureComponent {
                                        phone:value
                                    })
                                }}/>
-					<UrseInput text="密码"
-							   onChangeText={(value)=>{
+                    <UrseInput text="密码" secureTextEntry={true}
+                               onChangeText={(value)=>{
                                    this.setState({
                                        password:value
                                    })
@@ -50,16 +50,14 @@ class Login extends PureComponent {
 							<Text style={styles.text2}>忘记密码</Text>
 						</TouchableOpacity>
 					</View>
-					<Loading text={'正在登录...'} isShow={isFetching}/>
 				</Content>
 			</Container>
 		);
 	}
 
 	_login() {
+		const {dispatch} = this.props;
 		let {phone, password} = this.state;
-		phone = '15901097191';
-		password = '123456';
 
 		if (phone == '') {
 			tools.toast("用户名不能为空");
@@ -74,14 +72,15 @@ class Login extends PureComponent {
 			return;
 		}
 
-		this.showLoading();
+		dispatch(showLoading());
 
 		// 提交登录
-		request.getJson(urls.apis.USER_LOGIN, {
+		request.getJson(urls.apis.AUTH_LOGIN, {
 				account: phone,
 				pwd: hex_md5(phone + password),
-			}, (data) => {
-				this.hideLoading();
+			}).then((data) => {
+				dispatch(hideLoading());
+
 				if (data.success) {
 					tools.toast("登录成功");
 					let user = Object.assign({}, {
@@ -95,20 +94,10 @@ class Login extends PureComponent {
 				} else {
 					tools.toast("密码错误");
 				}
+			},(error) => {
+				dispatch(hideLoading());
 			}
-		)
-	}
-
-	showLoading() {
-		this.setState({
-			isFetching: true
-		})
-	}
-
-	hideLoading() {
-		this.setState({
-			isFetching: false
-		})
+		);
 	}
 
 	//根据是否有基本信息选择跳转页面
@@ -140,8 +129,6 @@ const styles = {
 		textDecorationLine: 'underline'
 	},
 };
+
 const mapStateToProps = state => ({});
 export default connect(mapStateToProps)(Login);
-
-
-

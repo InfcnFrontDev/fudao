@@ -33,7 +33,7 @@ export default {
 	CheckboxIconSize: (platform === 'ios') ? 21 : 14,
 	CheckboxIconMarginTop: (platform === 'ios') ? undefined : 1,
 	CheckboxFontSize: (platform === 'ios') ? (23 / 0.9) : 18,
-	DefaultFontSize: 14,
+	DefaultFontSize: 16,
 	checkboxBgColor: '#039BE5',
 	checkboxSize: 20,
 	checkboxTickColor: '#fff',
@@ -84,7 +84,7 @@ export default {
 	},
 	get btnTextSize() {
 		return (platform === 'ios') ? this.fontSizeBase * 1.1 :
-			this.fontSizeBase - 1;
+			this.fontSizeBase;
 	},
 	get btnTextSizeLarge() {
 		return this.fontSizeBase * 1.5;
@@ -121,7 +121,7 @@ export default {
 
 	// Font
 	fontFamily: (platform === 'ios') ? 'System' : 'Roboto',
-	fontSizeBase: 15,
+	fontSizeBase: 16,
 
 	get fontSizeH1() {
 		return this.fontSizeBase * 1.8;
@@ -181,7 +181,7 @@ export default {
 
 
 	// InputGroup
-	inputFontSize: 14,
+	inputFontSize: 16,
 	inputBorderColor: '#D9D5DC',
 	inputSuccessBorderColor: '#2b8339',
 	inputErrorBorderColor: '#ed2f2f',
@@ -266,7 +266,7 @@ export default {
 	// Title
 	titleFontfamily: (platform === 'ios') ? 'System' : 'Roboto_medium',
 	titleFontSize: (platform === 'ios') ? 17 : 19,
-	subTitleFontSize: (platform === 'ios') ? 12 : 14,
+	subTitleFontSize: (platform === 'ios') ? 12 : 16,
 	subtitleColor: (platform === 'ios') ? '#8e8e93' : '#FFF',
 
 	// New Variable

@@ -14,7 +14,6 @@ class Home extends PureComponent {
 		super(props);
 	}
 
-
 	render() {
 		
 		return (

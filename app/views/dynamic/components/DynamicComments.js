@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Text} from "native-base";
-import {View,Image,} from "react-native";
-import styles from "../styles";
+import {View,Image,ToastAndroid} from "react-native";
+import styles from "../assets/styles";
 
 /**
 * 动态
@@ -18,7 +18,7 @@ class DynamicComments extends Component {
           return (
             <View key={i} style={styles.oneComment}>
               <Text style={styles.commentName}>
-                {p.name}:
+                {p.nick}:
               </Text>
               <Text style={styles.commentContent}>
                 {p.content}

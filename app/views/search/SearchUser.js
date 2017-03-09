@@ -1,8 +1,10 @@
 import React, {PureComponent} from "react";
 import {StyleSheet, View, Text, Image, ActivityIndicator} from "react-native";
-import {Container, Content, Loading} from "../../components/index";
+import {connect} from "react-redux";
+import {Container, Content} from "../../components/index";
 import Header from "../../components/header/SearchHeader";
-import {theme} from "../../utils/";
+import {showLoading, hideLoading} from "../../actions/loading";
+import {request, urls} from "../../utils/index";
 
 /**
  * 搜索用户
@@ -10,18 +12,16 @@ import {theme} from "../../utils/";
 class SearchUser extends PureComponent {
 
 	state = {
-		isFetching: false,
-		inSearch: false,
-		user: null
+		notExist: false,
 	};
 
 	render() {
-		let {isFetching, inSearch, user} = this.state;
+		let {notExist} = this.state;
 		return (
 			<Container>
-				<Header placeholder="搜索" onSearch={this.search.bind(this)}/>
+				<Header placeholder="搜索" onSearch={this._onSearch.bind(this)}/>
 				<Content gray>
-					{isFetching ? <Loading text="正在查找..."/> : (inSearch && user) ? null : this.renderNoUser() }
+					{notExist ? this.renderNoUser() : null }
 				</Content>
 			</Container>
 		);
@@ -36,26 +36,28 @@ class SearchUser extends PureComponent {
 	}
 
 	// 搜索
-	search(keyword) {
+	_onSearch(phone) {
 		const {dispatch} = this.props;
-		if (keyword == '') {
-			// dispatch(clearSymptomProblem())
-		} else {
-			// dispatch(searchSymptomProblem(keyword))
-		}
+
+		dispatch(showLoading());
+
+		request.getJson(urls.apis.USER_SEARCH, {phone})
+			.then((data) => {
+				dispatch(hideLoading());
+				alert(JSON.stringify(data));
+			}, (error) => {
+				dispatch(hideLoading());
+			});
 	}
+
 }
 
 const styles = {
-	content: {
-		flex: 1,
-		backgroundColor: theme.contentBgColor,
-	},
 	noUserView: {
 		height: 100,
 		alignItems: 'center',
 		justifyContent: 'center'
 	}
 };
-
-export default (SearchUser);
+const mapStateToProps = state => ({});
+export default connect(mapStateToProps)(SearchUser);

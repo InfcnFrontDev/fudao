@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {TouchableOpacity, StyleSheet} from "react-native";
 import {Actions} from "react-native-router-flux";
-import {Header, Icon, Left, Right, Body, Form, Input, Item, Button, Grid, Row, Col} from "native-base";
+import {Header, Icon, Input, Item, Button, Grid, Row, Col} from "native-base";
 
 class SearchHeader extends PureComponent {
 
@@ -36,11 +36,11 @@ class SearchHeader extends PureComponent {
 							<Item rounded style={styles.inputGroup}>
 								<Icon name="search" style={styles.inputIcon}/>
 								<Input
+									ref={(e) => this._input = e}
 									placeholder={placeholder}
-									onChangeText={(text) => this.changeText(text)}
-									value={text}
+									onChangeText={(text) => this._onChangeText(text)}
 									autoFocus={autoFocus}
-									onSubmitEditing={(text) => this.submitEditing(text)}
+									onSubmitEditing={(text) => this._onSubmitEditing(text)}
 									style={styles.inputText}/>
 								{clearIcon}
 							</Item>
@@ -51,18 +51,19 @@ class SearchHeader extends PureComponent {
 		)
 	}
 
-	changeText(text) {
-		this.setState({text});
-		if (text == '') {
-			this.submitEditing(text);
-		}
+	_onChangeText(text) {
+		let {onChangeText} = this.props;
 
+		if (onChangeText) {
+			onChangeText(text);
+		}
 	}
 
-	submitEditing(text) {
+	_onSubmitEditing(event) {
 		let {onSearch} = this.props;
+
 		if (onSearch) {
-			onSearch(text);
+			onSearch(event.nativeEvent.text);
 		}
 	}
 
@@ -80,8 +81,9 @@ const styles = {
 
 SearchHeader.propsType = {
 	placeholder: React.PropTypes.string,
-	onSearch: React.PropTypes.func,
 	autoFocus: React.PropTypes.bool,
+	onSearch: React.PropTypes.func, // 提交搜索
+	onChangeText: React.PropTypes.func,
 };
 SearchHeader.defaultProps = {
 	placeholder: '搜索',

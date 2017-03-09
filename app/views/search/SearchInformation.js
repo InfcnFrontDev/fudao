@@ -34,7 +34,7 @@ class SearchInformation extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-	isLoading: state.search.isLoading,
-	information: state.search.information,
+	isLoading: state._onSearch.isLoading,
+	information: state._onSearch.information,
 });
 export default connect(mapStateToProps)(SearchInformation);

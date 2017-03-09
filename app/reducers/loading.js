@@ -1,16 +1,19 @@
 import * as types from "../actions/types";
 const initialState = {
-	loginUser: {}
+	isLoading: false,
+	text: '正在加载...'
 };
 export default function (state = initialState, {type, payload}) {
 	switch (type) {
-		case types.USER_LOGIN:
+		case types.LOADING_SHOW:
 			return Object.assign({}, state, {
-				...payload
-
+				isLoading: true,
+				text: payload.text || initialState.text
 			});
-		case types.AUTH__LOGOUT:
-			return initialState;
+		case types.LOADING_HIDE:
+			return Object.assign({}, state, {
+				isLoading: false
+			});
 		default:
 			return state;
 	}

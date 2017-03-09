@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import {Container, Title,Header, Content, Left, Right, Body,Text,Button,Icon} from "native-base";
-import { StyleSheet, View, DeviceEventEmitter, TextInput} from 'react-native'
+import { Image, View, DeviceEventEmitter, TextInput,TouchableHighlight,TouchableOpacity} from 'react-native'
 import {connect} from "react-redux";
 import Editor from './components/Editor'
+import NewPicture from './components/NewPicture'
 const charFromUtf16 = utf16 => String.fromCodePoint(...utf16.split('-').map(u => '0x' + u))
 
 class NewDynamic extends Component{
@@ -32,14 +33,15 @@ class NewDynamic extends Component{
                 </Right>
             </Header>
             <Content style={styles.content}>
-            <Editor
-                onChangeText={this.onChangeText.bind(this)}
-                text={this.state.text}/>
+                <Editor
+                    placeholder="说点什么吧..."
+                    onChangeText={(text)=>{this.setState({text:text})}}
+                    text={this.state.text}/>
+                <NewPicture />
             </Content>
           </Container>
         )
     }
-
 
 
     onChangeText(text) {
@@ -54,19 +56,14 @@ const styles={
   container:{
     flex:1,
   },
+  content:{
+    backgroundColor:'#fff'
+  },
   textInput:{
     height:100,
   },
 }
 
-function bindAction(dispatch) {
-    return {
-        openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: key => dispatch(closeDrawer()),
-    };
-}
-
 const mapStateToProps = state => ({
-  realm:state.realm
 });
-export default connect(mapStateToProps, bindAction)(NewDynamic);
+export default connect(mapStateToProps)(NewDynamic);

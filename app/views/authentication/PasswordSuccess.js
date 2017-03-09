@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
-import {theme} from "../../utils/";
+import {theme,tools} from "../../utils/";
 import  CommitButton from "./components/CommitButton"
 import  {login} from "./components/public"
 
@@ -23,7 +23,7 @@ class SetPassword extends PureComponent {
     render() {
         var title=(
             <Text style={styles.titleText}>{this.state.text}</Text>
-        )
+        );
         this.interval();
         return (
             <Container style={styles.container}>
@@ -37,23 +37,22 @@ class SetPassword extends PureComponent {
     }
     interval(){
         let self=this;
-        let num = self.state.number;
+        let {number} = self.state;
         var c=setInterval(function(){
-            if(num==0){
+            if(number==0){
                 login(self.state.phone,self.state.password)
                 clearInterval(c);
             }else{
-                num--;
+                number--;
                 self.setState({
-                    number:num
+                    number:number,
                 })
             }
         },1000)
     }
     _login(){
-        let phone = this.this.state.phone;
-        let password = this.this.state.password;
-        login(phone,password)
+        let {phone,password} = this.state;
+        login(phone,password);
     }
 }
 const styles = {

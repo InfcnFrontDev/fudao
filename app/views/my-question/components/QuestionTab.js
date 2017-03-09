@@ -38,7 +38,8 @@ class QuestionTab extends PureComponent {
 
 const styles = {
   tabView: {
-    flex: 1,
+    height:500,
+    backgroundColor:'#ff0'
   },
 };
 

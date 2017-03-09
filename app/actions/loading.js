@@ -1,21 +1,22 @@
 import * as types from "../actions/types";
 import {ToastAndroid} from "react-native";
+
 // 登录
-export function login(loginUser) {
+export function showLoading(text) {
 	return (dispatch) => {
 		dispatch({
-			type: types.USER_LOGIN,
+			type: types.LOADING_SHOW,
 			payload: {
-				loginUser
+				text
 			}
 		});
 	}
 }
 // 注销
-export function logout() {
+export function hideLoading() {
 	return (dispatch) => {
 		dispatch({
-			type: types.USER_LOGOUT
+			type: types.LOADING_HIDE
 		});
 	}
 }

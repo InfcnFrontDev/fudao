@@ -42,7 +42,7 @@ const styles = {
 };
 
 const mapStateToProps = state => ({
-	isLoading: state.search.isLoading,
-	symptomProblem: state.search.symptomProblem,
+	isLoading: state._onSearch.isLoading,
+	symptomProblem: state._onSearch.symptomProblem,
 });
 export default connect(mapStateToProps)(SearchSymptomProblem);

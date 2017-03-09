@@ -10,7 +10,7 @@ import {Container, Title, Content, Left, Right, Body, Form, Input, Item,Thumbnai
 import {View,Image,TouchableOpacity,TouchableHighlight,ToastAndroid, DatePickerAndroid,} from "react-native";
 import Header from "../../components/header/TitleHeader";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
-import {theme} from "../../utils/";
+import {theme,tools} from "../../utils/";
 import  CommitButton from "./components/CommitButton"
 
 
@@ -121,9 +121,7 @@ class StartInformation extends PureComponent {
         )
     }
     _tijiao(){
-        let sex = null;
-        let birth = null;
-        let position = null;
+        let sex,birth,position = null;
         if(this.state.showM){
             sex = 1
         }else{

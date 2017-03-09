@@ -130,17 +130,17 @@ const ChatMessage = {
    name: 'Dynamic',
    primaryKey: 'id',
    properties: {
-     id: 'int',// 动态ID
-     username: 'string', // 发表人
-     name: 'string', // 发表人
      content: 'string',// 动态内容
-     suports:  {type: 'list',objectType:'DynamicPraise' },
-     comments: {type:'list',objectType:'DynamicComment' },
-     createtime: 'int',// 发表时间,
-     photo: {type: 'string', optional: true},
-     urls: {type: 'string', optional: true},
-     flag: {type: 'bool', optional: true},
+     dynamicComments: {type:'list',objectType:'DynamicComment' },
+     dynamicImg: {type: 'string', optional: true},
+     dynamicPraises:  {type: 'list',objectType:'DynamicPraise' },
+     id: 'string',// 动态ID
+     nick: 'string', // 发表人
+     userId: 'string', // 发表人
+     publishTime: 'int',// 发表时间,
+     type: 'int',
      show:{type:'bool',optional: true,default:false},
+     flag:{type:'bool',optional: true,default:false}
    }
  };
 
@@ -151,9 +151,11 @@ const ChatMessage = {
      name: 'DynamicPraise',
      properties: {
          createTime:'int',
-         id: 'int', // 动态ID
-         publishId: 'int', // 动态ID
-         username: 'string',// 点赞人ID
+         dynamicId: 'string',
+         id: {type:'string',optional: true},
+         img:  {type:'string',optional: true},
+         userId:'string',
+         nick:'string',
      }
  };
 
@@ -163,12 +165,13 @@ const ChatMessage = {
 const DynamicComment = {
     name: 'DynamicComment',
     properties: {
-        // id: 'string',// 评论ID
-        // dynamicId: 'string', // 动态ID
-        // userId: 'string', // 评论用户ID
-        name:'string',
-        username:'string',
         content: 'string',// 评论内容
+        commentTime:'int',
+        dynamicId:{type:'string',optional: true},
+        id:{type:'string',optional: true},
+        img:{type:'string',optional: true},
+        nick:'string',
+        userId:'string'
     }
 };
 /**
@@ -185,7 +188,7 @@ const MyQuestion = {
 
 module.exports = {
     schema: [Dynamic,DynamicPraise,DynamicComment,MyQuestion],
-    schemaVersion: 15,
+    schemaVersion: 6,
     migration: () => {
     }
 };
