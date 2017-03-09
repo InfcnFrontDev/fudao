@@ -143,7 +143,7 @@ export function fetchData(page,options,callback,params){
 							userId:'867516022307943,86751602230794380640149',
 							page:1,
 							rows:5,
-					},function(res){
+					}).then((res)=>{
 						  if(res.datas.length>0) {
 								//有网状态下第一次加载
 								insert(res.datas,params.realm);
@@ -169,15 +169,14 @@ export function fetchData(page,options,callback,params){
 									dynamicList:dynamicList,
 								}
 							});
-					}
-			)
+					})
 		}else if(options.refresh){
 
 			request.getJson(urls.apis.DYNAMIC_LIST,{
 							userId:'867516022307943,86751602230794380640149',
 							page:1,
 							rows:5,
-					},function(res){
+					}).then((res)=>{
 						  if(res.datas.length>0) {
 								//有网状态下第一次加载
 								var realmDynamic = params.realm.objects('Dynamic');
@@ -222,7 +221,7 @@ export function fetchData(page,options,callback,params){
 									userId:'867516022307943,86751602230794380640149',
 									page:Math.floor(params.dynamic.length/5)+1,
 									rows:5,
-							},function(res){
+							}).then((res) =>{
 									if(res.datas.length==0){
 										callback(params.dynamic,{
 											allLoaded:true
@@ -242,8 +241,7 @@ export function fetchData(page,options,callback,params){
 											}
 										});
 									}
-							}
-					)
+							})
 		  }
 		}
 	}

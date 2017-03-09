@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Text} from "native-base";
-import {View,Image,} from "react-native";
+import {View,Image,ToastAndroid} from "react-native";
 import styles from "../styles";
 
 /**

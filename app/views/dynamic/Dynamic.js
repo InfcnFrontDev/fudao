@@ -86,6 +86,8 @@ class Dynamic extends PureComponent {
         }else{
           var show =(null);
         }
+        let comments =Array.prototype.slice.call(info.dynamicComments, 0);
+
     		return (
     			<View  style={styles.dynamic}>
               <DynamicCommon info={info} />
@@ -96,7 +98,7 @@ class Dynamic extends PureComponent {
                 </TouchableHighlight>
              </View>
                 <DynamicSupport zan={info.dynamicPraises} />
-                <DynamicComment comments={info.dynamicComments} />
+                <DynamicComment comments={comments} />
     			</View>
     		)
     	}
