@@ -1,12 +1,12 @@
 import * as types from "../actions/types";
 import {ToastAndroid} from "react-native";
 // 登录
-export function login(user) {
+export function login(loginUser) {
 	return (dispatch) => {
 		dispatch({
 			type: types.USER_LOGIN,
 			payload: {
-				user
+				loginUser
 			}
 		});
 	}
