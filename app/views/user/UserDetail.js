@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import {Alert} from "react-native";
 import {connect} from "react-redux";
+import {Actions} from "react-native-router-flux";
 import {Container, Content, List, Separator} from "../../components/index";
 import Header from "../../components/header/BaseHeader";
 import {Body, Left, Right, ListItem, Text, Button, Thumbnail, Icon, View} from "native-base";
@@ -100,23 +101,10 @@ class UserDetail extends PureComponent {
 			return;
 		}
 
-		// 申请加为好友
-		dispatch(showLoading());
-		request.getJson(urls.apis.FRIEND_APPLY, {
-			activeAppid: loginUser.appid,
-			activeName: '海龟大神',
-			passiveAppid: user.appid,
-		}).then(((result) => {
-			dispatch(hideLoading());
-			if(result.success){
-				tools.toast('');
-			}else{
-				tools.toast('请登录后重试');
-			}
-		}).bind(this), (error) => {
-			dispatch(hideLoading());
-			alert(JSON.stringify(error));
-		});
+		Actions.friendApply({
+			friend: user
+		})
+
 
 	}
 }
@@ -142,7 +130,7 @@ UserDetail.propTypes = {
 }
 
 UserDetail.defaultProps = {
-	userId: '867200022156895,86720002215690321000493'
+	userId: '867200022156895,86720002215690328312757'
 }
 
 const mapStateToProps = state => ({

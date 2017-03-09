@@ -1,26 +1,32 @@
 import React, {PureComponent} from "react";
 import {Alert} from "react-native";
 import {connect} from "react-redux";
+import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, Separator} from "../../components/index";
-import {Text, Button, Item, Input} from "native-base";
+import {Text, Button, ListItem, Item, Input} from "native-base";
 import {showLoading, hideLoading} from "../../actions/loading";
 import {request, urls, tools} from "../../utils/index";
 
 /**
- * 用户详情
+ * 好友申请
  */
-class UserDetail extends PureComponent {
+class FriendApply extends PureComponent {
 
-	state = {
-		user: null
+	constructor(props) {
+		super(props);
+		let {friend, loginUser} = props;
+		this.state = {
+			myIntro: '我叫' + loginUser.title,
+			friendRemark: friend.title
+		}
 	}
 
 	render() {
-		let {user}  = this.state;
+		let {friend}  = this.props;
 		return (
 			<Container>
 				<Header back {...this.props} right={
-					<Button small block style={styles.button} onPress={this._applyAddFriend.bind(this)}>
+					<Button small block style={styles.button} onPress={this._addApplyFriend.bind(this)}>
 						<Text>发送</Text>
 					</Button>
 				}/>
@@ -29,49 +35,49 @@ class UserDetail extends PureComponent {
 					<List style={{padding:10}}>
 						<Text note>你需要发送验证申请，等对方通过</Text>
 						<Item underline success>
-							<Input value="我的杨可可"/>
+							<Input onChangeText={(myIntro) => this.setState({myIntro})}
+								   value={this.state.myIntro}
+							/>
 						</Item>
 					</List>
 					<Separator/>
 					<List style={{padding:10}}>
 						<Text note>为好友设置备注</Text>
 						<Item underline success>
-							<Input value="杨可可"/>
+							<Input onChangeText={(friendRemark) => this.setState({friendRemark})}
+								   value={this.state.friendRemark}/>
 						</Item>
 					</List>
 					<Separator/>
 					<List style={{padding:10}}>
 						<Text note>设置朋友圈权限</Text>
-						<Item>
+						<ListItem last>
 							<Text>设置朋友圈权限</Text>
-						</Item>
+						</ListItem>
 					</List>
 				</Content>
 			</Container>
 		);
 	}
 
-	_applyAddFriend() {
-		let {loginUser, dispatch} = this.props;
-		let {user} = this.state;
-
-		if (!loginUser) {
-			tools.toast('请登录后重试');
-			return;
-		}
+	_addApplyFriend() {
+		let {loginUser, friend, dispatch} = this.props;
+		let {myIntro, friendRemark} = this.state;
 
 		// 申请加为好友
 		dispatch(showLoading());
 		request.getJson(urls.apis.FRIEND_APPLY, {
 			activeAppid: loginUser.appid,
-			activeName: '海龟大神',
-			passiveAppid: user.appid,
+			activeName: myIntro,
+			passiveAppid: friend.appid,
+			passiveName: friendRemark,
 		}).then(((result) => {
 			dispatch(hideLoading());
 			if (result.success) {
-				tools.toast('');
+				tools.toast('已发送申请');
+				Actions.pop();
 			} else {
-				tools.toast('请登录后重试');
+				tools.toast('发送申请失败，请重试');
 			}
 		}).bind(this), (error) => {
 			dispatch(hideLoading());
@@ -96,15 +102,11 @@ const styles = {
 
 };
 
-UserDetail.propTypes = {
-	userId: React.PropTypes.string, // 用户ID
-}
-
-UserDetail.defaultProps = {
-	userId: '867200022156895,86720002215690321000493'
+FriendApply.propTypes = {
+	friend: React.PropTypes.object, // 用户ID
 }
 
 const mapStateToProps = state => ({
 	loginUser: state.userStore.loginUser
 });
-export default connect(mapStateToProps)(UserDetail);
+export default connect(mapStateToProps)(FriendApply);
