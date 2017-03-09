@@ -83,7 +83,7 @@ const urls = {
 		//登录
 		AUTH_LOGIN : apiPath + "app/accountInfoAction!login.action",
 		//设置新密码
-		AUTH_NEW_PASSWORD : apiPath +"app/accountInfoAction!retrievePassword.action"
+		AUTH_NEW_PASSWORD : apiPath +"app/accountInfoAction!retrievePassword.action",
 
 
 
