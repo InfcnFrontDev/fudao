@@ -19,6 +19,9 @@ class DynamicImage extends Component {
     if(this.props.urls) {
       var arr_pic = this.props.urls.split(',');
       let pic = arr_pic.map((p, i) => {
+        if(p=="还未处理"){
+          return ( null );
+        }
         return (
           <TouchableHighlight key={i} onPress={()=> Actions['picture']({image:this.props.urls,i:i})} style={styles.imageTouch}>
           <Image source={{uri: 'http://192.168.10.58:9095/api/BaseApi/getImage?id='+p+'&w=600&h=600'}} style={styles.msgImage}  resizeMode= 'stretch' />

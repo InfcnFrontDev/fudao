@@ -21,14 +21,14 @@ class DynamicSupports extends Component {
               <View key={i} style={{flexDirection:'row'}}>
                 <Image source={require('../../../assets/xin.png')} style={styles.xin} />
                 <Text style={styles.commentName}>
-                {p.username}
+                {p.nick}
                 </Text>
               </View>
             )
           }else{
             return (
               <Text key={i} style={styles.commentName}>
-              ,  {p.username}
+              ,  {p.nick}
               </Text>
             )
           }

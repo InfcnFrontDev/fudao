@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
 import {StyleSheet, View, Text} from "react-native";
 import ScrollableTabView from "react-native-scrollable-tab-view";
 import TabBar from "./TabBar";
@@ -8,7 +9,8 @@ import Home from "../home/Home";
 import Article from "../article/Article";
 import Dynamic from "../../views/dynamic/Dynamic";
 import My from "../../views/my/My";
-
+import schema from '../../realm/schema.js'
+import {newRealm} from '../../actions/realm.js'
 const tabTitles = [
 	'主页', '资讯', '动态', '我的'
 ];
@@ -26,6 +28,11 @@ const tabComponents = [
  * 首页
  */
 class Index extends PureComponent {
+
+	constructor(props){
+		super(props);
+		this.props.newRealm();
+	}
 
 	_renderTabBar = () => <TabBar tabNames={tabTitles} tabIconNames={tabIcons} selectedTabIconNames={tabSelectedIcon}/>
 
@@ -68,5 +75,12 @@ const styles = {
 		color: theme.navTabBarActiveTextColor
 	},
 };
+function bindAction(dispatch) {
+    return {
+        newRealm: ()=>dispatch(newRealm(schema)),
+    };
+}
 
-export default (Index);
+const mapStateToProps = state => ({
+});
+export default connect(mapStateToProps, bindAction)(Index);

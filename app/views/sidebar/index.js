@@ -214,7 +214,7 @@ class SideBar extends Component {
 							this.props.closeDrawer()
 						}}>
 							<Left>
-								<Icon active name={data.icon} style={{color: '#777', fontSize: 26, width: 30}}/>
+								<Icon active name={data.icon} style={{color: '#777', fontSize: 26, width: 60}}/>
 								<Text style={styles.text}>{data.name}</Text>
 							</Left>
 							{(data.types) &&

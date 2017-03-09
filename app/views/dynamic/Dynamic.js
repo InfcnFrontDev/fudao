@@ -2,38 +2,26 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Title, Content, Left, Right, Body,Text,Button} from "native-base";
 import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo} from "react-native";
-import {openDrawer, closeDrawer} from "../../actions/drawer";
 import styles from "./styles";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment'
 import {Actions} from "react-native-router-flux";
 import Header from "../../components/header/IndexHeader";
 import DynamicList from './components/DynamicList';
-// import DynamicList from '../../components/listview/gifted';
 import DynamicHeader from './components/DynamicHeader';
 import DynamicComment from './components/DynamicComments';
 import DynamicSupport from './components/DynamicSupports';
 const dismissKeyboard = require('dismissKeyboard');
-import {store} from '../../store/configureStore.js';
-import {newRealm} from '../../actions/realm.js'
-import schema from '../../realm/schema.js'
 import DynamicCommon from '../../components/DynamicCommon'
+import {fetchData,show,zan,sendComment} from '../../actions/dynamic.js'
 /**
  * 动态
  */
 class Dynamic extends PureComponent {
   constructor(props) {
 		super(props);
-		// moment.locale('zh-cn');
-    this.props.newRealm();
-    this.dynamic=[];
-    this.endID=0;
-    this.length = 0;
-    this.startID = 0;
-    this.nowShow =0;
 		this.state={
       commentShow:false,
-      text:''
 		}
 	}
 
@@ -106,9 +94,9 @@ class Dynamic extends PureComponent {
                 <TouchableHighlight style={styles.showMessage} onPress={this._onMessage.bind(this,info.id)} underlayColor='#fafafa'>
                   <Image source={require('../../assets/message.png')}/>
                 </TouchableHighlight>
-              </View>
-              <DynamicSupport zan={info.suports} />
-              <DynamicComment comments={info.comments} />
+             </View>
+                <DynamicSupport zan={info.dynamicPraises} />
+                <DynamicComment comments={info.dynamicComments} />
     			</View>
     		)
     	}
@@ -120,77 +108,11 @@ class Dynamic extends PureComponent {
       }
 
       _onMessage(id){
-        var add=2;
-        var timer = 0;
-        if(this.nowShow==id){
-          this.props.realm.write(()=>{
-              this.props.realm.create('Dynamic',{ id:id, show:false, },true)
-          })
-          add = 1;
-        }else{
-          this.props.realm.write(()=>{
-              this.props.realm.create('Dynamic',{ id:id, show:true,},true)
-              if(this.nowShow!=0){
-                this.props.realm.create('Dynamic',{ id:this.nowShow, show:false,},true)
-              }
-          })
-        }
-        let realm_dynamic = this.props.realm.objects('Dynamic').sorted('id');
-        for(var i=0;i<this.dynamic.length;i++){
-          if(this.dynamic[i].id==this.nowShow){
-            this.dynamic[i]=realm_dynamic.filtered('id=='+this.nowShow)[0];
-            if(add==1){
-              break;
-            }
-            timer++;
-          }
-          if(this.dynamic[i].id==id){
-            this.dynamic[i]=realm_dynamic.filtered('id=='+id)[0];
-            timer++;
-          }
-          if(timer==add){
-            break;
-          }
-        }
-        if(this.nowShow==id){
-          this.nowShow=0;
-        }else{
-          this.nowShow = id;
-        }
-        this.refs.gifted._postRefresh(this.dynamic);
+        this.props.show(id,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm,nowShow:this.props.dynamic.nowShow})
       }
 
     	_zan(info){
-        let realm_dynamic = this.props.realm.objects('Dynamic').sorted('id');
-        let data = realm_dynamic.filtered('id=='+info.id)[0];
-        let suports = data.suports;
-        let arraySuports =Array.prototype.slice.call(suports, 0);
-        if(info.flag){
-          for(var j=0;j<arraySuports.length;j++){
-            if(arraySuports[j].username=='chenxx'){
-              arraySuports.splice(j,1);
-              break;
-            }
-          }
-        }else{
-          arraySuports[arraySuports.length]={createTime:Date.parse(new Date()),username:'chenxx',id:110,publishId:info.id};
-        }
-        this.props.realm.write(()=>{
-            this.props.realm.create('Dynamic',{
-              id:info.id,
-              suports:arraySuports,
-              flag:!info.flag,
-              show:false,
-            },true)
-        })
-        this.nowShow=0;
-        for(var i=0;i<this.dynamic.length;i++){
-          if(this.dynamic[i].id==info.id){
-            this.dynamic[i]=data;
-            break;
-          }
-        }
-        this.refs.gifted._postRefresh(this.dynamic);
+        this.props.zan(info,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm,})
     	}
 
       //显示评论输入框
@@ -204,195 +126,28 @@ class Dynamic extends PureComponent {
       //发表评论
       _onSubmitEditing(event){
         // event.nativeEvent.text
-        if(event.nativeEvent.text){
-          let realm_dynamic = this.props.realm.objects('Dynamic').sorted('id');
-          let Comments = realm_dynamic.filtered('id=='+this.commentID)[0].comments;
-          let arrayComments =Array.prototype.slice.call(Comments, 0);
-          arrayComments[arrayComments.length]={username:'chenxx',name:'陈欣欣',content:event.nativeEvent.text}
-          this.props.realm.write(()=>{
-              this.props.realm.create('Dynamic',{
-                id:this.commentID,
-                comments:arrayComments,
-                show:false,
-              },true)
-          })
-          this.nowShow = 0;
-          for(var i=0;i<this.dynamic.length;i++){
-            if(this.dynamic[i].id==this.commentID){
-              this.dynamic[i]=realm_dynamic.filtered('id=='+this.commentID)[0];
-              break;
-            }
-          }
-          this.refs.gifted._postRefresh(this.dynamic);
-          /*
-          暂缺提交给后台
-          */
-        }
+        this.props.sendComment(event,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm,commentID:this.commentID})
         this.setState({
           commentShow:false,
         })
       }
 
-    	_onFetch(page = 1, callback, options,flag){
-        if(page === 1 && options.firstLoad) {
-          fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id=&nav=1&size=5&username=chenxx',{
-            method:'POST',
-            headers:{
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'authorization':'4a80e13d-95ee-4bad-90e8-02ace2c4d893'
-            }
-          })
-          .then((res) => res.json())
-          .then((res) => {
-            if(!res.err_code&&res.ok==true&&res.obj.length>0) {
-              this.length = res.obj.length;
-              this.endID = res.obj[res.obj.length-1].id;
-              this.startID = res.obj[0].id;
-              callback(res.obj);
-              this.props.realm.write(()=>{
-                for(let i=0;i<res.obj.length;i++){
-                  this.props.realm.create('Dynamic',{
-                    id:res.obj[i].id,
-                    username:res.obj[i].username,
-                    name:res.obj[i].name,
-                    content:res.obj[i].content,
-                    createtime:res.obj[i].createtime,
-                    suports:res.obj[i].suports,
-                    comments:[],
-                    photo:res.obj[i].photo,
-                    urls:res.obj[i].urls,
-                    flag:res.obj[i].flag,
-                  },true)
-                }
-              })
-              let realm_res = this.props.realm.objects('Dynamic').sorted('id');
-              this.dynamic = realm_res.slice(realm_res.length-6,realm_res.length-1);
-            }else{
-              let res = this.props.realm.objects('Dynamic').sorted('id');
-              console.log(res);
-              if(res){
-                if(res.length>6){
-                  var firstres = res.slice(res.length-6,res.length-1);
-                }else{
-                  var firstres = res;
-                }
-                this.length = firstres.length;
-                this.endID=firstres[0].id
-                this.dynamic=firstres.reverse();
-                callback(this.dynamic);
-              }
-            }
-          })
-        }else if(page === 1&&!options.firstLoad&&flag==false) {
-
-          fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id='+this.startID+'&nav=0&size=5&username=chenxx',{
-            method:'POST',
-            headers:{
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'authorization':'4a80e13d-95ee-4bad-90e8-02ace2c4d893'
-            }
-          })
-          .then((res) => res.json())
-          .then((res) => {
-              if(!res.err_code&&res.ok==true&&res.obj.length>0) {
-          			this.dynamic=res.obj.concat(this.dynamic)
-                callback(this.dynamic);
-                this.props.realm.write(()=>{
-                  for(let i=0;i<res.obj.length;i++){
-                    this.props.realm.create('Dynamic',{
-                      id:res.obj[i].id,
-                      username:res.obj[i].username,
-                      name:res.obj[i].name,
-                      content:res.obj[i].content,
-                      createtime:res.obj[i].createtime,
-                      suports:res.obj[i].suports,
-                      comments:[],
-                      photo:res.obj[i].photo,
-                      urls:res.obj[i].urls,
-                      flag:res.obj[i].flag,
-                    },true)
-                  }
-                })
-                this.length +=res.obj.length;
-                this.startID = res.obj[0].obj;
-              }else{
-                callback(this.dynamic)
-              }
-          })
-        } else{
-            let realm_res = this.props.realm.objects('Dynamic').sorted('id');
-            if(realm_res.length>this.length+1){
-              if(realm_res.length>this.length+5){
-                var render_realm_res = realm_res.slice(realm_res.length-this.length-6,realm_res.length-this.length-1);
-              }else{
-                var render_realm_res = realm_res.slice(0,realm_res.length-this.length-1);
-              }
-              this.dynamic = this.dynamic.concat(render_realm_res.reverse());
-              this.length+=render_realm_res.length;
-              this.endID = render_realm_res[render_realm_res.length-1].id;
-              callback(this.dynamic);
-            }else{
-              this._loadMore(callback);
-            }
-
-
-        }
-      }
-
-      _loadMore(callback){
-        fetch('http://192.168.10.58:9095/api/PublishApi/getPublishs?id='+this.endID+'&nav=0&size=5&username=chenxx',{
-          method:'POST',
-          headers:{
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'authorization':'4a80e13d-95ee-4bad-90e8-02ace2c4d893'
-          }
-        })
-        .then((res) => res.json())
-        .then((res) => {
-          //上拉加载更多
-          if(!res.err_code&&res.ok&&res.obj.length>0) {
-            this.props.realm.write(()=>{
-              for(let i=0;i<res.obj.length;i++){
-                this.props.realm.create('Dynamic',{
-                  id:res.obj[i].id,
-                  username:res.obj[i].username,
-                  name:res.obj[i].name,
-                  content:res.obj[i].content,
-                  createtime:res.obj[i].createtime,
-                  suports:res.obj[i].suports,
-                  comments:[],
-                  photo:res.obj[i].photo,
-                  urls:res.obj[i].urls,
-                  flag:res.obj[i].flag,
-                },true)
-              }
-            })
-            this.endID=res.obj[res.obj.length-1].id
-            this.dynamic=this.dynamic.concat(res.obj);
-            this.length+=res.obj.length;
-            callback(this.dynamic);
-          }else{
-            callback(this.dynamic,{
-              allLoaded:true,
-            });
-          }
-        })
-
+    	_onFetch(page, callback, options,flag){
+        this.props.fetchData(page,options,callback,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList});
       }
 
 }
 function bindAction(dispatch) {
     return {
-        newRealm: ()=>dispatch(newRealm(schema)),
-        openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: key => dispatch(closeDrawer()),
+        fetchData:(page,options,callback,params)=>dispatch(fetchData(page,options,callback,params)),
+        show:(id,params)=>dispatch(show(id,params)),
+        zan:(info,params)=>dispatch(zan(info,params)),
+        sendComment:(event,params)=>dispatch(sendComment(event,params)),
     };
 }
 
 const mapStateToProps = state => ({
-  realm:state.realm
+  realm:state.realm,
+  dynamic:state.dynamic,
 });
 export default connect(mapStateToProps, bindAction)(Dynamic);

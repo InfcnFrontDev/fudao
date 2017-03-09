@@ -18,7 +18,7 @@ class DynamicComments extends Component {
           return (
             <View key={i} style={styles.oneComment}>
               <Text style={styles.commentName}>
-                {p.name}:
+                {p.nick}:
               </Text>
               <Text style={styles.commentContent}>
                 {p.content}

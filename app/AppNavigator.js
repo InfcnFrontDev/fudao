@@ -99,7 +99,7 @@ class AppNavigator extends Component {
 						<Scene key="root">
 
 							{/*首页*/}
-							<Scene key="index" component={Index} title="首页" hideNavBar initial/>
+							<Scene key="index" component={Index} title="首页" hideNavBar initial />
 
 							{/*启动注册*/}
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
