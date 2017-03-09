@@ -8,6 +8,8 @@ import  CommitButton from "./components/CommitButton"
 import  UrseInput from "./components/UrseInput"
 import {theme,request,urls,tools} from "../../utils/";
 import  {hex_md5} from "./components/md5"
+import {showLoading, hideLoading} from "../../actions/loading";
+
 
 /**
  * 设置密码
@@ -48,11 +50,14 @@ class SetPassword extends PureComponent {
         if(password1!=password){
             tools.toast("两次输入密码不一致");
         }else{
+            const {dispatch} = this.props;
+            dispatch(showLoading());
             request.getJson(urls.apis.AUTH_REG,{
                         appid:tools.uuid(),
                         account: phone,
                         pwd: hex_md5(phone+password)
-                },function(data){
+                }).then((data)=>{
+                dispatch(hideLoading());
                     if(data.success) {
                         setTimeout(function() {
                             Actions['passwordSuccess']({text:"恭喜您注册成功",phone:phone,password:password})
@@ -60,19 +65,17 @@ class SetPassword extends PureComponent {
                     }else{
                         tools.toast("注册失败");
                     }
-                }
-            )
+                },(error)=>{
+                    dispatch(hideLoading());
+                })
         }
 
 
     }
 }
-function bindAction(dispatch) {
-    return {};
-}
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(SetPassword);
+export default connect(mapStateToProps)(SetPassword);
 
 
 

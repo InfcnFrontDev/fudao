@@ -7,7 +7,6 @@ import {Actions} from "react-native-router-flux";
 import {Text,  Button,Item,Label,Input} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import Header from "../../components/header/BaseHeader";
-import {Container, Content, Loading} from "../../components/index";
 import {theme,request,urls,tools} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput";
@@ -21,13 +20,11 @@ class Register extends PureComponent {  // eslint-disable-line
     constructor(props){
         super(props);
         this.state={
-            isFetching: false,
             phone:'',
             code:'',
         }
     }
     render() {
-        let {isFetching} = this.state;
         return (
             <Container>
                 <Header {...this.props}></Header>
@@ -54,7 +51,6 @@ class Register extends PureComponent {  // eslint-disable-line
                         </GetCode >
                     </View>
                     <CommitButton title='找回密码' block={true} border={false} top={20}  onPress={this._find.bind(this)} />
-                    <Loading text={'正在登录...'} isShow={isFetching}/>
                 </Content>
             </Container>
         );
@@ -64,31 +60,22 @@ class Register extends PureComponent {  // eslint-disable-line
         if(phone.toString().length<11||phone.toString().length>11){
             tools.toast("请填入正确的手机号");
         }else{
-            this.showLoading();
+            const {dispatch} = this.props;
+            dispatch(showLoading());
             request.getJson(urls.apis.AUTH_CHECK_PHONE,{
                     phone:phone ,
                     type:'findPwd'
-                },function(data){
-                this.hideLoading();
+                }).then((data)=>{
+                dispatch(hideLoading());
                     if(data.success && "existence" == data.msg) {
                         tools.toast("手机号已被注册");
                     } else if(data.success && "existence" != data.msg) {
                         tools.toast("正在发送验证码...");
                     }
-                }
-            )
+                },(error)=>{
+                dispatch(hideLoading());
+                })
         }
-    }
-    showLoading() {
-        this.setState({
-            isFetching: true
-        })
-    }
-
-    hideLoading() {
-        this.setState({
-            isFetching: false
-        })
     }
     _find(){
         let {phone,code} = this.state;
@@ -106,7 +93,7 @@ class Register extends PureComponent {  // eslint-disable-line
                     if(data.success) {
                         Actions['rebuildPassword']({phone:phone});
                     } else {
-                        ToastAndroid.show("验证码错误...", ToastAndroid.SHORT);
+                        tools.toast("验证码错误...");
                     }
                 }
             )
@@ -135,10 +122,7 @@ const styles = {
     },
 };
 
-function bindAction(dispatch) {
-    return {};
-}
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(Register);
+export default connect(mapStateToProps)(Register);
 

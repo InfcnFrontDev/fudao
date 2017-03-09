@@ -57,6 +57,7 @@ class Login extends PureComponent {
 	}
 
 	_login() {
+		const {dispatch} = this.props;
 		let {phone, password} = this.state;
 
 		if (phone == '') {
@@ -72,14 +73,15 @@ class Login extends PureComponent {
 			return;
 		}
 
-		this.showLoading();
+		dispatch(showLoading());
 
 		// 提交登录
 		request.getJson(urls.apis.AUTH_LOGIN, {
 				account: phone,
 				pwd: hex_md5(phone + password),
 			}).then((data) => {
-				this.hideLoading();
+				dispatch(hideLoading());
+
 				if (data.success) {
 					tools.toast("登录成功");
 					let user = Object.assign({}, {
@@ -93,20 +95,10 @@ class Login extends PureComponent {
 				} else {
 					tools.toast("密码错误");
 				}
+			},(error) => {
+				dispatch(hideLoading());
 			}
 		);
-	}
-
-	showLoading() {
-		this.setState({
-			isFetching: true
-		})
-	}
-
-	hideLoading() {
-		this.setState({
-			isFetching: false
-		})
 	}
 
 	//根据是否有基本信息选择跳转页面
