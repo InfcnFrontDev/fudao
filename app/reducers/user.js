@@ -10,12 +10,12 @@ const initialState = {
 };
 export default function (state = initialState, {type, payload}) {
 	switch (type) {
-		case types.USER_LOGGING:
+		case types.AUTH_LOGGING:
 			return Object.assign({}, state, {
 				isLoading: true,
 				userInfo: null,
 			});
-		case types.USER_LOGIN:
+		case types.AUTH_LOGIN:
 			return Object.assign({}, state, {
 				isLoading: false,
 				userInfo:{
@@ -23,7 +23,7 @@ export default function (state = initialState, {type, payload}) {
 					...payload.accountInfo
 				}
 			});
-		case types.USER_LOGOUT:
+		case types.AUTH__LOGOUT:
 			return initialState;
 		default:
 			return state;

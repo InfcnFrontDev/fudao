@@ -53,14 +53,14 @@ class RebuildPassword extends PureComponent {
                 password1:''
             })
         }else{
-            request.getJson(urls.apis.NEW_PASSWORD,{
+            request.getJson(urls.apis.AUTH_NEW_PASSWORD,{
                     phone: phone,
                     pwd: hex_md5(phone+password)
                 },function(data){
                     if(data.success) {
                             Actions['passwordSuccess']({text:"密码设置成功",phone:phone,password:password})
                     }else{
-                        ToastAndroid.show("修改失败.", ToastAndroid.SHORT);
+                        ToastAndroid.show("修改失败...", ToastAndroid.SHORT);
                     }
                 }
             )

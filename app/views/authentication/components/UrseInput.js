@@ -5,7 +5,8 @@ import React, {PureComponent} from "react";
 import {Actions} from "react-native-router-flux";
 import {Container, Title, Content, Left, Right, Body, Form, Input, Item,Thumbnail,Button,Text} from "native-base";
 import {View,TextInput} from "react-native";
-import  CommitButton from "./CommitButton"
+import  CommitButton from "./CommitButton";
+
 
 
 
@@ -16,20 +17,12 @@ class UrseInput extends PureComponent {
     constructor(props) {
         super(props);
         this.state={
-            btn:this.props.btn,
             text:this.props.text,
         }
     }
     render() {
-        var button1=(null);
-        var key='default'
-        if(this.state.btn){
-            var button1=(
-                <CommitButton  border={true} block={false} top={this.props.top} title={this.props.title}
-                               onPress={this.props.onPress} >
-                </CommitButton >
-            )
-        }
+        var secureTextEntry=false
+        var key='default';
         if(this.state.text=="手机号"||this.state.text=="验证码"||this.state.text=="用户名"){
           key='numeric'
         }
@@ -39,10 +32,9 @@ class UrseInput extends PureComponent {
                 <View style={styles.border}>
                     <Text>{this.props.text}</Text>
                 </View>
-                <TextInput style={{flex:1}} underlineColorAndroid='transparent' placeholder={this.props.placeholder} keyboardType={key}
+                <TextInput style={{flex:1}} underlineColorAndroid='transparent' placeholder={this.props.placeholder} keyboardType={key} secureTextEntry={this.props.secureTextEntry}
                            onChangeText={this.props.onChangeText}
                 ></TextInput>
-                {button1}
             </View>
 
 
@@ -50,9 +42,11 @@ class UrseInput extends PureComponent {
 
         )
     }
+
 }
 const styles = {
     box:{
+        height:46,
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center',

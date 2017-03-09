@@ -9,7 +9,8 @@ import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native"
 import Header from "../../components/header/BaseHeader";
 import {theme,request,urls} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
-import  UrseInput from "./components/UrseInput"
+import  UrseInput from "./components/UrseInput";
+import  GetCode from "./components/GetCode";
 
 /**
  * 注册
@@ -34,14 +35,21 @@ class Register extends PureComponent {  // eslint-disable-line
                                        phone:value
                                    })
                                }}/>
-                    <UrseInput text="验证码"  title="获取验证码" top={2} btn={true}
-                               onChangeText={(value)=>{
-                                   this.setState({
-                                      code:value
-                                   })
-                               }}
-                               onPress={this._yzm.bind(this)}
-                    />
+                    <View style={styles.box}>
+                        <View style={styles.border}>
+                            <Text>验证码</Text>
+                        </View>
+                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric'
+                                   onChangeText={(value)=>{
+                                       this.setState({
+                                           code:value
+                                       })
+                                   }}
+                        ></TextInput>
+                        <GetCode  border={true} block={false}  title='获取验证码' ref={(e) => this._getGode = e}
+                                  onPress={this._yzm.bind(this)} >
+                        </GetCode >
+                    </View>
                     <CommitButton title='找回密码' block={true} border={false} top={20}  onPress={this._find.bind(this)} />
                 </Content>
             </Container>
@@ -52,11 +60,10 @@ class Register extends PureComponent {  // eslint-disable-line
         if(phone.toString().length<11||phone.toString().length>11){
             ToastAndroid.show("请填入正确的手机号", ToastAndroid.SHORT);
         }else{
-            request.getJson(urls.apis.CHECK_PHONE,{
+            request.getJson(urls.apis.AUTH_CHECK_PHONE,{
                     phone:phone ,
                     type:'findPwd'
                 },function(data){
-                    ToastAndroid.show("。。。", ToastAndroid.SHORT);
                     if(data.success && "existence" == data.msg) {
                         ToastAndroid.show("手机号已被注册", ToastAndroid.SHORT);
                     } else if(data.success && "existence" != data.msg) {
@@ -74,14 +81,13 @@ class Register extends PureComponent {  // eslint-disable-line
             ToastAndroid.show("验证码不能为空", ToastAndroid.SHORT);
         }else{
             /*接口*/
-            request.getJson(urls.apis.CHECK_CODE,{
+            request.getJson(urls.apis.AUTH_CHECK_CODE,{
                     account: phone,
                     code: code,
                     type: 'findPwd',
                 },function(data){
                     if(data.success) {
                         Actions['rebuildPassword']({phone:phone});
-                        ToastAndroid.show("验证码正确", ToastAndroid.SHORT);
                     } else {
                         ToastAndroid.show("验证码错误...", ToastAndroid.SHORT);
                     }
@@ -93,12 +99,23 @@ class Register extends PureComponent {  // eslint-disable-line
 }
 
 const styles = {
-    tiaokuan:{
-        fontSize:theme.DefaultFontSize-3,
-        textAlign:'center',
-        marginTop:6,
-        color:'#666'
-    }
+    box:{
+        height:46,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        borderColor:'#D4D4D4',
+        borderBottomWidth:1,
+
+    },
+    border:{
+        width:80,
+        flexDirection:'row',
+        justifyContent:'center',
+        borderRightWidth:1,
+        borderRightColor:"#D4D4D4",
+
+    },
 };
 
 function bindAction(dispatch) {

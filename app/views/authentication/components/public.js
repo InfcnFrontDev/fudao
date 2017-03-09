@@ -7,13 +7,11 @@ import {request,urls,} from "../../../utils/";
 export function login(phoneVale,passwordVale){
         let  phone=phoneVale;
         let  password=passwordVale;
-        ToastAndroid.show("进来了", ToastAndroid.SHORT);
-        request.getJson(urls.apis.LOGIN,{
+        request.getJson(urls.apis.AUTH_LOGIN,{
             account:phone,
             pwd:hex_md5(phone+password),
         },function(data){
             if(data.success) {
-                ToastAndroid.show("登录", ToastAndroid.SHORT);
                 var userInformation = data.obj.userInformation;
                 if(userInformation != undefined) { //基本信息已经添加完成
                     Actions['search']()

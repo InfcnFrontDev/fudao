@@ -25,13 +25,13 @@ class SetPassword extends PureComponent {
             <Container>
                 <Header {...this.props}></Header>
                 <Content padder>
-                    <UrseInput text="设置密码" placeholder={"至少6位数字/字母/_"}
+                    <UrseInput text="设置密码" placeholder={"至少6位数字/字母/_"} secureTextEntry={true}
                                onChangeText={(value)=>{
                                     this.setState({
                                         password:value
                                     })
                     }}/>
-                    <UrseInput text="重复密码"
+                    <UrseInput text="重复密码" secureTextEntry={true}
                                onChangeText={(value)=>{
                                    this.setState({
                                        password1:value
@@ -48,13 +48,12 @@ class SetPassword extends PureComponent {
         if(password1!=password){
             ToastAndroid.show("两次输入密码不一致", ToastAndroid.SHORT);
         }else{
-            request.getJson(urls.apis.REG,{
+            request.getJson(urls.apis.AUTH_REG,{
                         appid:tools.uuid(),
                         account: phone,
                         pwd: hex_md5(phone+password)
                 },function(data){
                     if(data.success) {
-                        ToastAndroid.show("注册完成，请登录..", ToastAndroid.SHORT);
                         setTimeout(function() {
                             Actions['passwordSuccess']({text:"恭喜您注册成功",phone:phone,password:password})
                         }, 1000);

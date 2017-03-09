@@ -3,18 +3,18 @@ import {ToastAndroid} from "react-native";
 import {request, urls} from "../utils/";
 import  {hex_md5} from "../views/authentication/components/md5"
 // 登录
-export function   login(phoneVale,passwordVale,d){
+export function login(phoneVale,passwordVale,d){
 			return (dispatch) => {
 				dispatch({
-					type: types.USER_LOGGING,
+					type: types.AUTH_LOGGING,
 				});
-			request.getJson(urls.apis.LOGIN,{
+			request.getJson(urls.apis.AUTH_LOGIN,{
 					account:phoneVale,
 					pwd:hex_md5(phoneVale+passwordVale),
 				},(data)=>{
 					if(data.success){
 						dispatch({
-							type: types.USER_LOGIN,
+							type: types.AUTH_LOGIN,
 							payload: {
 								...data
 							}
@@ -32,7 +32,7 @@ export function   login(phoneVale,passwordVale,d){
 export function logout() {
 	return (dispatch) => {
 		dispatch({
-			type: types.USER_LOGOUT
+			type: types.AUTH_LOGOUT
 		});
 	}
 }

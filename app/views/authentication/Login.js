@@ -26,13 +26,13 @@ class Login extends PureComponent {
             <Container>
                 <Header {...this.props}></Header>
                 <Content padder>
-                    <UrseInput text="用户名"
+                    <UrseInput text="用户名" secureTextEntry={false}
                                onChangeText={(value)=>{
                                    this.setState({
                                        phone:value
                                    })
                                }}/>
-                    <UrseInput text="密码"
+                    <UrseInput text="密码" secureTextEntry={true}
                                onChangeText={(value)=>{
                                    this.setState({
                                        password:value
@@ -77,6 +77,7 @@ class Login extends PureComponent {
             Actions['startInformation']()
         }
     }
+
 }
 const styles = {
 
