@@ -32,15 +32,15 @@ class MyFriend extends PureComponent {
 	}
 
 	componentDidMount() {
-		let {dispatch, user, friendList} = this.props;
+		let {dispatch, loginUser, friendList} = this.props;
 		if (friendList.length == 0) {
-			dispatch(fetchMyFriendsList(user.id));
+			dispatch(fetchMyFriendsList(loginUser.id));
 		}
 	}
 
 	_onRefresh() {
-		let {user, dispatch} = this.props;
-		dispatch(fetchMyFriendsList(user.id, () => {
+		let {loginUser, dispatch} = this.props;
+		dispatch(fetchMyFriendsList(loginUser.id, () => {
 			tools.toast('刷新成功');
 		}));
 	}
@@ -49,7 +49,7 @@ class MyFriend extends PureComponent {
 const styles = {}
 
 const mapStateToProps = state => ({
-	user: state.userStore.user,
+	loginUser: state.userStore.loginUser,
 	...state.friendStore,
 });
 export default connect(mapStateToProps)(MyFriend);

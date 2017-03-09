@@ -28,9 +28,9 @@ class MyCollection extends PureComponent {
 	}
 
 	_onFetch(page = 1, callback, options) {
-		let {user} = this.props;
+		let {loginUser} = this.props;
 		request.getJson(urls.apis.MY_COLLECTION_LIST, {
-			appid: user.appid,
+			appid: loginUser.appid,
 			page
 		}, (result) => {
 			let {datas, totalPages} = result.obj;
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({
-	user: state.userStore.user,
+	...state.userStore
 });
 export default connect(mapStateToProps)(MyCollection);

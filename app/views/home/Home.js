@@ -15,7 +15,6 @@ class Home extends PureComponent {
 	}
 
 	render() {
-		let {user} = this.props;
 		return (
 			<Container>
 				<Header>

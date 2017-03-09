@@ -4,12 +4,26 @@ import {connect} from "react-redux";
 import {Container, Content, List, Separator} from "../../components/index";
 import Header from "../../components/header/BaseHeader";
 import {Body, Left, Right, ListItem, Text, Button, Thumbnail, Icon} from "native-base";
+import {showLoading, hideLoading} from "../../actions/loading";
+import {request, urls, tools} from "../../utils/index";
 
 /**
  * 用户详情
  */
 class UserDetail extends PureComponent {
+
+	state = {
+		user: {
+			appid: "867200022156895,86720002215690321000493",
+			img: "null",
+			sex: "1",
+			title: "杨可",
+			remark: '海龟大神'
+		}
+	}
+
 	render() {
+		let {user}  = this.state;
 		return (
 			<Container>
 				<Header {...this.props}/>
@@ -23,13 +37,13 @@ class UserDetail extends PureComponent {
 							</Left>
 							<Body>
 							<Text>
-								海龟大神
+								{user.remark}
 								&nbsp;
-								<Icon name="man" style={styles.manIcon}/>
-								<Icon name="woman" style={styles.womanIcon}/>
+								{user.sex == '1' ? <Icon name="ios-man" style={styles.manIcon}/> :
+									<Icon name="ios-woman" style={styles.womanIcon}/>}
 							</Text>
 
-							<Text note style={{paddingBottom:20}}>昵称：杨可可</Text>
+							<Text note style={{paddingBottom:20}}>昵称：{user.title}</Text>
 							</Body>
 							<Right>
 							</Right>
@@ -46,12 +60,38 @@ class UserDetail extends PureComponent {
 						</ListItem>
 					</List>
 					<Separator/>
-					<Button block style={styles.button}>
+					<Button block style={styles.button} onPress={this._applyAddFriend.bind(this)}>
 						<Text>添加为我的好友</Text>
 					</Button>
 				</Content>
 			</Container>
 		);
+	}
+
+	_applyAddFriend() {
+		let {loginUser, dispatch} = this.props;
+		let {user} = this.state;
+
+		if (!loginUser) {
+			tools.toast('请登录后重试');
+			return;
+		}
+
+
+		dispatch(showLoading());
+
+		request.getJson(urls.apis.FRIEND_APPLY, {
+			activeAppid: loginUser.appid,
+			activeName: '海龟大神',
+			passiveAppid: user.appid,
+		}).then((result) => {
+			dispatch(hideLoading());
+			alert(JSON.stringify(result))
+		}, (error) => {
+			dispatch(hideLoading());
+			alert(JSON.stringify(error))
+		});
+
 	}
 }
 
@@ -60,22 +100,26 @@ const styles = {
 		marginLeft: 15,
 		marginRight: 15
 	},
-	manIcon:{
-		fontSize: 16,
+	manIcon: {
+		fontSize: 15,
+		color: '#50A1F2'
 	},
-	womanIcon:{
-		fontSize: 16,
+	womanIcon: {
+		fontSize: 15,
+		color: '#EF7155'
 	},
 
 };
 
 UserDetail.propTypes = {
-	userId: React.PropTypes.string, // 用户ID
+	friendId: React.PropTypes.string, // 用户ID
 }
 
 UserDetail.defaultProps = {
-	userId: '867200022156895,86720002215690321000493'
+	friendId: '867200022156895,86720002215690321000493'
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	loginUser: state.userStore.loginUser
+});
 export default connect(mapStateToProps)(UserDetail);

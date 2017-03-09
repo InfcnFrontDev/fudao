@@ -101,7 +101,7 @@ class AppNavigator extends Component {
 
 							{/*首页*/}
 							<Scene key="index" component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar
-
+								   initial
 							/>
 
 							{/*启动注册*/}
@@ -163,7 +163,7 @@ class AppNavigator extends Component {
 							<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
 
 							{/*用户*/}
-							<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar initial/>
+							<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
 						</Scene>
 					</AppRouter>
 				</Drawer>
