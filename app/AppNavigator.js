@@ -99,7 +99,7 @@ class AppNavigator extends Component {
 
 							{/*首页*/}
 							<Scene key="index" component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar
-								   initial/>
+								   />
 
 							{/*启动注册*/}
 
