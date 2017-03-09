@@ -40,30 +40,27 @@ class RebuildPassword extends PureComponent {
                                        password1:value
                                    })
                                }}/>
-                    <CommitButton  border={false} block={true} top={20} title="提交" onPress={this._yzpassword.bind(this)}/>
+                    <CommitButton  border={false} block={true} top={20} title="提交" onPress={this._yzPassword.bind(this)}/>
                 </Content>
             </Container>
         );
     }
-    _yzpassword(){
-        let phone= this.state.phone;
-        let type = this.state.type
-        let password = this.state.password;
-        let password1= this.state.password1;
+    _yzPassword(){
+        let {phone,password,password1}= this.state;
         if(password1!=password){
             ToastAndroid.show("两次输入密码不一致", ToastAndroid.SHORT);
             this.setState({
                 password1:''
             })
         }else{
-            request.getJson(urls.apis.NEW_PASSWORD,{
+            request.getJson(urls.apis.AUTH_NEW_PASSWORD,{
                     phone: phone,
                     pwd: hex_md5(phone+password)
                 },function(data){
                     if(data.success) {
                             Actions['passwordSuccess']({text:"密码设置成功",phone:phone,password:password})
                     }else{
-                        ToastAndroid.show("修改失败.", ToastAndroid.SHORT);
+                        ToastAndroid.show("修改失败...", ToastAndroid.SHORT);
                     }
                 }
             )

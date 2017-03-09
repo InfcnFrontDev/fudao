@@ -7,8 +7,9 @@ export default function (state = initialState, {type, payload}) {
 		case types.USER_LOGIN:
 			return Object.assign({}, state, {
 				...payload
+
 			});
-		case types.USER_LOGOUT:
+		case types.AUTH__LOGOUT:
 			return initialState;
 		default:
 			return state;

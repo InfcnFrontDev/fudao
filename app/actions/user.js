@@ -15,7 +15,7 @@ export function login(user) {
 export function logout() {
 	return (dispatch) => {
 		dispatch({
-			type: types.USER_LOGOUT
+			type: types.AUTH_LOGOUT
 		});
 	}
 }

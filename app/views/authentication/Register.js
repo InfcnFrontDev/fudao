@@ -11,6 +11,8 @@ import {theme,request,urls} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput"
 import {checkPhone} from "./components/public";
+import  GetCode from "./components/GetCode";
+
 /**
  * 注册
  */
@@ -20,7 +22,7 @@ class Register extends PureComponent {  // eslint-disable-line
         super(props);
         this.state={
             phone:'',
-            yannum:'',
+            code:'',
             title:this.props.title,
             text:this.props.text
         }
@@ -30,22 +32,31 @@ class Register extends PureComponent {  // eslint-disable-line
             <Container>
                 <Header title={this.state.title}></Header>
                 <Content padder>
-                    <UrseInput text="手机号" btn={false}
+                    <UrseInput text="手机号"
                                onChangeText={(value)=>{
                                    this.setState({
                                        phone:value
                                    })
                                }}/>
-                    <UrseInput text="验证码"  title="获取验证码" top={2} btn={true}
-                               onChangeText={(value)=>{
-                                   this.setState({
-                                       yannum:value
-                                   })
-                               }}
-                               onPress={this._yzm.bind(this)}
-                    />
+                    <View style={styles.box}>
+                        <View style={styles.border}>
+                            <Text>验证码</Text>
+                        </View>
+                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric'
+                                   onChangeText={(value)=>{
+                                       this.setState({
+                                           code:value
+                                       })
+                                   }}
+                        ></TextInput>
+                        <GetCode  border={true} block={false}  title='获取验证码' ref={(e) => this._getGode = e}
+                                  onPress={this._yzm.bind(this)} >
+                        </GetCode >
+                    </View>
                     <CommitButton title='注册' block={true} border={false} top={20}  onPress={this._zhuce.bind(this)} />
-                    <Text style={styles.tiaokuan}>点击注册代表您已同意《福道健康使用协议和隐私条款》</Text>
+                    <TouchableOpacity onPress={()=> this.protocol()}>
+                        <Text  style={styles.tiaokuan}>点击注册代表您已同意《福道健康使用协议和隐私条款》</Text>
+                    </TouchableOpacity>
                 </Content>
             </Container>
         );
@@ -55,37 +66,36 @@ class Register extends PureComponent {  // eslint-disable-line
         if(!checkPhone(phone)){
             ToastAndroid.show("请填入正确的手机号", ToastAndroid.SHORT);
         }else{
-            request.getJson(urls.apis.CHECK_PHONE,{
+            request.getJson(urls.apis.AUTH_CHECK_PHONE,{
                     phone:phone ,
                     type:'reg'
                 },function(data){
-                    ToastAndroid.show("。。。", ToastAndroid.SHORT);
+
                     if(data.success && "existence" == data.msg) {
                         ToastAndroid.show("手机号已被注册", ToastAndroid.SHORT);
                     } else if(data.success && "existence" != data.msg) {
                         ToastAndroid.show("正在发送验证码...", ToastAndroid.SHORT);
+                        this._getGode._click();
                     }
-                }
+                }.bind(this)
             )
         }
     }
     _zhuce(){
-        let phone = this.state.phone;
-        let code = this.state.yannum;
+        let {phone,code} = this.state;
+
         if(phone==""){
             ToastAndroid.show("手机号不能为空", ToastAndroid.SHORT);
         }else if(code==""){
             ToastAndroid.show("验证码不能为空", ToastAndroid.SHORT);
         }else{
             /*接口*/
-            request.getJson(urls.apis.CHECK_CODE,{
+            request.getJson(urls.apis.AUTH_CHECK_CODE,{
                     account: phone,
                     code: code,
                     type: "reg"
                 },function(data){
-                    ToastAndroid.show("走接口...", ToastAndroid.SHORT);
                     if(data.success) {
-                        ToastAndroid.show("验证码正确", ToastAndroid.SHORT);
                         Actions['setPassword']({phone:phone});
                     } else {
                         ToastAndroid.show("验证码错误...", ToastAndroid.SHORT);
@@ -95,10 +105,13 @@ class Register extends PureComponent {  // eslint-disable-line
 
         }
     }
-    _gotoIndex() {
-
-
+    protocol() {
+        Actions.webview({
+            title: '用户协议',
+            uri: urls.pages.PROTOCOL,
+        })
     }
+
 }
 
 const styles = {
@@ -107,7 +120,24 @@ const styles = {
         textAlign:'center',
         marginTop:6,
         color:'#666'
-    }
+    },
+    box:{
+        height:46,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        borderColor:'#D4D4D4',
+        borderBottomWidth:1,
+
+    },
+    border:{
+        width:80,
+        flexDirection:'row',
+        justifyContent:'center',
+        borderRightWidth:1,
+        borderRightColor:"#D4D4D4",
+
+    },
 };
 
 function bindAction(dispatch) {

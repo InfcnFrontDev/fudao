@@ -31,20 +31,20 @@ class Login extends PureComponent {
 				<Header {...this.props}></Header>
 				<Content padder>
 					<UrseInput text="用户名"
-							   onChangeText={(value)=> {
-								   this.setState({
-									   phone: value
-								   })
-							   }}/>
-					<UrseInput text="密码"
-							   onChangeText={(value)=> {
-								   this.setState({
-									   password: value
-								   })
-							   }}/>
+							   onChangeText={(value)=>{
+                                   this.setState({
+                                       phone:value
+                                   })
+                               }}/>
+                    <UrseInput text="密码" secureTextEntry={true}
+                               onChangeText={(value)=>{
+                                   this.setState({
+                                       password:value
+                                   })
+                               }}/>
 					<CommitButton title="登录" block={true} border={false} top={20} onPress={this._login.bind(this)}/>
 					<View style={styles.textdoc}>
-						<View style={{flexDirection: 'row'}}>
+						<View style={{flexDirection:'row'}}>
 						</View>
 						<TouchableOpacity onPress={()=>Actions['passwordValidate']()}>
 							<Text style={styles.text2}>忘记密码</Text>
@@ -58,6 +58,7 @@ class Login extends PureComponent {
 
 	_login() {
 		let {phone, password} = this.state;
+
 		if (phone == '') {
 			tools.toast("用户名不能为空");
 			return;
@@ -114,7 +115,7 @@ class Login extends PureComponent {
 		// ToastAndroid.show(JSON.stringify(obj.userInformation), ToastAndroid.SHORT);
 		var userInformation = obj.userInformation;
 		if (userInformation != undefined) { //基本信息已经添加完成
-			Actions['_onSearch']()
+			Actions['search']()
 		} else { //没有基本信息表示第一次登录需要添写信息
 			Actions['startInformation']()
 		}
@@ -137,6 +138,7 @@ const styles = {
 		textDecorationLine: 'underline'
 	},
 };
+
 const mapStateToProps = state => ({});
 export default connect(mapStateToProps)(Login);
 
