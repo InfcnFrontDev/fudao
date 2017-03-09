@@ -10,6 +10,7 @@ import CommitButton from "./components/CommitButton";
 import UrseInput from "./components/UrseInput";
 import {checkPhone} from "./components/public";
 import {request, urls, tools} from "../../utils/index";
+import {showLoading, hideLoading} from "../../actions/loading";
 import {hex_md5} from "./components/md5";
 import {login} from "../../actions/user";
 

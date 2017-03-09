@@ -1,6 +1,6 @@
 import * as types from "../actions/types";
 const initialState = {
-	user: {}
+	loginUser: {}
 };
 export default function (state = initialState, {type, payload}) {
 	switch (type) {

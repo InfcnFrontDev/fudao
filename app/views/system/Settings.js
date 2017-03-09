@@ -60,7 +60,7 @@ class Settings extends PureComponent {
 
 	quit() {
 		this.props.dispatch(logout());
-		Actions.login({
+		Actions.start({
 			type: ActionConst.POP_AND_REPLACE
 		});
 	}
