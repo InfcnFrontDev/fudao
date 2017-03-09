@@ -1,13 +1,13 @@
 import React, {PureComponent} from "react";
 import {StyleSheet, View, Text} from "react-native";
 import ScrollableTabView from "react-native-scrollable-tab-view";
-import TabBar from "./TabBar";
+import TabBar from "./components/TabBar";
 import {theme} from "../../utils/index";
-// tab components
 import Home from "../home/Home";
 import Article from "../article/Article";
 import Dynamic from "../../views/dynamic/Dynamic";
 import My from "../../views/my/My";
+// tab components
 
 const tabTitles = [
 	'主页', '资讯', '动态', '我的'

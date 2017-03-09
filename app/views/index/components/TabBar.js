@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import {theme} from "../../utils/index";
+import {theme} from "../../../utils/index";
 
 
 export default class TabBar extends Component {

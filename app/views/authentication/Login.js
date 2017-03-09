@@ -31,20 +31,20 @@ class Login extends PureComponent {
 				<Header {...this.props}></Header>
 				<Content padder>
 					<UrseInput text="用户名"
-							   onChangeText={(value)=>{
-                                   this.setState({
-                                       phone:value
-                                   })
-                               }}/>
+							   onChangeText={(value)=> {
+								   this.setState({
+									   phone: value
+								   })
+							   }}/>
 					<UrseInput text="密码"
-							   onChangeText={(value)=>{
-                                   this.setState({
-                                       password:value
-                                   })
-                               }}/>
+							   onChangeText={(value)=> {
+								   this.setState({
+									   password: value
+								   })
+							   }}/>
 					<CommitButton title="登录" block={true} border={false} top={20} onPress={this._login.bind(this)}/>
 					<View style={styles.textdoc}>
-						<View style={{flexDirection:'row'}}>
+						<View style={{flexDirection: 'row'}}>
 						</View>
 						<TouchableOpacity onPress={()=>Actions['passwordValidate']()}>
 							<Text style={styles.text2}>忘记密码</Text>
@@ -58,9 +58,6 @@ class Login extends PureComponent {
 
 	_login() {
 		let {phone, password} = this.state;
-		phone = '15901097191';
-		password = '123456';
-
 		if (phone == '') {
 			tools.toast("用户名不能为空");
 			return;

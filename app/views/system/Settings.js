@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {Alert} from "react-native";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
+import {Actions, ActionConst} from "react-native-router-flux";
 import {Container, Content, List, Separator} from "../../components/index";
 import Header from "../../components/header/BaseHeader";
 import {Body, Right, Switch, ListItem, Text} from "native-base";
@@ -41,7 +41,7 @@ class Settings extends PureComponent {
 					<Separator/>
 					<List>
 						<ListItem last onPress={this.quitAlert.bind(this)}>
-							<Body style={{alignItems:'center'}}>
+							<Body style={{alignItems: 'center'}}>
 							<Text>退出</Text>
 							</Body>
 						</ListItem>
@@ -60,7 +60,9 @@ class Settings extends PureComponent {
 
 	quit() {
 		this.props.dispatch(logout());
-		Actions.login();
+		Actions.login({
+			type: ActionConst.POP_AND_REPLACE
+		});
 	}
 }
 
