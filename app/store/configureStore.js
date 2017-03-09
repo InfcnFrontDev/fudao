@@ -1,6 +1,7 @@
 'use strict';
 import {applyMiddleware, createStore} from "redux";
 import thunk from "redux-thunk";
+import {persistStore, autoRehydrate} from "redux-persist";
 import {AsyncStorage} from "react-native";
 import reducers from "../reducers";
 
@@ -17,8 +18,15 @@ let middlewares = [
 	thunk
 ];
 
-let createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
+let createAppStore = applyMiddleware(...middlewares)(createStore);
 
-export default function configureStore() {
-	return createStoreWithMiddleware(reducers);
+export default function configureStore(onComplete) {
+	const store = autoRehydrate()(createAppStore)(reducers);
+	let opt = {
+		storage: AsyncStorage,
+		transform: [],
+		// whitelist: ['account'],
+	};
+	persistStore(store, opt, onComplete);
+	return store;
 }

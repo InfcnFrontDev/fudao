@@ -61,103 +61,7 @@ const datas = [
 		icon: 'radio-button-off',
 		bg: '#1EBC7C',
 		types: '9',
-	},
-	{
-		name: 'Card',
-		route: 'card',
-		icon: 'keypad',
-		bg: '#B89EF5',
-		types: '5',
-	},
-	{
-		name: 'Check Box',
-		route: 'checkbox',
-		icon: 'checkmark-circle',
-		bg: '#EB6B23',
-	},
-	{
-		name: 'Deck Swiper',
-		route: 'deckswiper',
-		icon: 'swap',
-		bg: '#3591FA',
-	},
-	{
-		name: 'Fab',
-		route: 'fab',
-		icon: 'help-buoy',
-		bg: '#EF6092',
-		types: '2',
-	},
-	{
-		name: 'Form & Inputs',
-		route: 'form',
-		icon: 'call',
-		bg: '#EFB406',
-		types: '13',
-	},
-	{
-		name: 'Icon',
-		route: 'icon',
-		icon: 'information-circle',
-		bg: '#EF6092',
-	},
-	{
-		name: 'Layout',
-		route: 'layout',
-		icon: 'grid',
-		bg: '#9F897C',
-		types: '5',
-	},
-	{
-		name: 'List',
-		route: 'list',
-		icon: 'lock',
-		bg: '#5DCEE2',
-		types: '7',
-	},
-	{
-		name: 'Picker',
-		route: 'picker',
-		icon: 'arrow-dropdown',
-		bg: '#F50C75',
-	},
-	{
-		name: 'Radio',
-		route: 'radio',
-		icon: 'radio-button-on',
-		bg: '#6FEA90',
-	},
-	{
-		name: 'SearchBar',
-		route: 'searchbar',
-		icon: 'search',
-		bg: '#29783B',
-	},
-	{
-		name: 'Spinner',
-		route: 'spinner',
-		icon: 'navigate',
-		bg: '#BE6F50',
-	},
-	{
-		name: 'Tabs',
-		route: 'tab',
-		icon: 'home',
-		bg: '#AB6AED',
-		types: '2',
-	},
-	{
-		name: 'Thumbnail',
-		route: 'thumbnail',
-		icon: 'image',
-		bg: '#cc0000',
-	},
-	{
-		name: 'Typography',
-		route: 'typography',
-		icon: 'paper',
-		bg: '#48525D',
-	},
+	}
 
 ];
 class SideBar extends Component {
@@ -181,15 +85,13 @@ class SideBar extends Component {
 			<Container>
 				<Content
 					bounces={false}
-					style={{flex: 1, backgroundColor: '#fff', top: -1}}
+					style={{flex: 1, backgroundColor: '#fff', top: -1,borderColor :'#fff'}}
 				>
-					<Image source={drawerCover} style={styles.drawerCover}>
-						<Image
-							square
-							style={styles.drawerImage}
-							source={drawerImage}
-						/>
-					</Image>
+					<View style={styles.drawerCover}>
+						<Image source={drawerCover} style={{width:100,height:100}}>
+
+						</Image>
+					</View>
 					{(Platform.OS === 'ios') &&
 					<View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
 						<StyleProvider style={getTheme(variables)}>
@@ -214,18 +116,10 @@ class SideBar extends Component {
 							this.props.closeDrawer()
 						}}>
 							<Left>
-								<Icon active name={data.icon} style={{color: '#777', fontSize: 26, width: 60}}/>
+								<Icon active name={data.icon} style={{color: '#777', fontSize: 26, width: 40}}/>
 								<Text style={styles.text}>{data.name}</Text>
 							</Left>
-							{(data.types) &&
-							<Right style={{flex: 1}}>
-								<Badge
-									style={{borderRadius: 3, height: 25, width: 72, backgroundColor: data.bg}}
-								>
-									<Text style={styles.badgeText}>{`${data.types} Types`}</Text>
-								</Badge>
-							</Right>
-							}
+
 						</ListItem>}
 					/>
 

@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Title, Content, Left, Right, Body, Text, Button} from "native-base";
+import {Container, Title, Content, Text} from "native-base";
 import Header from "../../components/header/IndexHeader";
 import MyEnter from "./components/MyEnter.js";
 import Headline from "./components/Headline.js";
@@ -13,7 +13,6 @@ class Home extends PureComponent {
 	constructor(props) {
 		super(props);
 	}
-
 
 	render() {
 		return (
@@ -31,10 +30,12 @@ class Home extends PureComponent {
 	}
 }
 
-const styles ={
-	content:{
-		backgroundColor:'#fff'
+const styles = {
+	content: {
+		backgroundColor: '#fff'
 	}
 }
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	...state.userStore
+});
 export default connect(mapStateToProps)(Home);

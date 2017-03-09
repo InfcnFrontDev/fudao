@@ -10,7 +10,7 @@ import {Container, Title, Content, Left, Right, Body, Form, Input, Item,Thumbnai
 import {View,Image,TouchableOpacity,TouchableHighlight,ToastAndroid, DatePickerAndroid,} from "react-native";
 import Header from "../../components/header/TitleHeader";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
-import {theme} from "../../utils/";
+import {theme,tools} from "../../utils/";
 import  CommitButton from "./components/CommitButton"
 
 
@@ -27,10 +27,15 @@ class StartInformation extends PureComponent {
             simpleText:"03/22/06",
         }
     }
+
     async showPicker(stateKey, options) {
+        let option={
+            options,
+            mode:'spinner'
+        }
         try {
             var newState = {};
-            const {action, year, month, day} = await DatePickerAndroid.open(options);
+            const {action, year, month, day} = await DatePickerAndroid.open(option);
             if (action === DatePickerAndroid.dismissedAction) {
                 newState[stateKey + 'Text'] = 'dismissed';
             } else {
@@ -108,12 +113,22 @@ class StartInformation extends PureComponent {
                                 <Icon  name='navigate' />
                                 <Text  style={styles.text3}>正在定位你的位置...</Text>
                             </TouchableOpacity>
-                            <CommitButton  border={false} block={true} top={20} title="提交" onPress={()=>Actions['login']()}/>
+                            <CommitButton  border={false} block={true} top={20} title="提交" onPress={this._tijiao.bind(this)}/>
                         </View>
                     </View>
                 </Content>
             </Container>
         )
+    }
+    _tijiao(){
+        let sex,birth,position = null;
+        if(this.state.showM){
+            sex = 1
+        }else{
+            sex = 0
+        }
+        birth = this.state.simpleText;
+        //获取地理位置
     }
 }
 const styles = {
@@ -189,25 +204,7 @@ const styles = {
         top:0,
         zIndex:1000
     },
-
-    /*button: {
-     margin:5,
-     backgroundColor: 'white',
-     padding: 15,
-     borderBottomColor: '#cdcdcd',
-     }*/
-
-
 };
-
-function bindAction(dispatch) {
-    return {
-        openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: key => dispatch(closeDrawer()),
-    };
-
-}
-
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(StartInformation);
+export default connect(mapStateToProps)(StartInformation);
 

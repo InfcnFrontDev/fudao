@@ -5,6 +5,9 @@ import search from "./search";
 import account from "./account";
 import collection from "./collection";
 import dynamic from "./dynamic";
+import loading from "./loading";
+import user from "./user";
+import friend from "./friend";
 
 export default combineReducers({
 	drawer,
@@ -13,4 +16,7 @@ export default combineReducers({
 	account,
 	collection,
 	dynamic
+	loadingStore: loading,
+	userStore: user,
+	friendStore: friend,
 });

@@ -10,8 +10,11 @@ export const CHANGE_MATERIAL = 'CHANGE_MATERIAL';
 export const CHANGE_PLATFORM = 'CHANGE_PLATFORM';
 
 
+// loading ////////////////////////////////////////
+export const LOADING_SHOW = 'LOADING_SHOW';
+export const LOADING_HIDE = 'LOADING_HIDE';
+
 // user actions ////////////////////////////////////////
-export const USER_LOGGING = 'USER_LOGGING';
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
 
@@ -32,11 +35,16 @@ export const SEARCH_INFORMATION_FETCH_LIST = 'SEARCH_INFORMATION_FETCH_LIST';
 export const SEARCH_INFORMATION_RECEIVE_LIST = 'SEARCH_INFORMATION_RECEIVE_LIST';
 export const SEARCH_INFORMATION_CLEAR_LIST = 'SEARCH_INFORMATION_CLEAR_LIST';
 
-// 搜索症状和问题
+
 export const MY_COLLECTION_FETCH_LIST_FIRSTLOAD = 'MY_COLLECTION_FETCH_LIST_FIRSTLOAD';
 export const MY_COLLECTION_FETCH_LIST_REFRESH = 'MY_COLLECTION_FETCH_LIST_REFRESH';
 export const MY_COLLECTION_FETCH_LIST_PAGINATION = 'MY_COLLECTION_FETCH_LIST_PAGINATION';
 export const MY_COLLECTION_RECEIVE_LIST = 'MY_COLLECTION_RECEIVE_LIST';
+
+
+// 我的好友
+export const MY_FRIEND_FETCH_LIST = 'MY_FRIEND_FETCH_LIST';
+export const MY_FRIEND_RECEIVE_LIST = 'MY_FRIEND_RECEIVE_LIST';
 
 
 // dynamic actions ////////////////////////////////////////

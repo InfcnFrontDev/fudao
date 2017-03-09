@@ -25,13 +25,13 @@ class MyList extends PureComponent {
 				})}
 				{this.renderItem({
 					icon: 'ios-tablet-portrait-outline',
-					text: '智能设备',
+					text: '我的方案与效果',
 					bordered: true,
 					route: 'about'
 				})}
 				{this.renderItem({
 					icon: 'ios-chatboxes-outline',
-					text: '推送通知',
+					text: '消息通知',
 					bordered: true,
 					route: 'start'
 				})}

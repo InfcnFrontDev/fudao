@@ -33,12 +33,9 @@ function createAreaData(callback){
 
 };
  class Picker extends PureComponent {
-
     constructor(props ) {
         super(props);
     }
-
-
     render() {
         return (
             <Navigator initialRoute={{name:'nav',component:Nav}}

@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {StyleSheet, View} from "react-native";
 import {connect} from "react-redux";
-import {Container, Left, Right, Body} from "native-base";
+import {Container} from "native-base";
 import GiftedListView from "../../components/GiftedListView";
 import Header from "../../components/header/BaseHeader";
 import ArticleItem from "../article/components/ArticleItem";
@@ -28,9 +28,9 @@ class MyCollection extends PureComponent {
 	}
 
 	_onFetch(page = 1, callback, options) {
-		let {account} = this.props;
+		let {loginUser} = this.props;
 		request.getJson(urls.apis.MY_COLLECTION_LIST, {
-			appid: account.accountInfo.appid,
+			appid: loginUser.appid,
 			page
 		}, (result) => {
 			let {datas, totalPages} = result.obj;
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({
-	account: state.account,
+	...state.userStore
 });
 export default connect(mapStateToProps)(MyCollection);

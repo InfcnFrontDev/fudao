@@ -22,7 +22,7 @@ class MyGrid extends PureComponent {
 					icon: 'people',
 					iconColor: '#79CDCD',
 					text: '好友',
-					route: 'myFriends',
+					route: 'myFriend',
 				})}
 				{this.renderItem({
 					icon: 'ios-settings',
