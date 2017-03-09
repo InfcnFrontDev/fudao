@@ -5,7 +5,7 @@ import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, Separator} from "../../components/index";
 import {Text, Button, ListItem, Item, Input} from "native-base";
 import {showLoading, hideLoading} from "../../actions/loading";
-import {request, urls, tools} from "../../utils/index";
+import {request, urls, tools,toast} from "../../utils/index";
 
 /**
  * 好友申请
@@ -74,10 +74,10 @@ class FriendApply extends PureComponent {
 		}).then(((result) => {
 			dispatch(hideLoading());
 			if (result.success) {
-				tools.toast('已发送申请');
+				toast.show('已发送申请');
 				Actions.pop();
 			} else {
-				tools.toast('发送申请失败，请重试');
+				toast.show('发送申请失败，请重试');
 			}
 		}).bind(this), (error) => {
 			dispatch(hideLoading());

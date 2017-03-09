@@ -6,7 +6,7 @@ import {Container, Content, List, Separator} from "../../components/index";
 import Header from "../../components/header/BaseHeader";
 import {Body, Left, Right, ListItem, Text, Button, Thumbnail, Icon, View} from "native-base";
 import {showLoading, hideLoading} from "../../actions/loading";
-import {request, urls, tools} from "../../utils/index";
+import {request, urls, tools,toast} from "../../utils/index";
 
 /**
  * 用户详情
@@ -84,7 +84,7 @@ class UserDetail extends PureComponent {
 					user
 				})
 			} else {
-				tools.toast('获取用户信息失败');
+				toast.show('获取用户信息失败');
 			}
 		}, (error) => {
 			dispatch(hideLoading());
@@ -97,7 +97,7 @@ class UserDetail extends PureComponent {
 		let {user} = this.state;
 
 		if (!loginUser) {
-			tools.toast('请登录后重试');
+			toast.show('请登录后重试');
 			return;
 		}
 

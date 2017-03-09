@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import {ScrollView, View} from "react-native";
+import {Actions} from "react-native-router-flux";
 import {Left, Right, Body} from "native-base";
 import Separator from "../../../components/Separator";
 import {List, ListItem} from "react-native-elements";
@@ -49,6 +50,7 @@ class FriendList extends PureComponent {
 								avatar={{uri: f.avatar_url}}
 								title={f.name}
 								containerStyle={(i < friendList.length - 1) ? styles.listItem : styles.lastListItem}
+								onPress={() => Actions.userDetail()}
 							/>
 						))}
 					</List>
@@ -72,8 +74,4 @@ const styles = {
 	},
 }
 
-const mapStateToProps = state => ({
-	account: state.account,
-	friends: state.friends,
-});
 export default (FriendList);

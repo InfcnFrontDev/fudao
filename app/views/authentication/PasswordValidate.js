@@ -8,7 +8,7 @@ import {Container,Content,Text,  Button,Item,Label,Input} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import Header from "../../components/header/BaseHeader";
 import {showLoading, hideLoading} from "../../actions/loading";
-import {theme,request,urls,tools} from "../../utils/";
+import {theme,request,urls,tools,toast} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput";
 import  GetCode from "./components/GetCode";
@@ -59,7 +59,7 @@ class Register extends PureComponent {  // eslint-disable-line
     _yzm(){
         let {phone} = this.state;
         if(phone.toString().length<11||phone.toString().length>11){
-            tools.toast("请填入正确的手机号");
+            toast.show("请填入正确的手机号");
         }else{
             request.getJson(urls.apis.AUTH_CHECK_PHONE,{
                     phone:phone ,
@@ -68,7 +68,7 @@ class Register extends PureComponent {  // eslint-disable-line
                     if(data.success && "existence" == data.msg) {
 
                     } else if(data.success && "existence" != data.msg) {
-                        tools.toast("正在发送验证码...");
+                        toast.show("正在发送验证码...");
                         this._getGode._click();
                     }
                 },(error)=>{
@@ -96,7 +96,7 @@ class Register extends PureComponent {  // eslint-disable-line
                         this._getGode.clearTimer();
                         Actions['rebuildPassword']({phone:phone});
                     } else {
-                        tools.toast("验证码错误...");
+                        toast.show("验证码错误...");
                         this.setState({
                             code:'',
                         })

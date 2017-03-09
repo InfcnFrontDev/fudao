@@ -9,7 +9,7 @@ import {showLoading, hideLoading} from "../../actions/loading";
 import CommitButton from "./components/CommitButton";
 import UrseInput from "./components/UrseInput";
 import {checkPhone} from "./components/public";
-import {request, urls, tools} from "../../utils/index";
+import {request, urls, tools,toast} from "../../utils/index";
 import {hex_md5} from "./components/md5";
 import {login} from "../../actions/user";
 
@@ -60,15 +60,15 @@ class Login extends PureComponent {
 		let {phone, password} = this.state;
 
 		if (phone == '') {
-			tools.toast("用户名不能为空");
+			toast.show("用户名不能为空");
 			return;
 		}
 		if (!checkPhone(phone)) {
-			tools.toast("请输入正确的用户名");
+			toast.show("请输入正确的用户名");
 			return;
 		}
 		if (password == '') {
-			tools.toast("密码不能为空");
+			toast.show("密码不能为空");
 			return;
 		}
 
@@ -82,7 +82,7 @@ class Login extends PureComponent {
 				dispatch(hideLoading());
 
 				if (data.success) {
-					tools.toast("登录成功");
+					toast.show("登录成功");
 					let user = Object.assign({}, {
 						...data.obj.accountInfo,
 						...data.obj.userInformation
@@ -92,7 +92,7 @@ class Login extends PureComponent {
 					// 跳到首页
 					Actions.index();
 				} else {
-					tools.toast("密码错误");
+					toast.show("密码错误");
 				}
 			},(error) => {
 				dispatch(hideLoading());

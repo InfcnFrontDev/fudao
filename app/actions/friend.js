@@ -3,7 +3,7 @@ import {request, urls} from "../utils/index";
 
 
 //
-export function fetchMyFriendsList(appid, callback) {
+export function fetchMyFriendsList(userId, callback) {
 	return (dispatch) => {
 		dispatch({
 			type: types.MY_FRIEND_FETCH_LIST,
@@ -11,8 +11,8 @@ export function fetchMyFriendsList(appid, callback) {
 
 		// 请求数据
 		request.getJson(urls.apis.MY_FRIENDS_LIST, {
-			appid
-		}, (result) => {
+			userId
+		}).then((result) => {
 
 			let friendList = [
 				{

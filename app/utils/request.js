@@ -1,4 +1,4 @@
-import tools from "./tools";
+import {toast} from "./index";
 /**
  * network request
  */
@@ -54,18 +54,18 @@ const request = {
 					'Cache-Control': 'no-cache',
 				}
 			})
-			.then((response) => type == 'text' ? response.text() : response.json())
-			.then((result) => {
-				if (resolve)
-					resolve(result)
-			})
-			.catch((error) => {
-				console.log(error);
-				tools.toast('服务器异常，请重试!');
-				if (reject) {
-					reject(error);
-				}
-			}).done();
+				.then((response) => type == 'text' ? response.text() : response.json())
+				.then((result) => {
+					if (resolve)
+						resolve(result)
+				})
+				.catch((error) => {
+					console.log(error);
+					toast.show('服务器异常，请重试!');
+					if (reject) {
+						reject(error);
+					}
+				}).done();
 		})
 	},
 
@@ -131,18 +131,18 @@ const request = {
 				headers,
 				body
 			})
-			.then((response) => type == 'text' ? response.text() : response.json())
-			.then((result) => {
-				if (resolve)
-					resolve(result)
-			})
-			.catch((error) => {
-				console.log(error);
-				tools.toast('服务器异常，请重试!');
-				if (reject) {
-					reject(error);
-				}
-			}).done();
+				.then((response) => type == 'text' ? response.text() : response.json())
+				.then((result) => {
+					if (resolve)
+						resolve(result)
+				})
+				.catch((error) => {
+					console.log(error);
+					toast.show('服务器异常，请重试!');
+					if (reject) {
+						reject(error);
+					}
+				}).done();
 		})
 	},
 };
