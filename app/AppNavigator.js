@@ -87,10 +87,10 @@ class AppNavigator extends Component {
 			<StyleProvider style={getTheme(theme)}>
 				<Drawer
 					ref={(ref) => this._drawer = ref}
-					openDrawerOffset={0.5}
-					panCloseMask={0.5}
+					openDrawerOffset={0.66}
+					panCloseMask={0.66}
 					content={<SideBar navigator={this._navigator}/>}
-					onClose={() => this.closeDrawer()}>
+					onClose={() => this.closeDrawer()} >
 					<StatusBar
 						hidden={(this.props.drawerState === 'opened' && Platform.OS === 'ios') ? true : false}
 						backgroundColor={theme.statusBarColor}/>
@@ -98,8 +98,7 @@ class AppNavigator extends Component {
 						<Scene key="root">
 
 							{/*首页*/}
-							<Scene key="index" component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar
-								   initial/>
+							<Scene key="index" component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar initial/>
 
 							{/*启动注册*/}
 
