@@ -132,6 +132,3 @@ const styles = {
 
 const mapStateToProps = state => ({});
 export default connect(mapStateToProps)(Login);
-
-
-

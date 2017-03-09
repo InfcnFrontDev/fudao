@@ -50,15 +50,14 @@ export default class EditorComp extends Component {
 
 const styles = StyleSheet.create({
     textInput: {
-        height: 200,
+        height: 140,
         backgroundColor: '#fff',
         padding: 10,
         paddingTop: 5,
         paddingBottom: 5,
         fontSize: 14,
         textAlignVertical: 'top',
-        borderBottomWidth:1,
-        borderBottomColor:'#ddd'
+
     },
     toolbar: {
         flexDirection: 'row',

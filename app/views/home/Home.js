@@ -15,6 +15,7 @@ class Home extends PureComponent {
 	}
 
 	render() {
+		
 		return (
 			<Container>
 				<Header>
@@ -24,6 +25,7 @@ class Home extends PureComponent {
 				<Content style={styles.content}>
 					<Headline />
 					<MyEnter />
+					<Text></Text>
 				</Content>
 			</Container>
 		)

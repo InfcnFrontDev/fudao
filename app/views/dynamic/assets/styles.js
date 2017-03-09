@@ -1,4 +1,4 @@
-import {theme} from "../../utils/";
+import {theme} from "../../../utils/";
 
 const styles = {
   contain:{
@@ -84,7 +84,7 @@ const styles = {
   showoneText:{
     textAlign:'center',
     color:'#999',
-    fontSize:theme.DefaultFontSize,
+    fontSize:theme.DefaultFontSize-2,
   },
   textInputContain:{
     paddingTop:10,
@@ -121,10 +121,11 @@ justifyContent:'flex-start',
   commentName:{
     color:'#5E7192',
     lineHeight:25,
-    fontSize:theme.DefaultFontSize,
+    fontSize:theme.DefaultFontSize-2,
     marginRight:6,
   },
   commentContent:{
+    fontSize:theme.DefaultFontSize-2,     
     lineHeight:25,
     color:'#060608',
 

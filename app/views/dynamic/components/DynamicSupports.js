@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Text} from "native-base";
 import {View,Image} from "react-native";
-import styles from "../styles";
+import styles from "../assets/styles";
 
 /**
 * 动态
@@ -21,14 +21,14 @@ class DynamicSupports extends Component {
               <View key={i} style={{flexDirection:'row'}}>
                 <Image source={require('../../../assets/xin.png')} style={styles.xin} />
                 <Text style={styles.commentName}>
-                {p.username}
+                {p.nick}
                 </Text>
               </View>
             )
           }else{
             return (
               <Text key={i} style={styles.commentName}>
-              ,  {p.username}
+              ,  {p.nick}
               </Text>
             )
           }

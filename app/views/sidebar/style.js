@@ -14,10 +14,14 @@ export default {
   drawerCover: {
     alignSelf: 'stretch',
     // resizeMode: 'cover',
-    height: deviceHeight / 3,
+    height: deviceHeight / 4,
     width: null,
     position: 'relative',
     marginBottom: 10,
+    backgroundColor:'#fff',
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems: 'center'
   },
   drawerImage: {
     position: 'absolute',
@@ -51,7 +55,7 @@ export default {
   text: {
     fontWeight: (Platform.OS === 'ios') ? '500' : '400',
     fontSize: 16,
-    marginLeft: 20,
+    marginLeft:-4
   },
   badgeText: {
     fontSize: (Platform.OS === 'ios') ? 13 : 11,
