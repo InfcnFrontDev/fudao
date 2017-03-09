@@ -74,11 +74,7 @@ class RebuildPassword extends PureComponent {
 
     }
 }
-const styles = {
 
-
-
-};
 
 const mapStateToProps = state => ({});
 export default connect(mapStateToProps)(RebuildPassword);

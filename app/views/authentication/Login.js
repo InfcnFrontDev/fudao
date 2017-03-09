@@ -2,10 +2,10 @@ import React, {PureComponent} from "react";
 import {View, Alert, TextInput, TouchableOpacity, ToastAndroid} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Text} from "native-base";
-import {Container, Content, Loading} from "../../components/index";
+import {Container, Content,Text} from "native-base";
 import Header from "../../components/header/BaseHeader";
 import {theme} from "../../utils/";
+import {showLoading, hideLoading} from "../../actions/loading";
 import CommitButton from "./components/CommitButton";
 import UrseInput from "./components/UrseInput";
 import {checkPhone} from "./components/public";
@@ -50,7 +50,6 @@ class Login extends PureComponent {
 							<Text style={styles.text2}>忘记密码</Text>
 						</TouchableOpacity>
 					</View>
-					<Loading text={'正在登录...'} isShow={isFetching}/>
 				</Content>
 			</Container>
 		);
