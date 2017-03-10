@@ -35,6 +35,7 @@ import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
 import TreatmentDetail from "./views/my-question/TreatmentDetail";
+import TreatmentDailyDetail from "./views/my-question/TreatmentDailyDetail";
 //注册登录
 import Start from "./views/authentication/Start";
 import Login from "./views/authentication/Login";
@@ -104,9 +105,8 @@ class AppNavigator extends Component {
 						<Scene key="root">
 
 							{/*首页*/}
-							<Scene key="index" component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar
-								   initial
-							/>
+							<Scene key="index" component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar newnew={false} initial />
+
 
 							{/*启动注册*/}
 
@@ -126,6 +126,7 @@ class AppNavigator extends Component {
 							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
 							<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
 							<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
+							<Scene key="treatmentDailyDetail" component={TreatmentDailyDetail} title="疗法详情" hideNavBar/>
 
 
 							{/*搜索*/}
