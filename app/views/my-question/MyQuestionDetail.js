@@ -52,6 +52,7 @@ const styles = {
   content:{
     backgroundColor:'#fff',
     flexDirection:'column',
+    flex:1,
   },
 };
 

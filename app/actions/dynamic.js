@@ -2,6 +2,8 @@ import * as types from "../actions/types";
 import ImagePicker from 'react-native-image-picker';
 import {request, urls} from "../utils/";
 import { ToastAndroid,} from "react-native";
+import {Actions} from "react-native-router-flux";
+
 /**
  * 动态列表：newDynamic
  */
@@ -30,7 +32,7 @@ export function sendComment(event,params){
 			暂缺提交给后台
 			*/
 			dispatch({
-				type: types.DYNAMIC_LIST_ZAN_COMMENT,
+				type: types.DYNAMIC_LIST_LOAD,
 				source:{
 					nowShow:'',
 					dynamicList:params.dynamic
@@ -73,7 +75,7 @@ export function zan(info,params){
 		  }
 		}
 		dispatch({
-			type: types.DYNAMIC_LIST_ZAN_COMMENT,
+			type: types.DYNAMIC_LIST_LOAD,
 			source:{
 				nowShow:'',
 				dynamicList:params.dynamic
@@ -125,7 +127,7 @@ export function show(id,params){
 		  params.nowShow = id;
 		}
 		dispatch({
-			type: types.DYNAMIC_LIST_SHOW,
+			type: types.DYNAMIC_LIST_LOAD,
 			source:{
 				nowShow:params.nowShow
 			}
@@ -171,7 +173,6 @@ export function fetchData(page,options,callback,params){
 							});
 					})
 		}else if(options.refresh){
-
 			request.getJson(urls.apis.DYNAMIC_LIST,{
 							userId:'867516022307943,86751602230794380640149',
 							page:1,
@@ -217,12 +218,14 @@ export function fetchData(page,options,callback,params){
 						}
 					});
 		    }else{
+
 					request.getJson(urls.apis.DYNAMIC_LIST,{
 									userId:'867516022307943,86751602230794380640149',
 									page:Math.floor(params.dynamic.length/5)+1,
 									rows:5,
 							}).then((res) =>{
-									if(res.datas.length==0){
+
+									if(res.datas.length<=params.dynamic.length%5){
 										callback(params.dynamic,{
 											allLoaded:true
 										});
@@ -294,5 +297,23 @@ export function selectPhotoTapped(keyword) {
 				return ;
 			}
     });
+	}
+}
+
+export function addNewDynamic(newDynamic,newnew) {
+	return (dispatch) => {
+		request.getJson(urls.apis.DYNAMIC_ADD_DYNAMIC,{
+						userId:'867516022307943,86751602230794380640149',
+						content:newDynamic,
+						type:1
+	 }).then(()=>{
+		 Actions.pop({refresh: { newnew: !newnew}})
+	 })
+		dispatch({
+			type: types.DYNAMIC_LIST_LOAD,
+			source:{
+				addPicture:[],
+			}
+		});
 	}
 }

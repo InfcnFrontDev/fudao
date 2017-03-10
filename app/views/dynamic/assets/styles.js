@@ -1,9 +1,10 @@
 import {theme} from "../../../utils/";
 
 const styles = {
-  contain:{
-    // backgroundColor:'#444',
-    // flexDirection:'column',
+  indexTitle:{
+    color:'#fff',
+    fontSize:theme.DefaultFontSize+4,
+
   },
   contain1:{
     backgroundColor:'#fff',
@@ -84,7 +85,7 @@ const styles = {
   showoneText:{
     textAlign:'center',
     color:'#999',
-    fontSize:theme.DefaultFontSize-2,
+    fontSize:theme.DefaultFontSize,
   },
   textInputContain:{
     paddingTop:10,
@@ -121,11 +122,11 @@ justifyContent:'flex-start',
   commentName:{
     color:'#5E7192',
     lineHeight:25,
-    fontSize:theme.DefaultFontSize-2,
+    fontSize:theme.DefaultFontSize,
     marginRight:6,
   },
   commentContent:{
-    fontSize:theme.DefaultFontSize-2,     
+    fontSize:theme.DefaultFontSize,
     lineHeight:25,
     color:'#060608',
 

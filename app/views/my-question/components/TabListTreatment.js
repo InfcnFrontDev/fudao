@@ -47,6 +47,7 @@ const styles = {
   },
   titleText:{
     color:'#333',
+    fontSize:14,
   },
   titleButtonLeft:{
     paddingTop:0,

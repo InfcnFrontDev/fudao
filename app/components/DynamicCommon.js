@@ -47,12 +47,12 @@ const styles={
 	},
 	dynamicName:{
 		color:'#5E7192',
-		fontSize:theme.DefaultFontSize-2,
+		fontSize:theme.DefaultFontSize,
 	},
 	dynamicContent:{
 		marginTop:6,
 		color:'#282828',
-		fontSize:theme.DefaultFontSize-2,
+		fontSize:theme.DefaultFontSize,
 	},
 }
 

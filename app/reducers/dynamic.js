@@ -15,16 +15,7 @@ export default function (state = initialState, {type, source}) {
 			});
 		case types.DYNAMIC_LIST_LOAD:
 			return Object.assign({}, state, {
-				dynamicList:source.dynamicList
-			});
-		case types.DYNAMIC_LIST_SHOW:
-			return Object.assign({}, state, {
-				nowShow:source.nowShow
-			});
-		case types.DYNAMIC_LIST_ZAN_COMMENT:
-			return Object.assign({}, state, {
-				nowShow:source.nowShow,
-				dynamicList:source.dynamicList
+				...source
 			});
 		default:
 			return state;

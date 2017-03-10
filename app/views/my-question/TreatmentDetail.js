@@ -61,7 +61,7 @@ const styles = {
      alignItems:'center',
   },
   contentText:{
-    fontSize:theme.DefaultFontSize+2,
+    fontSize:theme.DefaultFontSize,
     marginLeft:30,
     marginRight:30,
     lineHeight:28,
