@@ -32,10 +32,15 @@ class MyCollection extends PureComponent {
 		request.getJson(urls.apis.MY_COLLECTION_LIST, {
 			appid: loginUser.appid,
 			page
-		}, (result) => {
+		}).then((result) => {
 			let {datas, totalPages} = result.obj;
 			setTimeout(() => {
-				callback(datas, page === totalPages ? {allLoaded: true} : {});
+				if (page === totalPages) {
+					callback(datas, {allLoaded: true});
+				} else {
+					callback(datas);
+				}
+
 			}, options.firstLoad ? 300 : 0)
 		});
 	}

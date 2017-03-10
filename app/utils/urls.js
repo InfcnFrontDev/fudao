@@ -52,7 +52,7 @@ const urls = {
 		//资讯详细(ok)
 		ARTICLE_DETAIL: apiPath + 'app/myTerritoryAction!detail.action',
 		//我的收藏列表(ok)
-		MY_COLLECTION_LIST: apiPath + 'app/friendDynamicAction!getFriends.action',
+		MY_COLLECTION_LIST: apiPath +  'app/collectionAction!getMyCollection.action',
 
 
 		//获取用户信息

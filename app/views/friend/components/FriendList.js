@@ -50,7 +50,7 @@ class FriendList extends PureComponent {
 					<Separator title={group}/>
 					<List containerStyle={styles.list}>
 						{friendList.map((f, i) => (
-							<ListItem avatar last key={i} onPress={() => Actions.userDetail({userId: f.appid})}>
+							<ListItem avatar last key={i} onPress={() => Actions.userDetail({userId: f.friendId})}>
 								<Left>
 									<Thumbnail style={{width: 40, height: 40}} square
 											   source={{uri:'http://touxiang.qqzhi.com/uploads/2012-11/1111032758936.jpg'}}/>
