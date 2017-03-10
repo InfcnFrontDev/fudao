@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Left, Right, Body, Form, Item,} from "native-base";
 import {View, Image,AsyncStorage} from "react-native";
-import {theme,request,urls,tools} from "../../utils/";
+import {theme,request,urls,tools, toast} from "../../utils/";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import CommitButton from "./components/CommitButton";
 
@@ -20,7 +20,7 @@ class Start extends PureComponent {
     }
    /* getInitialState(){
         AsyncStorage.getItem("login",(err,res)=>{
-            tools.toast(res);
+            toast.show(res);
 
         });
     }*/
