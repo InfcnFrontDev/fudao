@@ -7,44 +7,44 @@ import {openDrawer, closeDrawer} from "../actions/drawer";
 class Header_ extends PureComponent {
 
 	render() {
-		let {back, menu, leftCmp, centerCmp, rightCmp, title} = this.props;
+		let {back, menu, left, center, right, title} = this.props;
 
-		if (!leftCmp) {
+		if (!left) {
 			if (back)
-				leftCmp = (
+				left = (
 					<Button transparent onPress={() => Actions.pop()}>
 						<Icon name="arrow-back"/>
 					</Button>
 				);
 			if (menu)
-				leftCmp = (
+				left = (
 					<Button transparent onPress={() => this.props.openDrawer()}>
 						<Icon name="menu"/>
 					</Button>
 				);
 		}
 
-		if (!centerCmp) {
+		if (!center) {
 			if (title)
-				centerCmp = (
+				center = (
 					<Title>{title}</Title>
 				)
 		}
 
-		if (!rightCmp) {
+		if (!right) {
 
 		}
 
 		return (
 			<Header>
 				<Left>
-					{leftCmp}
+					{left}
 				</Left>
 				<Body>
-				{centerCmp}
+				{center}
 				</Body>
 				<Right>
-					{rightCmp}
+					{right}
 				</Right>
 			</Header>
 		)
@@ -53,21 +53,21 @@ class Header_ extends PureComponent {
 
 
 Header_.propTypes = {
-	back: React.PropTypes.bool,
-	menu: React.PropTypes.bool,
-	title: React.PropTypes.string,
-	leftCmp: React.PropTypes.any,
-	centerCmp: React.PropTypes.any,
-	rightCmp: React.PropTypes.any,
+	back: React.PropTypes.bool,// 返回按钮
+	menu: React.PropTypes.bool, // 有菜单按钮
+	title: React.PropTypes.string, // 标题
+	left: React.PropTypes.any, // left
+	center: React.PropTypes.any, // center
+	right: React.PropTypes.any, // right
 }
 
 Header_.defaultProps = {
 	back: false,
 	menu: false,
 	title: '',
-	leftCmp: null,
-	centerCmp: null,
-	rightCmp: null
+	left: null,
+	center: null,
+	right: null
 }
 
 function bindAction(dispatch) {

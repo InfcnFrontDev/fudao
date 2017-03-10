@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Left, Right, Body, Text, Button,Form} from "native-base";
 import {View,TextInput,ToastAndroid} from "react-native";
-import {theme,request,urls,tools} from "../../utils/";
+import {theme,request,urls,tools,toast} from "../../utils/";
 import Header from "../../components/header/BaseHeader";
 import {showLoading, hideLoading} from "../../actions/loading";
 import  CommitButton from "./components/CommitButton"
@@ -29,13 +29,13 @@ class RebuildPassword extends PureComponent {
             <Container>
                 <Header {...this.props}></Header>
                 <Content padder>
-                    <UrseInput text="新密码" placeholder={""}
+                    <UrseInput text="新密码" placeholder={"至少6位，由数字/字母/_组成"}  value={this.state.password}
                                onChangeText={(value)=>{
                                    this.setState({
                                        password:value
                                    })
                                }}/>
-                    <UrseInput text="重复密码"
+                    <UrseInput text="重复密码" value={this.state.password1}
                                onChangeText={(value)=>{
                                    this.setState({
                                        password1:value
@@ -48,9 +48,12 @@ class RebuildPassword extends PureComponent {
     }
     _yzPassword(){
         let {phone,password,password1}= this.state;
-        if(password1!=password){
-            tools.toast("两次输入密码不一致");
+        if(password==""&& password==""){
+            toast.show("请设置密码");
+        }else if(password1!=password){
+            toast.show("两次输入密码不一致");
             this.setState({
+                password:'',
                 password1:''
             })
         }else{
@@ -64,7 +67,7 @@ class RebuildPassword extends PureComponent {
                 if(data.success) {
                         Actions['passwordSuccess']({text:"密码设置成功",phone:phone,password:password})
                     }else{
-                        tools.toast("修改失败...");
+                        toast.show("修改失败...");
                     }
                 },(error)=>{
                     dispatch(hideLoading());

@@ -36,7 +36,7 @@ class GetCode extends PureComponent {
             this.state.text+this.state.number1
         );
         return (
-            <Button block={this.props.block} disabled={this.state.disabled}  bordered={this.props.border} style={{marginTop:this.props.top}} onPress={this.props.onPress} >
+            <Button block={this.props.block} disabled={this.state.disabled}  bordered={this.props.border} style={{marginTop: 4}} onPress={this.props.onPress} >
                 <Text>{title}</Text>
             </Button>
         )
@@ -52,14 +52,14 @@ class GetCode extends PureComponent {
     interval(){
         let self=this;
         let {number} = self.state;
-        var c=setInterval(function(){
+        let timer = setInterval(function(){
             if(number==1){
                 self.setState({
                     disabled:false,
                     text:self.props.title,
                     number1:''
                 });
-                clearInterval(c);
+                clearInterval(timer);
             }else{
                 number--;
                 if(number>=10){
@@ -73,7 +73,11 @@ class GetCode extends PureComponent {
                 }
 
             }
-        },1000)
+        },1000);
+        this.timer = timer;
+    }
+    clearTimer(){
+        clearInterval(this.timer);
     }
 }
 

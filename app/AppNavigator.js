@@ -28,7 +28,6 @@ import About from "./views/system/About";
 import Picture from "./views/picture/";
 // My
 import MyInfo from "./views/my-info/";
-import MyFriend from "./views/my-friend/MyFriend";
 import MyCollection from "./views/my-collection/MyCollection";
 //Home
 import MyEmotion from "./views/my-emotion/MyEmotion";
@@ -55,6 +54,11 @@ import Webview from "./views/webview/";
 import NewDynamic from "./views/dynamic/NewDynamic";
 // User
 import UserDetail from "./views/user/UserDetail";
+// Friend
+import NewFriend from "./views/friend/NewFriend";
+import MyFriend from "./views/friend/MyFriend";
+import FriendApply from "./views/friend/FriendApply";
+import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 
 
 const AppRouter = connect()(Router);
@@ -90,8 +94,8 @@ class AppNavigator extends Component {
 			<StyleProvider style={getTheme(theme)}>
 				<Drawer
 					ref={(ref) => this._drawer = ref}
-					openDrawerOffset={0.5}
-					panCloseMask={0.5}
+					openDrawerOffset={0.66}
+					panCloseMask={0.66}
 					content={<SideBar navigator={this._navigator}/>}
 					onClose={() => this.closeDrawer()}>
 					<StatusBar
@@ -101,15 +105,15 @@ class AppNavigator extends Component {
 						<Scene key="root">
 
 							{/*首页*/}
-
 							<Scene key="index" component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar newnew={false} initial />
+
 
 							{/*启动注册*/}
 
 							<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
-							<Scene key="login"   component={Login} title="登录" hideNavBar/>
-							<Scene key="register"  component={Register} title="注册" hideNavBar/>
-							<Scene key="setPassword"  component={SetPassword} title="设置密码" hideNavBar/>
+							<Scene key="login" component={Login} title="登录" hideNavBar/>
+							<Scene key="register" component={Register} title="注册" hideNavBar/>
+							<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
 							<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 							<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
 							<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
@@ -134,9 +138,7 @@ class AppNavigator extends Component {
 							<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务" hideNavBar/>
 							<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
 								   hideNavBar/>
-
 							<Scene key="searchUser" component={SearchUser} title="用户" hideNavBar/>
-
 
 
 							{/*资讯*/}
@@ -149,7 +151,6 @@ class AppNavigator extends Component {
 
 							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
-							<Scene key="myFriend" component={MyFriend} title="我的好友" hideNavBar/>
 
 							<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 
@@ -165,6 +166,12 @@ class AppNavigator extends Component {
 
 							{/*用户*/}
 							<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
+
+							{/*好友*/}
+							<Scene key="myFriend" component={MyFriend} title="我的好友" hideNavBar/>
+							<Scene key="friendApply" component={FriendApply} title="好友申请" hideNavBar/>
+							<Scene key="newFriend" component={NewFriend} title="新的朋友" hideNavBar/>
+							<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
 						</Scene>
 					</AppRouter>
 				</Drawer>

@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import {StyleSheet, View, Text, Image, ActivityIndicator} from "react-native";
 import {connect} from "react-redux";
+import {Actions} from "react-native-router-flux";
 import {Container, Content} from "../../components/index";
 import Header from "../../components/header/SearchHeader";
 import {showLoading, hideLoading} from "../../actions/loading";
@@ -40,12 +41,24 @@ class SearchUser extends PureComponent {
 		const {dispatch} = this.props;
 
 		dispatch(showLoading());
-
 		request.getJson(urls.apis.USER_SEARCH, {phone})
-			.then((data) => {
+			.then(((result) => {
 				dispatch(hideLoading());
-				alert(JSON.stringify(data));
-			}, (error) => {
+				if (result.success) {
+					if (result.obj) {
+						this.setState({
+							notExist: false
+						})
+						Actions.userDetail({
+							userId: result.obj.appid
+						})
+					} else {
+						this.setState({
+							notExist: true
+						})
+					}
+				}
+			}), (error) => {
 				dispatch(hideLoading());
 			});
 	}

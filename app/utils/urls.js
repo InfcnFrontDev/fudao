@@ -34,7 +34,10 @@ const urls = {
 		// 健康圈
 		HEALTH_CIRCLE: webPath + 'healthCircle.html',
 		// 生命周期
-		LIFE_CYCLE: webPath + 'lifeCycle.html'
+		LIFE_CYCLE: webPath + 'lifeCycle.html',
+		// 我的位置
+		MY_LOCATION: webPath + 'myLocation.html'
+
 	},
 	/**
 	 *  接口

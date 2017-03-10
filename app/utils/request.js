@@ -1,4 +1,4 @@
-import tools from "./tools";
+import {toast} from "./index";
 /**
  * network request
  */
@@ -61,7 +61,7 @@ const request = {
 				})
 				.catch((error) => {
 					console.log(error);
-					tools.toast('服务器异常，请重试!');
+					toast.show('服务器异常，请重试!');
 					if (reject) {
 						reject(error);
 					}
@@ -138,7 +138,7 @@ const request = {
 				})
 				.catch((error) => {
 					console.log(error);
-					tools.toast('服务器异常，请重试!');
+					toast.show('服务器异常，请重试!');
 					if (reject) {
 						reject(error);
 					}
