@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
+import {Container,Content,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
+
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import {theme,tools} from "../../utils/";
 import  CommitButton from "./components/CommitButton"
@@ -58,7 +59,8 @@ class SetPassword extends PureComponent {
 const styles = {
     container:{
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+
     },
     view:{
         width:300,

@@ -12,7 +12,7 @@ class TitleHeader extends Component {
 			<Header>
 				<Left style={{flex:1}}/>
 				<Body style={{flex:1}}>
-				<Title >基本信息</Title>
+				<Title >{this.props.children}</Title>
 				</Body>
 				<Right style={{flex:1}}/>
 			</Header>

@@ -4,9 +4,9 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container,Content,Text,  Button,Item,Label,Input} from "native-base";
+import {Text,  Button} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
-import Header from "../../components/header/BaseHeader";
+import {Header,Container,Content} from "../../components/index";
 import {showLoading, hideLoading} from "../../actions/loading";
 import {theme,request,urls,tools} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
@@ -28,30 +28,33 @@ class Register extends PureComponent {  // eslint-disable-line
     render() {
         return (
             <Container>
-                <Header {...this.props}></Header>
-                <Content padder>
-                    <UrseInput text="手机号" btn={false}
-                               onChangeText={(value)=>{
-                                   this.setState({
-                                       phone:value
-                                   })
-                               }}/>
-                    <View style={styles.box}>
-                        <View style={styles.border}>
-                            <Text>验证码</Text>
-                        </View>
-                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
+                <Header back {...this.props}></Header>
+                <Content>
+                    <View style={styles.bag}>
+                        <UrseInput text="手机号" btn={false}
                                    onChangeText={(value)=>{
                                        this.setState({
-                                           code:value
+                                           phone:value
                                        })
-                                   }}
-                        ></TextInput>
-                        <GetCode  border={true} block={false}  title='获取验证码' ref={(e) => this._getGode = e}
-                                  onPress={this._yzm.bind(this)} >
-                        </GetCode >
+                                   }}/>
+                        <View style={styles.box}>
+                            <View style={styles.border}>
+                                <Text>验证码</Text>
+                            </View>
+                            <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
+                                       onChangeText={(value)=>{
+                                           this.setState({
+                                               code:value
+                                           })
+                                       }}
+                            ></TextInput>
+                            <GetCode  border={true} block={false}  title='获取验证码' ref={(e) => this._getGode = e}
+                                      onPress={this._yzm.bind(this)} >
+                            </GetCode >
+                        </View>
+                        <CommitButton title='找回密码' block={true} border={false} top={20}  onPress={this._find.bind(this)} />
                     </View>
-                    <CommitButton title='找回密码' block={true} border={false} top={20}  onPress={this._find.bind(this)} />
+
                 </Content>
             </Container>
         );
@@ -110,7 +113,7 @@ class Register extends PureComponent {  // eslint-disable-line
 
 const styles = {
     box:{
-        height:46,
+        height:54,
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center',
@@ -126,6 +129,9 @@ const styles = {
         borderRightColor:"#D4D4D4",
 
     },
+    bag:{
+        padding:10,
+    }
 };
 
 

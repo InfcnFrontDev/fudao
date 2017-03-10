@@ -188,7 +188,7 @@ const MyQuestion = {
 
 module.exports = {
     schema: [Dynamic,DynamicPraise,DynamicComment,MyQuestion],
-    schemaVersion: 6,
+    schemaVersion: 16,
     migration: () => {
     }
 };

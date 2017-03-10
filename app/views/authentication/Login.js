@@ -1,9 +1,9 @@
 import React, {PureComponent} from "react";
-import {View, Alert, TextInput, TouchableOpacity, ToastAndroid} from "react-native";
+import {View, Alert, TextInput, TouchableOpacity, ToastAndroid,AsyncStorage} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container, Content,Text} from "native-base";
-import Header from "../../components/header/BaseHeader";
+import {Text} from "native-base";
+import {Header,Container,Content} from "../../components/index";
 import {theme} from "../../utils/";
 import {showLoading, hideLoading} from "../../actions/loading";
 import CommitButton from "./components/CommitButton";
@@ -22,34 +22,38 @@ class Login extends PureComponent {
 		isFetching: false,
 		phone: '',
 		password: '',
+		login:'no'
 	}
 
 	render() {
 		let {isFetching} = this.state;
 		return (
 			<Container>
-				<Header {...this.props}></Header>
-				<Content padder>
-					<UrseInput text="用户名"
-							   onChangeText={(value)=>{
-                                   this.setState({
-                                       phone:value
-                                   })
-                               }}/>
-                    <UrseInput text="密码" secureTextEntry={true}
-                               onChangeText={(value)=>{
-                                   this.setState({
-                                       password:value
-                                   })
-                               }}/>
-					<CommitButton title="登录" block={true} border={false} top={20} onPress={this._login.bind(this)}/>
-					<View style={styles.textdoc}>
-						<View style={{flexDirection:'row'}}>
+				<Header back {...this.props}></Header>
+				<Content>
+					<View style={styles.bag}>
+						<UrseInput text="用户名"
+								   onChangeText={(value)=>{
+									   this.setState({
+										   phone:value
+									   })
+								   }}/>
+						<UrseInput text="密码" secureTextEntry={true}
+								   onChangeText={(value)=>{
+									   this.setState({
+										   password:value
+									   })
+								   }}/>
+						<CommitButton title="登录" block={true} border={false} top={20} onPress={this._login.bind(this)}/>
+						<View style={styles.textdoc}>
+							<View style={{flexDirection:'row'}}>
+							</View>
+							<TouchableOpacity onPress={()=>Actions['passwordValidate']()}>
+								<Text style={styles.text2}>忘记密码</Text>
+							</TouchableOpacity>
 						</View>
-						<TouchableOpacity onPress={()=>Actions['passwordValidate']()}>
-							<Text style={styles.text2}>忘记密码</Text>
-						</TouchableOpacity>
 					</View>
+
 				</Content>
 			</Container>
 		);
@@ -80,8 +84,11 @@ class Login extends PureComponent {
 				pwd: hex_md5(phone + password),
 			}).then((data) => {
 				dispatch(hideLoading());
-
 				if (data.success) {
+					this.setState({
+						login:"yes",
+					})
+					AsyncStorage.setItem('login',this.state.login)
 					tools.toast("登录成功");
 					let user = Object.assign({}, {
 						...data.obj.accountInfo,
@@ -128,6 +135,9 @@ const styles = {
 		color: '#666',
 		textDecorationLine: 'underline'
 	},
+	bag:{
+		padding:10
+	}
 };
 
 const mapStateToProps = state => ({});
