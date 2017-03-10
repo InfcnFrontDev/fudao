@@ -24,13 +24,13 @@ class MyFriend extends PureComponent {
 					<PullView isRefreshing={isFetching} onRefresh={this._onRefresh.bind(this)}>
 						<List>
 							<ListItem icon last style={{height: 55}} onPress={() => Actions.newFriend()}>
-								<Left style={{paddingRight: 8}}>
+								<Left>
 									<View style={styles.iconView}>
 										<Icon name="person-add" style={styles.icon}/>
 									</View>
 								</Left>
 								<Body>
-								<Text style={{fontSize: 14}}>新朋友</Text>
+								<Text>新朋友</Text>
 								</Body>
 								<Right>
 								</Right>
@@ -60,9 +60,9 @@ class MyFriend extends PureComponent {
 const styles = {
 	iconView: {
 		backgroundColor: '#F99D3A',
-		marginLeft: 7,
-		width: 36,
-		height: 36,
+		marginLeft: 0,
+		width: 40,
+		height: 40,
 		alignItems: 'center',
 		justifyContent: 'center'
 	},

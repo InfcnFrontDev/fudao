@@ -40,7 +40,9 @@ class UserDetail extends PureComponent {
 									{user.sex == '1' ? <Icon name="ios-man" style={styles.manIcon}/> :
 										<Icon name="ios-woman" style={styles.womanIcon}/>}
 								</Text>
-								<Text note style={{paddingBottom:20}}>昵称：{user.title}</Text>
+								<Text note style={{paddingBottom:20}}>
+									{friendNickMap[user.appid] ? '昵称：' + user.title : ''}
+								</Text>
 								</Body>
 								<Right>
 								</Right>
