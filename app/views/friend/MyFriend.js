@@ -5,7 +5,7 @@ import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, PullView, HeaderIcon} from "../../components/index";
 import {Left, Body, Right, ListItem, Icon, Text} from "native-base";
 import FriendList from "./components/FriendList";
-import {fetchMyFriendsList} from "../../actions/friend";
+import {fetchMyFriendList} from "../../actions/friend";
 import {toast} from "../../utils/index";
 
 /**
@@ -23,7 +23,7 @@ class MyFriend extends PureComponent {
 				<Content>
 					<PullView isRefreshing={isFetching} onRefresh={this._onRefresh.bind(this)}>
 						<List>
-							<ListItem icon last style={{height: 55}}>
+							<ListItem icon last style={{height: 55}} onPress={() => Actions.newFriend()}>
 								<Left style={{paddingRight: 8}}>
 									<View style={styles.iconView}>
 										<Icon name="person-add" style={styles.icon}/>
@@ -45,15 +45,16 @@ class MyFriend extends PureComponent {
 
 	componentDidMount() {
 		let {dispatch, loginUser, friendList} = this.props;
-		dispatch(fetchMyFriendsList(loginUser.id));
+		dispatch(fetchMyFriendList(loginUser.appid));
 	}
 
 	_onRefresh() {
 		let {loginUser, dispatch} = this.props;
-		dispatch(fetchMyFriendsList(loginUser.id, () => {
+		dispatch(fetchMyFriendList(loginUser.appid, () => {
 			toast.show('刷新成功');
 		}));
 	}
+
 }
 
 const styles = {

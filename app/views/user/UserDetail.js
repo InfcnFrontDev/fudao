@@ -6,7 +6,7 @@ import {Container, Content, List, Separator} from "../../components/index";
 import Header from "../../components/header/BaseHeader";
 import {Body, Left, Right, ListItem, Text, Button, Thumbnail, Icon, View} from "native-base";
 import {showLoading, hideLoading} from "../../actions/loading";
-import {request, urls, tools,toast} from "../../utils/index";
+import {request, urls, toast} from "../../utils/index";
 
 /**
  * 用户详情
@@ -19,6 +19,7 @@ class UserDetail extends PureComponent {
 
 	render() {
 		let {user}  = this.state;
+		let {friendNickMap} = this.props;
 		return (
 			<Container>
 				<Header {...this.props}/>
@@ -34,12 +35,11 @@ class UserDetail extends PureComponent {
 								</Left>
 								<Body>
 								<Text>
-									{user.remark}
+									{friendNickMap[user.appid] || user.title}
 									&nbsp;
 									{user.sex == '1' ? <Icon name="ios-man" style={styles.manIcon}/> :
 										<Icon name="ios-woman" style={styles.womanIcon}/>}
 								</Text>
-
 								<Text note style={{paddingBottom:20}}>昵称：{user.title}</Text>
 								</Body>
 								<Right>
@@ -57,9 +57,10 @@ class UserDetail extends PureComponent {
 							</ListItem>
 						</List>
 						<Separator/>
-						<Button block style={styles.button} onPress={this._applyAddFriend.bind(this)}>
-							<Text>添加到我的好友</Text>
-						</Button>
+						{friendNickMap[user.appid] ? null :
+							<Button block style={styles.button} onPress={this._applyAddFriend.bind(this)}>
+								<Text>添加到我的好友</Text>
+							</Button>}
 					</View> : null}
 				</Content>
 			</Container>
@@ -134,6 +135,7 @@ UserDetail.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-	loginUser: state.userStore.loginUser
+	loginUser: state.userStore.loginUser,
+	friendNickMap: state.friendStore.friendNickMap
 });
 export default connect(mapStateToProps)(UserDetail);

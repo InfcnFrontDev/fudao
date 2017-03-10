@@ -28,7 +28,6 @@ import About from "./views/system/About";
 import Picture from "./views/picture/";
 // My
 import MyInfo from "./views/my-info/";
-import MyFriend from "./views/friend/MyFriend";
 import MyCollection from "./views/my-collection/MyCollection";
 //Home
 import MyEmotion from "./views/my-emotion/MyEmotion";
@@ -55,7 +54,10 @@ import NewDynamic from "./views/dynamic/NewDynamic";
 // User
 import UserDetail from "./views/user/UserDetail";
 // Friend
+import NewFriend from "./views/friend/NewFriend";
+import MyFriend from "./views/friend/MyFriend";
 import FriendApply from "./views/friend/FriendApply";
+import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 
 
 const AppRouter = connect()(Router);
@@ -148,7 +150,6 @@ class AppNavigator extends Component {
 
 							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
-							<Scene key="myFriend" component={MyFriend} title="我的好友" hideNavBar/>
 
 							<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 
@@ -166,7 +167,10 @@ class AppNavigator extends Component {
 							<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
 
 							{/*好友*/}
+							<Scene key="myFriend" component={MyFriend} title="我的好友" hideNavBar/>
 							<Scene key="friendApply" component={FriendApply} title="好友申请" hideNavBar/>
+							<Scene key="newFriend" component={NewFriend} title="新的朋友" hideNavBar/>
+							<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
 						</Scene>
 					</AppRouter>
 				</Drawer>
