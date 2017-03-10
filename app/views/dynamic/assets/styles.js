@@ -1,9 +1,10 @@
 import {theme} from "../../../utils/";
 
 const styles = {
-  contain:{
-    // backgroundColor:'#444',
-    // flexDirection:'column',
+  indexTitle:{
+    color:'#fff',
+    fontSize:theme.DefaultFontSize,
+
   },
   contain1:{
     backgroundColor:'#fff',
@@ -125,7 +126,7 @@ justifyContent:'flex-start',
     marginRight:6,
   },
   commentContent:{
-    fontSize:theme.DefaultFontSize-2,     
+    fontSize:theme.DefaultFontSize-2,
     lineHeight:25,
     color:'#060608',
 

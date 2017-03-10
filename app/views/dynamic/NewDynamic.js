@@ -4,7 +4,9 @@ import { Image, View, DeviceEventEmitter, TextInput,TouchableHighlight,Touchable
 import {connect} from "react-redux";
 import Editor from './components/Editor'
 import NewPicture from './components/NewPicture'
-const charFromUtf16 = utf16 => String.fromCodePoint(...utf16.split('-').map(u => '0x' + u))
+import {Actions} from "react-native-router-flux";
+import {addNewDynamic} from '../../actions/dynamic.js'
+
 
 class NewDynamic extends Component{
     constructor(props) {
@@ -27,8 +29,8 @@ class NewDynamic extends Component{
                     <Title style={styles.title}>{this.props.title}</Title>
                 </Body>
                 <Right  style={{flex:1}}>
-                  <Button transparent onPress={()=>Actions.pop()}>
-                      <Text>确定</Text>
+                  <Button transparent onPress={this.send.bind(this)}>
+                      <Text>发表</Text>
                   </Button>
                 </Right>
             </Header>
@@ -43,6 +45,23 @@ class NewDynamic extends Component{
         )
     }
 
+    send(){
+      const {dispatch} = this.props;
+      // var newDynamic ={
+      //   "content":this.state.text,
+      //   "dynamicComments":{},
+      //   "dynamicImg":"还未处理",
+      //   "dynamicPraises":{},
+      //   "id":"34b71c7f9342472dbf778406bd245fae",
+      //   "nick":"12345678",
+      //   "publishTime":1489045800000,
+      //   "type":1,
+      //   "userId":"867516022307943,86751602230794380640149",
+      //   flag:false,
+      //   show:false
+      // }
+      dispatch(addNewDynamic(this.state.text,this.props.newnew))
+    }
 
     onChangeText(text) {
         this.setState({

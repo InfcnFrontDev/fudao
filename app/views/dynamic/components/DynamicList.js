@@ -161,22 +161,7 @@ var GiftedListView = React.createClass({
       return this.props.emptyView(refreshCallback);
     }
 
-    return (
-      <View style={[this.defaultStyles.defaultView, this.props.customStyles.defaultView]}>
-      <Text style={[this.defaultStyles.defaultViewTitle, this.props.customStyles.defaultViewTitle]}>
-      Sorry, there is no content to display
-      </Text>
-
-      <TouchableHighlight
-      underlayColor='#c8c7cc'
-      onPress={refreshCallback}
-      >
-      <Text>
-      ↻
-      </Text>
-      </TouchableHighlight>
-      </View>
-    );
+    return (null);
   },
   renderSeparator() {
     // console.log("renderSeparator");

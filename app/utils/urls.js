@@ -110,7 +110,8 @@ const urls = {
 
 
 		 	// 动态 ---------------------------------------------------------
-			DYNAMIC_LIST:apiPath + 'app/friendDynamicAction!getDynamics.action'
+			DYNAMIC_LIST:apiPath + 'app/friendDynamicAction!getDynamics.action',
+			DYNAMIC_ADD_DYNAMIC:apiPath+'app/friendDynamicAction!addDynamic.action',
 	}
 
 };
