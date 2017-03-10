@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Left, Right, Body, Item} from "native-base";
+import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import ArticleTextItem from "./ArticleTextItem";
 import ArticleSingleImageItem from "./ArticleSingleImageItem";
@@ -26,10 +26,10 @@ class ArticleItem extends Component {
 	}
 
 	_onPress() {
-		let {article} = this.props;
+		let {article, loginUser} = this.props;
 		Actions.webview({
 			title: '资讯详情',
-			uri: urls.pages.ARTICLE_DETAIL + "?id=" + article.id,
+			uri: urls.pages.ARTICLE_DETAIL + "?id=" + article.id + "&userId=" + loginUser.appid,
 		})
 	}
 }
@@ -39,4 +39,7 @@ ArticleItem.propTypes = {
 	onPress: React.PropTypes.func,
 }
 
-export default (ArticleItem);
+const mapStateToProps = state => ({
+	loginUser: state.userStore.loginUser,
+});
+export default connect(mapStateToProps)(ArticleItem);
