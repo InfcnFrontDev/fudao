@@ -6,6 +6,7 @@ import dynamic from "./dynamic";
 import loading from "./loading";
 import user from "./user";
 import friend from "./friend";
+import settings from "./settings";
 
 export default combineReducers({
 	drawer,
@@ -15,4 +16,5 @@ export default combineReducers({
 	loadingStore: loading,
 	userStore: user,
 	friendStore: friend,
+	settingsStore: settings,
 });
