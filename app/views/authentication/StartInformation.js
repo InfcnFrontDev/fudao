@@ -10,7 +10,7 @@ import {Thumbnail,Text,Icon} from "native-base";
 import {View,Image,TouchableOpacity,TouchableHighlight,ToastAndroid, DatePickerAndroid,} from "react-native";
 import {Header,Container,Content} from "../../components/index";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
-import {theme,tools,request} from "../../utils/";
+import {theme,urls,tools,request,toast} from "../../utils/";
 import  CommitButton from "./components/CommitButton"
 /**
  * 首次登录设置个人信息页
@@ -120,6 +120,7 @@ class StartInformation extends PureComponent {
         )
     };
     commit(){
+        let {dispatch, loginUser} = this.props;
         let sex,birth,position = null;
          if(this.state.showM){
          sex = 1
@@ -132,7 +133,7 @@ class StartInformation extends PureComponent {
 
 
         let userInformation ={};
-        userInformation.appid =tools.uuid()
+        userInformation.appid =loginUser.appid;
         userInformation.sex = sex
         userInformation.birthdate = birth
         userInformation.location = position
@@ -163,13 +164,13 @@ class StartInformation extends PureComponent {
         request.getJson(urls.apis.AUTH_CHECK_PHONE,{
             jsonStr: JSON.stringify(userInformation),
             ishealthRing: "yes",
-            appid: tools.uuid(),
+            appid: loginUser.appid,
             city: position
         }).then((data)=>{
             if(data.success) {
-                Action['search']();
+                toast.show("保存成功");
             }else{
-                tools.toast("保存失败");
+                toast.show("保存失败");
             }
         },(error)=>{
 
@@ -251,6 +252,9 @@ const styles = {
         zIndex:1000
     },
 };
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    loginUser: state.userStore.loginUser,
+    ...state.friendStore,
+});
 export default connect(mapStateToProps)(StartInformation);
 

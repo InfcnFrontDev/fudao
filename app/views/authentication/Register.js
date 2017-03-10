@@ -8,7 +8,7 @@ import {Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import {showLoading, hideLoading} from "../../actions/loading";
 import {Header,Container,Content} from "../../components/index";
-import {theme,request,urls,tools} from "../../utils/";
+import {theme,request,urls,tools,toast} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput"
 import {checkPhone} from "./components/public";
