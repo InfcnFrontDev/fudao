@@ -1,11 +1,12 @@
 import React, {PureComponent} from "react";
 import {Alert} from "react-native";
 import {connect} from "react-redux";
+import {Actions} from "react-native-router-flux";
 import {Container, Content, List, Separator} from "../../components/index";
 import Header from "../../components/header/BaseHeader";
 import {Body, Left, Right, ListItem, Text, Button, Thumbnail, Icon, View} from "native-base";
 import {showLoading, hideLoading} from "../../actions/loading";
-import {request, urls, tools} from "../../utils/index";
+import {request, urls, toast} from "../../utils/index";
 
 /**
  * 用户详情
@@ -18,6 +19,7 @@ class UserDetail extends PureComponent {
 
 	render() {
 		let {user}  = this.state;
+		let {friendNickMap} = this.props;
 		return (
 			<Container>
 				<Header {...this.props}/>
@@ -33,13 +35,14 @@ class UserDetail extends PureComponent {
 								</Left>
 								<Body>
 								<Text>
-									{user.remark}
+									{friendNickMap[user.appid] || user.title}
 									&nbsp;
 									{user.sex == '1' ? <Icon name="ios-man" style={styles.manIcon}/> :
 										<Icon name="ios-woman" style={styles.womanIcon}/>}
 								</Text>
-
-								<Text note style={{paddingBottom:20}}>昵称：{user.title}</Text>
+								<Text note style={{paddingBottom:20}}>
+									{friendNickMap[user.appid] ? '昵称：' + user.title : ''}
+								</Text>
 								</Body>
 								<Right>
 								</Right>
@@ -56,9 +59,10 @@ class UserDetail extends PureComponent {
 							</ListItem>
 						</List>
 						<Separator/>
-						<Button block style={styles.button} onPress={this._applyAddFriend.bind(this)}>
-							<Text>添加到我的好友</Text>
-						</Button>
+						{friendNickMap[user.appid] ? null :
+							<Button block style={styles.button} onPress={this._applyAddFriend.bind(this)}>
+								<Text>添加到我的好友</Text>
+							</Button>}
 					</View> : null}
 				</Content>
 			</Container>
@@ -83,7 +87,7 @@ class UserDetail extends PureComponent {
 					user
 				})
 			} else {
-				tools.toast('获取用户信息失败');
+				toast.show('获取用户信息失败');
 			}
 		}, (error) => {
 			dispatch(hideLoading());
@@ -96,27 +100,14 @@ class UserDetail extends PureComponent {
 		let {user} = this.state;
 
 		if (!loginUser) {
-			tools.toast('请登录后重试');
+			toast.show('请登录后重试');
 			return;
 		}
 
-		// 申请加为好友
-		dispatch(showLoading());
-		request.getJson(urls.apis.FRIEND_APPLY, {
-			activeAppid: loginUser.appid,
-			activeName: '海龟大神',
-			passiveAppid: user.appid,
-		}).then(((result) => {
-			dispatch(hideLoading());
-			if(result.success){
-				tools.toast('');
-			}else{
-				tools.toast('请登录后重试');
-			}
-		}).bind(this), (error) => {
-			dispatch(hideLoading());
-			alert(JSON.stringify(error));
-		});
+		Actions.friendApply({
+			friend: user
+		})
+
 
 	}
 }
@@ -142,10 +133,11 @@ UserDetail.propTypes = {
 }
 
 UserDetail.defaultProps = {
-	userId: '867200022156895,86720002215690321000493'
+	userId: '867200022156895,86720002215690328312757'
 }
 
 const mapStateToProps = state => ({
-	loginUser: state.userStore.loginUser
+	loginUser: state.userStore.loginUser,
+	friendNickMap: state.friendStore.friendNickMap
 });
 export default connect(mapStateToProps)(UserDetail);

@@ -6,7 +6,7 @@ import {View,TextInput,ToastAndroid} from "react-native";
 import {Header,Container,Content} from "../../components/index";
 import  CommitButton from "./components/CommitButton"
 import  UrseInput from "./components/UrseInput"
-import {theme,request,urls,tools} from "../../utils/";
+import {theme,request,urls,tools,toast} from "../../utils/";
 import  {hex_md5} from "./components/md5"
 import {showLoading, hideLoading} from "../../actions/loading";
 
@@ -51,9 +51,9 @@ class SetPassword extends PureComponent {
         let {password,password1} = this.state;
         let {phone} = this.props;
         if(password==""&& password==""){
-            tools.toast("请设置密码");
+            toast.show("请设置密码");
         }else if(password1!=password){
-            tools.toast("两次输入密码不一致");
+            toast.show("两次输入密码不一致");
             this.setState({
                 password:'',
                 password1:''
@@ -72,7 +72,7 @@ class SetPassword extends PureComponent {
                             Actions['passwordSuccess']({text:"恭喜您注册成功",phone:phone,password:password})
                         }, 1000);
                     }else{
-                        tools.toast("注册失败");
+                        toast.show("注册失败");
                     }
                 },(error)=>{
                     /*dispatch(hideLoading());*/

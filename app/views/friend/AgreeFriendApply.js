@@ -3,9 +3,9 @@ import {Alert} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, Separator, HeaderButton} from "../../components/index";
-import {Text, Button, ListItem, Item, Input} from "native-base";
+import {Text, ListItem, Item, Input} from "native-base";
 import {showLoading, hideLoading} from "../../actions/loading";
-import {request, urls, tools, toast} from "../../utils/index";
+import {request, urls, toast} from "../../utils/index";
 
 /**
  * 好友申请
@@ -16,8 +16,7 @@ class FriendApply extends PureComponent {
 		super(props);
 		let {friend, loginUser} = props;
 		this.state = {
-			myIntro: '我叫' + loginUser.title,
-			friendRemark: friend.title
+			friendRemark: friend.friendNick
 		}
 	}
 
@@ -26,24 +25,16 @@ class FriendApply extends PureComponent {
 		return (
 			<Container>
 				<Header back {...this.props} right={
-					<HeaderButton text="发送" onPress={this._addApplyFriend.bind(this)}/>
+					<HeaderButton text="完成" onPress={this._agree.bind(this)}/>
 				}/>
 
 				<Content gray>
 					<List style={{padding: 10}}>
-						<Text note>你需要发送验证申请，等对方通过</Text>
-						<Item underline success>
-							<Input onChangeText={(myIntro) => this.setState({myIntro})}
-								   value={this.state.myIntro}
-							/>
-						</Item>
-					</List>
-					<Separator/>
-					<List style={{padding: 10}}>
 						<Text note>为好友设置备注</Text>
 						<Item underline success>
 							<Input onChangeText={(friendRemark) => this.setState({friendRemark})}
-								   value={this.state.friendRemark}/>
+								   value={this.state.friendRemark}
+							/>
 						</Item>
 					</List>
 					<Separator/>
@@ -58,24 +49,22 @@ class FriendApply extends PureComponent {
 		);
 	}
 
-	_addApplyFriend() {
+	_agree() {
 		let {loginUser, friend, dispatch} = this.props;
-		let {myIntro, friendRemark} = this.state;
+		let {friendRemark} = this.state;
 
 		// 申请加为好友
 		dispatch(showLoading());
-		request.getJson(urls.apis.FRIEND_APPLY, {
-			activeAppid: loginUser.appid,
-			activeName: myIntro,
-			passiveAppid: friend.appid,
+		request.getJson(urls.apis.FRIEND_AGREE, {
+			id: friend.id,
 			passiveName: friendRemark,
 		}).then(((result) => {
 			dispatch(hideLoading());
 			if (result.success) {
-				toast.show('已发送申请');
+				toast.show('已发送');
 				Actions.pop();
 			} else {
-				toast.show('发送申请失败，请重试');
+				toast.show('发送失败，请重试');
 			}
 		}).bind(this), (error) => {
 			dispatch(hideLoading());
@@ -85,8 +74,7 @@ class FriendApply extends PureComponent {
 	}
 }
 
-const styles = {
-};
+const styles = {};
 
 FriendApply.propTypes = {
 	friend: React.PropTypes.object, // 用户ID

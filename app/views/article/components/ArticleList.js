@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {ScrollView, ListView, View, Text} from "react-native";
-import {Left, Right, Body, Form, Item} from "native-base";
 import GiftedListView from "../../../components/GiftedListView";
 import ArticleItem from "./ArticleItem";
 import {request, urls} from "../../../utils/";
@@ -27,7 +26,7 @@ class ArticleList extends Component {
 		request.getJson(urls.apis.ARTICLE_LIST, {
 			name: label,
 			page
-		}, (result) => {
+		}).then((result) => {
 			if (page === result.obj.totalPages) {
 				callback(result.obj.datas, {
 					allLoaded: true

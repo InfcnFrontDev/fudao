@@ -28,7 +28,6 @@ import About from "./views/system/About";
 import Picture from "./views/picture/";
 // My
 import MyInfo from "./views/my-info/";
-import MyFriend from "./views/my-friend/MyFriend";
 import MyCollection from "./views/my-collection/MyCollection";
 //Home
 import MyEmotion from "./views/my-emotion/MyEmotion";
@@ -36,6 +35,7 @@ import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
 import TreatmentDetail from "./views/my-question/TreatmentDetail";
+import TreatmentDailyDetail from "./views/my-question/TreatmentDailyDetail";
 //注册登录
 import Start from "./views/authentication/Start";
 import Login from "./views/authentication/Login";
@@ -56,7 +56,10 @@ import NewDynamic from "./views/dynamic/NewDynamic";
 // User
 import UserDetail from "./views/user/UserDetail";
 // Friend
+import NewFriend from "./views/friend/NewFriend";
+import MyFriend from "./views/friend/MyFriend";
 import FriendApply from "./views/friend/FriendApply";
+import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 
 
 const AppRouter = connect()(Router);
@@ -92,8 +95,8 @@ class AppNavigator extends Component {
 			<StyleProvider style={getTheme(theme)}>
 				<Drawer
 					ref={(ref) => this._drawer = ref}
-					openDrawerOffset={0.5}
-					panCloseMask={0.5}
+					openDrawerOffset={0.66}
+					panCloseMask={0.66}
 					content={<SideBar navigator={this._navigator}/>}
 					onClose={() => this.closeDrawer()}>
 					<StatusBar
@@ -103,11 +106,11 @@ class AppNavigator extends Component {
 						<Scene key="root">
 
 							{/*首页*/}
-							<Scene key="index" component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar
+							<Scene key="index" component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar newnew={false} initial />
 
-							/>
 
 							{/*启动注册*/}
+
 
 							<Scene key="start" initial component={Start} title="启动开始页" hideNavBar/>
 							<Scene key="login"    component={Login} title="登录" hideNavBar/>
@@ -126,6 +129,7 @@ class AppNavigator extends Component {
 							<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
 							<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
 							<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
+							<Scene key="treatmentDailyDetail" component={TreatmentDailyDetail} title="疗法详情" hideNavBar/>
 
 
 							{/*搜索*/}
@@ -150,7 +154,6 @@ class AppNavigator extends Component {
 
 							{/*我的*/}
 							<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
-							<Scene key="myFriend" component={MyFriend} title="我的好友" hideNavBar/>
 
 							<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 
@@ -168,7 +171,10 @@ class AppNavigator extends Component {
 							<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
 
 							{/*好友*/}
+							<Scene key="myFriend" component={MyFriend} title="我的好友" hideNavBar/>
 							<Scene key="friendApply" component={FriendApply} title="好友申请" hideNavBar/>
+							<Scene key="newFriend" component={NewFriend} title="新的朋友" hideNavBar/>
+							<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
 						</Scene>
 					</AppRouter>
 				</Drawer>

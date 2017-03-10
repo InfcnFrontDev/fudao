@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {StyleSheet, View, Text} from "react-native";
+import {StyleSheet, View, Text,ToastAndroid} from "react-native";
 import ScrollableTabView from "react-native-scrollable-tab-view";
 import TabBar from "./components/TabBar";
 import {theme} from "../../utils/index";
@@ -38,6 +38,7 @@ class Index extends PureComponent {
 	_renderTabBar = () => <TabBar tabNames={tabTitles} tabIconNames={tabIcons} selectedTabIconNames={tabSelectedIcon}/>
 
 	render() {
+
 		return (
 			<ScrollableTabView
 				renderTabBar={this._renderTabBar}
@@ -46,7 +47,7 @@ class Index extends PureComponent {
 				scrollWithoutAnimation
 			>
 				{tabComponents.map((Component, i)=>(
-					<Component key={tabTitles[i]} title={tabTitles[i]}/>
+					<Component key={tabTitles[i]} title={tabTitles[i]} newnew={this.props.newnew}/>
 				))}
 
 			</ScrollableTabView>

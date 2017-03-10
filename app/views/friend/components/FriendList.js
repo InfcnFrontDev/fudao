@@ -1,11 +1,13 @@
 import React, {PureComponent} from "react";
 import {ScrollView, View} from "react-native";
-import {Left, Right, Body} from "native-base";
+import {Actions} from "react-native-router-flux";
+import {List} from "../../../components/index";
+import {Left, Right, Body, ListItem, Icon, Text, Thumbnail} from "native-base";
 import Separator from "../../../components/Separator";
-import {List, ListItem} from "react-native-elements";
 import groupBy from "lodash/groupBy";
 import {tools} from "../../../utils/index";
 
+const groups = ["*", 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 /**
  * 好友列表
@@ -17,17 +19,18 @@ class FriendList extends PureComponent {
 
 		// 按首字母分组
 		let listGroupBy = groupBy(props.list, (friend) => {
-			return tools.getFirstChar(friend.name).toUpperCase()
+			let firstChar = tools.getFirstChar(friend.friendNick).toUpperCase();
+			if (groups.find((g) => g == firstChar))
+				return firstChar;
+			return groups[0]
 		})
 
 		this.state = {
-			groups: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
 			listGroupBy
 		}
 	}
 
 	render() {
-		let {groups} = this.state;
 		return (
 			<View>
 				{groups.map((g) => this.renderGroup(g))}
@@ -37,6 +40,9 @@ class FriendList extends PureComponent {
 
 	renderGroup(group) {
 		let {listGroupBy} = this.state;
+
+		console.log(listGroupBy);
+
 		if (listGroupBy.hasOwnProperty(group)) {
 			let friendList = listGroupBy[group];
 			return (
@@ -44,12 +50,19 @@ class FriendList extends PureComponent {
 					<Separator title={group}/>
 					<List containerStyle={styles.list}>
 						{friendList.map((f, i) => (
-							<ListItem
-								key={i}
-								avatar={{uri: f.avatar_url}}
-								title={f.name}
-								containerStyle={(i < friendList.length - 1) ? styles.listItem : styles.lastListItem}
-							/>
+							<ListItem avatar last key={i} onPress={() => Actions.userDetail({userId: f.appid})}>
+								<Left>
+									<Thumbnail style={{width: 40, height: 40}} square
+											   source={{uri:'http://touxiang.qqzhi.com/uploads/2012-11/1111032758936.jpg'}}/>
+								</Left>
+								<Body>
+								<Text>{f.friendNick}</Text>
+								<Text note>{f.phone}</Text>
+								</Body>
+								<Right style={{justifyContent:'center'}}>
+									<Icon name="ios-arrow-forward"/>
+								</Right>
+							</ListItem>
 						))}
 					</List>
 				</View>
@@ -72,8 +85,4 @@ const styles = {
 	},
 }
 
-const mapStateToProps = state => ({
-	account: state.account,
-	friends: state.friends,
-});
 export default (FriendList);

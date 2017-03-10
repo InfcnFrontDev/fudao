@@ -68,16 +68,16 @@ class Register extends PureComponent {  // eslint-disable-line
     _yzm(){
         let phone = this.state.phone;
         if(!checkPhone(phone)){
-            tools.toast("请填入正确的手机号");
+            toast.show("请填入正确的手机号");
         }else{
             request.getJson(urls.apis.AUTH_CHECK_PHONE,{
                     phone:phone ,
                     type:'reg'
                 }).then((data)=>{
                     if(data.success && "existence" == data.msg) {
-                        tools.toast("手机号已被注册");
+                        toast.show("手机号已被注册");
                     } else if(data.success && "existence" != data.msg) {
-                        tools.toast("正在发送验证码");
+                        toast.show("正在发送验证码");
                         this._getGode._click();
                     }
                 },(error)=>{
@@ -90,10 +90,10 @@ class Register extends PureComponent {  // eslint-disable-line
         let {phone,code} = this.state;
         const {dispatch} = this.props;
         if(phone==""){
-            tools.toast("手机号不能为空");
+            toast.show("手机号不能为空");
 
         }else if(code==""){
-            tools.toast("验证码不能为空");
+            toast.show("验证码不能为空");
         }else{
             /*接口*/
             dispatch(showLoading());
@@ -109,7 +109,7 @@ class Register extends PureComponent {  // eslint-disable-line
                             phone:phone,
                         });
                     } else {
-                        tools.toast("验证码错误...");
+                        toast.show("验证码错误...");
                         this.setState({
                             code:''
                         })
