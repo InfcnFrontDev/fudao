@@ -93,8 +93,8 @@ class AppNavigator extends Component {
 			<StyleProvider style={getTheme(theme)}>
 				<Drawer
 					ref={(ref) => this._drawer = ref}
-					openDrawerOffset={0.5}
-					panCloseMask={0.5}
+					openDrawerOffset={0.66}
+					panCloseMask={0.66}
 					content={<SideBar navigator={this._navigator}/>}
 					onClose={() => this.closeDrawer()}>
 					<StatusBar
