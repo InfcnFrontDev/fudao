@@ -3,7 +3,7 @@ import {theme} from "../../../utils/";
 const styles = {
   indexTitle:{
     color:'#fff',
-    fontSize:theme.DefaultFontSize,
+    fontSize:theme.DefaultFontSize+4,
 
   },
   contain1:{
