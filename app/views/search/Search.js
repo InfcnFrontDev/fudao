@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import {Container, Content, Left, Right, Body} from "native-base";
+import {Container, Content} from "native-base";
 import Header from "../../components/header/SearchHeader";
 import Category from "./components/SearchCategory";
 import {searchAll, clearAll} from "../../actions/search";
@@ -23,7 +23,7 @@ class Search extends PureComponent {
 	}
 
 	render() {
-		let {symptomProblem, information, dailyLife, friendsCircle, healthCare, offlineService} = this.props._onSearch,
+		let {symptomProblem, information, dailyLife, friendsCircle, healthCare, offlineService} = this.props.search,
 			results = [];
 		if (symptomProblem.list.length > 0) {
 			results.push(<SymptomProblemResult key="symptomproblem" list={symptomProblem.list}/>)
@@ -56,6 +56,6 @@ class Search extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-	search: state._onSearch,
+	search: state.search,
 });
 export default connect(mapStateToProps)(Search);
