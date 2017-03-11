@@ -22,7 +22,7 @@ const tabSelectedIcon = [
 	'ios-home', 'ios-list-box', 'ios-compass', 'ios-person'
 ];
 const tabComponents = [
-Dynamic,	Home, Article,  My
+	Home, Article,Dynamic,  My
 ];
 
 /**
