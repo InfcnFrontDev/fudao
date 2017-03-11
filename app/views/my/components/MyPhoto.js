@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {TouchableOpacity, Image} from "react-native";
-import {Left, Right, Body, Thumbnail, Item} from "native-base";
-import {theme} from "../../../utils/index";
+import {Thumbnail} from "native-base";
+import {theme, request, urls, toast} from "../../../utils/index";
 import ImagePicker from "react-native-image-picker"; //第三方相机
 var photoOptions = {
 	//底部弹出框选项
@@ -49,7 +49,26 @@ class MyPhoto extends PureComponent {
 			this.setState({
 				path: response.uri
 			});
+
+			this.uploadImage(response.uri, response.fileName);
 		})
+	}
+
+	uploadImage(uri, fileName) {
+		let formData = new FormData();
+		formData.append("filename", {uri: uri, type: 'multipart/form-data', name: fileName});
+		formData.append("filename", {uri: uri, type: 'multipart/form-data', name: fileName});
+		formData.append("filename", {uri: uri, type: 'multipart/form-data', name: fileName});
+
+		request.postJson(urls.apis.IMAGE_UPLOAD, formData)
+			.then(result => {
+				if (result.ok) {
+					console.log(result.obj);
+					toast.show("上传成功")
+				} else {
+					toast.show("上传失败")
+				}
+			})
 	}
 }
 

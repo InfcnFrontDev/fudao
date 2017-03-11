@@ -14,34 +14,30 @@ const groups = ["*", 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
  */
 class FriendList extends PureComponent {
 
-	constructor(props) {
-		super(props);
+	render() {
+		let {list} = this.props,
+			count = list.length;
 
 		// 按首字母分组
-		let listGroupBy = groupBy(props.list, (friend) => {
+		let listGroupBy = groupBy(list, (friend) => {
 			let firstChar = tools.getFirstChar(friend.friendNick).toUpperCase();
 			if (groups.find((g) => g == firstChar))
 				return firstChar;
 			return groups[0]
 		})
 
-		this.state = {
-			listGroupBy
-		}
-	}
-
-	render() {
 		return (
 			<View>
-				{groups.map((g) => this.renderGroup(g))}
+				{groups.map((g) => this.renderGroup(listGroupBy, g))}
+				<View style={{alignItems:'center', padding:15}}>
+					<Text>{count == 0 ? '没有好友' : count + '位好友'}</Text>
+				</View>
 			</View>
 		)
 	}
 
-	renderGroup(group) {
-		let {listGroupBy} = this.state;
-
-		console.log(listGroupBy);
+	renderGroup(listGroupBy, group) {
+		let {friendNickMap} = this.props;
 
 		if (listGroupBy.hasOwnProperty(group)) {
 			let friendList = listGroupBy[group];
@@ -57,7 +53,7 @@ class FriendList extends PureComponent {
 								</Left>
 								<Body>
 								<Text>{f.friendNick}</Text>
-								<Text note>{f.phone}</Text>
+								<Text note>{f.phone}，{friendNickMap[f.friendId]}</Text>
 								</Body>
 								<Right style={{justifyContent:'center'}}>
 									<Icon name="ios-arrow-forward"/>
