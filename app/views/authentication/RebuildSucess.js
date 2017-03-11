@@ -28,7 +28,7 @@ class SetPassword extends PureComponent {
         return (
             <Container style={styles.container}>
                 <View style={styles.view}>
-                    <Text style={styles.titleText}>恭喜你注册成功！</Text>
+                    <Text style={styles.titleText}>密码设置成功！</Text>
                     <Text style={{textAlign:'center',marginTop:120}}>{this.state.number}s后自动登录...</Text>
                     <CommitButton title="登录" block={true} border={false} top={20}  onPress={this._login.bind(this,this.state.phone,this.state.password)} />
                 </View>
@@ -56,13 +56,15 @@ class SetPassword extends PureComponent {
             pwd:hex_md5(phone+password),
         }).then((data)=>{
             if(data.success) {
-                var userInformation = data.obj.userInformation;
+                Actions['login ']()
+                //跳到登录页
+               /* var userInformation = data.obj.userInformation;
                 var appid=data.obj.accountInfo.appid;
                 if(userInformation != undefined) { //基本信息已经添加完成
                     Actions['_onSearch']()
                 } else { //没有基本信息表示第一次登录需要添写信息
                     Actions['startInformation']({appid:appid,showM:false,sex:0})
-                }
+                }*/
             }else{
                 toast.show("密码不正确");
             }

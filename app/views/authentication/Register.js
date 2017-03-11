@@ -77,7 +77,7 @@ class Register extends PureComponent {  // eslint-disable-line
                     if(data.success && "existence" == data.msg) {
                         toast.show("手机号已被注册");
                     } else if(data.success && "existence" != data.msg) {
-                        toast.show("正在发送验证码");
+                        toast.show("正在发送验证码...");
                         this._getGode._click();
                     }
                 },(error)=>{

@@ -64,16 +64,19 @@ class Register extends PureComponent {  // eslint-disable-line
         if(phone.toString().length<11||phone.toString().length>11){
             toast.show("请填入正确的手机号");
         }else{
+
             request.getJson(urls.apis.AUTH_CHECK_PHONE,{
                     phone:phone ,
                     type:'findPwd'
                 }).then((data)=>{
-                    if(data.success && "existence" == data.msg) {
-
-                    } else if(data.success && "existence" != data.msg) {
+                    if(data.success && "notexist" == data.msg) {
+                        toast.show("此号码没有注册过，请注册...");
+                    }else if(data.success && "" == data.msg){
                         toast.show("正在发送验证码...");
                         this._getGode._click();
                     }
+
+
                 },(error)=>{
 
                 })

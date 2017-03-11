@@ -10,7 +10,7 @@ import {Thumbnail,Button,Text} from "native-base";
 import {View,Image,TouchableOpacity,TouchableHighlight,ToastAndroid, DatePickerAndroid,} from "react-native";
 import {Header,Container,Content} from "../../components/index";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
-import {theme,tools} from "../../utils/";
+import {theme,tools,toast } from "../../utils/";
 import  CommitButton from "./components/CommitButton"
 
 
@@ -23,7 +23,7 @@ class WomanChoose extends PureComponent {
     constructor(props) {
         super(props);
         this.state={
-            isSelect:'false'
+
         }
 
     }
@@ -31,11 +31,11 @@ class WomanChoose extends PureComponent {
     render() {
         return (
             <Container style={styles.container}>
-                <Header back {...this.props}></Header>
+                <Header {...this.props}></Header>
                 <Content>
                     <View style={styles.bigBox}>
                         <View style={styles.box}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={this.choose.bind(this,'未孕阶段')}>
                                 <View style={styles.photo}>
                                     <View  style={styles.left} >
                                         <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
@@ -43,7 +43,7 @@ class WomanChoose extends PureComponent {
                                     <Text>未孕阶段</Text>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={this.choose.bind(this,'备孕阶段')}>
                                 <View  style={styles.photo}>
                                     <View  style={styles.left} >
                                         <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
@@ -51,7 +51,7 @@ class WomanChoose extends PureComponent {
                                     <Text>备孕阶段</Text>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={this.choose.bind(this,'待产阶段')}>
                                 <View  style={styles.photo}>
                                     <View  style={styles.left} >
                                         <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
@@ -59,7 +59,7 @@ class WomanChoose extends PureComponent {
                                     <Text>待产阶段</Text>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={this.choose.bind(this,'产后恢复阶段')}>
                                 <View  style={styles.photo}>
                                     <View  style={styles.left} >
                                         <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
@@ -67,7 +67,7 @@ class WomanChoose extends PureComponent {
                                     <Text>产后恢复阶段</Text>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={this.choose.bind(this,'已孕阶段')}>
                                 <View  style={styles.photo}>
                                     <View  style={styles.left} >
                                         <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
@@ -81,7 +81,11 @@ class WomanChoose extends PureComponent {
             </Container>
         )
     }
+    choose(text ){
+            Actions['startInformation']({jieduan:text,showM:false,sex:0})
+    }
 }
+
 const styles = {
     bigBox:{
         flexDirection:'row',
