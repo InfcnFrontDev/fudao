@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Title, Content, Text} from "native-base";
+import {Container, Title, Content} from "native-base";
+import {Button, Text} from "../../components/index";
 import Header from "../../components/header/IndexHeader";
 import MyEnter from "./components/MyEnter.js";
 import Headline from "./components/Headline.js";
@@ -15,7 +16,7 @@ class Home extends PureComponent {
 	}
 
 	render() {
-		
+
 		return (
 			<Container>
 				<Header>
@@ -25,7 +26,8 @@ class Home extends PureComponent {
 				<Content style={styles.content}>
 					<Headline />
 					<MyEnter />
-					<Text></Text>
+					<Text/>
+					<Button text="abcd" onPress={()=>alert('abcd')}/>
 				</Content>
 			</Container>
 		)

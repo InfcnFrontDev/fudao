@@ -2,13 +2,12 @@ import * as types from "../actions/types";
 import {request, urls} from "../utils/index";
 
 
-//
+// 获取我的好友列表
 export function fetchMyFriendList(userId, callback) {
 	return (dispatch) => {
 		dispatch({
 			type: types.FETCH_MY_FRIEND_LIST,
 		});
-
 		// 请求数据
 		request.getJson(urls.apis.MY_FRIENDS_LIST, {
 			userId
@@ -23,7 +22,12 @@ export function fetchMyFriendList(userId, callback) {
 				});
 			}
 			if (callback)
-				callback();
+				callback(result.success);
+		}, (error) => {
+			dispatch({
+				type: types.RECEIVE_MY_FRIEND_LIST,
+				payload: {}
+			});
 		});
 	}
 }
@@ -46,8 +50,10 @@ export function fetchNewFriendList(userId, callback) {
 					newFriendList
 				}
 			});
+			// 回调处理
+			if (callback)
+				callback(result.success);
 		}, (error) => {
-			let newFriendList = result.obj;
 			dispatch({
 				type: types.RECEIVE_NEW_FRIEND_LIST,
 				payload: {}
