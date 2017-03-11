@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Title, Content, Left, Right, Body,Text,Button,Header,Icon} from "native-base";
-import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo} from "react-native";
+import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert} from "react-native";
 import styles from "./assets/styles";
 import moment from 'moment'
 import {Actions} from "react-native-router-flux";
@@ -143,7 +143,14 @@ class Dynamic extends PureComponent {
       }
 
       _delete(id){
-        this.props.del(id,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm})
+        Alert.alert('','确定删除吗?',[
+          {text:'取消'},
+          {
+            text:'删除',
+            onPress:()=>        this.props.del(id,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm})
+          }
+        ])
+        // this.props.del(id,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm})
       }
 
       _onMessage(id){

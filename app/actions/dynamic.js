@@ -89,7 +89,23 @@ export function zan(info,params){
 //删除
 export function del(id,params){
 	return (dispatch) => {
-		
+		for(var i=0;i<params.dynamic.length;i++){
+			if(params.dynamic[i].id==id){
+				break;
+			}
+		}
+		params.dynamic.splice(i,1);
+		params.realm.write(()=>{
+			var delDynamic = params.realm.objects('Dynamic').filtered('id="'+id+'"');
+			params.realm.delete(delDynamic)
+		});
+		params.callback(params.dynamic)
+		dispatch({
+			type: types.DYNAMIC_LIST_LOAD,
+			source:{
+				dynamicList:params.dynamic
+			}
+		});
 	}
 }
 
