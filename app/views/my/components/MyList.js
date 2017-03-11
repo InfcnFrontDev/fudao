@@ -33,7 +33,7 @@ class MyList extends PureComponent {
 					icon: 'ios-chatboxes-outline',
 					text: '消息通知',
 					bordered: true,
-					route: 'start'
+					route: 'about'
 				})}
 				{this.renderItem({
 					icon: 'ios-information-circle-outline',

@@ -14,13 +14,13 @@ import {toast} from "../../utils/index";
 class MyFriend extends PureComponent {
 
 	render() {
-		let {isFetching, friendList} = this.props;
+		let {isFetching, friendList, friendNickMap} = this.props;
 		return (
 			<Container>
 				<Header back {...this.props} right={
 					<HeaderIcon iconName="add" onPress={() => Actions.searchUser()}/>
 				}/>
-				<Content>
+				<Content gray>
 					<PullView isRefreshing={isFetching} onRefresh={this._onRefresh.bind(this)}>
 						<List>
 							<ListItem icon last style={{height: 55}} onPress={() => Actions.newFriend()}>
@@ -36,7 +36,7 @@ class MyFriend extends PureComponent {
 								</Right>
 							</ListItem>
 						</List>
-						<FriendList list={friendList}/>
+						<FriendList list={friendList} friendNickMap={friendNickMap}/>
 					</PullView>
 				</Content>
 			</Container>
@@ -50,8 +50,12 @@ class MyFriend extends PureComponent {
 
 	_onRefresh() {
 		let {loginUser, dispatch} = this.props;
-		dispatch(fetchMyFriendList(loginUser.appid, () => {
-			toast.show('刷新成功');
+		dispatch(fetchMyFriendList(loginUser.appid, (success) => {
+			if (success) {
+				toast.show('刷新成功');
+			} else {
+				toast.show('刷新失败');
+			}
 		}));
 	}
 
