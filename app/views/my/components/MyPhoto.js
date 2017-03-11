@@ -1,9 +1,9 @@
 import React, {PureComponent} from "react";
 import {TouchableOpacity, Image} from "react-native";
 import {connect} from "react-redux";
-import {Thumbnail, Text} from "native-base";
+import {Thumbnail} from "native-base";
 import {updateUserPhoto} from "../../../actions/user";
-import {theme, request, urls, toast} from "../../../utils/index";
+import {theme, urls} from "../../../utils/index";
 import ImagePicker from "react-native-image-picker"; //第三方相机
 var photoOptions = {
 	//底部弹出框选项
@@ -20,86 +20,38 @@ var photoOptions = {
 	}
 }
 
+// 默认头像
+const defaultPhoto = require('../../../assets/my-photos/photo.jpg');
+
 /**
  * my grid menu
  */
 class MyPhoto extends PureComponent {
 
-	state = {
-		photo: require('../../../assets/my-photos/photo.jpg'),
-		path: null
-	}
-
 	render() {
-		let {photo, path} = this.state,
-			{loginUser} = this.props;
+		let {loginUser} = this.props;
 		return (
 			<Thumbnail source={require('../../../assets/my-covers/pic01.jpg')} style={styles.myCover}>
 				<TouchableOpacity activeOpacity={1} onPress={()=> this.cameraAction()}>
 					<Image style={styles.myPhoto}
-						   source={loginUser.img ? {uri: urls.getImage(loginUser.img,300,300)} : photo}/>
-					<Text>{loginUser.img}</Text>
+						   source={loginUser.img ? {uri: urls.getImage(loginUser.img,300,300)} : defaultPhoto}/>
 				</TouchableOpacity>
 			</Thumbnail>
 		)
 	}
 
 	cameraAction = () => {
+		let {dispatch, loginUser} = this.props;
+
 		// {data, fileName, fileSize, height, isVertical, originalRotation, path, type, uri, width}
 		ImagePicker.showImagePicker(photoOptions, (response) => {
 			console.log(response);
 			if (response.didCancel) {
-				return
+				return;
 			}
-			this.setState({
-				path: response.uri
-			});
-
-			this.uploadImage(response.uri, response.fileName);
+			// 上传并更新头像
+			dispatch(updateUserPhoto(loginUser.appid, response.fileName, response.uri));
 		})
-	}
-
-	uploadImage(uri, fileName) {
-		let {dispatch, loginUser} = this.props;
-		dispatch(updateUserPhoto(loginUser.appid, fileName, uri));
-		return;
-
-		let formData = new FormData();
-		formData.append("filename", {uri: uri, type: 'multipart/form-data', name: fileName});
-
-		request.postJson(urls.apis.IMAGE_UPLOAD, formData)
-			.then((result => {
-				if (result.ok) {
-					console.log(result.obj);
-					toast.show("上传成功")
-					// 修改图片路径
-					this.updateImage(result.obj);
-				} else {
-					toast.show("上传失败")
-				}
-			}).bind(this))
-	}
-
-	updateImage(path) {
-		let {loginUser} = this.props;
-		let jsonStr = JSON.stringify({
-			"tableName": "userinformation",
-			"appid": loginUser.appid,
-			"field": "img",
-			"value": path
-		});
-
-		request.postText(urls.apis.USER_UPDATE, {
-			jsonStr
-		})
-			.then(result => {
-				console.log(result);
-				if (result.success) {
-					toast.show("修改成功")
-				} else {
-					toast.show("修改失败")
-				}
-			})
 	}
 }
 
