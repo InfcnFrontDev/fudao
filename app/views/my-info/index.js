@@ -5,77 +5,9 @@ import Header from "../../components/header/BaseHeader";
 import Separator from "../../components/Separator";
 import GiftedListView from "../../components/GiftedListView";
 import MyInfoItem from "./item";
+import {request, urls} from "../../utils/";
 
-const groups = {
-	'基本信息': [
-		{
-			text: '我的头像',
-			note: 'photo.jpg',
-		},
-		{
-			text: '姓名',
-			note: '可可杨',
-		},
-		{
-			text: '性别',
-			note: '男',
-		},
-		{
-			text: '出生日期',
-			note: '1987-07-15',
-		},
-		{
-			text: '身高',
-			note: '173cm',
-		}
-	],
-	'病史': [
-		{
-			text: '个人史',
-			note: '文化程度低',
-		},
-		{
-			text: '家族史',
-			note: '无',
-		},
-		{
-			text: '婚育史',
-			note: '无',
-		},
-		{
-			text: '用药史',
-			note: '无',
-		}
-	],
-	'生活习惯': [
-		{
-			text: '饮食',
-			note: '饮食过咸',
-		},
-		{
-			text: '运动',
-			note: '长时间保持同一姿势',
-		},
-		{
-			text: '睡眠',
-			note: '无',
-		},
-		{
-			text: '吸烟',
-			note: '吸烟',
-		},
-		{
-			text: '饮酒',
-			note: '长期酗酒',
-		}
-	],
-	'长期精神状况': [
-		{
-			text: '精神状况',
-			note: '紧张/疲劳/...',
-		}
-	]
-};
+
 
 /**
  * 我的基本信息
@@ -103,9 +35,96 @@ class MyInfo extends PureComponent {
 	}
 
 	_onFetch(page = 1, callback, options) {
-		setTimeout(() => {
+
+		let {loginUser} = this.props;
+		request.getJson(urls.apis.USER_DETAIL, {
+			userId: loginUser.appid,
+		}).then((result) => {
+			let {userInformation} = result.obj;
+			let groups = {
+				'基本信息': [
+					{
+						text: '我的头像',
+						note: 'photo.jpg',
+					},
+					{
+						text: '姓名',
+						note: userInformation.title,
+					},
+					{
+						text: '性别',
+						note: userInformation.sex,
+					},
+					{
+						text: '出生日期',
+						note: userInformation.birthdate,
+					},
+					{
+						text: '身高',
+						note: userInformation.tops,
+					}
+				],
+				'病史': [
+					{
+						text: '个人史',
+						note: this.substr(userInformation.personal_history),
+					},
+					{
+						text: '家族史',
+						note: this.substr(userInformation.family_history),
+					},
+					{
+						text: '婚育史',
+						note: this.substr(userInformation.obstetrical_history),
+					},
+					{
+						text: '用药史',
+						note: this.substr(userInformation.medication_history),
+					}
+				],
+				'生活习惯': [
+					{
+						text: '饮食',
+						note: this.substr(userInformation.diet),
+					},
+					{
+						text: '运动',
+						note: this.substr(userInformation.motion),
+					},
+					{
+						text: '睡眠',
+						note: this.substr(userInformation.sleep),
+					},
+					{
+						text: '吸烟',
+						note: this.substr(userInformation.smoke),
+					},
+					{
+						text: '饮酒',
+						note: this.substr(userInformation.drink),
+					}
+				],
+				'长期精神状况': [
+					{
+						text: '精神状况',
+						note: this.substr(userInformation.mental_state),
+					}
+				]
+			};
+			setTimeout(() => {
+				callback(groups, {allLoaded: true});
+
+			}, options.firstLoad ? 300 : 0)
+		});
+		/*setTimeout(() => {
 			callback(groups, {allLoaded: true});
-		}, 500);
+		}, 500);*/
+	}
+	substr(str){
+		if(str.length>10)
+			str=str.substr(0, 10)+'...';
+		
+		return str
 	}
 
 	_renderRowView(rowData) {
@@ -123,5 +142,7 @@ const styles = {
 	content: {backgroundColor: '#FFF'},
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	loginUser: state.userStore.loginUser
+});
 export default connect(mapStateToProps)(MyInfo);

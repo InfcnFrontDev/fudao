@@ -5,10 +5,11 @@ import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, Separator, HeaderButton} from "../../components/index";
 import {Text, ListItem, Item, Input} from "native-base";
 import {showLoading, hideLoading} from "../../actions/loading";
+import {fetchNewFriendList, fetchMyFriendList} from "../../actions/friend";
 import {request, urls, toast} from "../../utils/index";
 
 /**
- * 好友申请
+ * 接受好友申请
  */
 class FriendApply extends PureComponent {
 
@@ -62,7 +63,12 @@ class FriendApply extends PureComponent {
 			dispatch(hideLoading());
 			if (result.success) {
 				toast.show('已发送');
+				// 返回上一页
 				Actions.pop();
+
+				// 刷新新朋友列表, 我的好友列表
+				this.refreshFriendList();
+
 			} else {
 				toast.show('发送失败，请重试');
 			}
@@ -71,6 +77,15 @@ class FriendApply extends PureComponent {
 			alert(JSON.stringify(error));
 		});
 
+	}
+
+	// 刷新新朋友列表, 我的好友列表
+	refreshFriendList() {
+		let {dispatch, loginUser} = this.props;
+		// 新朋友
+		dispatch(fetchNewFriendList(loginUser.appid));
+		// 我的好友
+		dispatch(fetchMyFriendList(loginUser.appid));
 	}
 }
 

@@ -10,6 +10,13 @@ export default function (state = initialState, {type, payload}) {
 			});
 		case types.USER_LOGOUT:
 			return initialState;
+		case types.USER_UPDATE_INFO:
+			let loginUser = {};
+			loginUser[payload.field] = payload.value
+			loginUser = Object.assign({}, state.loginUser, loginUser)
+			return Object.assign({}, state, {
+				loginUser
+			});
 		default:
 			return state;
 	}

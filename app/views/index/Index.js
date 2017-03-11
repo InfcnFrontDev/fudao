@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {StyleSheet, View, Text,ToastAndroid} from "react-native";
+import {StyleSheet, View, ToastAndroid} from "react-native";
 import ScrollableTabView from "react-native-scrollable-tab-view";
 import TabBar from "./components/TabBar";
 import {theme} from "../../utils/index";
@@ -8,8 +8,8 @@ import Home from "../home/Home";
 import Article from "../article/Article";
 import Dynamic from "../../views/dynamic/Dynamic";
 import My from "../../views/my/My";
-import schema from '../../realm/schema.js'
-import {newRealm} from '../../actions/realm.js'
+import schema from "../../realm/schema.js";
+import {newRealm} from "../../actions/realm.js";
 // tab components
 
 const tabTitles = [
@@ -22,7 +22,7 @@ const tabSelectedIcon = [
 	'ios-home', 'ios-list-box', 'ios-compass', 'ios-person'
 ];
 const tabComponents = [
-	Home, Article,Dynamic,  My
+	Home, Article, Dynamic, My
 ];
 
 /**
@@ -30,7 +30,7 @@ const tabComponents = [
  */
 class Index extends PureComponent {
 
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.props.newRealm();
 	}
@@ -45,7 +45,7 @@ class Index extends PureComponent {
 				locked
 				scrollWithoutAnimation
 			>
-				{tabComponents.map((Component, i)=>(
+				{tabComponents.map((Component, i) => (
 					<Component key={tabTitles[i]} title={tabTitles[i]} newnew={this.props.newnew}/>
 				))}
 
@@ -77,11 +77,10 @@ const styles = {
 	},
 };
 function bindAction(dispatch) {
-    return {
-        newRealm: ()=>dispatch(newRealm(schema)),
-    };
+	return {
+		newRealm: () => dispatch(newRealm(schema)),
+	};
 }
 
-const mapStateToProps = state => ({
-});
+const mapStateToProps = state => ({});
 export default connect(mapStateToProps, bindAction)(Index);

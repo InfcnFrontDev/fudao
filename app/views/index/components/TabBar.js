@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
+import {StyleSheet, View, TouchableOpacity} from "react-native";
+import {Text} from "../../../components/index";
 import Icon from "react-native-vector-icons/Ionicons";
 import {theme} from "../../../utils/index";
 
@@ -38,7 +39,7 @@ export default class TabBar extends Component {
 	}
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	tabs: {
 		flexDirection: 'row',
 		height: 49,
@@ -62,6 +63,6 @@ const styles = StyleSheet.create({
 		marginBottom: 2
 	},
 	text: {
-		fontSize: 12,
+		fontSize: 14,
 	}
-})
+}

@@ -16,7 +16,9 @@ export default function (state = initialState, {type, payload}) {
 
 			// userId => userNick
 			let friendNickMap = {};
-			friendList.forEach((f) => friendNickMap[f.friendId] = f.friendNick);
+			friendList.forEach((f) => {
+				friendNickMap[f.friendId] = new Date().getTime()//f.friendNick;
+			});
 
 			return Object.assign({}, state, {
 				isFetching: false,
