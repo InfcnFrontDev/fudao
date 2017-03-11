@@ -13,6 +13,7 @@ export const CHANGE_PLATFORM = 'CHANGE_PLATFORM';
 // loading ////////////////////////////////////////
 export const LOADING_SHOW = 'LOADING_SHOW';
 export const LOADING_HIDE = 'LOADING_HIDE';
+export const USER_UPDATE_INFO = "USER_UPDATE_INFO";
 
 // user actions ////////////////////////////////////////
 export const USER_LOGIN = 'USER_LOGIN';
