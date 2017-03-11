@@ -19,6 +19,7 @@ class SetPassword extends PureComponent {
             text:this.props.text,
             phone:this.props.phone,
             password:this.props.password,
+            appid:this.props.appid,
         }
     }
     render() {
@@ -52,8 +53,8 @@ class SetPassword extends PureComponent {
         },1000)
     }
     _login(){
-        let {phone,password} = this.state;
-        login(phone,password);
+        let {phone,password,appid} = this.state;
+        login(phone,password,appid);
     }
 }
 const styles = {

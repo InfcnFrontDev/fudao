@@ -21,20 +21,26 @@ class StartInformation extends PureComponent {
     constructor(props) {
         super(props);
         this.state={
+            presetDate: new Date(2016, 3, 5),
+            allDate: new Date(2020, 4, 5),
+            simpleText: '选择日期,默认今天',
+            minText: '选择日期,不能比今日再早',
+            maxText: "01/01/17",
+            presetText: '选择日期,指定2016/3/5',
             showM:true,
-            simpleText:"03/22/06",
-            position:'北京市',
 
+            position:'北京市',
+            appid:this.props.appId
         }
     }
     async showPicker(stateKey, options) {
-        let option={
+      /*  let option={
             options,
             mode:'spinner'
-        }
+        }*/
         try {
             var newState = {};
-            const {action, year, month, day} = await DatePickerAndroid.open(option);
+            const {action, year, month, day} = await DatePickerAndroid.open(options);
             if (action === DatePickerAndroid.dismissedAction) {
                 newState[stateKey + 'Text'] = 'dismissed';
             } else {
@@ -92,6 +98,7 @@ class StartInformation extends PureComponent {
                 </TouchableOpacity>
             )
         }
+
         return (
             <Container style={styles.container}>
                 <Header back {...this.props}></Header>
@@ -104,8 +111,8 @@ class StartInformation extends PureComponent {
                             </View>
                             <View  style={styles.row1}>
                                 <Text style={styles.text1}>请选择您的生日</Text>
-                                <TouchableOpacity style={styles.btn}  onPress={this.showPicker.bind(this, 'simple', {date: this.state.simpleDate})}>
-                                    <Text style={styles.text2}>{this.state.simpleText}</Text>
+                                <TouchableOpacity style={styles.btn}  onPress={this.showPicker.bind(this, 'max', {date: this.state.maxDate,maxDate:new Date(2012, 3, 5),mode:'spinner'})}>
+                                    <Text style={styles.text2}>{this.state.maxText}</Text>
                                 </TouchableOpacity>
                             </View>
                             <TouchableOpacity style={styles.btn1}>
@@ -120,20 +127,20 @@ class StartInformation extends PureComponent {
         )
     };
     commit(){
-        let {dispatch, loginUser} = this.props;
-        let sex,birth,position = null;
+        let {position,simpleText,appId} = this.state;
+        let sex,birth = null;
          if(this.state.showM){
          sex = 1
          }else{
          sex = 0
          }
-        birth = this.state.simpleText;
-        position=this.state.position
+        birth = simpleText;
+
         //获取地理位置
 
 
         let userInformation ={};
-        userInformation.appid =loginUser.appid;
+        userInformation.appid =appid;
         userInformation.sex = sex
         userInformation.birthdate = birth
         userInformation.location = position
@@ -161,10 +168,10 @@ class StartInformation extends PureComponent {
         userInformation.drink = '';
         // 精神状况
         userInformation.mental_state = '';
-        request.getJson(urls.apis.AUTH_CHECK_PHONE,{
+        request.getJson(urls.apis.AUTH_USER_INFORMATION,{
             jsonStr: JSON.stringify(userInformation),
             ishealthRing: "yes",
-            appid: loginUser.appid,
+            appid: appId,
             city: position
         }).then((data)=>{
             if(data.success) {
@@ -253,8 +260,7 @@ const styles = {
     },
 };
 const mapStateToProps = state => ({
-    loginUser: state.userStore.loginUser,
-    ...state.friendStore,
+
 });
 export default connect(mapStateToProps)(StartInformation);
 
