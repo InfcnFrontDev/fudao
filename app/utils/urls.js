@@ -45,6 +45,7 @@ const urls = {
 	apis: {
 		// 图片接口(ok)
 		IMAGE: picPath + 'api/ImgApi/getImage',
+		IMAGE_UPLOAD: picPath + 'api/ImgApi/upload',
 
 		// 资讯 ----------------------------------------------------------------------
 		//资讯列表(ok)
@@ -52,7 +53,7 @@ const urls = {
 		//资讯详细(ok)
 		ARTICLE_DETAIL: apiPath + 'app/myTerritoryAction!detail.action',
 		//我的收藏列表(ok)
-		MY_COLLECTION_LIST: apiPath +  'app/collectionAction!getMyCollection.action',
+		MY_COLLECTION_LIST: apiPath + 'app/collectionAction!getMyCollection.action',
 
 
 		//获取用户信息
@@ -67,6 +68,8 @@ const urls = {
 		FRIEND_AGREE: apiPath + 'app/friendDynamicAction!editFriend.action',
 		//好友申请列表
 		FRIEND_APPLY_LIST: apiPath + 'app/friendDynamicAction!getWaitBeFriends.action',
+		//删除好友
+		FRIEND_DELETE: apiPath + 'app/friendDynamicAction!deleteFriend.action',
 		//我的好友列表
 		MY_FRIENDS_LIST: apiPath + 'app/friendDynamicAction!getFriends.action',
 
@@ -84,11 +87,11 @@ const urls = {
 		//注册
 		AUTH_REG: apiPath + "app/accountInfoAction!register.action",
 		//登录
-		AUTH_LOGIN : apiPath + "app/accountInfoAction!login.action",
+		AUTH_LOGIN: apiPath + "app/accountInfoAction!login.action",
 		//设置新密码
-		AUTH_NEW_PASSWORD : apiPath +"app/accountInfoAction!retrievePassword.action",
+		AUTH_NEW_PASSWORD: apiPath + "app/accountInfoAction!retrievePassword.action",
 		//基本信息
-		AUTH_USER_INFORMATION : apiPath +"app/userInformationAction!saveUserinformation.action",
+		AUTH_USER_INFORMATION: apiPath + "app/userInformationAction!saveUserinformation.action",
 
 
 		// 注册登录(新)
@@ -113,9 +116,9 @@ const urls = {
 		 USER_INFO: apiPath + 'userinfo',*/
 
 
-		 	// 动态 ---------------------------------------------------------
-			DYNAMIC_LIST:apiPath + 'app/friendDynamicAction!getDynamics.action',
-			DYNAMIC_ADD_DYNAMIC:apiPath+'app/friendDynamicAction!addDynamic.action',
+		// 动态 ---------------------------------------------------------
+		DYNAMIC_LIST: apiPath + 'app/friendDynamicAction!getDynamics.action',
+		DYNAMIC_ADD_DYNAMIC: apiPath + 'app/friendDynamicAction!addDynamic.action',
 	}
 
 };

@@ -116,11 +116,16 @@ const request = {
 				headers = {
 					"Content-Type": "application/x-www-form-urlencoded"
 				};
-			} else {
+			} else if (typeof params == 'object' && params instanceof FormData) {
+				body = params;
+				headers = {
+					'Content-Type': 'multipart/form-data',
+				};
+			}
+			else {
 				body = params;
 			}
 		}
-
 
 		// console.log('GET:' + url);
 		// console.log('Body:' + body);

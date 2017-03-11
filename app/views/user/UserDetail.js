@@ -6,6 +6,7 @@ import {Container, Content, List, Separator} from "../../components/index";
 import Header from "../../components/header/BaseHeader";
 import {Body, Left, Right, ListItem, Text, Button, Thumbnail, Icon, View} from "native-base";
 import {showLoading, hideLoading} from "../../actions/loading";
+import {fetchMyFriendList} from "../../actions/friend";
 import {request, urls, toast} from "../../utils/index";
 
 /**
@@ -59,14 +60,33 @@ class UserDetail extends PureComponent {
 							</ListItem>
 						</List>
 						<Separator/>
-						{friendNickMap[user.appid] ? null :
-							<Button block style={styles.button} onPress={this._applyAddFriend.bind(this)}>
-								<Text>添加到我的好友</Text>
-							</Button>}
+						{this.renderButtons()}
 					</View> : null}
 				</Content>
 			</Container>
 		);
+	}
+
+	renderButtons() {
+		let {loginUser, friendNickMap} = this.props,
+			{user} = this.state;
+
+		if (loginUser.appid === user.appid) {// 自己
+
+			return null;
+		} else if (friendNickMap[user.appid]) {// 好友
+			return (
+				<Button danger block style={styles.button} onPress={this._deleteFriend.bind(this)}>
+					<Text>删除该好友</Text>
+				</Button>
+			);
+		} else {// 陌生人
+			return (
+				<Button block style={styles.button} onPress={this._addFriend.bind(this)}>
+					<Text>添加到我的好友</Text>
+				</Button>
+			)
+		}
 	}
 
 	componentDidMount() {
@@ -95,7 +115,8 @@ class UserDetail extends PureComponent {
 
 	}
 
-	_applyAddFriend() {
+	// 添加好友
+	_addFriend() {
 		let {loginUser, dispatch} = this.props;
 		let {user} = this.state;
 
@@ -104,12 +125,46 @@ class UserDetail extends PureComponent {
 			return;
 		}
 
+		// 跳转到添加好友申请页面
 		Actions.friendApply({
 			friend: user
 		})
-
-
 	}
+
+	// 删除好友
+	_deleteFriend() {
+		let {user} = this.state;
+		Alert.alert("删除好友", '您确定要删除好友' + user.title + '吗？', [{
+			text: '取消'
+		}, {
+			text: '确定', onPress: () => this.deleteFriend()
+		}])
+	}
+
+	deleteFriend() {
+		let {loginUser, dispatch} = this.props,
+			{user} = this.state,
+			userId = loginUser.appid,
+			friendId = user.appid;
+
+		// 获取用户信息
+		dispatch(showLoading());
+		request.getJson(urls.apis.FRIEND_DELETE, {
+			userId, friendId
+		}).then((result) => {
+			dispatch(hideLoading());
+			if (result.success) {
+				toast.show('删除成功');
+				// 刷新我的好友列表
+				dispatch(fetchMyFriendList(userId));
+			} else {
+				toast.show('删除失败');
+			}
+		}, (error) => {
+			dispatch(hideLoading());
+		});
+	}
+
 }
 
 const styles = {
