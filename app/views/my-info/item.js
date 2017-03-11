@@ -1,9 +1,11 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
 import {ToastAndroid,DatePickerAndroid} from "react-native";
 import {Left, Right, Body, ListItem, Text, Icon} from "native-base";
 import {dialogs} from "../../utils/";
 import ImagePicker from "react-native-image-picker";
-import chooseDate from "./chooseDate"
+import chooseDate from "./chooseDate";
+import {request, urls} from "../../utils/";
 var photoOptions = {
     //底部弹出框选项
     title: '请选择',
@@ -72,6 +74,7 @@ class MyInfoItem extends PureComponent {
     onPressItem() {
         let {data} = this.props;
 
+
         switch (data.text) {
             case '我的头像':
                 this.cameraAction();
@@ -90,6 +93,7 @@ class MyInfoItem extends PureComponent {
                 break;
             case '个人史':
                 this.multiChoiceDialog('个人史',chooseDate.PersonalHistory);
+                this._onFetch()
                 break;
             case '家族史':
                 this.multiChoiceDialog('家族史',chooseDate.FamilyHistory);
@@ -121,7 +125,20 @@ class MyInfoItem extends PureComponent {
         }
 
     }
+    _onFetch() {
+        
+        let {loginUser,data} = this.props;
+        alert(''+data+'');
+        /*request.getJson(urls.apis.USER_UPDATE, {
+            appid: loginUser.appid,
+            tableName:"userinformation",
+            field:key,
+            value:val
 
+        }).then((result) => {
+            alert(result)
+        });*/
+    }
 
     updateSex(data) {
         dialogs.showDialog({
@@ -194,5 +211,8 @@ MyInfoItem.propTypes = {
 MyInfoItem.defaultProps = {
     data: null,
 }
+const mapStateToProps = state => ({
+    loginUser: state.userStore.loginUser
+});
 
-export default (MyInfoItem);
+export default connect(mapStateToProps)(MyInfoItem);

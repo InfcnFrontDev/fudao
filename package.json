@@ -20,6 +20,8 @@
     "react-native-router-flux": "^3.37.0",
     "react-native-scrollable-tab-view": "^0.6.0",
     "react-native-splash-screen": "^2.0.0",
+    "react-native-swipe-list-view": "^0.4.0",
+    "react-native-swipeout": "^2.0.12",
     "react-native-swiper": "^1.5.4",
     "react-native-vector-icons": "^4.0.0",
     "react-redux": "^5.0.2",
