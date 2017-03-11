@@ -62,6 +62,9 @@ const urls = {
 		USER_UPDATE: apiPath + 'app/userInformationAction!updateValue.action',
 		//搜索用户
 		USER_SEARCH: apiPath + 'app/friendDynamicAction!getUserByPhone.action',
+
+		// 好友 ----------------------------------------------------------------------
+
 		//申请加为好友
 		FRIEND_APPLY: apiPath + 'app/friendDynamicAction!addFriend.action',
 		//同意加为好友
@@ -119,6 +122,16 @@ const urls = {
 		// 动态 ---------------------------------------------------------
 		DYNAMIC_LIST: apiPath + 'app/friendDynamicAction!getDynamics.action',
 		DYNAMIC_ADD_DYNAMIC: apiPath + 'app/friendDynamicAction!addDynamic.action',
+	},
+
+	getImage(filePath, width, height){
+		let url = this.apis.IMAGE + '?filePath=' + filePath;
+		if (width)
+			url += '&w=' + width;
+		if (height)
+			url += '&h=' + height;
+		console.log(url);
+		return url;
 	}
 
 };
