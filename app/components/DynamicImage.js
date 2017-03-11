@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 
-import {View,TouchableHighlight,Image} from "react-native";
+import {View,TouchableHighlight,Image,ToastAndroid} from "react-native";
+import {request, urls,toast} from "../utils/";
 
 /**
 * 动态
@@ -15,16 +16,16 @@ class DynamicImage extends Component {
 
 
   render(){
-    // ToastAndroid.show(JSON.stringify(this.props.rowID), ToastAndroid.SHORT);
+    // ToastAndroid.show('dynamicImage'+JSON.stringify(this.props.urls), ToastAndroid.SHORT);
     if(this.props.urls) {
       var arr_pic = this.props.urls.split(',');
       let pic = arr_pic.map((p, i) => {
-        if(p=="还未处理"){
-          return ( null );
-        }
+        // if(p=="还未处理"){
+        //   return ( null );
+        // }
         return (
           <TouchableHighlight key={i} onPress={()=> Actions['picture']({image:this.props.urls,i:i})} style={styles.imageTouch}>
-          <Image source={{uri: 'http://192.168.10.58:9095/api/BaseApi/getImage?id='+p+'&w=600&h=600'}} style={styles.msgImage}  resizeMode= 'stretch' />
+          <Image source={{uri: urls.getImage(p,600,600)}} style={styles.msgImage}  resizeMode= 'stretch' />
           </TouchableHighlight>
         )
       })

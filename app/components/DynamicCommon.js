@@ -17,6 +17,7 @@ class DynamicCommon extends Component {
 	}
 
 	render() {
+		// ToastAndroid.show('dynamicCommon'+JSON.stringify(this.props.info.path), ToastAndroid.SHORT);
 		var id=305;
 		if(this.props.info.photo){
 			id = this.props.info.photo;
