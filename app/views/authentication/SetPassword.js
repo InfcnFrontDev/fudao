@@ -59,17 +59,18 @@ class SetPassword extends PureComponent {
                 password1:''
             })
         }else{
-            /*const {dispatch} = this.props;*/
+            const {dispatch} = this.props;
             /*dispatch(showLoading());*/
+            let appid=tools.uuid();
             request.getJson(urls.apis.AUTH_REG,{
-                        appid:tools.uuid(),
+                        appid:appid,
                         account: phone,
                         pwd: hex_md5(phone+password)
                 }).then((data)=>{
                 /*dispatch(hideLoading());*/
                     if(data.success) {
                         setTimeout(function() {
-                            Actions['passwordSuccess']({text:"恭喜您注册成功",phone:phone,password:password})
+                            Actions['passwordSuccess']({phone:phone,password:password})
                         }, 1000);
                     }else{
                         toast.show("注册失败");

@@ -4,7 +4,7 @@ import  {hex_md5} from "./md5"
 import {request,urls,} from "../../../utils/";
 
 
-export function login(phoneVale,passwordVale){
+export function login(phoneVale,passwordVale,appid){
         let  phone=phoneVale;
         let  password=passwordVale;
         request.getJson(urls.apis.AUTH_LOGIN,{
@@ -12,11 +12,12 @@ export function login(phoneVale,passwordVale){
             pwd:hex_md5(phone+password),
         }).then((data)=>{
             if(data.success) {
+                toast.show(JSON.stringify(data))
                 var userInformation = data.obj.userInformation;
                 if(userInformation != undefined) { //基本信息已经添加完成
                     Actions['_onSearch']()
                 } else { //没有基本信息表示第一次登录需要添写信息
-                    Actions['startInformation']()
+                    Actions['startInformation']({appid:appid,showM:true,sex:1})
                 }
             }else{
                 ToastAndroid.show("密码不正确", ToastAndroid.SHORT);

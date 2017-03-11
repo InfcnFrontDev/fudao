@@ -18,25 +18,36 @@ import  CommitButton from "./components/CommitButton"
 
 
 class StartInformation extends PureComponent {
+
     constructor(props) {
         super(props);
         this.state={
-            showM:true,
-            simpleText:"03/22/06",
+            presetDate: new Date(2016, 3, 5),
+            maxText: '',
+            presetText: '选择日期,指定2016/3/5',
+            showM:this.props.showM,
             position:'北京市',
-
+            appid:this.props.appid,
+            year1:'',
+            year:'',
+            month1:'',
+            month:'',
+            day1:'',
+            sex:this.props.sex,
+            jieduan:this.props.jieduan?this.props.jieduan:'未孕阶段',
         }
     }
-    async showPicker(stateKey, options) {
-        let option={
-            options,
-            mode:'spinner'
-        }
+
+    componentDidMount(){
+        let date=new Date;
+        this.date(date,this.state.sex)
+    }
+    async showPicker(stateKey, options,text) {
         try {
             var newState = {};
-            const {action, year, month, day} = await DatePickerAndroid.open(option);
+            const {action, year, month, day} = await DatePickerAndroid.open(options);
             if (action === DatePickerAndroid.dismissedAction) {
-                newState[stateKey + 'Text'] = 'dismissed';
+                newState[stateKey + 'Text'] = text;
             } else {
                 var date = new Date(year, month, day);
                 newState[stateKey + 'Text'] = date.toLocaleDateString();
@@ -48,64 +59,57 @@ class StartInformation extends PureComponent {
         }
     }
 
+
     render() {
+
         var mbM=(
-            <TouchableOpacity onPress={()=>{
-                this.setState({
-                    showM:true,
-                    language:12
-                })
-            }}>
+            <TouchableOpacity onPress={this.man.bind(this)}>
                 <Thumbnail style={styles.touxiang} size={80} source={require('./assets/man.png')}/>
             </TouchableOpacity>
         );
         var mbW=(
-            <TouchableOpacity onPress={()=>{
-                this.setState({
-                    showM:false,
-                })
-            }}>
+            <TouchableOpacity onPress={this.woman.bind(this)}>
                 <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
+                <View style={{height:20}}>
+                    <Text>{this.state.jieduan}</Text>
+                </View>
             </TouchableOpacity>
         );
 
         if(this.state.showM){
             mbW= (
-                <TouchableOpacity onPress={()=>{
-                    this.setState({
-                        showM:false,
-                    })
-                }}>
+                <TouchableOpacity onPress={this.woman.bind(this)} style={{justifyContent:'center',
+                    alignItems:'center'}}>
                     <View style={styles.mb}></View>
                     <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/woman.png')}/>
+                    <View style={{height:20}}>
+                        <Text>{this.state.jieduan}</Text>
+                    </View>
                 </TouchableOpacity>
             )
         }else{
             mbM =(
-                <TouchableOpacity onPress={()=>{
-                    this.setState({
-                        showM:true,
-                    })
-                }}>
+                <TouchableOpacity onPress={this.man.bind(this)}>
                     <View style={styles.mb}></View>
                     <Thumbnail style={styles.touxiang} size={80} source={require('./assets/man.png')}/>
                 </TouchableOpacity>
             )
         }
+
         return (
             <Container style={styles.container}>
-                <Header back {...this.props}></Header>
+                <Header  {...this.props}></Header>
                 <Content padder >
                     <View style={styles.bigBox}>
                         <View style={styles.box}>
                             <View style={styles.photo}>
-                                {mbM}
                                 {mbW}
+                                {mbM}
                             </View>
                             <View  style={styles.row1}>
                                 <Text style={styles.text1}>请选择您的生日</Text>
-                                <TouchableOpacity style={styles.btn}  onPress={this.showPicker.bind(this, 'simple', {date: this.state.simpleDate})}>
-                                    <Text style={styles.text2}>{this.state.simpleText}</Text>
+                                <TouchableOpacity style={styles.btn}  onPress={this.showPicker.bind(this, 'max', {date: this.state.maxDate,maxDate:new Date(this.state.year1, this.state.month1, this.state.day1),mode:'spinner'},this.state.maxText)}>
+                                    <Text style={styles.text2}>{this.state.maxText}</Text>
                                 </TouchableOpacity>
                             </View>
                             <TouchableOpacity style={styles.btn1}>
@@ -119,23 +123,59 @@ class StartInformation extends PureComponent {
             </Container>
         )
     };
+    woman(){
+        let sex=0;
+        this.setState({
+            showM:false,
+            sex:sex,
+        })
+        let data=new Date();
+        this.date(data,sex)
+        setTimeout(()=>{
+             Actions['womanChoose']()
+        },100)
+
+    }
+    man(){
+        let sex=1;
+        this.setState({
+            showM:true,
+            sex:sex,
+            jieduan:''
+        })
+        let data=new Date();
+        this.date(data,sex)
+    }
+    date(myDate,sex){
+        let year,year1,month,month1,day,num=(null);
+        if(sex==0){
+            num=14
+        }else if(sex==1){
+            num=16
+        }
+        year1=myDate.getFullYear()-num;
+        year=(year1+'').substring(2)
+        month1=myDate.getMonth();
+        month=month1+1
+        day=myDate.getDate();
+        this.setState({
+            maxText:month+"/"+day+"/"+year,
+            month:month,
+            month1:month1,
+            day1:day,
+            year:year,
+            year1:year1,
+        })
+    }
     commit(){
-        let {dispatch, loginUser} = this.props;
-        let sex,birth,position = null;
-         if(this.state.showM){
-         sex = 1
-         }else{
-         sex = 0
-         }
-        birth = this.state.simpleText;
-        position=this.state.position
+        let {position,maxText,appid,sex} = this.state;
+       toast.show(position+'/'+maxText+'/'+sex+'/'+appid)
+
         //获取地理位置
-
-
         let userInformation ={};
-        userInformation.appid =loginUser.appid;
+        userInformation.appid =appid;
         userInformation.sex = sex
-        userInformation.birthdate = birth
+        userInformation.birthdate = maxText;
         userInformation.location = position
         userInformation.tops = '';
         userInformation.bmi = '';
@@ -161,10 +201,11 @@ class StartInformation extends PureComponent {
         userInformation.drink = '';
         // 精神状况
         userInformation.mental_state = '';
-        request.getJson(urls.apis.AUTH_CHECK_PHONE,{
+        //toast.show(userInformation)
+        request.postJson(urls.apis.AUTH_USER_INFORMATION,{
             jsonStr: JSON.stringify(userInformation),
             ishealthRing: "yes",
-            appid: loginUser.appid,
+            appid: appid,
             city: position
         }).then((data)=>{
             if(data.success) {
@@ -190,9 +231,9 @@ const styles = {
     },
     photo:{
         marginTop:40,
+        height:100,
         flexDirection:'row',
         justifyContent:'space-around',
-
     },
     touxiang:{
         width:80,
@@ -253,8 +294,7 @@ const styles = {
     },
 };
 const mapStateToProps = state => ({
-    loginUser: state.userStore.loginUser,
-    ...state.friendStore,
+
 });
 export default connect(mapStateToProps)(StartInformation);
 
