@@ -116,7 +116,6 @@ const urls = {
 		 USER_INFO: apiPath + 'userinfo',*/
 
 
-<<<<<<< HEAD
 		 	// 动态 ---------------------------------------------------------
 			DYNAMIC_LIST:apiPath + 'app/friendDynamicAction!getDynamics.action',
 			DYNAMIC_ADD_DYNAMIC:apiPath+'app/friendDynamicAction!addDynamic.action',
@@ -124,11 +123,7 @@ const urls = {
 			DYNAMIC_ADD_COMMENT:apiPath+'app/friendDynamicAction!addDynamicComment.action',
 			DYNAMIC_ADD_PRAISE:apiPath+'app/friendDynamicAction!addDynamicPraise.action',
 			DYNAMIC_DELETE_PRAISE:apiPath+'app/friendDynamicAction!deleteDynamicPraiseByUserIdAndDynamicId.action',
-=======
-		// 动态 ---------------------------------------------------------
-		DYNAMIC_LIST: apiPath + 'app/friendDynamicAction!getDynamics.action',
-		DYNAMIC_ADD_DYNAMIC: apiPath + 'app/friendDynamicAction!addDynamic.action',
->>>>>>> 63cae42a24cb7ea09de91d7f6d4428894add59dc
+
 	}
 
 };

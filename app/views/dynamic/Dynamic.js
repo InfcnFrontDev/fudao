@@ -30,11 +30,8 @@ class Dynamic extends PureComponent {
 
     componentWillReceiveProps(nextProps){
       if(this.props.newnew!=nextProps.newnew){
+        ToastAndroid.show('gfgfdgdd',ToastAndroid.SHORT)
         this.props.fetchData(1,{refresh:true},this.refs.gifted._postRefresh,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user});
-      }
-      if(this.props.delFlag!=nextProps.delFlag){
-        ToastAndroid.show('delFlag',ToastAndroid.SHORT)
-        this.refs.gifted._postRefresh(this.props.dynamic.dynamicList)
       }
     }
 
@@ -126,7 +123,7 @@ class Dynamic extends PureComponent {
 
     		return (
     			<View  style={styles.dynamic}>
-              <DynamicCommon info={info} delFlag={this.props.delFlag}/>
+              <DynamicCommon info={info} newnew={this.props.newnew}/>
               <View style={styles.showContain}>
                 <View style={styles.timeAndDelete}>
                   <Text style={styles.time}>{m}</Text>

@@ -30,7 +30,7 @@ class DynamicCommon extends Component {
 				<View>
 						<Text style={styles.dynamicName}>{this.props.info.nick}</Text>
 						<Text style={styles.dynamicContent}>{this.props.info.content}</Text>
-						<DynamicImage urls={this.props.info.dynamicImg}/>
+						<DynamicImage urls={this.props.info.path}/>
 				</View>
         </TouchableHighlight>
       </View>
@@ -39,7 +39,7 @@ class DynamicCommon extends Component {
 
 	_skipToDetail(){
 		const {dispatch} = this.props;
-		dispatch(skipToDetail(this.props.info,this.props.delFlag));
+		dispatch(skipToDetail(this.props.info,this.props.newnew));
 	}
 
 }

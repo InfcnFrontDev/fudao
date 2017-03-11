@@ -17,6 +17,18 @@ class NewDynamic extends Component{
     }
 
     render() {
+      var r_but=(
+        <Button transparent onPress={this.send.bind(this)}>
+            <Text>发表</Text>
+        </Button>
+      );
+      if(this.props.rightButton=='上传中'){
+        r_but = (
+          <Button transparent>
+              <Text>上传中</Text>
+          </Button>
+        )
+      }
         return (
           <Container style={styles.container}>
             <Header >
@@ -29,9 +41,7 @@ class NewDynamic extends Component{
                     <Title style={styles.title}>{this.props.title}</Title>
                 </Body>
                 <Right  style={{flex:1}}>
-                  <Button transparent onPress={this.send.bind(this)}>
-                      <Text>发表</Text>
-                  </Button>
+                  {r_but}
                 </Right>
             </Header>
             <Content style={styles.content}>
@@ -46,9 +56,9 @@ class NewDynamic extends Component{
     }
 
     send(){
-      if (this.state.text) {
+      if (this.state.text||this.props.renderPicture.length!=0) {
         const {dispatch} = this.props;
-        dispatch(addNewDynamic(this.state.text,this.props.newnew,this.props.userId))
+        dispatch(addNewDynamic(this.state.text,this.props.newnew,this.props.userId,this.props.renderPicture))
       }else{
         Alert.alert('','内容不能为空~~',[{text:'确定'}])
       }
@@ -76,5 +86,7 @@ const styles={
 
 const mapStateToProps = state => ({
   userId:state.userStore.loginUser.appid,
+  rightButton:state.dynamic.rightButton,
+  renderPicture:state.dynamic.renderPicture,
 });
 export default connect(mapStateToProps)(NewDynamic);

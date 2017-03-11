@@ -1,6 +1,6 @@
 import * as types from "../actions/types";
 import ImagePicker from 'react-native-image-picker';
-import {request, urls} from "../utils/";
+import {request, urls,toast} from "../utils/";
 import { ToastAndroid,} from "react-native";
 import {Actions} from "react-native-router-flux";
 
@@ -8,9 +8,9 @@ import {Actions} from "react-native-router-flux";
  * 动态列表：newDynamic
  */
 //跳转至详情页
-export function skipToDetail(dynamicDetail,del){
+export function skipToDetail(dynamicDetail,newnew){
 	return (dispatch) => {
-		Actions.dynamicDetail({delFlag:del});
+		Actions.dynamicDetail({newnew:newnew});
 		dispatch({
 			type: types.DYNAMIC_LIST_LOAD,
 			source:{
@@ -304,8 +304,10 @@ export function fetchData(page,options,callback,params){
 		      }else{
 		        var render_realm_res = realm_res.slice(0,realm_res.length-params.dynamic.length).reverse();
 		      }
+					// ToastAndroid.show(,ToastAndroid.SHORT);
+
 		      var dynamicList = params.dynamic.concat(render_realm_res);
-		      callback(dynamicList);
+		      // callback(dynamicList);
 					// request.getJson(urls.apis.DYNAMIC_LIST,{
 					// 				userId:params.user.appid,
 					// 				page:Math.floor(params.dynamic.length/5)+2,
@@ -398,7 +400,7 @@ export function selectPhotoTapped(keyword) {
 					type: types.NEW_DYNAMIC_ADD_PICTURE_ARR,
 					source:source
 				});
-				uploadImage(response.uri)
+				uploadImage(response.uri,dispatch);
       }else{
 				return ;
 			}
@@ -407,32 +409,49 @@ export function selectPhotoTapped(keyword) {
 }
 
 
-  function uploadImage(uri){
-
+  function uploadImage(uri,dispatch){
+		dispatch({
+			type: types.DYNAMIC_LIST_LOAD,
+			source:{
+				rightButton:'上传中'
+			}
+		});
     let formData = new FormData();
     var file = {uri: uri, type: 'multipart/form-data', name: 'a.jpg'};
-    formData.append("img",file);
-    fetch(urls.apis.UPLOAD_IMAGE,{
-      method:'POST',
-      headers:{
-        'Content-Type':'multipart/form-data',
-      },
-      body:formData,
-    })
-    .then((response) => response.json())
-    .then((responseData)=>{
-			ToastAndroid.show(JSON.stringify(responseData),ToastAndroid.SHORT);
-
-    })
+    formData.append("filename",file);
+		request.postJson(urls.apis.IMAGE_UPLOAD, formData)
+			.then(result => {
+				if (result.ok) {
+					console.log(result.obj);
+					toast.show("上传成功"+result.obj);
+					dispatch({
+						type: types.DYNAMIC_LIST_LOAD,
+						source:{
+							rightButton:'发表'
+						}
+					});
+					dispatch({
+						type: types.NEW_DYNAMIC_ADD_RENDER_PICTURE_ARR,
+						source:result.obj
+					});
+				}
+		})
   }
 
 //添加新的动态
-export function addNewDynamic(newDynamic,newnew,userId) {
+export function addNewDynamic(newDynamic,newnew,userId,picArr) {
 	return (dispatch) => {
+		var type = 1;
+		var pic = '';
+		if(picArr.length!=0){
+			pic = picArr.join(',');
+			type=2;
+		}
 		request.getJson(urls.apis.DYNAMIC_ADD_DYNAMIC,{
 						userId:userId,
 						content:newDynamic,
-						type:1
+						path:pic,
+						type:type
 	 }).then(()=>{
 		 Actions.pop({refresh: { newnew: !newnew}})
 	 })
