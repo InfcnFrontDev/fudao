@@ -3,8 +3,7 @@ import {theme} from "../../../utils/";
 const styles = {
   indexTitle:{
     color:'#fff',
-    fontSize:theme.DefaultFontSize,
-
+    fontSize:theme.DefaultFontSize+4,
   },
   contain1:{
     backgroundColor:'#fff',
@@ -50,11 +49,9 @@ const styles = {
   },
 
   time:{
-    color:'#999',
+    color:'#7E7E7E',
     fontSize:theme.DefaultFontSize,
   },
-
-
   dynamicMessage:{
     position:'absolute',
     right:0,
@@ -63,9 +60,20 @@ const styles = {
     width:16,
     height:16,
   },
+  timeAndDelete:{
+    marginLeft:56,
+    flexDirection:'row'
+  },
+  other:{
+    flexDirection:'row',
+  },
+  delete:{
+    color:'#5E7192',
+    marginLeft:8,
+  },
   showContain:{
+    marginTop:5,
     height:20,
-    marginBottom:6,
   },
   show:{
     flexDirection:'row',
@@ -147,7 +155,8 @@ justifyContent:'flex-start',
     marginRight:4,
     width:20,
     height:20,
-  }
+  },
+
 };
 
 export default styles;
