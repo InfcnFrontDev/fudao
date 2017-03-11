@@ -105,12 +105,11 @@ class AppNavigator extends Component {
 					<AppRouter createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
 						<Scene key="root">
 
-							{/*首页*/}
-							<Scene key="index"  component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar newnew={false}  />
 
+							{/*首页*/}
+							<Scene key="index" initial  component={Index} title="首页" type={ActionConst.REPLACE} hideNavBar newnew={false}  />
 
 							{/*启动注册*/}
-
 
 							<Scene key="start"  component={Start} title="启动开始页" hideNavBar/>
 							<Scene key="login"    component={Login} title="登录" hideNavBar/>
@@ -118,9 +117,9 @@ class AppNavigator extends Component {
 							<Scene key="setPassword"  component={SetPassword} title="设置密码" hideNavBar/>
 							<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 							<Scene key="passwordSuccess"  component={PasswordSuccess} hideNavBar/>
-							<Scene key="startInformation" initial  component={StartInformation} title="基本信息" hideNavBar/>
+							<Scene key="startInformation"   component={StartInformation} title="基本信息" hideNavBar/>
 							<Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
-							<Scene key="womanChoose"  component={WomanChoose} title="阶段选择" hideNavBar/>
+							<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
 							{/*<Scene key="picker"  component={Picker} title="城市列表" hideNavBar/>*/}
 
 							{/*主页*/}

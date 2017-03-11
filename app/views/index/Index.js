@@ -22,7 +22,7 @@ const tabSelectedIcon = [
 	'ios-home', 'ios-list-box', 'ios-compass', 'ios-person'
 ];
 const tabComponents = [
-	Home, Article, Dynamic, My
+	Home, Article,Dynamic,  My
 ];
 
 /**
@@ -38,7 +38,6 @@ class Index extends PureComponent {
 	_renderTabBar = () => <TabBar tabNames={tabTitles} tabIconNames={tabIcons} selectedTabIconNames={tabSelectedIcon}/>
 
 	render() {
-
 		return (
 			<ScrollableTabView
 				renderTabBar={this._renderTabBar}

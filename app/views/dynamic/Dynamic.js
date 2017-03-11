@@ -11,7 +11,7 @@ import DynamicHeader from './components/DynamicHeader';
 import DynamicComment from './components/DynamicComments';
 import DynamicSupport from './components/DynamicSupports';
 import DynamicCommon from '../../components/DynamicCommon'
-import {fetchData,show,zan,sendComment} from '../../actions/dynamic.js'
+import {fetchData,show,zan,sendComment,del} from '../../actions/dynamic.js'
 const dismissKeyboard = require('dismissKeyboard');
 
 /**
@@ -107,12 +107,24 @@ class Dynamic extends PureComponent {
         }else{
           var show =(null);
         }
+        var del = ( null );
+        if(info.id!=this.props.userId){
+          del=(
+            <TouchableHighlight underlayColor='#fafafa' onPress={this._delete.bind(this,info.id)}>
+                <Text style={styles.delete}>删除</Text>
+            </TouchableHighlight>
+          )
+        }
         let comments =Array.prototype.slice.call(info.dynamicComments, 0);
 
     		return (
     			<View  style={styles.dynamic}>
               <DynamicCommon info={info} />
               <View style={styles.showContain}>
+                <View style={styles.timeAndDelete}>
+                  <Text style={styles.time}>时间</Text>
+                  {del}
+                </View>
                 {show}
                 <TouchableHighlight style={styles.showMessage} onPress={this._onMessage.bind(this,info.id)} underlayColor='#fafafa'>
                   <Image source={require('../../assets/message.png')}/>
@@ -128,6 +140,10 @@ class Dynamic extends PureComponent {
           return  (
             <DynamicHeader />
           );
+      }
+
+      _delete(id){
+        this.props.del(id,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm})
       }
 
       _onMessage(id){
@@ -166,11 +182,13 @@ function bindAction(dispatch) {
         show:(id,params)=>dispatch(show(id,params)),
         zan:(info,params)=>dispatch(zan(info,params)),
         sendComment:(event,params)=>dispatch(sendComment(event,params)),
+        del:(id,params)=>dispatch(del(id,params)),
     };
 }
 
 const mapStateToProps = state => ({
   realm:state.realm,
   dynamic:state.dynamic,
+  userId:state.userStore.loginUser.appid,
 });
 export default connect(mapStateToProps, bindAction)(Dynamic);

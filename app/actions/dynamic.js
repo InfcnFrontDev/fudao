@@ -86,6 +86,14 @@ export function zan(info,params){
 }
 
 
+//删除
+export function del(id,params){
+	return (dispatch) => {
+		
+	}
+}
+
+
 //評論點讚按鈕的顯示和隱藏
 export function show(id,params){
 	return (dispatch) => {
@@ -218,13 +226,11 @@ export function fetchData(page,options,callback,params){
 						}
 					});
 		    }else{
-
 					request.getJson(urls.apis.DYNAMIC_LIST,{
 									userId:'867516022307943,86751602230794380640149',
 									page:Math.floor(params.dynamic.length/5)+1,
 									rows:5,
 							}).then((res) =>{
-
 									if(res.datas.length<=params.dynamic.length%5){
 										callback(params.dynamic,{
 											allLoaded:true
@@ -244,7 +250,7 @@ export function fetchData(page,options,callback,params){
 											}
 										});
 									}
-							})
+					})
 		  }
 		}
 	}

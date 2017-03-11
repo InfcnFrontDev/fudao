@@ -1,15 +1,15 @@
 import React, {PureComponent} from "react";
-import {View, Alert, TextInput, TouchableOpacity, ToastAndroid,AsyncStorage} from "react-native";
+import {View, Alert, TextInput, TouchableOpacity, ToastAndroid, AsyncStorage} from "react-native";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
+import {Actions, ActionConst} from "react-native-router-flux";
 import {Text} from "native-base";
-import {Header,Container,Content} from "../../components/index";
+import {Header, Container, Content} from "../../components/index";
 import {theme} from "../../utils/";
 import {showLoading, hideLoading} from "../../actions/loading";
 import CommitButton from "./components/CommitButton";
 import UrseInput from "./components/UrseInput";
 import {checkPhone} from "./components/public";
-import {request, urls, tools} from "../../utils/index";
+import {request, urls, tools, toast} from "../../utils/index";
 import {hex_md5} from "./components/md5";
 import {login} from "../../actions/user";
 
@@ -22,7 +22,7 @@ class Login extends PureComponent {
 		isFetching: false,
 		phone: '',
 		password: '',
-		login:'no'
+		login: 'no'
 	}
 
 	render() {
@@ -33,20 +33,20 @@ class Login extends PureComponent {
 				<Content>
 					<View style={styles.bag}>
 						<UrseInput text="用户名"
-								   onChangeText={(value)=>{
+								   onChangeText={(value)=> {
 									   this.setState({
-										   phone:value
+										   phone: value
 									   })
 								   }}/>
 						<UrseInput text="密码" secureTextEntry={true}
-								   onChangeText={(value)=>{
+								   onChangeText={(value)=> {
 									   this.setState({
-										   password:value
+										   password: value
 									   })
 								   }}/>
 						<CommitButton title="登录" block={true} border={false} top={20} onPress={this._login.bind(this)}/>
 						<View style={styles.textdoc}>
-							<View style={{flexDirection:'row'}}>
+							<View style={{flexDirection: 'row'}}>
 							</View>
 							<TouchableOpacity onPress={()=>Actions['passwordValidate']()}>
 								<Text style={styles.text2}>忘记密码</Text>
@@ -62,17 +62,16 @@ class Login extends PureComponent {
 	_login() {
 		const {dispatch} = this.props;
 		let {phone, password} = this.state;
-
 		if (phone == '') {
-			tools.toast("用户名不能为空");
+			toast.show("用户名不能为空");
 			return;
 		}
 		if (!checkPhone(phone)) {
-			tools.toast("请输入正确的用户名");
+			toast.show("请输入正确的用户名");
 			return;
 		}
 		if (password == '') {
-			tools.toast("密码不能为空");
+			toast.show("密码不能为空");
 			return;
 		}
 
@@ -80,16 +79,16 @@ class Login extends PureComponent {
 
 		// 提交登录
 		request.getJson(urls.apis.AUTH_LOGIN, {
-				account: phone,
-				pwd: hex_md5(phone + password),
-			}).then((data) => {
+			account: phone,
+			pwd: hex_md5(phone + password),
+		}).then((data) => {
 				dispatch(hideLoading());
 				if (data.success) {
 					this.setState({
-						login:"yes",
+						login: "yes",
 					})
-					AsyncStorage.setItem('login',this.state.login)
-					tools.toast("登录成功");
+					AsyncStorage.setItem('login', this.state.login)
+					toast.show("登录成功");
 					let user = Object.assign({}, {
 						...data.obj.accountInfo,
 						...data.obj.userInformation
@@ -97,11 +96,13 @@ class Login extends PureComponent {
 					// 保存用户状态
 					this.props.dispatch(login(user));
 					// 跳到首页
-					Actions.index();
+					Actions.index({
+						type: ActionConst.POP_AND_REPLACE
+					});
 				} else {
-					tools.toast("密码错误");
+					toast.show("密码错误");
 				}
-			},(error) => {
+			}, (error) => {
 				dispatch(hideLoading());
 			}
 		);
@@ -135,8 +136,8 @@ const styles = {
 		color: '#666',
 		textDecorationLine: 'underline'
 	},
-	bag:{
-		padding:10
+	bag: {
+		padding: 10
 	}
 };
 

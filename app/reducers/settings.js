@@ -1,15 +1,13 @@
 import * as types from "../actions/types";
 const initialState = {
-	loginUser: {}
+	isRecommend: true
 };
 export default function (state = initialState, {type, payload}) {
 	switch (type) {
-		case types.USER_LOGIN:
+		case types.SETTINGS_UPDATE:
 			return Object.assign({}, state, {
 				...payload
 			});
-		case types.USER_LOGOUT:
-			return initialState;
 		default:
 			return state;
 	}
