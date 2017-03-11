@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Container, Title, Content, Left, Right, Body,Text,Button,Header,Icon} from "native-base";
 import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert} from "react-native";
 import styles from "./assets/styles";
-import moment from 'moment'
+import moment from './assets/moment.js'
 import {Actions} from "react-native-router-flux";
 // import Header from "../../components/header/IndexHeader";
 import DynamicList from './components/DynamicList';
@@ -11,7 +11,8 @@ import DynamicHeader from './components/DynamicHeader';
 import DynamicComment from './components/DynamicComments';
 import DynamicSupport from './components/DynamicSupports';
 import DynamicCommon from '../../components/DynamicCommon'
-import {fetchData,show,zan,sendComment,del} from '../../actions/dynamic.js'
+import {fetchData,show,zan,sendComment,del} from '../../actions/dynamic.js';
+
 const dismissKeyboard = require('dismissKeyboard');
 
 /**
@@ -24,14 +25,19 @@ class Dynamic extends PureComponent {
         commentShow:false,
       }
       this.change=false;
+
     }
 
     componentWillReceiveProps(nextProps){
       if(this.props.newnew!=nextProps.newnew){
-        this.props.fetchData(1,{refresh:true},this.refs.gifted._postRefresh,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList});
+        this.props.fetchData(1,{refresh:true},this.refs.gifted._postRefresh,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user});
       }
-
+      if(this.props.delFlag!=nextProps.delFlag){
+        ToastAndroid.show('delFlag',ToastAndroid.SHORT)
+        this.refs.gifted._postRefresh(this.props.dynamic.dynamicList)
+      }
     }
+
 
     render() {
       // ToastAndroid.show('render'+JSON.stringify(this.props.newnew),ToastAndroid.SHORT)
@@ -83,6 +89,7 @@ class Dynamic extends PureComponent {
 
 
     	_renderRowView(info,sectionID,rowID){
+        var m = moment(info.publishTime).fromNow();
         if(info.flag){
           var zan =(
               <Text style={styles.showoneText}>取消</Text>
@@ -108,7 +115,7 @@ class Dynamic extends PureComponent {
           var show =(null);
         }
         var del = ( null );
-        if(info.id!=this.props.userId){
+        if(info.userId==this.props.user.appid){
           del=(
             <TouchableHighlight underlayColor='#fafafa' onPress={this._delete.bind(this,info.id)}>
                 <Text style={styles.delete}>删除</Text>
@@ -119,10 +126,10 @@ class Dynamic extends PureComponent {
 
     		return (
     			<View  style={styles.dynamic}>
-              <DynamicCommon info={info} />
+              <DynamicCommon info={info} delFlag={this.props.delFlag}/>
               <View style={styles.showContain}>
                 <View style={styles.timeAndDelete}>
-                  <Text style={styles.time}>时间</Text>
+                  <Text style={styles.time}>{m}</Text>
                   {del}
                 </View>
                 {show}
@@ -147,7 +154,7 @@ class Dynamic extends PureComponent {
           {text:'取消'},
           {
             text:'删除',
-            onPress:()=>        this.props.del(id,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm})
+            onPress:()=>this.props.del(id,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm,from:'list'})
           }
         ])
         // this.props.del(id,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm})
@@ -158,7 +165,7 @@ class Dynamic extends PureComponent {
       }
 
     	_zan(info){
-        this.props.zan(info,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm,})
+        this.props.zan(info,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm,user:this.props.user,from:'list'})
     	}
 
       //显示评论输入框
@@ -172,14 +179,16 @@ class Dynamic extends PureComponent {
       //发表评论
       _onSubmitEditing(event){
         // event.nativeEvent.text
-        this.props.sendComment(event,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm,commentID:this.commentID})
+        this.props.sendComment(event,{callback:this.refs.gifted._postRefresh,dynamic:this.props.dynamic.dynamicList,realm:this.props.realm,commentID:this.commentID,user:this.props.user,from:'list'})
         this.setState({
           commentShow:false,
         })
       }
 
     	_onFetch(page, callback, options,flag){
-        this.props.fetchData(page,options,callback,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList});
+
+
+        this.props.fetchData(page,options,callback,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user});
       }
 
 }
@@ -196,6 +205,6 @@ function bindAction(dispatch) {
 const mapStateToProps = state => ({
   realm:state.realm,
   dynamic:state.dynamic,
-  userId:state.userStore.loginUser.appid,
+  user:state.userStore.loginUser,
 });
 export default connect(mapStateToProps, bindAction)(Dynamic);

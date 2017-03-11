@@ -45,6 +45,7 @@ const urls = {
 	apis: {
 		// 图片接口(ok)
 		IMAGE: picPath + 'api/ImgApi/getImage',
+		UPLOAD_IMAGE:apiPath+'app/userInformationAction!uploadHeadImg.action',
 
 		// 资讯 ----------------------------------------------------------------------
 		//资讯列表(ok)
@@ -116,6 +117,10 @@ const urls = {
 		 	// 动态 ---------------------------------------------------------
 			DYNAMIC_LIST:apiPath + 'app/friendDynamicAction!getDynamics.action',
 			DYNAMIC_ADD_DYNAMIC:apiPath+'app/friendDynamicAction!addDynamic.action',
+			DYNAMIC_DELETE_DYNAMIC:apiPath+'app/friendDynamicAction!deleteDynamic.action',
+			DYNAMIC_ADD_COMMENT:apiPath+'app/friendDynamicAction!addDynamicComment.action',
+			DYNAMIC_ADD_PRAISE:apiPath+'app/friendDynamicAction!addDynamicPraise.action',
+			DYNAMIC_DELETE_PRAISE:apiPath+'app/friendDynamicAction!deleteDynamicPraiseByUserIdAndDynamicId.action',
 	}
 
 };

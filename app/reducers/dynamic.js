@@ -5,6 +5,7 @@ const initialState = {
 	addPicture:[],
 	dynamicList:[],
 	nowShow:'',
+	dynamicDetail:{},
 };
 export default function (state = initialState, {type, source}) {
 	switch (type) {

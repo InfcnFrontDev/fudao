@@ -38,7 +38,6 @@ class Index extends PureComponent {
 	_renderTabBar = () => <TabBar tabNames={tabTitles} tabIconNames={tabIcons} selectedTabIconNames={tabSelectedIcon}/>
 
 	render() {
-
 		return (
 			<ScrollableTabView
 				renderTabBar={this._renderTabBar}
@@ -47,7 +46,7 @@ class Index extends PureComponent {
 				scrollWithoutAnimation
 			>
 				{tabComponents.map((Component, i)=>(
-					<Component key={tabTitles[i]} title={tabTitles[i]} newnew={this.props.newnew}/>
+					<Component key={tabTitles[i]} title={tabTitles[i]} newnew={this.props.newnew} delFlag={this.props.delFlag}/>
 				))}
 
 			</ScrollableTabView>

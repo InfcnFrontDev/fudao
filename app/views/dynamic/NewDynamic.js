@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Container, Title,Header, Content, Left, Right, Body,Text,Button,Icon} from "native-base";
-import { Image, View, DeviceEventEmitter, TextInput,TouchableHighlight,TouchableOpacity} from 'react-native'
+import { Image, View, DeviceEventEmitter, TextInput,TouchableHighlight,TouchableOpacity,Alert} from 'react-native'
 import {connect} from "react-redux";
 import Editor from './components/Editor'
 import NewPicture from './components/NewPicture'
@@ -46,21 +46,12 @@ class NewDynamic extends Component{
     }
 
     send(){
-      const {dispatch} = this.props;
-      // var newDynamic ={
-      //   "content":this.state.text,
-      //   "dynamicComments":{},
-      //   "dynamicImg":"还未处理",
-      //   "dynamicPraises":{},
-      //   "id":"34b71c7f9342472dbf778406bd245fae",
-      //   "nick":"12345678",
-      //   "publishTime":1489045800000,
-      //   "type":1,
-      //   "userId":"867516022307943,86751602230794380640149",
-      //   flag:false,
-      //   show:false
-      // }
-      dispatch(addNewDynamic(this.state.text,this.props.newnew))
+      if (this.state.text) {
+        const {dispatch} = this.props;
+        dispatch(addNewDynamic(this.state.text,this.props.newnew,this.props.userId))
+      }else{
+        Alert.alert('','内容不能为空~~',[{text:'确定'}])
+      }
     }
 
     onChangeText(text) {
@@ -84,5 +75,6 @@ const styles={
 }
 
 const mapStateToProps = state => ({
+  userId:state.userStore.loginUser.appid,
 });
 export default connect(mapStateToProps)(NewDynamic);

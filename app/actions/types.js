@@ -54,3 +54,9 @@ export const NEW_DYNAMIC_ADD_PICTURE_ARR = 'NEW_DYNAMIC_ADD_PICTURE_ARR';
 export const DYNAMIC_LIST_LOAD = 'DYNAMIC_LIST_FIRSTLOAD';
 export const DYNAMIC_LIST_SHOW = 'DYNAMIC_LIST_SHOW';
 export const DYNAMIC_LIST_ZAN_COMMENT = 'DYNAMIC_LIST_ZAN_COMMENT';
+
+
+// settings actions ////////////////////////////////////////
+export const SETTINGS_UPDATE = 'SETTINGS_UPDATE';
+
+
