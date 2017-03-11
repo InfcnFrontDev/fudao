@@ -6,14 +6,12 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container, Title, Content, Left, Right, Body, Form, Input, Item,Thumbnail,Button,Text,Icon} from "native-base";
+import {Thumbnail,Text,Icon} from "native-base";
 import {View,Image,TouchableOpacity,TouchableHighlight,ToastAndroid, DatePickerAndroid,} from "react-native";
-import Header from "../../components/header/TitleHeader";
+import {Header,Container,Content} from "../../components/index";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
-import {theme,tools} from "../../utils/";
+import {theme,urls,tools,request,toast} from "../../utils/";
 import  CommitButton from "./components/CommitButton"
-
-
 /**
  * 首次登录设置个人信息页
  */
@@ -25,9 +23,10 @@ class StartInformation extends PureComponent {
         this.state={
             showM:true,
             simpleText:"03/22/06",
+            position:'北京市',
+
         }
     }
-
     async showPicker(stateKey, options) {
         let option={
             options,
@@ -95,7 +94,7 @@ class StartInformation extends PureComponent {
         }
         return (
             <Container style={styles.container}>
-                <Header></Header>
+                <Header back {...this.props}></Header>
                 <Content padder >
                     <View style={styles.bigBox}>
                         <View style={styles.box}>
@@ -111,24 +110,72 @@ class StartInformation extends PureComponent {
                             </View>
                             <TouchableOpacity style={styles.btn1}>
                                 <Icon  name='navigate' />
-                                <Text  style={styles.text3}>正在定位你的位置...</Text>
+                                <Text  style={styles.text3}>{this.state.position}</Text>
                             </TouchableOpacity>
-                            <CommitButton  border={false} block={true} top={20} title="提交" onPress={this._tijiao.bind(this)}/>
+                            <CommitButton  border={false} block={true} top={20} title="提交" onPress={this.commit.bind(this)}/>
                         </View>
                     </View>
                 </Content>
             </Container>
         )
-    }
-    _tijiao(){
+    };
+    commit(){
+        let {dispatch, loginUser} = this.props;
         let sex,birth,position = null;
-        if(this.state.showM){
-            sex = 1
-        }else{
-            sex = 0
-        }
+         if(this.state.showM){
+         sex = 1
+         }else{
+         sex = 0
+         }
         birth = this.state.simpleText;
+        position=this.state.position
         //获取地理位置
+
+
+        let userInformation ={};
+        userInformation.appid =loginUser.appid;
+        userInformation.sex = sex
+        userInformation.birthdate = birth
+        userInformation.location = position
+        userInformation.tops = '';
+        userInformation.bmi = '';
+        userInformation.weight = '';
+        userInformation.title = '';
+        // 个人史
+        userInformation.personal_history = '';
+        // 家族史
+        userInformation.family_history = '';
+        // 婚育史
+        userInformation.obstetrical_history = '';
+        // 用药史
+        userInformation.medication_history = '';
+        // 饮食
+        userInformation.diet = '';
+        // 运动
+        userInformation.motion = '';
+        // 睡眠
+        userInformation.sleep = '';
+        // 吸烟
+        userInformation.smoke = '';
+        // 饮酒
+        userInformation.drink = '';
+        // 精神状况
+        userInformation.mental_state = '';
+        request.getJson(urls.apis.AUTH_CHECK_PHONE,{
+            jsonStr: JSON.stringify(userInformation),
+            ishealthRing: "yes",
+            appid: loginUser.appid,
+            city: position
+        }).then((data)=>{
+            if(data.success) {
+                toast.show("保存成功");
+            }else{
+                toast.show("保存失败");
+            }
+        },(error)=>{
+
+        })
+
     }
 }
 const styles = {
@@ -205,6 +252,9 @@ const styles = {
         zIndex:1000
     },
 };
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    loginUser: state.userStore.loginUser,
+    ...state.friendStore,
+});
 export default connect(mapStateToProps)(StartInformation);
 

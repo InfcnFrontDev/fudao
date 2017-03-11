@@ -91,6 +91,33 @@ class MyInfoItem extends PureComponent {
             case '个人史':
                 this.multiChoiceDialog('个人史',chooseDate.PersonalHistory);
                 break;
+            case '家族史':
+                this.multiChoiceDialog('家族史',chooseDate.FamilyHistory);
+                break;
+            case '婚育史':
+                this.multiChoiceDialog('婚育史',chooseDate.ObstericalHistory);
+                break;
+            case '用药史':
+                this.multiChoiceDialog('用药史',chooseDate.PharmacyHistory);
+                break;
+            case '饮食':
+                this.multiChoiceDialog('饮食',chooseDate.Diet);
+                break;
+            case '运动':
+                this.multiChoiceDialog('运动',chooseDate.Exercise);
+                break;
+            case '睡眠':
+                this.multiChoiceDialog('睡眠',chooseDate.Sleep);
+                break;
+            case '吸烟':
+                this.multiChoiceDialog('吸烟',chooseDate.Smoke);
+                break;
+            case '饮酒':
+                this.multiChoiceDialog('饮酒',chooseDate.Drink);
+                break;
+            case '精神状况':
+                this.multiChoiceDialog('精神状况',chooseDate.MentalState);
+                break;
         }
 
     }

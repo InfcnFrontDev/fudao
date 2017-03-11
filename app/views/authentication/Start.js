@@ -5,8 +5,9 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container, Left, Right, Body, Form, Item} from "native-base";
-import {View, Image} from "react-native";
+import {Container, Left, Right, Body, Form, Item,} from "native-base";
+import {View, Image,AsyncStorage} from "react-native";
+import {theme,request,urls,tools, toast} from "../../utils/";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import CommitButton from "./components/CommitButton";
 
@@ -17,7 +18,16 @@ class Start extends PureComponent {
     constructor(props) {
         super(props);
     }
-    render() {
+   /* getInitialState(){
+        AsyncStorage.getItem("login",(err,res)=>{
+            toast.show(res);
+
+        });
+    }*/
+
+
+
+render() {
         return (
             <Container style={styles.container}>
                 <View style={styles.view}>

@@ -4,10 +4,10 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container, Content, Left, Right, Body, Text, Button,Form} from "native-base";
+import { Text, Button} from "native-base";
 import {View,TextInput,ToastAndroid} from "react-native";
-import {theme,request,urls,tools,toast} from "../../utils/";
-import Header from "../../components/header/BaseHeader";
+import {theme,request,urls,tools} from "../../utils/";
+import {Header,Container,Content} from "../../components/index";
 import {showLoading, hideLoading} from "../../actions/loading";
 import  CommitButton from "./components/CommitButton"
 import  UrseInput from "./components/UrseInput"
@@ -27,21 +27,24 @@ class RebuildPassword extends PureComponent {
     render() {
         return (
             <Container>
-                <Header {...this.props}></Header>
-                <Content padder>
-                    <UrseInput text="新密码" placeholder={"至少6位，由数字/字母/_组成"}  value={this.state.password}
-                               onChangeText={(value)=>{
-                                   this.setState({
-                                       password:value
-                                   })
-                               }}/>
-                    <UrseInput text="重复密码" value={this.state.password1}
-                               onChangeText={(value)=>{
-                                   this.setState({
-                                       password1:value
-                                   })
-                               }}/>
-                    <CommitButton  border={false} block={true} top={20} title="提交" onPress={this._yzPassword.bind(this)}/>
+                <Header back {...this.props}></Header>
+                <Content>
+                    <View style={styles.bag}>
+                        <UrseInput text="新密码" placeholder={"至少6位，由数字/字母/_组成"}  value={this.state.password}
+                                   onChangeText={(value)=>{
+                                       this.setState({
+                                           password:value
+                                       })
+                                   }}/>
+                        <UrseInput text="重复密码" value={this.state.password1}
+                                   onChangeText={(value)=>{
+                                       this.setState({
+                                           password1:value
+                                       })
+                                   }}/>
+                        <CommitButton  border={false} block={true} top={20} title="提交" onPress={this._yzPassword.bind(this)}/>
+                    </View>
+
                 </Content>
             </Container>
         );
@@ -75,6 +78,11 @@ class RebuildPassword extends PureComponent {
         }
 
 
+    }
+}
+const styles={
+    bag:{
+        padding:10,
     }
 }
 

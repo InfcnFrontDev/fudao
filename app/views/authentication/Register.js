@@ -4,10 +4,10 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions, ActionConst} from "react-native-router-flux";
-import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
+import {Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,TouchableOpacity,ToastAndroid} from "react-native";
 import {showLoading, hideLoading} from "../../actions/loading";
-import Header from "../../components/header/BaseHeader";
+import {Header,Container,Content} from "../../components/index";
 import {theme,request,urls,tools,toast} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
 import  UrseInput from "./components/UrseInput"
@@ -31,33 +31,36 @@ class Register extends PureComponent {  // eslint-disable-line
     render() {
         return (
             <Container>
-                <Header title={this.state.title}></Header>
-                <Content padder>
-                    <UrseInput text="手机号"
-                               onChangeText={(value)=>{
-                                   this.setState({
-                                       phone:value
-                                   })
-                               }}/>
-                    <View style={styles.box}>
-                        <View style={styles.border}>
-                            <Text>验证码</Text>
-                        </View>
-                        <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
+                <Header back title={this.state.title}></Header>
+                <Content>
+                    <View style={styles.bag}>
+                        <UrseInput text="手机号"
                                    onChangeText={(value)=>{
                                        this.setState({
-                                           code:value
+                                           phone:value
                                        })
-                                   }}
-                        ></TextInput>
-                        <GetCode  border={true} block={false}  title='获取验证码' ref={(e) => this._getGode = e}
-                                  onPress={this._yzm.bind(this)} >
-                        </GetCode >
+                                   }}/>
+                        <View style={styles.box}>
+                            <View style={styles.border}>
+                                <Text>验证码</Text>
+                            </View>
+                            <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
+                                       onChangeText={(value)=>{
+                                           this.setState({
+                                               code:value
+                                           })
+                                       }}
+                            ></TextInput>
+                            <GetCode  border={true} block={false}  title='获取验证码' ref={(e) => this._getGode = e}
+                                      onPress={this._yzm.bind(this)} >
+                            </GetCode >
+                        </View>
+                        <CommitButton title='注册' block={true} border={false} top={20}  onPress={this._zhuce.bind(this)} />
+                        <TouchableOpacity onPress={()=> this.protocol()}>
+                            <Text  style={styles.tiaokuan}>点击注册代表您已同意《福道健康使用协议和隐私条款》</Text>
+                        </TouchableOpacity>
                     </View>
-                    <CommitButton title='注册' block={true} border={false} top={20}  onPress={this._zhuce.bind(this)} />
-                    <TouchableOpacity onPress={()=> this.protocol()}>
-                        <Text  style={styles.tiaokuan}>点击注册代表您已同意《福道健康使用协议和隐私条款》</Text>
-                    </TouchableOpacity>
+
                 </Content>
             </Container>
         );
@@ -140,6 +143,9 @@ const styles = {
         borderColor:'#D4D4D4',
         borderBottomWidth:1,
 
+    },
+    bag:{
+        padding:10,
     },
     border:{
         width:80,
