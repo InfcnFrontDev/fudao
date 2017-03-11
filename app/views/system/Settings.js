@@ -5,24 +5,16 @@ import {Actions, ActionConst} from "react-native-router-flux";
 import {Container, Content, List, Separator} from "../../components/index";
 import Header from "../../components/header/BaseHeader";
 import {Body, Right, Switch, ListItem, Text} from "native-base";
+import {updateSettings} from "../../actions/settings";
 import {logout} from "../../actions/user";
-
-const list = [
-	{
-		name: 'Amy Farha',
-		subtitle: 'Vice President'
-	},
-	{
-		name: 'Chris Jackson',
-		subtitle: 'Vice Chairman'
-	},
-]
 
 /**
  * 系统设置
  */
 class Settings extends PureComponent {
+
 	render() {
+		let {dispatch, isRecommend} = this.props;
 		return (
 			<Container>
 				<Header {...this.props}/>
@@ -34,7 +26,8 @@ class Settings extends PureComponent {
 							<Text>是否推送</Text>
 							</Body>
 							<Right>
-								<Switch value={true}/>
+								<Switch value={isRecommend}
+										onValueChange={()=> dispatch(updateSettings({isRecommend: !isRecommend}))}/>
 							</Right>
 						</ListItem>
 					</List>
@@ -74,5 +67,7 @@ const styles = {
 	},
 	listItem: {}
 };
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	...state.settingsStore
+});
 export default connect(mapStateToProps)(Settings);
