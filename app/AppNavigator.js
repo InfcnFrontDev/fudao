@@ -169,7 +169,7 @@ class AppNavigator extends Component {
 							<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
 
 							{/*好友*/}
-							<Scene key="myFriend" component={MyFriend} title="我的好友" hideNavBar/>
+							<Scene key="myFriend" component={MyFriend} title="我的好友" hideNavBar initial/>
 							<Scene key="friendApply" component={FriendApply} title="好友申请" hideNavBar/>
 							<Scene key="newFriend" component={NewFriend} title="新的朋友" hideNavBar/>
 							<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
