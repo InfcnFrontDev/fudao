@@ -53,7 +53,7 @@ class FriendList extends PureComponent {
 								</Left>
 								<Body>
 								<Text>{f.friendNick}</Text>
-								<Text note>{f.phone}，{friendNickMap[f.friendId]}</Text>
+								<Text note>{f.phone}</Text>
 								</Body>
 								<Right style={{justifyContent:'center'}}>
 									<Icon name="ios-arrow-forward"/>

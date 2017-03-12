@@ -6,8 +6,6 @@
 // 侧边栏 actions
 export const OPEN_DRAWER = 'OPEN_DRAWER';
 export const CLOSE_DRAWER = 'CLOSE_DRAWER';
-export const CHANGE_MATERIAL = 'CHANGE_MATERIAL';
-export const CHANGE_PLATFORM = 'CHANGE_PLATFORM';
 
 
 // loading ////////////////////////////////////////

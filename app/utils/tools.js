@@ -25,5 +25,11 @@ const tools = {
 	getFirstChar(str){
 		return pinyin.getFullChars(str).substring(0, 1);
 	},
+
+	/**
+	 * 对象合并
+	 */
+
+
 };
 export default tools;
