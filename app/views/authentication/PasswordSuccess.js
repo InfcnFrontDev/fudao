@@ -61,7 +61,7 @@ class SetPassword extends PureComponent {
                 if(userInformation != undefined) { //基本信息已经添加完成
                     Actions['_onSearch']()
                 } else { //没有基本信息表示第一次登录需要添写信息
-                    Actions['startInformation']({appid:appid,showM:false,sex:0})
+                    Actions['startInformation']({appid:appid})
                 }
             }else{
                 toast.show("密码不正确");

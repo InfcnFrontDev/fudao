@@ -25,7 +25,7 @@ class StartInformation extends PureComponent {
             presetDate: new Date(2016, 3, 5),
             maxText: '',
             presetText: '选择日期,指定2016/3/5',
-            showM:this.props.showM,
+            showM:false,
             position:'北京市',
             appid:this.props.appid,
             year1:'',
@@ -33,7 +33,7 @@ class StartInformation extends PureComponent {
             month1:'',
             month:'',
             day1:'',
-            sex:this.props.sex,
+            sex:0,
             jieduan:this.props.jieduan?this.props.jieduan:'未孕阶段',
         }
     }
@@ -50,7 +50,11 @@ class StartInformation extends PureComponent {
                 newState[stateKey + 'Text'] = text;
             } else {
                 var date = new Date(year, month, day);
-                newState[stateKey + 'Text'] = date.toLocaleDateString();
+                var year = date.getFullYear() ;
+                var month = date.getMonth() +1 ;
+                var day = date.getDate() ;
+                var formatedStr = year + '-' + month +'-' + day ;
+                newState[stateKey + 'Text'] = formatedStr;
                 newState[stateKey + 'Date'] = date;
             }
             this.setState(newState);
@@ -70,8 +74,8 @@ class StartInformation extends PureComponent {
         var mbW=(
             <TouchableOpacity onPress={this.woman.bind(this)}>
                 <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
-                <View style={{height:20}}>
-                    <Text>{this.state.jieduan}</Text>
+                <View style={{height:20,width:80}}>
+                    <Text style={{textAlign:'center'}}>{this.state.jieduan}</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -82,8 +86,8 @@ class StartInformation extends PureComponent {
                     alignItems:'center'}}>
                     <View style={styles.mb}></View>
                     <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/woman.png')}/>
-                    <View style={{height:20}}>
-                        <Text>{this.state.jieduan}</Text>
+                    <View style={{height:20,width:80}}>
+                        <Text style={{textAlign:'center'}}>{this.state.jieduan}</Text>
                     </View>
                 </TouchableOpacity>
             )
@@ -131,10 +135,7 @@ class StartInformation extends PureComponent {
         })
         let data=new Date();
         this.date(data,sex)
-        setTimeout(()=>{
-             Actions['womanChoose']()
-        },100)
-
+        Actions['womanChoose']()
     }
     man(){
         let sex=1;
@@ -147,24 +148,21 @@ class StartInformation extends PureComponent {
         this.date(data,sex)
     }
     date(myDate,sex){
-        let year,year1,month,month1,day,num=(null);
+        let year,year1,month,month1,day,num,year0=(null);
         if(sex==0){
             num=14
         }else if(sex==1){
             num=16
         }
-        year1=myDate.getFullYear()-num;
-        year=(year1+'').substring(2)
+        year=myDate.getFullYear()-num;
         month1=myDate.getMonth();
-        month=month1+1
+        month=month1+1;
         day=myDate.getDate();
         this.setState({
-            maxText:month+"/"+day+"/"+year,
-            month:month,
+            maxText:year+"-"+month+"-"+day,
             month1:month1,
             day1:day,
-            year:year,
-            year1:year1,
+            year1:year,
         })
     }
     commit(){
@@ -254,7 +252,7 @@ const styles = {
     },
     text1:{
         textAlign:'center',
-        fontSize:theme.DefaultFontSize+3
+        fontSize:theme.DefaultFontSize+2
 
     },
     text2:{
