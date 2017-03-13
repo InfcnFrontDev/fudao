@@ -61,11 +61,11 @@ class AppRouter extends PureComponent {
 					<Scene key="start" component={Start} title="启动开始页" hideNavBar />
 
 					{/*首页*/}
-					<Scene key="index" component={Index} title="首页" hideNavBar/>
+					<Scene key="index" component={Index} title="首页" hideNavBar />
 
 					{/*启动注册*/}
-					<Scene key="login" component={Login} title="登录" hideNavBar/>
-					<Scene key="register" initial component={Register} title="注册" hideNavBar/>
+					<Scene key="login" component={Login} title="登录" hideNavBar />
+					<Scene key="register"  component={Register} title="注册" hideNavBar/>
 					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
 					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 					<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
@@ -105,7 +105,7 @@ class AppRouter extends PureComponent {
 
 
 					{/*我的*/}
-					<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
+					<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar initial/>
 
 					<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 

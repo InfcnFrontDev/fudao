@@ -139,24 +139,27 @@ class MyInfo extends PureComponent {
 
 	state = {}
 
-	async showPicker(stateKey, options) {
+	async showPicker(dispatch,item,loginUser,options) {
 		let option={
 			options,
 			mode:'spinner'
 		}
 		try {
-			var newState = {};
 			const {action, year, month, day} = await DatePickerAndroid.open(option);
 			if (action === DatePickerAndroid.dismissedAction) {
-				newState[stateKey + 'Text'] = 'dismissed';
+				
 			} else {
-				var date = new Date(year, month, day);
-				newState[stateKey + 'Text'] = date.toLocaleDateString();
-				newState[stateKey + 'Date'] = date;
+				let date = new Date(year, month, day);
+
+				let year = date.getFullYear() ;
+				let month = date.getMonth() +1 ;
+				let day = date.getDate() ;
+				let formatedStr = year + '-' + month +'-' + day ;
+				dispatch(updateUserInfo(loginUser.appid,item.field,formatedStr));
 			}
 			this.setState(newState);
 		} catch ({code, message}) {
-			console.warn(`Error in example '${stateKey}': `, message);
+			//console.warn(`Error in example '${stateKey}': `, message);
 		}
 	}
 
@@ -240,7 +243,10 @@ class MyInfo extends PureComponent {
 			});
 
 		}else if (item.type == 'date'){
-			this.showPicker()
+			let option={
+				maxText: '选择日期,不能比今日再晚'
+			}
+			this.showPicker(dispatch,item,loginUser,option)
 
 		}
 	}
