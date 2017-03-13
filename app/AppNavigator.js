@@ -56,6 +56,6 @@ class AppNavigator extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-	drawerState: state.drawerStore.drawerState,
+	drawerState: state.drawer.drawerState,
 });
 export default connect(mapStateToProps)(AppNavigator);

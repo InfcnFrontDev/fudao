@@ -171,6 +171,6 @@ function bindAction(dispatch) {
 const mapStateToProps = state => ({
   realm:state.realm,
   dynamic:state.dynamic,
-  user:state.userStore.loginUser,
+  user:state.user.loginUser,
 });
 export default connect(mapStateToProps, bindAction)(DynamicDetail);

@@ -39,8 +39,8 @@ const styles = {
 	}
 }
 const mapStateToProps = state => ({
-	...state.userStore,
-	...state.drawerStore,
+	...state.user,
+	...state.drawer,
 	...state.position,
 });
 export default connect(mapStateToProps)(Home);

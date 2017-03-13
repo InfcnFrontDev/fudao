@@ -69,6 +69,6 @@ const styles={
 }
 
 const mapStateToProps = state => ({
-  userId:state.userStore.loginUser.appid,
+  userId:state.user.loginUser.appid,
 });
 export default connect(mapStateToProps)(DynamicCommon);

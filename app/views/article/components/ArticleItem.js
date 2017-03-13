@@ -40,6 +40,6 @@ ArticleItem.propTypes = {
 }
 
 const mapStateToProps = state => ({
-	loginUser: state.userStore.loginUser,
+	loginUser: state.user.loginUser,
 });
 export default connect(mapStateToProps)(ArticleItem);

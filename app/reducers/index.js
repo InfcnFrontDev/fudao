@@ -10,13 +10,13 @@ import friend from "./friend";
 import settings from "./settings";
 
 export default combineReducers({
-	drawerStore: drawer,
+	drawer,
 	position,
 	realm,
 	search,
 	dynamic,
-	loadingStore: loading,
-	userStore: user,
-	friendStore: friend,
-	settingsStore: settings,
+	loading,
+	user,
+	friend,
+	settings,
 });
