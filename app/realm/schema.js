@@ -139,6 +139,7 @@ const ChatMessage = {
      userId: 'string', // 发表人
      publishTime: 'int',// 发表时间,
      type: 'int',
+     path:{type:'string',default:''},
      show:{type:'bool',optional: true,default:false},
      flag:{type:'bool',optional: true,default:false}
    }
@@ -188,7 +189,7 @@ const MyQuestion = {
 
 module.exports = {
     schema: [Dynamic,DynamicPraise,DynamicComment,MyQuestion],
-    schemaVersion: 16,
+    schemaVersion: 17,
     migration: () => {
     }
 };

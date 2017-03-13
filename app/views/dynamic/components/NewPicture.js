@@ -34,7 +34,6 @@ class NewPicture extends Component {
   selectPhotoTapped(){
     const {dispatch} = this.props;
     dispatch(selectPhotoTapped())
-
   }
 
 

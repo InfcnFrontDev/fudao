@@ -1,12 +1,25 @@
 import * as types from "../actions/types";
 import ImagePicker from 'react-native-image-picker';
-import {request, urls} from "../utils/";
+import {request, urls,toast} from "../utils/";
 import { ToastAndroid,} from "react-native";
 import {Actions} from "react-native-router-flux";
 
 /**
  * 动态列表：newDynamic
  */
+//跳转至详情页
+export function skipToDetail(dynamicDetail,newnew){
+	return (dispatch) => {
+		Actions.dynamicDetail({newnew:newnew});
+		dispatch({
+			type: types.DYNAMIC_LIST_LOAD,
+			source:{
+				dynamicDetail:dynamicDetail
+			}
+		});
+	}
+}
+
  //评论
 export function sendComment(event,params){
 	return (dispatch) => {
@@ -14,7 +27,7 @@ export function sendComment(event,params){
 			let realm_dynamic = params.realm.objects('Dynamic').sorted('publishTime');
 			let Comments = realm_dynamic.filtered('id="'+params.commentID+'"')[0].dynamicComments;
 			let arrayComments =Array.prototype.slice.call(Comments, 0);
-			arrayComments[arrayComments.length]={userId:'867516022307943,86751602230794380640149',nick:'用户',content:event.nativeEvent.text,commentTime:Date.parse(new Date())}
+			arrayComments[arrayComments.length]={userId:params.user.appid,nick:params.user.title,content:event.nativeEvent.text,commentTime:Date.parse(new Date())}
 			params.realm.write(()=>{
 					params.realm.create('Dynamic',{
 						id:params.commentID,
@@ -28,9 +41,6 @@ export function sendComment(event,params){
 					break;
 				}
 			}
-			/*
-			暂缺提交给后台
-			*/
 			dispatch({
 				type: types.DYNAMIC_LIST_LOAD,
 				source:{
@@ -38,12 +48,27 @@ export function sendComment(event,params){
 					dynamicList:params.dynamic
 				}
 			});
-			params.callback(params.dynamic);
+			if(params.from=='list'){
+				params.callback(params.dynamic);
+			}else if(params.from=='detail'){
+				dispatch({
+					type: types.DYNAMIC_LIST_LOAD,
+					source:{
+						dynamicDetail:params.dynamic[i]
+					}
+				});
+			}
+			request.getJson(urls.apis.DYNAMIC_ADD_COMMENT,{
+							dynamicID:params.commentID,
+							userId:params.user.appid,
+							content:event.nativeEvent.text,
+							atUserId:''
+		 })
 		}
 	}
 }
-//点赞
 
+//点赞
 export function zan(info,params){
 	return (dispatch) => {
 		let realm_dynamic = params.realm.objects('Dynamic').sorted('publishTime');
@@ -52,13 +77,22 @@ export function zan(info,params){
 		let arraySuports =Array.prototype.slice.call(suports, 0);
 		if(info.flag){
 		  for(var j=0;j<arraySuports.length;j++){
-		    if(arraySuports[j].userId=='867516022307943,86751602230794380640149'){
+		    if(arraySuports[j].userId==params.user.appid){
 		      arraySuports.splice(j,1);
 		      break;
 		    }
 		  }
+
+			request.getJson(urls.apis.DYNAMIC_DELETE_PRAISE,{
+				dynamicID:info.id,
+				userId:params.user.appid,
+			})
 		}else{
-		  arraySuports[arraySuports.length]={createTime:Date.parse(new Date()),nick:'用户',dynamicId:info.id,userId:'867516022307943,86751602230794380640149'};
+		  arraySuports[arraySuports.length]={createTime:Date.parse(new Date()),nick:params.user.title,dynamicId:info.id,userId:params.user.appid};
+			request.getJson(urls.apis.DYNAMIC_ADD_PRAISE,{
+							dynamicID:info.id,
+							userId:params.user.appid,
+		 			})
 		}
 		params.realm.write(()=>{
 		    params.realm.create('Dynamic',{
@@ -78,10 +112,19 @@ export function zan(info,params){
 			type: types.DYNAMIC_LIST_LOAD,
 			source:{
 				nowShow:'',
-				dynamicList:params.dynamic
+				dynamicList:params.dynamic,
 			}
 		});
-		params.callback(params.dynamic);
+		if(params.from=='list'){
+			params.callback(params.dynamic);
+		}else if(params.from=='detail'){
+			dispatch({
+				type: types.DYNAMIC_LIST_LOAD,
+				source:{
+					dynamicDetail:data
+				}
+			});
+		}
 	}
 }
 
@@ -89,7 +132,28 @@ export function zan(info,params){
 //删除
 export function del(id,params){
 	return (dispatch) => {
-		
+		for(var i=0;i<params.dynamic.length;i++){
+			if(params.dynamic[i].id==id){
+				break;
+			}
+		}
+		params.dynamic.splice(i,1);
+		params.realm.write(()=>{
+			var delDynamic = params.realm.objects('Dynamic').filtered('id="'+id+'"');
+			params.realm.delete(delDynamic)
+		});
+		dispatch({
+			type: types.DYNAMIC_LIST_LOAD,
+			source:{
+				dynamicList:params.dynamic
+			}
+		});
+		if(params.from=='list'){
+			params.callback(params.dynamic)
+		}
+		request.getJson(urls.apis.DYNAMIC_DELETE_DYNAMIC,{
+			key:id
+	 })
 	}
 }
 
@@ -148,18 +212,27 @@ export function show(id,params){
 // 获取列表数据
 export function fetchData(page,options,callback,params){
 	return (dispatch) => {
+
 		if(options.firstLoad) {
 			request.getJson(urls.apis.DYNAMIC_LIST,{
-							userId:'867516022307943,86751602230794380640149',
+							userId:params.user.appid,
 							page:1,
 							rows:5,
 					}).then((res)=>{
+						ToastAndroid.show(JSON.stringify(res.data),ToastAndroid.SHORT);
 						  if(res.datas.length>0) {
 								//有网状态下第一次加载
+
 								insert(res.datas,params.realm);
 						    let realm_res = params.realm.objects('Dynamic').sorted('publishTime');
 						    var dynamicList = realm_res.slice(realm_res.length-5,realm_res.length).reverse();
-								callback(dynamicList);
+								if(res.datas.length<5){
+									callback(dynamicList,{
+										allLoaded:true
+									});
+								}else{
+									callback(dynamicList);
+								}
 						  }else{
 								//无网状态下第一次加载
 						    let res = params.realm.objects('Dynamic').sorted('publishTime');
@@ -170,7 +243,13 @@ export function fetchData(page,options,callback,params){
 						        var firstres = res;
 						      }
 						      dynamicList=firstres.reverse();
-						      callback(dynamicList);
+									if(res.datas.length<5){
+										callback(dynamicList,{
+											allLoaded:true
+										});
+									}else{
+										callback(dynamicList);
+									}
 						    }
 						  }
 							dispatch({
@@ -182,12 +261,12 @@ export function fetchData(page,options,callback,params){
 					})
 		}else if(options.refresh){
 			request.getJson(urls.apis.DYNAMIC_LIST,{
-							userId:'867516022307943,86751602230794380640149',
+							userId:params.user.appid,
 							page:1,
 							rows:5,
 					}).then((res)=>{
 						  if(res.datas.length>0) {
-								//有网状态下第一次加载
+								//有网状态下下拉加载更多
 								var realmDynamic = params.realm.objects('Dynamic');
 								var length_ago = realmDynamic.length;
 								insert(res.datas,params.realm);
@@ -196,7 +275,6 @@ export function fetchData(page,options,callback,params){
 								if(length_ago<length_now){
 									var newData = realm_res.slice(length_ago,length_now).reverse();
 									var dynamicList = newData.concat(params.dynamic);
-									callback(dynamicList);
 									dispatch({
 										type: types.DYNAMIC_LIST_LOAD,
 										source:{
@@ -204,7 +282,14 @@ export function fetchData(page,options,callback,params){
 										}
 									});
 								}else{
-									callback(params.dynamic);
+									var dynamicList = params.dynamic;
+								}
+								if(res.datas.length<5){
+									callback(dynamicList,{
+										allLoaded:true
+									});
+								}else{
+									callback(dynamicList);
 								}
 						  }
 					}
@@ -212,13 +297,25 @@ export function fetchData(page,options,callback,params){
 		}else if(options.loadMore){
 		    let realm_res = params.realm.objects('Dynamic').sorted('publishTime');
 		    if(realm_res.length>params.dynamic.length){
+					ToastAndroid.show('nono'+params.dynamic.length,ToastAndroid.SHORT);
+
 		      if(realm_res.length>params.dynamic.length+5){
 		        var render_realm_res = realm_res.slice(realm_res.length-params.dynamic.length-6,realm_res.length-params.dynamic.length-1).reverse();
 		      }else{
 		        var render_realm_res = realm_res.slice(0,realm_res.length-params.dynamic.length).reverse();
 		      }
+					// ToastAndroid.show(,ToastAndroid.SHORT);
+
 		      var dynamicList = params.dynamic.concat(render_realm_res);
-		      callback(dynamicList);
+		      // callback(dynamicList);
+					// request.getJson(urls.apis.DYNAMIC_LIST,{
+					// 				userId:params.user.appid,
+					// 				page:Math.floor(params.dynamic.length/5)+2,
+					// 				rows:5,
+					// 		}).then((res) =>{
+					// 			insert(res.datas,params.realm);
+					// })
+
 					dispatch({
 						type: types.DYNAMIC_LIST_LOAD,
 						source:{
@@ -226,8 +323,10 @@ export function fetchData(page,options,callback,params){
 						}
 					});
 		    }else{
+					ToastAndroid.show('wangshang'+params.dynamic.length,ToastAndroid.SHORT);
+
 					request.getJson(urls.apis.DYNAMIC_LIST,{
-									userId:'867516022307943,86751602230794380640149',
+									userId:params.user.appid,
 									page:Math.floor(params.dynamic.length/5)+1,
 									rows:5,
 							}).then((res) =>{
@@ -242,6 +341,7 @@ export function fetchData(page,options,callback,params){
 										}
 										insert(newDynamic,params.realm);
 										var dynamicList = params.dynamic.concat(newDynamic);
+
 										callback(dynamicList);
 										dispatch({
 											type: types.DYNAMIC_LIST_LOAD,
@@ -256,6 +356,7 @@ export function fetchData(page,options,callback,params){
 	}
 }
 
+//数据库插入操作，本文件内调用
 function insert(datas,realm){
 	realm.write(()=>{
 		for(let i=0;i<datas.length;i++){
@@ -299,6 +400,7 @@ export function selectPhotoTapped(keyword) {
 					type: types.NEW_DYNAMIC_ADD_PICTURE_ARR,
 					source:source
 				});
+				uploadImage(response.uri,dispatch);
       }else{
 				return ;
 			}
@@ -306,12 +408,50 @@ export function selectPhotoTapped(keyword) {
 	}
 }
 
-export function addNewDynamic(newDynamic,newnew) {
+
+  function uploadImage(uri,dispatch){
+		dispatch({
+			type: types.DYNAMIC_LIST_LOAD,
+			source:{
+				rightButton:'上传中'
+			}
+		});
+    let formData = new FormData();
+    var file = {uri: uri, type: 'multipart/form-data', name: 'a.jpg'};
+    formData.append("filename",file);
+		request.postJson(urls.apis.IMAGE_UPLOAD, formData)
+			.then(result => {
+				if (result.ok) {
+					console.log(result.obj);
+					toast.show("上传成功"+result.obj);
+					dispatch({
+						type: types.DYNAMIC_LIST_LOAD,
+						source:{
+							rightButton:'发表'
+						}
+					});
+					dispatch({
+						type: types.NEW_DYNAMIC_ADD_RENDER_PICTURE_ARR,
+						source:result.obj
+					});
+				}
+		})
+  }
+
+//添加新的动态
+export function addNewDynamic(newDynamic,newnew,userId,picArr) {
 	return (dispatch) => {
+		var type = 1;
+		var pic = '';
+		if(picArr.length!=0){
+			pic = picArr.join(',');
+			type=2;
+		}
 		request.getJson(urls.apis.DYNAMIC_ADD_DYNAMIC,{
-						userId:'867516022307943,86751602230794380640149',
+						userId:userId,
 						content:newDynamic,
-						type:1
+						path:pic,
+						type:type
 	 }).then(()=>{
 		 Actions.pop({refresh: { newnew: !newnew}})
 	 })

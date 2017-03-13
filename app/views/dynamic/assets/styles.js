@@ -74,6 +74,7 @@ const styles = {
   showContain:{
     marginTop:5,
     height:20,
+    marginBottom:6,
   },
   show:{
     flexDirection:'row',
@@ -156,7 +157,12 @@ justifyContent:'flex-start',
     width:20,
     height:20,
   },
-
+  onlyDetail:{
+    marginRight:8,
+    marginLeft:-40,
+    paddingLeft:0,
+    marginTop:15,
+  }
 };
 
 export default styles;

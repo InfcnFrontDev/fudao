@@ -45,6 +45,7 @@ class Index extends PureComponent {
 				locked
 				scrollWithoutAnimation
 			>
+
 				{tabComponents.map((Component, i) => (
 					<Component key={tabTitles[i]} title={tabTitles[i]} newnew={this.props.newnew}/>
 				))}
