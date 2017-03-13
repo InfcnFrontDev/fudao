@@ -130,7 +130,7 @@ class Register extends PureComponent {  // eslint-disable-line
 
 const styles = {
     tiaokuan:{
-        fontSize:theme.DefaultFontSize-5,
+        fontSize:theme.DefaultFontSize-4,
         textAlign:'center',
         marginTop:6,
         color:'#666'
