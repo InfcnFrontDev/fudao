@@ -1,20 +1,9 @@
 import React, {PureComponent} from "react";
 import {Image} from "react-native";
 import {connect} from "react-redux";
-import {
-	Content,
-	Text,
-	List,
-	ListItem,
-	Container,
-	Left,
-	Right,
-	View,
-	StyleProvider,
-	getTheme,
-	variables
-} from "native-base";
+import {Content, Text, List, ListItem, Container, Left, View} from "native-base";
 import {Actions} from "react-native-router-flux";
+import {closeDrawer} from "../../actions/drawer";
 import styles from "./style";
 import {urls} from "../../utils/";
 
@@ -97,7 +86,7 @@ class SideBar extends PureComponent {
 										  title: data.name,
 										  uri: urls.pages[data.route]
 									  })
-									  this.props.closeDrawer()
+									  this.props.dispatch(closeDrawer())
 								  }}>
 							<Left
 								style={{flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'}}>
