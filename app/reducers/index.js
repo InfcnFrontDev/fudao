@@ -1,5 +1,6 @@
 import {combineReducers} from "redux";
 import drawer from "./drawer";
+import position from "./position";
 import realm from "./realm";
 import search from "./search";
 import dynamic from "./dynamic";
@@ -10,6 +11,7 @@ import settings from "./settings";
 
 export default combineReducers({
 	drawerStore: drawer,
+	position,
 	realm,
 	search,
 	dynamic,
