@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {ScrollView} from "react-native";
+import {ScrollView,DatePickerAndroid} from "react-native";
 import {connect} from "react-redux";
 import {ListItem, Body, Right, View, Text, Icon} from "native-base";
 import {Container, Content, Separator} from "../../components/index";
@@ -139,6 +139,27 @@ class MyInfo extends PureComponent {
 
 	state = {}
 
+	async showPicker(stateKey, options) {
+		let option={
+			options,
+			mode:'spinner'
+		}
+		try {
+			var newState = {};
+			const {action, year, month, day} = await DatePickerAndroid.open(option);
+			if (action === DatePickerAndroid.dismissedAction) {
+				newState[stateKey + 'Text'] = 'dismissed';
+			} else {
+				var date = new Date(year, month, day);
+				newState[stateKey + 'Text'] = date.toLocaleDateString();
+				newState[stateKey + 'Date'] = date;
+			}
+			this.setState(newState);
+		} catch ({code, message}) {
+			console.warn(`Error in example '${stateKey}': `, message);
+		}
+	}
+
 	render() {
 		let {loginUser} = this.props;
 		return (
@@ -206,11 +227,30 @@ class MyInfo extends PureComponent {
 				itemsCallbackMultiChoice: (id, text) => dispatch(updateUserInfo(loginUser.appid, item.field,
 					text.filter((t) => t != null && t != '').join(',')))
 			})
+		} else if (item.type == 'input'){
+			dialogs.showDialog({
+				title: item.title ,
+				input: {
+					hint: item.title,
+					prefill: '',
+					allowEmptyInput: false,
+					maxLength: 10,
+					callback: (id, text) =>  dispatch(updateUserInfo(loginUser.appid, item.field, id))
+				}
+			});
+
+		}else if (item.type == 'date'){
+			this.showPicker()
+
 		}
 	}
 
 
 	substr(str) {
+		if(str=='0')
+			str='男';
+		if(str=='1')
+			str='女';
 		if (str.length > 10)
 			str = str.substr(0, 10) + '...';
 
