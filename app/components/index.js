@@ -9,6 +9,7 @@ import Loading from "./Loading";
 import PullView from "./PullView";
 import HeaderIcon from "./HeaderIcon";
 import HeaderButton from "./HeaderButton";
+import WebView from "./WebView";
 
 export {
 	Container,
@@ -22,4 +23,5 @@ export {
 	PullView,
 	HeaderIcon,
 	HeaderButton,
+	WebView,
 }

@@ -1,4 +1,6 @@
 import React, {PureComponent} from "react";
+import {WebView, View, Image, Text} from "react-native";
+
 
 /**
  * WebView

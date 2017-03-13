@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
-import {Container, Title, Left, Right, Body} from "native-base";
-import Header from "../../components/header/IndexHeader";
+import {Actions} from "react-native-router-flux";
+import {View} from "native-base";
+import {Container, Header, HeaderIcon} from "../../components/index";
 import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-view";
 import ArticleList from "./components/ArticleList";
 import {theme} from "../../utils/";
@@ -16,15 +17,18 @@ class Article extends PureComponent {
 	render() {
 		return (
 			<Container>
-				<Header>
-					<Title>{this.props.title}</Title>
-				</Header>
+				<Header menu {...this.props} right={
+					<View style={{flexDirection: 'row'}}>
+						<HeaderIcon onPress={()=>Actions.search()} name="search"/>
+						<HeaderIcon onPress={()=>Actions.message()} name="ios-chatboxes"/>
+					</View>
+				}/>
 
 				<ScrollableTabView
 					renderTabBar={() => (
 						<ScrollableTabBar
 							activeTextColor={theme.navTabBarActiveTextColor}
-							underlineStyle={{backgroundColor:theme.navTabBarActiveTextColor}}
+							underlineStyle={{backgroundColor: theme.navTabBarActiveTextColor}}
 						/>
 					)}
 					tabBarPosition='top'

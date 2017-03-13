@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Text, Container, Title, Content, View} from "native-base";
-import Header from "../../components/header/IndexHeader";
+import {Actions} from "react-native-router-flux";
+import {Text, View} from "native-base";
+import {Container, Content, Header, HeaderIcon} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
 import Headline from "./components/Headline.js";
 
@@ -14,9 +15,12 @@ class Home extends PureComponent {
 	render() {
 		return (
 			<Container>
-				<Header>
-					<Title>{this.props.title}</Title>
-				</Header>
+				<Header menu {...this.props} right={
+					<View style={{flexDirection: 'row'}}>
+						<HeaderIcon onPress={()=>Actions.search()} name="search"/>
+						<HeaderIcon onPress={()=>Actions.message()} name="ios-chatboxes"/>
+					</View>
+				}/>
 
 				<Content style={styles.content}>
 					<Headline />
