@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {StyleSheet, View, TouchableOpacity} from "react-native";
-import {Text} from "../../../components/index";
+import {Text} from "native-base";
 import Icon from "react-native-vector-icons/Ionicons";
 import {theme} from "../../../utils/index";
 
@@ -29,7 +29,7 @@ export default class TabBar extends Component {
 						>
 							<View style={styles.tabItem}>
 								<Icon style={[styles.icon, {color: color}]} name={icon}/>
-								<Text style={[styles.text, {color: color}]}>{this.props.tabNames[i]}</Text>
+								<Text style={{fontSize: 14, color: color}}>{this.props.tabNames[i]}</Text>
 							</View>
 						</TouchableOpacity>
 					)
@@ -61,8 +61,5 @@ const styles = {
 	icon: {
 		fontSize: 26,
 		marginBottom: 2
-	},
-	text: {
-		fontSize: 14,
 	}
 }

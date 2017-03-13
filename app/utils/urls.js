@@ -1,9 +1,7 @@
 // 接口服务器地址
-
 //const apiPath = 'http://103.254.113.11:8080/fudao-svc/'; // 外网
 // const apiPath = 'http://192.168.10.69:8080/fudao-svc/'; // 内网服务器
  const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
-
 
 // web服务器地址
 const webPath = 'http://192.168.3.204:3000/';
@@ -126,6 +124,7 @@ const urls = {
 		DYNAMIC_ADD_DYNAMIC: apiPath + 'app/friendDynamicAction!addDynamic.action',
 	},
 
+	// 获取图片完整路径
 	getImage(filePath, width, height){
 		let url = this.apis.IMAGE + '?filePath=' + filePath;
 		if (width)

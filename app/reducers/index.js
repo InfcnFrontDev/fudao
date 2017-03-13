@@ -9,7 +9,7 @@ import friend from "./friend";
 import settings from "./settings";
 
 export default combineReducers({
-	drawer,
+	drawerStore: drawer,
 	realm,
 	search,
 	dynamic,

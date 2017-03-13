@@ -1,39 +1,20 @@
-import {OPEN_DRAWER, CLOSE_DRAWER, CHANGE_MATERIAL, CHANGE_PLATFORM} from "../actions/types";
+import * as types from "../actions/types";
 
 const initialState = {
 	drawerState: 'closed',
-	drawerDisabled: true,
-	themeState: 'platform',
 };
 
-export default function (state = initialState, action) {
-	if (action.type === OPEN_DRAWER) {
-		return {
-			...state,
-			drawerState: 'opened',
-		};
+export default function (state = initialState, {type}) {
+	switch (type) {
+		case types.OPEN_DRAWER:
+			return Object.assign({}, state, {
+				drawerState: 'opened'
+			});
+		case types.CLOSE_DRAWER:
+			return Object.assign({}, state, {
+				drawerState: 'closed',
+			});
+		default:
+			return state;
 	}
-
-	if (action.type === CLOSE_DRAWER) {
-		return {
-			...state,
-			drawerState: 'closed',
-		};
-	}
-
-	if (action.type === CHANGE_PLATFORM) {
-		return {
-			...state,
-			themeState: 'platform',
-		};
-	}
-
-	if (action.type === CHANGE_MATERIAL) {
-		return {
-			...state,
-			themeState: 'material',
-		};
-	}
-
-	return state;
 }

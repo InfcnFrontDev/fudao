@@ -1,31 +1,24 @@
-import React, {Component} from 'react';
-import {Image, Platform} from 'react-native';
-import {connect} from 'react-redux';
+import React, {PureComponent} from "react";
+import {Image} from "react-native";
+import {connect} from "react-redux";
 import {
 	Content,
 	Text,
 	List,
 	ListItem,
-	Icon,
 	Container,
 	Left,
 	Right,
-	Badge,
-	Button,
 	View,
 	StyleProvider,
 	getTheme,
 	variables
-} from 'native-base';
-import {Actions} from 'react-native-router-flux';
-
-import material from '../../../native-base-theme/variables/material';
-import {changePlatform, changeMaterial, closeDrawer} from '../../actions/drawer';
-import styles from './style';
+} from "native-base";
+import {Actions} from "react-native-router-flux";
+import styles from "./style";
 import {urls} from "../../utils/";
 
 const drawerCover = require('../../assets/my-photos/photo.jpg');
-
 
 
 const datas = [
@@ -64,21 +57,7 @@ const datas = [
 	}
 
 ];
-class SideBar extends Component {
-
-	static propTypes = {
-		themeState: React.PropTypes.string,
-		changePlatform: React.PropTypes.func,
-		changeMaterial: React.PropTypes.func,
-	}
-
-	constructor(props) {
-		super(props);
-		this.state = {
-			shadowOffsetWidth: 1,
-			shadowRadius: 4,
-		};
-	}
+class SideBar extends PureComponent {
 
 	render() {
 		return (
@@ -88,42 +67,44 @@ class SideBar extends Component {
 					style={{flex: 1, backgroundColor: '#f8f8f8', top: -1}}
 				>
 					<View style={styles.drawerCover}>
-						<View style={{width:100,height:100,borderRadius:50,borderWidth:1,borderColor:"#cecece",flexDirection:'row',justifyContent:'center',alignItems: 'center'}}>
-							<Image source={drawerCover} style={{width:90,height:90,borderRadius:45,borderWidth:1,borderColor:"#cecece"}}>
+						<View style={{
+							width: 100,
+							height: 100,
+							borderRadius: 50,
+							borderWidth: 1,
+							borderColor: "#cecece",
+							flexDirection: 'row',
+							justifyContent: 'center',
+							alignItems: 'center'
+						}}>
+							<Image source={drawerCover} style={{
+								width: 90,
+								height: 90,
+								borderRadius: 45,
+								borderWidth: 1,
+								borderColor: "#cecece"
+							}}>
 
 							</Image>
 						</View>
 					</View>
-					{(Platform.OS === 'ios') &&
-					<View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-						<StyleProvider style={getTheme(variables)}>
-							<Button block rounded light onPress={this.props.changePlatform}>
-								<Text>Platform</Text>
-							</Button>
-						</StyleProvider>
-						<StyleProvider style={getTheme(material)}>
-							<Button block rounded onPress={this.props.changeMaterial}>
-								<Text>Material</Text>
-							</Button>
-						</StyleProvider>
-					</View>
-					}
 					<List
 						dataArray={datas} renderRow={data =>
 						<ListItem button noBorder
-								  style={{flexDirection:'row',justifyContent:'center',alignItems: 'center'}}
+								  style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}
 								  onPress={() => {
-							Actions.webview({
-								title:data.name,
-								uri:urls.pages[data.route]
-							})
-							this.props.closeDrawer()
-						}}>
-							<Left style={{flexDirection:'column',justifyContent:'space-around',alignItems: 'center'}}>
-								<Image source={data.icon} style={{width:30,height:28}}/>
+									  Actions.webview({
+										  title: data.name,
+										  uri: urls.pages[data.route]
+									  })
+									  this.props.closeDrawer()
+								  }}>
+							<Left
+								style={{flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'}}>
+								<Image source={data.icon} style={{width: 30, height: 28}}/>
 								<Text style={styles.text}>{data.name}</Text>
 							</Left>
-							
+
 						</ListItem>}
 					/>
 
@@ -133,17 +114,6 @@ class SideBar extends Component {
 	}
 }
 
-function bindAction(dispatch) {
-	return {
-		closeDrawer: () => dispatch(closeDrawer()),
-		changePlatform: () => dispatch(changePlatform()),
-		changeMaterial: () => dispatch(changeMaterial()),
-	};
-}
 
-const mapStateToProps = state => ({
-	navigation: state.cardNavigation,
-	themeState: state.drawer.themeState,
-});
-
-export default connect(mapStateToProps, bindAction)(SideBar);
+const mapStateToProps = state => ({});
+export default connect(mapStateToProps)(SideBar);
