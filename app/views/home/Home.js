@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Title, Content} from "native-base";
-import Header from "../../components/header/IndexHeader";
+import {Actions} from "react-native-router-flux";
+import {Text, View} from "native-base";
+import {Container, Content, Header, HeaderIcon} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
 import Headline from "./components/Headline.js";
 
@@ -10,21 +11,26 @@ import Headline from "./components/Headline.js";
  * 主页
  */
 class Home extends PureComponent {
-	constructor(props) {
-		super(props);
-	}
 
 	render() {
-
 		return (
 			<Container>
-				<Header>
-					<Title>{this.props.title}</Title>
-				</Header>
+				<Header menu {...this.props} right={
+					<View style={{flexDirection: 'row'}}>
+						<HeaderIcon onPress={()=>Actions.search()} name="search"/>
+						<HeaderIcon onPress={()=>Actions.message()} name="ios-chatboxes"/>
+					</View>
+				}/>
 
 				<Content style={styles.content}>
 					<Headline />
 					<MyEnter />
+					<View>
+						<Text>
+							<Text style={styles.title}>Current position: </Text>
+							{JSON.stringify(this.props.lastPosition)}
+						</Text>
+					</View>
 				</Content>
 			</Container>
 		)
@@ -37,7 +43,8 @@ const styles = {
 	}
 }
 const mapStateToProps = state => ({
-	...state.userStore,
-	...state.drawerStore,
+	...state.user,
+	...state.drawer,
+	...state.position,
 });
 export default connect(mapStateToProps)(Home);

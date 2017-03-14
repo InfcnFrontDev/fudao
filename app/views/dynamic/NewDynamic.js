@@ -85,7 +85,7 @@ const styles={
 }
 
 const mapStateToProps = state => ({
-  userId:state.userStore.loginUser.appid,
+  userId:state.user.loginUser.appid,
   rightButton:state.dynamic.rightButton,
   renderPicture:state.dynamic.renderPicture,
 });

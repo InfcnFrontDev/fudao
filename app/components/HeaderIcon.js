@@ -7,10 +7,10 @@ import {Button, Icon} from "native-base";
 class HeaderIcon extends PureComponent {
 
 	render() {
-		let {iconName, onPress} = this.props;
+		let {name, onPress} = this.props;
 		return (
-			<Button transparent onPress={onPress}>
-				<Icon name={iconName} style={{fontSize: 26}}/>
+			<Button transparent onPress={onPress} style={{paddingLeft: 6, paddingRight: 6}}>
+				<Icon name={name} style={{color: '#FFFFFF'}}/>
 			</Button>
 		)
 	}
@@ -23,7 +23,7 @@ HeaderIcon.propTypes = {
 }
 
 HeaderIcon.defaultProps = {
-	iconName: 'add',
+	name: 'add',
 	onPress: () => {
 	}
 }

@@ -68,6 +68,6 @@ const styles = {
 	listItem: {}
 };
 const mapStateToProps = state => ({
-	...state.settingsStore
+	...state.settings
 });
 export default connect(mapStateToProps)(Settings);

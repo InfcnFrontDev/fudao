@@ -41,6 +41,7 @@ import NewFriend from "./views/friend/NewFriend";
 import MyFriend from "./views/friend/MyFriend";
 import FriendApply from "./views/friend/FriendApply";
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
+import MyEnergy from "./views/my-energy/MyEnergy";
 
 
 const RouterWithRedux = connect()(Router);
@@ -72,7 +73,7 @@ class AppRouter extends PureComponent {
 					<Scene key="startInformation"  component={StartInformation} title="基本信息" hideNavBar/>
 					<Scene key="passwordValidate"  component={PasswordValidate} title="找回密码" hideNavBar/>
 					<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
-					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
+					<Scene key="rebuildSuccess" component={RebuildSuccess}  hideNavBar/>
 					{/*<Scene key="picker"  component={Picker} title="城市列表" hideNavBar/>*/}
 
 					{/*主页*/}
@@ -127,6 +128,9 @@ class AppRouter extends PureComponent {
 					<Scene key="friendApply" component={FriendApply} title="好友申请" hideNavBar/>
 					<Scene key="newFriend" component={NewFriend} title="新的朋友" hideNavBar/>
 					<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
+
+					{/*我的能量场*/}
+					<Scene key="myEnergy" component={MyEnergy} title="我的能量场" hideNavBar/>
 				</Scene>
 			</RouterWithRedux>
 		)

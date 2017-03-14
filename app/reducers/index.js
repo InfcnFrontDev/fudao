@@ -1,5 +1,6 @@
 import {combineReducers} from "redux";
 import drawer from "./drawer";
+import position from "./position";
 import realm from "./realm";
 import search from "./search";
 import dynamic from "./dynamic";
@@ -9,12 +10,13 @@ import friend from "./friend";
 import settings from "./settings";
 
 export default combineReducers({
-	drawerStore: drawer,
+	drawer,
+	position,
 	realm,
 	search,
 	dynamic,
-	loadingStore: loading,
-	userStore: user,
-	friendStore: friend,
-	settingsStore: settings,
+	loading,
+	user,
+	friend,
+	settings,
 });

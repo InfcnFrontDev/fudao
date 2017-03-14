@@ -60,6 +60,6 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({
-	...state.userStore
+	...state.user
 });
 export default connect(mapStateToProps)(MyCollection);

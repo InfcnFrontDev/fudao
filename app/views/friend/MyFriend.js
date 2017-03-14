@@ -77,7 +77,7 @@ const styles = {
 }
 
 const mapStateToProps = state => ({
-	loginUser: state.userStore.loginUser,
-	...state.friendStore,
+	loginUser: state.user.loginUser,
+	...state.friend,
 });
 export default connect(mapStateToProps)(MyFriend);

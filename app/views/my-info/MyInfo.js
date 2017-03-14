@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {ScrollView} from "react-native";
+import {ScrollView,DatePickerAndroid} from "react-native";
 import {connect} from "react-redux";
 import {ListItem, Body, Right, View, Text, Icon} from "native-base";
 import {Container, Content, Separator} from "../../components/index";
@@ -139,6 +139,30 @@ class MyInfo extends PureComponent {
 
 	state = {}
 
+	async showPicker(dispatch,item,loginUser,options) {
+		let option={
+			options,
+			mode:'spinner'
+		}
+		try {
+			const {action, year, month, day} = await DatePickerAndroid.open(option);
+			if (action === DatePickerAndroid.dismissedAction) {
+				
+			} else {
+				let date = new Date(year, month, day);
+
+				let year = date.getFullYear() ;
+				let month = date.getMonth() +1 ;
+				let day = date.getDate() ;
+				let formatedStr = year + '-' + month +'-' + day ;
+				dispatch(updateUserInfo(loginUser.appid,item.field,formatedStr));
+			}
+			this.setState(newState);
+		} catch ({code, message}) {
+			//console.warn(`Error in example '${stateKey}': `, message);
+		}
+	}
+
 	render() {
 		let {loginUser} = this.props;
 		return (
@@ -206,11 +230,33 @@ class MyInfo extends PureComponent {
 				itemsCallbackMultiChoice: (id, text) => dispatch(updateUserInfo(loginUser.appid, item.field,
 					text.filter((t) => t != null && t != '').join(',')))
 			})
+		} else if (item.type == 'input'){
+			dialogs.showDialog({
+				title: item.title ,
+				input: {
+					hint: item.title,
+					prefill: '',
+					allowEmptyInput: false,
+					maxLength: 10,
+					callback: (id, text) =>  dispatch(updateUserInfo(loginUser.appid, item.field, id))
+				}
+			});
+
+		}else if (item.type == 'date'){
+			let option={
+				maxText: '选择日期,不能比今日再晚'
+			}
+			this.showPicker(dispatch,item,loginUser,option)
+
 		}
 	}
 
 
 	substr(str) {
+		if(str=='0')
+			str='男';
+		if(str=='1')
+			str='女';
 		if (str.length > 10)
 			str = str.substr(0, 10) + '...';
 
@@ -223,6 +269,6 @@ const styles = {
 }
 
 const mapStateToProps = state => ({
-	loginUser: state.userStore.loginUser
+	loginUser: state.user.loginUser
 });
 export default connect(mapStateToProps)(MyInfo);

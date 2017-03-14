@@ -13,6 +13,9 @@ export const LOADING_SHOW = 'LOADING_SHOW';
 export const LOADING_HIDE = 'LOADING_HIDE';
 export const USER_UPDATE_INFO = "USER_UPDATE_INFO";
 
+// position ////////////////////////////////////////
+export const UPDATE_POSITION = 'UPDATE_POSITION';
+
 // user actions ////////////////////////////////////////
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';

@@ -192,7 +192,7 @@ UserDetail.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-	loginUser: state.userStore.loginUser,
-	friendNickMap: state.friendStore.friendNickMap
+	loginUser: state.user.loginUser,
+	friendNickMap: state.friend.friendNickMap
 });
 export default connect(mapStateToProps)(UserDetail);

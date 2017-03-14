@@ -6,6 +6,7 @@ import SplashScreen from "react-native-splash-screen";
 import AppRouter from "./AppRouter";
 import getTheme from "../native-base-theme/components/";
 import SideBar from "./views/sidebar/";
+import Position from "./views/position/Position";
 import {closeDrawer} from "./actions/drawer";
 import {theme} from "./utils/index";
 
@@ -29,7 +30,10 @@ class AppNavigator extends PureComponent {
 					<StatusBar
 						hidden={(this.props.drawerState === 'opened' && Platform.OS === 'ios') ? true : false}
 						backgroundColor={theme.statusBarColor}/>
+
 					<AppRouter/>
+
+					<Position />
 				</Drawer>
 			</StyleProvider>
 		)
@@ -52,6 +56,6 @@ class AppNavigator extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-	drawerState: state.drawerStore.drawerState,
+	drawerState: state.drawer.drawerState,
 });
 export default connect(mapStateToProps)(AppNavigator);

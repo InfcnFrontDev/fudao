@@ -1,8 +1,8 @@
 import React, {PureComponent} from "react";
-import {View, TouchableNativeFeedback} from "react-native";
 import {connect} from "react-redux";
-import {Container, Title, Content, Left, Right, Body} from "native-base";
-import Header from "../../components/header/IndexHeader";
+import {View} from "native-base";
+import {Actions} from "react-native-router-flux";
+import {Container, Content, Header, HeaderIcon} from "../../components/index";
 import Separator from "../../components/Separator";
 import MyPhoto from "./components/MyPhoto";
 import MyList from "./components/MyList";
@@ -17,9 +17,12 @@ class My extends PureComponent {
 	render() {
 		return (
 			<Container>
-				<Header>
-					<Title>{this.props.title}</Title>
-				</Header>
+				<Header menu {...this.props} right={
+					<View style={{flexDirection: 'row'}}>
+						<HeaderIcon onPress={()=>Actions.search()} name="search"/>
+						<HeaderIcon onPress={()=>Actions.message()} name="ios-chatboxes"/>
+					</View>
+				}/>
 
 				<Content>
 					<MyPhoto/>
