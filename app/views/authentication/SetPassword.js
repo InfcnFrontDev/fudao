@@ -5,7 +5,7 @@ import { Text, Button} from "native-base";
 import {View,TextInput,ToastAndroid} from "react-native";
 import {Header,Container,Content} from "../../components/index";
 import  CommitButton from "./components/CommitButton"
-import  UrseInput from "./components/UrseInput"
+import  UserInput from "./components/UserInput"
 import {theme,request,urls,tools,toast} from "../../utils/";
 import  {hex_md5} from "./components/md5"
 import {showLoading, hideLoading} from "../../actions/loading";
@@ -28,13 +28,13 @@ class SetPassword extends PureComponent {
                 <Header back {...this.props}></Header>
                 <Content>
                     <View style={styles.bag}>
-                        <UrseInput text="设置密码" placeholder={"至少6位，由数字/字母/_组成"} secureTextEntry={true}  value={this.state.password}
+                        <UserInput text="设置密码" placeholder={"至少6位，由数字/字母/_组成"} secureTextEntry={true}  value={this.state.password}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password:value
                                        })
                                    }}/>
-                        <UrseInput text="重复密码" secureTextEntry={true} value={this.state.password1}
+                        <UserInput text="重复密码" secureTextEntry={true} value={this.state.password1}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password1:value

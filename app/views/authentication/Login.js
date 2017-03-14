@@ -7,7 +7,7 @@ import {Header, Container, Content} from "../../components/index";
 import {theme} from "../../utils/";
 import {showLoading, hideLoading} from "../../actions/loading";
 import CommitButton from "./components/CommitButton";
-import UrseInput from "./components/UrseInput";
+import UserInput from "./components/UserInput";
 import {checkPhone} from "./components/public";
 import {request, urls, tools, toast} from "../../utils/index";
 import {hex_md5} from "./components/md5";
@@ -32,13 +32,13 @@ class Login extends PureComponent {
 				<Header back {...this.props}></Header>
 				<Content>
 					<View style={styles.bag}>
-						<UrseInput text="用户名"
+						<UserInput text="用户名"
 								   onChangeText={(value)=> {
 									   this.setState({
 										   phone: value
 									   })
 								   }}/>
-						<UrseInput text="密码" secureTextEntry={true}
+						<UserInput text="密码" secureTextEntry={true}
 								   onChangeText={(value)=> {
 									   this.setState({
 										   password: value

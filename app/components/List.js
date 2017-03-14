@@ -19,6 +19,9 @@ export default class List extends PureComponent {
 
 const styles = {
 	list: {
+		paddingTop:5,
+		paddingBottom:5,
+		paddingLeft:10,
 		backgroundColor: '#FFFFFF',
 		borderTopWidth: theme.borderWidth,
 		borderBottomWidth: theme.borderWidth,

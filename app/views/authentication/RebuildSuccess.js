@@ -10,7 +10,7 @@ import  {hex_md5} from "./components/md5"
 /**
  * 设置密码
  */
-class SetPassword extends PureComponent {
+class RebuildSuccess extends PureComponent {
     constructor(props){
         super(props);
         this.state={
@@ -51,26 +51,33 @@ class SetPassword extends PureComponent {
         },1000)
     }
     _login(phone,password){
-        request.getJson(urls.apis.AUTH_LOGIN,{
-            account:phone,
-            pwd:hex_md5(phone+password),
-        }).then((data)=>{
-            if(data.success) {
-                Actions['login ']()
-                //跳到登录页
-               /* var userInformation = data.obj.userInformation;
-                var appid=data.obj.accountInfo.appid;
-                if(userInformation != undefined) { //基本信息已经添加完成
-                    Actions['_onSearch']()
-                } else { //没有基本信息表示第一次登录需要添写信息
-                    Actions['startInformation']({appid:appid,showM:false,sex:0})
-                }*/
-            }else{
-                toast.show("密码不正确");
-            }
-        },(error)=>{
+        request.getJson(urls.apis.AUTH_LOGIN, {
+            account: phone,
+            pwd: hex_md5(phone + password),
+        }).then((data) => {
+                if (data.success) {
+                    var userInformation = data.obj.userInformation;
+                    var appid=data.obj.accountInfo.appid;
+                    if (userInformation != undefined) { //基本信息已经添加完成
+                        let user = Object.assign({}, {
+                            ...data.obj.accountInfo,
+                            ...userInformation
+                        });
+                        // 保存用户状态
+                        this.props.dispatch(login(user));
+                        // 跳到首页
+                        Actions.index();
+                    } else { //没有基本信息表示第一次登录需要添写信息
+                        Actions['startInformation']({appid:appid})
+                    }
 
-        })
+                } else {
+
+                }
+            }, (error) => {
+
+            }
+        );
     }
 }
 const styles = {
@@ -94,7 +101,7 @@ function bindAction(dispatch) {
 }
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(SetPassword);
+export default connect(mapStateToProps, bindAction)(RebuildSuccess);
 
 
 

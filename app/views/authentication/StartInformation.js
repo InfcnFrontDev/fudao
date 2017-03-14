@@ -208,6 +208,17 @@ class StartInformation extends PureComponent {
         }).then((data)=>{
             if(data.success) {
                 toast.show("保存成功");
+                // 提交登录
+                   let user = Object.assign({}, {
+                        ...data.obj.accountInfo,
+                        ...userInformation
+                    });
+                    // 保存用户状态
+                    this.props.dispatch(login(user));
+                    // 跳到首页*/
+                    Actions.index()
+
+
             }else{
                 toast.show("保存失败");
             }
