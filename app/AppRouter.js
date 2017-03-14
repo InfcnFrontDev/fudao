@@ -36,6 +36,7 @@ import WomanChoose from "./views/authentication/WomanChoose";
 import Message from "./views/message/message";
 import Webview from "./views/webview/";
 import NewDynamic from "./views/dynamic/NewDynamic";
+import DynamicDetail from "./views/dynamic/DynamicDetail";
 import UserDetail from "./views/user/UserDetail";
 import NewFriend from "./views/friend/NewFriend";
 import MyFriend from "./views/friend/MyFriend";
@@ -80,7 +81,7 @@ class AppRouter extends PureComponent {
 					{/*主页*/}
 					<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 					<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
-					<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
+					<Scene key="myQuestion" component={MyQuestion}  title="我的问题" hideNavBar/>
 					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
 					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
 					<Scene key="treatmentDailyDetail" component={TreatmentDailyDetail} title="疗法详情" hideNavBar/>
@@ -103,7 +104,8 @@ class AppRouter extends PureComponent {
 
 					{/*动态*/}
 					<Scene key="picture" component={Picture} title="图片预览" hideNavBar/>
-					<Scene key="newDynamic" component={NewDynamic} title="发表文字" hideNavBar/>
+					<Scene key="newDynamic" component={NewDynamic} title="发表文字" hideNavBar newnew/>
+					<Scene key="dynamicDetail" component={DynamicDetail} title="发表文字" hideNavBar newnew/>
 
 
 					{/*我的*/}

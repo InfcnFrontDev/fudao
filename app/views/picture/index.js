@@ -13,6 +13,8 @@ import {
 } from 'react-native'
 import {Actions} from "react-native-router-flux";
 import Swiper from 'react-native-swiper'
+import {urls} from "../../utils/";
+
 var images=[];
 var index;
 export default class FeedbackView extends Component{
@@ -46,7 +48,7 @@ export default class FeedbackView extends Component{
                     key={i}
                     style={{flex:1,}}
                     resizeMode= {Image.resizeMode.contain}
-                    source={{uri:'http://192.168.10.58:9095/api/BaseApi/getImage?id='+images[i]+'&w=900&h=1220'}}
+                    source={{uri:urls.getImage(images[i],900,1220)}}
                 >
                 <TouchableOpacity onPress={Actions.pop} style={{flex:1}}>
                 </TouchableOpacity>
