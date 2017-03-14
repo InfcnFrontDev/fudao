@@ -59,25 +59,25 @@ class AppRouter extends PureComponent {
 			<RouterWithRedux createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
 				<Scene key="root">
 
-					<Scene key="start" component={Start} title="启动开始页" hideNavBar  />
+					<Scene key="start" component={Start} title="启动开始页" hideNavBar initial/>
 
 					{/*首页*/}
 					<Scene key="index" component={Index} title="首页" hideNavBar/>
 
 					{/*启动注册*/}
-					<Scene key="login"  component={Login} title="登录" hideNavBar/>
-					<Scene key="register"   component={Register} title="注册" hideNavBar/>
-					<Scene key="setPassword"  component={SetPassword} title="设置密码" hideNavBar/>
+					<Scene key="login" component={Login} title="登录" hideNavBar/>
+					<Scene key="register" component={Register} title="注册" hideNavBar/>
+					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
 					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 					<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
-					<Scene key="startInformation"  component={StartInformation} title="基本信息" hideNavBar/>
-					<Scene key="passwordValidate"  component={PasswordValidate} title="找回密码" hideNavBar/>
+					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
+					<Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
 					<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
-					<Scene key="rebuildSuccess" component={RebuildSuccess}  hideNavBar/>
+					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
 					{/*<Scene key="picker"  component={Picker} title="城市列表" hideNavBar/>*/}
 
 					{/*主页*/}
-					<Scene key="myEmotion" initial  component={MyEmotion} title="我的情绪" hideNavBar/>
+					<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
 					<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
 					<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
 					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
