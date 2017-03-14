@@ -10,7 +10,7 @@ import {theme,request,urls,tools,toast} from "../../utils/";
 import {Header,Container,Content} from "../../components/index";
 import {showLoading, hideLoading} from "../../actions/loading";
 import  CommitButton from "./components/CommitButton"
-import  UrseInput from "./components/UrseInput"
+import  UserInput from "./components/UserInput"
 import  {hex_md5} from "./components/md5"
 /**
  * 设置密码
@@ -30,13 +30,13 @@ class RebuildPassword extends PureComponent {
                 <Header back {...this.props}></Header>
                 <Content>
                     <View style={styles.bag}>
-                        <UrseInput text="新密码" placeholder={"至少6位，由数字/字母/_组成"}  value={this.state.password}
+                        <UserInput text="新密码" placeholder={"至少6位，由数字/字母/_组成"}  value={this.state.password} secureTextEntry={true}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password:value
                                        })
                                    }}/>
-                        <UrseInput text="重复密码" value={this.state.password1}
+                        <UserInput text="重复密码" value={this.state.password1} secureTextEntry={true}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password1:value
@@ -68,7 +68,7 @@ class RebuildPassword extends PureComponent {
                 }).then((data)=>{
                 dispatch(hideLoading());
                 if(data.success) {
-                        Actions['RebuildSucess']({phone:phone,password:password})
+                        Actions['rebuildSuccess']({phone:phone,password:password})
                     }else{
                         toast.show("修改失败...");
                     }

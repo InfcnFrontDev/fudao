@@ -35,6 +35,7 @@ class Index extends PureComponent {
 		this.props.newRealm();
 	}
 
+
 	_renderTabBar = () => <TabBar tabNames={tabTitles} tabIconNames={tabIcons} selectedTabIconNames={tabSelectedIcon}/>
 
 	render() {

@@ -89,5 +89,6 @@ export const bad = [
     name:'yanwu',
     title:'厌恶',
     img:require('../assets/17yanwu.png')
-  }
+  },
+
 ]

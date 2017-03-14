@@ -1,8 +1,8 @@
 //noinspection JSAnnotator
 import React, {PureComponent} from "react";
-
 import {connect} from "react-redux";
-import {Container, Header, Title, Content, ListItem, Text, Left, Button, Icon, Body, Right} from "native-base";
+import { Text ,Icon} from "native-base";
+import {Container, Content, Header, List, Separator, HeaderButton} from "../../components/index";
 import {View,Image,DeviceEventEmitter} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import ItemEmotion from './components/ItemEmotion';
@@ -23,39 +23,27 @@ class MyEmotion extends PureComponent {
           }
         }
     }
-
-
     render() {
         return (
             <Container style={styles.container}>
-              <Header>
-                <Left>
-                  <Button transparent onPress={()=>Actions.pop()}>
-                    <Icon name='arrow-back' />
-                  </Button>
-                </Left>
-                <Body>
-                  <Title>{this.props.title}</Title>
-                </Body>
-                <Right style={styles.right}>
-                <View  style={styles.selectedEmotion}>
-                  <Image source ={this.state.emotion.img} style={styles.selectedEmotionImg}/>
-                  <Text style={styles.selectedEmotionTitle}>{this.state.emotion.title}</Text>
-                </View>
-                </Right>
-              </Header>
+                <Header back {...this.props} right={
+                    <View  style={styles.selectedEmotion}>
+                        <Image source ={this.state.emotion.img} style={styles.selectedEmotionImg}/>
+                        <Text style={styles.selectedEmotionTitle}>{this.state.emotion.title}</Text>
+                    </View>
+                }/>
                 <Content style={styles.content}>
-                   <ListItem itemDivider style={styles.divideList}>
+                   <List style={styles.divideList}>
                        <Text style={styles.divideTitle}>积极向上，朵朵小太阳</Text>
-                   </ListItem>
+                   </List>
                    <ItemEmotion type='good' />
-                   <ListItem itemDivider style={styles.divideList}>
+                   <List  style={styles.divideList}>
                        <Text style={styles.divideTitle}>清风徐来，水波不兴</Text>
-                   </ListItem>
+                   </List>
                    <ItemEmotion type='calm' />
-                   <ListItem itemDivider style={styles.divideList}>
+                   <List style={styles.divideList}>
                        <Text style={styles.divideTitle}>月落乌啼霜满天</Text>
-                   </ListItem>
+                   </List>
                    <ItemEmotion type='bad' />
 
                </Content>
@@ -90,8 +78,8 @@ const styles = {
     backgroundColor:'#fff',
   },
   divideTitle:{
-    color:'#2e7fae',
-    fontSize:theme.DefaultFontSize+2,
+    color:'#676767',
+    fontSize:theme.DefaultFontSize-2,
   },
   right:{
     paddingTop:0,
