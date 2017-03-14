@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Title, Content, Left, Right, Body,Text,Button,Header,Icon} from "native-base";
-import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert} from "react-native";
+import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert,TouchableOpacity} from "react-native";
 import styles from "./assets/styles";
 import moment from './assets/moment.js'
 import {Actions} from "react-native-router-flux";
@@ -30,14 +30,12 @@ class Dynamic extends PureComponent {
 
     componentWillReceiveProps(nextProps){
       if(this.props.newnew!=nextProps.newnew){
-        ToastAndroid.show('gfgfdgdd',ToastAndroid.SHORT)
         this.props.fetchData(1,{refresh:true},this.refs.gifted._postRefresh,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user});
       }
     }
 
 
     render() {
-      // ToastAndroid.show('render'+JSON.stringify(this.props.newnew),ToastAndroid.SHORT)
 
       let input = (null);
       if(this.state.commentShow){
@@ -112,13 +110,13 @@ class Dynamic extends PureComponent {
           var show =(null);
         }
         var del = ( null );
-        if(info.userId==this.props.user.appid){
-          del=(
-            <TouchableHighlight underlayColor='#fafafa' onPress={this._delete.bind(this,info.id)}>
-                <Text style={styles.delete}>删除</Text>
-            </TouchableHighlight>
-          )
-        }
+        // if(info.userId==this.props.user.appid){
+        //   del=(
+        //     <TouchableOpacity onPress={this._delete.bind(this,info.id)}>
+        //         <Text style={styles.delete}>删除</Text>
+        //     </TouchableOpacity>
+        //   )
+        // }
         let comments =Array.prototype.slice.call(info.dynamicComments, 0);
 
     		return (

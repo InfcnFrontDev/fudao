@@ -97,7 +97,7 @@ class Login extends PureComponent {
 					this.props.dispatch(login(user));
 					// 跳到首页
 					Actions.index({
-						type: ActionConst.POP_AND_REPLACE
+						type: ActionConst.POP_AND_REPLACE,
 					});
 				} else {
 					toast.show("密码错误");

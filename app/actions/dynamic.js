@@ -10,11 +10,11 @@ import {Actions} from "react-native-router-flux";
 //跳转至详情页
 export function skipToDetail(dynamicDetail,newnew){
 	return (dispatch) => {
-		Actions.dynamicDetail({newnew:newnew});
+		Actions.del({newnew:newnew});
 		dispatch({
 			type: types.DYNAMIC_LIST_LOAD,
 			source:{
-				dynamicDetail:dynamicDetail
+				del:dynamicDetail
 			}
 		});
 	}
@@ -132,12 +132,14 @@ export function zan(info,params){
 //删除
 export function del(id,params){
 	return (dispatch) => {
-		for(var i=0;i<params.dynamic.length;i++){
-			if(params.dynamic[i].id==id){
+		var dynamic = params.dynamic;
+		for(var i=0;i<dynamic.length;i++){
+			if(dynamic[i].id==id){
 				break;
 			}
 		}
-		params.dynamic.splice(i,1);
+		dynamic.splice(i,1);
+		// ToastAndroid.show(JSON.stringify(dynamic),ToastAndroid.SHORT)
 		params.realm.write(()=>{
 			var delDynamic = params.realm.objects('Dynamic').filtered('id="'+id+'"');
 			params.realm.delete(delDynamic)
@@ -145,15 +147,15 @@ export function del(id,params){
 		dispatch({
 			type: types.DYNAMIC_LIST_LOAD,
 			source:{
-				dynamicList:params.dynamic
+				dynamicList:dynamic
 			}
 		});
-		if(params.from=='list'){
-			params.callback(params.dynamic)
-		}
 		request.getJson(urls.apis.DYNAMIC_DELETE_DYNAMIC,{
 			key:id
-	 })
+		})
+		if(params.from=='list'){
+			params.callback(dynamic)
+		}
 	}
 }
 
