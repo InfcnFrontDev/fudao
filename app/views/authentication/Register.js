@@ -10,7 +10,7 @@ import {showLoading, hideLoading} from "../../actions/loading";
 import {Header,Container,Content} from "../../components/index";
 import {theme,request,urls,tools,toast} from "../../utils/";
 import  CommitButton from "./components/CommitButton";
-import  UrseInput from "./components/UrseInput"
+import  UserInput from "./components/UserInput"
 import {checkPhone} from "./components/public";
 import  GetCode from "./components/GetCode";
 
@@ -34,7 +34,7 @@ class Register extends PureComponent {  // eslint-disable-line
                 <Header back title={this.state.title}></Header>
                 <Content>
                     <View style={styles.bag}>
-                        <UrseInput text="手机号"
+                        <UserInput text="手机号"
                                    onChangeText={(value)=>{
                                        this.setState({
                                            phone:value

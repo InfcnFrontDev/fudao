@@ -16,7 +16,7 @@ import Settings from "./views/system/Settings";
 import About from "./views/system/About";
 import Picture from "./views/picture/";
 import MyInfo from "./views/my-info/MyInfo";
-import MyCollection from "./views/my-collection/MyCollection";
+import MyCollection from "./views/collection/MyCollection";
 import MyEmotion from "./views/my-emotion/MyEmotion";
 import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
 import MyQuestion from "./views/my-question/MyQuestion";
@@ -60,7 +60,7 @@ class AppRouter extends PureComponent {
 			<RouterWithRedux createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
 				<Scene key="root">
 
-					<Scene key="start" component={Start} title="启动开始页" hideNavBar />
+					<Scene key="start" component={Start} title="启动开始页" hideNavBar initial/>
 
 					{/*首页*/}
 					<Scene key="index" component={Index} title="首页" hideNavBar/>
@@ -71,7 +71,7 @@ class AppRouter extends PureComponent {
 					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
 					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 					<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
-					<Scene key="startInformation"  component={StartInformation} title="基本信息" hideNavBar/>
+					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
 					<Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
 					<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
 					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>

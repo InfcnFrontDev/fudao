@@ -79,7 +79,6 @@ const styles = {
     marginTop:0,
     marginRight:0,
     marginLeft:0,
-    flex:1,
     flexDirection:'column',
     alignItems:'flex-start',
     height:80,
@@ -89,9 +88,10 @@ const styles = {
     height:50,
   },
   oneEmotionTitle:{
-    color:'#9b9b9b',
+    color:'#676767',
     textAlign:'center',
     marginLeft:13,
+    fontSize:theme.DefaultFontSize-2,
   },
 };
 

@@ -55,11 +55,13 @@ class SetPassword extends PureComponent {
             account:phone,
             pwd:hex_md5(phone+password),
         }).then((data)=>{
+            toast.show(JSON.stringify(data))
             if(data.success) {
                 var userInformation = data.obj.userInformation;
                 var appid=data.obj.accountInfo.appid;
-                if(userInformation != undefined) { //基本信息已经添加完成
-                    Actions['_onSearch']()
+                if (userInformation != undefined) { //基本信息已经添加完成
+                    // 跳到首页
+                    Actions.index();
                 } else { //没有基本信息表示第一次登录需要添写信息
                     Actions['startInformation']({appid:appid})
                 }
