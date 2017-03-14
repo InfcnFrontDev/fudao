@@ -53,7 +53,6 @@ class AppRouter extends PureComponent {
 
 	// 最后一次触Back键的时间
 	lastBackPressTime = 0;
-
 	render() {
 		return (
 			<RouterWithRedux createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
@@ -65,7 +64,7 @@ class AppRouter extends PureComponent {
 					<Scene key="index" component={Index} title="首页" hideNavBar/>
 
 					{/*启动注册*/}
-					<Scene key="login"  component={Login} title="登录" hideNavBar/>
+					<Scene key="login" initial  component={Login} title="登录" hideNavBar/>
 					<Scene key="register"   component={Register} title="注册" hideNavBar/>
 					<Scene key="setPassword"  component={SetPassword} title="设置密码" hideNavBar/>
 					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
@@ -77,7 +76,7 @@ class AppRouter extends PureComponent {
 					{/*<Scene key="picker"  component={Picker} title="城市列表" hideNavBar/>*/}
 
 					{/*主页*/}
-					<Scene key="myEmotion" initial  component={MyEmotion} title="我的情绪" hideNavBar/>
+					<Scene key="myEmotion"   component={MyEmotion} title="我的情绪" hideNavBar/>
 					<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
 					<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
 					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>

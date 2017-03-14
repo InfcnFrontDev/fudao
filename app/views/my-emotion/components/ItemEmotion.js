@@ -61,7 +61,7 @@ class ItemEmotion extends PureComponent {
   solve(p){
     DeviceEventEmitter.emit('change',p);
     ToastAndroid.show(JSON.stringify(p),ToastAndroid.SHORT);
-    Actions['myEmotionSolve']();
+    Actions['myEmotionSolve']({});
   }
 
 }

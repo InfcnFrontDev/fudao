@@ -65,5 +65,7 @@ function bindAction(dispatch) {
 
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+
+});
 export default connect(mapStateToProps, bindAction)(MyEmotionSolve);

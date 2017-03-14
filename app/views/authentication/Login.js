@@ -88,17 +88,25 @@ class Login extends PureComponent {
 						login: "yes",
 					})
 					AsyncStorage.setItem('login', this.state.login)
+
 					toast.show("登录成功");
-					let user = Object.assign({}, {
-						...data.obj.accountInfo,
-						...data.obj.userInformation
-					});
-					// 保存用户状态
-					this.props.dispatch(login(user));
-					// 跳到首页
-					Actions.index({
-						type: ActionConst.POP_AND_REPLACE
-					});
+					var userInformation = data.obj.userInformation;
+					var appid=data.obj.accountInfo.appid;
+					if(userInformation!=undefined){
+						let user = Object.assign({}, {
+							...data.obj.accountInfo,
+							...userInformation
+						});
+						// 保存用户状态
+						this.props.dispatch(login(user));
+						// 跳到首页
+						Actions.index({
+							type: ActionConst.POP_AND_REPLACE
+						});
+					}else{
+						Actions['startInformation']({appid:appid})
+					}
+
 				} else {
 					toast.show("密码错误");
 				}
