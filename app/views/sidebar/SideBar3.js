@@ -1,17 +1,18 @@
 import React, {PureComponent} from "react";
 import {Image} from "react-native";
 import {connect} from "react-redux";
-import {Grid, Col, Text, Icon, Button} from "native-base";
+import {Grid, Col, View, Text, Icon, Button} from 'native-base';
 import {Container, Content} from "../../components/index";
 import {theme} from "../../utils/index";
-import TabNavigator from "react-native-tab-navigator";
+import ScrollableTabView, {DefaultTabBar,} from 'react-native-scrollable-tab-view';
+
+
+const drawerCover = require('../../assets/my-photos/photo.jpg');
+import TabBar from "./components/TabBar";
 import Home from "../home/Home";
 import Article from "../article/Article";
 import Dynamic from "../../views/dynamic/Dynamic";
 import My from "../../views/my/My";
-
-
-const drawerCover = require('../../assets/my-photos/photo.jpg');
 
 const datas = [
 	{
@@ -66,8 +67,8 @@ const tabComponents = [
 class SideBar extends PureComponent {
 
 	state = {
-		selectedTab: 'home'
-	};
+		active: 0
+	}
 
 	render() {
 		let {active} = this.state;
@@ -78,58 +79,36 @@ class SideBar extends PureComponent {
 					<Grid>
 						<Col style={styles.sidebar}>
 							{this.renderTabBar({
-								tab: 'home',
+								index: 0,
 								icon: 'ios-home-outline',
 								text: '主页',
 							})}
 							{this.renderTabBar({
-								tab: 'article',
+								index: 1,
 								icon: 'ios-list-box-outline',
 								text: '资讯',
 							})}
 							{this.renderTabBar({
-								tab: 'dynamic',
+								index: 2,
 								icon: 'ios-compass-outline',
 								text: '动态',
 							})}
 							{this.renderTabBar({
-								tab: 'my',
+								index: 3,
 								icon: 'ios-person-outline',
 								text: '我的',
 							})}
 						</Col>
 						<Col>
-							<TabNavigator
-								tabBarStyle={{height: 0, overflow: 'hidden'}}
-								sceneStyle={{paddingBottom: 0}}
+							<ScrollableTabView
+								style={{marginTop: 20,}}
+								renderTabBar={() => <View style={{height: 0, width: 0}}/>}
+								tabBarPosition={'bottom'}
 							>
-								{this.renderTabItem({
-									tab: 'home',
-									icon: 'ios-home-outline',
-									text: '主页',
-									component: <Home/>
-								})}
-								{this.renderTabItem({
-									tab: 'article',
-									icon: 'ios-list-box-outline',
-									text: '资讯',
-									component: <Article/>
-
-								})}
-								{this.renderTabItem({
-									tab: 'dynamic',
-									index: 2,
-									icon: 'ios-compass-outline',
-									text: '动态',
-									component: <Dynamic/>
-								})}
-								{this.renderTabItem({
-									tab: 'my',
-									icon: 'ios-person-outline',
-									text: '我的',
-									component: <My/>
-								})}
-							</TabNavigator>
+								<Home tabLabel='Tab #1'>My</Home>
+								<Article tabLabel='Tab #2'>favorite</Article>
+								<My tabLabel='Tab #3'>project</My>
+							</ScrollableTabView>
 						</Col>
 					</Grid>
 				</Content>
@@ -141,7 +120,7 @@ class SideBar extends PureComponent {
 		return (
 			<Button
 				transparent
-				onPress={() => this.setState({selectedTab: item.tab})}
+				onPress={() => this.setState({active: item.index})}
 				style={{
 					flexDirection: 'column',
 					paddingLeft: 0,
@@ -155,20 +134,6 @@ class SideBar extends PureComponent {
 				<Icon name={item.icon}/>
 				<Text>{item.text}</Text>
 			</Button>
-		)
-	}
-
-	renderTabItem(item) {
-		return (
-			<TabNavigator.Item
-				selected={this.state.selectedTab === item.tab}
-				title={item.text}
-				renderIcon={() => <Icon name={item.icon}/>}
-				renderSelectedIcon={() => <Icon name={item.icon}/>}
-				badgeText="1"
-				onPress={() => this.setState({selectedTab: item.tab})}>
-				{item.component}
-			</TabNavigator.Item>
 		)
 	}
 }
