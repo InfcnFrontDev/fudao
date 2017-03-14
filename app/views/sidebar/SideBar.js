@@ -1,15 +1,52 @@
 import React, {PureComponent} from "react";
+import {Image} from "react-native";
 import {connect} from "react-redux";
-import {StyleSheet, View, ToastAndroid} from "react-native";
 import ScrollableTabView from "react-native-scrollable-tab-view";
-import TabBar from "./components/TabBar";
 import {theme} from "../../utils/index";
+
+const drawerCover = require('../../assets/my-photos/photo.jpg');
+import TabBar from "./components/TabBar";
 import Home from "../home/Home";
 import Article from "../article/Article";
 import Dynamic from "../../views/dynamic/Dynamic";
 import My from "../../views/my/My";
-import schema from "../../realm/schema.js";
-import {newRealm} from "../../actions/realm.js";
+
+const datas = [
+	{
+		name: '我的时间',
+		route: 'MY_TIME',
+		icon: require('../../../img/biao.jpg'),
+		bg: '#C5F442',
+	},
+	{
+		name: '健康测评',
+		route: 'HEALTH_APPRAISAL',
+		icon: require('../../../img/jiankang.jpg'),
+		bg: '#477EEA',
+		types: '8',
+	},
+	{
+		name: '健康圈',
+		route: 'HEALTH_CIRCLE',
+		icon: require('../../../img/taiyang.jpg'),
+		bg: '#DA4437',
+		types: '4',
+	},
+	{
+		name: '生命周期',
+		route: 'LIFE_CYCLE',
+		icon: require('../../../img/woniu.jpg'),
+		bg: '#4DCAE0',
+	},
+	{
+		name: '我的位置',
+		route: 'MY_LOCATION',
+		icon: require('../../../img/dingwei.jpg'),
+		bg: '#1EBC7C',
+		types: '9',
+	}
+
+];
 
 const tabTitles = [
 	'主页', '资讯', '动态', '我的'
@@ -24,16 +61,7 @@ const tabComponents = [
 	Home, Article, Dynamic, My
 ];
 
-/**
- * 首页
- */
-class Index extends PureComponent {
-
-	constructor(props) {
-		super(props);
-		this.props.newRealm();
-	}
-
+class SideBar extends PureComponent {
 
 	_renderTabBar = () => <TabBar tabNames={tabTitles} tabIconNames={tabIcons} selectedTabIconNames={tabSelectedIcon}/>
 
@@ -41,7 +69,7 @@ class Index extends PureComponent {
 		return (
 			<ScrollableTabView
 				renderTabBar={this._renderTabBar}
-				tabBarPosition='bottom'
+				tabBarPosition='left'
 				locked
 				scrollWithoutAnimation
 			>
@@ -51,37 +79,17 @@ class Index extends PureComponent {
 				))}
 
 			</ScrollableTabView>
-		)
+		);
 	}
+}
 
-}
 const styles = {
-	container: {
-		flexGrow: 1
-	},
-	tabBarStyle: {},
-	sceneStyle: {},
-	titleStyle: {
-		color: theme.navTabBarTextColor,
-		fontSize: 12
-	},
-	titleStyleSelected: {
-		color: theme.navTabBarActiveTextColor
-	},
-	tabIcon: {
-		color: theme.navTabBarTextColor,
-		fontSize: 28,
-		marginBottom: -3
-	},
-	tabIconSelected: {
-		color: theme.navTabBarActiveTextColor
-	},
-};
-function bindAction(dispatch) {
-	return {
-		newRealm: () => dispatch(newRealm(schema)),
-	};
+	sidebar: {
+		backgroundColor: theme.toolbarDefaultBg,
+		width: 50
+	}
 }
+
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(Index);
+export default connect(mapStateToProps)(SideBar);

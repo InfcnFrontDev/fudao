@@ -42,6 +42,7 @@ import MyFriend from "./views/friend/MyFriend";
 import FriendApply from "./views/friend/FriendApply";
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import MyEnergy from "./views/my-energy/MyEnergy";
+import SideBar from "./views/sidebar/SideBar";
 
 
 const RouterWithRedux = connect()(Router);
@@ -131,6 +132,9 @@ class AppRouter extends PureComponent {
 
 					{/*我的能量场*/}
 					<Scene key="myEnergy" component={MyEnergy} title="我的能量场" hideNavBar/>
+
+					{/*侧边栏*/}
+					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar initial/>
 				</Scene>
 			</RouterWithRedux>
 		)
