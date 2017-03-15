@@ -5,9 +5,7 @@ import {connect} from "react-redux";
 import SplashScreen from "react-native-splash-screen";
 import AppRouter from "./AppRouter";
 import getTheme from "../native-base-theme/components/";
-import SideBar from "./views/sidebar/";
 import Position from "./views/position/Position";
-import {closeDrawer} from "./actions/drawer";
 import {theme} from "./utils/index";
 
 
@@ -20,19 +18,12 @@ class AppNavigator extends PureComponent {
 		let {dispatch} = this.props;
 		return (
 			<StyleProvider style={getTheme(theme)}>
-				<Drawer
-					ref={(ref) => this._drawer = ref}
-					openDrawerOffset={0.66}
-					panCloseMask={0.66}
-					content={<SideBar/>}
-					onClose={() => dispatch(closeDrawer())}
-				>
+				<Drawer ref={(ref) => this._drawer = ref}>
 					<StatusBar
 						hidden={(this.props.drawerState === 'opened' && Platform.OS === 'ios') ? true : false}
 						backgroundColor={theme.statusBarColor}/>
 
 					<AppRouter/>
-
 					<Position />
 				</Drawer>
 			</StyleProvider>
@@ -41,17 +32,6 @@ class AppNavigator extends PureComponent {
 
 	componentDidMount() {
 		SplashScreen.hide();
-	}
-
-	componentDidUpdate() {
-		let {drawerState} = this.props;
-		if (drawerState === 'opened') {
-			this._drawer._root.open();
-		}
-
-		if (drawerState === 'closed') {
-			this._drawer._root.close();
-		}
 	}
 }
 
