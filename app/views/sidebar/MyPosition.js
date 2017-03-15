@@ -9,13 +9,16 @@ import {urls} from "../../utils/index"
 class MyEnergy extends PureComponent {
 
 	render() {
+		let {lastPosition}=this.props;
 		return (
 			<Content>
-				<WebView uri={urls.pages.MY_LOCATION}/>
+				<WebView uri={urls.pages.MY_LOCATION+'?position='+JSON.stringify(this.props.lastPosition)}/>
 			</Content>
 		)
 	}
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	lastPosition:state.position
+});
 export default connect(mapStateToProps)(MyEnergy);
