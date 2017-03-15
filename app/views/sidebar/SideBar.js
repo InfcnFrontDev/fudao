@@ -1,14 +1,16 @@
 import React, {PureComponent} from "react";
 import {Image} from "react-native";
 import {connect} from "react-redux";
-import {Grid, Col, Text, Icon, Button} from "native-base";
+import {Grid, Col, View, Text, Icon, Button} from "native-base";
 import {Container, Content} from "../../components/index";
 import {theme} from "../../utils/index";
-import TabNavigator from "react-native-tab-navigator";
-import Home from "../home/Home";
-import Article from "../article/Article";
-import Dynamic from "../../views/dynamic/Dynamic";
-import My from "../../views/my/My";
+import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
+import HealthEvaluation from "./HealthEvaluation";
+import HealthRing from "./HealthRing";
+import LifeCycle from "./LifeCycle";
+import MyPosition from "./MyPosition";
+import MyTime from "./MyTime";
+import OfflineService from "./OfflineService";
 
 
 const drawerCover = require('../../assets/my-photos/photo.jpg');
@@ -50,86 +52,67 @@ const datas = [
 
 ];
 
-const tabTitles = [
-	'主页', '资讯', '动态', '我的'
-];
-const tabIcons = [
-	'ios-home-outline', 'ios-list-box-outline', 'ios-compass-outline', 'ios-person-outline'
-];
-const tabSelectedIcon = [
-	'ios-home', 'ios-list-box', 'ios-compass', 'ios-person'
-];
-const tabComponents = [
-	Home, Article, Dynamic, My
-];
+
+const tabs = [
+	{
+		title: '我的健康环',
+		icon: 'ios-home-outline',
+		selectedIcon: 'ios-home',
+		component: HealthRing
+	},
+	{
+		title: '我的生命周期',
+		icon: 'ios-list-box-outline',
+		selectedIcon: 'ios-list-box',
+		component: LifeCycle
+	},
+	{
+		title: '我的时间',
+		icon: 'ios-compass-outline',
+		selectedIcon: 'ios-compass',
+		component: MyTime
+	},
+	{
+		title: '我的位置',
+		icon: 'ios-person-outline',
+		selectedIcon: 'ios-person',
+		component: MyPosition
+	},
+	{
+		title: '健康测评',
+		icon: 'ios-person-outline',
+		selectedIcon: 'ios-person',
+		component: HealthEvaluation
+	},
+	{
+		title: '线下服务',
+		icon: 'ios-person-outline',
+		selectedIcon: 'ios-person',
+		component: OfflineService
+	}
+]
 
 class SideBar extends PureComponent {
 
 	state = {
-		selectedTab: 'home'
-	};
+		activeTab: 0
+	}
 
 	render() {
-		let {active} = this.state;
-		let Component = tabComponents[active];
 		return (
 			<Container>
 				<Content>
 					<Grid>
 						<Col style={styles.sidebar}>
-							{this.renderTabBar({
-								tab: 'home',
-								icon: 'ios-home-outline',
-								text: '主页',
-							})}
-							{this.renderTabBar({
-								tab: 'article',
-								icon: 'ios-list-box-outline',
-								text: '资讯',
-							})}
-							{this.renderTabBar({
-								tab: 'dynamic',
-								icon: 'ios-compass-outline',
-								text: '动态',
-							})}
-							{this.renderTabBar({
-								tab: 'my',
-								icon: 'ios-person-outline',
-								text: '我的',
-							})}
+							{tabs.map((item, index) => this.renderTabBar(item, index))}
 						</Col>
 						<Col>
-							<TabNavigator
-								tabBarStyle={{height: 0, overflow: 'hidden'}}
-								sceneStyle={{paddingBottom: 0}}
+							<ScrollableTabView
+								ref={(e) => this._scrollableTabView = e}
+								renderTabBar={() => <View style={{height: 0, width: 0}}/>}
 							>
-								{this.renderTabItem({
-									tab: 'home',
-									icon: 'ios-home-outline',
-									text: '主页',
-									component: <Home/>
-								})}
-								{this.renderTabItem({
-									tab: 'article',
-									icon: 'ios-list-box-outline',
-									text: '资讯',
-									component: <Article/>
-
-								})}
-								{this.renderTabItem({
-									tab: 'dynamic',
-									index: 2,
-									icon: 'ios-compass-outline',
-									text: '动态',
-									component: <Dynamic/>
-								})}
-								{this.renderTabItem({
-									tab: 'my',
-									icon: 'ios-person-outline',
-									text: '我的',
-									component: <My/>
-								})}
-							</TabNavigator>
+								{tabs.map((item, index) => this.renderTab(item, index))}
+							</ScrollableTabView>
 						</Col>
 					</Grid>
 				</Content>
@@ -137,20 +120,13 @@ class SideBar extends PureComponent {
 		);
 	}
 
-	renderTabBar(item) {
+	renderTabBar(item, index) {
 		return (
 			<Button
+				key={index}
 				transparent
-				onPress={() => this.setState({selectedTab: item.tab})}
-				style={{
-					flexDirection: 'column',
-					paddingLeft: 0,
-					paddingRight: 0,
-					justifyContent: 'center',
-					alignItems: 'center',
-					width: 60,
-					marginTop: 20,
-				}}
+				onPress={() => this._goToPage(index)}
+				style={styles.tabBarItem}
 			>
 				<Icon name={item.icon}/>
 				<Text>{item.text}</Text>
@@ -158,24 +134,34 @@ class SideBar extends PureComponent {
 		)
 	}
 
-	renderTabItem(item) {
+	renderTab(item, index) {
+		let Component = item.component;
 		return (
-			<TabNavigator.Item
-				selected={this.state.selectedTab === item.tab}
-				title={item.text}
-				renderIcon={() => <Icon name={item.icon}/>}
-				renderSelectedIcon={() => <Icon name={item.icon}/>}
-				onPress={() => this.setState({selectedTab: item.tab})}>
-				{item.component}
-			</TabNavigator.Item>
+			<Component key={index} tabLabel={item.title}/>
 		)
+	}
+
+	_goToPage(index) {
+		this._scrollableTabView.goToPage(index);
+		this.setState({
+			activeTab: index
+		})
 	}
 }
 
 const styles = {
 	sidebar: {
 		backgroundColor: theme.toolbarDefaultBg,
-		width: 60
+		width: 55
+	},
+	tabBarItem: {
+		flexDirection: 'column',
+		paddingLeft: 0,
+		paddingRight: 0,
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: 55,
+		marginTop: 20,
 	}
 }
 

@@ -9,12 +9,9 @@ class OfflineService extends PureComponent {
 
 	render() {
 		return (
-			<Container>
-				<Header back {...this.props} />
-				<Content>
-					<WebView uri="http://echarts.baidu.com/examples.html"/>
-				</Content>
-			</Container>
+			<Content>
+				<WebView uri="http://echarts.baidu.com/examples.html"/>
+			</Content>
 		)
 	}
 }
