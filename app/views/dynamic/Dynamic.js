@@ -110,13 +110,13 @@ class Dynamic extends PureComponent {
           var show =(null);
         }
         var del = ( null );
-        // if(info.userId==this.props.user.appid){
-        //   del=(
-        //     <TouchableOpacity onPress={this._delete.bind(this,info.id)}>
-        //         <Text style={styles.delete}>删除</Text>
-        //     </TouchableOpacity>
-        //   )
-        // }
+        if(info.userId==this.props.user.appid){
+          del=(
+            <TouchableOpacity onPress={this._delete.bind(this,info.id)}>
+                <Text style={styles.delete}>删除</Text>
+            </TouchableOpacity>
+          )
+        }
         let comments =Array.prototype.slice.call(info.dynamicComments, 0);
 
     		return (

@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import Swiper from 'react-native-swiper'
 import {ListItem, Text, Button,} from "native-base";
-import {View,Image,ToastAndroid,DeviceEventEmitter} from "react-native";
+import {View,Image,ToastAndroid,DeviceEventEmitter,TouchableHighlight} from "react-native";
 import {theme} from "../../../utils/";
 
 /**
@@ -19,27 +19,79 @@ class QuestionMyself extends PureComponent {
       <View style={styles.myQuestion}>
           <Text style={styles.title}>我的问题</Text>
           <Swiper
-          height={160}
-          loop={false}
-          dot={<View style={{width:5,height:5,backgroundColor:'gray',borderRadius:4,marginLeft:3,marginRight:3}}></View>}
-          activeDot={<View style={{width:5,height:5,backgroundColor:'#A1CC00',borderRadius:4,marginLeft:3,marginRight:3}}></View>}
-          >
-            {this.renderPage()}
+            height={160}
+            loop={false}
+            dot={<View style={{width:5,height:5,backgroundColor:'gray',borderRadius:4,marginLeft:3,marginRight:3}}></View>}
+            activeDot={<View style={{width:5,height:5,backgroundColor:'#A1CC00',borderRadius:4,marginLeft:3,marginRight:3}}></View>}
+            >
+            {this.renderPages()}
           </Swiper>
       </View>
     )
   }
 
-  renderPage(){
+  renderPages(){
     var pages = [];
-      for(var i=0;i<2;i++){
-          pages.push(
-              <View key={i}>
-              <Text>ddd</Text>
-              </View>
-          );
+      for(var i=0;i<Math.ceil(this.props.my_question.length/4);i++){
+          pages[i] = this.renderOnePage(i,this.props.my_question.length/4);
       }
       return pages;
+  }
+
+  renderOnePage(i,pages){
+    if(i+1-0.25>pages){
+      var  pageContent= (
+            <View key={0} style={{flex:1,flexDirection:'column',justifyContent:'flex-start'}}>
+                {this.renderOneLine(4*i,this.props.my_question.length)}
+            </View>
+          )
+    }else{
+      var  pageContent= [0,1].map((p)=>{
+          return (
+            <View key={p} style={{flex:1,flexDirection:'column',justifyContent:'center'}}>
+                {this.renderOneLine(4*i+p*2,this.props.my_question.length)}
+            </View>
+          )
+        })
+   }
+    return (
+      <View key={i} style={{flex:1,paddingBottom:30,}}>
+      {pageContent}
+      </View>
+    );
+  }
+
+  renderOneLine(i,length){
+    if(i+1>=length){
+      return (
+        <View  style={styles.oneline}>
+          {this.renderOneQuestion(i)}
+          <View style={styles.noQuestion}></View>
+        </View>
+      )
+    }
+    return (
+      <View style={styles.oneline}>
+        {this.renderOneQuestion(i)}
+        {this.renderOneQuestion(i+1)}
+      </View>
+    )
+  }
+
+  renderOneQuestion(num){
+    return (
+      <Button transparent style={styles.oneQuestion} onPress={()=>Actions.myQuestionDetail({question_title:'p.title'})}>
+          <Image source={require('../assets/1yuyue.png')} style={styles.img}/>
+          <Text style={styles.oneTitle}>{this.props.my_question[num]}</Text>
+          <TouchableHighlight  onPress={this.choose.bind(this,this.props.my_question)} underlayColor='#fafafa'>
+          <Image source={require('../../../assets/arrows_square_minus.png')} style={styles.choose}/>
+          </TouchableHighlight>
+      </Button>
+    )
+  }
+
+  choose(){
+
   }
 
 }
@@ -58,14 +110,52 @@ const styles = {
     marginTop:16,
     marginBottom:16,
   },
+  oneline:{
+    flexDirection:'row',
+  },
+  noQuestion:{
+    marginTop:0,
+    marginRight:6,
+    marginLeft:6,
+    paddingLeft:6,
+    paddingRight:6,
+    flex:1,
+    marginBottom:16,
+  },
+  oneQuestion:{
+    marginRight:6,
+    marginLeft:6,
+    paddingLeft:6,
+    paddingRight:6,
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'flex-start',
+    backgroundColor:'#fff',
+    borderColor:'#959595',
+    borderWidth:1,
+    borderRadius:0,
+    marginBottom:16,
+  },
+  oneTitle:{
+    color:'#000',
+    flex:1,
+  },
+  img:{
+    width:36,
+    height:36,
+    marginRight:8,
+  },
+  choose:{
+    width:20,
+    height:20,
+    justifyContent:'flex-end',
+  }
 };
 
-function bindAction(dispatch) {
-  return {
-    openDrawer: () => dispatch(openDrawer()),
-    closeDrawer: key => dispatch(closeDrawer()),
-  };
-}
 
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(QuestionMyself);
+const mapStateToProps = props => ({
+  my_question:props.myQuestion.my_question,
+  flag:props.myQuestion.flag
+});
+export default connect(mapStateToProps)(QuestionMyself);

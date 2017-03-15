@@ -1,5 +1,5 @@
 package com.fudao;
-
+import com.brentvatne.react.ReactVideoPackage;
 import android.app.Application;
 import android.util.Log;
 
@@ -36,7 +36,8 @@ public class MainApplication extends Application implements ReactApplication {
             new SplashScreenReactPackage(),
             new ReactNativeDialogsPackage(),
             new RealmReactPackage(),
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+			new ReactVideoPackage()
       );
     }
   };
