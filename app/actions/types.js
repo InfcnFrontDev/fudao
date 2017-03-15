@@ -68,3 +68,9 @@ export const MY_COLLECTION_FETCH_LIST = 'MY_COLLECTION_FETCH_LIST';
 export const MY_COLLECTION_RECEIVE_LIST = 'MY_COLLECTION_RECEIVE_LIST';
 
 
+// my emotion actions ////////////////////////////////////////
+export const MY_EMOTION_UPDATE = 'MY_EMOTION_UPDATE';
+
+
+
+

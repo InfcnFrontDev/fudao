@@ -5,6 +5,7 @@ import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter} from "react-native";
 import {good,calm,bad} from './Data';
 import {theme,urls,request,toast} from "../../../utils/";
+import {updateMyEmotion} from "../../../actions/emotion";
 
 /**
 * 情绪列表
@@ -62,25 +63,23 @@ class ItemEmotion extends PureComponent {
     )
   }
 
-  solve(p){
-    DeviceEventEmitter.emit('change',p);
-      /*toast.show(JSON.stringify(p))*/
-      request.getJson(urls.apis.NOW_EMOTION,{
-          name:p.title,
-          renqun:'high_quality_population',
-      }).then((data)=>{
-          toast.show(JSON.stringify(data))
-          if(data.success){
-              Actions['myEmotionSolve']({data:data.obj});
-          }
+    solve(p){
+
+        this.props.dispatch(updateMyEmotion(p));
+
+        request.getJson(urls.apis.NOW_EMOTION,{
+            name:p.title,
+            renqun:'high_quality_population',
+        }).then((data)=>{
+            if(data.success){
+                Actions['myEmotionSolve']({data:data.obj});
+            }
+        },(error)=>{
+
+        })
 
 
-      },(error)=>{
-
-      })
-
-
-  }
+    }
 
 }
 
@@ -113,14 +112,7 @@ const styles = {
   },
 };
 
-function bindAction(dispatch) {
-  return {
-    openDrawer: () => dispatch(openDrawer()),
-    closeDrawer: key => dispatch(closeDrawer()),
-  };
-}
-
 const mapStateToProps = state => ({
     loginUser: state.user.loginUser,
 });
-export default connect(mapStateToProps, bindAction)(ItemEmotion);
+export default connect(mapStateToProps)(ItemEmotion);

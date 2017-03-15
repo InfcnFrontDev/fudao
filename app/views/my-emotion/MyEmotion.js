@@ -8,30 +8,26 @@ import {openDrawer, closeDrawer} from "../../actions/drawer";
 import ItemEmotion from './components/ItemEmotion';
 import {Actions} from "react-native-router-flux";
 import {theme,toast} from "../../utils/";
+import {good,calm,bad} from './components/Data';
+import {updateMyEmotion} from "../../actions/emotion";
 
 /**
  * 我的情绪
  */
 class MyEmotion extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-          emotion:{
-            name:'pingjing',
-            title:'平静',
-            img:require('./assets/5pingjing.png')
-          }
-        }
-    }
+
     render() {
-        let {loginUser} = this.props;
+        let {loginUser, myEmotion} = this.props;
+        if(!myEmotion){
+            myEmotion = calm[0];
+        }
 
         return (
             <Container style={styles.container}>
                 <Header back {...this.props} right={
                     <View  style={styles.selectedEmotion}>
-                        <Image source ={this.state.emotion.img} style={styles.selectedEmotionImg}/>
-                        <Text style={styles.selectedEmotionTitle}>{this.state.emotion.title}</Text>
+                        <Image source ={myEmotion.img} style={styles.selectedEmotionImg}/>
+                        <Text style={styles.selectedEmotionTitle}>{myEmotion.title}</Text>
                     </View>
                 }/>
                 <Content style={styles.content}>
@@ -52,16 +48,15 @@ class MyEmotion extends PureComponent {
             </Container>
         )
     }
-
-    componentDidMount(){
-      DeviceEventEmitter.addListener('change',(p)=>{
-        if(p.name!=this.state.emotion.name){
-          this.setState({
-            emotion:p,
-            date:new Date(),
-          })
+    componentWillMount(){
+        let {loginUser, myEmotion, updateTime} = this.props;
+        if(myEmotion){
+            let currentTime = new Date().getTime();
+            if(currentTime - updateTime > 1000 * 60 * 60){
+                this.props.dispatch(updateMyEmotion(calm[0]));
+            }
         }
-      })
+
     }
 }
 
@@ -110,5 +105,6 @@ function bindAction(dispatch) {
 }
 const mapStateToProps = state => ({
     loginUser: state.user.loginUser,
+    ...state.emotion
 });
 export default connect(mapStateToProps, bindAction)(MyEmotion);

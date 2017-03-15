@@ -27,7 +27,7 @@ class Header_ extends PureComponent {
 		if (!center) {
 			if (title)
 				center = (
-					<Title>{title}</Title>
+					<Title >{title}</Title>
 				)
 		}
 

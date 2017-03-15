@@ -8,6 +8,7 @@ import loading from "./loading";
 import user from "./user";
 import friend from "./friend";
 import settings from "./settings";
+import emotion from "./emotion";
 
 export default combineReducers({
 	drawer,
@@ -19,4 +20,5 @@ export default combineReducers({
 	user,
 	friend,
 	settings,
+	emotion,
 });
