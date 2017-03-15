@@ -43,7 +43,7 @@ import MyFriend from "./views/friend/MyFriend";
 import FriendApply from "./views/friend/FriendApply";
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import MyEnergy from "./views/my-energy/MyEnergy";
-import SideBar from "./views/sidebar/SideBar3";
+import SideBar from "./views/sidebar/SideBar";
 
 
 const RouterWithRedux = connect()(Router);

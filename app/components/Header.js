@@ -18,7 +18,7 @@ class Header_ extends PureComponent {
 				);
 			if (menu)
 				left = (
-					<Button transparent onPress={() => this.props.openDrawer()}>
+					<Button transparent onPress={() => Actions.sideBar()}>
 						<Icon name="menu"/>
 					</Button>
 				);

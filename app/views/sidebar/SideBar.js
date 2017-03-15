@@ -1,135 +1,79 @@
 import React, {PureComponent} from "react";
-import {Image} from "react-native";
+import {Image, TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import {Grid, Col, Text, Icon, Button} from "native-base";
+import {Actions} from "react-native-router-flux";
+import {Grid, Col, Text, Icon, Button, View} from "native-base";
 import {Container, Content} from "../../components/index";
-import {theme} from "../../utils/index";
-import TabNavigator from "react-native-tab-navigator";
-import Home from "../home/Home";
-import Article from "../article/Article";
-import Dynamic from "../../views/dynamic/Dynamic";
-import My from "../../views/my/My";
+import {theme, urls} from "../../utils/index";
+import {DefaultTabBar} from "react-native-scrollable-tab-view";
+import TabView from "./components/TabView";
+import HealthEvaluation from "./HealthEvaluation";
+import HealthRing from "./HealthRing";
+import LifeCycle from "./LifeCycle";
+import MyPosition from "./MyPosition";
+import MyTime from "./MyTime";
+import OfflineService from "./OfflineService";
 
 
 const drawerCover = require('../../assets/my-photos/photo.jpg');
 
-const datas = [
+const tabs = [
 	{
-		name: '我的时间',
-		route: 'MY_TIME',
-		icon: require('../../../img/biao.jpg'),
-		bg: '#C5F442',
+		text: '健康环',
+		icon: 'ios-speedometer-outline',
+		selectedIcon: 'ios-speedometer',
+		component: HealthRing
 	},
 	{
-		name: '健康测评',
-		route: 'HEALTH_APPRAISAL',
-		icon: require('../../../img/jiankang.jpg'),
-		bg: '#477EEA',
-		types: '8',
+		text: '生命周期',
+		icon: 'ios-cloudy-outline',
+		selectedIcon: 'ios-cloudy',
+		component: LifeCycle
 	},
 	{
-		name: '健康圈',
-		route: 'HEALTH_CIRCLE',
-		icon: require('../../../img/taiyang.jpg'),
-		bg: '#DA4437',
-		types: '4',
+		text: '我的时间',
+		icon: 'ios-clock-outline',
+		selectedIcon: 'ios-clock',
+		component: MyTime
 	},
 	{
-		name: '生命周期',
-		route: 'LIFE_CYCLE',
-		icon: require('../../../img/woniu.jpg'),
-		bg: '#4DCAE0',
+		text: '我的位置',
+		icon: 'ios-navigate-outline',
+		selectedIcon: 'ios-navigate',
+		component: MyPosition
 	},
 	{
-		name: '我的位置',
-		route: 'MY_LOCATION',
-		icon: require('../../../img/dingwei.jpg'),
-		bg: '#1EBC7C',
-		types: '9',
+		text: '健康测评',
+		icon: 'ios-medkit-outline',
+		selectedIcon: 'ios-medkit',
+		component: HealthEvaluation
+	},
+	{
+		text: '线下服务',
+		icon: 'ios-cart-outline',
+		selectedIcon: 'ios-cart',
+		component: OfflineService
 	}
-
-];
-
-const tabTitles = [
-	'主页', '资讯', '动态', '我的'
-];
-const tabIcons = [
-	'ios-home-outline', 'ios-list-box-outline', 'ios-compass-outline', 'ios-person-outline'
-];
-const tabSelectedIcon = [
-	'ios-home', 'ios-list-box', 'ios-compass', 'ios-person'
-];
-const tabComponents = [
-	Home, Article, Dynamic, My
-];
+]
 
 class SideBar extends PureComponent {
 
 	state = {
-		selectedTab: 'home'
-	};
+		activeTab: 0
+	}
 
 	render() {
-		let {active} = this.state;
-		let Component = tabComponents[active];
 		return (
 			<Container>
 				<Content>
 					<Grid>
 						<Col style={styles.sidebar}>
-							{this.renderTabBar({
-								tab: 'home',
-								icon: 'ios-home-outline',
-								text: '主页',
-							})}
-							{this.renderTabBar({
-								tab: 'article',
-								icon: 'ios-list-box-outline',
-								text: '资讯',
-							})}
-							{this.renderTabBar({
-								tab: 'dynamic',
-								icon: 'ios-compass-outline',
-								text: '动态',
-							})}
-							{this.renderTabBar({
-								tab: 'my',
-								icon: 'ios-person-outline',
-								text: '我的',
-							})}
+							{this.renderAvater()}
+							{tabs.map((item, index) => this.renderTabBar(item, index))}
 						</Col>
 						<Col>
-							<TabNavigator
-								tabBarStyle={{height: 0, overflow: 'hidden'}}
-								sceneStyle={{paddingBottom: 0}}
-							>
-								{this.renderTabItem({
-									tab: 'home',
-									icon: 'ios-home-outline',
-									text: '主页',
-									component: <Home/>
-								})}
-								{this.renderTabItem({
-									tab: 'article',
-									icon: 'ios-list-box-outline',
-									text: '资讯',
-									component: <Article/>
-
-								})}
-								{this.renderTabItem({
-									tab: 'dynamic',
-									index: 2,
-									icon: 'ios-compass-outline',
-									text: '动态',
-									component: <Dynamic/>
-								})}
-								{this.renderTabItem({
-									tab: 'my',
-									icon: 'ios-person-outline',
-									text: '我的',
-									component: <My/>
-								})}
-							</TabNavigator>
+							<TabView ref={(e) => this._tabView = e} tabs={tabs}
+									 onChangeTab={(event) => this._onChangeTab(event)}/>
 						</Col>
 					</Grid>
 				</Content>
@@ -137,48 +81,101 @@ class SideBar extends PureComponent {
 		);
 	}
 
-	renderTabBar(item) {
+	renderAvater() {
+		let {loginUser} = this.props;
+		return (
+			<View style={styles.avatar}>
+				<TouchableOpacity onPress={() => Actions.pop()}>
+					<Image
+						source={{uri: urls.getImage(loginUser.img)}}
+						style={styles.thumbnail}/>
+				</TouchableOpacity>
+			</View>
+		)
+	}
+
+	renderTabBar(item, index) {
+
+		let itemStyle = styles.tabBarItem,
+			textStyle = styles.tabBarItemText,
+			iconStyle = styles.tabBarItemIcon,
+			iconName = item.icon;
+		if (this.state.activeTab === index) {
+			itemStyle = Object.assign({}, styles.tabBarItem, styles.tabBarItemSelected);
+			textStyle = Object.assign({}, styles.tabBarItemText, styles.tabBarItemTextSelected);
+			iconStyle = Object.assign({}, styles.tabBarItemIcon, styles.tabBarItemTextSelected);
+			iconName = item.selectedIcon;
+		}
+
 		return (
 			<Button
+				key={index}
 				transparent
-				onPress={() => this.setState({selectedTab: item.tab})}
-				style={{
-					flexDirection: 'column',
-					paddingLeft: 0,
-					paddingRight: 0,
-					justifyContent: 'center',
-					alignItems: 'center',
-					width: 60,
-					marginTop: 20,
-				}}
+				onPress={() => this._goToPage(index)}
+				style={itemStyle}
 			>
-				<Icon name={item.icon}/>
-				<Text>{item.text}</Text>
+				<Icon name={iconName} style={iconStyle}/>
+				<Text style={textStyle}>{item.text}</Text>
 			</Button>
 		)
 	}
 
-	renderTabItem(item) {
-		return (
-			<TabNavigator.Item
-				selected={this.state.selectedTab === item.tab}
-				title={item.text}
-				renderIcon={() => <Icon name={item.icon}/>}
-				renderSelectedIcon={() => <Icon name={item.icon}/>}
-				onPress={() => this.setState({selectedTab: item.tab})}>
-				{item.component}
-			</TabNavigator.Item>
-		)
+	_goToPage(index) {
+		this._tabView.goToPage(index);
+	}
+
+	_onChangeTab(event) {
+		this.setState({
+			activeTab: event.i
+		})
 	}
 }
-
+const sideBarWidth = 55;
 const styles = {
 	sidebar: {
 		backgroundColor: theme.toolbarDefaultBg,
-		width: 60
-	}
+		width: sideBarWidth
+	},
+	avatar: {
+		width: sideBarWidth,
+		marginTop: 20,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	thumbnail: {
+		width: 40,
+		height: 40,
+		borderWidth: 1,
+		borderColor: '#efefef',
+	},
+	tabBarItem: {
+		flexDirection: 'column',
+		paddingLeft: 0,
+		paddingRight: 0,
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: sideBarWidth,
+		marginTop: 20,
+		borderRadius: 0,
+	},
+	tabBarItemSelected: {
+		backgroundColor: '#FFFFFF',
+	},
+	tabBarItemIcon: {
+		fontSize: 24,
+		color: '#FFFFFF',
+	},
+	tabBarItemText: {
+		fontSize: 10,
+		color: '#FFFFFF',
+	},
+	tabBarItemTextSelected: {
+		color: theme.brandPrimary
+	},
 }
 
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	...state.user,
+});
 export default connect(mapStateToProps)(SideBar);
