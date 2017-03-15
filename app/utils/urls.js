@@ -1,7 +1,7 @@
 // 接口服务器地址
-const apiPath = 'http://103.254.113.11:8080/fudao-svc/'; // 外网
+// const apiPath = 'http://103.254.113.11:8080/fudao-svc/'; // 外网
 // const apiPath = 'http://192.168.10.69:8080/fudao-svc/'; // 内网服务器
-//  const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
+  const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
 
 // web服务器地址
 const webPath = 'http://192.168.3.204:3000/';
@@ -94,8 +94,9 @@ const urls = {
 		//设置新密码
 		AUTH_NEW_PASSWORD: apiPath + "app/accountInfoAction!retrievePassword.action",
 		//基本信息
-		AUTH_USER_INFORMATION: apiPath + "app/userInformationAction!saveUserinformation.action",
-
+		AUTH_USER_INFORMATION: apiPath +"app/userInformationAction!saveUserinformation.action",
+		//情绪
+		NOW_EMOTION:apiPath+"app/emotionAction!method.action",
 
 		// 注册登录(新)
 

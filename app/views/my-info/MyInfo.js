@@ -150,12 +150,18 @@ class MyInfo extends PureComponent {
 			if (action === DatePickerAndroid.dismissedAction) {
 
 			} else {
-				let date = new Date(year, month, day);
+				var date = new Date(year, month, day);
 
-				let year = date.getFullYear();
-				let month = date.getMonth() + 1;
-				let day = date.getDate();
-				let formatedStr = year + '-' + month + '-' + day;
+				var year = date.getFullYear();
+				var month = date.getMonth() + 1;
+				if(month<10){
+					month='0'+month
+				}
+				var day = date.getDate();
+				if(day<10){
+					day='0'+day
+				}
+				var formatedStr = year + '-' + month + '-' + day;
 				dispatch(updateUserInfo(loginUser.appid, item.field, formatedStr));
 			}
 			this.setState(newState);

@@ -71,3 +71,11 @@ export const MY_COLLECTION_RECEIVE_LIST = 'MY_COLLECTION_RECEIVE_LIST';
 // my question  actions ////////////////////////////////////////
 export const MY_QUESTION_ROW = 'MY_QUESTION_ROW';
 export const MY_QUESTION_CHANGE_QUESTION = 'MY_QUESTION_CHANGE_QUESTION'
+
+// my emotion actions ////////////////////////////////////////
+export const MY_EMOTION_UPDATE = 'MY_EMOTION_UPDATE';
+
+
+
+
+>>>>>>> b8dd91af7e8c5365506c694b0319c1bf2e06fba6

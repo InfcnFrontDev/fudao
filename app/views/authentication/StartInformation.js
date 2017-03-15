@@ -7,7 +7,7 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Thumbnail,Text,Icon} from "native-base";
-import {View,Image,TouchableOpacity,TouchableHighlight,ToastAndroid, DatePickerAndroid,} from "react-native";
+import {View,Image,TouchableOpacity,TouchableHighlight,ToastAndroid, DatePickerAndroid,Alert} from "react-native";
 import {Header,Container,Content} from "../../components/index";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import {theme,urls,tools,request,toast} from "../../utils/";
@@ -15,8 +15,6 @@ import  CommitButton from "./components/CommitButton"
 /**
  * 首次登录设置个人信息页
  */
-
-
 class StartInformation extends PureComponent {
 
     constructor(props) {
@@ -120,7 +118,7 @@ class StartInformation extends PureComponent {
                                 <Icon  name='navigate' />
                                 <Text  style={styles.text3}>{this.state.position}</Text>
                             </TouchableOpacity>
-                            <CommitButton  border={false} block={true} top={20} title="提交" onPress={this.commit.bind(this)}/>
+                            <CommitButton  border={false} block={true} top={20} title="提交" onPress={this.tishi.bind(this)}/>
                         </View>
                     </View>
                 </Content>
@@ -165,10 +163,19 @@ class StartInformation extends PureComponent {
             year1:year,
         })
     }
+    tishi(){
+        Alert.alert(
+            '悄悄告诉你:',
+            "基本信息保存后不可修改哦，确认提交吗？",
+            [
+                {text: '取消', onPress: () => null},
+                {text: '提交', onPress: () => this.commit()},
+            ]
+        )
+    }
     commit(){
-        let {position,maxText,appid,sex} = this.state;
-       toast.show(position+'/'+maxText+'/'+sex+'/'+appid)
 
+        let {position,maxText,appid,sex} = this.state;
         //获取地理位置
         let userInformation ={};
         userInformation.appid =appid;
@@ -207,15 +214,16 @@ class StartInformation extends PureComponent {
             city: position
         }).then((data)=>{
             if(data.success) {
-                toast.show("保存成功");
+                /*toast.show("保存成功");*/
                 // 提交登录
-                   let user = Object.assign({}, {
-                        ...data.obj.accountInfo,
-                        ...userInformation
-                    });
+               let user = Object.assign({}, {
+                    ...data.obj.accountInfo,
+                    ...userInformation,
+                    ...data.obj.renqun,
+                });
                     // 保存用户状态
                     this.props.dispatch(login(user));
-                    // 跳到首页*/
+                    // 跳到首页
                     Actions.index()
 
 
