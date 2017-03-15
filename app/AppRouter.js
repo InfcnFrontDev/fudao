@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Router, Scene, Reducer} from "react-native-router-flux";
 import {toast} from "./utils/index";
-import Index from "./views/index/Index";
+import Index from "./views/index/Index2";
 import Search from "./views/search/Search";
 import SearchSymptomProblem from "./views/search/SearchSymptomProblem";
 import SearchDailyLife from "./views/search/SearchDailyLife";
@@ -43,7 +43,7 @@ import MyFriend from "./views/friend/MyFriend";
 import FriendApply from "./views/friend/FriendApply";
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import MyEnergy from "./views/my-energy/MyEnergy";
-import SideBar from "./views/sidebar/SideBar";
+import SideBar from "./views/sidebar/SideBar3";
 
 
 const RouterWithRedux = connect()(Router);
@@ -136,7 +136,7 @@ class AppRouter extends PureComponent {
 					<Scene key="myEnergy" component={MyEnergy} title="我的能量场" hideNavBar/>
 
 					{/*侧边栏*/}
-					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
+					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar initial/>
 				</Scene>
 			</RouterWithRedux>
 		)

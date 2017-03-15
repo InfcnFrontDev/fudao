@@ -1,18 +1,17 @@
 import React, {PureComponent} from "react";
 import {Image} from "react-native";
 import {connect} from "react-redux";
-import {Grid, Col, View, Text, Icon, Button} from 'native-base';
+import {Grid, Col, View, Text, Icon, Button} from "native-base";
 import {Container, Content} from "../../components/index";
 import {theme} from "../../utils/index";
-import ScrollableTabView, {DefaultTabBar,} from 'react-native-scrollable-tab-view';
-
-
-const drawerCover = require('../../assets/my-photos/photo.jpg');
-import TabBar from "./components/TabBar";
+import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
 import Home from "../home/Home";
 import Article from "../article/Article";
 import Dynamic from "../../views/dynamic/Dynamic";
 import My from "../../views/my/My";
+
+
+const drawerCover = require('../../assets/my-photos/photo.jpg');
 
 const datas = [
 	{
@@ -64,6 +63,39 @@ const tabComponents = [
 	Home, Article, Dynamic, My
 ];
 
+
+const tabs = [
+	{
+		id: 'home',
+		title: '主页',
+		icon: 'ios-home-outline',
+		selectedIcon: 'ios-home',
+		component: Home
+	},
+	{
+		id: 'article',
+		title: '资讯',
+		icon: 'ios-list-box-outline',
+		selectedIcon: 'ios-list-box',
+		component: Article
+	},
+	{
+		id: 'dynamic',
+		title: '动态',
+		icon: 'ios-compass-outline',
+		selectedIcon: 'ios-compass',
+		badge: 8,
+		component: Dynamic
+	},
+	{
+		id: 'my',
+		title: '我的',
+		icon: 'ios-person-outline',
+		selectedIcon: 'ios-person',
+		component: My
+	}
+]
+
 class SideBar extends PureComponent {
 
 	state = {
@@ -101,13 +133,13 @@ class SideBar extends PureComponent {
 						</Col>
 						<Col>
 							<ScrollableTabView
-								style={{marginTop: 20,}}
+								ref={(e) => this._scrollableTabView = e}
 								renderTabBar={() => <View style={{height: 0, width: 0}}/>}
-								tabBarPosition={'bottom'}
 							>
 								<Home tabLabel='Tab #1'>My</Home>
 								<Article tabLabel='Tab #2'>favorite</Article>
-								<My tabLabel='Tab #3'>project</My>
+								<Dynamic tabLabel='Tab #3'>project</Dynamic>
+								<My tabLabel='Tab #4'>project</My>
 							</ScrollableTabView>
 						</Col>
 					</Grid>
@@ -120,7 +152,7 @@ class SideBar extends PureComponent {
 		return (
 			<Button
 				transparent
-				onPress={() => this.setState({active: item.index})}
+				onPress={() => this._scrollableTabView.goToPage(item.index)}
 				style={{
 					flexDirection: 'column',
 					paddingLeft: 0,
