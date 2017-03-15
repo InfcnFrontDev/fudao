@@ -10,7 +10,7 @@ import {Actions} from "react-native-router-flux";
 //跳转至详情页
 export function skipToDetail(dynamicDetail,newnew){
 	return (dispatch) => {
-		Actions.del({newnew:newnew});
+		Actions.dynamicDetail({newnew:newnew});
 		dispatch({
 			type: types.DYNAMIC_LIST_LOAD,
 			source:{
@@ -139,23 +139,22 @@ export function del(id,params){
 			}
 		}
 		dynamic.splice(i,1);
-		// ToastAndroid.show(JSON.stringify(dynamic),ToastAndroid.SHORT)
-		params.realm.write(()=>{
-			var delDynamic = params.realm.objects('Dynamic').filtered('id="'+id+'"');
-			params.realm.delete(delDynamic)
-		});
 		dispatch({
 			type: types.DYNAMIC_LIST_LOAD,
 			source:{
 				dynamicList:dynamic
 			}
 		});
-		request.getJson(urls.apis.DYNAMIC_DELETE_DYNAMIC,{
-			key:id
-		})
 		if(params.from=='list'){
 			params.callback(dynamic)
 		}
+		params.realm.write(()=>{
+			var delDynamic = params.realm.objects('Dynamic').filtered('id="'+id+'"');
+			params.realm.delete(delDynamic)
+		});
+		request.getJson(urls.apis.DYNAMIC_DELETE_DYNAMIC,{
+			key:id
+		})
 	}
 }
 
@@ -411,7 +410,7 @@ export function selectPhotoTapped(keyword) {
 }
 
 
-  function uploadImage(uri,dispatch){
+function uploadImage(uri,dispatch){
 		dispatch({
 			type: types.DYNAMIC_LIST_LOAD,
 			source:{
@@ -461,6 +460,7 @@ export function addNewDynamic(newDynamic,newnew,userId,picArr) {
 			type: types.DYNAMIC_LIST_LOAD,
 			source:{
 				addPicture:[],
+				renderPicture:[],
 			}
 		});
 	}

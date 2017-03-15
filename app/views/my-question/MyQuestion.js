@@ -6,9 +6,6 @@ import {Container, Header, Title, Content, ListItem, Text, Left, Button, Icon, B
 import {View,Image,DeviceEventEmitter} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import {Actions} from "react-native-router-flux";
-import {store} from '../../store/configureStore.js';
-import {newRealm} from '../../actions/realm.js'
-import schema from '../../realm/schema.js'
 import QuestionMyself from './components/QuestionMyself'
 import QuestionAll from './components/QuestionAll'
 
@@ -18,7 +15,11 @@ import QuestionAll from './components/QuestionAll'
 class MyQuestion extends PureComponent {
     constructor(props) {
         super(props);
-        this.props.newRealm();
+
+    }
+
+    componentWillMount(){
+      
     }
 
     render() {
@@ -56,9 +57,6 @@ const styles = {
 };
 function bindAction(dispatch) {
     return {
-        newRealm: ()=>dispatch(newRealm(schema)),
-        openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: key => dispatch(closeDrawer()),
     };
 
 }
