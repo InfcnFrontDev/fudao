@@ -211,7 +211,8 @@ class StartInformation extends PureComponent {
                 // 提交登录
                let user = Object.assign({}, {
                     ...data.obj.accountInfo,
-                    ...userInformation
+                    ...userInformation,
+                    ...data.obj.renqun,
                 });
                     // 保存用户状态
                     this.props.dispatch(login(user));

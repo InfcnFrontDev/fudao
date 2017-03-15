@@ -24,8 +24,8 @@ class MyEmotion extends PureComponent {
         }
     }
     render() {
-       /* let {loginUser} = this.props;
-        toast.show(JSON.stringify(loginUser))*/
+        let {loginUser} = this.props;
+
         return (
             <Container style={styles.container}>
                 <Header back {...this.props} right={
@@ -109,6 +109,6 @@ function bindAction(dispatch) {
 
 }
 const mapStateToProps = state => ({
-    /*loginUser: state.user.loginUser,*/
+    loginUser: state.user.loginUser,
 });
 export default connect(mapStateToProps, bindAction)(MyEmotion);

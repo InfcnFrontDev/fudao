@@ -34,14 +34,11 @@ class MyCollection extends PureComponent {
 			page
 		}).then((result) => {
 			let {datas, totalPages} = result.obj;
-			setTimeout(() => {
-				if (page === totalPages) {
-					callback(datas, {allLoaded: true});
-				} else {
-					callback(datas);
-				}
-
-			}, options.firstLoad ? 300 : 0)
+			if (page === totalPages) {
+				callback(datas, {allLoaded: true});
+			} else {
+				callback(datas);
+			}
 		});
 	}
 

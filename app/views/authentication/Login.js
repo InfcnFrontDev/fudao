@@ -92,20 +92,22 @@ class Login extends PureComponent {
 					toast.show("登录成功");
 					var userInformation = data.obj.userInformation;
 					var appid=data.obj.accountInfo.appid;
-					if(userInformation!=undefined){
+					if (userInformation != undefined) { //基本信息已经添加完成
 						let user = Object.assign({}, {
 							...data.obj.accountInfo,
-							...userInformation
+							...userInformation,
+							...data.obj
 						});
 						// 保存用户状态
 						this.props.dispatch(login(user));
 						// 跳到首页
 						Actions.index({
-							type: ActionConst.POP_AND_REPLACE
+							type: ActionConst.POP_AND_REPLACE,
 						});
-					}else{
+					} else { //没有基本信息表示第一次登录需要添写信息
 						Actions['startInformation']({appid:appid})
 					}
+
 
 				} else {
 					toast.show("密码错误");

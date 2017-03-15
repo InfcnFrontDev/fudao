@@ -59,12 +59,12 @@ class RebuildSuccess extends PureComponent {
                     var userInformation = data.obj.userInformation;
                     var appid=data.obj.accountInfo.appid;
                     if (userInformation != undefined) { //基本信息已经添加完成
-                      /*  let user = Object.assign({}, {
+                        let user = Object.assign({}, {
                             ...data.obj.accountInfo,
                             ...userInformation
                         });
                         // 保存用户状态
-                        this.props.dispatch(login(user));*/
+                        this.props.dispatch(login(user));
                         // 跳到首页
                         Actions.index();
                     } else { //没有基本信息表示第一次登录需要添写信息
