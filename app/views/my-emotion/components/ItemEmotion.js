@@ -4,7 +4,7 @@ import {Actions} from "react-native-router-flux";
 import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter} from "react-native";
 import {good,calm,bad} from './Data';
-import {theme} from "../../../utils/";
+import {theme,urls,request,toast} from "../../../utils/";
 
 /**
 * 情绪列表
@@ -19,9 +19,13 @@ class ItemEmotion extends PureComponent {
     }else{
       this.list = bad;
     }
+    this.state={
+        renqun:this.props.loginUser.renqun,
+    }
   }
 
   render(){
+    let {loginUser} = this.props;
     let item = this.list.map((p, i) => {
       if(i%4==0){
         var item_zu =  this._list4(i);
@@ -60,8 +64,22 @@ class ItemEmotion extends PureComponent {
 
   solve(p){
     DeviceEventEmitter.emit('change',p);
-    ToastAndroid.show(JSON.stringify(p),ToastAndroid.SHORT);
-    Actions['myEmotionSolve']();
+      /*toast.show(JSON.stringify(p))*/
+      request.getJson(urls.apis.NOW_EMOTION,{
+          name:p.title,
+          renqun:'high_quality_population',
+      }).then((data)=>{
+          toast.show(JSON.stringify(data))
+          if(data.success){
+              Actions['myEmotionSolve']({data:data.obj});
+          }
+
+
+      },(error)=>{
+
+      })
+
+
   }
 
 }
@@ -102,5 +120,7 @@ function bindAction(dispatch) {
   };
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    loginUser: state.user.loginUser,
+});
 export default connect(mapStateToProps, bindAction)(ItemEmotion);

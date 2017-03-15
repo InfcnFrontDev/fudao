@@ -55,7 +55,6 @@ class SetPassword extends PureComponent {
             account:phone,
             pwd:hex_md5(phone+password),
         }).then((data)=>{
-            toast.show(JSON.stringify(data))
             if(data.success) {
                 var userInformation = data.obj.userInformation;
                 var appid=data.obj.accountInfo.appid;

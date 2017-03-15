@@ -7,7 +7,7 @@ import {View,Image,DeviceEventEmitter} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import ItemEmotion from './components/ItemEmotion';
 import {Actions} from "react-native-router-flux";
-import {theme} from "../../utils/";
+import {theme,toast} from "../../utils/";
 
 /**
  * 我的情绪
@@ -24,6 +24,8 @@ class MyEmotion extends PureComponent {
         }
     }
     render() {
+        let {loginUser} = this.props;
+
         return (
             <Container style={styles.container}>
                 <Header back {...this.props} right={
@@ -106,5 +108,7 @@ function bindAction(dispatch) {
     };
 
 }
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    loginUser: state.user.loginUser,
+});
 export default connect(mapStateToProps, bindAction)(MyEmotion);

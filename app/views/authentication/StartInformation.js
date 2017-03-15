@@ -207,15 +207,16 @@ class StartInformation extends PureComponent {
             city: position
         }).then((data)=>{
             if(data.success) {
-                toast.show("保存成功");
+                /*toast.show("保存成功");*/
                 // 提交登录
-                   let user = Object.assign({}, {
-                        ...data.obj.accountInfo,
-                        ...userInformation
-                    });
+               let user = Object.assign({}, {
+                    ...data.obj.accountInfo,
+                    ...userInformation,
+                    ...data.obj.renqun,
+                });
                     // 保存用户状态
                     this.props.dispatch(login(user));
-                    // 跳到首页*/
+                    // 跳到首页
                     Actions.index()
 
 

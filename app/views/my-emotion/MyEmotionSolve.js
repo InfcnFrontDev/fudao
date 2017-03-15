@@ -6,7 +6,7 @@ import {Container, Header, Title, Content, ListItem, Text, Left, Button, Icon, B
 import {View,Image,DeviceEventEmitter,TouchableHighlight} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import {Actions} from "react-native-router-flux";
-import {theme} from "../../utils/";
+import {theme,urls,request,toast} from "../../utils/";
 
 /**
  * 我的情绪
@@ -14,17 +14,22 @@ import {theme} from "../../utils/";
 class MyEmotionSolve extends PureComponent {
     constructor(props) {
         super(props);
+        this.state={
+            data:this.props.data,
+        }
     }
 
 
     render() {
+        let data=this.state.data;
+
         return (
           <Container  style={styles.container}>
             <TouchableHighlight onPress={()=>Actions.pop()}>
               <View style={styles.View}>
-              <Text style={styles.title}>开心一笑</Text>
-              <Text style={styles.content}>        小时候和我妈去裁缝店，我妈指着电熨斗说：“这东西很烫，千万不要用手碰！” 我很听话，没用手碰，我舔了一下。 那感觉比冬天舔黑龙江漠河北极村的铁栏杆还带劲！</Text>
-              <Image source={require('../../assets/error.png')} style={styles.image}/>
+              <Text style={styles.title}>{data.mitigation_method}</Text>
+              <Text style={styles.content}>{data.method_detail}</Text>
+              <Image source={{uri: urls.getImage("/high_quality_population"+data.img)}} style={styles.image}/>
               </View>
             </TouchableHighlight>
           </Container>
@@ -51,11 +56,18 @@ const styles = {
       marginBottom:60,
     },
     content:{
+      textAlign:'center',
       fontSize:theme.DefaultFontSize+2,
       marginLeft:30,
       marginRight:30,
       lineHeight:28,
     },
+    image:{
+        marginTop:20,
+        width:250,
+        height:200,
+        justifyContent:'center',
+    }
 };
 function bindAction(dispatch) {
     return {
