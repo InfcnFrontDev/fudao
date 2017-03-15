@@ -1,16 +1,16 @@
 import React, {PureComponent} from "react";
-import {Image} from "react-native";
 import {View} from "native-base";
-import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
+import ScrollableTabView from "react-native-scrollable-tab-view";
 
 class TabView extends PureComponent {
 
 	render() {
-		let {tabs} = this.props;
+		let {tabs, onChangeTab} = this.props;
 		return (
 			<ScrollableTabView
 				ref={(e) => this._scrollableTabView = e}
 				renderTabBar={() => <View style={{height: 0, width: 0}}/>}
+				onChangeTab={(event) => onChangeTab(event)}
 			>
 				{tabs.map((item, index) => this.renderTab(item, index))}
 			</ScrollableTabView>
@@ -34,5 +34,16 @@ class TabView extends PureComponent {
 }
 
 const styles = {}
+
+TabView.propTypes = {
+	tabs: React.PropTypes.array,
+	onChangeTab: React.PropTypes.func,
+}
+
+TabView.defaultProps = {
+	tabs: [],
+	onChangeTab: () => {
+	},
+}
 
 export default (TabView);

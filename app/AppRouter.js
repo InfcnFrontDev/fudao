@@ -136,7 +136,7 @@ class AppRouter extends PureComponent {
 					<Scene key="myEnergy" component={MyEnergy} title="我的能量场" hideNavBar/>
 
 					{/*侧边栏*/}
-					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar initial/>
+					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar />
 				</Scene>
 			</RouterWithRedux>
 		)
