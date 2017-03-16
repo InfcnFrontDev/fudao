@@ -1,10 +1,8 @@
 import React, {PureComponent} from "react";
+import {Modal, TouchableHighlight, View, Text} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Text, View} from "native-base";
 import {Container, Content, Header, HeaderIcon} from "../../components/index";
-import MyEnter from "./components/MyEnter.js";
-import Headline from "./components/Headline.js";
 
 
 /**
@@ -12,36 +10,58 @@ import Headline from "./components/Headline.js";
  */
 class Home extends PureComponent {
 
+	state = {
+		modalVisible: false
+	}
+
 	render() {
+
 		return (
 			<Container>
 				<Header menu {...this.props} right={
 					<View style={{flexDirection: 'row'}}>
 						<HeaderIcon onPress={()=>Actions.search()} name="search"/>
-						<HeaderIcon onPress={()=>Actions.message()} name="ios-chatboxes"/>
+						<HeaderIcon onPress={()=> this._setModalVisible()} name="ios-chatboxes"/>
 					</View>
 				}/>
 
-				<Content style={styles.content}>
-					<Headline />
-					<MyEnter />
-					<View>
-						<Text>
-							<Text style={styles.title}>Current position: </Text>
-							{JSON.stringify(this.props.lastPosition)}
-						</Text>
-					</View>
+				<Content>
+					<Modal
+						animationType={"fade"}
+						transparent={true}
+						visible={this.state.modalVisible}
+						onRequestClose={() => {}}
+					>
+						<View style={{flex:1,justifyContent:'center', alignItems:'center'}}>
+							<View>
+								<Text>Hello World!</Text>
+								<TouchableHighlight onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+									<Text>Hide Modal</Text>
+								</TouchableHighlight>
+							</View>
+						</View>
+					</Modal>
+					<TouchableHighlight onPress={() => this.setModalVisible(true)}>
+						<Text>Show Modal</Text>
+					</TouchableHighlight>
 				</Content>
 			</Container>
 		)
 	}
+
+	setModalVisible(visible) {
+		this.setState({modalVisible: visible});
+	}
 }
 
 const styles = {
-	content: {
-		backgroundColor: '#fff'
-	}
-}
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		padding: 20,
+	},
+};
+
 const mapStateToProps = state => ({
 	...state.user,
 	...state.drawer,
