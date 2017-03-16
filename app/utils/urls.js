@@ -136,6 +136,12 @@ const urls = {
       // 我的问题 ---------------------------------------------------------
       //所有问题
       MY_QUESTION_ALL_QUESTION:apiPath+'app/threeDiseasesListAction!findDiseasesAll.action',
+      //用户问题
+      MY_QUESTION_USER_QUESTION:apiPath+'app/threeDiseasesListAction!getUserDiseasesByuserId.action',
+      //添加用户问题
+      MY_QUESTION_ADD_USER_QUESTION:apiPath+'app/threeDiseasesListAction!addUserDisease.action',
+      //删除用户问题
+      MY_QUESTION_DEL_USER_QUESTION:apiPath+'app/threeDiseasesListAction!deleteUserDisease.action',
 
 	},
 

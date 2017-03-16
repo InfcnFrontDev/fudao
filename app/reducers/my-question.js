@@ -2,15 +2,15 @@ import * as types from "../actions/types";
 import { ToastAndroid,} from "react-native";
 
 const initialState = {
-	rows:[],
 	my_question:[],
 	flag:true,
 	allQuestions:[],
 	refresh:true,
+	changeRowID:0,
 };
 export default function (state = initialState, {type, source}) {
 	switch (type) {
-		case types.MY_QUESTION_ROW:
+		case types.MY_QUESTION:
 			return Object.assign({}, state, {
 				...source
 			});
@@ -27,7 +27,9 @@ export default function (state = initialState, {type, source}) {
 			return Object.assign({}, state, {
 				allQuestions:source.allQuestions,
 				refresh:!state.refresh,
+				changeRowID:source.changeRowID
 			});
+
 		default:
 			return state;
 

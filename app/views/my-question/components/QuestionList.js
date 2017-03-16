@@ -8,6 +8,7 @@ import {theme} from "../../../utils/";
 import {questions} from './Data';
 import GiftedListView from '../../../components/GiftedListView'
 import {myQuestionToRows,addMyQuestion} from '../../../actions/my-question.js'
+import {request,urls} from "../../../utils/";
 
 
 /**
@@ -18,6 +19,15 @@ class QuestionList extends PureComponent {
 		super(props);
 	}
 
+
+  shouldComponentUpdate(nextProps){
+    if(this.props.my_question!=nextProps.my_question||this.props.refresh!=nextProps.refresh){
+      if(nextProps.changeRowID!=this.props.id){
+        return false
+      }
+    }
+    return true;
+  }
 
 	render() {
 		return (
@@ -51,7 +61,6 @@ class QuestionList extends PureComponent {
 	}
 
 	renderCellView(p,num,i) {
-
     var btn=(null)
     if(p!=''){
       if(p.flag){
@@ -62,7 +71,7 @@ class QuestionList extends PureComponent {
         )
       }else{
         var add=(
-          <TouchableHighlight  onPress={this.choose.bind(this,p.showVal)} underlayColor='transparent'>
+          <TouchableHighlight  onPress={this.choose.bind(this,p)} underlayColor='transparent'>
             <Image source={require('../../../assets/arrows_square_plus.png')} style={styles.choose}/>
           </TouchableHighlight>
         )
@@ -70,7 +79,7 @@ class QuestionList extends PureComponent {
       btn = (
         <Button transparent style={(num%2==0)?(i==0?styles.oneQuestion00:styles.oneQuestion01):(i==0?styles.oneQuestion10:styles.oneQuestion11)} onPress={()=>Actions.myQuestionDetail({question_title:p.showVal})}>
           <View  style={styles.oneQuestionView}>
-            <Image source={require('../assets/1yuyue.png')} style={styles.img}/>
+            <Image source={{uri:urls.getImage(p.img)}} style={styles.img}/>
             <Text style={styles.oneTitle}>{p.showVal}</Text>
             {add}
           </View>
@@ -88,9 +97,9 @@ class QuestionList extends PureComponent {
 		return (null )
 	}
 
-  choose(title){
+  choose(p){
     const {dispatch} = this.props;
-    dispatch(addMyQuestion(title,this.props.my_question,this.props.id,this.props.allQuestions,this.refs.questions._postRefresh))
+    dispatch(addMyQuestion(p,this.props.my_question,this.props.id,this.props.allQuestions,this.refs.questions._postRefresh,this.props.userId))
   }
 }
 
@@ -160,7 +169,7 @@ const styles = {
   img:{
     width:36,
     height:36,
-    marginRight:8,
+    marginRight:4,
   },
   choose:{
     width:20,
@@ -173,6 +182,7 @@ const mapStateToProps = state => ({
   my_question:state.myQuestion.my_question,
   allQuestions:state.myQuestion.allQuestions,
   refresh:state.myQuestion.refresh,
-
+  changeRowID:state.myQuestion.changeRowID,
+  userId:state.user.loginUser.appid,
 });
 export default connect(mapStateToProps)(QuestionList);

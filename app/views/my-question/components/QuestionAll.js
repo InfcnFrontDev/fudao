@@ -39,7 +39,8 @@ class QuestionAll extends PureComponent {
   }
   onFetch(page = 1, callback, options) {
     const {dispatch} = this.props;
-    dispatch(getAllQuestions(callback,this.props.my_question,this.props.allQuestions))
+    ToastAndroid.show(JSON.stringify(this.props.renqun),ToastAndroid.SHORT);
+    dispatch(getAllQuestions(callback,this.props.my_question,this.props.allQuestions,this.props.renqun))
 	}
 
 	renderRowView(row,sectionid,rowid) {
@@ -76,5 +77,6 @@ const styles = {
 const mapStateToProps = state => ({
   my_question:state.myQuestion.my_question,
   allQuestions:state.myQuestion.allQuestions,
+  renqun:state.user.loginUser.renqun
 });
 export default connect(mapStateToProps)(QuestionAll);
