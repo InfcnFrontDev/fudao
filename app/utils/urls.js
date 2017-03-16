@@ -120,12 +120,22 @@ const urls = {
 		 USER_INFO: apiPath + 'userinfo',*/
 
 		 	// 动态 ---------------------------------------------------------
+      //动态列表
 			DYNAMIC_LIST:apiPath + 'app/friendDynamicAction!getDynamics.action',
+      //添加动态
 			DYNAMIC_ADD_DYNAMIC:apiPath+'app/friendDynamicAction!addDynamic.action',
+      //删除动态
 			DYNAMIC_DELETE_DYNAMIC:apiPath+'app/friendDynamicAction!deleteDynamic.action',
+      //添加评论
 			DYNAMIC_ADD_COMMENT:apiPath+'app/friendDynamicAction!addDynamicComment.action',
+      //点赞
 			DYNAMIC_ADD_PRAISE:apiPath+'app/friendDynamicAction!addDynamicPraise.action',
+      //取消点赞
 			DYNAMIC_DELETE_PRAISE:apiPath+'app/friendDynamicAction!deleteDynamicPraiseByUserIdAndDynamicId.action',
+
+      // 我的问题 ---------------------------------------------------------
+      //所有问题
+      MY_QUESTION_ALL_QUESTION:apiPath+'app/threeDiseasesListAction!findDiseasesAll.action',
 
 	},
 

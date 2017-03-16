@@ -18,8 +18,8 @@ class QuestionList extends PureComponent {
 		super(props);
 	}
 
+
 	render() {
-		// let {title} = this.props;
 		return (
       <View style={styles.contain}>
 				<GiftedListView
@@ -30,6 +30,7 @@ class QuestionList extends PureComponent {
 					firstLoader={true}
 					withSections={false}
 					paginationAllLoadedView={this.renderPaginationAllLoadedView}
+          ref='questions'
 				/>
       </View>
 		)
@@ -50,22 +51,34 @@ class QuestionList extends PureComponent {
 	}
 
 	renderCellView(p,num,i) {
+
     var btn=(null)
     if(p!=''){
+      if(p.flag){
+        var add=(
+          <TouchableHighlight underlayColor='transparent'>
+            <Image source={require('../../../assets/arrows_square_check.png')} style={styles.choose}/>
+          </TouchableHighlight>
+        )
+      }else{
+        var add=(
+          <TouchableHighlight  onPress={this.choose.bind(this,p.showVal)} underlayColor='transparent'>
+            <Image source={require('../../../assets/arrows_square_plus.png')} style={styles.choose}/>
+          </TouchableHighlight>
+        )
+      }
       btn = (
-        <Button transparent style={(num%2==0)?(i==0?styles.oneQuestion00:styles.oneQuestion01):(i==0?styles.oneQuestion10:styles.oneQuestion11)} onPress={()=>Actions.myQuestionDetail({question_title:'p.title'})}>
+        <Button transparent style={(num%2==0)?(i==0?styles.oneQuestion00:styles.oneQuestion01):(i==0?styles.oneQuestion10:styles.oneQuestion11)} onPress={()=>Actions.myQuestionDetail({question_title:p.showVal})}>
           <View  style={styles.oneQuestionView}>
             <Image source={require('../assets/1yuyue.png')} style={styles.img}/>
-            <Text style={styles.oneTitle}>{p}</Text>
-            <TouchableHighlight  onPress={this.choose.bind(this,p)} underlayColor='#fafafa'>
-            <Image source={require('../../../assets/arrows_square_plus.png')} style={styles.choose}/>
-            </TouchableHighlight>
+            <Text style={styles.oneTitle}>{p.showVal}</Text>
+            {add}
           </View>
         </Button>
       )
     }
     return (
-      <View key={p} style={[styles.cellView, p == '' ? styles.noDataCellView : {}]}>
+      <View key={i} style={[styles.cellView, p == '' ? styles.noDataCellView : {}]}>
         {btn}
       </View>
     )
@@ -77,7 +90,7 @@ class QuestionList extends PureComponent {
 
   choose(title){
     const {dispatch} = this.props;
-    dispatch(addMyQuestion(title,this.props.my_question))
+    dispatch(addMyQuestion(title,this.props.my_question,this.props.id,this.props.allQuestions,this.refs.questions._postRefresh))
   }
 }
 
@@ -112,35 +125,29 @@ const styles = {
 		fontSize: 12,
 		paddingTop: 5
 	},
-	allLoadedView: {
-		height: 44,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#FFF',
-		padding: 20,
-	},
-	allLoadedText: {
-		fontSize: 14,
-	},
   oneQuestion00:{
+    padding:0,
     margin:6,
     backgroundColor:'#F1F7EE',
   },
   oneQuestion01:{
+    padding:0,
     margin:6,
     backgroundColor:'#F9F1EF',
   },
   oneQuestion10:{
     margin:6,
+    padding:0,
     backgroundColor:'#F4F5E5',
   },
   oneQuestion11:{
     margin:6,
+    padding:0,
     backgroundColor:'#EDF4FE',
   },
   oneQuestionView:{
-    paddingLeft:1,
-    paddingRight:1,
+    marginLeft:8,
+    marginRight:8,
     flex:1,
     flexDirection:'row',
     alignItems:'center',
@@ -164,5 +171,8 @@ const styles = {
 
 const mapStateToProps = state => ({
   my_question:state.myQuestion.my_question,
+  allQuestions:state.myQuestion.allQuestions,
+  refresh:state.myQuestion.refresh,
+
 });
 export default connect(mapStateToProps)(QuestionList);
