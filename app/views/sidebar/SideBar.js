@@ -20,38 +20,38 @@ const drawerCover = require('../../assets/my-photos/photo.jpg');
 const tabs = [
 	{
 		text: '健康环',
-		icon: 'ios-speedometer-outline',
-		selectedIcon: 'ios-speedometer',
+		icon: require('../../assets/sidebar/shulan-2_06.png'),
+		selectedIcon:require('../../assets/sidebar/shulan_06.png'),
 		component: HealthRing
 	},
 	{
 		text: '生命周期',
-		icon: 'ios-cloudy-outline',
-		selectedIcon: 'ios-cloudy',
+		icon: require('../../assets/sidebar/shulan-2_08.png'),
+		selectedIcon: require('../../assets/sidebar/shulan_08.png'),
 		component: LifeCycle
 	},
 	{
 		text: '我的时间',
-		icon: 'ios-clock-outline',
-		selectedIcon: 'ios-clock',
+		icon: require('../../assets/sidebar/shulan-2_10.png'),
+		selectedIcon: require('../../assets/sidebar/shulan_10.png'),
 		component: MyTime
 	},
 	{
 		text: '我的位置',
-		icon: 'ios-navigate-outline',
-		selectedIcon: 'ios-navigate',
+		icon: require('../../assets/sidebar/shulan-2_12.png'),
+		selectedIcon: require('../../assets/sidebar/shulan_12.png'),
 		component: MyPosition
 	},
 	{
 		text: '健康测评',
-		icon: 'ios-medkit-outline',
-		selectedIcon: 'ios-medkit',
+		icon: require('../../assets/sidebar/shulan-2_14.png'),
+		selectedIcon: require('../../assets/sidebar/shulan_14.png'),
 		component: HealthEvaluation
 	},
 	{
 		text: '线下服务',
-		icon: 'ios-cart-outline',
-		selectedIcon: 'ios-cart',
+		icon: require('../../assets/sidebar/shulan-2_16.png'),
+		selectedIcon: require('../../assets/sidebar/shulan_16.png'),
 		component: OfflineService
 	}
 ]
@@ -114,7 +114,7 @@ class SideBar extends PureComponent {
 				onPress={() => this._goToPage(index)}
 				style={itemStyle}
 			>
-				<Icon name={iconName} style={iconStyle}/>
+				<Image source={iconName} style={{width: 24,height: 24}}/>
 				<Text style={textStyle}>{item.text}</Text>
 			</Button>
 		)

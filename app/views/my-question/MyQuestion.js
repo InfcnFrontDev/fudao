@@ -8,6 +8,7 @@ import {openDrawer, closeDrawer} from "../../actions/drawer";
 import {Actions} from "react-native-router-flux";
 import QuestionMyself from './components/QuestionMyself'
 import QuestionAll from './components/QuestionAll'
+import {initialMyQuestion} from '../../actions/my-question.js'
 
 /**
  * 我的问题
@@ -19,7 +20,8 @@ class MyQuestion extends PureComponent {
     }
 
     componentWillMount(){
-      
+      const {dispatch} = this.props;
+      dispatch(initialMyQuestion(this.props.userId,this.props.my_question))
     }
 
     render() {
@@ -55,11 +57,9 @@ const styles = {
     backgroundColor:'#fff',
   },
 };
-function bindAction(dispatch) {
-    return {
-    };
 
-}
-
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(MyQuestion);
+const mapStateToProps = state => ({
+  userId:state.user.loginUser.appid,
+  my_question:state.myQuestion.my_question,
+});
+export default connect(mapStateToProps)(MyQuestion);

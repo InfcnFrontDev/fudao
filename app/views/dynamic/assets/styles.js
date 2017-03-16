@@ -50,7 +50,7 @@ const styles = {
 
   time:{
     color:'#7E7E7E',
-    fontSize:theme.DefaultFontSize,
+    fontSize:14,
   },
   dynamicMessage:{
     position:'absolute',
@@ -70,6 +70,7 @@ const styles = {
   delete:{
     color:'#5E7192',
     marginLeft:8,
+    fontSize:14,
   },
   showContain:{
     marginTop:5,

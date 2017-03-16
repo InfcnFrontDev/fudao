@@ -14,7 +14,7 @@ export function skipToDetail(dynamicDetail,newnew){
 		dispatch({
 			type: types.DYNAMIC_LIST_LOAD,
 			source:{
-				del:dynamicDetail
+				dynamicDetail:dynamicDetail
 			}
 		});
 	}
@@ -218,16 +218,16 @@ export function fetchData(page,options,callback,params){
 			request.getJson(urls.apis.DYNAMIC_LIST,{
 							userId:params.user.appid,
 							page:1,
-							rows:5,
+							rows:6,
 					}).then((res)=>{
 						ToastAndroid.show(JSON.stringify(res.data),ToastAndroid.SHORT);
 						  if(res.datas.length>0) {
 								//有网状态下第一次加载
-
-								insert(res.datas,params.realm);
+								var arrDynamic = res.datas.slice(0,5);
+								insert(arrDynamic,params.realm);
 						    let realm_res = params.realm.objects('Dynamic').sorted('publishTime');
 						    var dynamicList = realm_res.slice(realm_res.length-5,realm_res.length).reverse();
-								if(res.datas.length<5){
+								if(res.datas.length<=5){
 									callback(dynamicList,{
 										allLoaded:true
 									});
