@@ -5,6 +5,7 @@ import Swiper from 'react-native-swiper'
 import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter,TouchableHighlight} from "react-native";
 import {theme} from "../../../utils/";
+import {delMyQuestion} from '../../../actions/my-question.js'
 
 /**
 * 我所选的问题
@@ -80,18 +81,19 @@ class QuestionMyself extends PureComponent {
 
   renderOneQuestion(num){
     return (
-      <Button transparent style={styles.oneQuestion} onPress={()=>Actions.myQuestionDetail({question_title:'p.title'})}>
+      <Button transparent style={styles.oneQuestion} onPress={()=>Actions.myQuestionDetail({question_title:this.props.my_question[num].title})}>
           <Image source={require('../assets/1yuyue.png')} style={styles.img}/>
-          <Text style={styles.oneTitle}>{this.props.my_question[num]}</Text>
-          <TouchableHighlight  onPress={this.choose.bind(this,this.props.my_question)} underlayColor='#fafafa'>
+          <Text style={styles.oneTitle}>{this.props.my_question[num].title}</Text>
+          <TouchableHighlight  onPress={this.choose.bind(this,this.props.my_question[num])} underlayColor='#fafafa'>
           <Image source={require('../../../assets/arrows_square_minus.png')} style={styles.choose}/>
           </TouchableHighlight>
       </Button>
     )
   }
 
-  choose(){
-
+  choose(obj){
+    const {dispatch} = this.props;
+    dispatch(delMyQuestion(obj,this.props.my_question,this.props.allQuestions));
   }
 
 }
@@ -156,6 +158,7 @@ const styles = {
 
 const mapStateToProps = props => ({
   my_question:props.myQuestion.my_question,
+  allQuestions:props.myQuestion.allQuestions,
   flag:props.myQuestion.flag
 });
 export default connect(mapStateToProps)(QuestionMyself);

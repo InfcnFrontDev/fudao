@@ -3,23 +3,45 @@ import { ToastAndroid,} from "react-native";
 import {request,urls} from "../utils/";
 
 
-export function getAllQuestions(callback) {
+export function getAllQuestions(callback,my_question,all_questions) {
   return (dispatch) => {
-    // request.getJson(urls.apis.DYNAMIC_DELETE_PRAISE,{
-    //   // dynamicID:info.id,
-    //   // userId:params.user.appid,
-    // }).then((res)=>{
-    //
-    // })
-    // dispatch({
-    //   type: types.MY_QUESTION_ROW,
-    //   source:{
-    //     row:rows,
-    //   }
-    // })
-    callback([1,2,3], {
-      allLoaded: true
-    })
+    if(all_questions!=[]){
+      callback(all_questions, {
+        allLoaded: true
+      })
+    }else{
+      request.getJson(urls.apis.MY_QUESTION_ALL_QUESTION,{
+        renqun:'aged'
+      }).then((res)=>{
+        var allQuestions = res.obj.datas;
+        for(var i=0;i<allQuestions.length;i++){
+          for(var j=0;j<allQuestions[i].diseases.length;j++){
+            var flag=true;
+            for(var k=0;k<my_question.length;k++){
+              if(my_question[k].title==allQuestions[i].diseases[j].showVal){
+                allQuestions[i].diseases[j].flag=true;
+                flag=false;
+                break;
+              }
+            }
+            if(flag){
+              allQuestions[i].diseases[j].flag=false;
+            }
+          }
+        }
+        dispatch({
+          type: types.MY_QUESTION_ALL_QUESTION,
+          source:{
+            allQuestions:allQuestions,
+          }
+        })
+        // setTimeout(function(){
+        callback(allQuestions, {
+          allLoaded: true
+        })
+        // },600);
+      })
+    }
   }
 }
 
@@ -30,8 +52,7 @@ export function myQuestionToRows(allQuestion,callback) {
     let colNum = 2,
     rows = [],
     row = {rowNum: 0, cells: []};
-    allQuestion=['aaa','bbb','ccc','ddd','eee','fff','ggg','hhhh','rrr']
-    //.then函数内部
+
     for (var value of allQuestion) {
       row.cells.push(value);
       if (row.cells.length == 2) {
@@ -52,24 +73,55 @@ export function myQuestionToRows(allQuestion,callback) {
   }
 }
 
-export function addMyQuestion(title,my_question) {
+export function addMyQuestion(title,my_question,id,allQuestions,callback) {
   return (dispatch) => {
-    for(var i=0;i<my_question.length;i++){
-      if(title==my_question[i]){
-        ToastAndroid.show('删掉了',ToastAndroid.SHORT);
-        my_question.splice(i,1);
-        i=-1;
-        break;
+    my_question = [{title}].concat(my_question);
+    dispatch({
+      type: types.MY_QUESTION_CHANGE_QUESTION,
+      source:{
+        my_question:my_question,
+      }
+    })
+    for(var j=0;j<allQuestions[id].diseases.length;j++){
+      if(allQuestions[id].diseases[j].showVal==title){
+          allQuestions[id].diseases[j].flag=true;
       }
     }
+    myQuestionToRows(allQuestions[id],callback);
+    dispatch({
+      type: types.MY_QUESTION_ALL_QUESTION,
+      source:{
+        allQuestions:allQuestions,
+      }
+    })
+  }
+}
 
-    if(i!=-1){
-    my_question = [title].concat(my_question);
+export function delMyQuestion(obj,my_question,allQuestions) {
+  return (dispatch) => {
+    for(var i=0;i<my_question.length;i++){
+      if(obj.title==my_question[i].title){
+        my_question.splice(i,1);
+        break;
+      }
     }
     dispatch({
       type: types.MY_QUESTION_CHANGE_QUESTION,
       source:{
         my_question:my_question,
+      }
+    })
+    for(var i=0;i<allQuestions.length;i++){
+      for(var j=0;j<allQuestions[i].diseases.length;j++){
+        if(allQuestions[i].diseases[j].showVal==obj.title){
+          allQuestions[i].diseases[j].flag=false;
+        }
+      }
+    }
+    dispatch({
+      type: types.MY_QUESTION_DEL_QUESTION_CHANGE_ALL_QUESTIONS,
+      source:{
+        allQuestions:allQuestions,
       }
     })
   }

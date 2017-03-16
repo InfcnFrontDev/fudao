@@ -70,7 +70,9 @@ export const MY_COLLECTION_RECEIVE_LIST = 'MY_COLLECTION_RECEIVE_LIST';
 
 // my question  actions ////////////////////////////////////////
 export const MY_QUESTION_ROW = 'MY_QUESTION_ROW';
+export const MY_QUESTION_ALL_QUESTION = 'MY_QUESTION_ALL_QUESTION';
 export const MY_QUESTION_CHANGE_QUESTION = 'MY_QUESTION_CHANGE_QUESTION'
+export const MY_QUESTION_DEL_QUESTION_CHANGE_ALL_QUESTIONS = 'MY_QUESTION_DEL_QUESTION_CHANGE_ALL_QUESTIONS'
 
 // my emotion actions ////////////////////////////////////////
 export const MY_EMOTION_UPDATE = 'MY_EMOTION_UPDATE';
