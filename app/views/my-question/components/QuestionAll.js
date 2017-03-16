@@ -20,8 +20,9 @@ class QuestionAll extends PureComponent {
 
   }
 
+
+
   render(){
-    var items=[0,1,2,3]
     return (
       <View>
         <GiftedListView
@@ -38,19 +39,15 @@ class QuestionAll extends PureComponent {
   }
   onFetch(page = 1, callback, options) {
     const {dispatch} = this.props;
-    dispatch(getAllQuestions(callback))
-    // setTimeout(() => {
-    //   callback([1,2,3,4],{
-    //     allLoaded:true
-    //   })
-		// }, 700);
+    ToastAndroid.show(JSON.stringify(this.props.renqun),ToastAndroid.SHORT);
+    dispatch(getAllQuestions(callback,this.props.my_question,this.props.allQuestions,this.props.renqun))
 	}
 
 	renderRowView(row,sectionid,rowid) {
 		return (
       <View style={styles.types}>
-             <Text style={styles.title}>{rowid}</Text>
-              <QuestionList data={[]} type='myQuestionDetail' />
+             <Text style={styles.title}>{row.name}</Text>
+              <QuestionList data={row.diseases} id={rowid} type='myQuestionDetail' />
       </View>
 		)
 	}
@@ -58,17 +55,6 @@ class QuestionAll extends PureComponent {
   renderPaginationAllLoadedView(){
     return (null)
   }
-  // renderQuestions(){
-  //   let item = [0,1].map((p, i) => {
-  //     return (
-  //       <View key={i} style={styles.types}>
-  //              <Text style={styles.title}>{p}</Text>
-  //               <QuestionList data={[]} type='myQuestionDetail' />
-  //       </View>
-  //     )
-  //   })
-  //   return item;
-  // }
 
 }
 
@@ -76,6 +62,7 @@ const styles = {
   types:{
     borderBottomColor:'#F0F0F0',
     borderBottomWidth:1,
+    paddingBottom:12,
   },
   title:{
     fontSize:theme.DefaultFontSize+2,
@@ -89,5 +76,7 @@ const styles = {
 
 const mapStateToProps = state => ({
   my_question:state.myQuestion.my_question,
+  allQuestions:state.myQuestion.allQuestions,
+  renqun:state.user.loginUser.renqun
 });
 export default connect(mapStateToProps)(QuestionAll);

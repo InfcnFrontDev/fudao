@@ -8,6 +8,7 @@ import {theme} from "../../../utils/";
 import {questions} from './Data';
 import GiftedListView from '../../../components/GiftedListView'
 import {myQuestionToRows,addMyQuestion} from '../../../actions/my-question.js'
+import {request,urls} from "../../../utils/";
 
 
 /**
@@ -18,8 +19,17 @@ class QuestionList extends PureComponent {
 		super(props);
 	}
 
+
+  shouldComponentUpdate(nextProps){
+    if(this.props.my_question!=nextProps.my_question||this.props.refresh!=nextProps.refresh){
+      if(nextProps.changeRowID!=this.props.id){
+        return false
+      }
+    }
+    return true;
+  }
+
 	render() {
-		// let {title} = this.props;
 		return (
       <View style={styles.contain}>
 				<GiftedListView
@@ -30,6 +40,7 @@ class QuestionList extends PureComponent {
 					firstLoader={true}
 					withSections={false}
 					paginationAllLoadedView={this.renderPaginationAllLoadedView}
+          ref='questions'
 				/>
       </View>
 		)
@@ -52,20 +63,31 @@ class QuestionList extends PureComponent {
 	renderCellView(p,num,i) {
     var btn=(null)
     if(p!=''){
-      btn = (
-        <Button transparent style={(num%2==0)?(i==0?styles.oneQuestion00:styles.oneQuestion01):(i==0?styles.oneQuestion10:styles.oneQuestion11)} onPress={()=>Actions.myQuestionDetail({question_title:'p.title'})}>
-          <View  style={styles.oneQuestionView}>
-            <Image source={require('../assets/1yuyue.png')} style={styles.img}/>
-            <Text style={styles.oneTitle}>{p}</Text>
-            <TouchableHighlight  onPress={this.choose.bind(this,p)} underlayColor='#fafafa'>
+      if(p.flag){
+        var add=(
+          <TouchableHighlight underlayColor='transparent'>
+            <Image source={require('../../../assets/arrows_square_check.png')} style={styles.choose}/>
+          </TouchableHighlight>
+        )
+      }else{
+        var add=(
+          <TouchableHighlight  onPress={this.choose.bind(this,p)} underlayColor='transparent'>
             <Image source={require('../../../assets/arrows_square_plus.png')} style={styles.choose}/>
-            </TouchableHighlight>
+          </TouchableHighlight>
+        )
+      }
+      btn = (
+        <Button transparent style={(num%2==0)?(i==0?styles.oneQuestion00:styles.oneQuestion01):(i==0?styles.oneQuestion10:styles.oneQuestion11)} onPress={()=>Actions.myQuestionDetail({question_title:p.showVal})}>
+          <View  style={styles.oneQuestionView}>
+            <Image source={{uri:urls.getImage(p.img)}} style={styles.img}/>
+            <Text style={styles.oneTitle}>{p.showVal}</Text>
+            {add}
           </View>
         </Button>
       )
     }
     return (
-      <View key={p} style={[styles.cellView, p == '' ? styles.noDataCellView : {}]}>
+      <View key={i} style={[styles.cellView, p == '' ? styles.noDataCellView : {}]}>
         {btn}
       </View>
     )
@@ -75,9 +97,9 @@ class QuestionList extends PureComponent {
 		return (null )
 	}
 
-  choose(title){
+  choose(p){
     const {dispatch} = this.props;
-    dispatch(addMyQuestion(title,this.props.my_question))
+    dispatch(addMyQuestion(p,this.props.my_question,this.props.id,this.props.allQuestions,this.refs.questions._postRefresh,this.props.userId))
   }
 }
 
@@ -112,35 +134,29 @@ const styles = {
 		fontSize: 12,
 		paddingTop: 5
 	},
-	allLoadedView: {
-		height: 44,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#FFF',
-		padding: 20,
-	},
-	allLoadedText: {
-		fontSize: 14,
-	},
   oneQuestion00:{
+    padding:0,
     margin:6,
     backgroundColor:'#F1F7EE',
   },
   oneQuestion01:{
+    padding:0,
     margin:6,
     backgroundColor:'#F9F1EF',
   },
   oneQuestion10:{
     margin:6,
+    padding:0,
     backgroundColor:'#F4F5E5',
   },
   oneQuestion11:{
     margin:6,
+    padding:0,
     backgroundColor:'#EDF4FE',
   },
   oneQuestionView:{
-    paddingLeft:1,
-    paddingRight:1,
+    marginLeft:8,
+    marginRight:8,
     flex:1,
     flexDirection:'row',
     alignItems:'center',
@@ -153,7 +169,7 @@ const styles = {
   img:{
     width:36,
     height:36,
-    marginRight:8,
+    marginRight:4,
   },
   choose:{
     width:20,
@@ -164,5 +180,9 @@ const styles = {
 
 const mapStateToProps = state => ({
   my_question:state.myQuestion.my_question,
+  allQuestions:state.myQuestion.allQuestions,
+  refresh:state.myQuestion.refresh,
+  changeRowID:state.myQuestion.changeRowID,
+  userId:state.user.loginUser.appid,
 });
 export default connect(mapStateToProps)(QuestionList);

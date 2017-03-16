@@ -16,6 +16,7 @@ import Settings from "./views/system/Settings";
 import About from "./views/system/About";
 import Picture from "./views/picture/";
 import MyInfo from "./views/my-info/MyInfo";
+import MyCheck from "./views/my-check/MyCheck";
 import MyCollection from "./views/collection/MyCollection";
 import MyEmotion from "./views/my-emotion/MyEmotion";
 import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
@@ -114,7 +115,7 @@ class AppRouter extends PureComponent {
 
 					{/*我的*/}
 					<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
-
+					<Scene key="myCheck" component={MyCheck} title="体检信息" hideNavBar/>
 					<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 
 					{/*系统*/}

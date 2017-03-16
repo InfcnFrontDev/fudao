@@ -5,6 +5,8 @@ import Swiper from 'react-native-swiper'
 import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter,TouchableHighlight} from "react-native";
 import {theme} from "../../../utils/";
+import {delMyQuestion} from '../../../actions/my-question.js'
+import {request,urls} from "../../../utils/";
 
 /**
 * 我所选的问题
@@ -80,18 +82,19 @@ class QuestionMyself extends PureComponent {
 
   renderOneQuestion(num){
     return (
-      <Button transparent style={styles.oneQuestion} onPress={()=>Actions.myQuestionDetail({question_title:'p.title'})}>
-          <Image source={require('../assets/1yuyue.png')} style={styles.img}/>
-          <Text style={styles.oneTitle}>{this.props.my_question[num]}</Text>
-          <TouchableHighlight  onPress={this.choose.bind(this,this.props.my_question)} underlayColor='#fafafa'>
+      <Button transparent style={styles.oneQuestion} onPress={()=>Actions.myQuestionDetail({question_title:this.props.my_question[num].showVal})}>
+          <Image source={{uri:urls.getImage(this.props.my_question[num].img)}} style={styles.img}/>
+          <Text style={styles.oneTitle}>{this.props.my_question[num].showVal}</Text>
+          <TouchableHighlight  onPress={this.choose.bind(this,this.props.my_question[num])} underlayColor='#fafafa'>
           <Image source={require('../../../assets/arrows_square_minus.png')} style={styles.choose}/>
           </TouchableHighlight>
       </Button>
     )
   }
 
-  choose(){
-
+  choose(obj){
+    const {dispatch} = this.props;
+    dispatch(delMyQuestion(obj,this.props.my_question,this.props.allQuestions,this.props.userId));
   }
 
 }
@@ -154,8 +157,11 @@ const styles = {
 };
 
 
-const mapStateToProps = props => ({
-  my_question:props.myQuestion.my_question,
-  flag:props.myQuestion.flag
+const mapStateToProps = state => ({
+  my_question:state.myQuestion.my_question,
+  allQuestions:state.myQuestion.allQuestions,
+  flag:state.myQuestion.flag,
+  userId:state.user.loginUser.appid,
+
 });
 export default connect(mapStateToProps)(QuestionMyself);

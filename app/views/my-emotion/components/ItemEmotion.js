@@ -66,7 +66,7 @@ class ItemEmotion extends PureComponent {
     solve(p){
 
         this.props.dispatch(updateMyEmotion(p));
-
+         toast.show(this.state.renqun)
         request.getJson(urls.apis.NOW_EMOTION,{
             name:p.title,
             renqun:'high_quality_population',
