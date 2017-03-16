@@ -41,7 +41,18 @@ class ItemEmotion extends PureComponent {
 		})
 		return (
 			<View>
-				{item}
+				<List style={styles.divideList}>
+					<Text style={styles.divideTitle}>积极向上，朵朵小太阳</Text>
+				</List>
+				<ItemEmotion type='good'/>
+				<List style={styles.divideList}>
+					<Text style={styles.divideTitle}>清风徐来，水波不兴</Text>
+				</List>
+				<ItemEmotion type='calm'/>
+				<List style={styles.divideList}>
+					<Text style={styles.divideTitle}>月落乌啼霜满天</Text>
+				</List>
+				<ItemEmotion type='bad'/>
 			</View>
 		)
 	}

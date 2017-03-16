@@ -29,7 +29,7 @@ export default class TabBar extends Component {
 						>
 							<View style={styles.tabItem}>
 								<Icon style={[styles.icon, {color: color}]} name={icon}/>
-								<Text style={{fontSize: 14, color: color}}>{this.props.tabNames[i]}</Text>
+								<Text style={{fontSize: 12, color: color}}>{this.props.tabNames[i]}</Text>
 							</View>
 						</TouchableOpacity>
 					)
@@ -42,7 +42,7 @@ export default class TabBar extends Component {
 const styles = {
 	tabs: {
 		flexDirection: 'row',
-		height: 49,
+		height: 50,
 		borderTopColor: theme.navTabBarBorderColor,
 		borderTopWidth: theme.navTabBarBorderWidth,
 	},
@@ -59,7 +59,7 @@ const styles = {
 		justifyContent: 'space-around'
 	},
 	icon: {
-		fontSize: 26,
+		fontSize: 24,
 		marginBottom: 2
 	}
 }
