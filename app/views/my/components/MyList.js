@@ -21,7 +21,7 @@ class MyList extends PureComponent {
 					icon: 'ios-stopwatch-outline',
 					text: '体检信息',
 					bordered: true,
-					route: 'about'
+					route: 'myCheck'
 				})}
 				{this.renderItem({
 					icon: 'ios-tablet-portrait-outline',
