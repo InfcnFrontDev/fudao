@@ -9,13 +9,16 @@ import {urls} from "../../utils/index"
 class HealthEvaluation extends PureComponent {
 
 	render() {
+		let {loginUser} = this.props;
 		return (
 			<Content>
-				<WebView uri={urls.pages.HEALTH_APPRAISAL}/>
+				<WebView uri={urls.pages.HEALTH_APPRAISAL+'?userId='+this.props.loginUser.appid}/>
 			</Content>
 		)
 	}
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	loginUser: state.user.loginUser
+});
 export default connect(mapStateToProps)(HealthEvaluation);
