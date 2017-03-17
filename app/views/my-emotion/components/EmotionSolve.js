@@ -20,12 +20,32 @@ class EmotionSolveModal extends PureComponent {
 		if (!data)
 			return null;
 
-		let box, img, s, houZui = (null)
-		img = data.img
-		s = img.indexOf(".");
-		houZui = img.substring(s + 1)
-		if (houZui == 'mp3' || houZui == 'wav' || houZui == 'm4a') {
-			box = (
+		return (
+			<Modal
+				animationType={'slide'}
+				transparent
+				visible={this.state.show}
+				onRequestClose={() => this.hide()}
+			>
+				<TouchableHighlight onPress={() => this.hide()} style={{flex: 1}}>
+					<View style={styles.container}>
+						<View style={styles.View}>
+							<Text style={styles.title}>{data.mitigation_method}</Text>
+							<Text style={styles.content}>{data.method_detail}</Text>
+							<View>
+								{data.img && this.renderImg(data.img)}
+							</View>
+						</View>
+					</View>
+				</TouchableHighlight>
+			</Modal>
+		)
+	}
+
+	renderImg(img) {
+		let ext = img.substring(img.indexOf(".") + 1);
+		if (ext == 'mp3' || ext == 'wav' || ext == 'm4a') {
+			return (
 				<Video source={{uri: urls.getImage("/high_quality_population" + img)}} // 视频的URL地址，或者本地地址，都可以.
 					   rate={1.0}                   // 控制暂停/播放，0 代表暂停paused, 1代表播放normal.
 					   volume={1.0}                 // 声音的放大倍数，0 代表没有声音，就是静音muted, 1 代表正常音量 normal，更大的数字表示放大的倍数
@@ -43,31 +63,11 @@ class EmotionSolveModal extends PureComponent {
 					   style={styles.backgroundVideo}/>
 			)
 		} else {
-			box = (
+			return (
 				<Image source={{uri: urls.getImage("/high_quality_population" + img)}} resizeMode='cover'
 					   style={styles.image}/>
 			)
 		}
-		return (
-			<Modal
-				animationType={'slide'}
-				transparent={true}
-				visible={this.state.show}
-				onRequestClose={() => this.hide()}
-			>
-				<TouchableHighlight onPress={() => this.hide()} style={{flex: 1}}>
-					<View style={styles.container}>
-						<View style={styles.View}>
-							<Text style={styles.title}>{data.mitigation_method}</Text>
-							<Text style={styles.content}>{data.method_detail}</Text>
-							<View>
-								{box}
-							</View>
-						</View>
-					</View>
-				</TouchableHighlight>
-			</Modal>
-		)
 	}
 
 
@@ -82,12 +82,6 @@ class EmotionSolveModal extends PureComponent {
 		this.setState({
 			show: false,
 			data: null
-		})
-	}
-
-	toggle() {
-		this.setState({
-			show: !this.state.show
 		})
 	}
 }

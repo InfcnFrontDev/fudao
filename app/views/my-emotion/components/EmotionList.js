@@ -1,76 +1,63 @@
 import React, {PureComponent} from "react";
-import {connect} from "react-redux";
+import {ListView, ScrollView, View, Image, ToastAndroid, DeviceEventEmitter} from "react-native";
 import {Actions} from "react-native-router-flux";
-import {ListItem, Text, Button,} from "native-base";
-import {View, Image, ToastAndroid, DeviceEventEmitter} from "react-native";
-import {good, calm, bad} from './Data';
+import {Text, Button} from "native-base";
 import {theme, urls, request, toast} from "../../../utils/";
 import {updateMyEmotion} from "../../../actions/emotion";
+import {good, calm, bad} from "./EmotionData";
 
 /**
  * 情绪列表
  */
-class ItemEmotion extends PureComponent {
-	constructor(props) {
-		super(props);
-		if (this.props.type == 'good') {
-			this.list = good;
-		} else if (this.props.type == 'calm') {
-			this.list = calm;
-		} else {
-			this.list = bad;
-		}
-		this.state = {
-			renqun: this.props.loginUser.renqun,
-		}
+class EmotionList extends PureComponent {
+
+	ds = new ListView.DataSource({
+		rowHasChanged: (row1, row2) => row1 !== row2,
+		sectionHeaderHasChanged: (section1, section2) => section1 !== section2,
+	});
+
+	state = {
+		dataSource1: this.ds.cloneWithRows(good),
+		dataSource2: this.ds.cloneWithRows(calm),
+		dataSource3: this.ds.cloneWithRows(bad),
 	}
 
 	render() {
-		let {loginUser} = this.props;
-		let item = this.list.map((p, i) => {
-			if (i % 4 == 0) {
-				var item_zu = this._list4(i);
-			} else {
-				var item_zu = (null);
-			}
-			return (
-				<View key={i}>
-					{item_zu}
-				</View>
-			)
-		})
+		let {dataSource1, dataSource2, dataSource3} = this.state;
 		return (
-			<View>
-				<List style={styles.divideList}>
-					<Text style={styles.divideTitle}>积极向上，朵朵小太阳</Text>
-				</List>
-				<ItemEmotion type='good'/>
-				<List style={styles.divideList}>
-					<Text style={styles.divideTitle}>清风徐来，水波不兴</Text>
-				</List>
-				<ItemEmotion type='calm'/>
-				<List style={styles.divideList}>
-					<Text style={styles.divideTitle}>月落乌啼霜满天</Text>
-				</List>
-				<ItemEmotion type='bad'/>
+			<ScrollView>
+				{this._renderGroup('积极向上，朵朵小太阳', dataSource1)}
+				{this._renderGroup('清风徐来，水波不兴', dataSource2)}
+				{this._renderGroup('月落乌啼霜满天', dataSource3)}
+			</ScrollView>
+		)
+	}
+
+	_renderGroup(text, dataSource) {
+		return (
+			<View style={styles.container}>
+				<View style={styles.groupContainer}>
+					<Text style={styles.groupText}>{text}</Text>
+				</View>
+				<ListView
+					contentContainerStyle={styles.listContainer}
+					dataSource={dataSource}
+					renderRow={this._renderRow.bind(this)}
+					horizontal
+					pageSize={4}
+					enableEmptySections
+				/>
 			</View>
 		)
 	}
 
-	_list4(i) {
-		var new_list = this.list.slice(i, i + 4);
-		var click = new_list.map((p, i)=> {
-			return (
-				<Button transparent key={i} style={styles.oneEmotion} onPress={this.solve.bind(this, p)}>
-					<Image source={p.img} style={styles.oneEmotionImg}/>
-					<Text style={styles.oneEmotionTitle}>{p.title}</Text>
-				</Button>
-			)
-		})
+	_renderRow(rowData) {
+		let {onItemPress} = this.props;
 		return (
-			<ListItem style={styles.contentList}>
-				{click}
-			</ListItem>
+			<Button transparent block style={styles.item} onPress={() => onItemPress(rowData)}>
+				<Image source={rowData.img} style={styles.itemImg}/>
+				<Text style={styles.itemText}>{rowData.title}</Text>
+			</Button>
 		)
 	}
 
@@ -81,11 +68,11 @@ class ItemEmotion extends PureComponent {
 		request.getJson(urls.apis.NOW_EMOTION, {
 			name: p.title,
 			renqun: 'high_quality_population',
-		}).then((data)=> {
+		}).then((data) => {
 			if (data.success) {
 				Actions['myEmotionSolve']({data: data.obj});
 			}
-		}, (error)=> {
+		}, (error) => {
 
 		})
 
@@ -94,36 +81,54 @@ class ItemEmotion extends PureComponent {
 
 }
 
-
 const styles = {
-	contentList: {
-		borderColor: '#fff',
-		paddingTop: 0,
-		paddingBottom: 0,
-
+	container: {
+		paddingLeft: 10,
+		paddingRight: 10,
 	},
-	oneEmotion: {
-		marginBottom: 0,
-		marginTop: 0,
-		marginRight: 0,
-		marginLeft: 0,
+	groupContainer: {
+		paddingTop: 10,
+		paddingBottom: 6,
+		paddingLeft: 6,
+		borderBottomWidth: theme.borderWidth,
+		borderBottomColor: theme.listBorderColor,
+	},
+	groupText: {
+		color: '#676767',
+		fontSize: theme.DefaultFontSize - 2,
+	},
+	listContainer: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		width: theme.deviceWidth - 20,
+		justifyContent: 'space-between',
+		paddingLeft: 5,
+		paddingRight: 5,
+	},
+	item: {
 		flexDirection: 'column',
-		alignItems: 'flex-start',
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: 80,
 		height: 80,
 	},
-	oneEmotionImg: {
+	itemImg: {
 		width: 50,
 		height: 50,
+		marginRight: 5,
 	},
-	oneEmotionTitle: {
+	itemText: {
 		color: '#676767',
-		textAlign: 'center',
-		marginLeft: 13,
 		fontSize: theme.DefaultFontSize - 2,
 	},
 };
 
-const mapStateToProps = state => ({
-	loginUser: state.user.loginUser,
-});
-export default connect(mapStateToProps)(ItemEmotion);
+EmotionList.propTypes = {
+	onItemPress: React.PropTypes.func,
+}
+EmotionList.defaultProps = {
+	onItemPress: () => {
+	}
+}
+
+export default (EmotionList);
