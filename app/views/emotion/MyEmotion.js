@@ -16,6 +16,8 @@ class MyEmotion extends PureComponent {
 
 	render() {
 		let {myEmotion} = this.props;
+
+		// 默认情绪为‘平静’
 		if (!myEmotion) {
 			myEmotion = calm[0];
 		}
@@ -37,6 +39,9 @@ class MyEmotion extends PureComponent {
 		)
 	}
 
+	/**
+	 * 一小时后情绪修改为平静， 进入页面时处理
+	 */
 	componentWillMount() {
 		let {loginUser, myEmotion, updateTime} = this.props;
 		if (myEmotion) {
@@ -47,6 +52,10 @@ class MyEmotion extends PureComponent {
 		}
 	}
 
+	/**
+	 * 单击每个情绪时，修改右上角的当前情绪，并且弹出 情绪干预。
+	 * @param item 情绪
+	 */
 	_onItemPress(item) {
 		// 更新我的情绪
 		this.props.dispatch(updateMyEmotion(item));
