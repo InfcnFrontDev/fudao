@@ -1,8 +1,8 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Text} from "native-base";
+import {Right, View, Text} from "native-base";
 import {Container, Content, Header, Loading} from "../../components/index";
-import {View, Image, DeviceEventEmitter} from "react-native";
+import {Image, DeviceEventEmitter} from "react-native";
 import {calm} from "./components/EmotionData";
 import {updateMyEmotion} from "../../actions/emotion";
 import EmotionList from "./components/EmotionList";
@@ -24,11 +24,13 @@ class MyEmotion extends PureComponent {
 
 		return (
 			<Container>
-				<Header back {...this.props} right={
-					<View style={styles.selectedEmotion}>
-						<Image source={myEmotion.img} style={styles.selectedEmotionImg}/>
-						<Text style={styles.selectedEmotionTitle}>{myEmotion.title}</Text>
-					</View>
+				<Header {...this.props} right={
+					<Right style={{}}>
+						<View style={styles.selectedEmotion}>
+							<Image source={myEmotion.img} style={styles.selectedEmotionImg}/>
+							<Text style={styles.selectedEmotionTitle}>{myEmotion.title}</Text>
+						</View>
+					</Right>
 				}/>
 				<Content>
 					<Loading ref={(e)=>this._loading = e}/>

@@ -1,16 +1,14 @@
 //noinspection JSAnnotator
 import React, {PureComponent} from "react";
-
 import {connect} from "react-redux";
-import {Container, Header, Title, Content, ListItem, Text, Left, Button, Icon, Body, Right} from "native-base";
-import {View,Image,DeviceEventEmitter} from "react-native";
-import {openDrawer, closeDrawer} from "../../actions/drawer";
+import {Container, Header, Title, Content, Left, Button, Icon, Body, Right} from "native-base";
+import {View, Image, DeviceEventEmitter} from "react-native";
 import {Actions} from "react-native-router-flux";
-import {store} from '../../store/configureStore.js';
-import {newRealm} from '../../actions/realm.js'
-import schema from '../../realm/schema.js'
-import ExpectMyself from './components/ExpectMyself'
-import ExpectAll from './components/ExpectAll'
+import {store} from "../../store/configureStore.js";
+import {newRealm} from "../../actions/realm.js";
+import schema from "../../realm/schema.js";
+import ExpectMyself from "./components/ExpectMyself";
+import ExpectAll from "./components/ExpectAll";
 
 /**
  * 我的问题
@@ -57,8 +55,6 @@ const styles = {
 function bindAction(dispatch) {
     return {
         newRealm: ()=>dispatch(newRealm(schema)),
-        openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: key => dispatch(closeDrawer()),
     };
 
 }

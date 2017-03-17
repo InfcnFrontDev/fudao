@@ -2,8 +2,7 @@ import React, {PureComponent} from "react";
 import {ScrollView, DatePickerAndroid} from "react-native";
 import {connect} from "react-redux";
 import {ListItem, Body, Right, View, Text, Icon} from "native-base";
-import {Container, Content, Separator} from "../../components/index";
-import Header from "../../components/header/BaseHeader";
+import {Container, Content, Header, Separator} from "../../components/index";
 import {updateUserInfo} from "../../actions/user";
 import {dialogs} from "../../utils/index";
 import _ from "lodash";
@@ -154,12 +153,12 @@ class MyInfo extends PureComponent {
 
 				var year = date.getFullYear();
 				var month = date.getMonth() + 1;
-				if(month<10){
-					month='0'+month
+				if (month < 10) {
+					month = '0' + month
 				}
 				var day = date.getDate();
-				if(day<10){
-					day='0'+day
+				if (day < 10) {
+					day = '0' + day
 				}
 				var formatedStr = year + '-' + month + '-' + day;
 				dispatch(updateUserInfo(loginUser.appid, item.field, formatedStr));

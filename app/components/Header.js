@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Header, Left, Right, Body, Button, Icon, Title} from "native-base";
-import {openDrawer, closeDrawer} from "../actions/drawer";
 
 class Header_ extends PureComponent {
 
@@ -10,42 +9,43 @@ class Header_ extends PureComponent {
 		let {back, menu, left, center, right, title} = this.props;
 
 		if (!left) {
-			if (back)
-				left = (
-					<Button transparent onPress={() => Actions.pop()}>
-						<Icon name="arrow-back"/>
-					</Button>
-				);
 			if (menu)
 				left = (
-					<Button transparent onPress={() => Actions.sideBar()}>
-						<Icon name="menu"/>
-					</Button>
+					<Left>
+						<Button transparent onPress={() => Actions.sideBar()}>
+							<Icon name="menu"/>
+						</Button>
+					</Left>
 				);
+			else
+				left = (
+					<Left>
+						<Button transparent onPress={() => Actions.pop()}>
+							<Icon name="arrow-back"/>
+						</Button>
+					</Left>
+				);
+
 		}
 
 		if (!center) {
 			if (title)
 				center = (
+					<Body>
 					<Title >{title}</Title>
+					</Body>
 				)
 		}
 
 		if (!right) {
-
+			right = <Right/>;
 		}
 
 		return (
 			<Header>
-				<Left>
-					{left}
-				</Left>
-				<Body>
+				{left}
 				{center}
-				</Body>
-				<Right>
-					{right}
-				</Right>
+				{right}
 			</Header>
 		)
 	}
@@ -57,7 +57,7 @@ Header_.propTypes = {
 	menu: React.PropTypes.bool, // 有菜单按钮
 	title: React.PropTypes.string, // 标题
 	left: React.PropTypes.any, // left
-	center: React.PropTypes.any, // center
+	body: React.PropTypes.any, // body
 	right: React.PropTypes.any, // right
 }
 
@@ -66,15 +66,9 @@ Header_.defaultProps = {
 	menu: false,
 	title: '',
 	left: null,
-	center: null,
+	body: null,
 	right: null
 }
 
-function bindAction(dispatch) {
-	return {
-		openDrawer: () => dispatch(openDrawer()),
-		closeDrawer: key => dispatch(closeDrawer()),
-	};
-}
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(Header_)
+export default connect(mapStateToProps)(Header_)

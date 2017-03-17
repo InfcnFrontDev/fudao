@@ -17,7 +17,7 @@ class MyFriend extends PureComponent {
 		let {isFetching, friendList, friendNickMap} = this.props;
 		return (
 			<Container>
-				<Header back {...this.props} right={
+				<Header {...this.props} right={
 					<HeaderIcon iconName="add" onPress={() => Actions.searchUser()}/>
 				}/>
 				<Content gray>

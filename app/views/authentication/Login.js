@@ -29,7 +29,7 @@ class Login extends PureComponent {
 		let {isFetching} = this.state;
 		return (
 			<Container>
-				<Header back {...this.props}></Header>
+				<Header {...this.props}></Header>
 				<Content>
 					<View style={styles.bag}>
 						<UserInput text="用户名"

@@ -42,10 +42,10 @@ export default class Loading extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#EDEDED',
 		justifyContent: 'center',
 		alignItems: 'center',
-		opacity: 0.5,
+		// backgroundColor: '#EDEDED',
+		// opacity: 1,
 	},
 	loading: {
 		backgroundColor: '#393939',

@@ -25,7 +25,7 @@ class FriendApply extends PureComponent {
 		let {friend}  = this.props;
 		return (
 			<Container>
-				<Header back {...this.props} right={
+				<Header {...this.props} right={
 					<HeaderButton text="完成" onPress={this._agree.bind(this)}/>
 				}/>
 

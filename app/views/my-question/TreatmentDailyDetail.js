@@ -1,10 +1,8 @@
 //noinspection JSAnnotator
 import React, {PureComponent} from "react";
-
 import {connect} from "react-redux";
-import {Container, Header, Title, Content, ListItem, Text, Left, Button, Icon, Body, Right} from "native-base";
-import {View,Image,DeviceEventEmitter,TouchableHighlight} from "react-native";
-import {openDrawer, closeDrawer} from "../../actions/drawer";
+import {Container, Text} from "native-base";
+import {View, Image, DeviceEventEmitter, TouchableHighlight} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {theme} from "../../utils/";
 
@@ -65,13 +63,6 @@ const styles = {
       marginBottom:20,
     }
 };
-function bindAction(dispatch) {
-    return {
-        openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: key => dispatch(closeDrawer()),
-    };
-
-}
 
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(TreatmentDailyDetail);
+export default connect(mapStateToProps)(TreatmentDailyDetail);

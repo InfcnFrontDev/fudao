@@ -11,7 +11,6 @@ import SearchHealthCare from "./views/search/SearchHealthCare";
 import SearchInformation from "./views/search/SearchInformation";
 import SearchOfflineService from "./views/search/SearchOfflineService";
 import SearchUser from "./views/search/SearchUser";
-import ArticleDetail from "./views/article/ArticleDetail";
 import Settings from "./views/system/Settings";
 import About from "./views/system/About";
 import Picture from "./views/picture/";
@@ -100,10 +99,6 @@ class AppRouter extends PureComponent {
 					<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
 						   hideNavBar/>
 					<Scene key="searchUser" component={SearchUser} title="用户" hideNavBar/>
-
-
-					{/*资讯*/}
-					<Scene key="articleDetail" component={ArticleDetail} title="资讯详情" hideNavBar/>
 
 					{/*动态*/}
 					<Scene key="picture" component={Picture} title="图片预览" hideNavBar/>

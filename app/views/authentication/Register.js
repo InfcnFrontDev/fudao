@@ -31,7 +31,7 @@ class Register extends PureComponent {  // eslint-disable-line
     render() {
         return (
             <Container>
-                <Header back title={this.state.title}></Header>
+                <Header title={this.state.title}></Header>
                 <Content>
                     <View style={styles.bag}>
                         <UserInput text="手机号"

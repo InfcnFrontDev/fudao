@@ -135,7 +135,6 @@ const styles = {
 
 const mapStateToProps = state => ({
 	...state.user,
-	...state.drawer,
 	...state.position,
 });
 export default connect(mapStateToProps)(Home);

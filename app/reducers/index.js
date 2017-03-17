@@ -1,5 +1,4 @@
 import {combineReducers} from "redux";
-import drawer from "./drawer";
 import position from "./position";
 import realm from "./realm";
 import search from "./search";
@@ -11,7 +10,6 @@ import settings from "./settings";
 import myQuestion from "./my-question";
 import emotion from "./emotion";
 export default combineReducers({
-	drawer,
 	position,
 	realm,
 	search,

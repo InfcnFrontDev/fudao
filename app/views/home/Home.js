@@ -2,8 +2,8 @@ import React, {PureComponent} from "react";
 import {Modal, TouchableHighlight} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Text, View} from "native-base";
-import {Container, Content, Header, HeaderIcon} from "../../components/index";
+import {Right, Text, View, Button, Icon} from "native-base";
+import {Container, Content, Header} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
 import Headline from "./components/Headline.js";
 
@@ -21,10 +21,10 @@ class Home extends PureComponent {
 		return (
 			<Container>
 				<Header menu {...this.props} right={
-					<View style={{flexDirection: 'row'}}>
-						<HeaderIcon onPress={()=>Actions.search()} name="search"/>
-						<HeaderIcon onPress={()=> this._setModalVisible()} name="ios-chatboxes"/>
-					</View>
+					<Right>
+						<Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
+						<Button transparent onPress={()=> this._setModalVisible()}><Icon name="ios-chatboxes"/></Button>
+					</Right>
 				}/>
 
 				<Content style={styles.content}>
@@ -135,7 +135,6 @@ const styles = {
 
 const mapStateToProps = state => ({
 	...state.user,
-	...state.drawer,
 	...state.position,
 });
 export default connect(mapStateToProps)(Home);

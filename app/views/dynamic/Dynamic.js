@@ -1,11 +1,11 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Title, Content, Left, Right, Body,Text,Button,Header,Icon} from "native-base";
+import {Container, Title, Content, Left, Right, Body,Text,Button,Icon} from "native-base";
 import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert,TouchableOpacity} from "react-native";
 import styles from "./assets/styles";
 import moment from './assets/moment.js'
 import {Actions} from "react-native-router-flux";
-// import Header from "../../components/header/IndexHeader";
+import {Header} from "../../components/index";
 import DynamicList from './components/DynamicList';
 import DynamicHeader from './components/DynamicHeader';
 import DynamicComment from './components/DynamicComments';
@@ -52,20 +52,12 @@ class Dynamic extends PureComponent {
       }
         return (
             <Container>
-                <Header>
-                    <Left>
-                        <Button transparent onPress={() => this.props.openDrawer()}>
-                            <Icon name="menu"/>
-                        </Button>
-                    </Left>
-                    <Body>
-                       <Text style={styles.indexTitle}>{this.props.title}</Text>
-                    </Body>
+                <Header menu {...this.props} right={
                     <Right>
                         <Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
-                        <Button transparent onPress={()=>Actions['newDynamic']({newnew:this.props.newnew})}><Icon name="ios-chatboxes"/></Button>
+                        <Button transparent onPress={()=>Actions.newDynamic({newnew:this.props.newnew})}><Icon name="ios-chatboxes"/></Button>
                     </Right>
-                </Header>
+                }/>
                 <DynamicList
                   renderHeader={this._renderHeader.bind(this)}
                   enableEmptySections={true}
