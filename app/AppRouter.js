@@ -18,7 +18,7 @@ import Picture from "./views/picture/";
 import MyInfo from "./views/my-info/MyInfo";
 import MyCheck from "./views/my-check/MyCheck";
 import MyCollection from "./views/collection/MyCollection";
-import MyEmotion from "./views/my-emotion/MyEmotion";
+import MyEmotion from "./views/emotion/MyEmotion";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
 import TreatmentDetail from "./views/my-question/TreatmentDetail";

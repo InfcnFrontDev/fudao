@@ -3,12 +3,11 @@ import {connect} from "react-redux";
 import {Text} from "native-base";
 import {Container, Content, Header, Loading} from "../../components/index";
 import {View, Image, DeviceEventEmitter} from "react-native";
-import {openDrawer, closeDrawer} from "../../actions/drawer";
-import {request, urls, toast} from "../../utils/";
 import {calm} from "./components/EmotionData";
 import {updateMyEmotion} from "../../actions/emotion";
 import EmotionList from "./components/EmotionList";
 import EmotionSolve from "./components/EmotionSolve";
+import {request, urls, toast} from "../../utils/";
 
 /**
  * 我的情绪
@@ -86,16 +85,8 @@ const styles = {
 	}
 };
 
-
-function bindAction(dispatch) {
-	return {
-		openDrawer: () => dispatch(openDrawer()),
-		closeDrawer: key => dispatch(closeDrawer()),
-	};
-
-}
 const mapStateToProps = state => ({
 	loginUser: state.user.loginUser,
 	...state.emotion
 });
-export default connect(mapStateToProps, bindAction)(MyEmotion);
+export default connect(mapStateToProps)(MyEmotion);

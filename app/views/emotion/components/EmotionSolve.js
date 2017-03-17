@@ -1,19 +1,18 @@
 import React, {PureComponent} from "react";
-import {Modal, View, Image, DeviceEventEmitter, TouchableHighlight} from "react-native";
+import {Modal, View, Image, TouchableHighlight} from "react-native";
 import {Text} from "native-base";
 import {theme, urls} from "../../../utils/index";
 import Video from "react-native-video";
 
 /**
- * 我的情绪
+ * 情绪干预， 弹出
  */
-class EmotionSolveModal extends PureComponent {
+class EmotionSolve extends PureComponent {
 
 	state = {
 		show: false,
 		data: null
 	};
-
 
 	render() {
 		let {data} = this.state;
@@ -127,4 +126,4 @@ const styles = {
 	},
 };
 
-export default (EmotionSolveModal);
+export default (EmotionSolve);

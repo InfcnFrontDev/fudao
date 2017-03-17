@@ -1,3 +1,7 @@
+/**
+ * 情绪数据
+ */
+
 const good = [
 	{
 		name: 'yuyue',
@@ -90,8 +94,4 @@ const bad = [
 	}
 ];
 
-export {
-	good,
-	calm,
-	bad
-};
+export {good, calm, bad};
