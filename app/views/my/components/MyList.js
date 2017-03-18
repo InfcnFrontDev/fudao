@@ -25,9 +25,9 @@ class MyList extends PureComponent {
 				})}
 				{this.renderItem({
 					icon: 'ios-tablet-portrait-outline',
-					text: '我的方案与效果',
+					text: '我的记录',
 					bordered: true,
-					route: 'about'
+					route: 'myRecord'
 				})}
 				{this.renderItem({
 					icon: 'ios-chatboxes-outline',
