@@ -11,6 +11,7 @@ import DynamicHeader from './components/DynamicHeader';
 import DynamicComment from './components/DynamicComments';
 import DynamicSupport from './components/DynamicSupports';
 import DynamicCommon from '../../components/DynamicCommon'
+import {fetchData,show,zan,sendComment,del} from '../../actions/dynamic'
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -186,7 +187,6 @@ function bindAction(dispatch) {
         fetchData:(page,options,callback,params)=>dispatch(fetchData(page,options,callback,params)),
         show:(id,params)=>dispatch(show(id,params)),
         zan:(info,params)=>dispatch(zan(info,params)),
-        openDrawer:()=>dispatch(openDrawer()),
         sendComment:(event,params)=>dispatch(sendComment(event,params)),
         del:(id,params)=>dispatch(del(id,params)),
     };
