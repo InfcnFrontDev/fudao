@@ -45,7 +45,7 @@ export function updateUserPhoto(appid, fileName, uri) {
 	}
 }
 
-// 修改头像
+// 修改基本信息
 export function updateUserInfo(appid, field, value) {
 	return (dispatch) => {
 		let jsonStr = JSON.stringify({
@@ -54,8 +54,8 @@ export function updateUserInfo(appid, field, value) {
 			field,
 			value
 		});
-
-		request.postJson(urls.apis.USER_UPDATE, {
+		toast.show(jsonStr)
+		/*request.postJson(urls.apis.USER_UPDATE, {
 			jsonStr
 		})
 			.then(result => {
@@ -67,6 +67,39 @@ export function updateUserInfo(appid, field, value) {
 						payload: {
 							field,
 							value
+						}
+					});
+
+					toast.show("修改成功")
+				} else {
+					toast.show("修改失败")
+				}
+			})*/
+	}
+}
+
+// 修改体检信息
+export function updateUserCheck(appid,field ,tableName, value) {
+	return (dispatch) => {
+		let jsonStr1 = {
+			tableName: tableName,
+			jsonStr:{
+				appid:appid
+			}
+		};
+		jsonStr1.jsonStr[field]=value;
+		let jsonS=JSON.stringify(jsonStr1)
+		toast.show(jsonS)
+		request.postJson(urls.apis.USER_CHECK, {
+			jsonS
+		})
+			.then(result => {
+				if (result.success) {
+					dispatch({
+						type: types.USER_UPDATE_CHECK,
+						payload: {
+							 tableName,
+							 jsonStr,
 						}
 					});
 

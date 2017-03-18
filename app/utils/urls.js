@@ -62,6 +62,8 @@ const urls = {
 		USER_UPDATE: apiPath + 'app/userInformationAction!updateValue.action',
 		//搜索用户
 		USER_SEARCH: apiPath + 'app/friendDynamicAction!getUserByPhone.action',
+		//修改用户体检信息
+		USER_CHECK: apiPath + 'app/userInformationAction!updateResult.action',
 
 		// 好友 ----------------------------------------------------------------------
 
