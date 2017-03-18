@@ -14,7 +14,7 @@ class MyEnergy extends PureComponent {
 	render() {
 		return (
 			<Container>
-				<Header back {...this.props} />
+				<Header {...this.props} />
 				<Content>
 					<WebView uri="http://echarts.baidu.com/examples.html"/>
 				</Content>

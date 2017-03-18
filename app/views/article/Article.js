@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {Actions} from "react-native-router-flux";
-import {View} from "native-base";
+import {Right, Button, Icon} from "native-base";
 import {Container, Header, HeaderIcon} from "../../components/index";
 import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-view";
 import ArticleList from "./components/ArticleList";
@@ -18,10 +18,10 @@ class Article extends PureComponent {
 		return (
 			<Container>
 				<Header menu {...this.props} right={
-					<View style={{flexDirection: 'row'}}>
-						<HeaderIcon onPress={()=>Actions.search()} name="search"/>
-						<HeaderIcon onPress={()=>Actions.message()} name="ios-chatboxes"/>
-					</View>
+					<Right>
+						<Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
+						<Button transparent onPress={()=>Actions.message()}><Icon name="ios-chatboxes"/></Button>
+					</Right>
 				}/>
 
 				<ScrollableTabView

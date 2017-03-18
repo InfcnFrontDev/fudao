@@ -7,8 +7,6 @@ import List from "./List";
 import Separator from "./Separator";
 import Loading from "./Loading";
 import PullView from "./PullView";
-import HeaderIcon from "./HeaderIcon";
-import HeaderButton from "./HeaderButton";
 import WebView from "./WebView";
 
 export {
@@ -21,7 +19,5 @@ export {
 	Separator,
 	Loading,
 	PullView,
-	HeaderIcon,
-	HeaderButton,
 	WebView,
 }

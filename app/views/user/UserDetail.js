@@ -2,8 +2,7 @@ import React, {PureComponent} from "react";
 import {Alert} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container, Content, List, Separator} from "../../components/index";
-import Header from "../../components/header/BaseHeader";
+import {Container, Header, Content, List, Separator} from "../../components/index";
 import {Body, Left, Right, ListItem, Text, Button, Thumbnail, Icon, View} from "native-base";
 import {showLoading, hideLoading} from "../../actions/loading";
 import {fetchMyFriendList} from "../../actions/friend";
@@ -32,7 +31,7 @@ class UserDetail extends PureComponent {
 							<ListItem avatar last>
 								<Left>
 									<Thumbnail square
-											   source={{uri:'http://touxiang.qqzhi.com/uploads/2012-11/1111135112148.jpg'}}/>
+											   source={{uri: 'http://touxiang.qqzhi.com/uploads/2012-11/1111135112148.jpg'}}/>
 								</Left>
 								<Body>
 								<Text>
@@ -41,7 +40,7 @@ class UserDetail extends PureComponent {
 									{user.sex == '1' ? <Icon name="ios-man" style={styles.manIcon}/> :
 										<Icon name="ios-woman" style={styles.womanIcon}/>}
 								</Text>
-								<Text note style={{paddingBottom:20}}>
+								<Text note style={{paddingBottom: 20}}>
 									{friendNickMap[user.appid] ? '昵称：' + user.title : ''}
 								</Text>
 								</Body>

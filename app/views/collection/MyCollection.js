@@ -1,9 +1,8 @@
 import React, {PureComponent} from "react";
 import {StyleSheet, View} from "react-native";
 import {connect} from "react-redux";
-import {Container} from "native-base";
 import GiftedListView from "../../components/GiftedListView";
-import Header from "../../components/header/BaseHeader";
+import {Container, Header} from "../../components/index";
 import ArticleItem from "../article/components/ArticleItem";
 import {request, urls} from "../../utils/";
 

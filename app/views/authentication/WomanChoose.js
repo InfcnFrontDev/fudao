@@ -1,17 +1,13 @@
 /**
  * Created by Administrator on 2017/3/9.
  */
-//noinspection JSAnnotator
 'use strict';
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Thumbnail,Button,Text} from "native-base";
-import {View,Image,TouchableOpacity,TouchableHighlight,ToastAndroid, DatePickerAndroid,} from "react-native";
-import {Header,Container,Content} from "../../components/index";
-import {openDrawer, closeDrawer} from "../../actions/drawer";
-import {theme,tools,toast } from "../../utils/";
-import  CommitButton from "./components/CommitButton"
+import {Thumbnail, Text} from "native-base";
+import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePickerAndroid} from "react-native";
+import {Header, Container, Content} from "../../components/index";
 
 
 /**

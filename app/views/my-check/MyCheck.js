@@ -6,7 +6,6 @@ import {Container, Content, Separator} from "../../components/index";
 import Header from "../../components/header/BaseHeader";
 import {updateUserCheck} from "../../actions/user";
 import {dialogs} from "../../utils/index";
-import _ from "lodash";
 
 const groups = [
 	{

@@ -6,12 +6,11 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Thumbnail,Text,Icon} from "native-base";
-import {View,Image,TouchableOpacity,TouchableHighlight,ToastAndroid, DatePickerAndroid,Alert} from "react-native";
-import {Header,Container,Content} from "../../components/index";
-import {openDrawer, closeDrawer} from "../../actions/drawer";
-import {theme,urls,tools,request,toast} from "../../utils/";
-import  CommitButton from "./components/CommitButton"
+import {Thumbnail, Text, Icon} from "native-base";
+import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePickerAndroid, Alert} from "react-native";
+import {Header, Container, Content} from "../../components/index";
+import {theme, urls, request, toast} from "../../utils/";
+import CommitButton from "./components/CommitButton";
 /**
  * 首次登录设置个人信息页
  */

@@ -28,7 +28,7 @@ class Register extends PureComponent {  // eslint-disable-line
     render() {
         return (
             <Container>
-                <Header back {...this.props}></Header>
+                <Header {...this.props}></Header>
                 <Content>
                     <View style={styles.bag}>
                         <UserInput text="手机号" btn={false}

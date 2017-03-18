@@ -1,19 +1,12 @@
-/**
- * Created by Administrator on 2017/3/2.
- */
 import React, {PureComponent} from "react";
+import {View, Alert, TextInput, TouchableOpacity, ToastAndroid, ListView} from "react-native";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
-import {Container, Content, Left, Right, Body,  Row,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
-import {View, Alert,TextInput,TouchableOpacity,ToastAndroid,ListView} from "react-native";
-import Header from "../../components/header/BaseHeader";
-import {theme} from "../../utils/";
-import {request,urls} from "../../utils/";
+import {Text} from "native-base";
+import {Container, Content, Header} from "../../components/index";
 
 /**
  * 消息
  */
-
 class Message extends PureComponent {
     constructor(props){
         super(props);
@@ -27,7 +20,7 @@ class Message extends PureComponent {
     render(){
         return (
             <Container>
-                <Header {...this.props}></Header>
+                <Header {...this.props}/>
                 <Content padder>
                     <View style={{flex: 1, paddingTop: 22}}>
                         <ListView
