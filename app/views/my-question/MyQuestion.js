@@ -7,7 +7,7 @@ import {View,Image,DeviceEventEmitter} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import {Actions} from "react-native-router-flux";
 import QuestionMyself from './components/QuestionMyself'
-import QuestionAll from './components/QuestionAll'
+import QuestionAll from '../../components/QuestionAndExpectAll'
 import {initialMyQuestion} from '../../actions/my-question.js'
 
 /**
@@ -41,7 +41,7 @@ class MyQuestion extends PureComponent {
               </Header>
               <Content style={styles.content}>
                 <QuestionMyself />
-                <QuestionAll />
+                <QuestionAll from='myquestion'/>
               </Content>
             </Container>
         )

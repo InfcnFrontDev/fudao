@@ -4,7 +4,7 @@
   const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
 
 // web服务器地址
-const webPath = 'http://192.168.3.204:3000/';
+const webPath = 'http://192.168.3.213:1000/';
 
 // 图片服务器地址
 const picPath = 'http://103.254.113.11:9191/';
@@ -36,6 +36,8 @@ const urls = {
 		// 生命周期
 		LIFE_CYCLE: webPath + 'lifeCycle.html',
 		// 我的位置
+		MY_QUESTION_PERSON: webPath + 'myQuestionPerson.html',
+
 		MY_LOCATION: webPath + 'myLocation.html'
 
 	},

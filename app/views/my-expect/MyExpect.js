@@ -6,11 +6,9 @@ import {Container, Header, Title, Content, ListItem, Text, Left, Button, Icon, B
 import {View,Image,DeviceEventEmitter} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import {Actions} from "react-native-router-flux";
-import {store} from '../../store/configureStore.js';
-import {newRealm} from '../../actions/realm.js'
-import schema from '../../realm/schema.js'
 import ExpectMyself from './components/ExpectMyself'
-import ExpectAll from './components/ExpectAll'
+import ExpectAll from '../../components/QuestionAndExpectAll'
+import {initialMyExpect} from '../../actions/my-question.js'
 
 /**
  * 我的问题
@@ -18,7 +16,12 @@ import ExpectAll from './components/ExpectAll'
 class MyExpect extends PureComponent {
     constructor(props) {
         super(props);
-        this.props.newRealm();
+
+    }
+
+    componentWillMount(){
+      const {dispatch} = this.props;
+      dispatch(initialMyExpect(this.props.userId,this.props.my_expect))
     }
 
     render() {
@@ -38,7 +41,7 @@ class MyExpect extends PureComponent {
               </Header>
               <Content style={styles.content}>
                 <ExpectMyself />
-                <ExpectAll />
+                <ExpectAll from='myexpect' />
               </Content>
             </Container>
         )
@@ -54,14 +57,9 @@ const styles = {
     backgroundColor:'#fff',
   },
 };
-function bindAction(dispatch) {
-    return {
-        newRealm: ()=>dispatch(newRealm(schema)),
-        openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: key => dispatch(closeDrawer()),
-    };
 
-}
-
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(MyExpect);
+const mapStateToProps = state => ({
+  userId:state.user.loginUser.appid,
+  my_expect:state.myQuestion.my_expect,
+});
+export default connect(mapStateToProps)(MyExpect);

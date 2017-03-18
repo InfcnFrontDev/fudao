@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Title, Content, Left, Right, Body,Text,Button,Header,Icon} from "native-base";
+import {Title,  Left, Right, Body,Text,Button,Icon} from "native-base";
 import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert,TouchableOpacity} from "react-native";
+import {Container, Content, Header, HeaderIcon} from "../../components/index";
 import styles from "./assets/styles";
 import moment from './assets/moment.js'
 import {Actions} from "react-native-router-flux";
@@ -12,6 +13,7 @@ import DynamicComment from './components/DynamicComments';
 import DynamicSupport from './components/DynamicSupports';
 import DynamicCommon from '../../components/DynamicCommon'
 import {fetchData,show,zan,sendComment,del} from '../../actions/dynamic.js';
+import {openDrawer} from "../../actions/drawer";
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -52,20 +54,12 @@ class Dynamic extends PureComponent {
       }
         return (
             <Container>
-                <Header>
-                    <Left>
-                        <Button transparent onPress={() => this.props.openDrawer()}>
-                            <Icon name="menu"/>
-                        </Button>
-                    </Left>
-                    <Body>
-                       <Text style={styles.indexTitle}>{this.props.title}</Text>
-                    </Body>
-                    <Right>
-                        <Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
-                        <Button transparent onPress={()=>Actions['newDynamic']({newnew:this.props.newnew})}><Icon name="ios-chatboxes"/></Button>
-                    </Right>
-                </Header>
+                <Header menu {...this.props} right={
+                  <View style={{flexDirection: 'row'}}>
+                    <HeaderIcon onPress={()=>Actions.search()} name="search"/>
+                    <HeaderIcon onPress={()=>Actions['newDynamic']({newnew:this.props.newnew})} name="ios-chatboxes"/>
+                  </View>
+                }/>
                 <DynamicList
                   renderHeader={this._renderHeader.bind(this)}
                   enableEmptySections={true}
@@ -192,6 +186,7 @@ function bindAction(dispatch) {
         fetchData:(page,options,callback,params)=>dispatch(fetchData(page,options,callback,params)),
         show:(id,params)=>dispatch(show(id,params)),
         zan:(info,params)=>dispatch(zan(info,params)),
+        openDrawer:()=>dispatch(openDrawer()),
         sendComment:(event,params)=>dispatch(sendComment(event,params)),
         del:(id,params)=>dispatch(del(id,params)),
     };

@@ -30,14 +30,18 @@ const styles = {
     color:'#000',
     fontSize:theme.DefaultFontSize+1,
   },
-  touxiang:{
-    width:78,
-    height:78,
+  touxiangView:{
     position:'absolute',
     top:120,
     right:10,
-    borderColor:'#fff',
-    borderWidth:2.5,
+    borderColor:'#CECECE',
+    borderWidth:1,
+    padding:3,
+    backgroundColor:'#fff',
+  },
+  touxiang:{
+    width:78,
+    height:78,
   },
   dynamic:{
     borderBottomColor:'#E0E0E2',

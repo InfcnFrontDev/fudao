@@ -3,7 +3,7 @@ import React, {PureComponent} from "react";
 
 import {connect} from "react-redux";
 import {Container, Header, Title, Content, ListItem, Text, Left, Button, Icon, Body, Right} from "native-base";
-import {View,Image,DeviceEventEmitter} from "react-native";
+import {View,Image,DeviceEventEmitter,WebView} from "react-native";
 import {openDrawer, closeDrawer} from "../../actions/drawer";
 import {Actions} from "react-native-router-flux";
 import {store} from '../../store/configureStore.js';
