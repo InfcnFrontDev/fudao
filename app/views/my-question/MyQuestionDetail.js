@@ -1,12 +1,8 @@
-//noinspection JSAnnotator
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Header, Title, Content, Left, Button, Icon, Body, Right} from "native-base";
-import {View, Image, DeviceEventEmitter} from "react-native";
+import {View, Image} from "react-native";
 import {Actions} from "react-native-router-flux";
-import {store} from "../../store/configureStore.js";
-import {newRealm} from "../../actions/realm.js";
-import schema from "../../realm/schema.js";
 import QuestionMyself from "./components/QuestionMyself";
 import QuestionTab from "./components/QuestionTab";
 
@@ -16,7 +12,6 @@ import QuestionTab from "./components/QuestionTab";
 class MyQuestionDetail extends PureComponent {
     constructor(props) {
         super(props);
-        this.props.newRealm();
     }
 
     render() {
@@ -54,12 +49,5 @@ const styles = {
   },
 };
 
-function bindAction(dispatch) {
-    return {
-        newRealm: ()=>dispatch(newRealm(schema)),
-    };
-
-}
-
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(MyQuestionDetail);
+export default connect(mapStateToProps)(MyQuestionDetail);

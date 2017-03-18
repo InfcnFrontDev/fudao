@@ -7,6 +7,9 @@ const initialState = {
 	allQuestions:[],
 	refresh:true,
 	changeRowID:0,
+	my_expect:[],
+	allExcepts:[],
+
 };
 export default function (state = initialState, {type, source}) {
 	switch (type) {
@@ -18,16 +21,15 @@ export default function (state = initialState, {type, source}) {
 			return Object.assign({}, state, {
 				...source
 			});
-		case types.MY_QUESTION_CHANGE_QUESTION:
+		case types.MY_QUESTION_CHANGE:
 			return Object.assign({}, state, {
-				my_question:source.my_question,
+				...source,
 				flag:!state.flag,
 			});
 		case types.MY_QUESTION_DEL_QUESTION_CHANGE_ALL_QUESTIONS:
 			return Object.assign({}, state, {
-				allQuestions:source.allQuestions,
+				...source,
 				refresh:!state.refresh,
-				changeRowID:source.changeRowID
 			});
 
 		default:

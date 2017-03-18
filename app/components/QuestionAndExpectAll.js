@@ -4,19 +4,17 @@ import {Actions} from "react-native-router-flux";
 import Swiper from 'react-native-swiper'
 import {ListItem, Text, Button,List} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter} from "react-native";
-import {theme} from "../../../utils/";
-import {questions} from './Data';
-import QuestionList from './QuestionList'
-import GiftedListView from '../../../components/GiftedListView'
-import {getAllQuestions} from '../../../actions/my-question.js'
+import {theme} from "../utils/";
+import QuestionAndExpectList from './QuestionAndExpectList'
+import GiftedListView from './GiftedListView'
+import {getAllDatas} from '../actions/my-question.js'
 
 /**
 * 所有问题
 */
-class QuestionAll extends PureComponent {
+class QuestionAndExpectAll extends PureComponent {
   constructor(props) {
     super(props);
-    this.problem = questions[0].alltypes;
 
   }
 
@@ -39,15 +37,18 @@ class QuestionAll extends PureComponent {
   }
   onFetch(page = 1, callback, options) {
     const {dispatch} = this.props;
-    ToastAndroid.show(JSON.stringify(this.props.renqun),ToastAndroid.SHORT);
-    dispatch(getAllQuestions(callback,this.props.my_question,this.props.allQuestions,this.props.renqun))
+    if(this.props.from=='myquestion'){
+      dispatch(getAllDatas(callback,this.props.my_question,this.props.allQuestions,this.props.renqun,'myquestion'))
+    }else{
+      dispatch(getAllDatas(callback,this.props.my_expect,this.props.allExpects,this.props.renqun,'myexpect'))
+    }
 	}
 
 	renderRowView(row,sectionid,rowid) {
 		return (
       <View style={styles.types}>
              <Text style={styles.title}>{row.name}</Text>
-              <QuestionList data={row.diseases} id={rowid} type='myQuestionDetail' />
+              <QuestionAndExpectList data={row.diseases} id={rowid} from={this.props.from}/>
       </View>
 		)
 	}
@@ -76,7 +77,9 @@ const styles = {
 
 const mapStateToProps = state => ({
   my_question:state.myQuestion.my_question,
+  my_expect:state.myQuestion.my_expect,
   allQuestions:state.myQuestion.allQuestions,
+  allExpects:state.myQuestion.allExpects,
   renqun:state.user.loginUser.renqun
 });
-export default connect(mapStateToProps)(QuestionAll);
+export default connect(mapStateToProps)(QuestionAndExpectAll);

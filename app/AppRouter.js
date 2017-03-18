@@ -20,6 +20,7 @@ import MyCollection from "./views/collection/MyCollection";
 import MyEmotion from "./views/emotion/MyEmotion";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
+import MyExpect from "./views/my-expect/MyExpect";
 import TreatmentDetail from "./views/my-question/TreatmentDetail";
 import TreatmentDailyDetail from "./views/my-question/TreatmentDailyDetail";
 import Start from "./views/authentication/Start";
@@ -87,6 +88,7 @@ class AppRouter extends PureComponent {
 					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
 					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
 					<Scene key="treatmentDailyDetail" component={TreatmentDailyDetail} title="疗法详情" hideNavBar/>
+					<Scene key="myExpect" component={MyExpect}  title="我的期望" hideNavBar/>
 
 
 					{/*搜索*/}

@@ -94,7 +94,7 @@ class QuestionMyself extends PureComponent {
 
   choose(obj){
     const {dispatch} = this.props;
-    dispatch(delMyQuestion(obj,this.props.my_question,this.props.allQuestions,this.props.userId));
+    dispatch(delMyQuestion(obj,this.props.my_question,this.props.allQuestions,this.props.userId,'myquestion'));
   }
 
 }

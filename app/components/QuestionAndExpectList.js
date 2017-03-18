@@ -4,24 +4,23 @@ import {Actions} from "react-native-router-flux";
 import Swiper from 'react-native-swiper'
 import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter,StyleSheet,TouchableHighlight} from "react-native";
-import {theme} from "../../../utils/";
-import {questions} from './Data';
-import GiftedListView from '../../../components/GiftedListView'
-import {myQuestionToRows,addMyQuestion} from '../../../actions/my-question.js'
-import {request,urls} from "../../../utils/";
+import {theme} from "../utils/";
+import GiftedListView from './GiftedListView'
+import {myQuestionToRows,addMyQuestion} from '../actions/my-question.js'
+import {request,urls} from "../utils/";
 
 
 /**
 * 所有问题
 */
-class QuestionList extends PureComponent {
+class QuestionAndExpectList extends PureComponent {
   constructor(props) {
 		super(props);
 	}
 
 
   shouldComponentUpdate(nextProps){
-    if(this.props.my_question!=nextProps.my_question||this.props.refresh!=nextProps.refresh){
+    if(this.props.my_question!=nextProps.my_question||this.props.refresh!=nextProps.refresh||this.props.my_expect!=nextProps.my_expect){
       if(nextProps.changeRowID!=this.props.id){
         return false
       }
@@ -49,7 +48,6 @@ class QuestionList extends PureComponent {
 	onFetch(page = 1, callback, options) {
     const {dispatch} = this.props;
     dispatch(myQuestionToRows(this.props.data,callback))
-
 	}
 
 	renderRowView(row) {
@@ -66,18 +64,18 @@ class QuestionList extends PureComponent {
       if(p.flag){
         var add=(
           <TouchableHighlight underlayColor='transparent'>
-            <Image source={require('../../../assets/arrows_square_check.png')} style={styles.choose}/>
+            <Image source={require('../assets/arrows_square_check.png')} style={styles.choose}/>
           </TouchableHighlight>
         )
       }else{
         var add=(
           <TouchableHighlight  onPress={this.choose.bind(this,p)} underlayColor='transparent'>
-            <Image source={require('../../../assets/arrows_square_plus.png')} style={styles.choose}/>
+            <Image source={require('../assets/arrows_square_plus.png')} style={styles.choose}/>
           </TouchableHighlight>
         )
       }
       btn = (
-        <Button transparent style={(num%2==0)?(i==0?styles.oneQuestion00:styles.oneQuestion01):(i==0?styles.oneQuestion10:styles.oneQuestion11)} onPress={()=>Actions.myQuestionDetail({question_title:p.showVal})}>
+        <Button transparent style={(num%2==0)?(i==0?styles.oneQuestion00:styles.oneQuestion01):(i==0?styles.oneQuestion10:styles.oneQuestion11)} onPress={()=>this.props.from=='myquestion'?Actions.myQuestionDetail({question_title:p.showVal}):false}>
           <View  style={styles.oneQuestionView}>
             <Image source={{uri:urls.getImage(p.img)}} style={styles.img}/>
             <Text style={styles.oneTitle}>{p.showVal}</Text>
@@ -94,12 +92,17 @@ class QuestionList extends PureComponent {
 	}
 
 	renderPaginationAllLoadedView() {
-		return (null )
+		return (null)
 	}
 
   choose(p){
     const {dispatch} = this.props;
-    dispatch(addMyQuestion(p,this.props.my_question,this.props.id,this.props.allQuestions,this.refs.questions._postRefresh,this.props.userId))
+    if(this.props.from=='myquestion'){
+      dispatch(addMyQuestion(p,this.props.my_question,this.props.id,this.props.allQuestions,this.refs.questions._postRefresh,this.props.userId,'myquestion'))
+    }else{
+      dispatch(addMyQuestion(p,this.props.my_expect,this.props.id,this.props.allExpects,this.refs.questions._postRefresh,this.props.userId,'myexpect'))
+
+    }
   }
 }
 
@@ -180,9 +183,11 @@ const styles = {
 
 const mapStateToProps = state => ({
   my_question:state.myQuestion.my_question,
+  my_expect:state.myQuestion.my_expect,
   allQuestions:state.myQuestion.allQuestions,
+  allExpects:state.myQuestion.allExpects,
   refresh:state.myQuestion.refresh,
   changeRowID:state.myQuestion.changeRowID,
   userId:state.user.loginUser.appid,
 });
-export default connect(mapStateToProps)(QuestionList);
+export default connect(mapStateToProps)(QuestionAndExpectList);

@@ -1,17 +1,17 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Title, Content, Left, Right, Body,Text,Button,Icon} from "native-base";
+import {Title, Right, Body,Text,Button,Icon} from "native-base";
 import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert,TouchableOpacity} from "react-native";
+import {Container, Content, Header} from "../../components/index";
 import styles from "./assets/styles";
 import moment from './assets/moment.js'
 import {Actions} from "react-native-router-flux";
-import {Header} from "../../components/index";
 import DynamicList from './components/DynamicList';
 import DynamicHeader from './components/DynamicHeader';
 import DynamicComment from './components/DynamicComments';
 import DynamicSupport from './components/DynamicSupports';
 import DynamicCommon from '../../components/DynamicCommon'
-import {fetchData,show,zan,sendComment,del} from '../../actions/dynamic.js';
+import {fetchData,show,zan,sendComment,del} from '../../actions/dynamic'
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -53,10 +53,13 @@ class Dynamic extends PureComponent {
         return (
             <Container>
                 <Header menu {...this.props} right={
+                  <View style={{flexDirection: 'row'}}>
                     <Right>
-                        <Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
-                        <Button transparent onPress={()=>Actions.newDynamic({newnew:this.props.newnew})}><Icon name="ios-chatboxes"/></Button>
+                      <Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
+                      <Button transparent onPress={()=>Actions['newDynamic']({newnew:this.props.newnew})}><Icon name="ios-chatboxes"/></Button>
                     </Right>
+                  </View>
+
                 }/>
                 <DynamicList
                   renderHeader={this._renderHeader.bind(this)}

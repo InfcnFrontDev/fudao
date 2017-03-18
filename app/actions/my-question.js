@@ -3,40 +3,56 @@ import { ToastAndroid,} from "react-native";
 import {request,urls} from "../utils/";
 
 
-export function getAllQuestions(callback,my_question,all_questions,renqun) {
+export function getAllDatas(callback,my_params,all_params,renqun,from) {
   return (dispatch) => {
-    // if(all_questions!=[]){
-    //   callback(all_questions, {
+    // if(all_params!=[]){
+    //   callback(all_params, {
     //     allLoaded: true
     //   })
     // }else{
-      request.getJson(urls.apis.MY_QUESTION_ALL_QUESTION,{
+      if(from=='myquestion'){
+        var url = urls.apis.MY_QUESTION_ALL_QUESTION;
+      }else{
+        ToastAndroid.show('ACTION_MyExpect_getAllQuestions',ToastAndroid.SHORT)
+        //expect 待修改
+        var url = urls.apis.MY_QUESTION_ALL_QUESTION;
+      }
+      request.getJson(url,{
         renqun:renqun
       }).then((res)=>{
-        var allQuestions = res.obj.datas;
-        for(var i=0;i<allQuestions.length;i++){
-          for(var j=0;j<allQuestions[i].diseases.length;j++){
+        var allDatas = res.obj.datas;
+        for(var i=0;i<allDatas.length;i++){
+          for(var j=0;j<allDatas[i].diseases.length;j++){
             var flag=true;
-            for(var k=0;k<my_question.length;k++){
-              if(my_question[k].showVal==allQuestions[i].diseases[j].showVal){
-                allQuestions[i].diseases[j].flag=true;
+            for(var k=0;k<my_params.length;k++){
+              if(my_params[k].showVal==allDatas[i].diseases[j].showVal){
+                allDatas[i].diseases[j].flag=true;
                 flag=false;
                 break;
               }
             }
             if(flag){
-              allQuestions[i].diseases[j].flag=false;
+              allDatas[i].diseases[j].flag=false;
             }
           }
         }
-        dispatch({
-          type: types.MY_QUESTION_ALL_QUESTION,
-          source:{
-            allQuestions:allQuestions,
-          }
-        })
+        if(from=='myquestion'){
+          dispatch({
+            type: types.MY_QUESTION_ALL_QUESTION,
+            source:{
+              allQuestions:allDatas,
+            }
+          })
+        }else{
+          dispatch({
+            type: types.MY_QUESTION_ALL_QUESTION,
+            source:{
+              allExpects:allDatas,
+            }
+          })
+        }
         // setTimeout(function(){
-        callback(allQuestions, {
+        callback(allDatas, {
           allLoaded: true
         })
         // },600);
@@ -44,8 +60,6 @@ export function getAllQuestions(callback,my_question,all_questions,renqun) {
     // }
   }
 }
-
-
 
 export function myQuestionToRows(allQuestion,callback) {
   return (dispatch) => {
@@ -90,14 +104,21 @@ export function initialMyQuestion(userId,my_question) {
   }
 }
 
-export function addMyQuestion(obj,my_question,id,allQuestions,callback,userId) {
+export function addMyQuestion(obj,my_question,id,allQuestions,callback,userId,from) {
   return (dispatch) => {
     my_question = [obj].concat(my_question);
-    dispatch({
-      type: types.MY_QUESTION,
-      source:{
+    if(from=='myquestion'){
+      var my_source={
         my_question:my_question,
       }
+    }else{
+      var my_source={
+        my_expect:my_question,
+      }
+    }
+    dispatch({
+      type: types.MY_QUESTION,
+      source:my_source
     })
     for(var j=0;j<allQuestions[id].diseases.length;j++){
       if(allQuestions[id].diseases[j].showVal==obj.showVal){
@@ -105,21 +126,32 @@ export function addMyQuestion(obj,my_question,id,allQuestions,callback,userId) {
       }
     }
     myQuestionToRows(allQuestions[id],callback);
-    dispatch({
-      type: types.MY_QUESTION,
-      source:{
+    if(from=='myquestion'){
+      var allSource={
         allQuestions:allQuestions,
         changeRowID:id
       }
+      var url=urls.apis.MY_QUESTION_ADD_USER_QUESTION;
+    }else{
+      var allSource={
+        allExpects:allQuestions,
+        changeRowID:id
+      }
+      //expect 待修改
+      var url=urls.apis.MY_QUESTION_ADD_USER_QUESTION;
+    }
+    dispatch({
+      type: types.MY_QUESTION,
+      source:allSource
     })
-    request.getJson(urls.apis.MY_QUESTION_ADD_USER_QUESTION,{
+    request.getJson(url,{
       userId:userId,
       diseaseId:obj.id,
     })
   }
 }
 
-export function delMyQuestion(obj,my_question,allQuestions,userId) {
+export function delMyQuestion(obj,my_question,allQuestions,userId,from) {
   return (dispatch) => {
     for(var i=0;i<my_question.length;i++){
       if(obj.showVal==my_question[i].showVal){
@@ -127,11 +159,18 @@ export function delMyQuestion(obj,my_question,allQuestions,userId) {
         break;
       }
     }
-    dispatch({
-      type: types.MY_QUESTION_CHANGE_QUESTION,
-      source:{
+    if(from=='myquestion'){
+      var my_source={
         my_question:my_question,
       }
+    }else{
+      var my_source={
+        my_expect:my_question,
+      }
+    }
+    dispatch({
+      type: types.MY_QUESTION_CHANGE,
+      source:my_source
     })
     for(var i=0;i<allQuestions.length;i++){
       for(var j=0;j<allQuestions[i].diseases.length;j++){
@@ -145,16 +184,43 @@ export function delMyQuestion(obj,my_question,allQuestions,userId) {
         break;
       }
     }
-    dispatch({
-      type: types.MY_QUESTION_DEL_QUESTION_CHANGE_ALL_QUESTIONS,
-      source:{
+    if(from=='myquestion'){
+      var allSource={
         allQuestions:allQuestions,
         changeRowID:i,
       }
+      var url=urls.apis.MY_QUESTION_DEL_USER_QUESTION;
+    }else{
+      var allSource={
+        allExpects:allQuestions,
+        changeRowID:i,
+      }
+      var url=urls.apis.MY_QUESTION_ADD_USER_QUESTION;
+    }
+    dispatch({
+      type: types.MY_QUESTION_DEL_QUESTION_CHANGE_ALL_QUESTIONS,
+      source:allSource
     })
-    request.getJson(urls.apis.MY_QUESTION_DEL_USER_QUESTION,{
+    request.getJson(url,{
       userId:userId,
       diseaseId:obj.id,
     })
+  }
+}
+
+export function initialMyExpect(userId,my_expect) {
+  return (dispatch) => {
+    if(my_expect.length==0){
+      request.getJson(urls.apis.MY_QUESTION_USER_QUESTION,{
+        userId:userId
+      }).then((res)=>{
+        dispatch({
+          type: types.MY_QUESTION,
+          source:{
+            my_expect:res.obj,
+          }
+        })
+      })
+    }
   }
 }

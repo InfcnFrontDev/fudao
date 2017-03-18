@@ -3,9 +3,9 @@ import {connect} from "react-redux";
 import {Container, Header, Title, Content, Left, Button, Icon, Body, Right} from "native-base";
 import {View, Image, DeviceEventEmitter} from "react-native";
 import {Actions} from "react-native-router-flux";
-import QuestionMyself from "./components/QuestionMyself";
-import QuestionAll from "./components/QuestionAll";
-import {initialMyQuestion} from "../../actions/my-question.js";
+import QuestionMyself from './components/QuestionMyself'
+import QuestionAll from '../../components/QuestionAndExpectAll'
+import {initialMyQuestion} from '../../actions/my-question.js'
 
 /**
  * 我的问题
@@ -38,7 +38,7 @@ class MyQuestion extends PureComponent {
               </Header>
               <Content style={styles.content}>
                 <QuestionMyself />
-                <QuestionAll />
+                <QuestionAll from='myquestion'/>
               </Content>
             </Container>
         )
