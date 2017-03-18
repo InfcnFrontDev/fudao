@@ -11,15 +11,13 @@ import SearchHealthCare from "./views/search/SearchHealthCare";
 import SearchInformation from "./views/search/SearchInformation";
 import SearchOfflineService from "./views/search/SearchOfflineService";
 import SearchUser from "./views/search/SearchUser";
-import ArticleDetail from "./views/article/ArticleDetail";
 import Settings from "./views/system/Settings";
 import About from "./views/system/About";
 import Picture from "./views/picture/";
 import MyInfo from "./views/my-info/MyInfo";
 import MyCheck from "./views/my-check/MyCheck";
 import MyCollection from "./views/collection/MyCollection";
-import MyEmotion from "./views/my-emotion/MyEmotion";
-import MyEmotionSolve from "./views/my-emotion/MyEmotionSolve";
+import MyEmotion from "./views/emotion/MyEmotion";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
 import MyExpect from "./views/my-expect/MyExpect";
@@ -86,9 +84,8 @@ class AppRouter extends PureComponent {
 					{/*主页*/}
 
 					<Scene key="myEmotion"  component={MyEmotion} title="我的情绪" hideNavBar/>
-					<Scene key="myEmotionSolve" component={MyEmotionSolve} title="情绪干预" hideNavBar/>
 					<Scene key="myQuestion" component={MyQuestion}  title="我的问题" hideNavBar/>
-					<Scene key="myQuestionDetail" component={MyQuestionDetail} initial title="问题详情" hideNavBar/>
+					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
 					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
 					<Scene key="treatmentDailyDetail" component={TreatmentDailyDetail} title="疗法详情" hideNavBar/>
 					<Scene key="myExpect" component={MyExpect}  title="我的期望" hideNavBar/>
@@ -104,10 +101,6 @@ class AppRouter extends PureComponent {
 					<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
 						   hideNavBar/>
 					<Scene key="searchUser" component={SearchUser} title="用户" hideNavBar/>
-
-
-					{/*资讯*/}
-					<Scene key="articleDetail" component={ArticleDetail} title="资讯详情" hideNavBar/>
 
 					{/*动态*/}
 					<Scene key="picture" component={Picture} title="图片预览" hideNavBar/>

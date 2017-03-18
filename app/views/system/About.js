@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {Actions} from "react-native-router-flux";
-import {Container, Content, Text, Row, Thumbnail, Col, Button} from "native-base";
-import Header from "../../components/header/BaseHeader";
+import {Text, Row, Thumbnail, Col, Button} from "native-base";
+import {Container, Content, Header} from "../../components/index";
 import {config, urls} from "../../utils/";
 
 /**
@@ -12,15 +12,15 @@ class About extends PureComponent {
 		return (
 			<Container>
 				<Header {...this.props}/>
-				<Content padder style={{backgroundColor:'#FFFFFF'}}>
+				<Content padder style={{backgroundColor: '#FFFFFF'}}>
 					<Row style={styles.title}>
 						<Col/>
-						<Col style={{width:230}}>
+						<Col style={{width: 230}}>
 							<Row>
-								<Col style={{width:80}}>
+								<Col style={{width: 80}}>
 									<Thumbnail square size={80} source={require('../../assets/logo.png')}/>
 								</Col>
-								<Col style={{paddingTop:8}}>
+								<Col style={{paddingTop: 8}}>
 									<Text style={styles.titleText}>{config.appName}</Text>
 									<Text>{config.appVersion}</Text>
 								</Col>
@@ -50,7 +50,7 @@ class About extends PureComponent {
 					<Row>
 						<Text>商务合作：fudao@infcn.com.cn</Text>
 					</Row>
-					<Row style={{marginTop:30}}>
+					<Row style={{marginTop: 30}}>
 						<Col style={styles.center}>
 							<Button onPress={()=> this.declare()}><Text>隐式声明</Text></Button>
 						</Col>

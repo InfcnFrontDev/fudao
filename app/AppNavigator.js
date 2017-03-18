@@ -20,7 +20,7 @@ class AppNavigator extends PureComponent {
 			<StyleProvider style={getTheme(theme)}>
 				<Drawer ref={(ref) => this._drawer = ref}>
 					<StatusBar
-						hidden={(this.props.drawerState === 'opened' && Platform.OS === 'ios') ? true : false}
+						hidden={false}
 						backgroundColor={theme.statusBarColor}/>
 
 					<AppRouter/>
@@ -35,7 +35,5 @@ class AppNavigator extends PureComponent {
 	}
 }
 
-const mapStateToProps = state => ({
-	drawerState: state.drawer.drawerState,
-});
+const mapStateToProps = state => ({});
 export default connect(mapStateToProps)(AppNavigator);

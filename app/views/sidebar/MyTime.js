@@ -9,13 +9,16 @@ import {urls} from "../../utils/index"
 class MyTime extends PureComponent {
 
 	render() {
+		let{loginUser}=this.props;
 		return (
 			<Content>
-				<WebView uri={urls.pages.MY_TIME}/>
+				<WebView uri={urls.pages.MY_TIME+'?renqun='+this.props.loginUser['renqun']}/>
 			</Content>
 		)
 	}
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	loginUser: state.user.loginUser
+});
 export default connect(mapStateToProps)(MyTime);

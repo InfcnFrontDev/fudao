@@ -11,6 +11,7 @@ class TabView extends PureComponent {
 				ref={(e) => this._scrollableTabView = e}
 				renderTabBar={() => <View style={{height: 0, width: 0}}/>}
 				onChangeTab={(event) => onChangeTab(event)}
+				locked
 			>
 				{tabs.map((item, index) => this.renderTab(item, index))}
 			</ScrollableTabView>

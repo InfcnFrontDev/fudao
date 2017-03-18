@@ -21,7 +21,7 @@ class MyCollection extends PureComponent {
 		let {dataSource, list, isLoading} = this.state;
 		return (
 			<Container>
-				<Header back {...this.props}/>
+				<Header {...this.props}/>
 				<Content>
 					{!isLoading &&
 					<ListView

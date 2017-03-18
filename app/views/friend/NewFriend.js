@@ -17,7 +17,7 @@ class NewFriend extends PureComponent {
 			count = newFriendList.length;
 		return (
 			<Container>
-				<Header back {...this.props}/>
+				<Header {...this.props}/>
 				<Content gray>
 					<PullView isRefreshing={isFetching} onRefresh={this._onRefresh.bind(this)}>
 						<Separator title="新的朋友"/>

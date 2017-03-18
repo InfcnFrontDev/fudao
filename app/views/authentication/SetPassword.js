@@ -25,7 +25,7 @@ class SetPassword extends PureComponent {
     render() {
         return (
             <Container>
-                <Header back {...this.props}></Header>
+                <Header {...this.props}></Header>
                 <Content>
                     <View style={styles.bag}>
                         <UserInput text="设置密码" placeholder={"至少6位，由数字/字母/_组成"} secureTextEntry={true}  value={this.state.password}

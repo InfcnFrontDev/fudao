@@ -27,7 +27,7 @@ class RebuildPassword extends PureComponent {
     render() {
         return (
             <Container>
-                <Header back {...this.props}></Header>
+                <Header {...this.props}></Header>
                 <Content>
                     <View style={styles.bag}>
                         <UserInput text="新密码" placeholder={"至少6位，由数字/字母/_组成"}  value={this.state.password} secureTextEntry={true}

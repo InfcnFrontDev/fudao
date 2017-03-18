@@ -1,19 +1,16 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Title,  Left, Right, Body,Text,Button,Icon} from "native-base";
+import {Title, Right, Body,Text,Button,Icon} from "native-base";
 import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert,TouchableOpacity} from "react-native";
-import {Container, Content, Header, HeaderIcon} from "../../components/index";
+import {Container, Content, Header} from "../../components/index";
 import styles from "./assets/styles";
 import moment from './assets/moment.js'
 import {Actions} from "react-native-router-flux";
-// import Header from "../../components/header/IndexHeader";
 import DynamicList from './components/DynamicList';
 import DynamicHeader from './components/DynamicHeader';
 import DynamicComment from './components/DynamicComments';
 import DynamicSupport from './components/DynamicSupports';
 import DynamicCommon from '../../components/DynamicCommon'
-import {fetchData,show,zan,sendComment,del} from '../../actions/dynamic.js';
-import {openDrawer} from "../../actions/drawer";
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -56,9 +53,12 @@ class Dynamic extends PureComponent {
             <Container>
                 <Header menu {...this.props} right={
                   <View style={{flexDirection: 'row'}}>
-                    <HeaderIcon onPress={()=>Actions.search()} name="search"/>
-                    <HeaderIcon onPress={()=>Actions['newDynamic']({newnew:this.props.newnew})} name="ios-chatboxes"/>
+                    <Right>
+                      <Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
+                      <Button transparent onPress={()=>Actions['newDynamic']({newnew:this.props.newnew})}><Icon name="ios-chatboxes"/></Button>
+                    </Right>
                   </View>
+
                 }/>
                 <DynamicList
                   renderHeader={this._renderHeader.bind(this)}

@@ -2,11 +2,9 @@ import React, {PureComponent} from "react";
 import {ScrollView, DatePickerAndroid} from "react-native";
 import {connect} from "react-redux";
 import {ListItem, Body, Right, View, Text, Icon} from "native-base";
-import {Container, Content, Separator} from "../../components/index";
-import Header from "../../components/header/BaseHeader";
+import {Container, Content, Header, Separator} from "../../components/index";
 import {updateUserInfo} from "../../actions/user";
 import {dialogs} from "../../utils/index";
-import _ from "lodash";
 
 const groups = [
 	{
