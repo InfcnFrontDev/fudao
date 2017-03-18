@@ -12,7 +12,7 @@ export const CLOSE_DRAWER = 'CLOSE_DRAWER';
 export const LOADING_SHOW = 'LOADING_SHOW';
 export const LOADING_HIDE = 'LOADING_HIDE';
 export const USER_UPDATE_INFO = "USER_UPDATE_INFO";
-
+export const USER_UPDATE_CHECK = "USER_UPDATE_CHECK";
 // position ////////////////////////////////////////
 export const UPDATE_POSITION = 'UPDATE_POSITION';
 

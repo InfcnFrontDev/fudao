@@ -171,6 +171,7 @@ class MyInfo extends PureComponent {
 
 	render() {
 		let {loginUser} = this.props;
+		console.log(loginUser)
 		return (
 			<Container>
 				<Header {...this.props}/>

@@ -12,10 +12,19 @@ export default function (state = initialState, {type, payload}) {
 			return initialState;
 		case types.USER_UPDATE_INFO:
 			let loginUser = {};
-			loginUser[payload.field] = payload.value
-			loginUser = Object.assign({}, state.loginUser, loginUser)
+			loginUser[payload.field] = payload.value;
+			loginUser = Object.assign({}, state.loginUser, loginUser);
 			return Object.assign({}, state, {
 				loginUser
+			});
+		case types.USER_UPDATE_CHECK:
+			let loginUser1= {};
+			let str={};
+            str[payload.field] = payload.value;
+			loginUser1[payload.tableName] = str;
+			loginUser1 = Object.assign({}, state.loginUser, loginUser1);
+			return Object.assign({}, state, {
+				loginUser1
 			});
 		default:
 			return state;

@@ -1,693 +1,764 @@
 import React, {PureComponent} from "react";
-import {ScrollView, DatePickerAndroid} from "react-native";
+import {ScrollView, DatePickerAndrofield} from "react-native";
 import {connect} from "react-redux";
 import {ListItem, Body, Right, View, Text, Icon} from "native-base";
-import {Container, Content, Header, Separator} from "../../components/index";
-import {updateUserInfo} from "../../actions/user";
+import {Container, Content, Separator,Header} from "../../components/index";
+import {updateUserCheck} from "../../actions/user";
 import {dialogs} from "../../utils/index";
 
 const groups = [
 	{
 		title: '基本信息',
+		tableName:'userInformation',
 		items: [
 			{
 				title: '身高',
-				id: 'tops',
+				field: 'tops',
 				type: 'input',
 			},
 			{
 				title: '体重',
-				id: 'weight',
+				field: 'weight',
 				type: 'input',
 			},
 			{
 				title: '体重指数',
-				id: 'bmi',
+				field: 'bmi',
 				type: 'input',
 			},
 			{
 				title: '舒张压/收缩压',
-				id: 'blood_pressure',
+				field: 'blood_pressure',
 				type: 'input',
 			}
 		]
 	},
 	{
 		title: '肝胆功能',
+		tableName:'liverAndGallbladder',
 		items: [
 			{
 				title: '谷丙转氨酶',
-				id: 'alanine_aminotransferase',
+				field: 'alanine_aminotransferase',
 				type: 'input',
 			},
 			{
 				title: '谷草转氨酶',
-				id: 'ast',
+				field: 'ast',
 				type: 'input',
 			},
 			{
 				title: 'AST/ALT',
-				id: 'ast_alt',
+				field: 'ast_alt',
 				type: 'input',
 			},
 		]
 	},
 	{
 		title: '肿瘤标志物',
+		tableName:'tumorMarker',
 		items: [
 			{
 				title: '癌胚抗原',
-				id: 'cea',
+				field: 'cea',
 				type: 'input',
 			},
 			{
 				title: '甲胎蛋白',
-				id: 'afp',
+				field: 'afp',
 				type: 'input',
 			},
 		]
 	},
 	{
 		title: '尿常规',
+		tableName:'urineRoutine',
 		items: [
 			{
 				title: '比重',
-				id: 'proportion',
+				field: 'proportion',
 				type: 'input',
 			},
 			{
 				title: 'PH',
-				id: 'ph',
+				field: 'ph',
 				type: 'input',
 			},
 			{
 				title: '葡萄糖',
-				id: 'glucose',
-				type: 'input',
+				field: 'glucose',
+                type: 'singleChoice',
+                items: [
+                    '阴性', '阳性'
+                ],
 			},
 			{
 				title: '酮体',
-				id: 'ketone',
-				type: 'input',
+				field: 'ketone',
+                type: 'singleChoice',
+                items: [
+                    '阴性', '阳性'
+                ],
 			},
 			{
 				title: '胆红素',
-				id: 'bilirubin',
-				type: 'input',
+				field: 'bilirubin',
+                type: 'singleChoice',
+                items: [
+                    '阴性', '阳性'
+                ],
 			},
 			{
 				title: '尿胆原',
-				id: 'urinary_bladder',
-				type: 'input',
+				field: 'urinary_bladder',
+                type: 'singleChoice',
+                items: [
+                    '阴性', '阳性'
+                ],
 			},
 			{
 				title: '潜血',
-				id: 'occult_blood',
-				type: 'input',
+				field: 'occult_blood',
+                type: 'singleChoice',
+                items: [
+                    '阴性', '阳性'
+                ],
 			},
 			{
 				title: '尿蛋白',
-				id: 'urine_protein',
-				type: 'input',
+				field: 'urine_protein',
+                type: 'singleChoice',
+                items: [
+                    '阴性', '阳性'
+                ],
 			},
 			{
 				title: '亚硝酸盐',
-				id: 'nitrite',
-				type: 'input',
+				field: 'nitrite',
+                type: 'singleChoice',
+                items: [
+                    '阴性', '阳性'
+                ],
 			},
 			{
 				title: '白细胞',
-				id: 'white_blood_cellwhite_blood_cell',
-				type: 'input',
+				field: 'white_blood_cellwhite_blood_cell',
+                type: 'singleChoice',
+                items: [
+                    '阴性', '阳性'
+                ],
 			},
 			{
 				title: '抗坏血栓VC',
-				id: 'anti_thrombosis_vc',
-				type: 'input',
+				field: 'anti_thrombosis_vc',
+                type: 'singleChoice',
+                items: [
+                    '阴性', '阳性'
+                ],
 			}
 		]
 	},
 	{
 		title: '耳鼻喉科',
+		tableName:'otolaryngology',
 		items: [
 			{
 				title: '听力',
-				id: 'hearing',
+				field: 'hearing',
 				type: 'input',
 			},
 			{
 				title: '外耳',
-				id: 'external_ear',
+				field: 'external_ear',
 				type: 'input',
 			},
 			{
 				title: '外耳道',
-				id: 'external_auditory_canal',
+				field: 'external_auditory_canal',
 				type: 'input',
 			},
 			{
 				title: '鼓膜',
-				id: 'eardrum',
+				field: 'eardrum',
 				type: 'input',
 			},
 			{
 				title: '外鼻',
-				id: 'external_nose',
+				field: 'external_nose',
 				type: 'input',
 			},
 			{
 				title: '鼻腔',
-				id: 'nasal_cavity',
+				field: 'nasal_cavity',
 				type: 'input',
 			},
 			{
 				title: '咽',
-				id: 'pharynx',
+				field: 'pharynx',
 				type: 'input',
 			},
 			{
 				title: '喉',
-				id: 'throat',
+				field: 'throat',
 				type: 'input',
 			},
 			{
 				title: '其他',
-				id: 'other',
+				field: 'other',
 				type: 'input',
 			},
 		]
 	},
 	{
 		title: '眼科',
+		tableName:'ophthalmology',
 		items: [
 			{
 				title: '右眼矫正视力',
-				id: 'right_eye',
+				field: 'right_eye',
 				type: 'input',
 			},
 			{
 				title: '左眼矫正视力',
-				id: 'left_eye',
+				field: 'left_eye',
 				type: 'input',
 			},
 			{
 				title: '辨色力',
-				id: 'color',
-				type: 'input',
+				field: 'color',
+                type: 'singleChoice',
+                items: [
+                    '正常', '色弱','色盲'
+                ],
 			}
 		]
 	},
 	{
 		title: '血常规',
+		tableName:'routineBloodTest',
 		items: [
 			{
 				title: '白细胞（WBC)',
-				id: 'wbc',
+				field: 'wbc',
 				type: 'input',
 			},
 			{
 				title: '淋巴细胞比率(LYM%)',
-				id: 'lym_ratio',
+				field: 'lym_ratio',
 				type: 'input',
 			},
 			{
 				title: '单核细胞比率(MONO%)',
-				id: 'mono_ratio',
+				field: 'mono_ratio',
 				type: 'input',
 			},
 			{
 				title: '中性粒细胞比率',
-				id: 'gra_ratio',
+				field: 'gra_ratio',
 				type: 'input',
 			},
 			{
 				title: '淋巴细胞(LYM)',
-				id: 'lym',
+				field: 'lym',
 				type: 'input',
 			},
 			{
 				title: '单核细胞数(MONO)',
-				id: 'mono',
+				field: 'mono',
 				type: 'input',
 			},
 			{
 				title: '中性粒细胞(NEUT)',
-				id: 'neut',
+				field: 'neut',
 				type: 'input',
 			},
 			{
 				title: '红细胞(RBC)',
-				id: 'rbc',
+				field: 'rbc',
 				type: 'input',
 			},
 			{
 				title: '红细胞压积(HCT)',
-				id: 'hct',
+				field: 'hct',
 				type: 'input',
 			},
 			{
 				title: '平均红细胞体积(MCV)',
-				id: 'mcv',
+				field: 'mcv',
 				type: 'input',
 			},
 			{
 				title: '红细胞分布宽度(RDW-CV)',
-				id: 'rdw_cv',
+				field: 'rdw_cv',
 				type: 'input',
 			},
 			{
 				title: '红细胞分布宽度（RDW-SD）',
-				id: 'rdw_sd',
+				field: 'rdw_sd',
 				type: 'input',
 			},
 			{
 				title: '血红蛋白（HGB）',
-				id: 'hgb',
+				field: 'hgb',
 				type: 'input',
 			},
 			{
 				title: '平均血红蛋白浓度（MCHC)',
-				id: 'mchc',
+				field: 'mchc',
 				type: 'input',
 			},
 			{
 				title: '平均血红蛋白含量（MCH）',
-				id: 'mch',
+				field: 'mch',
 				type: 'input',
 			},
 			{
 				title: '血小板计数（PLT）',
-				id: 'plt',
+				field: 'plt',
 				type: 'input',
 			},
 			{
 				title: '平均血小板体积（MPV)',
-				id: 'mpv',
+				field: 'mpv',
 				type: 'input',
 			},
 			{
 				title: '血小板压积（PCT）',
-				id: 'pct',
+				field: 'pct',
 				type: 'input',
 			},
 			{
 				title: '血小板平均宽度（PDW）',
-				id: 'pdw',
+				field: 'pdw',
 				type: 'input',
 			}
 		]
 	},
 	{
 		title: '口腔科',
+		tableName:'dentalDepartment',
 		items: [
 			{
 				title: '颜面',
-				id: 'face',
+				field: 'face',
 				type: 'input',
 			},
 			{
 				title: '口舌',
-				id: 'tongue',
+				field: 'tongue',
 				type: 'input',
 			},
 			{
 				title: '唇腭',
-				id: 'chune',
+				field: 'chune',
 				type: 'input',
 			},
 			{
 				title: '口腔黏膜',
-				id: 'oral_mucosa',
+				field: 'oral_mucosa',
 				type: 'input',
 			},
 			{
 				title: '口腔其他',
-				id: 'other',
+				field: 'other',
 				type: 'input',
 			},
 			{
 				title: '牙齿',
-				id: 'tooth',
+				field: 'tooth',
 				type: 'input',
 			},
 			{
 				title: '缺失',
-				id: 'missing',
+				field: 'missing',
 				type: 'input',
 			},
 			{
 				title: '龋齿',
-				id: 'caries',
+				field: 'caries',
 				type: 'input',
 			},
 			{
 				title: '牙周',
-				id: 'periodontal',
+				field: 'periodontal',
 				type: 'input',
 			},
 			{
 				title: '颞下颚关节',
-				id: 'temporomandibular_joint',
+				field: 'temporomandibular_joint',
 				type: 'input',
 			},
 			{
 				title: '腮腺',
-				id: 'parotid',
+				field: 'parotfield',
 				type: 'input',
 			}
 		]
 	},
 	{
 		title: 'CT',
+		tableName:'ct',
 		items: [
 			{
 				title: '肝',
-				id: 'liver',
+				field: 'liver',
 				type: 'input',
 			},
 			{
 				title: '胆',
-				id: 'bravery',
+				field: 'bravery',
 				type: 'input',
 			},
 			{
 				title: '胰',
-				id: 'pancreatic',
+				field: 'pancreatic',
 				type: 'input',
 			},
 			{
 				title: '脾',
-				id: 'spleen',
+				field: 'spleen',
 				type: 'input',
 			},
 			{
 				title: '双肾',
-				id: 'kidneys',
+				field: 'kfieldneys',
 				type: 'input',
 			}
 		]
 	},
 	{
 		title: '内科',
+		tableName:'medicalDepartment',
 		items: [
 			{
 				title: '既往病史',
-				id: 'past_history',
+				field: 'past_history',
 				type: 'input',
 			},
 			{
 				title: '心率',
-				id: 'heart_rate',
+				field: 'heart_rate',
 				type: 'input',
 			},
 			{
 				title: '心音',
-				id: 'heart_sound',
+				field: 'heart_sound',
 				type: 'input',
 			},
 			{
 				title: '心界',
-				id: 'of_heart',
+				field: 'of_heart',
 				type: 'input',
 			},
 			{
 				title: '肺',
-				id: 'lung',
+				field: 'lung',
 				type: 'input',
 			},
 			{
 				title: '腹部',
-				id: 'abdomen',
+				field: 'abdomen',
 				type: 'input',
 			},
 			{
 				title: '肝脏',
-				id: 'liver',
+				field: 'liver',
 				type: 'input',
 			},
 			{
 				title: '胆',
-				id: 'bravery',
+				field: 'bravery',
 				type: 'input',
 			},
 			{
 				title: '脾脏',
-				id: 'spleen',
+				field: 'spleen',
 				type: 'input',
 			},
 			{
 				title: '精神及神经',
-				id: 'mental_and_neurological',
+				field: 'mental_and_neurological',
 				type: 'input',
 			},
 			{
 				title: '腱反射',
-				id: 'tendon_reflexes',
+				field: 'tendon_reflexes',
 				type: 'input',
 			}
 		]
 	},
 	{
 		title: '心电图',
+		tableName:'ecg',
 		items: [
 			{
 				title: '心率',
-				id: 'heart_rate',
+				field: 'heart_rate',
 				type: 'input',
 			},
 			{
 				title: '心律',
-				id: 'heart_lv',
-				type: 'input',
+				field: 'heart_lv',
+                type: 'singleChoice',
+                items: [
+                    '正常', '异常'
+                ],
 			},
 			{
 				title: 'P波',
-				id: 'p_wave',
-				type: 'input',
+				field: 'p_wave',
+                type: 'singleChoice',
+                items: [
+                    '正常', '异常'
+                ],
 			},
 			{
 				title: 'P-R周期',
-				id: 'p_r_cycle',
-				type: 'input',
+				field: 'p_r_cycle',
+                type: 'singleChoice',
+                items: [
+                    '正常', '异常'
+                ],
 			},
 			{
 				title: 'QRS',
-				id: 'qrs',
-				type: 'input',
+				field: 'qrs',
+                type: 'singleChoice',
+                items: [
+                    '正常', '异常'
+                ],
 			},
 			{
 				title: 'ST段',
-				id: 'st',
-				type: 'input',
+				field: 'st',
+                type: 'singleChoice',
+                items: [
+                    '正常', '异常'
+                ],
 			},
 			{
 				title: 'T波',
-				id: 't_wave',
-				type: 'input',
+				field: 't_wave',
+                type: 'singleChoice',
+                items: [
+                    '正常', '异常'
+                ],
 			},
 			{
 				title: '电轴',
-				id: 'axis',
-				type: 'input',
+				field: 'axis',
+                type: 'singleChoice',
+                items: [
+                    '正常', '异常'
+                ],
 			},
 			{
 				title: '节律',
-				id: 'rhythm',
-				type: 'input',
+				field: 'rhythm',
+                type: 'singleChoice',
+                items: [
+                    '齐', '不齐'
+                ],
 			}
 		]
 	},
 	{
 		title: '外科',
+		tableName:'surgical',
 		items: [
 			{
 				title: '既往病史',
-				id: 'past_history',
+				field: 'past_history',
 				type: 'input',
 			},
 			{
 				title: '皮肤',
-				id: 'skin',
+				field: 'skin',
 				type: 'input',
 			},
 			{
 				title: '浅表淋巴结',
-				id: 'superficial_lymph_nodes',
+				field: 'superficial_lymph_nodes',
 				type: 'input',
 			},
 			{
 				title: '甲状腺',
-				id: 'thyroid',
+				field: 'thyrofield',
 				type: 'input',
 			},
 			{
 				title: '乳房',
-				id: 'breast',
+				field: 'breast',
 				type: 'input',
 			},
 			{
 				title: '脊柱',
-				id: 'spine',
+				field: 'spine',
 				type: 'input',
 			},
 			{
 				title: '四肢关节',
-				id: 'limbs',
+				field: 'limbs',
 				type: 'input',
 			},
 			{
 				title: '肛门',
-				id: 'anus',
+				field: 'anus',
 				type: 'input',
 			},
 			{
 				title: '直肠指诊',
-				id: 'digital_rectal_examination',
+				field: 'digital_rectal_examination',
 				type: 'input',
 			},
 			{
 				title: '外科其他',
-				id: 'other',
+				field: 'other',
 				type: 'input',
 			}
 		]
 	},
 	{
 		title: '血脂类',
+		tableName:'lipfieldClass',
 		items: [
 			{
 				title: '总胆固醇',
-				id: 'total_cholesterol',
+				field: 'total_cholesterol',
 				type: 'input',
 			},
 			{
 				title: '甘油三酯',
-				id: 'triglyceride',
+				field: 'triglycerfielde',
 				type: 'input',
 			}
 		]
 	},
 	{
 		title: '肾功能',
+		tableName:'renalFunction',
 		items: [
 			{
 				title: '肌酐',
-				id: 'creatinine',
+				field: 'creatinine',
 				type: 'input',
 			},
 			{
 				title: '尿酸',
-				id: 'uric_acid',
+				field: 'uric_acfield',
 				type: 'input',
 			},
 			{
 				title: '尿素氮',
-				id: 'urea_nitrogen',
+				field: 'urea_nitrogen',
 				type: 'input',
 			}
 		]
 	},
 	{
 		title: '血糖类',
+		tableName:'bloodGlucose',
 		items: [
 			{
 				title: '空腹血糖',
-				id: 'fasting_blood_glucose',
+				field: 'fasting_blood_glucose',
 				type: 'input',
 			}
 		]
 	},
 	{
 		title: 'X光',
+		tableName:'xray',
 		items: [
 			{
 				title: '胸部透视',
-				id: 'chest_fluoroscopy',
+				field: 'chest_fluoroscopy',
 				type: 'input',
 			}
 		]
 	},
 	{
 		title: '乳腺远红外线',
+		tableName:'breastFarInfrared',
 		items: [
 			{
 				title: '右乳',
-				id: 'right_breast_color',
+				field: 'right_breast_color',
 				type: 'input',
 			},
 			{
 				title: '右乳灰影颜色',
-				id: 'right_breast_color',
+				field: 'right_breast_color',
 				type: 'input',
 			},
 			{
 				title: '右乳灰影边界',
-				id: 'right_breast_border',
+				field: 'right_breast_border',
 				type: 'input',
 			},
 			{
 				title: '右乳灰影位置',
-				id: 'right_breast_position',
+				field: 'right_breast_position',
 				type: 'input',
 			},
 			{
 				title: '右乳灰影压痛',
-				id: 'right_breast_tenderness',
+				field: 'right_breast_tenderness',
 				type: 'input',
 			},
 			{
 				title: '右乳血管',
-				id: 'right_breast_vascular',
+				field: 'right_breast_vascular',
 				type: 'input',
 			},
 			{
 				title: '右乳头形状',
-				id: 'right_breast_shape',
+				field: 'right_breast_shape',
 				type: 'input',
 			},
 			{
 				title: '右乳头泌液',
-				id: 'right_breast_exudate',
+				field: 'right_breast_exudate',
 				type: 'input',
 			},
 			{
 				title: '左乳',
-				id: 'left_breast',
+				field: 'left_breast',
 				type: 'input',
 			},
 			{
 				title: '左乳灰影颜色',
-				id: 'left_breast_color',
+				field: 'left_breast_color',
 				type: 'input',
 			},
 			{
 				title: '左乳灰影边界',
-				id: 'left_breast_border',
+				field: 'left_breast_border',
 				type: 'input',
 			},
 			{
 				title: '左乳灰影位置',
-				id: 'left_breast_position',
+				field: 'left_breast_position',
 				type: 'input',
 			},
 			{
 				title: '左乳灰影压痛',
-				id: 'left_breast_tenderness',
+				field: 'left_breast_tenderness',
 				type: 'input',
 			},
 			{
 				title: '左乳血管',
-				id: 'left_breast_vascular',
+				field: 'left_breast_vascular',
 				type: 'input',
 			},
 			{
 				title: '左乳头形状',
-				id: 'left_breast_shape',
+				field: 'left_breast_shape',
 				type: 'input',
 			},
 			{
 				title: '左乳头泌液',
-				id: 'left_breast_exudate',
+				field: 'left_breast_exudate',
 				type: 'input',
 			}
 		]
@@ -720,55 +791,59 @@ class MyCheck extends PureComponent {
 			<View key={group.title}>
 				<Separator title={group.title}/>
 				<View>
-					{group.items.map(item => this.renderItem(item))}
+					{group.items.map(item => this.renderItem(item,group))}
 				</View>
 			</View>
 		)
 	}
 
-	renderItem(item) {
+	renderItem(item,group) {
 		let {loginUser} = this.props;
 		return (
-			<ListItem key={item.title} icon onPress={() => this.editItem(item)}>
+			<ListItem key={item.title} icon onPress={() => this.editItem(item,group)}>
 				<Body>
 				<Text>{item.title}</Text>
 				</Body>
 				<Right>
-					<Text note>{loginUser[item.id]}</Text>
+					<Text note>{loginUser[item.field]}</Text>
 					<Icon active name="ios-arrow-forward"/>
 				</Right>
 			</ListItem>
 		)
 	}
 
-	editItem(item) {
+	editItem(item,group) {
 		let {dispatch, loginUser} = this.props;
 		 if (item.type == 'input') {
 			dialogs.showDialog({
 				title: item.title,
 				input: {
 					hint: item.title,
-					prefill: '',
+					prefill:loginUser[item.field],
 					allowEmptyInput: false,
 					maxLength: 10,
-					callback: (id, text) => dispatch(updateUserInfo(loginUser.appid, item.id, id))
+					callback: (id, text) => dispatch(updateUserCheck(loginUser.appid, item.field, group.tableName, id))
 				}
 			});
 
-		}
+		}else if (item.type == 'singleChoice') {
+            let selectedIndex = 0;
+
+            try {
+                let value = loginUser[item.field];
+                selectedIndex = _.isNumber(value) ? value : 0;
+            } catch (e) {
+            }
+
+            dialogs.showDialog({
+                title: item.title,
+                items: item.items,
+                selectedIndex: selectedIndex,
+                itemsCallbackSingleChoice: (id, text) => dispatch(updateUserCheck(loginUser.appid, item.field, group.tableName, id))
+            })
+        }
 	}
 
-
-	substr(str) {
-		if (str == '0')
-			str = '男';
-		if (str == '1')
-			str = '女';
-		if (str.length > 10)
-			str = str.substr(0, 10) + '...';
-
-		return str
-	}
 }
 
 const styles = {
