@@ -21,7 +21,7 @@ class QuestionMyself extends PureComponent {
       <View style={styles.myQuestion}>
           <Text style={styles.title}>我的问题</Text>
           <Swiper
-            height={160}
+            height={140}
             loop={false}
             dot={<View style={{width:5,height:5,backgroundColor:'gray',borderRadius:4,marginLeft:3,marginRight:3}}></View>}
             activeDot={<View style={{width:5,height:5,backgroundColor:'#A1CC00',borderRadius:4,marginLeft:3,marginRight:3}}></View>}
@@ -101,7 +101,7 @@ class QuestionMyself extends PureComponent {
 
 const styles = {
   myQuestion:{
-    height:200,
+    height:180,
     backgroundColor:'#F0F0F0',
     borderBottomColor:'#D8D8D8',
   },
@@ -110,8 +110,8 @@ const styles = {
     color:'#000',
     fontWeight:'400',
     textAlign:'center',
-    marginTop:16,
-    marginBottom:16,
+    marginTop:12,
+    marginBottom:12,
   },
   oneline:{
     flexDirection:'row',
@@ -123,7 +123,7 @@ const styles = {
     paddingLeft:6,
     paddingRight:6,
     flex:1,
-    marginBottom:16,
+    marginBottom:10,
   },
   oneQuestion:{
     marginRight:6,
@@ -138,7 +138,7 @@ const styles = {
     borderColor:'#959595',
     borderWidth:1,
     borderRadius:0,
-    marginBottom:16,
+    marginBottom:10,
   },
   oneTitle:{
     color:'#000',
