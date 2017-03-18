@@ -2,8 +2,7 @@ import React, {PureComponent} from "react";
 import {ScrollView, DatePickerAndrofield} from "react-native";
 import {connect} from "react-redux";
 import {ListItem, Body, Right, View, Text, Icon} from "native-base";
-import {Container, Content, Separator} from "../../components/index";
-import Header from "../../components/header/BaseHeader";
+import {Container, Content, Separator,Header} from "../../components/index";
 import {updateUserCheck} from "../../actions/user";
 import {dialogs} from "../../utils/index";
 
