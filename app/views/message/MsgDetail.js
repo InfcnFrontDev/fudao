@@ -14,16 +14,16 @@ class PushMsg extends Component {
 
             <Container>
                 <Header {...this.props}/>
-                <Content style={styles.con}>
+                <Content padder gray style={styles.con}>
                     <View  style={styles.item1}>
-                        <View style={{ flexDirection:'row',height:20}}>
-                            <Text>牛牛</Text>
-                            <Text>给你分享了一个链接</Text>
+                        <View style={{ flexDirection:'row',height:20,marginBottom:5}}>
+                            <Text style={{color:'#0F82D7'}}>牛牛快跑</Text>
+                            <Text style={{marginLeft:10}}>给你分享了一个链接</Text>
                         </View>
                         <View style={{ flexDirection:'row',alignItems:'center'}}>
-                            <Thumbnail square source={require('./assets/zhuye.png')} style={styles.img} size={60}/>
+                            <Thumbnail square source={require('./assets/zhuye.png')} style={styles.img}/>
                             <View style={{marginLeft:10}}>
-                                <Text>吃饭时间到吃饭时间到吃饭时间到吃饭时间到</Text>
+                                <Text style={{fontSize:14}}>高血压症状，高血压早期症状</Text>
                             </View>
                         </View>
 
@@ -46,23 +46,26 @@ const styles = {
         justifyContent:'center'
     },
     item1: {
-
-       padding:10,
+        marginLeft:30,
+        marginRight:30,
         borderRadius:15,
         borderColor:"#fff",
         borderWidth:1,
-        flexDirection:'column',
+        padding:5,
+
        /* paddingRight:20,*/
-        alignItems:'center',
-        backgroundColor:'#333',
+
+        backgroundColor:'#fff',
     },
     item: {
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
+
     },
     img:{
-        width:50,
-        height:50
+        width:80,
+        height:60,
+        resizeMode:'contain'
     }
 
 }

@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Container, Content, Header, Separator} from "../../components/index";
 import {Actions} from "react-native-router-flux";
 import {Text,Thumbnail,View} from "native-base";
+import {theme} from "../../utils/index";
 import SystemMsg from "./SystemMsg";
 import PushMsg from "./PushMsg";
 class Message extends Component {
@@ -11,7 +12,7 @@ class Message extends Component {
         return (
             <Container>
                 <Header {...this.props}/>
-                <Content style={styles.con}>
+                <Content gray>
                     <SystemMsg/>
                     <PushMsg/>
                 </Content>
@@ -22,7 +23,7 @@ class Message extends Component {
 }
 const styles = {
     con:{
-        backgroundColor:'red'
+        backgroundColor:'#333'
     }
 
 }

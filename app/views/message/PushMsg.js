@@ -12,18 +12,18 @@ class PushMsg extends Component {
                 <View  style={styles.item1}>
                     <TouchableOpacity style={styles.item} onPress={this._open.bind(this)}>
                         <Thumbnail square source={require('./assets/zhuye.png')} style={styles.img} size={60}/>
-                        <View style={{marginLeft:10}}>
+                        <View>
                             <Text>福福</Text>
-                            <Text>吃饭时间到吃饭时间到吃饭时间到吃饭时间到</Text>
+                            <Text>吃饭时间到吃饭时间到吃饭时间到</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.item1}>
                     <TouchableOpacity style={styles.item} onPress={this._open.bind(this)}>
                         <Thumbnail square source={require('./assets/zhuye.png')} style={styles.img}/>
-                        <View style={{marginLeft:10}}>
+                        <View>
                             <Text>福福</Text>
-                            <Text>吃饭时间到吃饭时间到吃饭时间到吃饭时间到</Text>
+                            <Text>吃饭时间到吃饭时间到吃饭时间到</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -35,21 +35,24 @@ class PushMsg extends Component {
     }
 }
 const styles = {
+
     item1: {
         height:80,
         borderColor:"#D6D6D6",
         borderBottomWidth:1,
         flexDirection:'row',
         paddingHorizontal:10,
-        alignItems:'center'
+        alignItems:'center',
+        backgroundColor:'#fff'
     },
     item: {
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
     },
     img:{
         width:50,
-        height:50
+        height:50,
+        marginRight:10
     }
 
 }

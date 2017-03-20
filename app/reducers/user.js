@@ -1,4 +1,5 @@
 import * as types from "../actions/types";
+import {toast} from "../utils/index"
 const initialState = {
 	loginUser: {}
 };
@@ -21,10 +22,10 @@ export default function (state = initialState, {type, payload}) {
 			let loginUser1= {};
 			let str={};
             str[payload.field] = payload.value;
-			loginUser1[payload.tableName] = str;
-			loginUser1 = Object.assign({}, state.loginUser, loginUser1);
+			loginUser1[payload.tableName]  = Object.assign({}, state.loginUser[payload.tableName], str);
+			loginUser = Object.assign({}, state.loginUser, loginUser1);
 			return Object.assign({}, state, {
-				loginUser1
+				loginUser
 			});
 		default:
 			return state;

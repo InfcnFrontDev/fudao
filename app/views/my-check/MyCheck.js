@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {ListItem, Body, Right, View, Text, Icon} from "native-base";
 import {Container, Content, Separator,Header} from "../../components/index";
 import {updateUserCheck} from "../../actions/user";
-import {dialogs} from "../../utils/index";
+import {dialogs,toast} from "../../utils/index";
 
 const groups = [
 	{
@@ -787,6 +787,7 @@ class MyCheck extends PureComponent {
 	}
 
 	renderGroup(group) {
+
 		return (
 			<View key={group.title}>
 				<Separator title={group.title}/>
@@ -799,13 +800,23 @@ class MyCheck extends PureComponent {
 
 	renderItem(item,group) {
 		let {loginUser} = this.props;
+		let tab=loginUser[group.tableName];
+		let text=''
+		if(tab==undefined){
+
+		}else{
+			text=(
+				tab[item.field]
+			)
+		}
+
 		return (
 			<ListItem key={item.title} icon onPress={() => this.editItem(item,group)}>
 				<Body>
 				<Text>{item.title}</Text>
 				</Body>
 				<Right>
-					<Text note>{loginUser[item.field]}</Text>
+					<Text note>{text}</Text>
 					<Icon active name="ios-arrow-forward"/>
 				</Right>
 			</ListItem>
@@ -813,16 +824,17 @@ class MyCheck extends PureComponent {
 	}
 
 	editItem(item,group) {
+
 		let {dispatch, loginUser} = this.props;
 		 if (item.type == 'input') {
 			dialogs.showDialog({
 				title: item.title,
 				input: {
 					hint: item.title,
-					prefill:loginUser[item.field],
+					prefill:"",
 					allowEmptyInput: false,
 					maxLength: 10,
-					callback: (id, text) => dispatch(updateUserCheck(loginUser.appid, item.field, group.tableName, id))
+					callback: (id, text) => dispatch(updateUserCheck(loginUser.appid, item.field, group.tableName,id))
 				}
 			});
 

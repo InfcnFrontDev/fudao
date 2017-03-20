@@ -1,10 +1,10 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {View,TouchableOpacity} from "react-native";
+import {View,TouchableOpacity,TouchableHighlight,Alert  } from "react-native";
 import {Text, Button} from "native-base";
 import {Container, Content} from "../../components/index";
-import {config, urls,theme} from "../../utils/";
+import {config, urls,theme,toast} from "../../utils/index";
 /**
  * 菜单
  */
@@ -12,22 +12,28 @@ import {config, urls,theme} from "../../utils/";
 const tabs = [
     {
         text: '芹菜',
+        con:'0'
     },
     {
         text: '胡萝卜',
+        con:'1'
     },
     {
         text: '西葫芦',
+        con:'2'
     },
     {
         text: '白菜',
+        con:'3'
     }
     ];
 
 class Menukinds extends PureComponent {
     constructor(props) {
         super(props);
-
+        this.state={
+          activeBar:0
+        }
     }
 
     render() {
@@ -37,8 +43,13 @@ class Menukinds extends PureComponent {
                     <View style={styles.bar}>
                         {tabs.map((item, index) => this.renderTab(item, index))}
                     </View>
-                    <View style={styles.imgBox}></View>
-                    <Text style={{textAlign:'center',marginTop:10}}>芹菜的营养价值表</Text>
+                    <View style={styles.imgBox}>
+                        {this.renderImg(this.state.activeBar)}
+                    </View>
+                    <View style={{flexDirection:'row',justifyContent:'center',marginTop:10}}>
+                        <Text>芹菜</Text>
+                        <Text>的营养价值表</Text>
+                    </View>
                     <View style={styles.yyBox}>
                             <View style={styles.yyBag}>
                                 <View style={styles.yyName}>
@@ -106,21 +117,33 @@ class Menukinds extends PureComponent {
     }
 
     renderTab(item, index) {
+        let itemStyle = styles.button;
+        if (this.state.activeBar === index) {
+            itemStyle = Object.assign({}, styles.button, styles.buttonSelected);
+        }
+
         return (
             <Button
                 key={index}
                 transparent
-                onPress={() => this._goToPage(item.text)}
-                style={styles.button}
+                onPress={() => this._goToPage(index)}
+                style={itemStyle}
             >
                 <Text style={styles.textBar}>{item.text}</Text>
-            </Button>
+            </Button  >
+        )
+    }
+    renderImg(index) {
+        let con = tabs[index].con;
+        return (
+                <Text  key={index} style={styles.textBar}>{con}</Text>
         )
     }
 
-    _goToPage(text) {
-
-
+    _goToPage(index) {
+        this.setState({
+            activeBar:index,
+        })
     }
 
 
@@ -128,21 +151,26 @@ class Menukinds extends PureComponent {
 
 const styles = {
     textBar:{
-        fontColor:'#666666',
-        fontSize:18,
+       color:'#333',
+        fontSize:16,
+        textAlign:'center'
     },
     bar:{
         height:40,
-        flexDirection:'row'
+        flexDirection:'row',
+        backgroundColor:'#EDEDED'
+
     },
     imgBox:{
         height:200,
-        backgroundColor:'red'
+        backgroundColor:'#fff'
     },
     button:{
-        backgroundColor:"#F0F0F0",
         flex:1,
         justifyContent:'center'
+    },
+    buttonSelected:{
+        backgroundColor:"#fff",
     },
     yyBox:{
         marginTop:10,
