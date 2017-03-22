@@ -6,6 +6,7 @@ import {Actions} from "react-native-router-flux";
 import QuestionMyself from './components/QuestionMyself'
 import QuestionAll from '../../components/QuestionAndExpectAll'
 import {initialMyQuestion} from '../../actions/my-question.js'
+import {config, urls,theme,toast,request} from "../../utils/index";
 
 /**
  * 我的问题
@@ -22,6 +23,7 @@ class MyQuestion extends PureComponent {
     }
 
     render() {
+
         return (
             <Container style={styles.container}>
               <Header>
@@ -56,6 +58,7 @@ const styles = {
 };
 
 const mapStateToProps = state => ({
+    renqun:state.user.loginUser.renqun,
   userId:state.user.loginUser.appid,
   my_question:state.myQuestion.my_question,
 });

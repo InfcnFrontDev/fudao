@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {View,TouchableOpacity,TouchableHighlight,Alert  } from "react-native";
+import {View,TouchableOpacity,TouchableHighlight,Alert,Image  } from "react-native";
 import {Text, Button} from "native-base";
 import {Container, Content} from "../../components/index";
 import {config, urls,theme,toast,request} from "../../utils/index";
@@ -9,40 +9,28 @@ import {config, urls,theme,toast,request} from "../../utils/index";
  * 菜谱
  */
 
-const tabs = [
-    {
-        text: '芹菜',
-        con:'0'
-    },
-    {
-        text: '胡萝卜',
-        con:'1'
-    },
-    {
-        text: '西葫芦',
-        con:'2'
-    },
-    {
-        text: '白菜',
-        con:'3'
-    }
-    ];
 
 class Menukinds extends PureComponent {
     constructor(props) {
         super(props);
         this.state={
           activeBar:0,
-         data:''
+          obj:this.props.data,
+          arr:this.props.arr,
         }
     }
-    componentDidMount(){
-        request.getJson(urls.apis.MENU_KINDS,{
-            diseaseDailyMethodId:4,
-            ingredientsId:34,
-            cookbook_timePeriod:'午餐',
-            cookbook_type:'主食'
-        }).then((result) => {
+    componentWillMount(){
+        let obj=this.state.obj;
+        let arr=this.props.arr;
+        var nowId=obj.ingredientsId;
+        for(var i=0;i<arr.length;i++){
+            if(arr[i].id==nowId){
+                this.setState({
+                    activeBar:i
+                })
+            }
+        }
+        request.getJson(urls.apis.MENU_KINDS,obj).then((result) => {
             this.setState({
                 data:result.obj
             })
@@ -51,22 +39,27 @@ class Menukinds extends PureComponent {
         });
     }
     render() {
+
         let data=this.state.data;
-        let caiPu=data.cookbook;
-        if(data==''){
+        let tab =this.state.arr;
+
+
+        if(!data){
             return(<Container></Container>)
         }else{
+            let caiPu=data.cookbook;
+
             return (
                 <Container>
                     <Content>
                         <View style={styles.bar}>
-                            {tabs.map((item, index) => this.renderTab(item, index))}
+                            {tab.map((item, index) => this.renderTab(item, index))}
                         </View>
                         <View style={styles.imgBox}>
-                            {this.renderImg(this.state.activeBar)}
+                            <Image source={{uri: urls.getImage(data.ingredients.img)}} style={styles.img}></Image>
                         </View>
                         <View style={styles.textBox}>
-                            <Text>{data.ingredients['abstract_']}</Text>
+                            <Text>        {data.ingredients['abstract_']}</Text>
                         </View>
                         <View style={{flexDirection:'row',justifyContent:'center',marginTop:10}}>
                             <Text>{data.ingredients.name}</Text>
@@ -124,15 +117,14 @@ class Menukinds extends PureComponent {
         if (this.state.activeBar === index) {
             itemStyle = Object.assign({}, styles.button, styles.buttonSelected);
         }
-
         return (
             <Button
                 key={index}
                 transparent
-                onPress={() => this._goToPage(index)}
+                onPress={() => this._goToPage(item,index)}
                 style={itemStyle}
             >
-                <Text style={styles.textBar}>{item.text}</Text>
+                <Text style={styles.textBar}>{item.name}</Text>
             </Button  >
         )
     }
@@ -143,17 +135,29 @@ class Menukinds extends PureComponent {
             </View>
         )
     }
-    renderImg(index) {
+    renderImg(item,index) {
         let con = tabs[index].con;
         return (
                 <Text  key={index} style={styles.textBar}>{con}</Text>
         )
     }
 
-    _goToPage(index) {
+    _goToPage(item,index) {
+        let obj=this.state.obj;
         this.setState({
             activeBar:index,
-        })
+        });
+
+        obj['ingredientsId']=item.id;
+
+        /*toast.show(JSON.stringify(obj))*/
+        request.getJson(urls.apis.MENU_KINDS,obj).then((result) => {
+            this.setState({
+                data:result.obj
+            })
+        }, (error) => {
+
+        });
     }
 
 
@@ -166,14 +170,19 @@ const styles = {
         textAlign:'center'
     },
     bar:{
-        height:40,
+        height:42,
         flexDirection:'row',
         backgroundColor:'#EDEDED'
 
     },
     imgBox:{
         height:200,
-        backgroundColor:'#fff'
+        backgroundColor:'#fff',
+        justifyContent: 'center',
+    },
+    img:{
+        width: 300,
+        height: 200,
     },
     button:{
         flex:1,
@@ -181,6 +190,12 @@ const styles = {
     },
     buttonSelected:{
         backgroundColor:"#fff",
+    },
+    textBox:{
+        height:50,
+        flexDirection:'row',
+        paddingLeft:10,
+        paddingRight:10
     },
     yyBox:{
         marginTop:10,

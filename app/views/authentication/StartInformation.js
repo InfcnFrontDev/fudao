@@ -11,6 +11,8 @@ import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePic
 import {Header, Container, Content} from "../../components/index";
 import {theme, urls, request, toast} from "../../utils/";
 import CommitButton from "./components/CommitButton";
+import {login} from "../../actions/user";
+
 /**
  * 首次登录设置个人信息页
  */
@@ -173,7 +175,7 @@ class StartInformation extends PureComponent {
         )
     }
     commit(){
-
+let {dispatch}=this.props;
         let {position,maxText,appid,sex} = this.state;
         //获取地理位置
         let userInformation ={};
@@ -221,7 +223,7 @@ class StartInformation extends PureComponent {
                     ...data.obj.renqun,
                 });
                     // 保存用户状态
-                    this.props.dispatch(login(user));
+                    dispatch(login(user));
                     // 跳到首页
                     Actions.index()
 
