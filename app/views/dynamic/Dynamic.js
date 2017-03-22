@@ -76,7 +76,10 @@ class Dynamic extends PureComponent {
 
 
     	_renderRowView(info,sectionID,rowID){
-        var m = moment(info.publishTime).fromNow();
+        var m = '刚刚'
+        if(info.publishTime){
+          m = moment(info.publishTime).fromNow();
+        }
         if(info.flag){
           var zan =(
               <Text style={styles.showoneText}>取消</Text>

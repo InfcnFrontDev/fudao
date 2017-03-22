@@ -3,9 +3,8 @@ import {connect} from "react-redux";
 import {ScrollView, ListView, View, Dimensions} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Left, Right, Body, Form, Item, Text, Segment,Button} from "native-base";
-import TreatmentProfession from "./TreatmentProfession";
+import TreatmentProfessionList from "./TreatmentProfessionList";
 import TreatmentDaily from "./TreatmentDaily";
-import {getQuestionTreetment} from '../../../actions/my-question.js'
 
 
 class TabListTreatment extends PureComponent {
@@ -29,15 +28,9 @@ class TabListTreatment extends PureComponent {
                     <Text style={this.state.flag?styles.titleText:styles.titleChoose}>专业疗法</Text>
                 </Button>
             </View>
-            {this.state.flag?<TreatmentDaily />:<TreatmentProfession />}
+            {this.state.flag?<TreatmentDaily />:<TreatmentProfessionList />}
           </View>
         )
-    }
-
-    componentWillMount(){
-      const {dispatch} = this.props;
-      // dispatch(getQuestionTreetment('40',this.props.renqun))
-      dispatch(getQuestionTreetment(this.props.question.id,this.props.renqun))
     }
 
 }
@@ -91,7 +84,5 @@ const styles = {
 }
 
 const mapStateToProps = state => ({
-  renqun:state.user.loginUser.renqun,
-  my_question:state.myQuestion.my_question,
 });
 export default connect(mapStateToProps)(TabListTreatment);

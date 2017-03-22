@@ -113,7 +113,7 @@ export function initialMyQuestion(userId,my_question) {
         userId:userId
       }).then((res)=>{
         dispatch({
-          type: types.MY_QUESTION_CHANGE_QUESTION,
+          type: types.MY_QUESTION_CHANGE,
           source:{
             my_question:res.obj,
           }

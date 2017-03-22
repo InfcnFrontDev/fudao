@@ -5,6 +5,7 @@ import {View, Image} from "react-native";
 import {Actions} from "react-native-router-flux";
 import QuestionMyself from "./components/QuestionMyself";
 import QuestionTab from "./components/QuestionTab";
+import {getQuestionTreetment} from '../../actions/my-question.js'
 
 /**
  * 我的问题
@@ -14,8 +15,13 @@ class MyQuestionDetail extends PureComponent {
         super(props);
     }
 
+    componentWillMount(){
+      const {dispatch} = this.props;
+      // dispatch(getQuestionTreetment('40',this.props.renqun))
+      dispatch(getQuestionTreetment(this.props.question.id,this.props.renqun))
+    }
+
     render() {
-      // this.props.question.showVal
         return (
             <Container style={styles.container}>
               <Header>
@@ -49,5 +55,8 @@ const styles = {
   },
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({   
+    renqun:state.user.loginUser.renqun,
+    my_question:state.myQuestion.my_question,
+});
 export default connect(mapStateToProps)(MyQuestionDetail);

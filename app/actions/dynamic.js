@@ -237,7 +237,7 @@ export function fetchData(page,options,callback,params){
 						  }else{
 								//无网状态下第一次加载
 						    let res = params.realm.objects('Dynamic').sorted('publishTime');
-						    if(res){
+						    if(res.length>0){
 						      if(res.length>6){
 						        var firstres = res.slice(res.length-5,res.length);
 						      }else{
@@ -251,7 +251,12 @@ export function fetchData(page,options,callback,params){
 									}else{
 										callback(dynamicList);
 									}
-						    }
+						    }else{
+									callback([],{
+										allLoaded:true,
+									});
+
+								}
 						  }
 							dispatch({
 								type: types.DYNAMIC_LIST_LOAD,
@@ -261,6 +266,7 @@ export function fetchData(page,options,callback,params){
 							});
 					})
 		}else if(options.refresh){
+			ToastAndroid.show('refresh',ToastAndroid.SHORT)
 			request.getJson(urls.apis.DYNAMIC_LIST,{
 							userId:params.user.appid,
 							page:1,
@@ -275,7 +281,11 @@ export function fetchData(page,options,callback,params){
 								var length_now = realmDynamic.length;
 								if(length_ago<length_now){
 									var newData = realm_res.slice(length_ago,length_now).reverse();
-									var dynamicList = newData.concat(params.dynamic);
+									if(length_ago==0){
+										var dynamicList = newData; 										
+									}else{
+										var dynamicList = newData.concat(params.dynamic);
+									}
 									dispatch({
 										type: types.DYNAMIC_LIST_LOAD,
 										source:{
@@ -467,6 +477,6 @@ export function clear(){
 				addPicture:[],
 				renderPicture:[],
 			}
-		}); 		
+		});
 	}
 }

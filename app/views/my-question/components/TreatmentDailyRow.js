@@ -105,7 +105,6 @@ class TreatmentDailyRow extends PureComponent {
           cookbook_timePeriod:cookbook_timePeriod,
           cookbook_type:p.cookbook_type||''
         }
-        ToastAndroid.show(JSON.stringify(arr),ToastAndroid.SHORT)
         return(
           <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?Actions.menuKinds({data:obj,arr:arr}):false}>
           <Text style={flag?styles.shiwutext:styles.color6d}>{p.name}{i!=arr.length-1?'、':''}</Text>
