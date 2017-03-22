@@ -7,11 +7,10 @@ import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-v
 import MyRecordeList from "./MyRecordeList";
 import {theme} from "../../../utils/";
 const Btn = require('./Button');
-
-
+const LABELS3 = ['1月', '2月', '3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
 
 /**
- * 资讯
+ * 我的月记录
  */
 class MyRecordMonth extends PureComponent {
 	constructor(props){
@@ -19,13 +18,17 @@ class MyRecordMonth extends PureComponent {
     this.state={
       flag:'day',
     }
+		this.nowDate=new Date();
+		this.mounth = this.nowDate.getMonth()+1;
+		this.allMounth = LABELS3.slice(0,this.mounth);
+		this.disabled = LABELS3.slice(this.mounth);
   }
 
 	render() {
 		return (
 			<View style={styles.tabView}>
 				<View>
-				<Text>2017年3月</Text>
+				<Text style={{textAlign:'center'}}>{this.nowDate.getFullYear()}年{this.mounth}月</Text>
 				</View>
 				<ScrollableTabView
 				renderTabBar={() => (
@@ -37,29 +40,57 @@ class MyRecordMonth extends PureComponent {
 				tabBarPosition='top'
 				scrollWithoutAnimation={false}
 				>
-					{this.props.labels.map((label) => <MyRecordeList key={label} tabLabel={label} label={label} type='month'/>)}
+					{this.allMounth.map((label) => <MyRecordeList key={label} tabLabel={label} label={label} type='month'/>)}
 				</ScrollableTabView>
 			</View>
 		)
 	}
 
 	_renderTabBar(name, page, isTabActive, onPressHandler, onLayoutHandler){
-		ToastAndroid.show(''+name,ToastAndroid.SHORT);
-		return <Btn
+		var disabled=(null);
+		if(this.allMounth.length-1==page){
+			disabled=this.disabled.map((p,i)=>{
+				return (
+					<View key={i} style={styles.tabBarView}>
+						<Text style={{color:'#AEAEAE'}}>
+						{p}
+						</Text>
+					</View>
+				)
+			})
+			return <Btn
+			key={`${name}_${page}`}
+			accessible={true}
+			accessibilityLabel={name}
+			accessibilityTraits='button'
+			onPress={() => onPressHandler(page)}
+			>
+			<View 	style={{flexDirection:'row'}}>
+				<View style={isTabActive?styles.tabBarViewActive:styles.tabBarView}>
+				<Text>
+				{name}
+				</Text>
+				</View>
+				{disabled}
+			</View>
+			</Btn>
+		}
+			return <Btn
 			key={`${name}_${page}`}
 			accessible={true}
 			accessibilityLabel={name}
 			accessibilityTraits='button'
 			onPress={() => onPressHandler(page)}
 			onLayout={onLayoutHandler}
-		>
-			<View style={isTabActive?styles.tabBarViewActive:styles.tabBarView}>
+			>
+			<View 	style={{flexDirection:'row'}}>
+				<View style={isTabActive?styles.tabBarViewActive:styles.tabBarView}>
 				<Text style={isTabActive?styles.tabTextActive:styles.tabTextActive}>
-					{name}
+				{name}
 				</Text>
+				</View>
 			</View>
-		</Btn>;
-		return (null)
+			</Btn>
 	}
 }
 const styles = {

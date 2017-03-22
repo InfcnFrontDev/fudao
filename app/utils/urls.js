@@ -143,6 +143,8 @@ const urls = {
       // 我的问题 ---------------------------------------------------------
       //所有问题
       MY_QUESTION_ALL_QUESTION:apiPath+'app/threeDiseasesListAction!findDiseasesAll.action',
+      //问题详情-疗法
+      MY_QUESTION_TREETMENT:apiPath+'app/threeDiseasesListAction!findDailyTherapy_new.action',
       //用户问题
       MY_QUESTION_USER_QUESTION:apiPath+'app/threeDiseasesListAction!getUserDiseasesByuserId.action',
       //添加用户问题

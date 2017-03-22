@@ -11,9 +11,7 @@ import MyRecordMonth from "./components/MyRecordMonth";
 import {theme} from "../../utils/";
 
 
-const LABELS = ['1', '2', '3', '4', '5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
-const LABELS2 = ['第一周', '第二周', '第三周', '第四周', '第五周'];
-const LABELS3 = ['1月', '2月', '3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
 
 /**
  * 资讯
@@ -31,7 +29,7 @@ class MyRecord extends PureComponent {
 			<Container>
 				<Header {...this.props}/>
 				<View style={styles.content}>
-					{this.state.flag=='day'?<MyRecordDay labels={LABELS} />:(this.state.flag=='week'?<MyRecordWeek labels={LABELS2} />:<MyRecordMonth labels={LABELS3} />)}
+					{this.state.flag=='day'?<MyRecordDay />:(this.state.flag=='week'?<MyRecordWeek />:<MyRecordMonth />)}
 					<View style={styles.typeTitle}>
 							<Button transparent onPress={()=>{this.setState({flag:'day'})}}
 								style={this.state.flag=='day'?styles.titleButtonLeft:styles.titleButtonAll}>

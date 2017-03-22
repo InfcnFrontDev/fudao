@@ -1,8 +1,9 @@
 import React, {PureComponent} from "react";
-import { View, Image} from "react-native";
+import { View, Image, Dimensions} from "react-native";
+import {connect} from "react-redux";
 import {Container, Left, Header, Icon, Right, Body,ListItem, Button, Title, Content, Text} from "native-base";
 import {Actions} from "react-native-router-flux";
-import {theme} from "../../utils/";
+import {theme,urls} from "../../utils/";
 
 class TreatmentDetail extends PureComponent {
   constructor(props){
@@ -10,6 +11,9 @@ class TreatmentDetail extends PureComponent {
   }
 
     render() {
+      var content = this.props.data.details;
+      var e=new RegExp('\n',"g");
+      content = content.replace(e, '\n        ');
         return (
           <Container style={styles.container}>
             <Header>
@@ -19,24 +23,24 @@ class TreatmentDetail extends PureComponent {
                     </Button>
                 </Left>
                 <Body>
-                    <Title style={styles.title}>{this.props.pageTitle}</Title>
+                    <Title style={styles.title}>{this.props.data.name}</Title>
                 </Body>
                 <Right>
                 </Right>
             </Header>
             <Content style={styles.content}>
               <View style={styles.from}>
-                  <Text>高血压 > 自疗方案 > 专业疗法 > {this.props.pageTitle}</Text>
+                  <Text>高血压 > 自疗方案 > {this.props.from=='日常'?'日常疗法':'专业疗法'} > {this.props.data.name}</Text>
               </View>
               <View style={styles.view}>
-                  <Image source={require('../../assets/error.png')} style={styles.image}/>
-                  <Text style={styles.contentText}>        小时候和我妈去裁缝店，我妈指着电熨斗说：“这东西很烫，千万不要用手碰！” 我很听话，没用手碰，我舔了一下。 那感觉比冬天舔黑龙江漠河北极村的铁栏杆还带劲！</Text>
-                  <Text style={styles.contentText}>        小时候和我妈去裁缝店，我妈指着电熨斗说：“这东西很烫，千万不要用手碰！” 我很听话，没用手碰，我舔了一下。 那感觉比冬天舔黑龙江漠河北极村的铁栏杆还带劲！</Text>
+                  <Image source={this.props.data.img?{uri:urls.getImage('/'+this.props.renqun+this.props.data.img)}:require('../../assets/error.png')} style={styles.image}/>
+                  <Text style={styles.contentText}>        {content}</Text>
               </View>
             </Content>
           </Container>
         )
     }
+    // <Image source={require('../../assets/error.png')} style={styles.image}/>
 
 }
 
@@ -69,7 +73,12 @@ const styles = {
   image:{
     marginTop:20,
     marginBottom:20,
+    width:Dimensions.get('window').width,
+    height:200,
   }
 }
 
-export default (TreatmentDetail);
+const mapStateToProps = state => ({
+  renqun:state.user.loginUser.renqun,
+});
+export default connect(mapStateToProps)(TreatmentDetail);

@@ -2,6 +2,25 @@ import * as types from "../actions/types";
 import { ToastAndroid,} from "react-native";
 import {request,urls} from "../utils/";
 
+export function getQuestionTreetment(diseaseId,renqun){
+  return (dispatch) => {
+    request.getJson(urls.apis.MY_QUESTION_TREETMENT,{
+      diseaseId:diseaseId,
+      renqun:renqun,
+      local:'北京'
+    }).then((res)=>{
+      ToastAndroid.show(JSON.stringify(diseaseId),ToastAndroid.SHORT);
+
+      dispatch({
+        type: types.MY_QUESTION_ALL_QUESTION,
+        source:{
+          questionDetail:res.obj,
+        }
+      })
+    })
+
+  }
+}
 
 export function getAllDatas(callback,my_params,all_params,renqun,from) {
   return (dispatch) => {
