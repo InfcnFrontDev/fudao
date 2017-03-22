@@ -11,7 +11,7 @@ import DynamicHeader from './components/DynamicHeader';
 import DynamicComment from './components/DynamicComments';
 import DynamicSupport from './components/DynamicSupports';
 import DynamicCommon from '../../components/DynamicCommon'
-import {fetchData,show,zan,sendComment,del} from '../../actions/dynamic'
+import {fetchData,show,zan,sendComment,del,clear} from '../../actions/dynamic'
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -53,13 +53,10 @@ class Dynamic extends PureComponent {
         return (
             <Container>
                 <Header menu {...this.props} right={
-                  <View style={{flexDirection: 'row'}}>
-                    <Right>
-                      <Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
-                      <Button transparent onPress={()=>Actions['newDynamic']({newnew:this.props.newnew})}><Icon name="ios-chatboxes"/></Button>
-                    </Right>
-                  </View>
-
+                  <Right>
+                    <Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
+                    <Button transparent onPress={this.skipToNew.bind(this)}><Icon name="ios-chatboxes"/></Button>
+                  </Right>
                 }/>
                 <DynamicList
                   renderHeader={this._renderHeader.bind(this)}
@@ -176,9 +173,12 @@ class Dynamic extends PureComponent {
       }
 
     	_onFetch(page, callback, options,flag){
-
-
         this.props.fetchData(page,options,callback,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user});
+      }
+
+      skipToNew(){
+        this.props.clear();
+        Actions['newDynamic']({newnew:this.props.newnew});
       }
 
 }
@@ -189,6 +189,7 @@ function bindAction(dispatch) {
         zan:(info,params)=>dispatch(zan(info,params)),
         sendComment:(event,params)=>dispatch(sendComment(event,params)),
         del:(id,params)=>dispatch(del(id,params)),
+        clear:()=>dispatch(clear())
     };
 }
 

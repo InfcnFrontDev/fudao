@@ -7,11 +7,12 @@ import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-v
 import MyRecordeList from "./MyRecordeList";
 import {theme} from "../../../utils/";
 const Btn = require('./Button');
+const LABELS2 = ['第一周', '第二周', '第三周', '第四周', '第五周','第六周'];
 
 
 
 /**
- * 资讯
+ * 我的周记录
  */
 class MyRecordWeek extends PureComponent {
 	constructor(props){
@@ -19,13 +20,19 @@ class MyRecordWeek extends PureComponent {
     this.state={
       flag:'day',
     }
+		this.nowDate=new Date();
+		var lastCurDay = new Date(this.nowDate.getFullYear(), this.nowDate.getMonth() + 1, 0);
+		this.week = this.getMonthWeek(lastCurDay.getFullYear(), lastCurDay.getMonth(), lastCurDay.getDate());
+		this.allWeek = LABELS2.slice(0,this.week);
   }
 
 	render() {
 		return (
 			<View style={styles.tabView}>
-				<View>
-				<Text>2017年3月</Text>
+				<View style={styles.topView}>
+					<Text>{this.nowDate.getMonth()}月</Text>
+					<Text style={styles.topCenter}>{this.nowDate.getFullYear()}年{this.nowDate.getMonth()+1}月</Text>
+					<Text style={styles.colorAE}>{this.nowDate.getMonth()+2}月</Text>
 				</View>
 				<ScrollableTabView
 				renderTabBar={() => (
@@ -37,14 +44,13 @@ class MyRecordWeek extends PureComponent {
 				tabBarPosition='top'
 				scrollWithoutAnimation={false}
 				>
-					{this.props.labels.map((label) => <MyRecordeList key={label} tabLabel={label} label={label} type='week'/>)}
+					{this.allWeek.map((label) => <MyRecordeList key={label} tabLabel={label} label={label} type='week'/>)}
 				</ScrollableTabView>
 			</View>
 		)
 	}
 
 	_renderTabBar(name, page, isTabActive, onPressHandler, onLayoutHandler){
-		ToastAndroid.show(''+name,ToastAndroid.SHORT);
 		return <Btn
 			key={`${name}_${page}`}
 			accessible={true}
@@ -54,14 +60,23 @@ class MyRecordWeek extends PureComponent {
 			onLayout={onLayoutHandler}
 		>
 			<View style={isTabActive?styles.tabBarViewActive:styles.tabBarView}>
-				<Text style={isTabActive?styles.tabTextActive:styles.tabTextActive}>
+				<Text>
 					{name}
 				</Text>
 			</View>
 		</Btn>;
-		return (null)
 	}
+
+	getMonthWeek(a, b, c) {
+		var date = new Date(a, b, c), w = date.getDay(), d = date.getDate();
+		return Math.ceil(
+			(d + 6 - w) / 7
+		);
+	}
+
+
 }
+
 const styles = {
 	tabView: {
 		flex: 1,
@@ -69,6 +84,15 @@ const styles = {
 		marginBottom:70,
 		borderBottomColor:'#D8D8D8',
 		borderBottomWidth:1,
+	},
+	topView:{
+		flexDirection:'row',
+		margin:10,
+		marginBottom:0,
+	},
+	topCenter:{
+		flex:1,
+		textAlign:'center'
 	},
 	tabBarViewActive:{
 		backgroundColor:'#A1CC00',
@@ -85,6 +109,9 @@ const styles = {
 		marginLeft:6,
 		padding:8,
 		paddingTop:2,
+	},
+	colorAE:{
+		color:'#aeaeae',
 	}
 };
 

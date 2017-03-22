@@ -7,11 +7,11 @@ import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-v
 import MyRecordeList from "./MyRecordeList";
 import {theme} from "../../../utils/";
 const Btn = require('./Button');
-
+const LABELS = ['1', '2', '3', '4', '5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
 
 
 /**
- * 资讯
+ * 我的日记录
  */
 class MyRecordDay extends PureComponent {
 	constructor(props){
@@ -19,13 +19,20 @@ class MyRecordDay extends PureComponent {
     this.state={
       flag:'day',
     }
+		this.nowDate=new Date();
+		this.days = new Date(this.nowDate.getFullYear(), this.nowDate.getMonth() + 1, 0).getDate();
+		this.allDays=LABELS.slice(0,this.days);
+		this.labels = this.allDays.slice(0,this.nowDate.getDate());
+		this.disabled = this.allDays.slice(this.nowDate.getDate());
   }
 
 	render() {
 		return (
 			<View style={styles.tabView}>
-				<View>
-				<Text>2017年3月</Text>
+				<View style={styles.topView}>
+					<Text>{this.nowDate.getMonth()}月</Text>
+					<Text style={styles.topCenter}>{this.nowDate.getFullYear()}年{this.nowDate.getMonth()+1}月</Text>
+					<Text style={styles.colorAE}>{this.nowDate.getMonth()+2}月</Text>
 				</View>
 				<ScrollableTabView
 				renderTabBar={() => (
@@ -37,28 +44,58 @@ class MyRecordDay extends PureComponent {
 				tabBarPosition='top'
 				scrollWithoutAnimation={false}
 				>
-					{this.props.labels.map((label,i) => <MyRecordeList key={i} tabLabel={label} label={label} type='day'/>)}
+					{this.labels.map((label,i) => <MyRecordeList key={i} tabLabel={label} label={label} type='day'/>)}
 				</ScrollableTabView>
 			</View>
 		)
 	}
 
 	_renderTabBar(name, page, isTabActive, onPressHandler, onLayoutHandler){
-		return <Btn
+		// ToastAndroid.show(JSON.stringify(parseInt(name)),ToastAndroid.SHORT);
+		var disabled=(null);
+		if(parseInt(name)==this.nowDate.getDate()){
+			disabled=this.disabled.map((p,i)=>{
+				return (
+					<View key={i} style={styles.tabBarView}>
+						<Text style={styles.colorAE}>
+						{p}
+						</Text>
+					</View>
+				)
+			})
+			return <Btn
+			key={`${name}_${page}`}
+			accessible={true}
+			accessibilityLabel={name}
+			accessibilityTraits='button'
+			onPress={() => onPressHandler(page)}
+			>
+			<View 	style={{flexDirection:'row'}}>
+				<View style={isTabActive?styles.tabBarViewActive:styles.tabBarView}>
+				<Text style={isTabActive?styles.tabTextActive:styles.tabTextActive}>
+				{name}
+				</Text>
+				</View>
+				{disabled}
+			</View>
+			</Btn>
+		}
+			return <Btn
 			key={`${name}_${page}`}
 			accessible={true}
 			accessibilityLabel={name}
 			accessibilityTraits='button'
 			onPress={() => onPressHandler(page)}
 			onLayout={onLayoutHandler}
-		>
-			<View style={isTabActive?styles.tabBarViewActive:styles.tabBarView}>
+			>
+			<View 	style={{flexDirection:'row'}}>
+				<View style={isTabActive?styles.tabBarViewActive:styles.tabBarView}>
 				<Text style={isTabActive?styles.tabTextActive:styles.tabTextActive}>
-					{name}
+				{name}
 				</Text>
+				</View>
 			</View>
-		</Btn>;
-		return (null)
+			</Btn>
 	}
 }
 const styles = {
@@ -68,6 +105,15 @@ const styles = {
 		marginBottom:70,
 		borderBottomColor:'#D8D8D8',
 		borderBottomWidth:1,
+	},
+	topView:{
+		flexDirection:'row',
+		margin:10,
+		marginBottom:0,
+	},
+	topCenter:{
+		flex:1,
+		textAlign:'center'
 	},
 	tabBarViewActive:{
 		backgroundColor:'#A1CC00',
@@ -84,6 +130,9 @@ const styles = {
 		marginLeft:6,
 		padding:8,
 		paddingTop:2,
+	},
+	colorAE:{
+		color:'#aeaeae',
 	}
 };
 

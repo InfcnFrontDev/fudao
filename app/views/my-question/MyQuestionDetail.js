@@ -15,6 +15,7 @@ class MyQuestionDetail extends PureComponent {
     }
 
     render() {
+      // this.props.question.showVal
         return (
             <Container style={styles.container}>
               <Header>
@@ -24,15 +25,15 @@ class MyQuestionDetail extends PureComponent {
                       </Button>
                   </Left>
                   <Body>
-                      <Title style={styles.title}>{this.props.question_title}</Title>
+                      <Title style={styles.title}>{this.props.question.showVal}</Title>
                   </Body>
                   <Right>
                   </Right>
               </Header>
-              <Content style={styles.content}>
+              <View style={styles.content}>
                 <QuestionMyself />
-                <QuestionTab />
-              </Content>
+                <QuestionTab  question={this.props.question}/>
+              </View>
             </Container>
         )
     }
@@ -40,7 +41,6 @@ class MyQuestionDetail extends PureComponent {
 
 const styles = {
   container:{
-    backgroundColor:'#fff',
   },
   content:{
     backgroundColor:'#fff',

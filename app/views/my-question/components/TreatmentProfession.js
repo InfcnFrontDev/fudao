@@ -6,7 +6,7 @@ import TreatmentProfessionList from "./TreatmentProfessionList";
 
 const obj = [{
   type:'1',
-  arr:['11','12','13']
+  arr:['11','12','13','11','12','13','11','12','13','11','12','13','11','12','13','11','12','13','11','12','13','11','12','13']
 }]
 
 class TreatmentProfession extends PureComponent {
@@ -20,7 +20,7 @@ class TreatmentProfession extends PureComponent {
 
     render() {
         return (
-          <View>
+          <View style={{flex:1}}>
             {this._treatmentProfessionList()}
           </View>
         )

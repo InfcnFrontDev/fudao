@@ -1,83 +1,95 @@
 import React, {PureComponent} from "react";
-import { View, Text,} from "react-native";
-import {Left, Right, Body,ListItem, Button, List} from "native-base";
-import {Actions} from "react-native-router-flux";
-import TreatmentProfessionList from "./TreatmentProfessionList";
+import { View,ToastAndroid} from "react-native";
+import {Left, Right, Body,ListItem, Button, List, Text} from "native-base";
+import {connect} from "react-redux";
+import GiftedListView from '../../../components/GiftedListView'
+import TreatmentDailyRow from "./TreatmentDailyRow";
 
-const obj = [{
-  type:'提供成都力铭鞋业有限公司相关企业介绍及产品信息主要以2013夏季',
-  arr:['想唱就唱','12','13']
-}]
 
 class TreatmentDaily extends PureComponent {
   constructor(props){
     super(props);
-    this.state={
-      data:obj,
-    }
 
   }
 
     render() {
         return (
-          <View>
-            <Text style={styles.type}>        {obj[0].type}</Text>
-            <List dataArray={obj[0].arr} renderRow={(data) =>
-                        <ListItem style={styles.list} >
-                          <Button style={styles.button} transparent onPress={()=>Actions['treatmentDailyDetail']()}>
-                            <View style={styles.dotView}>
-                                <Text style={styles.dot}>·</Text>
-                            </View>
-                            <View style={styles.dataView}>
-                                <Text style={styles.data}>{data}</Text>
-                            </View>
-                          </Button>
-                        </ListItem>
-            } />
-          </View>
+            <GiftedListView
+              enableEmptySections={true}
+              rowView={this.renderRowView.bind(this)}
+              onFetch={this.onFetch.bind(this)}
+              refreshable={false}
+              firstLoader={true}
+              withSections={false}
+              paginationAllLoadedView={this.renderPaginationAllLoadedView}
+              ref='questions'
+            />
         )
     }
 
+    onFetch(page = 1, callback, options){
+      callback(this.props.questionDetail.dailyMethods,{
+        allLoaded:true
+      })
+    }
+
+    renderRowView(row){
+      return (
+        <TreatmentDailyRow row={row} id={this.props.questionDetail.dailyMethods.id}/>
+      )
+    }
+
+    renderPaginationAllLoadedView(){
+      return (null)
+    }
 
 }
 
 const styles = {
-  type:{
-
+  container:{
+    paddingLeft:15,
+    paddingRight:15,
   },
-  list:{
-    paddingTop:0,
-    paddingBottom:0,
-    borderBottomWidth:0,
-    marginTop:0,
-    marginBottom:0,
-
-  },
-  button:{
-
-    marginTop:-6,
-    marginBottom:-15,
-    paddingTop:0,
-    paddingBottom:0,
-    flex:1,
-
+  sectionOne:{
+    flexDirection:'row',
   },
   dot:{
     fontWeight:'900',
     fontSize:40,
     color:'#333',
+    lineHeight:23,
+    paddingRight:10,
   },
-  dotView:{
-    width:20,
-    paddingBottom:2,
+  type:{
+    paddingLeft:20,
+    paddingRight:20,
+    color:'#6D6D6D',
+    fontSize:14,
   },
-  dataView:{
-    flex:1,
+  list:{
+    borderBottomColor:'transparent',
+    padding:0,
+  },
+  button:{
+    marginTop:-6,
+    marginBottom:-15,
+    padding:0,
+  },
+  gan:{
+    paddingRight:8,
+    color:'#949494',
   },
   data:{
-    color:'#5D5D5D',
+    color:'#353535'
+  },
+  listData:{
+    color:'#949494',
   }
+
 
 }
 
-export default (TreatmentDaily);
+const mapStateToProps = state => ({
+  questionDetail:state.myQuestion.questionDetail,
+});
+export default connect(mapStateToProps)(TreatmentDaily);
