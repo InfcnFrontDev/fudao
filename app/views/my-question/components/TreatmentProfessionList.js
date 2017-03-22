@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
-import { View, Text,} from "react-native";
-import {Left, Right, Body,ListItem, Button} from "native-base";
+import { View, Text,ScrollView,ToastAndroid} from "react-native";
+import {Left, Right, Body,ListItem, Button,List} from "native-base";
 import {Actions} from "react-native-router-flux";
+import {connect} from "react-redux";
 
 class TreatmentProfessionList extends PureComponent {
   constructor(props){
@@ -11,58 +12,78 @@ class TreatmentProfessionList extends PureComponent {
 
     render() {
         return (
-          <View>
-            <ListItem itemDivider style={styles.divider}>
-                <Text>{this.props.data.type}</Text>
-            </ListItem>
+          <ScrollView style={{height:500}}>
             {this._renderList()}
-          </View>
+          </ScrollView>
         )
     }
 
     _renderList(){
-      let item = this.props.data.arr.map((p, i) => {
+      let item = this.props.questionDetail.professionalMethods.map((p, i) => {
         return (
-          <ListItem style={styles.list} key={i}>
-            <Button transparent style={styles.button} onPress={()=>Actions['treatmentDetail']({pageTitle:p})}>
-                <Body>
-                  <Text>{p}</Text>
-                </Body>
-                <Right>
-                  <Text>></Text>
-                </Right>
-            </Button>
-          </ListItem>
+          <View key={i} style={styles.oneType}>
+            <View style={styles.divider}>
+                <Text>{p.type}</Text>
+            </View>
+              <List dataArray={p.datas} renderRow={(data)=>{
+                return (
+                  <ListItem  style={styles.list}>
+                    <Button transparent style={styles.button} onPress={()=>Actions['treatmentDetail']({data:data})}>
+                      <View style={styles.name}>
+                        <Text>{data.name}</Text>
+                      </View>
+                      <Text>></Text>
+                    </Button>
+                  </ListItem>
+                )
+              }} />
+
+          </View>
         )
       })
       return item;
     }
+    //
+
+
 
 }
 
 const styles = {
-  divider:{
-    borderColor:'#D8D8D8',
+  oneType:{
+    borderTopColor:'#D8D8D8',
     borderTopWidth:2,
-    borderBottomWidth:1,
+    borderBottomColor:'transparent',
+    padding:0,
+  },
+  divider:{
+    paddingLeft:20,
+    borderColor:'#D8D8D8',
+    borderBottomWidth:0.5,
     height:40,
-    paddingTop:4,
-    paddingBottom:4,
+    paddingTop:10,
+    paddingBottom:0,
+    backgroundColor:'#F0F0F0'
   },
   list:{
     height:36,
-    paddingTop:0,
-    paddingBottom:0,
-    marginLeft:0,
+    padding:0,
+    margin:0,
+    paddingLeft:20,
+    flexDirection:'row',
   },
   button:{
-    marginTop:-4,
-    marginBottom:0,
-    paddingTop:0,
-    paddingBottom:0,
+    flex:1,
+    flexDirection:'row',
+  },
+  name:{
     flex:1,
   }
 
+
 }
 
-export default (TreatmentProfessionList);
+const mapStateToProps = state => ({
+  questionDetail:state.myQuestion.questionDetail,
+});
+export default connect(mapStateToProps)(TreatmentProfessionList);

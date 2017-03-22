@@ -65,7 +65,14 @@ class MyRecordeList extends Component {
 }
 
 const styles={
-
+	sectionHeader:{
+		marginTop:20,
+		marginLeft:36,
+	},
+	sectionHeaderText:{
+		color:'#000',
+		fontSize:16,
+	}
 }
 
 MyRecordeList.propTypes = {

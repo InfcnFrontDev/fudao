@@ -456,12 +456,17 @@ export function addNewDynamic(newDynamic,newnew,userId,picArr) {
 	 }).then(()=>{
 		 Actions.pop({refresh: { newnew: !newnew}})
 	 })
+	}
+}
+
+export function clear(){
+	return (dispatch) =>{
 		dispatch({
 			type: types.DYNAMIC_LIST_LOAD,
 			source:{
 				addPicture:[],
 				renderPicture:[],
 			}
-		});
+		}); 		
 	}
 }

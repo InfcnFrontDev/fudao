@@ -75,7 +75,7 @@ class QuestionAndExpectList extends PureComponent {
         )
       }
       btn = (
-        <Button transparent style={(num%2==0)?(i==0?styles.oneQuestion00:styles.oneQuestion01):(i==0?styles.oneQuestion10:styles.oneQuestion11)} onPress={()=>this.props.from=='myquestion'?Actions.myQuestionDetail({question_title:p.showVal}):false}>
+        <Button transparent style={(num%2==0)?(i==0?styles.oneQuestion00:styles.oneQuestion01):(i==0?styles.oneQuestion10:styles.oneQuestion11)} onPress={()=>this.props.from=='myquestion'?Actions.myQuestionDetail({question:p}):false}>
           <View  style={styles.oneQuestionView}>
             <Image source={{uri:urls.getImage(p.img)}} style={styles.img}/>
             <Text style={styles.oneTitle}>{p.showVal}</Text>

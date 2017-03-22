@@ -27,8 +27,8 @@ class QuestionTab extends PureComponent {
         tabBarUnderlineStyle ={{backgroundColor:'#A0CD01',height:4,}}
         tabBarTextStyle={{color:'#000',fontWeight:"400",}}
       >
-        <TabListMeridian tabLabel='经络穴位'/>
-        <TabListTreatment tabLabel='自疗方案'/>
+        <TabListMeridian tabLabel='经络穴位' question={this.props.question.showVal}/>
+        <TabListTreatment tabLabel='自疗方案' question={this.props.question}/>
       </ScrollableTabView>
     )
   }
@@ -38,14 +38,14 @@ class QuestionTab extends PureComponent {
 
 const styles = {
   tabView: {
-    minHeight:350,
+    flex:1,
+    // minHeight:380,
+    // marginBottom:40,
   },
 };
 
 function bindAction(dispatch) {
   return {
-    openDrawer: () => dispatch(openDrawer()),
-    closeDrawer: key => dispatch(closeDrawer()),
   };
 }
 

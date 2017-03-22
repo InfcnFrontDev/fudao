@@ -82,7 +82,7 @@ class QuestionMyself extends PureComponent {
 
   renderOneQuestion(num){
     return (
-      <Button transparent style={styles.oneQuestion} onPress={()=>Actions.myQuestionDetail({question_title:this.props.my_question[num].showVal})}>
+      <Button transparent style={styles.oneQuestion} onPress={()=>Actions.myQuestionDetail({question:this.props.my_question[num]})}>
           <Image source={{uri:urls.getImage(this.props.my_question[num].img)}} style={styles.img}/>
           <Text style={styles.oneTitle}>{this.props.my_question[num].showVal}</Text>
           <TouchableHighlight  onPress={this.choose.bind(this,this.props.my_question[num])} underlayColor='#fafafa'>
