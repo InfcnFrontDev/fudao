@@ -34,7 +34,8 @@ import RebuildPassword from "./views/authentication/RebuildPassword";
 import RebuildSuccess from "./views/authentication/RebuildSuccess";
 import PasswordValidate from "./views/authentication/PasswordValidate";
 import WomanChoose from "./views/authentication/WomanChoose";
-import Message from "./views/message/message";
+import Message from "./views/message/Message";
+import MsgDetail from "./views/message/MsgDetail";
 import Webview from "./views/webview/";
 import NewDynamic from "./views/dynamic/NewDynamic";
 import DynamicDetail from "./views/dynamic/DynamicDetail";
@@ -45,7 +46,7 @@ import FriendApply from "./views/friend/FriendApply";
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import MyEnergy from "./views/my-energy/MyEnergy";
 import SideBar from "./views/sidebar/SideBar";
-
+import MenuKinds from "./views/menu_kinds/Menukinds";
 
 const RouterWithRedux = connect()(Router);
 
@@ -90,14 +91,15 @@ class AppRouter extends PureComponent {
 					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
 					<Scene key="treatmentDailyDetail" component={TreatmentDailyDetail} title="疗法详情" hideNavBar/>
 					<Scene key="myExpect" component={MyExpect}  title="我的期望" hideNavBar/>
-
+					{/*菜单*/}
+					<Scene key="menuKinds" component={MenuKinds}  hideNavBar />
 
 					{/*搜索*/}
 					<Scene key="search" component={Search} title="搜索" hideNavBar/>
 					<Scene key="searchDailyLife" component={SearchDailyLife} title="日常生活" hideNavBar/>
 					<Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈" hideNavBar/>
 					<Scene key="searchHealthCare" component={SearchHealthCare} title="保健方法" hideNavBar/>
-					<Scene key="searchInformation" component={SearchInformation} title="资讯" hideNavBar/>
+					<Scene key="searchInformation" component={SearchInformation} title="资讯" hideNavBar />
 					<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务" hideNavBar/>
 					<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
 						   hideNavBar/>
@@ -111,8 +113,10 @@ class AppRouter extends PureComponent {
 
 					{/*我的*/}
 					<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
-					<Scene key="myCheck" component={MyCheck} title="体检信息" hideNavBar/>
+
+					<Scene key="myCheck" component={MyCheck} title="体检信息" hideNavBar initial/>
 					<Scene key="myRecord" component={MyRecord} title="我的记录" hideNavBar/>
+
 
 					<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 
@@ -121,7 +125,8 @@ class AppRouter extends PureComponent {
 					<Scene key="about" component={About} title="关于福道" hideNavBar/>
 
 					{/*消息*/}
-					<Scene key="message" component={Message} title="消息" hideNavBar/>
+					<Scene key="message" component={Message} title="消息" hideNavBar />
+					<Scene key="msgDetail" component={MsgDetail} hideNavBar  />
 
 					{/*其他*/}
 					<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
