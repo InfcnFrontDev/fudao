@@ -1,11 +1,12 @@
 import React, {PureComponent} from "react";
-import {Modal, TouchableHighlight} from "react-native";
+import {Modal, TouchableHighlight,Dimensions} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Right, Text, View, Button, Icon} from "native-base";
-import {Container, Content, Header} from "../../components/index";
+import {Container, Content, Header,WebView} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
 import Headline from "./components/Headline.js";
+import {urls} from "../../utils/index"
 
 
 /**
@@ -20,39 +21,30 @@ class Home extends PureComponent {
 	render() {
 		return (
 			<Container>
-				<Header menu {...this.props} right={
-					<Right>
-						<Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
-						<Button transparent onPress={()=> this._setModalVisible()}><Icon name="ios-chatboxes"/></Button>
-					</Right>
-				}/>
+				
 
-				<Content style={styles.content}>
-					<Headline />
-					<MyEnter />
-					<View>
-						<Text>
-							<Text style={styles.title}>Current position: </Text>
-							{JSON.stringify(this.props.lastPosition)}
-						</Text>
+				<Content>
+
+					
+					<WebView uri={urls.pages.HOEM}>
+
+					</WebView>
+					<View style={{width:Dimensions.get('window').width,
+					height:80,
+					position:'absolute',
+					top:0,
+					right:0
+				}}>
+						<Header style={{backgroundColor:'rgba(225,225,225,0.3)',color:'#000'}} menu {...this.props} right={
+							<Right>
+								<Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
+								<Button transparent onPress={()=> this._setModalVisible()}><Icon name="ios-chatboxes"/></Button>
+							</Right>
+						}/>
 					</View>
-					<Modal
-						animationType={"slide"}
-						transparent={false}
-						visible={this.state.modalVisible}
-						onRequestClose={() => alert("Modal has been closed.")}>
-						<View style={{marginTop: 22}}>
-							<View>
-								<Text>Hello World!</Text>
-								<TouchableHighlight onPress={() => this.setModalVisible(!this.state.modalVisible)}>
-									<Text>Hide Modal</Text>
-								</TouchableHighlight>
-							</View>
-						</View>
-					</Modal>
-					<TouchableHighlight onPress={() => this.setModalVisible(true)}>
-						<Text>Show Modal</Text>
-					</TouchableHighlight>
+					<View style={{width:Dimensions.get('window').width,height:122,position:'absolute',bottom:0}}>
+						<MyEnter />
+					</View>
 				</Content>
 			</Container>
 		)
@@ -64,9 +56,6 @@ class Home extends PureComponent {
 }
 
 const styles = {
-	content: {
-		backgroundColor: '#fff'
-	},
 	container: {
 		flex: 1,
 		backgroundColor: '#ECECF0',
