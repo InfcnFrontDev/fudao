@@ -82,25 +82,28 @@ export function updateUserInfo(appid, field, value) {
 
 export function updateUserCheck(appid,field ,tableName, value) {
 
-	return (dispatch) => {
-		let jsonStr1 = {
-			tableName: tableName,
-			jsonStr:{
-				appid:appid
-			}
-		};
-		jsonStr1.jsonStr[field]=value;
-		let jsonS=JSON.stringify(jsonStr1)
+		return (dispatch) => {
+			let jsonStr1 = {
+				tableName: tableName,
+				jsonStr:{
+					appid:appid
+				}
+			};
+			jsonStr1.jsonStr[field]=value;
+			let jsonS=JSON.stringify(jsonStr1)
 
-		dispatch({
-			type: types.USER_UPDATE_CHECK,
-			payload: {
-				tableName,
-				field,
-				value
-			}
-		});
-		toast.show("修改成功");
-		//发送数据
-	}
+			dispatch({
+				type: types.USER_UPDATE_CHECK,
+				payload: {
+					tableName,
+					field,
+					value
+				}
+			});
+
+			toast.show("修改成功");
+			//发送数据
+		}
+
+
 }

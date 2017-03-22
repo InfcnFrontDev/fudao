@@ -146,6 +146,8 @@ const urls = {
       MY_QUESTION_ADD_USER_QUESTION:apiPath+'app/threeDiseasesListAction!addUserDisease.action',
       //删除用户问题
       MY_QUESTION_DEL_USER_QUESTION:apiPath+'app/threeDiseasesListAction!deleteUserDisease.action',
+	 //疾病日常疗法的推荐的菜谱
+	  MENU_KINDS:apiPath+'app/threeDiseasesListAction!findIngredientsContainsCookbook.action',
 
 	},
 
