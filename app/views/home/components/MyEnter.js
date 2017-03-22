@@ -15,33 +15,41 @@ class MyEnter extends PureComponent {
 
 
     render() {
+        let  itemStyle1 = Object.assign({}, styles.button, styles.mgl10);
+        let  itemStyle = Object.assign({}, styles.button, styles.mgl);
         return (
-            <View style={styles.View}>
-                <Button style={styles.button} transparent onPress={()=>Actions.myEmotion()}>
-                    <View style={styles.badge}>
-                        <Image source={require('../assets/1yuyue.png')} style={styles.image}/>
-                    </View>
-                    <Text style={styles.text}>我的情绪</Text>
-                </Button>
-                <Button style={styles.button} transparent onPress={()=>Actions.myEnergy()}>
-                    <View style={[styles.badge,styles.color2]}>
-                        <Image source={require('../assets/1yuyue.png')} style={styles.image}/>
-                    </View>
-                    <Text style={styles.text}>我的能量场</Text>
-                </Button>
-                <Button style={styles.button} transparent onPress={()=>Actions.myQuestion()}>
-                    <View style={[styles.badge,styles.color3]}>
-                        <Image source={require('../assets/1yuyue.png')} style={styles.image}/>
-                    </View>
-                    <Text style={styles.text}>我的问题</Text>
-                </Button>
-                <Button style={styles.button} transparent onPress={()=>Actions.myExpect()}>
-                    <View style={[styles.badge,styles.color4]}>
-                        <Image source={require('../assets/1yuyue.png')} style={styles.image}/>
-                    </View>
-                    <Text style={styles.text}>我的期望</Text>
-                </Button>
+            <View>
+                <View style={styles.View}>
+                    <Button style={itemStyle1} transparent onPress={()=>Actions.myEmotion()}>
+                        
+                        <Image source={require('../assets/langh.png')} style={styles.image}/>
+                        
+                        <Text style={styles.text}>情绪调和</Text>
+                    </Button>
+                    <Button style={itemStyle} transparent onPress={()=>Actions.myEnergy()}>
+                        
+                        <Image source={require('../assets/drill.png')} style={styles.image}/>
+                        
+                        <Text style={styles.text}>我的能量场</Text>
+                    </Button>
+                    
+                </View>
+                <View style={styles.View}>
+                    <Button style={itemStyle1} transparent onPress={()=>Actions.myQuestion()}>
+                        
+                        <Image source={require('../assets/adjust.png')} style={styles.image}/>
+                        
+                        <Text style={styles.text}>疑症自调</Text>
+                    </Button>
+                    <Button style={itemStyle} transparent onPress={()=>Actions.myExpect()}>
+                        
+                        <Image source={require('../assets/love.png')} style={styles.image}/>
+                        
+                        <Text style={styles.text}>完美秘籍</Text>
+                    </Button>
+                </View>
             </View>
+            
         )
     }
 
@@ -50,22 +58,27 @@ class MyEnter extends PureComponent {
 const styles = {
     View:{
         flexDirection:'row',
-        paddingTop:10,
-        paddingBottom:10,
-        borderBottomColor:'#ddd',
-        borderBottomWidth:1,
+        marginTop:1
+    
     },
     button:{
-        flexDirection:'column',
-        height:70,
-        paddingRight:0,
-        paddingLeft:0,
-        paddingBottom:0,
-        paddingTop:0,
-        flex:1
+        flexDirection:'row',
+        height:60,
+        justifyContent: 'center',
+        flex: 1,
+        alignSelf:'stretch',
+        backgroundColor:'rgba(255, 255, 255, 0.3)',
+        
+        
+    },
+    mgl:{
+        marginLeft:1
+    },
+    mgl10:{
+        marginLeft:6
     },
     text:{
-        color:'#333'
+        color:'#fff'
     },
     badge:{
         backgroundColor: '#AED9E5',
@@ -76,8 +89,8 @@ const styles = {
         borderRadius:48,
     },
     image:{
-        width:36,
-        height:36,
+        width:32,
+        height:32,
     },
     color2:{
         backgroundColor: '#E5B2A8',
