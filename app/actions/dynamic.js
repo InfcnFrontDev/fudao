@@ -220,13 +220,13 @@ export function fetchData(page,options,callback,params){
 							page:1,
 							rows:6,
 					}).then((res)=>{
-						ToastAndroid.show(JSON.stringify(res.data),ToastAndroid.SHORT);
 						  if(res.datas.length>0) {
 								//有网状态下第一次加载
 								var arrDynamic = res.datas.slice(0,5);
 								insert(arrDynamic,params.realm);
 						    let realm_res = params.realm.objects('Dynamic').sorted('publishTime');
 						    var dynamicList = realm_res.slice(realm_res.length-5,realm_res.length).reverse();
+								ToastAndroid.show(JSON.stringify(dynamicList),ToastAndroid.SHORT);
 								if(res.datas.length<=5){
 									callback(dynamicList,{
 										allLoaded:true
@@ -282,7 +282,7 @@ export function fetchData(page,options,callback,params){
 								if(length_ago<length_now){
 									var newData = realm_res.slice(length_ago,length_now).reverse();
 									if(length_ago==0){
-										var dynamicList = newData; 										
+										var dynamicList = newData;
 									}else{
 										var dynamicList = newData.concat(params.dynamic);
 									}

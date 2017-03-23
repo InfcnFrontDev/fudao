@@ -2,6 +2,22 @@ import * as types from "../actions/types";
 import { ToastAndroid,} from "react-native";
 import {request,urls} from "../utils/";
 
+//跳转菜单页
+export function skipTopCaipin(obj){
+  return (dispatch) => {
+    ToastAndroid.show('aaa',ToastAndroid.SHORT)
+    dispatch({
+      type: types.MY_QUESTION,
+      source:{
+        caiping:obj,
+        isShow:true,
+      }
+    })
+  }
+}
+
+
+
 export function getQuestionTreetment(diseaseId,renqun){
   return (dispatch) => {
     request.getJson(urls.apis.MY_QUESTION_TREETMENT,{
@@ -12,7 +28,7 @@ export function getQuestionTreetment(diseaseId,renqun){
       ToastAndroid.show(JSON.stringify(diseaseId),ToastAndroid.SHORT);
 
       dispatch({
-        type: types.MY_QUESTION_ALL_QUESTION,
+        type: types.MY_QUESTION,
         source:{
           questionDetail:res.obj,
         }
@@ -57,14 +73,14 @@ export function getAllDatas(callback,my_params,all_params,renqun,from) {
         }
         if(from=='myquestion'){
           dispatch({
-            type: types.MY_QUESTION_ALL_QUESTION,
+            type: types.MY_QUESTION,
             source:{
               allQuestions:allDatas,
             }
           })
         }else{
           dispatch({
-            type: types.MY_QUESTION_ALL_QUESTION,
+            type: types.MY_QUESTION,
             source:{
               allExpects:allDatas,
             }

@@ -296,8 +296,10 @@ const styles = {
     }
 };
 
-const mapStateToProps = state => ({   
+const mapStateToProps = state => ({
     renqun:state.user.loginUser.renqun,
     my_question:state.myQuestion.my_question,
+    caipin:state.myQuestion.caipin,
+    isShow:state.myQuestion.isShow,
 });
 export default connect(mapStateToProps)(MyQuestionDetail);
