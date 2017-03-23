@@ -18,15 +18,10 @@ class DynamicCommon extends Component {
 	}
 
 	render() {
-		// ToastAndroid.show('dynamicCommon'+JSON.stringify(this.props.info.path), ToastAndroid.SHORT);
-		// var id=305;
-		// if(this.props.info.photo){
-		// 	id = this.props.info.photo;
-		// }
     return (
       <View  style={styles.dynamicCommon}>
         <View>
-          <Image source={{uri: urls.getImage('867200022156895,86720002215690321000493')}}  style={styles.dynamicTouxiang}/>
+          <Image source={{uri: urls.getImage(this.props.info.img)}}  style={styles.dynamicTouxiang}/>
         </View>
         <TouchableHighlight style={styles.dynamicDetail} underlayColor='#fafafa' onPress={this._skipToDetail.bind(this)}>
 				<View>

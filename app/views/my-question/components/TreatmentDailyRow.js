@@ -97,11 +97,12 @@ class TreatmentDailyRow extends PureComponent {
 
       shi = arr.map((p,i)=>{
         var obj = {
-          diseaseDailyMethodId:this.props.id,
+          diseaseDailyMethodId:this.props.row.datas.diseaseDailyMethod.id,
           ingredientsId:p.id,
           cookbook_timePeriod:cookbook_timePeriod,
           cookbook_type:p.cookbook_type||''
         }
+        ToastAndroid.show(JSON.stringify(obj),ToastAndroid.SHORT)
         return(
           <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?dispatch(skipTopCaipin({data:obj,arr:arr})):false}>
           <Text style={flag?styles.shiwutext:styles.color6d}>{p.name}{i!=arr.length-1?'、':''}</Text>
