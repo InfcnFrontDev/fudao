@@ -3,6 +3,8 @@ import { View,ToastAndroid} from "react-native";
 import {Left, Right, Body,ListItem, Button, List, Text} from "native-base";
 import {Actions} from "react-native-router-flux";
 import TreatmentProfessionList from "./TreatmentProfessionList";
+import {skipTopCaipin} from '../../../actions/my-question.js'
+import {connect} from "react-redux";
 
 class TreatmentDailyRow extends PureComponent {
   constructor(props){
@@ -76,12 +78,7 @@ class TreatmentDailyRow extends PureComponent {
     }
 
     caipu(data,flag,type,cookbook_timePeriod){
-      /*
-      *diseaseDailyMethodId:this.props.id
-      *ingredientsId:p.id
-      *cookbook_timePeriod:cookbook_timePeriod
-      *cookbook_type:p.cookbook_type||''
-      */
+      var {dispatch} = this.props;
       var shi=(null)
       if(flag&&(type=='午餐'||type=='晚餐')){
         var caipin = data['菜品']
@@ -106,7 +103,7 @@ class TreatmentDailyRow extends PureComponent {
           cookbook_type:p.cookbook_type||''
         }
         return(
-          <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?Actions.menuKinds({data:obj,arr:arr}):false}>
+          <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?dispatch(skipTopCaipin({data:obj,arr:arr})):false}>
           <Text style={flag?styles.shiwutext:styles.color6d}>{p.name}{i!=arr.length-1?'、':''}</Text>
           </Button>
         )
@@ -192,9 +189,8 @@ const styles = {
   color6d:{
     color:'#6D6D6D',
   },
-
-
-
 }
 
-export default (TreatmentDailyRow);
+const mapStateToProps = state => ({
+});
+export default connect(mapStateToProps)(TreatmentDailyRow);

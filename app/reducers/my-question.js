@@ -9,7 +9,9 @@ const initialState = {
 	changeRowID:0,
 	my_expect:[],
 	allExcepts:[],
-	questionDetail:{}
+	questionDetail:{},
+	caiping:{},
+	isShow:false,
 };
 export default function (state = initialState, {type, source}) {
 	switch (type) {
