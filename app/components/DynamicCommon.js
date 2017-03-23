@@ -6,6 +6,7 @@ import DynamicImage from './DynamicImage';
 import {theme} from "../utils/";
 import {Actions} from "react-native-router-flux";
 import {skipToDetail} from '../actions/dynamic.js'
+import {urls} from "../utils/index";
 
 /**
  * 需添加参数info
@@ -18,14 +19,14 @@ class DynamicCommon extends Component {
 
 	render() {
 		// ToastAndroid.show('dynamicCommon'+JSON.stringify(this.props.info.path), ToastAndroid.SHORT);
-		var id=305;
-		if(this.props.info.photo){
-			id = this.props.info.photo;
-		}
+		// var id=305;
+		// if(this.props.info.photo){
+		// 	id = this.props.info.photo;
+		// }
     return (
       <View  style={styles.dynamicCommon}>
         <View>
-          <Image source={{uri: 'http://192.168.10.58:9095/api/BaseApi/getImage?id='+id+'&w=&h='}}  style={styles.dynamicTouxiang}/>
+          <Image source={{uri: urls.getImage('867200022156895,86720002215690321000493')}}  style={styles.dynamicTouxiang}/>
         </View>
         <TouchableHighlight style={styles.dynamicDetail} underlayColor='#fafafa' onPress={this._skipToDetail.bind(this)}>
 				<View>
