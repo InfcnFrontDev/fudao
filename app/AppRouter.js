@@ -16,8 +16,6 @@ import About from "./views/system/About";
 import Picture from "./views/picture/";
 import MyInfo from "./views/my-info/MyInfo";
 import MyCheck from "./views/my-check/MyCheck";
-
-
 import MyCollection from "./views/collection/MyCollection";
 import MyRecord from "./views/my-record/MyRecord";
 import MyEmotion from "./views/emotion/MyEmotion";
@@ -49,6 +47,8 @@ import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import MyEnergy from "./views/energy/MyEnergy";
 import SideBar from "./views/sidebar/SideBar";
 import MenuKinds from "./views/menu_kinds/Menukinds";
+import EnergyInformation from "./views/energy/EnergyInformation";
+import EnergyQuestionnaire from "./views/energy/EnergyQuestionnaire";
 
 const RouterWithRedux = connect()(Router);
 
@@ -59,13 +59,13 @@ class AppRouter extends PureComponent {
 
 	// 最后一次触Back键的时间
 	lastBackPressTime = 0;
+
 	render() {
 		return (
 			<RouterWithRedux createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
 				<Scene key="root">
 
-
-					<Scene key="start" component={Start} title="启动开始页" hideNavBar  />
+					<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
 
 
 					{/*首页*/}
@@ -87,21 +87,21 @@ class AppRouter extends PureComponent {
 
 					{/*主页*/}
 
-					<Scene key="myEmotion"  component={MyEmotion} title="我的情绪" hideNavBar/>
-					<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar />
+					<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
+					<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
 					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
 					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
 					<Scene key="treatmentDailyDetail" component={TreatmentDailyDetail} title="疗法详情" hideNavBar/>
-					<Scene key="myExpect" component={MyExpect}  title="我的期望" hideNavBar/>
+					<Scene key="myExpect" component={MyExpect} title="我的期望" hideNavBar/>
 					{/*菜单*/}
-					<Scene key="menuKinds" component={MenuKinds}  hideNavBar />
+					<Scene key="menuKinds" component={MenuKinds} hideNavBar/>
 
 					{/*搜索*/}
 					<Scene key="search" component={Search} title="搜索" hideNavBar/>
 					<Scene key="searchDailyLife" component={SearchDailyLife} title="日常生活" hideNavBar/>
 					<Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈" hideNavBar/>
 					<Scene key="searchHealthCare" component={SearchHealthCare} title="保健方法" hideNavBar/>
-					<Scene key="searchInformation" component={SearchInformation} title="资讯" hideNavBar />
+					<Scene key="searchInformation" component={SearchInformation} title="资讯" hideNavBar/>
 					<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务" hideNavBar/>
 					<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
 						   hideNavBar/>
@@ -124,8 +124,8 @@ class AppRouter extends PureComponent {
 					<Scene key="about" component={About} title="关于福道" hideNavBar/>
 
 					{/*消息*/}
-					<Scene key="message" component={Message} title="消息" hideNavBar />
-					<Scene key="msgDetail" component={MsgDetail} hideNavBar  />
+					<Scene key="message" component={Message} title="消息" hideNavBar/>
+					<Scene key="msgDetail" component={MsgDetail} hideNavBar/>
 
 					{/*其他*/}
 					<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
@@ -141,9 +141,11 @@ class AppRouter extends PureComponent {
 
 					{/*我的能量场*/}
 					<Scene key="myEnergy" component={MyEnergy} title="我的能量场" hideNavBar/>
+					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar initial/>
+					<Scene key="energyQuestionnaire" component={EnergyQuestionnaire} title="问卷调查" hideNavBar/>
 
 					{/*侧边栏*/}
-					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar />
+					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
 				</Scene>
 			</RouterWithRedux>
 		)
