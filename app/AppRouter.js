@@ -46,7 +46,7 @@ import NewFriend from "./views/friend/NewFriend";
 import MyFriend from "./views/friend/MyFriend";
 import FriendApply from "./views/friend/FriendApply";
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
-import MyEnergy from "./views/my-energy/MyEnergy";
+import MyEnergy from "./views/energy/MyEnergy";
 import SideBar from "./views/sidebar/SideBar";
 import MenuKinds from "./views/menu_kinds/Menukinds";
 
