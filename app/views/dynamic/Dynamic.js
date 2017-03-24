@@ -11,7 +11,7 @@ import DynamicHeader from './components/DynamicHeader';
 import DynamicComment from './components/DynamicComments';
 import DynamicSupport from './components/DynamicSupports';
 import DynamicCommon from '../../components/DynamicCommon'
-import {fetchData,show,zan,sendComment,del,clear} from '../../actions/dynamic'
+import {fetchData,show,zan,sendComment,del,clear,updateRealm} from '../../actions/dynamic'
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -30,8 +30,18 @@ class Dynamic extends PureComponent {
 
     componentWillReceiveProps(nextProps){
       if(this.props.newnew!=nextProps.newnew){
-        this.props.fetchData(1,{refresh:true},this.refs.gifted._postRefresh,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user});
+        this.props.fetchData(1,{refresh:true},this.refs.gifted._postRefresh,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user,time:this.props.dynamic.update});
       }
+    }
+
+
+    componentDidMount(){
+      this.props.updateRealm(1,true,this.props.user.appid,this.props.realm)
+    }
+
+    componentDidUpdate(){
+      this.props.updateRealm(this.props.dynamic.update,false,this.props.user.appid,this.props.realm)
+
     }
 
 
@@ -176,7 +186,7 @@ class Dynamic extends PureComponent {
       }
 
     	_onFetch(page, callback, options,flag){
-        this.props.fetchData(page,options,callback,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user});
+        this.props.fetchData(page,options,callback,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user,time:this.props.dynamic.update});
       }
 
       skipToNew(){
@@ -192,7 +202,8 @@ function bindAction(dispatch) {
         zan:(info,params)=>dispatch(zan(info,params)),
         sendComment:(event,params)=>dispatch(sendComment(event,params)),
         del:(id,params)=>dispatch(del(id,params)),
-        clear:()=>dispatch(clear())
+        clear:()=>dispatch(clear()),
+        updateRealm:(time,flag,id,realm)=>dispatch(updateRealm(time,flag,id,realm)),
     };
 }
 
