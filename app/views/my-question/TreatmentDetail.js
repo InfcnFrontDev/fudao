@@ -73,7 +73,7 @@ const styles = {
   image:{
     marginTop:20,
     marginBottom:20,
-    width:Dimensions.get('window').width,
+    width:Dimensions.get('window').width-40,
     height:200,
   }
 }

@@ -16,8 +16,6 @@ import About from "./views/system/About";
 import Picture from "./views/picture/";
 import MyInfo from "./views/my-info/MyInfo";
 import MyCheck from "./views/my-check/MyCheck";
-
-
 import MyCollection from "./views/collection/MyCollection";
 import MyRecord from "./views/my-record/MyRecord";
 import MyEmotion from "./views/emotion/MyEmotion";
@@ -61,6 +59,7 @@ class AppRouter extends PureComponent {
 
 	// 最后一次触Back键的时间
 	lastBackPressTime = 0;
+
 	render() {
 		return (
 			<RouterWithRedux createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
@@ -145,8 +144,9 @@ class AppRouter extends PureComponent {
 					<Scene key="myEnergy" component={MyEnergy} title="我的能量场" hideNavBar/>
 					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar />
 					<Scene key="energyQuestionnaire" component={EnergyQuestionnaire} title="问卷调查" hideNavBar/>
+
 					{/*侧边栏*/}
-					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar />
+					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
 				</Scene>
 			</RouterWithRedux>
 		)

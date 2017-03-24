@@ -7,7 +7,8 @@ const initialState = {
 	dynamicList:[],
 	nowShow:'',
 	dynamicDetail:{},
-	rightButton:'发表'
+	rightButton:'发表',
+	update:1,
 };
 export default function (state = initialState, {type, source}) {
 	switch (type) {

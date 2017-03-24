@@ -343,7 +343,7 @@ var GiftedListView = React.createClass({
         canCancelContentTouches={true}
         refreshControl={this.props.refreshable === true ? this.renderRefreshControl() : null}
         {...this.props}
-        onEndReachedThreshold={0.000001}
+        onEndReachedThreshold={1}
         onEndReached={this._onPaginate}
         style={this.props.style}
       />
