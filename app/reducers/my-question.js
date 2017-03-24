@@ -10,8 +10,7 @@ const initialState = {
 	my_expect:[],
 	allExcepts:[],
 	questionDetail:{},
-	caiping:{},
-	isShow:false,
+
 };
 export default function (state = initialState, {type, source}) {
 	switch (type) {

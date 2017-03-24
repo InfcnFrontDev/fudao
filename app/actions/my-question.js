@@ -1,20 +1,9 @@
 import * as types from "../actions/types";
 import { ToastAndroid,} from "react-native";
-import {request,urls} from "../utils/";
+import {request,urls,toast} from "../utils/";
 
 //跳转菜单页
-export function skipTopCaipin(obj){
-  return (dispatch) => {
-    ToastAndroid.show('aaa',ToastAndroid.SHORT)
-    dispatch({
-      type: types.MY_QUESTION,
-      source:{
-        caiping:obj,
-        isShow:true,
-      }
-    })
-  }
-}
+
 
 
 

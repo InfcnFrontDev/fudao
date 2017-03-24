@@ -88,13 +88,16 @@ class AppRouter extends PureComponent {
 
 					{/*主页*/}
 
+
 					<Scene key="myEmotion"  component={MyEmotion} title="我的情绪" hideNavBar/>
 					<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar />
-					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
-					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
+					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar  />
+					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar />
 					<Scene key="treatmentDailyDetail" component={TreatmentDailyDetail} title="疗法详情" hideNavBar/>
-					<Scene key="myExpect" component={MyExpect}  title="我的期望" hideNavBar/>
+					<Scene key="myExpect" component={MyExpect} title="我的期望" hideNavBar/>
 					{/*菜单*/}
+					<Scene key="menuKinds" component={MenuKinds}  title="食材"  hideNavBar />
+
 					<Scene key="menuKinds" component={MenuKinds}  hideNavBar />
 
 					{/*搜索*/}
@@ -125,8 +128,8 @@ class AppRouter extends PureComponent {
 					<Scene key="about" component={About} title="关于福道" hideNavBar/>
 
 					{/*消息*/}
-					<Scene key="message" component={Message} title="消息" hideNavBar />
-					<Scene key="msgDetail" component={MsgDetail} hideNavBar  />
+					<Scene key="message" component={Message} title="消息" hideNavBar/>
+					<Scene key="msgDetail" component={MsgDetail} hideNavBar/>
 
 					{/*其他*/}
 					<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
@@ -143,6 +146,7 @@ class AppRouter extends PureComponent {
 					{/*我的能量场*/}
 					<Scene key="myEnergy" component={MyEnergy} title="我的能量场" hideNavBar/>
 					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar />
+					
 					<Scene key="energyQuestionnaire" component={EnergyQuestionnaire} title="问卷调查" hideNavBar/>
 
 					{/*侧边栏*/}
