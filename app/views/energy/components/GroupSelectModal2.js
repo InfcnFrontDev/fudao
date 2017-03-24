@@ -19,7 +19,6 @@ class GroupSelectModal extends PureComponent {
 
 		this.state = {
 			...props,
-			visible: false,
 			rowsData: this.groupByItems(props.items)
 		}
 	}
@@ -32,12 +31,12 @@ class GroupSelectModal extends PureComponent {
 	}
 
 	render() {
-		let {visible, rowsData} = this.state;
+		let {visible, transparent, animationType, rowsData} = this.state;
 
 		return (
 			<Modal
-				animationType={'fade'}
-				transparent={true}
+				animationType={animationType}
+				transparent={transparent}
 				visible={visible}
 				onRequestClose={() => this.hide()}
 			>
@@ -129,7 +128,7 @@ const styles = {
 		bottom: 30,
 		left: 20,
 		right: 20,
-		// borderRadius: 3,
+		borderRadius: 3,
 		opacity: 1,
 		flex: 1,
 		flexDirection: 'column',
@@ -158,11 +157,17 @@ const styles = {
 };
 
 GroupSelectModal.propTypes = {
+	visible: React.PropTypes.bool,
+	transparent: React.PropTypes.bool,
+	animationType: React.PropTypes.oneOf(['none', 'slide', 'fade']),
 	items: React.PropTypes.array,
 	onSelect: React.PropTypes.func,
 
 };
 GroupSelectModal.defaultProps = {
+	visible: false,
+	transparent: true,
+	animationType: 'fade',
 	items: [],
 	onSelect: (rowData) => alert(rowData),
 }

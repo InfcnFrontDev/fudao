@@ -16,43 +16,43 @@ class MyQuestionDetail extends PureComponent {
     }
 
     componentWillMount(){
-      const {dispatch} = this.props;
-      // dispatch(getQuestionTreetment('40',this.props.renqun))
-      dispatch(getQuestionTreetment(this.props.question.id,this.props.renqun))
+        const {dispatch} = this.props;
+        // dispatch(getQuestionTreetment('40',this.props.renqun))
+        dispatch(getQuestionTreetment(this.props.question.id,this.props.renqun))
     }
 
     render() {
         return (
             <Container style={styles.container}>
-              <Header>
-                  <Left>
-                      <Button transparent onPress={()=>Actions.pop()}>
-                          <Icon name='arrow-back' />
-                      </Button>
-                  </Left>
-                  <Body>
-                      <Title style={styles.title}>{this.props.question.showVal}</Title>
-                  </Body>
-                  <Right>
-                  </Right>
-              </Header>
-              <View style={styles.content}>
-                <QuestionMyself />
-                <QuestionTab  question={this.props.question}/>
-              </View>
+                <Header>
+                    <Left>
+                        <Button transparent onPress={()=>Actions.pop()}>
+                            <Icon name='arrow-back' />
+                        </Button>
+                    </Left>
+                    <Body>
+                    <Title style={styles.title}>{this.props.question.showVal}</Title>
+                    </Body>
+                    <Right>
+                    </Right>
+                </Header>
+                <View style={styles.content}>
+                    <QuestionMyself />
+                    <QuestionTab  question={this.props.question}/>
+                </View>
             </Container>
         )
     }
 }
 
 const styles = {
-  container:{
-  },
-  content:{
-    backgroundColor:'#fff',
-    flexDirection:'column',
-    flex:1,
-  },
+    container:{
+    },
+    content:{
+        backgroundColor:'#fff',
+        flexDirection:'column',
+        flex:1,
+    },
 };
 
 const mapStateToProps = state => ({
