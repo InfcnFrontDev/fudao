@@ -26,9 +26,8 @@ class Home extends PureComponent {
 				<Content>
 
 					
-					<WebView uri={urls.pages.HOEM}>
+					<WebView uri={urls.pages.HOEM}/>
 
-					</WebView>
 					<View style={{width:Dimensions.get('window').width,
 					height:80,
 					position:'absolute',

@@ -65,8 +65,7 @@ class AppRouter extends PureComponent {
 			<RouterWithRedux createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
 				<Scene key="root">
 
-
-					<Scene key="start" component={Start} title="启动开始页" hideNavBar  />
+					<Scene key="start" component={Start} title="启动开始页" hideNavBar/>
 
 
 					{/*首页*/}
@@ -98,14 +97,13 @@ class AppRouter extends PureComponent {
 					{/*菜单*/}
 					<Scene key="menuKinds" component={MenuKinds}  title="食材"  hideNavBar />
 
-					<Scene key="menuKinds" component={MenuKinds}  hideNavBar />
 
 					{/*搜索*/}
 					<Scene key="search" component={Search} title="搜索" hideNavBar/>
 					<Scene key="searchDailyLife" component={SearchDailyLife} title="日常生活" hideNavBar/>
 					<Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈" hideNavBar/>
 					<Scene key="searchHealthCare" component={SearchHealthCare} title="保健方法" hideNavBar/>
-					<Scene key="searchInformation" component={SearchInformation} title="资讯" hideNavBar />
+					<Scene key="searchInformation" component={SearchInformation} title="资讯" hideNavBar/>
 					<Scene key="searchOfflineService" component={SearchOfflineService} title="线下服务" hideNavBar/>
 					<Scene key="searchSymptomProblem" component={SearchSymptomProblem} title="症状与问题"
 						   hideNavBar/>
@@ -145,8 +143,7 @@ class AppRouter extends PureComponent {
 
 					{/*我的能量场*/}
 					<Scene key="myEnergy" component={MyEnergy} title="我的能量场" hideNavBar/>
-					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar />
-					
+					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar/>
 					<Scene key="energyQuestionnaire" component={EnergyQuestionnaire} title="问卷调查" hideNavBar/>
 
 					{/*侧边栏*/}
