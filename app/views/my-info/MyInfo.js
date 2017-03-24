@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {ListItem, Body, Right, View, Text, Icon} from "native-base";
 import {Container, Content, Header, Separator} from "../../components/index";
 import {updateUserInfo} from "../../actions/user";
-import {dialogs} from "../../utils/index";
+import {dialogs,toast} from "../../utils/index";
 import _ from "lodash";
 
 const groups = [
@@ -21,7 +21,7 @@ const groups = [
 				field: 'sex',
 				type: 'singleChoice',
 				items: [
-					'男', '女'
+					'女', '男'
 				],
 			},
 			{
@@ -197,6 +197,7 @@ class MyInfo extends PureComponent {
 
 	renderItem(item) {
 		let {loginUser} = this.props;
+		toast.show(JSON.stringify(loginUser))
 		return (
 			<ListItem key={item.title} icon onPress={() => this.editItem(item)}>
 				<Body>
@@ -269,9 +270,9 @@ class MyInfo extends PureComponent {
 
 	substr(str) {
 		if (str == '0')
-			str = '男';
-		if (str == '1')
 			str = '女';
+		if (str == '1')
+			str = '男';
 		if (str.length > 10)
 			str = str.substr(0, 10) + '...';
 

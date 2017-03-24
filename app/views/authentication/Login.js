@@ -83,6 +83,7 @@ class Login extends PureComponent {
 			pwd: hex_md5(phone + password),
 		}).then((data) => {
 				dispatch(hideLoading());
+
 				if (data.success) {
 					this.setState({
 						login: "yes",
