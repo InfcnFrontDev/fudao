@@ -21,11 +21,11 @@ class Home extends PureComponent {
 	render() {
 		return (
 			<Container>
-				
+
 
 				<Content>
 
-					
+
 					<WebView uri={urls.pages.HOEM}/>
 
 					<View style={{width:Dimensions.get('window').width,
@@ -37,7 +37,7 @@ class Home extends PureComponent {
 						<Header style={{backgroundColor:'rgba(225,225,225,0.3)',color:'#000'}} menu {...this.props} right={
 							<Right>
 								<Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
-								<Button transparent onPress={()=> this._setModalVisible()}><Icon name="ios-chatboxes"/></Button>
+								<Button transparent onPress={()=> Actions.message()}><Icon name="ios-chatboxes"/></Button>
 							</Right>
 						}/>
 					</View>

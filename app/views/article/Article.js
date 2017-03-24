@@ -17,12 +17,7 @@ class Article extends PureComponent {
 	render() {
 		return (
 			<Container>
-				<Header menu {...this.props} right={
-					<Right>
-						<Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
-						<Button transparent onPress={()=>Actions.message()}><Icon name="ios-chatboxes"/></Button>
-					</Right>
-				}/>
+				<Header menu {...this.props}/>
 
 				<ScrollableTabView
 					renderTabBar={() => (
