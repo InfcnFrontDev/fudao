@@ -347,9 +347,11 @@ export function fetchData(page,options,callback,params){
 		      if(realm_res.length>params.dynamic.length+5){
 		        var render_realm_res = realm_res.slice(realm_res.length-params.dynamic.length-6,realm_res.length-params.dynamic.length-1).reverse();
 		      }else{
+						ToastAndroid.show('lllllll',ToastAndroid.SHORT)
 		        var render_realm_res = realm_res.slice(0,realm_res.length-params.dynamic.length).reverse();
 		      }
 		      var dynamicList = params.dynamic.concat(render_realm_res);
+					callback(dynamicList);
 					dispatch({
 						type: types.DYNAMIC_LIST_LOAD,
 						source:{
