@@ -1,15 +1,16 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {View,TouchableOpacity,TouchableHighlight,Alert,Image  } from "react-native";
+import {View,TouchableOpacity,TouchableHighlight,Alert,Image ,Modal,Dimensions } from "react-native";
 import {Text, Button} from "native-base";
-import {Container, Content} from "../../components/index";
+import {Container, Content,Header} from "../../components/index";
 import {config, urls,theme,toast,request} from "../../utils/index";
 /**
  * 菜谱
  */
 
-
+var width=Dimensions.get('window').width;
+var height=Dimensions.get('window').height;
 class Menukinds extends PureComponent {
     constructor(props) {
         super(props);
@@ -17,6 +18,7 @@ class Menukinds extends PureComponent {
           activeBar:0,
           obj:this.props.data,
           arr:this.props.arr,
+          isShow:false,
         }
     }
     componentWillMount(){
@@ -32,7 +34,8 @@ class Menukinds extends PureComponent {
         }
         request.getJson(urls.apis.MENU_KINDS,obj).then((result) => {
             this.setState({
-                data:result.obj
+                data:result.obj,
+                item:result.obj.cookbook[0]
             })
         }, (error) => {
 
@@ -48,9 +51,64 @@ class Menukinds extends PureComponent {
             return(<Container></Container>)
         }else{
             let caiPu=data.cookbook;
+            let cai=(null);
+            let mb=(null);
+            let item=this.state.item;
+            if(caiPu.length!=0){
+                cai=(
+                    <View>
+                        <Text style={{textAlign:'center',marginTop:10}}>推荐菜谱</Text>
+                        <View style={styles.caiPuBox}>
+                            {caiPu.map((item, index) => this.renderCaiPu(item, index))}
+                        </View>
+                    </View>
+                    )
+                mb=(
+                    <Modal
+                        transparent={true}
+                        visible={this.state.isShow}
+                        onRequestClose={this.hide(false)}
+                    >
+                        <View style={styles.mb1}>
+                            <View style={styles.box1}>
+                                <View style={styles.imgBox}>
+                                    <Image source={{uri: urls.getImage(item.img)}} style={styles.img}></Image>
+                                </View>
+                                <View>
+                                    <View style={styles.cpBar}>
+                                        <Text>主料</Text>
+                                    </View>
+                                    <View style={styles.cp}>
+                                        <Text>{item.ingredients}</Text>
+                                    </View>
+
+                                </View>
+                                <View>
+                                    <View style={styles.cpBar}>
+                                        <Text>辅料</Text>
+                                    </View>
+                                    <View style={styles.cp}>
+                                        <Text>{item.ingredients}</Text>
+                                    </View>
+                                </View>
+                                <View>
+                                    <View  style={styles.cpBar}>
+                                        <Text>操作方法</Text>
+                                    </View>
+                                    <View style={styles.cp}>
+                                        <Text>{item.ingredients}</Text>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </Modal>
+                )
+
+            }
 
             return (
                 <Container>
+                    <Header back {...this.props}></Header>
                     <Content>
                         <View style={styles.bar}>
                             {tab.map((item, index) => this.renderTab(item, index))}
@@ -101,10 +159,8 @@ class Menukinds extends PureComponent {
                                 </View>
                             </View>
                         </View>
-                        <Text style={{textAlign:'center',marginTop:10}}>推荐菜谱</Text>
-                        <View style={styles.caiPuBox}>
-                            {caiPu.map((item, index) => this.renderCaiPu(item, index))}
-                        </View>
+                        {cai}
+                        {mb}
                     </Content>
                 </Container>
             );
@@ -130,18 +186,17 @@ class Menukinds extends PureComponent {
     }
     renderCaiPu(item, index) {
         return (
-            <View  key={index} style={styles["menu"+index]}>
-                <Text style={styles.doc}>{item.name}</Text>
-            </View>
-        )
-    }
-    renderImg(item,index) {
-        let con = tabs[index].con;
-        return (
-                <Text  key={index} style={styles.textBar}>{con}</Text>
-        )
-    }
 
+                <View key={index} style={styles["menu"+index]}>
+                    <TouchableOpacity
+                            onPress={() => this.show(item,index)}
+                    >
+                        <Text style={styles.doc}>{item.name}</Text>
+                    </TouchableOpacity>
+                </View>
+
+        )
+    }
     _goToPage(item,index) {
         let obj=this.state.obj;
         this.setState({
@@ -159,8 +214,18 @@ class Menukinds extends PureComponent {
 
         });
     }
-
-
+    hide(i){
+        this.setState({
+            isShow:i,
+        })
+    }
+    show(item,index){
+toast.show(JSON.stringify(item))
+        this.setState({
+            isShow:true,
+            item:item,
+        })
+    }
 }
 
 const styles = {
@@ -262,6 +327,30 @@ const styles = {
         borderWidth:2,
         justifyContent:'center',
         width:'50%'
+    },
+    mb1:{
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent:'center',
+        alignItems:'center',
+        flex:1,
+    },
+    box1:{
+        width:width*0.9,
+        height:height*0.9,
+        backgroundColor:'#fff',
+        borderRadius:5
+    },
+    cpBar:{
+        height:30,
+        borerWidth:1,
+        borderColor:'#666',
+        backGroundColor:'#F0F0F0'
+    },
+    cp:{
+        height:30,
+        borerWidth:1,
+        borderColor:'#666',
+        backGroundColor:'#F0F0F0'
     }
 };
 

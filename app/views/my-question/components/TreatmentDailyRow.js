@@ -97,13 +97,13 @@ class TreatmentDailyRow extends PureComponent {
 
       shi = arr.map((p,i)=>{
         var obj = {
-          diseaseDailyMethodId:this.props.id,
+          diseaseDailyMethodId:this.props.row.datas.diseaseDailyMethod.id,
           ingredientsId:p.id,
           cookbook_timePeriod:cookbook_timePeriod,
           cookbook_type:p.cookbook_type||''
         }
         return(
-          <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?dispatch(skipTopCaipin({data:obj,arr:arr})):false}>
+          <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?Actions['menuKinds']({data:obj,arr:arr}):false}>
           <Text style={flag?styles.shiwutext:styles.color6d}>{p.name}{i!=arr.length-1?'、':''}</Text>
           </Button>
         )
@@ -192,5 +192,6 @@ const styles = {
 }
 
 const mapStateToProps = state => ({
+
 });
 export default connect(mapStateToProps)(TreatmentDailyRow);
