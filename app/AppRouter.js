@@ -49,6 +49,8 @@ import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import MyEnergy from "./views/energy/MyEnergy";
 import SideBar from "./views/sidebar/SideBar";
 import MenuKinds from "./views/menu_kinds/Menukinds";
+import EnergyInformation from "./views/energy/EnergyInformation";
+import EnergyQuestionnaire from "./views/energy/EnergyQuestionnaire";
 
 const RouterWithRedux = connect()(Router);
 
@@ -141,7 +143,8 @@ class AppRouter extends PureComponent {
 
 					{/*我的能量场*/}
 					<Scene key="myEnergy" component={MyEnergy} title="我的能量场" hideNavBar/>
-
+					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar />
+					<Scene key="energyQuestionnaire" component={EnergyQuestionnaire} title="问卷调查" hideNavBar/>
 					{/*侧边栏*/}
 					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar />
 				</Scene>
