@@ -209,6 +209,32 @@ export function show(id,params){
 	}
 }
 
+//数据库后台同步
+export function updateRealm(time,flag,id,realm){
+	return (dispatch) =>{
+		request.getJson(urls.apis.DYNAMIC_LIST,{
+			userId:id,
+			page:time,
+			rows:5,
+		}).then((res) =>{
+			if(res.datas.length>0){
+				// ToastAndroid.show('UPADATE'+JSON.stringify(res.datas),ToastAndroid.SHORT)
+				insert(res.datas,realm);
+				if(flag){
+					var update=2;
+				}else{
+					var update=time+1;
+				}
+				dispatch({
+					type: types.DYNAMIC_LIST_LOAD,
+					source:{
+						update:update
+					}
+				});
+			}
+		})
+	}
+}
 
 // 获取列表数据
 export function fetchData(page,options,callback,params){
@@ -225,8 +251,11 @@ export function fetchData(page,options,callback,params){
 								var arrDynamic = res.datas.slice(0,5);
 								insert(arrDynamic,params.realm);
 						    let realm_res = params.realm.objects('Dynamic').sorted('publishTime');
-						    var dynamicList = realm_res.slice(realm_res.length-5,realm_res.length).reverse();
-								ToastAndroid.show(JSON.stringify(dynamicList),ToastAndroid.SHORT);
+								if(realm_res.length<5){
+									var dynamicList = realm_res.slice(realm_res.length*(-1)).reverse();
+								}else{
+									var dynamicList = realm_res.slice(realm_res.length-5,realm_res.length).reverse();
+								}
 								if(res.datas.length<=5){
 									callback(dynamicList,{
 										allLoaded:true
@@ -255,7 +284,6 @@ export function fetchData(page,options,callback,params){
 									callback([],{
 										allLoaded:true,
 									});
-
 								}
 						  }
 							dispatch({
@@ -266,7 +294,6 @@ export function fetchData(page,options,callback,params){
 							});
 					})
 		}else if(options.refresh){
-			ToastAndroid.show('refresh',ToastAndroid.SHORT)
 			request.getJson(urls.apis.DYNAMIC_LIST,{
 							userId:params.user.appid,
 							page:1,
@@ -302,31 +329,29 @@ export function fetchData(page,options,callback,params){
 								}else{
 									callback(dynamicList);
 								}
+								request.getJson(urls.apis.DYNAMIC_LIST,{
+									userId:params.user.appid,
+									page:1,
+									rows:5*params.time,
+								}).then((result) =>{
+									if(result.datas.length>0){
+										insert(result.datas,params.realm);
+									}
+								})
 						  }
 					}
 			)
 		}else if(options.loadMore){
 		    let realm_res = params.realm.objects('Dynamic').sorted('publishTime');
 		    if(realm_res.length>params.dynamic.length){
-					ToastAndroid.show('nono'+params.dynamic.length,ToastAndroid.SHORT);
-
 		      if(realm_res.length>params.dynamic.length+5){
 		        var render_realm_res = realm_res.slice(realm_res.length-params.dynamic.length-6,realm_res.length-params.dynamic.length-1).reverse();
 		      }else{
+						ToastAndroid.show('lllllll',ToastAndroid.SHORT)
 		        var render_realm_res = realm_res.slice(0,realm_res.length-params.dynamic.length).reverse();
 		      }
-					// ToastAndroid.show(,ToastAndroid.SHORT);
-
 		      var dynamicList = params.dynamic.concat(render_realm_res);
-		      // callback(dynamicList);
-					// request.getJson(urls.apis.DYNAMIC_LIST,{
-					// 				userId:params.user.appid,
-					// 				page:Math.floor(params.dynamic.length/5)+2,
-					// 				rows:5,
-					// 		}).then((res) =>{
-					// 			insert(res.datas,params.realm);
-					// })
-
+					callback(dynamicList);
 					dispatch({
 						type: types.DYNAMIC_LIST_LOAD,
 						source:{
@@ -334,8 +359,6 @@ export function fetchData(page,options,callback,params){
 						}
 					});
 		    }else{
-					ToastAndroid.show('wangshang'+params.dynamic.length,ToastAndroid.SHORT);
-
 					request.getJson(urls.apis.DYNAMIC_LIST,{
 									userId:params.user.appid,
 									page:Math.floor(params.dynamic.length/5)+1,
@@ -384,7 +407,6 @@ function insert(datas,realm){
 		}
 	})
 }
-
 
 /**
  * 新动态：newDynamic
