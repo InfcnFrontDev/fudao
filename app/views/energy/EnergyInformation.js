@@ -182,8 +182,6 @@ class EnergyQuestionnaire extends PureComponent {
 				</View>
 				<View style={{width:Dimensions.get('window').width/4*2}} >
 					{ppp}
-					<Text style={styles.text}>{this.state.text}</Text>
-					
 				</View>
 			</ListItem>
 		)
