@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/3/1.
  */
 //noinspection JSAnnotator
-'use strict';
+
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
@@ -73,7 +73,7 @@ class StartInformation extends PureComponent {
         var mbW=(
             <TouchableOpacity onPress={this.woman.bind(this)}>
                 <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
-                <View style={{height:20,width:80}}>
+                <View style={{height:20,width:90}}>
                     <Text style={{textAlign:'center'}}>{this.state.jieduan}</Text>
                 </View>
             </TouchableOpacity>
@@ -81,7 +81,7 @@ class StartInformation extends PureComponent {
 
         if(this.state.showM){
             mbW= (
-                <TouchableOpacity onPress={this.woman.bind(this)} style={{justifyContent:'center',
+                <TouchableOpacity onPress={this.woman.bind(this,this.state.appid)} style={{justifyContent:'center',
                     alignItems:'center'}}>
                     <View style={styles.mb}></View>
                     <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/woman.png')}/>
@@ -126,7 +126,7 @@ class StartInformation extends PureComponent {
             </Container>
         )
     };
-    woman(){
+    woman(appid){
         let sex=0;
         this.setState({
             showM:false,
@@ -174,67 +174,116 @@ class StartInformation extends PureComponent {
             ]
         )
     }
-    commit(){
-let {dispatch}=this.props;
-        let {position,maxText,appid,sex} = this.state;
+    commit() {
+        let {dispatch}=this.props;
+        let loginUser=this.props.loginUser;
+        let {position, maxText, appid, sex, jieduan} = this.state;
+        let womanType;
+        if (sex == 0) {
+            if (jieduan == '未孕阶段' || jieduan == '备孕阶段' || jieduan == '已孕阶段') {
+                womanType = 1
+            } else if (jieduan == '待产阶段') {
+                womanType = 2
+            } else {
+                womanType = 3
+            }
+        }
+
         //获取地理位置
-        let userInformation ={};
-        userInformation.appid =appid;
-        userInformation.sex = sex
-        userInformation.birthdate = maxText;
-        userInformation.location = position
-        userInformation.tops = '';
-        userInformation.bmi = '';
-        userInformation.weight = '';
-        userInformation.title = '';
-        // 个人史
-        userInformation.personal_history = '';
-        // 家族史
-        userInformation.family_history = '';
-        // 婚育史
-        userInformation.obstetrical_history = '';
-        // 用药史
-        userInformation.medication_history = '';
-        // 饮食
-        userInformation.diet = '';
-        // 运动
-        userInformation.motion = '';
-        // 睡眠
-        userInformation.sleep = '';
-        // 吸烟
-        userInformation.smoke = '';
-        // 饮酒
-        userInformation.drink = '';
-        // 精神状况
-        userInformation.mental_state = '';
-        //toast.show(userInformation)
-        request.postJson(urls.apis.AUTH_USER_INFORMATION,{
+
+        let userInformation = {};
+
+        if (womanType) {
+            userInformation.womanType = womanType;
+            userInformation.appid = loginUser.appid;
+            userInformation.sex = sex;
+            userInformation.birthdate = maxText;
+            userInformation.location = position
+            userInformation.tops = '';
+            userInformation.bmi = '';
+            userInformation.weight = '';
+            userInformation.title = '';
+            // 个人史
+            userInformation.personal_history = '';
+            // 家族史
+            userInformation.family_history = '';
+            // 婚育史
+            userInformation.obstetrical_history = '';
+            // 用药史
+            userInformation.medication_history = '';
+            // 饮食
+            userInformation.diet = '';
+            // 运动
+            userInformation.motion = '';
+            // 睡眠
+            userInformation.sleep = '';
+            // 吸烟
+            userInformation.smoke = '';
+            // 饮酒
+            userInformation.drink = '';
+            // 精神状况
+            userInformation.mental_state = '';
+        } else {
+            userInformation.appid = appid;
+            userInformation.sex = sex;
+            userInformation.birthdate = maxText;
+            userInformation.location = position
+            userInformation.tops = '';
+            userInformation.bmi = '';
+            userInformation.weight = '';
+            userInformation.title = '';
+            // 个人史
+            userInformation.personal_history = '';
+            // 家族史
+            userInformation.family_history = '';
+            // 婚育史
+            userInformation.obstetrical_history = '';
+            // 用药史
+            userInformation.medication_history = '';
+            // 饮食
+            userInformation.diet = '';
+            // 运动
+            userInformation.motion = '';
+            // 睡眠
+            userInformation.sleep = '';
+            // 吸烟
+            userInformation.smoke = '';
+            // 饮酒
+            userInformation.drink = '';
+            // 精神状况
+            userInformation.mental_state = '';
+        }
+
+        request.postJson(urls.apis.AUTH_USER_INFORMATION, {
             jsonStr: JSON.stringify(userInformation),
             ishealthRing: "yes",
             appid: appid,
             city: position
-        }).then((data)=>{
-            if(data.success) {
-                /*toast.show("保存成功");*/
-                // 提交登录
-               let user = Object.assign({}, {
-                    ...data.obj.accountInfo,
-                    ...userInformation,
-                    ...data.obj.renqun,
-                });
-                    // 保存用户状态
-                    dispatch(login(user));
-                    // 跳到首页
-                    Actions.index()
+        }).then((data)=> {
+            if (data.success) {
+                let loginUser=this.props.loginUser;
 
+                request.getJson(urls.apis.AUTH_LOGIN, {
+                    account: loginUser.phone,
+                    pwd: loginUser.pwd,
+                }).then((data) => {
 
-            }else{
-                toast.show("保存失败");
+                        let user = Object.assign({}, {
+                            ...data.obj.accountInfo,
+                            ...data.obj.userInformation,
+                            ...data.obj
+                        });
+
+                        // 保存用户状态
+                        this.props.dispatch(login(user));
+                        // 跳到首页
+                        Actions.index();
+                    }, (error) => {
+
+                    }
+                );
             }
-        },(error)=>{
-
         })
-
     }
 }
 const styles = {
@@ -312,7 +361,7 @@ const styles = {
     },
 };
 const mapStateToProps = state => ({
-
+    loginUser: state.user.loginUser,
 });
 export default connect(mapStateToProps)(StartInformation);
 

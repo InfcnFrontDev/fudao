@@ -30,7 +30,7 @@ class TreatmentDetail extends PureComponent {
             </Header>
             <Content style={styles.content}>
               <View style={styles.from}>
-                  <Text>高血压 > 自疗方案 > {this.props.from=='日常'?'日常疗法':'专业疗法'} > {this.props.data.name}</Text>
+                  <Text>{this.props.title} > 自疗方案 > {this.props.from=='日常'?'日常疗法':'专业疗法'} > {this.props.data.name}</Text>
               </View>
               <View style={styles.view}>
                   <Image source={this.props.data.img?{uri:urls.getImage('/'+this.props.renqun+this.props.data.img)}:require('../../assets/error.png')} style={styles.image}/>

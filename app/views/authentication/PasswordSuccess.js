@@ -6,7 +6,7 @@ import {theme,request,urls,tools,toast} from "../../utils/";
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import  CommitButton from "./components/CommitButton"
 import  {hex_md5} from "./components/md5"
-
+import {login} from "../../actions/user";
 /**
  * 设置密码
  */
@@ -51,6 +51,7 @@ class SetPassword extends PureComponent {
         },1000)
     }
     _login(phone,password){
+        let {dispatch}=this.props;
         request.getJson(urls.apis.AUTH_LOGIN,{
             account:phone,
             pwd:hex_md5(phone+password),
@@ -58,6 +59,8 @@ class SetPassword extends PureComponent {
             if(data.success) {
                 var userInformation = data.obj.userInformation;
                 var appid=data.obj.accountInfo.appid;
+                 // 保存用户状态
+                 dispatch(login(data.obj.accountInfo));
                 if (userInformation != undefined) { //基本信息已经添加完成
                     // 跳到首页
                     Actions.index();
