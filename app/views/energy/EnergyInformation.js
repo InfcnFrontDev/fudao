@@ -1,10 +1,11 @@
 import React, {PureComponent} from "react";
-import {View, Image, DeviceEventEmitter,Dimensions,ScrollView} from "react-native";
+import {View, Image,ScrollView, DeviceEventEmitter,Dimensions,ScrollViewAppRegistry, StyleSheet} from "react-native";
 import {connect} from "react-redux";
 import {Container, Header, Content, Separator} from "../../components/index";
-import {Left, Right, Body, ListItem, Text, Icon} from "native-base";
-import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
-
+import {Left, Right, Body, ListItem, Text, Icon,Button} from "native-base";
+import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
+import {Select, Option} from "react-native-chooser";
+import {toast} from "../../utils/index"
 /**
  * 我的能量场 > 资料填写
  */
@@ -12,7 +13,8 @@ class EnergyQuestionnaire extends PureComponent {
 	constructor(){
 		 super()
 		 this.state = {
-				 text: ''
+				 text: '',
+			 canada: ''
 		 }
 		 this.onSelect = this.onSelect.bind(this)
 	}
@@ -23,6 +25,10 @@ class EnergyQuestionnaire extends PureComponent {
 		 })
 	 }
 
+	Select(data) {
+
+		alert(data);
+	}
 
 	render() {
 		let data = [
@@ -155,7 +161,13 @@ class EnergyQuestionnaire extends PureComponent {
 					<Separator title={'请填写您的信息'}/>
 					<ScrollView>
 						{data.map((item,index)=> this.renderGroup(item,index))}
+						<View style={styles.View}>
+							<Button style={styles.Btn}>
+								<Text>完整保存</Text>
+							</Button>
+						</View>
 					</ScrollView>
+
 
 				</Content>
 			</Container>
@@ -170,32 +182,59 @@ class EnergyQuestionnaire extends PureComponent {
 					selectedIndex = {1}
 					color= {'#a1cc01'}
 				>
-					{item.items.map((item,index) => this.renderItem(item,index))}
+					{item.items.map((item,index) => this.renderRadioItem(item,index))}
 				</RadioGroup>
 
 				)
+		}else if(item.type==2){
+			ppp=(<Select
+					onSelect = {this.Select.bind(this)}
+					defaultText  = "Select Me Please"
+					style = {{borderWidth : 1, borderColor : "green"}}
+					textStyle = {{}}
+					backdropStyle  = {{backgroundColor : "#d3d5d6"}}
+					optionListStyle = {{backgroundColor : "#F5FCFF"}}
+					>
+					{item.items.map((item,index) => this.renderSelectItem(item,index))}
+				</Select>
+
+			)
+		}else if(item.type==3){
+			ppp=(
+				<View style={{flexDirection:'row',justifyContent:'space-between',flex:1,width:Dimensions.get('window').width/4*3-20}}>
+					<Left>
+						<Text note>{item.value}</Text>
+					</Left>
+					<Right>
+						<Icon active name="ios-arrow-forward"/>
+					</Right>
+
+				</View>
+			)
 		}
 		return(
 			<ListItem style={styles.row} key={indx}>
 				<View style={{width:Dimensions.get('window').width/4*1}}>
 					<Text style={{textAlign:'right'}}>{item.name+':'}</Text>
 				</View>
-				<View style={{width:Dimensions.get('window').width/4*2}} >
+				<View style={{width:Dimensions.get('window').width/4*3}} >
 					{ppp}
+
 				</View>
 			</ListItem>
 		)
 	}
-	renderItem(item,index) {
+	renderRadioItem(item,index) {
 		return (
-
-				 <RadioButton Checked={true} value={item} key={index} style={{width:86}}>
-					 <Text>{item}</Text>
-				 </RadioButton>
-
-
+			<RadioButton Checked={true} value={item} key={index} style={{width: 86}}>
+				<Text>{item}</Text>
+			</RadioButton>
 		)
-
+	}
+	renderSelectItem(item,index) {
+		return (
+			<Option key={index} value={item}>{item}</Option>
+		)
 	}
 }
 
@@ -209,6 +248,17 @@ const styles = {
 	right:{
 		flexDirection:'row',
 		width:Dimensions.get('window').width/3*2
+	},
+	View:{
+		flexDirection:'row',
+		height:80,
+		justifyContent:'space-around'
+	},
+	Btn:{
+		marginTop:30,
+		width:100,
+		height:30,
+		justifyContent:'center'
 	}
 };
 
