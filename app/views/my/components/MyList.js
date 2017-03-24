@@ -24,7 +24,7 @@ class MyList extends PureComponent {
 					route: 'myCheck'
 				})}
 				{this.renderItem({
-					icon: 'ios-tablet-portrait-outline',
+					icon: 'ios-film-outline',
 					text: '我的记录',
 					bordered: true,
 					route: 'myRecord'
@@ -66,7 +66,7 @@ class MyList extends PureComponent {
 const styles = {
 	myList: {backgroundColor: '#fff'},
 	listText: {
-		fontSize: theme.DefaultFontSize,
+		fontSize: theme.fontSizeBase,
 	}
 };
 
