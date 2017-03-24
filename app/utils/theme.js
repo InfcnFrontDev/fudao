@@ -28,4 +28,10 @@ export default Object.assign(material, {
 
 	fontSizeBase: 15,
 	DefaultFontSize: 15,
+
+
+	get fontSizeH4() {
+		return this.fontSizeBase * 1.2;
+	},
+
 })

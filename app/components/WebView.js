@@ -29,6 +29,10 @@ export default class InfcnWebView extends PureComponent {
 			</View>
 		)
 	}
+
+	shouldComponentUpdate() {
+		return false
+	}
 }
 
 const styles = {
