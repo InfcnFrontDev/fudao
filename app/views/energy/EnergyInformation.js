@@ -2,32 +2,33 @@ import React, {PureComponent} from "react";
 import {View, Image,ScrollView, DeviceEventEmitter,Dimensions,ScrollViewAppRegistry, StyleSheet} from "react-native";
 import {connect} from "react-redux";
 import {Container, Header, Content, Separator} from "../../components/index";
-import {Left, Right, Body, ListItem, Text, Icon,Button} from "native-base";
+import {Left, Right, Body, ListItem, Text, Icon,Button,Picker} from "native-base";
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
 import {Select, Option} from "react-native-chooser";
 import {toast} from "../../utils/index"
 /**
  * 我的能量场 > 资料填写
  */
+const Item = Picker.Item;
 class EnergyQuestionnaire extends PureComponent {
-	constructor(){
-		 super()
+	constructor(props){
+		 super(props)
 		 this.state = {
-				 text: '',
-			 canada: ''
+			 selectedItem: undefined,
+			 selected1: 'key1',
+			 results: {
+				 items: []
+			 }
 		 }
-		 this.onSelect = this.onSelect.bind(this)
+
 	}
 
-	 onSelect(index, value){
-		 this.setState({
-			 text: `Selected index: ${index} , value: ${value}`
-		 })
-	 }
 
-	Select(data) {
 
-		alert(data);
+	onValueChange (value) {
+		this.setState({
+			selected1 : value
+		});
 	}
 
 	render() {
@@ -62,15 +63,15 @@ class EnergyQuestionnaire extends PureComponent {
 					'博士', '研究生', '本科', '专科', '高中'
 				], // 指标选项
 				value: '专科',
-				type:2
+				type:1
 			},
 			{
 				name: '高校类型', // 指标名称
 				items: [
-					'一本', '二本', '三本', '专科', '高中'
+					'一本', '二本', '三本', '专科'
 				], // 指标选项
 				value: '一本',
-				type:2
+				type:1
 			},
 			{
 				name: '行业', // 指标名称
@@ -150,7 +151,7 @@ class EnergyQuestionnaire extends PureComponent {
 					'无信仰','佛教'
 				], // 指标选项, 分组形式
 				value: '佛教',
-				type:2
+				type:1
 
 			},
 		];
@@ -176,34 +177,20 @@ class EnergyQuestionnaire extends PureComponent {
 	renderGroup(item,indx){
 		let ppp=(null);
 		if(item.type==1){
-			ppp=(<RadioGroup
-					style={styles.row}
-					onSelect = {(inde, value) => this.onSelect(inde, value)}
-					selectedIndex = {1}
-					color= {'#a1cc01'}
-				>
+			ppp=(<Picker
+					iosHeader="Select one"
+					mode="dropdown"
+					selectedValue={this.state.selected1}
+					onValueChange={this.onValueChange.bind(this)}>
 					{item.items.map((item,index) => this.renderRadioItem(item,index))}
-				</RadioGroup>
+				</Picker>
 
 				)
-		}else if(item.type==2){
-			ppp=(<Select
-					onSelect = {this.Select.bind(this)}
-					defaultText  = "Select Me Please"
-					style = {{borderWidth : 1, borderColor : "green"}}
-					textStyle = {{}}
-					backdropStyle  = {{backgroundColor : "#d3d5d6"}}
-					optionListStyle = {{backgroundColor : "#F5FCFF"}}
-					>
-					{item.items.map((item,index) => this.renderSelectItem(item,index))}
-				</Select>
-
-			)
 		}else if(item.type==3){
 			ppp=(
-				<View style={{flexDirection:'row',justifyContent:'space-between',flex:1,width:Dimensions.get('window').width/4*3-20}}>
+				<View style={{flexDirection:'row',justifyContent:'space-between',flex:1,width:Dimensions.get('window').width/4*3-40}}>
 					<Left>
-						<Text note>{item.value}</Text>
+						<Text>{item.value}</Text>
 					</Left>
 					<Right>
 						<Icon active name="ios-arrow-forward"/>
@@ -214,10 +201,10 @@ class EnergyQuestionnaire extends PureComponent {
 		}
 		return(
 			<ListItem style={styles.row} key={indx}>
-				<View style={{width:Dimensions.get('window').width/4*1}}>
-					<Text style={{textAlign:'right'}}>{item.name+':'}</Text>
-				</View>
-				<View style={{width:Dimensions.get('window').width/4*3}} >
+				<Right style={{width:Dimensions.get('window').width/3*1}}>
+					<Text>{item.name+':'}</Text>
+				</Right>
+				<View style={{width:Dimensions.get('window').width/3*2}} >
 					{ppp}
 
 				</View>
@@ -226,16 +213,10 @@ class EnergyQuestionnaire extends PureComponent {
 	}
 	renderRadioItem(item,index) {
 		return (
-			<RadioButton Checked={true} value={item} key={index} style={{width: 86}}>
-				<Text>{item}</Text>
-			</RadioButton>
+			<Item label={item} key={index} />
 		)
 	}
-	renderSelectItem(item,index) {
-		return (
-			<Option key={index} value={item}>{item}</Option>
-		)
-	}
+
 }
 
 
