@@ -25,8 +25,6 @@ export function getQuestionTreetment(diseaseId,renqun){
       renqun:renqun,
       local:'北京'
     }).then((res)=>{
-      ToastAndroid.show(JSON.stringify(diseaseId),ToastAndroid.SHORT);
-
       dispatch({
         type: types.MY_QUESTION,
         source:{

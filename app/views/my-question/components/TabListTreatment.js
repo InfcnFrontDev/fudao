@@ -28,7 +28,7 @@ class TabListTreatment extends PureComponent {
                     <Text style={this.state.flag?styles.titleText:styles.titleChoose}>专业疗法</Text>
                 </Button>
             </View>
-            {this.state.flag?<TreatmentDaily />:<TreatmentProfessionList />}
+            {this.state.flag?<TreatmentDaily title={this.props.question.showVal} />:<TreatmentProfessionList  title={this.props.question.showVal} />}
           </View>
         )
     }

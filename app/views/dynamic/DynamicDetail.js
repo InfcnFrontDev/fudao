@@ -83,9 +83,9 @@ class DynamicDetail extends PureComponent {
       var del = ( null );
       // if(info.userId==this.props.user.appid){
       //   del=(
-      //     <TouchableHighlight underlayColor='#fafafa' onPress={this._delete.bind(this,info.id)}>
+      //     <Button style={{margin:0,padding:0,marginTop:-12,}} transparent onPress={this._delete.bind(this,info.id)}>
       //         <Text style={styles.delete}>删除</Text>
-      //     </TouchableHighlight>
+      //     </Button>
       //   )
       // }
       let comments =Array.prototype.slice.call(info.dynamicComments, 0);
@@ -120,7 +120,7 @@ class DynamicDetail extends PureComponent {
           {
             text:'删除',
             onPress:()=> {
-              Actions.pop();
+              Actions.pop({refresh: { newnew: id}});
             }
           }
         ])

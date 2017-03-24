@@ -35,7 +35,7 @@ class TreatmentDaily extends PureComponent {
 
     renderRowView(row){
       return (
-        <TreatmentDailyRow row={row}/>
+        <TreatmentDailyRow row={row} title={this.props.title}/>
       )
     }
 

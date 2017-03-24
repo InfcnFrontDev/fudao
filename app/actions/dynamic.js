@@ -218,7 +218,6 @@ export function updateRealm(time,flag,id,realm){
 			rows:5,
 		}).then((res) =>{
 			if(res.datas.length>0){
-				// ToastAndroid.show('UPADATE'+JSON.stringify(res.datas),ToastAndroid.SHORT)
 				insert(res.datas,realm);
 				if(flag){
 					var update=2;
@@ -347,7 +346,6 @@ export function fetchData(page,options,callback,params){
 		      if(realm_res.length>params.dynamic.length+5){
 		        var render_realm_res = realm_res.slice(realm_res.length-params.dynamic.length-6,realm_res.length-params.dynamic.length-1).reverse();
 		      }else{
-						ToastAndroid.show('lllllll',ToastAndroid.SHORT)
 		        var render_realm_res = realm_res.slice(0,realm_res.length-params.dynamic.length).reverse();
 		      }
 		      var dynamicList = params.dynamic.concat(render_realm_res);
@@ -456,7 +454,7 @@ function uploadImage(uri,dispatch){
 			.then(result => {
 				if (result.ok) {
 					console.log(result.obj);
-					toast.show("上传成功"+result.obj);
+					toast.show("上传成功");
 					dispatch({
 						type: types.DYNAMIC_LIST_LOAD,
 						source:{
