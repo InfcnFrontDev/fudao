@@ -6,7 +6,7 @@ import DynamicImage from './DynamicImage';
 import {theme} from "../utils/";
 import {Actions} from "react-native-router-flux";
 import {skipToDetail} from '../actions/dynamic.js'
-import {urls} from "../utils/index";
+import {urls,toast} from "../utils/index";
 
 /**
  * 需添加参数info

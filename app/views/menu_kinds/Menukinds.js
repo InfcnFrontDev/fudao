@@ -79,11 +79,10 @@ class Menukinds extends PureComponent {
                         visible={this.state.isShow}
                         onRequestClose={this.hide.bind(this,false)}
                     >
-
                             <View style={styles.mb1}>
                                 <View style={styles.box1}>
                                     <View style={styles.imgBox}>
-                                      <Image source={{uri: urls.getImage(item.img)}} style={styles.img1}></Image>
+                                      <Image source={{uri: urls.getImage(item.img)}} style={{width:200,height:200}}></Image>
                                     </View>
                                     <View>
                                         <View style={styles.cpBar}>
@@ -98,17 +97,21 @@ class Menukinds extends PureComponent {
                                         <View style={styles.cpBar}>
                                             <Text>辅料</Text>
                                         </View>
-                                        <View style={styles.cp}>
-                                            <Text>{item.mainIngredient}</Text>
-                                        </View>
+                                        <ScrollView style={{height:30}}>
+                                            <View style={styles.cp}>
+                                                <Text>{item.mainIngredient}</Text>
+                                            </View>
+                                        </ScrollView>
                                     </View>
                                     <View>
                                         <View  style={styles.cpBar}>
                                             <Text>操作方法</Text>
                                         </View>
-                                        <ScrollView style={{height:200}}>
-                                            <View style={styles.cp}>
-                                                <Text>{item.steps}</Text>
+                                        <ScrollView style={{height:150,marginBottom:20}}>
+                                            <View style={styles.cpBox}>
+                                                <View style={styles.cp}>
+                                                    <Text>{item.steps}</Text>
+                                                </View>
                                             </View>
                                         </ScrollView>
                                     </View>
@@ -241,7 +244,7 @@ class Menukinds extends PureComponent {
         })
     }
     show(item,index){
-    
+
         this.setState({
             isShow:true,
             item:item,
@@ -357,7 +360,8 @@ const styles = {
     },
     box1:{
         width:width*0.9,
-
+        borderWidth:1,
+        borderColor:'#fff',
         backgroundColor:'#fff',
         borderRadius:5
     },
@@ -368,22 +372,25 @@ const styles = {
     cpBar:{
         height:30,
         borderTopWidth:1,
-        borderColor:'#666',
+        borderColor:'#E2E2E2',
         backgroundColor:'#F0F0F0',
         justifyContent:'center',
         paddingLeft:10,
         paddingRight:10,
     },
     cp:{
-
         borderTopWidth:1,
-        borderColor:'#666',
+        borderColor:'#E2E2E2',
         backgroundColor:'#fff',
         justifyContent:'center',
         paddingLeft:10,
         paddingRight:10,
+        paddingTop:4,
+        paddingBottom:4,
     },
-
+    cpBox:{
+        paddingLeft:10,
+    }
 };
 
 const mapStateToProps = state => ({});
