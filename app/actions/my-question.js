@@ -12,7 +12,6 @@ export function clearMyQuestion() {
           type: types.MY_QUESTION_CLEAR,
         })
     }
-  }
 }
 
 export function getQuestionTreetment(diseaseId,renqun){

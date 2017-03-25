@@ -12,7 +12,9 @@ import {checkPhone} from "./components/public";
 import {request, urls, tools, toast} from "../../utils/index";
 import {hex_md5} from "./components/md5";
 import {login} from "../../actions/user";
-
+import {clearMyQuestion} from "../../actions/my-question";
+import {clearMyEmotion} from "../../actions/emotion";
+import {clearFriend} from "../../actions/emotion";
 /**
  * 登录
  */
@@ -101,6 +103,10 @@ class Login extends PureComponent {
 						});
 						// 保存用户状态
 						this.props.dispatch(login(user));
+						//初始化用户信息
+						this.props.dispatch(clearMyQuestion());
+						this.props.dispatch(clearMyEmotion());
+						this.props.dispatch(clearFriend());
 						// 跳到首页
 						Actions.index({
 							type: ActionConst.POP_AND_REPLACE,
@@ -152,5 +158,7 @@ const styles = {
 	}
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+
+});
 export default connect(mapStateToProps)(Login);

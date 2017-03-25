@@ -11,7 +11,8 @@ import {Header,Container,Content} from "../../components/index";
 import {showLoading, hideLoading} from "../../actions/loading";
 import  CommitButton from "./components/CommitButton"
 import  UserInput from "./components/UserInput"
-import  {hex_md5} from "./components/md5"
+import  {hex_md5} from "./components/md5";
+import {checkPwd} from "./components/public";
 /**
  * 设置密码
  */
@@ -30,13 +31,13 @@ class RebuildPassword extends PureComponent {
                 <Header {...this.props}></Header>
                 <Content>
                     <View style={styles.bag}>
-                        <UserInput text="新密码" placeholder={"至少6位，由数字/字母/_组成"}  value={this.state.password} secureTextEntry={true}
+                        <UserInput text="新密码" placeholder={"6-12位由字母或数字或下划线组成"}  value={this.state.password} secureTextEntry={true}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password:value
                                        })
                                    }}/>
-                        <UserInput text="重复密码" value={this.state.password1} secureTextEntry={true}
+                        <UserInput text="重复密码" placeholder={"6-12位由字母或数字或下划线组成"} value={this.state.password1} secureTextEntry={true}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password1:value
@@ -56,9 +57,10 @@ class RebuildPassword extends PureComponent {
         }else if(password1!=password){
             toast.show("两次输入密码不一致");
             this.setState({
-                password:'',
                 password1:''
             })
+        }else if(!checkPwd(password)){
+            toast.show("请填入6-12由字母或数字或下划线组成的密码！");
         }else{
             const {dispatch} = this.props;
             dispatch(showLoading());

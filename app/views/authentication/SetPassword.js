@@ -29,13 +29,13 @@ class SetPassword extends PureComponent {
                 <Header {...this.props}></Header>
                 <Content>
                     <View style={styles.bag}>
-                        <UserInput text="设置密码" placeholder={"6-18位由字母、数字、下划线组成"} secureTextEntry={true}  value={this.state.password}
+                        <UserInput text="设置密码" placeholder={"6-12位由字母或数字或下划线组成"} secureTextEntry={true}  value={this.state.password}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password:value
                                        })
                                    }}/>
-                        <UserInput text="重复密码" placeholder={"6-18位由字母、数字、下划线组成"} secureTextEntry={true} value={this.state.password1}
+                        <UserInput text="重复密码" placeholder={"6-12位由字母或数字或下划线组成"} secureTextEntry={true} value={this.state.password1}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password1:value
@@ -59,7 +59,7 @@ class SetPassword extends PureComponent {
                 password1:''
             })
         }else if(!checkPwd(password)){
-            toast.show("请填入6-18由字母、数字、下划线组成的密码！");
+            toast.show("请填入6-12由字母或数字或下划线组成的密码！");
         }else{
             const {dispatch} = this.props;
             /*dispatch(showLoading());*/
@@ -72,11 +72,12 @@ class SetPassword extends PureComponent {
                 /*dispatch(hideLoading());*/
                     if(data.success) {
                         setTimeout(function() {
-                            Actions.passwordSuccess({
+                           /* Actions.passwordSuccess({
                                 type: ActionConst.POP_AND_REPLACE,
-                                phone:phone,password:password
-                            })
-                           /* Actions['passwordSuccess']({phone:phone,password:password})*/
+                                phone:phone,
+                                password:password
+                            })*/
+                           Actions['passwordSuccess']({phone:phone,password:password})
                         }, 1000);
                     }else{
                         toast.show("注册失败");

@@ -34,6 +34,8 @@ export default function (state = initialState, {type, payload}) {
 				isFetching: false,
 				...payload
 			});
+		case types.FRIEND_CLEAR:
+			return Object.assign({}, state, initialState);
 		default:
 			return state;
 	}
