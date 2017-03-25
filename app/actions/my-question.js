@@ -5,7 +5,15 @@ import {request,urls,toast} from "../utils/";
 //跳转菜单页
 
 
-
+//清空我的问题和期望
+export function clearMyQuestion() {
+  return (dispatch) => {
+        dispatch({
+          type: types.MY_QUESTION_CLEAR,
+        })
+    }
+  }
+}
 
 export function getQuestionTreetment(diseaseId,renqun){
   return (dispatch) => {
@@ -125,6 +133,9 @@ export function initialMyQuestion(userId,my_question) {
     }
   }
 }
+
+
+
 
 export function addMyQuestion(obj,my_question,id,allQuestions,callback,userId,from) {
   return (dispatch) => {
