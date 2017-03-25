@@ -8,10 +8,10 @@ class MyRecordeListRow extends Component {
 		return (
 			<View style={this.props.type=='day'?styles.myRecordeListRow:[styles.myRecordeListRow,styles.Month]}>
 				<View style={styles.twoLine}>
-					<Text style={styles.color000}>休息</Text>
-					<Text style={styles.color000}>9 : 20 am</Text>
+					<Text style={styles.color000}>{this.props.row.name}</Text>
+					<Text style={styles.color000}>{this.props.row.time}</Text>
 				</View>
-				<View style={this.props.type=='day'?{ maxWidth:100 }:{ maxWidth:200 }}>
+				<View style={this.props.type=='day'?{ width:100 }:{ width:200 }}>
 					{this.renderList()}
 				</View>
 			</View>
@@ -20,17 +20,16 @@ class MyRecordeListRow extends Component {
 
 	renderList(){
 		if(this.props.type!='day'){
-			var items=[1,2,3,4,5]
 			return (
-				<List dataArray={items} renderRow={(data) =>
+				<List dataArray={this.props.row.content} renderRow={(data) =>
 					<ListItem style={styles.listItem}>
-						<Text style={styles.colorA4}>大米 大米 大米 大米{data}</Text>
+						<Text style={{color:'#A4A4A4'}}>{data.time}  {data.content}</Text>
 					</ListItem>
 				} />
 			)
 		}
 		return (
-			<Text style={styles.colorA4}>大米 大米 大米 大米</Text>
+			<Text style={styles.colorA4}>{this.props.row.content}</Text>
 		)
 	}
 }

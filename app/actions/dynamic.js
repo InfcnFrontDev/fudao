@@ -238,7 +238,6 @@ export function updateRealm(time,flag,id,realm){
 // 获取列表数据
 export function fetchData(page,options,callback,params){
 	return (dispatch) => {
-
 		if(options.firstLoad) {
 			request.getJson(urls.apis.DYNAMIC_LIST,{
 							userId:params.user.appid,
@@ -267,10 +266,12 @@ export function fetchData(page,options,callback,params){
 						    let res = params.realm.objects('Dynamic').sorted('publishTime');
 						    if(res.length>0){
 						      if(res.length>6){
-						        var firstres = res.slice(res.length-5,res.length);
+						        var firstresObj = res.slice(res.length-5,res.length);
 						      }else{
-						        var firstres = res;
+						        var firstresObj = res;
 						      }
+									toast.show(JSON.stringify(firstresObj));
+									firstres =Array.prototype.slice.call(firstresObj, 0);
 						      dynamicList=firstres.reverse();
 									if(res.datas.length<5){
 										callback(dynamicList,{
@@ -315,7 +316,8 @@ export function fetchData(page,options,callback,params){
 									dispatch({
 										type: types.DYNAMIC_LIST_LOAD,
 										source:{
-											dynamicList:dynamicList
+											dynamicList:dynamicList,
+											nowShow:0,
 										}
 									});
 								}else{

@@ -32,6 +32,8 @@ export default function (state = initialState, {type, source}) {
 				...source,
 				refresh:!state.refresh,
 			});
+		case types.MY_QUESTION_CLEAR:
+			return Object.assign({}, state, initialState);
 
 		default:
 			return state;
