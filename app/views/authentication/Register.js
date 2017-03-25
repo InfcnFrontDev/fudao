@@ -105,6 +105,9 @@ class Register extends PureComponent {  // eslint-disable-line
                     dispatch(hideLoading());
                     if(data.success) {
                         this._getGode.clearTimer();
+                       /* Actions.setPassword({
+
+                        })*/
                         Actions['setPassword']({
                             phone:phone,
                         });
