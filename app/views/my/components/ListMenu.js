@@ -4,9 +4,9 @@ import {View, Icon, Left, Right, Body, Text, ListItem} from "native-base";
 import {theme} from "../../../utils/index";
 
 /**
- * my datas menu
+ * my list menu
  */
-class MyList extends PureComponent {
+class ListMenu extends PureComponent {
 
 	render() {
 		return (
@@ -28,12 +28,6 @@ class MyList extends PureComponent {
 					text: '我的记录',
 					bordered: true,
 					route: 'myRecord'
-				})}
-				{this.renderItem({
-					icon: 'ios-chatboxes-outline',
-					text: '消息通知',
-					bordered: true,
-					route: 'about'
 				})}
 				{this.renderItem({
 					icon: 'ios-information-circle-outline',
@@ -61,6 +55,10 @@ class MyList extends PureComponent {
 			</ListItem>
 		)
 	}
+
+	shouldComponentUpdate() {
+		return false
+	}
 }
 
 const styles = {
@@ -70,4 +68,4 @@ const styles = {
 	}
 };
 
-export default (MyList);
+export default (ListMenu);

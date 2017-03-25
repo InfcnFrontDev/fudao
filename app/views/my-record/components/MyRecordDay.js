@@ -44,7 +44,7 @@ class MyRecordDay extends PureComponent {
 				tabBarPosition='top'
 				scrollWithoutAnimation={false}
 				>
-					{this.labels.map((label,i) => <MyRecordeList key={i} tabLabel={label} label={label} type='day'/>)}
+					{this.labels.map((label,i) => <MyRecordeList key={i} tabLabel={label}  label={label} type='day'/>)}
 				</ScrollableTabView>
 			</View>
 		)
