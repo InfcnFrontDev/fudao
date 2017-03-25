@@ -10,6 +10,8 @@ export default function (state = initialState, {type, payload}) {
 				updateTime: new Date().getTime(),
 				...payload
 			});
+		case types.MY_EMOTION_CLEAR:
+			return Object.assign({}, state, initialState);
 		default:
 			return state;
 	}

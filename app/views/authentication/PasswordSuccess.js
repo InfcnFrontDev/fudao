@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
+import {Actions,ActionConst} from "react-native-router-flux";
 import {Container,Content,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {theme,request,urls,tools,toast} from "../../utils/";
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
@@ -63,12 +63,20 @@ class SetPassword extends PureComponent {
                  dispatch(login(data.obj.accountInfo));
                 if (userInformation != undefined) { //基本信息已经添加完成
                     // 跳到首页
-                    Actions.index();
+                    Actions.index({
+                        type: ActionConst.POP_AND_REPLACE,
+                    });
                 } else { //没有基本信息表示第一次登录需要添写信息
-                    Actions['startInformation']({appid:appid})
+                    Actions['startInformation']({
+                        appid:appid
+                    })
+                   /* Actions.startInformation({
+                        type: ActionConst.POP_AND_REPLACE,
+                        appid:appid
+                    })*/
                 }
             }else{
-                toast.show("密码不正确");
+
             }
         },(error)=>{
 

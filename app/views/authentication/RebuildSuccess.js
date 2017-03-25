@@ -6,7 +6,9 @@ import {theme,request,urls,tools,toast} from "../../utils/";
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import  CommitButton from "./components/CommitButton"
 import  {hex_md5} from "./components/md5"
-
+import {clearMyQuestion} from "../../actions/my-question";
+import {clearMyEmotion} from "../../actions/emotion";
+import {clearFriend} from "../../actions/friend";
 /**
  * 设置密码
  */
@@ -65,6 +67,10 @@ class RebuildSuccess extends PureComponent {
                         });
                         // 保存用户状态
                         this.props.dispatch(login(user));
+                        //初始化用户信息
+                        this.props.dispatch(clearMyQuestion());
+                        this.props.dispatch(clearMyEmotion());
+                        this.props.dispatch(clearFriend());
                         // 跳到首页
                         Actions.index();
                     } else { //没有基本信息表示第一次登录需要添写信息

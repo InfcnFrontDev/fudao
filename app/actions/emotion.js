@@ -12,3 +12,11 @@ export function updateMyEmotion(myEmotion) {
 		});
 	}
 }
+//清空我的情绪
+export function clearMyEmotion(myEmotion) {
+	return (dispatch) => {
+		dispatch({
+			type: types.MY_EMOTION_CLEAR,
+		});
+	}
+}

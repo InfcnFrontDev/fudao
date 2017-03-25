@@ -5,13 +5,16 @@
 
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
+import {Actions,ActionConst} from "react-native-router-flux";
 import {Thumbnail, Text, Icon} from "native-base";
 import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePickerAndroid, Alert} from "react-native";
 import {Header, Container, Content} from "../../components/index";
 import {theme, urls, request, toast} from "../../utils/";
 import CommitButton from "./components/CommitButton";
 import {login} from "../../actions/user";
+import {clearMyQuestion} from "../../actions/my-question";
+import {clearMyEmotion} from "../../actions/emotion";
+import {clearFriend} from "../../actions/friend";
 
 /**
  * 首次登录设置个人信息页
@@ -276,6 +279,10 @@ class StartInformation extends PureComponent {
 
                         // 保存用户状态
                         this.props.dispatch(login(user));
+                    //初始化用户信息
+                    this.props.dispatch(clearMyQuestion());
+                    this.props.dispatch(clearMyEmotion());
+                    this.props.dispatch(clearFriend());
                         // 跳到首页
                         Actions.index();
                     }, (error) => {

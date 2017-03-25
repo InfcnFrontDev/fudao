@@ -61,3 +61,11 @@ export function fetchNewFriendList(userId, callback) {
 		});
 	}
 }
+
+export function clearFriend() {
+	return (dispatch) => {
+		dispatch({
+			type: types.FRIEND_CLEAR,
+		});
+}
+}
