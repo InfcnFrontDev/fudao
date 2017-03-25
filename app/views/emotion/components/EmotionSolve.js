@@ -90,7 +90,7 @@ const styles = {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#c6c6c6',
+		backgroundColor: '#fff',
 	},
 	View: {
 		flex: 1,

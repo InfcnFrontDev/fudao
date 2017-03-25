@@ -35,3 +35,11 @@ export function checkPhone(phone){
         return true;
     }
 }
+//至少6位字母、数字、下划线密码
+export function checkPwd(pwd){
+    if(!(/^[a-zA-Z]\w{5,17}$/).test(pwd)){
+        return false;
+    }else{
+        return true;
+    }
+}

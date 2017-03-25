@@ -9,8 +9,8 @@ const webPath = 'http://103.254.113.11:8080/fudao-svc/app/'; // 外网
 // const webPath = 'http://192.168.10.69:8080/fudao-svc/app/';
 
 // 图片服务器地址
-const picPath = 'http://103.254.113.11:9191/';
-// const picPath = 'http://192.168.10.69:9191/';
+//  const picPath = 'http://103.254.113.11:9191/';
+const picPath = 'http://192.168.10.69:9191/';
 
 const urls = {
 	apiPath,
