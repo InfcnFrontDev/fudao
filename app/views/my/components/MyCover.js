@@ -24,9 +24,9 @@ var photoOptions = {
 const defaultPhoto = require('../../../assets/my-photos/photo.jpg');
 
 /**
- * my grid menu
+ * 我的封面
  */
-class MyPhoto extends PureComponent {
+class MyCover extends PureComponent {
 
 	render() {
 		let {loginUser} = this.props;
@@ -49,11 +49,10 @@ class MyPhoto extends PureComponent {
 		// {data, fileName, fileSize, height, isVertical, originalRotation, path, type, uri, width}
 		ImagePicker.showImagePicker(photoOptions, (response) => {
 			console.log(response);
-			if (response.didCancel) {
-				return;
+			if (response && response.fileName && response.uri) {
+				// 上传并更新头像
+				dispatch(updateUserPhoto(loginUser.appid, response.fileName, response.uri));
 			}
-			// 上传并更新头像
-			dispatch(updateUserPhoto(loginUser.appid, response.fileName, response.uri));
 		})
 	}
 }
@@ -76,4 +75,4 @@ const styles = {
 const mapStateToProps = state => ({
 	loginUser: state.user.loginUser
 });
-export default connect(mapStateToProps)(MyPhoto);
+export default connect(mapStateToProps)(MyCover);
