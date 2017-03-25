@@ -1,12 +1,14 @@
 import React, {Component} from "react";
-import {Left, Right, Body, Grid, Item, Text, Row} from "native-base";
+import {Grid, Item, Text, Row} from "native-base";
 
 class ArticleTextItem extends Component {
 
 	render() {
-		let {article, onPress} = this.props;
+		let {article, onPress, onLongPress} = this.props;
 		return (
-			<Item style={styles.item} onPress={()=> onPress && onPress(article)}>
+			<Item style={styles.item}
+				  onPress={()=> onPress && onPress(article)}
+				  onLongPress={()=> onLongPress && onLongPress(article)}>
 				<Grid>
 					<Row style={styles.row1}>
 						<Text style={styles.title}>{article.title}</Text>
@@ -45,6 +47,7 @@ const styles = {
 ArticleTextItem.propTypes = {
 	article: React.PropTypes.object, // 资讯
 	onPress: React.PropTypes.func,
+	onLongPress: React.PropTypes.func,
 }
 
 export default (ArticleTextItem);

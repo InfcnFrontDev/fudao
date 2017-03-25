@@ -55,12 +55,7 @@ class MyCollection extends PureComponent {
 	}
 
 	removeMyCollection(rowData) {
-		alert(JSON.stringify(rowData));
-		request.getJson(urls.apis.MY_COLLECTION_DELETE, {
-			id: rowData.id
-		}).then((result) => {
-			//alert(JSON.stringify(result));
-		})
+		alert(rowData.title)
 	}
 }
 const styles = StyleSheet.create({

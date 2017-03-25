@@ -69,13 +69,13 @@ class AppRouter extends PureComponent {
 
 
 					{/*首页*/}
-					<Scene key="index" component={Index} title="首页" hideNavBar />
+					<Scene key="index" component={Index} title="首页" hideNavBar/>
 
 					{/*启动注册*/}
 
-					<Scene key="login" component={Login} title="登录" hideNavBar  />
-					<Scene key="register" component={Register} title="注册" hideNavBar  />
-					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar />
+					<Scene key="login" component={Login} title="登录" hideNavBar/>
+					<Scene key="register" component={Register} title="注册" hideNavBar/>
+					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
 
 					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 					<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
@@ -88,14 +88,14 @@ class AppRouter extends PureComponent {
 					{/*主页*/}
 
 
-					<Scene key="myEmotion"  component={MyEmotion} title="我的情绪" hideNavBar/>
-					<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar />
-					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar  />
-					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar />
+					<Scene key="myEmotion" component={MyEmotion} title="我的情绪" hideNavBar/>
+					<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
+					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
+					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
 					<Scene key="treatmentDailyDetail" component={TreatmentDailyDetail} title="疗法详情" hideNavBar/>
 					<Scene key="myExpect" component={MyExpect} title="我的期望" hideNavBar/>
 					{/*菜单*/}
-					<Scene key="menuKinds" component={MenuKinds}  title="食材"  hideNavBar />
+					<Scene key="menuKinds" component={MenuKinds} title="食材" hideNavBar/>
 
 
 					{/*搜索*/}
@@ -119,6 +119,8 @@ class AppRouter extends PureComponent {
 					<Scene key="myInfo" component={MyInfo} title="个人信息" hideNavBar/>
 					<Scene key="myCheck" component={MyCheck} title="体检信息" hideNavBar/>
 					<Scene key="myRecord" component={MyRecord} title="我的记录" hideNavBar/>
+
+					{/*收藏*/}
 					<Scene key="myCollection" component={MyCollection} title="我的收藏" hideNavBar/>
 
 					{/*系统*/}
@@ -126,8 +128,8 @@ class AppRouter extends PureComponent {
 					<Scene key="about" component={About} title="关于福道" hideNavBar/>
 
 					{/*消息*/}
-					<Scene key="message" component={Message} title="消息" hideNavBar  />
-					<Scene key="msgDetail" component={MsgDetail} hideNavBar />
+					<Scene key="message" component={Message} title="消息" hideNavBar/>
+					<Scene key="msgDetail" component={MsgDetail} hideNavBar/>
 
 					{/*其他*/}
 					<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
