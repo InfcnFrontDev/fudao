@@ -19,28 +19,50 @@ class Home extends PureComponent {
 	}
 
 	render() {
+		 let {loginUser} = this.props;
 		return (
 			<Container>
-
+				
 
 				<Content>
 
+					
+					<WebView uri={urls.pages.HOEM+'?userid='+this.props.loginUser.appid+'&renqun='+this.props.loginUser['renqun']}/>
 
-					<WebView uri={urls.pages.HOEM}/>
-
-					<View style={{width:Dimensions.get('window').width,
-					height:80,
+					<View menu {...this.props} style={{width:Dimensions.get('window').width,
+					height:60,
 					position:'absolute',
 					top:0,
-					right:0
+					right:0,
+					backgroundColor:'rgba(225,225,225,0.2)',
+					flexDirection:'row'
 				}}>
-						<Header style={{backgroundColor:'rgba(225,225,225,0.3)',color:'#000'}} menu {...this.props} right={
-							<Right>
-								<Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
-								<Button transparent onPress={()=> Actions.message()}><Icon name="ios-chatboxes"/></Button>
-							</Right>
-						}/>
+						<View style={{flexDirection:'column',justifyContent:'center'}}>
+							<Button transparent onPress={()=>Actions.sideBar()}><Icon name="menu"style={{color:"#fff"}}/></Button>
+						</View>
+						<View style={{flexDirection:'column',justifyContent:'center'}}>
+							<Text style={styles.font}>北京.海淀</Text>
+							<Text style={styles.font}>春分 3~7℃</Text>
+						</View>
+						<Right style={{flexDirection:'row'}}>
+
+								<Button style={{height:26,
+									borderRadius:30,
+									backgroundColor:'rgba(125,130,144,0.3)',
+									marginBottom:10,
+									flexDirection:'column',
+									width:Dimensions.get('window').width/2-10,
+									flex:0}}
+										transparent
+										onPress={()=>Actions.search()}>
+									<Icon name="search" style={{color:"#fff",alignSelf:'flex-end',position:'absolute',right:10}}/>
+								</Button>
+
+
+							<Button transparent onPress={()=> this._setModalVisible()}><Icon name="ios-chatboxes"style={{color:"#fff"}}/></Button>
+						</Right>
 					</View>
+
 					<View style={{width:Dimensions.get('window').width,height:122,position:'absolute',bottom:0}}>
 						<MyEnter />
 					</View>
@@ -58,6 +80,14 @@ const styles = {
 	container: {
 		flex: 1,
 		backgroundColor: '#ECECF0',
+	},
+	font:{
+		width:70,
+		fontSize:12,
+		flexDirection:'column',
+		justifyContent:'center',
+		textAlign:'center',
+		color:'#fff'
 	},
 	// modal的样式
 	modalStyle: {
@@ -124,5 +154,6 @@ const styles = {
 const mapStateToProps = state => ({
 	...state.user,
 	...state.position,
+	loginUser: state.user.loginUser
 });
 export default connect(mapStateToProps)(Home);

@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Header, Content, WebView} from "../../components/index";
-import {urls} from "../../utils/index"
+import {Content, WebView} from "../../components/index";
+import {urls} from "../../utils/index";
 
 /**
  * 我的位置
@@ -12,13 +12,14 @@ class MyEnergy extends PureComponent {
 		let {lastPosition}=this.props;
 		return (
 			<Content>
-				<WebView uri={urls.pages.MY_LOCATION+'?position='+JSON.stringify(this.props.lastPosition)}/>
+				<WebView
+					uri={urls.pages.MY_LOCATION+'?x=' + lastPosition.coords.longitude + '&y=' + lastPosition.coords.latitude}/>
 			</Content>
 		)
 	}
 }
 
 const mapStateToProps = state => ({
-	lastPosition:state.position
+	...state.position
 });
 export default connect(mapStateToProps)(MyEnergy);
