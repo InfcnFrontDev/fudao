@@ -28,7 +28,7 @@ class TreatmentProfessionList extends PureComponent {
               <List dataArray={p.datas} renderRow={(data)=>{
                 return (
                   <ListItem  style={styles.list}>
-                    <Button transparent style={styles.button} onPress={()=>Actions['treatmentDetail']({data:data})}>
+                    <Button transparent style={styles.button} onPress={()=>Actions['treatmentDetail']({data:data,title:this.props.title})}>
                       <View style={styles.name}>
                         <Text>{data.name}</Text>
                       </View>

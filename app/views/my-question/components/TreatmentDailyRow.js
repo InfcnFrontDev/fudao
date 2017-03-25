@@ -55,7 +55,7 @@ class TreatmentDailyRow extends PureComponent {
           <List dataArray={this.props.row.datas.datas} renderRow={(data) =>{
             return (
               <ListItem style={styles.list} >
-                <Button style={styles.button} transparent onPress={()=>Actions['treatmentDetail']({data:data.diseaseDailyMethods[0],from:'日常'})}>
+                <Button style={styles.button} transparent onPress={()=>Actions['treatmentDetail']({data:data.diseaseDailyMethods[0],from:'日常',title:this.props.title})}>
                       <Text style={styles.gan}>-    {data.timePeriod}:</Text>
                       <Text  style={styles.listData}>{data.diseaseDailyMethods[0].name}</Text>
                 </Button>

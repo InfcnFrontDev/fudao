@@ -1,14 +1,14 @@
 /**
  * Created by Administrator on 2017/3/9.
  */
-'use strict';
+
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Thumbnail, Text} from "native-base";
 import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePickerAndroid} from "react-native";
 import {Header, Container, Content} from "../../components/index";
-
+import {theme, urls, request, toast} from "../../utils/";
 
 /**
  * 女生选择
@@ -77,7 +77,7 @@ class WomanChoose extends PureComponent {
             </Container>
         )
     }
-    choose(text ){
+    choose(text){
             Actions['startInformation']({jieduan:text,showM:false,sex:0})
     }
 }

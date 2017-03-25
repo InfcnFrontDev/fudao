@@ -30,6 +30,14 @@ class Dynamic extends PureComponent {
 
     componentWillReceiveProps(nextProps){
       if(this.props.newnew!=nextProps.newnew){
+        if(typeof nextProps.newnew=='string'){
+          // ToastAndroid.show(JSON.stringify(nextProps.newnew),ToastAndroid.SHORT)
+          var that = this;
+          // setTimeout(function(){
+          //   that.props.del(nextProps.newnew,{callback:that.refs.gifted._postRefresh,dynamic:that.props.dynamic.dynamicList,realm:that.props.realm,from:'list'})
+          // },500)
+          return ;
+        }
         this.props.fetchData(1,{refresh:true},this.refs.gifted._postRefresh,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user,time:this.props.dynamic.update});
       }
     }
