@@ -59,7 +59,7 @@ class Home extends PureComponent {
 								</Button>
 
 
-							<Button transparent onPress={()=> this._setModalVisible()}><Icon name="ios-chatboxes"style={{color:"#fff"}}/></Button>
+							<Button transparent onPress={()=> Actions.message()}><Icon name="ios-chatboxes"style={{color:"#fff"}}/></Button>
 						</Right>
 					</View>
 

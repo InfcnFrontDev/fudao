@@ -27,7 +27,7 @@ class ListMenu extends PureComponent {
 					icon: 'ios-film-outline',
 					text: '我的记录',
 					bordered: true,
-					route: 'myRecord'
+					route: 'record'
 				})}
 				{this.renderItem({
 					icon: 'ios-information-circle-outline',

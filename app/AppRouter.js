@@ -17,7 +17,7 @@ import Picture from "./views/picture/";
 import Check from "./views/check/Check";
 import Collection from "./views/collection/Collection";
 import Personal from "./views/personal/Personal";
-import MyRecord from "./views/my-record/MyRecord";
+import Record from "./views/record/Record";
 import Emotion from "./views/emotion/Emotion";
 import MyQuestion from "./views/my-question/MyQuestion";
 import MyQuestionDetail from "./views/my-question/MyQuestionDetail";
@@ -111,17 +111,13 @@ class AppRouter extends PureComponent {
 					<Scene key="newDynamic" component={NewDynamic} title="发表文字" hideNavBar newnew/>
 					<Scene key="dynamicDetail" component={DynamicDetail} title="发表文字" hideNavBar newnew/>
 
-					{/*我的*/}
-					<Scene key="myRecord" component={MyRecord} title="我的记录" hideNavBar/>
-
-					{/*体检*/}
-					<Scene key="check" component={Check} title="体检信息" hideNavBar/>
-
 					{/*收藏*/}
 					<Scene key="collection" component={Collection} title="收藏" hideNavBar/>
 
-					{/*基本信息*/}
+					{/*我的*/}
 					<Scene key="personal" component={Personal} title="个人信息" hideNavBar/>
+					<Scene key="check" component={Check} title="体检信息" hideNavBar/>
+					<Scene key="record" component={Record} title="我的记录" hideNavBar/>
 
 					{/*系统*/}
 					<Scene key="settings" component={Settings} title="系统设置" hideNavBar/>
