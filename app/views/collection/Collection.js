@@ -18,6 +18,7 @@ class Collection extends PureComponent {
 				<Header {...this.props}/>
 				<View style={styles.listView}>
 					<GiftedListView
+						ref={(e) => this._giftedListview = e}
 						onFetch={this._onFetch.bind(this)}
 						rowView={this._renderRowView.bind(this)}
 					/>
@@ -55,12 +56,17 @@ class Collection extends PureComponent {
 	}
 
 	removeMyCollection(rowData) {
-		alert(JSON.stringify(rowData));
+		// alert(JSON.stringify(rowData));
 		request.getJson(urls.apis.MY_COLLECTION_DELETE, {
 			id: rowData.id
 		}).then((result) => {
 			//alert(JSON.stringify(result));
-		})
+		});
+
+		let rows = this._giftedListview._getRows();
+		rows.splice(1, 1);
+		this._giftedListview._updateRows(rows, {});
+
 	}
 }
 const styles = StyleSheet.create({
