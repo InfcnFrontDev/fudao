@@ -8,9 +8,9 @@ import {request, urls} from "../../utils/";
 
 
 /**
- * 我的收藏
+ * 收藏
  */
-class MyCollection extends PureComponent {
+class Collection extends PureComponent {
 
 	render() {
 		return (
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
 	...state.user
 });
-export default connect(mapStateToProps)(MyCollection);
+export default connect(mapStateToProps)(Collection);

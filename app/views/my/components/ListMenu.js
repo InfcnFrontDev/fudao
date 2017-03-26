@@ -15,13 +15,13 @@ class ListMenu extends PureComponent {
 					icon: 'ios-list-box-outline',
 					text: '基本信息',
 					bordered: true,
-					route: 'myInfo'
+					route: 'personal'
 				})}
 				{this.renderItem({
 					icon: 'ios-stopwatch-outline',
 					text: '体检信息',
 					bordered: true,
-					route: 'myCheck'
+					route: 'check'
 				})}
 				{this.renderItem({
 					icon: 'ios-film-outline',

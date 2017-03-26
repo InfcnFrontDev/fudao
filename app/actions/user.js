@@ -54,56 +54,46 @@ export function updateUserInfo(appid, field, value) {
 			field,
 			value
 		});
-		toast.show(value)
 		request.postJson(urls.apis.USER_UPDATE, {
 			jsonStr
+		}).then(result => {
+			console.log(result);
+			if (result.success) {
+
+				dispatch({
+					type: types.USER_UPDATE_INFO,
+					payload: {
+						field,
+						value
+					}
+				});
+			}
 		})
-			.then(result => {
-				console.log(result);
-				if (result.success) {
-
-					dispatch({
-						type: types.USER_UPDATE_INFO,
-						payload: {
-							field,
-							value
-						}
-					});
-
-					toast.show("修改成功")
-				} else {
-					toast.show("修改失败")
-				}
-			})
 	}
 }
 
 // 修改体检信息
 
-export function updateUserCheck(appid,field ,tableName, value) {
+export function updateUserCheck(appid, field, tableName, value) {
+	return (dispatch) => {
+		let jsonStr1 = {
+			tableName: tableName,
+			jsonStr: {
+				appid: appid
+			}
+		};
+		jsonStr1.jsonStr[field] = value;
+		let jsonS = JSON.stringify(jsonStr1)
 
-		return (dispatch) => {
-			let jsonStr1 = {
-				tableName: tableName,
-				jsonStr:{
-					appid:appid
-				}
-			};
-			jsonStr1.jsonStr[field]=value;
-			let jsonS=JSON.stringify(jsonStr1)
-
-			dispatch({
-				type: types.USER_UPDATE_CHECK,
-				payload: {
-					tableName,
-					field,
-					value
-				}
-			});
-
-			toast.show("修改成功");
-			//发送数据
-		}
+		dispatch({
+			type: types.USER_UPDATE_CHECK,
+			payload: {
+				tableName,
+				field,
+				value
+			}
+		});
+	}
 
 
 }

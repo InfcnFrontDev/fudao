@@ -16,13 +16,13 @@ class GridMenu extends PureComponent {
 					icon: 'heart',
 					iconColor: '#FE9429',
 					text: '收藏',
-					route: 'myCollection',
+					route: 'collection',
 				})}
 				{this.renderItem({
 					icon: 'people',
 					iconColor: '#2CCA73',
 					text: '好友',
-					route: 'myFriend',
+					route: 'friend',
 				})}
 				{this.renderItem({
 					icon: 'ios-settings',

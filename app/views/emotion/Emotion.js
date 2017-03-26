@@ -10,9 +10,9 @@ import EmotionSolve from "./components/EmotionSolve";
 import {request, urls, toast} from "../../utils/";
 
 /**
- * 我的情绪
+ * 情绪
  */
-class MyEmotion extends PureComponent {
+class Emotion extends PureComponent {
 
 	render() {
 		let {myEmotion} = this.props;
@@ -100,4 +100,4 @@ const mapStateToProps = state => ({
 	loginUser: state.user.loginUser,
 	...state.emotion
 });
-export default connect(mapStateToProps)(MyEmotion);
+export default connect(mapStateToProps)(Emotion);
