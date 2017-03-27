@@ -191,7 +191,4 @@ const styles = {
   },
 }
 
-const mapStateToProps = state => ({
-
-});
-export default connect(mapStateToProps)(TreatmentDailyRow);
+export default (TreatmentDailyRow);

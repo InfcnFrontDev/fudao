@@ -6,7 +6,7 @@ import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter,StyleSheet,TouchableHighlight} from "react-native";
 import {theme} from "../utils/";
 import GiftedListView from './GiftedListView'
-import {myQuestionToRows,addMyQuestion} from '../actions/my-question.js'
+import {myQuestionToRows,addMyQuestion,skipToDetail} from '../actions/my-question.js'
 import {request,urls} from "../utils/";
 
 
@@ -75,7 +75,7 @@ class QuestionAndExpectList extends PureComponent {
         )
       }
       btn = (
-        <Button transparent style={(num%2==0)?(i==0?styles.oneQuestion00:styles.oneQuestion01):(i==0?styles.oneQuestion10:styles.oneQuestion11)} onPress={()=>this.props.from=='myquestion'?Actions.myQuestionDetail({question:p}):false}>
+        <Button transparent style={(num%2==0)?(i==0?styles.oneQuestion00:styles.oneQuestion01):(i==0?styles.oneQuestion10:styles.oneQuestion11)} onPress={()=>this.props.from=='myquestion'?this.skipToDetail(p):false}>
           <View  style={styles.oneQuestionView}>
             <Image source={{uri:urls.getImage(p.img)}} style={styles.img}/>
             <Text style={styles.oneTitle}>{p.showVal}</Text>
@@ -90,6 +90,11 @@ class QuestionAndExpectList extends PureComponent {
       </View>
     )
 	}
+
+  skipToDetail(question){
+    let {dispatch} = this.props;
+    dispatch(skipToDetail(question,'list'))
+  }
 
 	renderPaginationAllLoadedView() {
 		return (null)
