@@ -175,9 +175,6 @@ var GiftedListView = React.createClass({
   },
 
   getInitialState() {
-    // console.log("getInitialState");
-    // this._setPage(1);
-    // console.log("lalalalalalla");
     this._setRows([]);
 
     var ds = null;
@@ -205,6 +202,7 @@ var GiftedListView = React.createClass({
 
   componentDidMount() {
     // console.log("componentDidMount");
+    ToastAndroid.show("componentDidMount",ToastAndroid.SHORT)
     this.props.onFetch(1, this._postRefresh, {firstLoad: true});
   },
 
@@ -240,8 +238,6 @@ var GiftedListView = React.createClass({
 
 
   _onPaginate() {
-    // console.log("_onPaginate");
-
     if(this.state.paginationStatus==='allLoaded'){
       return null
     }else {

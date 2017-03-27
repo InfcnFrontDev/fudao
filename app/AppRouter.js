@@ -73,9 +73,9 @@ class AppRouter extends PureComponent {
 
 					{/*启动注册*/}
 
-					<Scene key="login" component={Login} title="登录" hideNavBar  />
-					<Scene key="register" component={Register} title="注册" hideNavBar  />
-					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar />
+					<Scene key="login" component={Login} title="登录" hideNavBar/>
+					<Scene key="register" component={Register} title="注册" hideNavBar />
+					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
 
 					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 					<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
@@ -126,8 +126,8 @@ class AppRouter extends PureComponent {
 					<Scene key="about" component={About} title="关于福道" hideNavBar/>
 
 					{/*消息*/}
-					<Scene key="message" component={Message} title="消息" hideNavBar  />
-					<Scene key="msgDetail" component={MsgDetail} hideNavBar />
+					<Scene key="message" component={Message} title="消息" hideNavBar/>
+					<Scene key="msgDetail" component={MsgDetail} hideNavBar/>
 
 					{/*其他*/}
 					<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
