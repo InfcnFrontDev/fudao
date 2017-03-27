@@ -95,7 +95,7 @@ const urls = {
 
 		//搜索------------------------------------------------------------------------
 		//全部搜索
-		SEARCH_ALL: apiPath + 'app/searchAction!searchAll.action?type=woman&page=1&pageSize=10&keyword=',
+		SEARCH_ALL: apiPath + 'app/searchAction!searchAll.action?type=woman&page=1&pageSize=5',
 
 		// 注册登录(老)
 		//验证手机号
