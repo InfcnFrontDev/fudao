@@ -8,14 +8,18 @@ import {urls} from "../../utils/index"
  */
 class HealthRing extends PureComponent {
 
+
 	render() {
+		let {loginUser} = this.props;
 		return (
 			<Content>
-				<WebView uri={urls.pages.HEALTH_CIRCLE}/>
+				<WebView uri={urls.pages.HEALTH_CIRCLE+'?userid='+this.props.loginUser.appid+'&renqun='+this.props.loginUser['renqun']}/>
 			</Content>
 		)
 	}
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	loginUser: state.user.loginUser
+});
 export default connect(mapStateToProps)(HealthRing);

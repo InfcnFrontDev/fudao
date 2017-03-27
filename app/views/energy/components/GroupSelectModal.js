@@ -129,7 +129,7 @@ const styles = {
 		bottom: 30,
 		left: 20,
 		right: 20,
-		// borderRadius: 3,
+		borderRadius: 3,
 		opacity: 1,
 		flex: 1,
 		flexDirection: 'column',

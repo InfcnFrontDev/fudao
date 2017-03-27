@@ -1,33 +1,51 @@
 import React from "react";
-import {StyleSheet, View, Text, Image, ActivityIndicator} from "react-native";
+import {Modal, StyleSheet, View, Text, Image, ActivityIndicator} from "react-native";
 
 export default class Loading extends React.Component {
+
+	state = {
+		isShow: false,
+		text: '正在加载...'
+	};
+
 	render() {
-		let {text, isShow} = this.props;
-		if (isShow)
-			return (
+		let {isShow, text} = this.state;
+		return (
+			<Modal
+				transparent
+				visible={isShow}
+				onRequestClose={() => this.hide()}
+			>
 				<View style={styles.container}>
 					<View style={styles.loading}>
 						<ActivityIndicator color={'#FFFFFF'}/>
 						<Text style={styles.loadingTitle}>{text}</Text>
 					</View>
 				</View>
-			)
-		return null
+			</Modal>
+		)
+	}
+
+	show() {
+		this.setState({
+			isShow: true,
+		})
+	}
+
+	hide() {
+		this.setState({
+			isShow: false,
+		})
 	}
 }
 
 const styles = StyleSheet.create({
 	container: {
-		position: 'absolute',
-		backgroundColor: '#EDEDED',
-		top: 0,
-		left: 0,
-		bottom: 0,
-		right: 0,
+		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		opacity: 0.8,
+		// backgroundColor: '#EDEDED',
+		// opacity: 1,
 	},
 	loading: {
 		backgroundColor: '#393939',

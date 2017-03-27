@@ -49,7 +49,7 @@ export const FETCH_MY_FRIEND_LIST = 'FETCH_MY_FRIEND_LIST';
 export const RECEIVE_MY_FRIEND_LIST = 'RECEIVE_MY_FRIEND_LIST';
 export const FETCH_NEW_FRIEND_LIST = 'FETCH_NEW_FRIEND_LIST';
 export const RECEIVE_NEW_FRIEND_LIST = 'RECEIVE_NEW_FRIEND_LIST';
-
+export const FRIEND_CLEAR = 'FRIEND_CLEAR';
 
 // dynamic actions ////////////////////////////////////////
 export const NEW_DYNAMIC_ADD_PICTURE_ARR = 'NEW_DYNAMIC_ADD_PICTURE_ARR';
@@ -78,3 +78,4 @@ export const MY_EXPECT_CHANGE = 'MY_EXPECT_CHANGE'
 
 // my emotion actions ////////////////////////////////////////
 export const MY_EMOTION_UPDATE = 'MY_EMOTION_UPDATE';
+export const MY_EMOTION_CLEAR = 'MY_EMOTION_CLEAR';

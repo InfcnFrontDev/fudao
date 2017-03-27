@@ -1,6 +1,6 @@
-import {ToastAndroid} from "react-native";
 import uuid from "uuid";
 import pinyin from "./pinyin";
+import config from "./config";
 const tools = {
 	/**
 	 * 生成UUID
@@ -27,8 +27,11 @@ const tools = {
 	},
 
 	/**
-	 * 对象合并
+	 * 延迟加载
 	 */
+	delayLoad(callback){
+		setTimeout(callback, config.loadingDelayTime)
+	},
 
 
 };

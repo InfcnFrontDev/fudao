@@ -105,12 +105,13 @@ class Register extends PureComponent {  // eslint-disable-line
                     dispatch(hideLoading());
                     if(data.success) {
                         this._getGode.clearTimer();
-                       /* Actions.setPassword({
-
-                        })*/
-                        Actions['setPassword']({
+                       Actions.setPassword({
+                            type: ActionConst.POP_AND_REPLACE,
+                           phone:phone,
+                        })
+                        /*Actions['setPassword']({
                             phone:phone,
-                        });
+                        });*/
                     } else {
                         toast.show("验证码错误...");
                         this.setState({

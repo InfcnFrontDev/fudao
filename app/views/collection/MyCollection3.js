@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, View, Alert} from "react-native";
 import {connect} from "react-redux";
 import GiftedListView from "../../components/GiftedListView";
 import {Container, Header} from "../../components/index";
@@ -43,8 +43,19 @@ class MyCollection extends PureComponent {
 
 	_renderRowView(rowData) {
 		return (
-			<ArticleItem article={rowData}/>
+			<ArticleItem article={rowData} onLongPress={() => this._onLongPress(rowData)}/>
 		)
+	}
+
+	_onLongPress(rowData) {
+		Alert.alert('操作提示', '您确定要取消该收藏吗', [
+			{text: '取消'},
+			{text: '删除', onPress: () => this.removeMyCollection(rowData)},
+		])
+	}
+
+	removeMyCollection(rowData) {
+		alert(rowData.title)
 	}
 }
 const styles = StyleSheet.create({

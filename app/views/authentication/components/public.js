@@ -37,7 +37,7 @@ export function checkPhone(phone){
 }
 //至少6位字母、数字、下划线密码
 export function checkPwd(pwd){
-    if(!(/^[a-zA-Z]\w{5,17}$/).test(pwd)){
+    if(!(/^[\w]{6,12}$/).test(pwd)){
         return false;
     }else{
         return true;

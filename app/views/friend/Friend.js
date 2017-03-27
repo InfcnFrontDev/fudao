@@ -9,9 +9,9 @@ import {fetchMyFriendList} from "../../actions/friend";
 import {toast} from "../../utils/index";
 
 /**
- * 我的好友
+ * 好友列表
  */
-class MyFriend extends PureComponent {
+class Friend extends PureComponent {
 
 	render() {
 		let {isFetching, friendList, friendNickMap} = this.props;
@@ -19,7 +19,7 @@ class MyFriend extends PureComponent {
 			<Container>
 				<Header {...this.props} right={
 					<Right>
-					<Button transparent onPress={()=>Actions.searchUser()}><Icon name="add"/></Button>
+						<Button transparent onPress={()=>Actions.searchUser()}><Icon name="add"/></Button>
 					</Right>
 				}/>
 				<Content gray>
@@ -82,4 +82,4 @@ const mapStateToProps = state => ({
 	loginUser: state.user.loginUser,
 	...state.friend,
 });
-export default connect(mapStateToProps)(MyFriend);
+export default connect(mapStateToProps)(Friend);
