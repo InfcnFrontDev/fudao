@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {ScrollView, ListView, View, Dimensions} from "react-native";
+import {ScrollView, ListView, View, Dimensions,ToastAndroid} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Left, Right, Body, Form, Item, Text, Segment,Button} from "native-base";
 import TreatmentProfessionList from "./TreatmentProfessionList";
@@ -28,7 +28,7 @@ class TabListTreatment extends PureComponent {
                     <Text style={this.state.flag?styles.titleText:styles.titleChoose}>专业疗法</Text>
                 </Button>
             </View>
-            {this.state.flag?<TreatmentDaily title={this.props.question.showVal} />:<TreatmentProfessionList  title={this.props.question.showVal} />}
+            {this.state.flag?<TreatmentDaily questionDetail={this.props.question} />:<TreatmentProfessionList questionDetail={this.props.question} />}
           </View>
         )
     }
@@ -83,6 +83,12 @@ const styles = {
   }
 }
 
-const mapStateToProps = state => ({
-});
-export default connect(mapStateToProps)(TabListTreatment);
+TabListTreatment.propTypes = {
+  diseaseName: React.PropTypes.string,
+}
+
+TabListTreatment.defaultProps = {
+  diseaseName: '痴呆'
+}
+
+export default (TabListTreatment);

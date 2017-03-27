@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Title, Content, Left, Right, Body,Text,Button,Header,Icon} from "native-base";
-import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert} from "react-native";
+import { Platform, View,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert} from "react-native";
 import styles from "./assets/styles";
 import moment from './assets/moment.js'
 import {Actions} from "react-native-router-flux";
@@ -25,7 +25,6 @@ class DynamicDetail extends PureComponent {
     }
 
     render() {
-      // ToastAndroid.show('render'+JSON.stringify(this.props.newnew),ToastAndroid.SHORT)
 
       let input = (null);
       if(this.state.commentShow){

@@ -6,10 +6,11 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Thumbnail, Text} from "native-base";
-import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePickerAndroid} from "react-native";
-import {Header, Container, Content} from "../../components/index";
-import {theme, urls, request, toast} from "../../utils/";
+import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePickerAndroid,Dimensions,Modal} from "react-native";
+import {toast} from "../../utils/index";
 
+var width=Dimensions.get('window').width;
+var height=Dimensions.get('window').height;
 /**
  * 女生选择
  */
@@ -19,16 +20,17 @@ class WomanChoose extends PureComponent {
     constructor(props) {
         super(props);
         this.state={
-
+            show: false,
+            jieduan1:''
         }
-
     }
-
     render() {
         return (
-            <Container style={styles.container}>
-                <Header {...this.props}></Header>
-                <Content>
+            <Modal
+                transparent
+                visible={this.state.show}
+                onRequestClose={() => {}}
+            >
                     <View style={styles.bigBox}>
                         <View style={styles.box}>
                             <TouchableOpacity onPress={this.choose.bind(this,'未孕阶段')}>
@@ -73,25 +75,37 @@ class WomanChoose extends PureComponent {
                             </TouchableOpacity>
                         </View>
                     </View>
-                </Content>
-            </Container>
+                </Modal>
         )
     }
     choose(text){
-            Actions['startInformation']({jieduan:text,showM:false,sex:0})
+        this.setState({
+            show: false,
+        })
+        this.props._jieduan(text)
+    }
+    show() {
+        this.setState({
+            show: true,
+        })
     }
 }
 
 const styles = {
     bigBox:{
+        width:width,
+        height:height,
         flexDirection:'row',
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+        backgroundColor:'rgba(0,0,0,0.5)',
     },
     box:{
-        width:280,
-        height:500,
-        paddingLeft:30
+        backgroundColor:'#fff',
+        width:width*0.8,
+        height:height*0.8,
+        paddingLeft:30,
+        borderRadius:10
     },
     photo:{
         height:100,
@@ -108,6 +122,5 @@ const styles = {
         borderRadius:40,
     },
 };
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps)(WomanChoose);
+export default (WomanChoose);
 

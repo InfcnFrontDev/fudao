@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import {Text} from "native-base";
 import {connect} from "react-redux";
-import {View,Image,TouchableHighlight,ToastAndroid } from "react-native";
+import {View,Image,TouchableHighlight} from "react-native";
 import DynamicImage from './DynamicImage';
 import {theme} from "../utils/";
 import {Actions} from "react-native-router-flux";
 import {skipToDetail} from '../actions/dynamic.js'
-import {urls,toast} from "../utils/index";
+import {urls} from "../utils/index";
 
 /**
  * 需添加参数info

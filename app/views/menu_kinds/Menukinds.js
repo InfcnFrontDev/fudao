@@ -2,8 +2,8 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {View,TouchableOpacity,TouchableHighlight,Alert,Image ,Modal,Dimensions ,ScrollView} from "react-native";
-import {Text, Button} from "native-base";
-import {Container, Content,Header} from "../../components/index";
+import {Text, Button,ListItem} from "native-base";
+import {Container, Content,Header,List} from "../../components/index";
 import {config, urls,theme,toast,request} from "../../utils/index";
 /**
  * 菜谱
@@ -18,8 +18,6 @@ class Menukinds extends PureComponent {
           activeBar:0,
           obj:this.props.data,
           arr:this.props.arr,
-          isShow:false,
-          item:{}
         }
     }
     componentWillMount(){
@@ -34,23 +32,14 @@ class Menukinds extends PureComponent {
             }
         }
         request.getJson(urls.apis.MENU_KINDS,obj).then((result) => {
-            if(result.obj.cookbook.length!=0){
-                this.setState({
-                    data:result.obj,
-                    item:result.obj.cookbook[0]
-                })
-            }else{
                 this.setState({
                     data:result.obj,
                 })
-            }
-
         }, (error) => {
 
         });
     }
     render() {
-
         let data=this.state.data;
         let tab =this.state.arr;
         if(!data){
@@ -58,8 +47,6 @@ class Menukinds extends PureComponent {
         }else{
             let caiPu=data.cookbook;
             let cai=(null);
-            let mb=(null);
-
             if(caiPu.length!=0){
                 cai=(
                     <View>
@@ -70,60 +57,6 @@ class Menukinds extends PureComponent {
                     </View>
                     )
             }
-
-            if(this.state.item!={}){
-                let item=this.state.item;
-                mb=(
-                    <Modal
-                        transparent={true}
-                        visible={this.state.isShow}
-                        onRequestClose={this.hide.bind(this,false)}
-                    >
-                            <View style={styles.mb1}>
-                                <View style={styles.box1}>
-                                    <View style={styles.imgBox}>
-                                      <Image source={{uri: urls.getImage(item.img)}} style={{width:200,height:200}}></Image>
-                                    </View>
-                                    <View>
-                                        <View style={styles.cpBar}>
-                                            <Text>主料</Text>
-                                        </View>
-                                        <View style={styles.cp}>
-                                            <Text>{item.ingredients}</Text>
-                                        </View>
-
-                                    </View>
-                                    <View>
-                                        <View style={styles.cpBar}>
-                                            <Text>辅料</Text>
-                                        </View>
-                                        <ScrollView style={{height:30}}>
-                                            <View style={styles.cp}>
-                                                <Text>{item.mainIngredient}</Text>
-                                            </View>
-                                        </ScrollView>
-                                    </View>
-                                    <View>
-                                        <View  style={styles.cpBar}>
-                                            <Text>操作方法</Text>
-                                        </View>
-                                        <ScrollView style={{height:150,marginBottom:20}}>
-                                            <View style={styles.cpBox}>
-                                                <View style={styles.cp}>
-                                                    <Text>{item.steps}</Text>
-                                                </View>
-                                            </View>
-                                        </ScrollView>
-                                    </View>
-                                </View>
-                            </View>
-                    </Modal>
-                )
-            }
-
-
-
-
             return (
                 <Container>
                     <Header back {...this.props}></Header>
@@ -132,7 +65,7 @@ class Menukinds extends PureComponent {
                             {tab.map((item, index) => this.renderTab(item, index))}
                         </View>
                         <View style={styles.imgBox}>
-                            <Image source={{uri: urls.getImage(data.ingredients.img)}} style={styles.img}></Image>
+                            <Image source={{uri: urls.getImage(data.ingredients.img,width,200)}} style={styles.img}></Image>
                         </View>
                         <View style={styles.textBox}>
                             <Text>        {data.ingredients['abstract_']}</Text>
@@ -178,7 +111,6 @@ class Menukinds extends PureComponent {
                             </View>
                         </View>
                         {cai}
-                        {mb}
                     </Content>
                 </Container>
             );
@@ -204,15 +136,11 @@ class Menukinds extends PureComponent {
     }
     renderCaiPu(item, index) {
         return (
-
-                <View key={index} style={styles["menu"+index]}>
-                    <TouchableOpacity
-                            onPress={() => this.show(item,index)}
-                    >
-                        <Text style={styles.doc}>{item.name}</Text>
-                    </TouchableOpacity>
-                </View>
-
+            <TouchableOpacity key={index} style={styles["menu"+index]}
+                onPress={() =>this.detail(item,index)}
+            >
+                            <Text style={styles.doc}>{item.name}</Text>
+            </TouchableOpacity>
         )
     }
     _goToPage(item,index) {
@@ -223,32 +151,15 @@ class Menukinds extends PureComponent {
 
         obj['ingredientsId']=item.id;
         request.getJson(urls.apis.MENU_KINDS,obj).then((result) => {
-
-            if(result.obj.cookbook.length!=0){
                 this.setState({
                     data:result.obj,
-                    item:result.obj.cookbook[0]
-                })
-            }else{
-                this.setState({
-                    data:result.obj,
-                })
-            }
+                });
         }, (error) => {
 
         });
     }
-    hide(i){
-        this.setState({
-            isShow:i,
-        })
-    }
-    show(item,index){
-
-        this.setState({
-            isShow:true,
-            item:item,
-        })
+    detail(item,index){
+        Actions['menuDetail']({item:item,index:index})
     }
 }
 

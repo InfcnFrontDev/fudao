@@ -27,6 +27,8 @@ export default function (state = initialState, {type, source}) {
 			return Object.assign({}, state, {
 				...source
 			});
+		case types.DYNAMIC_CLEAR:
+			return Object.assign({}, state, initialState);
 		default:
 			return state;
 

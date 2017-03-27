@@ -21,7 +21,6 @@ class EmotionSolve extends PureComponent {
 
 		return (
 			<Modal
-				animationType={'slide'}
 				transparent
 				visible={this.state.show}
 				onRequestClose={() => this.hide()}

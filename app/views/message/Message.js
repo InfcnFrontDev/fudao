@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Container, Content, Header, Separator} from "../../components/index";
+import {Container, Content, Header, Separator,List} from "../../components/index";
 import {Actions} from "react-native-router-flux";
-import {View,Dimensions,TouchableHighlight} from "react-native";
-import {Text,Thumbnail,} from "native-base";
-import {theme} from "../../utils/index";
+import {View,Dimensions,TouchableHighlight,TouchableOpacity } from "react-native";
+import {Text,Thumbnail,ListItem,Left,Body,Button,Icon} from "native-base";
+import {theme,toast} from "../../utils/index";
 var width=Dimensions.get('window').width;
 var height=Dimensions.get('window').height;
 class Message extends Component {
@@ -14,54 +14,106 @@ class Message extends Component {
             <Container>
                 <Header {...this.props}/>
                 <Content gray>
-                  <View style={{borderTopWidth:1,borderColor:'#D6D6D6'}}>
-                        <TouchableHighlight onPress={()=>this._open()}>
-                            <View style={styles.item}>
-                                <View style={styles.item1}>
-                                    <View  style={styles.itemLeft}>
-                                        <View style={styles.point}></View>
-                                        <Thumbnail square source={require('./assets/woniu.png')} style={styles.img}/>
-                                    </View>
-                                    <View  style={styles.textBox}>
-                                        <Text style={styles.title}>互动消息</Text>
-                                        <Text style={styles.doc}>牛牛快跑给您分享了一个链接！</Text>
-                                    </View>
-                                </View>
+                    <View>
+                            <View style={{backgroundColor:'#fff'}}>
+                                <ListItem avatar>
+                                    <Left>
+                                        <Thumbnail style={{width: 40, height: 40}} square
+                                                   source={require('./assets/mag-org.png')}/>
+                                    </Left>
+                                    <Body>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
+                                            <Text>互动消息</Text>
+                                            <Text note>牛牛快跑给您分享了一个链接！</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    </Body>
+                                </ListItem>
                             </View>
-                        </TouchableHighlight>
 
-                    </View>
-                 <View style={{borderTopWidth:1,borderColor:'#D6D6D6'}}>
-                        <TouchableHighlight onPress={()=>this._open()}>
-                            <View style={styles.item}>
-                                <View style={styles.item1}>
-                                    <View  style={styles.itemLeft}>
-                                        <View style={styles.point}></View>
-                                        <Thumbnail square source={require('./assets/msg.png')} style={styles.img}/>
-                                    </View>
-                                    <View  style={styles.textBox}>
-                                        <Text style={styles.title}>系统消息</Text>
-                                        <Text style={styles.doc}>福道健康有新版本了，快来更新把！</Text>
-                                    </View>
-                                </View>
+                            <View style={{backgroundColor:'#fff'}}>
+                                <ListItem avatar>
+                                    <Left>
+                                        <Thumbnail style={{width: 40, height: 40}} square
+                                                   source={require('./assets/msg1.png')}/>
+                                    </Left>
+                                    <Body>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
+                                            <Text>系统消息</Text>
+                                            <Text note>福道健康有新版本了，快来更新把！</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    </Body>
+                                </ListItem>
                             </View>
-                        </TouchableHighlight>
-                    </View>
-                  <View style={{borderTopWidth:1,borderColor:'#D6D6D6'}}>
-                        <TouchableHighlight onPress={()=>this._open()}>
-                            <View style={styles.item}>
-                                <View style={styles.item1}>
-                                    <View  style={styles.itemLeft}>
-                                        <View style={styles.point}></View>
-                                        <Thumbnail square source={require('./assets/zhuye.png')} style={styles.img}/>
-                                    </View>
-                                    <View  style={styles.textBox}>
-                                        <Text style={styles.title}>福福</Text>
-                                        <Text style={styles.doc}>吃饭时间到，快来看看福福给您准备了什么好吃的！</Text>
-                                    </View>
-                                </View>
+                            <View style={{backgroundColor:'#fff'}}>
+                                <ListItem avatar>
+                                    <Left>
+                                        <Thumbnail style={{width: 40, height: 40}} square
+                                                   source={require('./assets/msg3.png')}/>
+                                    </Left>
+                                    <Body>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
+                                            <Text>福福</Text>
+                                            <Text note>吃饭时间到，快来看看福福给您准备了...</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    </Body>
+                                </ListItem>
                             </View>
-                        </TouchableHighlight>
+                    </View>
+                    <View style={{marginTop:10}}>
+                            <View style={{backgroundColor:'#fff'}}>
+                                <ListItem avatar>
+                                    <Left>
+                                        <Thumbnail style={{width: 40, height: 40}} square
+                                                   source={require('./assets/touxiang1.jpg')}/>
+                                    </Left>
+                                    <Body>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
+                                            <Text>神奇小白马</Text>
+                                            <Text note>[微笑]</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    </Body>
+                                </ListItem>
+                            </View>
+                            <View style={{backgroundColor:'#fff'}}>
+                                <ListItem avatar>
+                                    <Left>
+                                        <Thumbnail style={{width: 40, height: 40}} square
+                                                   source={require('./assets/touxiang2.jpg')}/>
+                                    </Left>
+                                    <Body>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
+                                    <Text>初九</Text>
+                                    <Text note>我打开了你得分享，快来跟我聊聊吧!</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    </Body>
+                                </ListItem>
+                            </View>
+                            <View style={{backgroundColor:'#fff'}}>
+                                <ListItem avatar>
+                                    <Left>
+                                        <Thumbnail style={{width: 40, height: 40}} square
+                                                   source={require('./assets/touxiang3.jpg')}/>
+                                    </Left>
+                                    <Body>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
+                                            <Text>王美丽</Text>
+                                            <Text note>我赞了你哦！</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    </Body>
+                                </ListItem>
+                            </View>
                     </View>
                 </Content>
             </Container>
@@ -78,8 +130,6 @@ const styles = {
     },
     item: {
         height:80,
-        borderColor:"#D6D6D6",
-        borderBottomWidth:1,
         flexDirection:'row',
         width:width,
         alignItems:'center',
@@ -110,6 +160,8 @@ const styles = {
     },
     textBox:{
         width:width*0.8,
+        borderWidth:1,
+        borderColor:"#D6D6D6"
     },
     point:{
         width:10,

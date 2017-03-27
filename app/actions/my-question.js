@@ -1,9 +1,34 @@
 import * as types from "../actions/types";
-import { ToastAndroid,} from "react-native";
 import {request,urls,toast} from "../utils/";
+import {Actions} from "react-native-router-flux";
 
-//跳转菜单页
-
+//跳转详情页
+export function skipToDetail(question,from){
+  return (dispatch) => {
+      if(from=='list'){
+        Actions.myQuestionDetail({question:question})
+      }else{
+        request.getJson(urls.apis.MY_QUESTION_TREETMENT,{
+          diseaseId:question.id,
+          renqun:'aged',
+          local:'北京'
+        }).then((res)=>{
+          dispatch({
+            type: types.MY_QUESTION,
+            source:{
+              questionDetail:res.obj,
+            }
+          })
+        })
+      }
+      dispatch({
+        type: types.MY_QUESTION,
+        source:{
+          currentDetail:question
+        }
+      })
+    }
+}
 
 //清空我的问题和期望
 export function clearMyQuestion() {
@@ -42,7 +67,6 @@ export function getAllDatas(callback,my_params,all_params,renqun,from) {
       if(from=='myquestion'){
         var url = urls.apis.MY_QUESTION_ALL_QUESTION;
       }else{
-        ToastAndroid.show('ACTION_MyExpect_getAllQuestions',ToastAndroid.SHORT)
         //expect 待修改
         var url = urls.apis.MY_QUESTION_ALL_QUESTION;
       }
