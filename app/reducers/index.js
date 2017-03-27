@@ -8,6 +8,7 @@ import user from "./user";
 import friend from "./friend";
 import settings from "./settings";
 import myQuestion from "./my-question";
+import question from "./question";
 import emotion from "./emotion";
 export default combineReducers({
 	position,
@@ -19,5 +20,6 @@ export default combineReducers({
 	friend,
 	settings,
 	myQuestion,
+	question,
 	emotion,
 });

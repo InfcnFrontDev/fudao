@@ -79,3 +79,11 @@ export const MY_EXPECT_CHANGE = 'MY_EXPECT_CHANGE'
 // my emotion actions ////////////////////////////////////////
 export const MY_EMOTION_UPDATE = 'MY_EMOTION_UPDATE';
 export const MY_EMOTION_CLEAR = 'MY_EMOTION_CLEAR';
+
+// question  actions ////////////////////////////////////////
+export const QUESTION_FETCH_ALL_LIST = 'QUESTION_FETCH_ALL_LIST';
+export const QUESTION_RECEIVE_ALL_LIST = 'QUESTION_RECEIVE_ALL_LIST';
+export const QUESTION_FETCH_MY_LIST = 'QUESTION_FETCH_MY_LIST';
+export const QUESTION_RECEIVE_MY_LIST = 'QUESTION_RECEIVE_MY_LIST';
+export const QUESTION_ADD_TO_MY_LIST = 'QUESTION_ADD_TO_MY_LIST';
+
