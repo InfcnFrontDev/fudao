@@ -65,7 +65,7 @@ class Menukinds extends PureComponent {
                             {tab.map((item, index) => this.renderTab(item, index))}
                         </View>
                         <View style={styles.imgBox}>
-                            <Image source={{uri: urls.getImage(data.ingredients.img)}} style={styles.img}></Image>
+                            <Image source={{uri: urls.getImage(data.ingredients.img,width,200)}} style={styles.img}></Image>
                         </View>
                         <View style={styles.textBox}>
                             <Text>        {data.ingredients['abstract_']}</Text>
@@ -136,7 +136,6 @@ class Menukinds extends PureComponent {
     }
     renderCaiPu(item, index) {
         return (
-
                 <View key={index} style={styles["menu"+index]}>
                     <TouchableOpacity
                             onPress={() =>this.detail(item,index)}
