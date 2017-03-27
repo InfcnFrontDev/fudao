@@ -63,6 +63,23 @@ export function fetchMyQuestions(userId) {
 	}
 }
 
+export function removeMyQuestion(userId, question) {
+	return (dispatch) => {
+		request.getJson(urls.apis.MY_QUESTION_DEL_USER_QUESTION, {
+			userId: userId,
+			diseaseId: question.id,
+		}).then((res) => {
+			dispatch({
+				type: types.QUESTION_REMOVE_MY_QUESTION,
+				payload: {
+					question
+				}
+			})
+		})
+	}
+}
+
+
 export function addToMyQuestions(userId, question) {
 	return (dispatch) => {
 		request.getJson(urls.apis.MY_QUESTION_ADD_USER_QUESTION, {

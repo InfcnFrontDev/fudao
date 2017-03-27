@@ -15,7 +15,7 @@ export const USER_UPDATE_INFO = "USER_UPDATE_INFO";
 export const USER_UPDATE_CHECK = "USER_UPDATE_CHECK";
 // position ////////////////////////////////////////
 export const UPDATE_POSITION = 'UPDATE_POSITION';
-export const CLEAR_POSITION= 'CLEAR_POSITION';
+export const CLEAR_POSITION = 'CLEAR_POSITION';
 // user actions ////////////////////////////////////////
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
@@ -57,7 +57,7 @@ export const NEW_DYNAMIC_ADD_RENDER_PICTURE_ARR = 'NEW_DYNAMIC_ADD_RENDER_PICTUR
 export const DYNAMIC_LIST_LOAD = 'DYNAMIC_LIST_FIRSTLOAD';
 export const DYNAMIC_LIST_SHOW = 'DYNAMIC_LIST_SHOW';
 export const DYNAMIC_LIST_ZAN_COMMENT = 'DYNAMIC_LIST_ZAN_COMMENT';
-export const DYNAMIC_CLEAR= 'DYNAMIC_CLEAR';
+export const DYNAMIC_CLEAR = 'DYNAMIC_CLEAR';
 
 // settings actions ////////////////////////////////////////
 export const SETTINGS_UPDATE = 'SETTINGS_UPDATE';
@@ -86,4 +86,5 @@ export const QUESTION_RECEIVE_ALL_LIST = 'QUESTION_RECEIVE_ALL_LIST';
 export const QUESTION_FETCH_MY_LIST = 'QUESTION_FETCH_MY_LIST';
 export const QUESTION_RECEIVE_MY_LIST = 'QUESTION_RECEIVE_MY_LIST';
 export const QUESTION_ADD_TO_MY_LIST = 'QUESTION_ADD_TO_MY_LIST';
+export const QUESTION_REMOVE_MY_QUESTION = 'QUESTION_REMOVE_MY_QUESTION';
 

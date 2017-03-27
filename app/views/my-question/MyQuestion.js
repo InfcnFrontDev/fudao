@@ -1,10 +1,11 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
+import {Actions} from "react-native-router-flux";
 import {View, Image, DeviceEventEmitter, ScrollView} from "react-native";
 import {Container, Content, Header} from "../../components/index";
 import QuestionMyself from "./components/QuestionMyself";
 import QuestionAll from "./components/QuestionAll";
-import {fetchAllQuestions, fetchMyQuestions, addToMyQuestions} from "../../actions/question";
+import {fetchAllQuestions, fetchMyQuestions, addToMyQuestions, removeMyQuestion} from "../../actions/question";
 
 /**
  * 我的问题
@@ -21,16 +22,24 @@ class MyQuestion extends PureComponent {
 	}
 
 	render() {
-		let {allQuestionsGroupBy, myQuestionsGroupBy} = this.props;
+		let {allQuestionsGroupBy, myQuestions, myQuestionMap} = this.props;
 		return (
 			<Container>
 				<Header {...this.props}/>
 				<Content delay>
 					<ScrollView>
-						<QuestionMyself />
+						{myQuestions &&
+						<QuestionMyself
+							items={myQuestions}
+							onItemPress={(item) => this._onItemPress(item)}
+							onItemRemove={(item) => this._onItemRemove(item)}/>
+						}
 						{allQuestionsGroupBy &&
-						<QuestionAll rowsData={allQuestionsGroupBy} selectedData={myQuestionsGroupBy}
-									 onAdd={(rowData)=>this._onAddToMyQuestion(rowData)}/>}
+						<QuestionAll
+							rowsData={allQuestionsGroupBy}
+							selectedData={myQuestionMap}
+							onItemPress={(item) => this._onItemPress(item)}
+							onItemAdd={(item)=>this._onItemAdd(item)}/>}
 					</ScrollView>
 				</Content>
 			</Container>
@@ -38,14 +47,25 @@ class MyQuestion extends PureComponent {
 	}
 
 	componentDidMount() {
-		const {dispatch, userId} = this.props;
+		const {dispatch, loginUser} = this.props;
 		dispatch(fetchAllQuestions('aged'));
-		dispatch(fetchMyQuestions(userId));
+		dispatch(fetchMyQuestions(loginUser.userId));
 	}
 
-	_onAddToMyQuestion(question) {
-		const {dispatch, userId} = this.props;
-		dispatch(addToMyQuestions(userId, question));
+	_onItemPress(question) {
+		Actions.myQuestionDetail({
+			question
+		})
+	}
+
+	_onItemRemove(question) {
+		const {dispatch, loginUser} = this.props;
+		dispatch(removeMyQuestion(loginUser.userId, question));
+	}
+
+	_onItemAdd(question) {
+		const {dispatch, loginUser} = this.props;
+		dispatch(addToMyQuestions(loginUser.userId, question));
 	}
 
 }
@@ -53,9 +73,7 @@ class MyQuestion extends PureComponent {
 const styles = {};
 
 const mapStateToProps = state => ({
-	renqun: state.user.loginUser.renqun,
-	userId: state.user.loginUser.appid,
-	my_question: state.myQuestion.my_question,
+	...state.user,
 	...state.question
 });
 export default connect(mapStateToProps)(MyQuestion);

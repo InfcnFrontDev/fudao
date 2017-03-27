@@ -2,6 +2,8 @@ import React, {PureComponent} from "react";
 import {View, Image, ListView, TouchableHighlight} from "react-native";
 import {Text, Button} from "native-base";
 import {theme, urls} from "../../../utils/index";
+
+const bgColors = ['#F1F7EE', '#F9F1EF', '#EDF4FE', '#F4F5E5'];
 /**
  * 所有问题
  */
@@ -17,31 +19,21 @@ class QuestionAll extends PureComponent {
 
 		this.state = {
 			rowsData: props.rowsData,
-			dataSource: this.ds.cloneWithRowsAndSections(props.rowsData),
 		}
 	}
 
 	render() {
-		let {dataSource} = this.state;
+		let {rowsData} = this.state;
 		return (
 			<ListView
 				contentContainerStyle={styles.contentContainer}
-				dataSource={dataSource}
+				dataSource={this.ds.cloneWithRowsAndSections(rowsData)}
 				renderRow={this._renderRow.bind(this)}
 				pageSize={4}
 				renderSectionHeader={this._renderSectionHeader.bind(this)}
 			/>
 		)
 	}
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.rowsData !== nextProps.rowsData) {
-			this.setState({
-				dataSource: this.ds.cloneWithRowsAndSections(nextProps.rowsData.slice(0))
-			})
-		}
-	}
-
 
 	_renderSectionHeader(sectionData, sectionID) {
 		return (
@@ -52,22 +44,23 @@ class QuestionAll extends PureComponent {
 	}
 
 	_renderRow(rowData, sectionId, rowId) {
-		let {selectedData, onAdd} = this.props;
+		let {selectedData, onItemAdd, onItemPress} = this.props;
+
 		return (
 			<View style={styles.row}>
 				<Button transparent
-						style={{padding:0,margin:6,backgroundColor:'#F1F7EE'}}
-						onPress={()=>{}}>
+						style={{padding: 0, margin: 6, backgroundColor: bgColors[rowId % 4]}}
+						onPress={() => onItemPress(rowData)}>
 					<View style={styles.rowView}>
-						<Image source={{uri:urls.getImage(rowData.img)}} style={styles.rowimg}/>
+						<Image source={{uri: urls.getImage(rowData.img)}} style={styles.rowimg}/>
 						<Text style={styles.rowTitle}>{rowData.showVal}</Text>
-						{rowData.selected ?
+						{selectedData[rowData.id] ?
 							<TouchableHighlight underlayColor='transparent'>
 								<Image source={require('../../../assets/arrows_square_check.png')}
 									   style={styles.choose}/>
 							</TouchableHighlight>
 							:
-							<TouchableHighlight onPress={() => onAdd(rowData)} underlayColor='transparent'>
+							<TouchableHighlight onPress={() => onItemAdd(rowData)} underlayColor='transparent'>
 								<Image source={require('../../../assets/arrows_square_plus.png')}
 									   style={styles.choose}/>
 							</TouchableHighlight>
@@ -77,17 +70,6 @@ class QuestionAll extends PureComponent {
 			</View>
 		)
 	}
-
-	choose(rowData) {
-		const {dispatch} = this.props;
-		if (this.props.from == 'myquestion') {
-			dispatch(addMyQuestion(rowData, this.props.my_question, this.props.id, this.props.allQuestions, this.refs.questions._postRefresh, this.props.userId, 'myquestion'))
-		} else {
-			dispatch(addMyQuestion(rowData, this.props.my_expect, this.props.id, this.props.allExpects, this.refs.questions._postRefresh, this.props.userId, 'myexpect'))
-
-		}
-	}
-
 }
 
 const styles = {
@@ -136,12 +118,15 @@ const styles = {
 QuestionAll.propsTypes = {
 	rowsData: React.PropTypes.object,
 	selectedData: React.PropTypes.object,
-	onAdd: React.PropTypes.func,
+	onItemAdd: React.PropTypes.func,
+	onItemPress: React.PropTypes.func,
 }
 QuestionAll.defaultProps = {
 	rowsData: {},
 	selectedData: {},
-	onAdd: () => {
+	onItemAdd: () => {
+	},
+	onItemPress: () => {
 	},
 }
 

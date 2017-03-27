@@ -1,12 +1,13 @@
 import * as types from "../actions/types";
 import {ToastAndroid} from "react-native";
+import _ from "lodash";
 
 const initialState = {
 	allQuestions: [],
 	allQuestionMap: {},
 	allQuestionsGroupBy: {},
 	myQuestions: [],
-	myQuestionsGroupBy: {},
+	myQuestionMap: {},
 };
 export default function (state = initialState, {type, payload}) {
 	switch (type) {
@@ -19,11 +20,22 @@ export default function (state = initialState, {type, payload}) {
 				...payload
 			});
 		case types.QUESTION_ADD_TO_MY_LIST:
-			let question = payload.question;
-			state.myQuestions.push(question);
-			state.myQuestionsGroupBy[question.id] = question;
-			state.allQuestionMap[question.id].selected = true;
-			return Object.assign({}, state);
+			let item = payload.question;
+			// 插入元素第一个位置
+			state.myQuestions.unshift(item);
+			state.myQuestionMap[item.id] = item;
+			return Object.assign({}, state, {
+				myQuestions: _.slice(state.myQuestions, 0),
+				myQuestionMap: _.clone(state.myQuestionMap)
+			});
+		case types.QUESTION_REMOVE_MY_QUESTION:
+			// 删除指定元素
+			_.remove(state.myQuestions, (n) => n.id == payload.question.id);
+			delete state.myQuestionMap[payload.question.id];
+			return Object.assign({}, state, {
+				myQuestions: _.slice(state.myQuestions, 0),
+				myQuestionMap: _.clone(state.myQuestionMap)
+			});
 		default:
 			return state;
 	}
