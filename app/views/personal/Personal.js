@@ -1,10 +1,10 @@
 import React, {PureComponent} from "react";
 import {ListView, DatePickerAndroid} from "react-native";
 import {connect} from "react-redux";
-import {ListItem, Body, Right, View, Text, Icon} from "native-base";
-import {Container, Content, Header, Separator, Loading} from "../../components/index";
+import {ListItem, Body, Right, Text, Icon} from "native-base";
+import {Container, Content, Header, Separator} from "../../components/index";
 import {updateUserInfo} from "../../actions/user";
-import {dialogs, tools, toast, theme} from "../../utils/index";
+import {dialogs, toast, theme} from "../../utils/index";
 import _ from "lodash";
 
 const rowsData = {
@@ -136,7 +136,6 @@ class Personal extends PureComponent {
 		});
 
 		this.state = {
-			isLoading: true,
 			rowsData
 		}
 	}
@@ -172,32 +171,19 @@ class Personal extends PureComponent {
 	}
 
 	render() {
-		let {isLoading} = this.state;
 		return (
 			<Container>
 				<Header {...this.props}/>
-				<Content>
-					{!isLoading &&
+				<Content delay>
 					<ListView
 						dataSource={this.ds.cloneWithRowsAndSections(rowsData)}
 						renderRow={this._renderRow.bind(this)}
 						pageSize={10}
 						renderSectionHeader={this._renderSectionHeader.bind(this)}
 					/>
-					}
-					<Loading isShow={isLoading}/>
 				</Content>
 			</Container>
 		)
-	}
-
-	componentDidMount() {
-		// 延迟加载
-		tools.delayLoad(()=> {
-			this.setState({
-				isLoading: false
-			})
-		})
 	}
 
 	_renderRow(rowData, sectionId, rowId) {

@@ -22,7 +22,7 @@ class Friend extends PureComponent {
 						<Button transparent onPress={()=>Actions.searchUser()}><Icon name="add"/></Button>
 					</Right>
 				}/>
-				<Content gray>
+				<Content gray delay>
 					<PullView isRefreshing={isFetching} onRefresh={this._onRefresh.bind(this)}>
 						<List>
 							<ListItem icon last style={{height: 55}} onPress={() => Actions.newFriend()}>

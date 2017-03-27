@@ -16,7 +16,7 @@ class SymptomProblemResult extends PureComponent {
 				<View style={styles.itemContainer}>
 					{list.map((text) => (
 						<TouchableOpacity key={text.val} style={styles.item} onPress={() => alert(text.val)}>
-							<Text>{text.show_val}</Text>
+							<Text>{text.showVal}</Text>
 						</TouchableOpacity>
 					))}
 				</View>

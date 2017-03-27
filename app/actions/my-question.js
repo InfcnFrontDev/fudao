@@ -18,7 +18,7 @@ export function getQuestionTreetment(diseaseId,renqun){
   return (dispatch) => {
     request.getJson(urls.apis.MY_QUESTION_TREETMENT,{
       diseaseId:diseaseId,
-      renqun:renqun,
+      renqun:'aged',
       local:'北京'
     }).then((res)=>{
       dispatch({
@@ -47,7 +47,7 @@ export function getAllDatas(callback,my_params,all_params,renqun,from) {
         var url = urls.apis.MY_QUESTION_ALL_QUESTION;
       }
       request.getJson(url,{
-        renqun:renqun
+        renqun:'aged'
       }).then((res)=>{
         var allDatas = res.obj.datas;
         for(var i=0;i<allDatas.length;i++){
