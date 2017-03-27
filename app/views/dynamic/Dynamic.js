@@ -194,7 +194,8 @@ class Dynamic extends PureComponent {
       }
 
     	_onFetch(page, callback, options,flag){
-        this.props.fetchData(page,options,callback,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user,time:this.props.dynamic.update});
+        ToastAndroid.show(''+this.props.dynamic.page,ToastAndroid.SHORT);
+        this.props.fetchData(page,options,callback,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user,time:this.props.dynamic.update,page:this.props.dynamic.page});
       }
 
       skipToNew(){

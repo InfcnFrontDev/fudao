@@ -164,6 +164,7 @@ export function show(id,params){
 	return (dispatch) => {
 		var add=2;
 		var timer = 0;
+
 		if(params.nowShow==id){
 		  params.realm.write(()=>{
 		      params.realm.create('Dynamic',{ id:id, show:false, },true)
@@ -218,7 +219,7 @@ export function updateRealm(time,flag,id,realm){
 			rows:5,
 		}).then((res) =>{
 			if(res.datas.length>0){
-				insert(res.datas,realm);
+				insert(res.datas,realm,id);
 				if(flag){
 					var update=2;
 				}else{
@@ -246,8 +247,9 @@ export function fetchData(page,options,callback,params){
 					}).then((res)=>{
 						  if(res.datas.length>0) {
 								//有网状态下第一次加载
+								toast.show('first');
 								var arrDynamic = res.datas.slice(0,5);
-								insert(arrDynamic,params.realm);
+								insert(arrDynamic,params.realm,params.user.appid);
 						    let realm_res = params.realm.objects('Dynamic').sorted('publishTime');
 								if(realm_res.length<5){
 									var dynamicList = realm_res.slice(realm_res.length*(-1)).reverse();
@@ -290,6 +292,7 @@ export function fetchData(page,options,callback,params){
 								type: types.DYNAMIC_LIST_LOAD,
 								source:{
 									dynamicList:dynamicList,
+									page:true
 								}
 							});
 					})
@@ -297,52 +300,44 @@ export function fetchData(page,options,callback,params){
 			request.getJson(urls.apis.DYNAMIC_LIST,{
 							userId:params.user.appid,
 							page:1,
-							rows:5,
+							rows:params.dynamic.length,
 					}).then((res)=>{
-						  if(res.datas.length>0) {
-								//有网状态下下拉加载更多
-								var realmDynamic = params.realm.objects('Dynamic');
-								var length_ago = realmDynamic.length;
-								insert(res.datas,params.realm);
-						    let realm_res = realmDynamic.sorted('publishTime');
-								var length_now = realmDynamic.length;
-								if(length_ago<length_now){
-									var newData = realm_res.slice(length_ago,length_now).reverse();
-									if(length_ago==0){
-										var dynamicList = newData;
-									}else{
-										var dynamicList = newData.concat(params.dynamic);
-									}
-									dispatch({
-										type: types.DYNAMIC_LIST_LOAD,
-										source:{
-											dynamicList:dynamicList,
-											nowShow:0,
-										}
-									});
-								}else{
-									var dynamicList = params.dynamic;
+						if(res.datas.length>0) {
+							insert(res.datas,params.realm,params.user.appid)
+							var dynamicList = res.datas;
+							dispatch({
+								type: types.DYNAMIC_LIST_LOAD,
+								source:{
+									dynamicList:dynamicList,
 								}
-								if(res.datas.length<5){
-									callback(dynamicList,{
-										allLoaded:true
-									});
-								}else{
-									callback(dynamicList);
-								}
-								request.getJson(urls.apis.DYNAMIC_LIST,{
-									userId:params.user.appid,
-									page:1,
-									rows:5*params.time,
-								}).then((result) =>{
-									if(result.datas.length>0){
-										insert(result.datas,params.realm);
-									}
-								})
-						  }
+							});
+						}else{
+							var dynamicList = params.dynamic;
+						}
+						callback(dynamicList);
+						request.getJson(urls.apis.DYNAMIC_LIST,{
+							userId:params.user.appid,
+							page:1,
+							rows:5*params.time,
+						}).then((result) =>{
+							if(result.datas.length>0){
+								insert(result.datas,params.realm,params.user.appid);
+							}
+						})
 					}
 			)
 		}else if(options.loadMore){
+			toast.show('loadMore'+params.page);
+				if(params.page){
+					dispatch({
+						type: types.DYNAMIC_LIST_LOAD,
+						source:{
+							page:false,
+						}
+					});
+					return ;
+				}
+
 		    let realm_res = params.realm.objects('Dynamic').sorted('publishTime');
 		    if(realm_res.length>params.dynamic.length){
 		      if(realm_res.length>params.dynamic.length+5){
@@ -373,7 +368,7 @@ export function fetchData(page,options,callback,params){
 										if(params.dynamic.length%5!=0){
 											newDynamic = res.datas.slice(params.dynamic.length%5,5);
 										}
-										insert(newDynamic,params.realm);
+										insert(newDynamic,params.realm,params.user.appid);
 										var dynamicList = params.dynamic.concat(newDynamic);
 
 										callback(dynamicList);
@@ -391,12 +386,12 @@ export function fetchData(page,options,callback,params){
 }
 
 //数据库插入操作，本文件内调用
-function insert(datas,realm){
+function insert(datas,realm,id){
 	realm.write(()=>{
 		for(let i=0;i<datas.length;i++){
 			var flag=false
 			for(let j=0;j<datas[i].dynamicPraises.length;j++){
-				if(datas[i].dynamicPraises[j].userId==datas[i].userId){
+				if(datas[i].dynamicPraises[j].userId==id){
 					flag=true
 				}
 			}

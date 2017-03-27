@@ -9,6 +9,7 @@ const initialState = {
 	dynamicDetail:{},
 	rightButton:'发表',
 	update:1,
+	page:false,
 };
 export default function (state = initialState, {type, source}) {
 	switch (type) {

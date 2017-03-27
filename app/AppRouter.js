@@ -73,7 +73,7 @@ class AppRouter extends PureComponent {
 					{/*启动注册*/}
 
 					<Scene key="login" component={Login} title="登录" hideNavBar/>
-					<Scene key="register" component={Register} title="注册" hideNavBar/>
+					<Scene key="register" component={Register} title="注册" hideNavBar />
 					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
 
 					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
