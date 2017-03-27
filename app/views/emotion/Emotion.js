@@ -1,26 +1,21 @@
 import React, {PureComponent} from "react";
+import {Image, DeviceEventEmitter} from "react-native";
 import {connect} from "react-redux";
 import {Right, View, Text} from "native-base";
-import {Container, Content, Header, Loading} from "../../components/index";
-import {Image, DeviceEventEmitter} from "react-native";
+import {Container, Content, Header} from "../../components/index";
 import {calm} from "./components/EmotionData";
 import {updateMyEmotion} from "../../actions/emotion";
 import EmotionList from "./components/EmotionList";
 import EmotionSolve from "./components/EmotionSolve";
-import {request, urls, toast, tools} from "../../utils/";
+import {request, urls, toast} from "../../utils/";
 
 /**
  * 情绪
  */
 class Emotion extends PureComponent {
 
-	state = {
-		isLoading: true
-	};
-
 	render() {
 		let {myEmotion} = this.props;
-		let {isLoading} = this.state;
 
 		// 默认情绪为‘平静’
 		if (!myEmotion) {
@@ -37,9 +32,8 @@ class Emotion extends PureComponent {
 						</View>
 					</Right>
 				}/>
-				<Content>
-					<Loading isShow={isLoading}/>
-					{!isLoading && <EmotionList onItemPress={this._onItemPress.bind(this)}/>}
+				<Content delay>
+					<EmotionList onItemPress={this._onItemPress.bind(this)}/>
 					<EmotionSolve ref={(e)=>this._modal = e}/>
 				</Content>
 			</Container>
@@ -57,15 +51,6 @@ class Emotion extends PureComponent {
 				this.props.dispatch(updateMyEmotion(calm[0]));
 			}
 		}
-	}
-
-	componentDidMount() {
-		// 延迟加载
-		tools.delayLoad(()=> {
-			this.setState({
-				isLoading: false
-			})
-		})
 	}
 
 	/**

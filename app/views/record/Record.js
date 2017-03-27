@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {View} from "react-native";
 import {Button, Text} from "native-base";
-import {Container, Header} from "../../components/index";
+import {Container, Content, Header} from "../../components/index";
 import {ScrollableTabBar} from "react-native-scrollable-tab-view";
 import MyRecordDay from "./components/MyRecordDay";
 import MyRecordWeek from "./components/MyRecordWeek";
@@ -23,9 +23,9 @@ class Record extends PureComponent {
 		return (
 			<Container>
 				<Header {...this.props}/>
-				<View style={styles.content}>
+				<Content delay gray>
 					{this.state.flag == 'day' ? <MyRecordDay /> : (this.state.flag == 'week' ? <MyRecordWeek /> :
-						<MyRecordMonth />)}
+							<MyRecordMonth />)}
 					<View style={styles.typeTitle}>
 						<Button transparent onPress={()=> {
 							this.setState({flag: 'day'})
@@ -49,17 +49,13 @@ class Record extends PureComponent {
 								style={this.state.flag == 'month' ? styles.titleTextChoosed : styles.titleText}>月记录</Text>
 						</Button>
 					</View>
-				</View>
+				</Content>
 
 			</Container>
 		)
 	}
 }
 const styles = {
-	content: {
-		flex: 1,
-		backgroundColor: '#F0F0F0'
-	},
 	tabView: {
 		flex: 1,
 		flexGrow: 1,
