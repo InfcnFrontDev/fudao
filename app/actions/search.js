@@ -9,7 +9,9 @@ export function searchAll(keyword) {
 		});
 
 		// 请求数据
-		request.getJson(urls.apis.SEARCH_ALL, (result) => {
+		request.getJson(urls.apis.SEARCH_ALL)
+			.then((result) => {
+			alert(result.obj);
 			result = result.obj;
 			/*result = {
 				symptomProblem: {
