@@ -11,3 +11,11 @@ export function updatePosition(lastPosition) {
 		});
 	}
 }
+
+export function clearPosition() {
+	return (dispatch) => {
+		dispatch({
+			type: types.CLEAR_POSITION,
+		});
+	}
+}

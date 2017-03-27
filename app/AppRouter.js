@@ -47,6 +47,7 @@ import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import Energy from "./views/energy/Energy";
 import SideBar from "./views/sidebar/SideBar";
 import MenuKinds from "./views/menu_kinds/Menukinds";
+import MenuDetail from "./views/menu_kinds/MenuDetail";
 import EnergyInformation from "./views/energy/EnergyInformation";
 import EnergyQuestionnaire from "./views/energy/EnergyQuestionnaire";
 
@@ -68,17 +69,17 @@ class AppRouter extends PureComponent {
 					<Scene key="start" component={Start} title="启动开始页" hideNavBar initial/>
 
 					{/*首页*/}
-					<Scene key="index" component={Index} title="首页" hideNavBar/>
+					<Scene key="index" component={Index} title="首页" hideNavBar />
 
 					{/*启动注册*/}
 
-					<Scene key="login" component={Login} title="登录" hideNavBar/>
+					<Scene key="login" component={Login} title="登录" hideNavBar />
 					<Scene key="register" component={Register} title="注册" hideNavBar />
 					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
 
 					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 					<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
-					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
+					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar />
 					<Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
 					<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
 					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
@@ -92,6 +93,7 @@ class AppRouter extends PureComponent {
 					<Scene key="myExpect" component={MyExpect} title="我的期望" hideNavBar/>
 					{/*菜单*/}
 					<Scene key="menuKinds" component={MenuKinds} title="食材" hideNavBar/>
+					<Scene key="menuDetail" component={MenuDetail}  hideNavBar/>
 
 					{/*情绪调和*/}
 					<Scene key="emotion" component={Emotion} title="情绪调和" hideNavBar/>
@@ -124,7 +126,7 @@ class AppRouter extends PureComponent {
 					<Scene key="about" component={About} title="关于福道" hideNavBar/>
 
 					{/*消息*/}
-					<Scene key="message" component={Message} title="消息" hideNavBar/>
+					<Scene key="message" component={Message} title="消息" hideNavBar />
 					<Scene key="msgDetail" component={MsgDetail} hideNavBar/>
 
 					{/*其他*/}

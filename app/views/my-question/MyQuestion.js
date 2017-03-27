@@ -13,6 +13,7 @@ import {config, urls,theme,toast,request} from "../../utils/index";
  * 我的问题
  */
 class MyQuestion extends PureComponent {
+
     constructor(props) {
         super(props);
 
@@ -40,18 +41,11 @@ class MyQuestion extends PureComponent {
 
 }
 
-const styles = {
-  container:{
-    backgroundColor:'#fff',
-  },
-  content:{
-    backgroundColor:'#fff',
-  },
-};
+const styles = {};
 
 const mapStateToProps = state => ({
-    renqun:state.user.loginUser.renqun,
-  userId:state.user.loginUser.appid,
-  my_question:state.myQuestion.my_question,
+	renqun: state.user.loginUser.renqun,
+	userId: state.user.loginUser.appid,
+	my_question: state.myQuestion.my_question,
 });
 export default connect(mapStateToProps)(MyQuestion);

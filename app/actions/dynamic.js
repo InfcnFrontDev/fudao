@@ -502,3 +502,10 @@ export function clear(){
 		});
 	}
 }
+export function clearDynamic(){
+	return (dispatch) =>{
+		dispatch({
+			type: types.DYNAMIC_CLEAR,
+		});
+	}
+}

@@ -10,8 +10,8 @@ const webPath = 'http://103.254.113.11:8080/fudao-svc/app/'; // 外网
 // const webPath = 'http://192.168.3.204:3000/'; // 王朋
 
 // 图片服务器地址
-const picPath = 'http://103.254.113.11:9191/'; // 外网
-// const picPath = 'http://192.168.10.69:9191/'; // 内网
+// const picPath = 'http://103.254.113.11:9191/'; // 外网
+ const picPath = 'http://192.168.10.69:9191/'; // 内网
 
 const urls = {
 	apiPath,
@@ -95,7 +95,7 @@ const urls = {
 
 		//搜索------------------------------------------------------------------------
 		//全部搜索
-		SEARCH_ALL: apiPath + 'app/searchAction!searchAll.action?type=woman&page=1&pageSize=10&keyword=',
+		SEARCH_ALL: apiPath + 'app/searchAction!searchAll.action?type=woman&page=1&pageSize=5',
 
 		// 注册登录(老)
 		//验证手机号

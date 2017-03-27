@@ -2,9 +2,9 @@ import React, {PureComponent} from "react";
 import {StyleSheet, View, Alert} from "react-native";
 import {connect} from "react-redux";
 import GiftedListView from "../../components/GiftedListView";
-import {Container, Header} from "../../components/index";
+import {Container, Content, Header} from "../../components/index";
 import ArticleItem from "../article/components/ArticleItem";
-import {request, urls} from "../../utils/";
+import {request, urls, toast} from "../../utils/";
 
 
 /**
@@ -16,13 +16,13 @@ class Collection extends PureComponent {
 		return (
 			<Container>
 				<Header {...this.props}/>
-				<View style={styles.listView}>
+				<Content delay>
 					<GiftedListView
 						ref={(e) => this._giftedListview = e}
 						onFetch={this._onFetch.bind(this)}
 						rowView={this._renderRowView.bind(this)}
 					/>
-				</View>
+				</Content>
 			</Container>
 		)
 	}
@@ -44,7 +44,7 @@ class Collection extends PureComponent {
 
 	_renderRowView(rowData) {
 		return (
-			<ArticleItem article={rowData} onLongPress={() => this._onLongPress(rowData)}/>
+			<ArticleItem article={rowData.sourceObj} onLongPress={() => this._onLongPress(rowData)}/>
 		)
 	}
 
@@ -60,12 +60,10 @@ class Collection extends PureComponent {
 		request.getJson(urls.apis.MY_COLLECTION_DELETE, {
 			id: rowData.id
 		}).then((result) => {
-			//alert(JSON.stringify(result));
+			toast.show('删除成功');
 		});
 
-		let rows = this._giftedListview._getRows();
-		rows.splice(1, 1);
-		this._giftedListview._updateRows(rows, {});
+		this._giftedListview._refresh();
 
 	}
 }
