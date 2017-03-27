@@ -30,30 +30,33 @@ class MenuDetail extends PureComponent {
                                 <Image source={{uri: urls.getImage(data.img,width,200)}} style={{width:width,height:200}}></Image>
                             </View>
                             <ScrollView style={styles.scrollView}>
-                                <View>
-                                    <View style={styles.cpBar}>
-                                        <Text>主料</Text>
+                                <View style={{marginBottom:20}}>
+                                    <View>
+                                        <View style={styles.cpBar}>
+                                            <Text>主料</Text>
+                                        </View>
+                                        <View style={styles.cp}>
+                                            <Text>{data.ingredients}</Text>
+                                        </View>
                                     </View>
-                                    <View style={styles.cp}>
-                                        <Text>{data.ingredients}</Text>
+                                    <View>
+                                        <View style={styles.cpBar}>
+                                            <Text>辅料</Text>
+                                        </View>
+                                        <View style={styles.cp}>
+                                            <Text>{data.mainIngredient}</Text>
+                                        </View>
+                                    </View>
+                                    <View>
+                                        <View  style={styles.cpBar}>
+                                            <Text>操作方法</Text>
+                                        </View>
+                                        <View style={styles.cp}>
+                                            <Text>{data.steps}</Text>
+                                        </View>
                                     </View>
                                 </View>
-                                <View>
-                                    <View style={styles.cpBar}>
-                                        <Text>辅料</Text>
-                                    </View>
-                                    <View style={styles.cp}>
-                                        <Text>{data.mainIngredient}</Text>
-                                    </View>
-                                </View>
-                                <View>
-                                    <View  style={styles.cpBar}>
-                                        <Text>操作方法</Text>
-                                    </View>
-                                    <View style={styles.cp}>
-                                        <Text>{data.steps}</Text>
-                                    </View>
-                                </View>
+
                             </ScrollView>
                         </View>
                     </Content>
@@ -107,7 +110,7 @@ const styles = {
         paddingBottom:4,
     },
     scrollView:{
-        height:height-200,
+        height:height-260,
         marginBottom:20
     }
 

@@ -136,14 +136,11 @@ class Menukinds extends PureComponent {
     }
     renderCaiPu(item, index) {
         return (
-                <View key={index} style={styles["menu"+index]}>
-                    <TouchableOpacity
-                            onPress={() =>this.detail(item,index)}
-                    >
-                        <Text style={styles.doc}>{item.name}</Text>
-                    </TouchableOpacity>
-                </View>
-
+            <TouchableOpacity key={index} style={styles["menu"+index]}
+                onPress={() =>this.detail(item,index)}
+            >
+                            <Text style={styles.doc}>{item.name}</Text>
+            </TouchableOpacity>
         )
     }
     _goToPage(item,index) {

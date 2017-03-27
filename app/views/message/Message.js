@@ -4,7 +4,7 @@ import {Container, Content, Header, Separator,List} from "../../components/index
 import {Actions} from "react-native-router-flux";
 import {View,Dimensions,TouchableHighlight,TouchableOpacity } from "react-native";
 import {Text,Thumbnail,ListItem,Left,Body,Button,Icon} from "native-base";
-import {theme} from "../../utils/index";
+import {theme,toast} from "../../utils/index";
 var width=Dimensions.get('window').width;
 var height=Dimensions.get('window').height;
 class Message extends Component {
@@ -15,7 +15,6 @@ class Message extends Component {
                 <Header {...this.props}/>
                 <Content gray>
                     <View>
-                        <TouchableHighlight onPress={()=>this._open()}>
                             <View style={{backgroundColor:'#fff'}}>
                                 <ListItem avatar>
                                     <Left>
@@ -23,13 +22,16 @@ class Message extends Component {
                                                    source={require('./assets/mag-org.png')}/>
                                     </Left>
                                     <Body>
-                                    <Text>互动消息</Text>
-                                    <Text note>牛牛快跑给您分享了一个链接！</Text>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
+                                            <Text>互动消息</Text>
+                                            <Text note>牛牛快跑给您分享了一个链接！</Text>
+                                        </View>
+                                    </TouchableOpacity>
                                     </Body>
                                 </ListItem>
                             </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight onPress={()=>this._open()}>
+
                             <View style={{backgroundColor:'#fff'}}>
                                 <ListItem avatar>
                                     <Left>
@@ -37,13 +39,15 @@ class Message extends Component {
                                                    source={require('./assets/msg1.png')}/>
                                     </Left>
                                     <Body>
-                                    <Text>系统消息</Text>
-                                    <Text note>福道健康有新版本了，快来更新把！</Text>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
+                                            <Text>系统消息</Text>
+                                            <Text note>福道健康有新版本了，快来更新把！</Text>
+                                        </View>
+                                    </TouchableOpacity>
                                     </Body>
                                 </ListItem>
                             </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight onPress={()=>this._open()}>
                             <View style={{backgroundColor:'#fff'}}>
                                 <ListItem avatar>
                                     <Left>
@@ -51,15 +55,17 @@ class Message extends Component {
                                                    source={require('./assets/msg3.png')}/>
                                     </Left>
                                     <Body>
-                                    <Text>福福</Text>
-                                    <Text note>吃饭时间到，快来看看福福给您准备了...</Text>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
+                                            <Text>福福</Text>
+                                            <Text note>吃饭时间到，快来看看福福给您准备了...</Text>
+                                        </View>
+                                    </TouchableOpacity>
                                     </Body>
                                 </ListItem>
                             </View>
-                        </TouchableHighlight>
                     </View>
                     <View style={{marginTop:10}}>
-                        <TouchableHighlight onPress={()=>this._open()}>
                             <View style={{backgroundColor:'#fff'}}>
                                 <ListItem avatar>
                                     <Left>
@@ -67,13 +73,15 @@ class Message extends Component {
                                                    source={require('./assets/touxiang1.jpg')}/>
                                     </Left>
                                     <Body>
-                                    <Text>神奇小白马</Text>
-                                    <Text note>[微笑]</Text>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
+                                            <Text>神奇小白马</Text>
+                                            <Text note>[微笑]</Text>
+                                        </View>
+                                    </TouchableOpacity>
                                     </Body>
                                 </ListItem>
                             </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight onPress={()=>this._open()}>
                             <View style={{backgroundColor:'#fff'}}>
                                 <ListItem avatar>
                                     <Left>
@@ -81,13 +89,15 @@ class Message extends Component {
                                                    source={require('./assets/touxiang2.jpg')}/>
                                     </Left>
                                     <Body>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
                                     <Text>初九</Text>
                                     <Text note>我打开了你得分享，快来跟我聊聊吧!</Text>
+                                        </View>
+                                    </TouchableOpacity>
                                     </Body>
                                 </ListItem>
                             </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight onPress={()=>this._open()}>
                             <View style={{backgroundColor:'#fff'}}>
                                 <ListItem avatar>
                                     <Left>
@@ -95,12 +105,15 @@ class Message extends Component {
                                                    source={require('./assets/touxiang3.jpg')}/>
                                     </Left>
                                     <Body>
-                                    <Text>王美丽</Text>
-                                    <Text note>我赞了你哦！</Text>
+                                    <TouchableOpacity onPress={()=>this._open()}>
+                                        <View>
+                                            <Text>王美丽</Text>
+                                            <Text note>我赞了你哦！</Text>
+                                        </View>
+                                    </TouchableOpacity>
                                     </Body>
                                 </ListItem>
                             </View>
-                        </TouchableHighlight>
                     </View>
                 </Content>
             </Container>
