@@ -5,7 +5,7 @@ import Swiper from 'react-native-swiper'
 import {ListItem, Text, Button,} from "native-base";
 import {View,Image,ToastAndroid,DeviceEventEmitter,TouchableHighlight} from "react-native";
 import {theme} from "../../../utils/";
-import {delMyQuestion} from '../../../actions/my-question.js'
+import {delMyQuestion,getQuestionTreetment,skipToDetail} from '../../../actions/my-question.js'
 import {request,urls} from "../../../utils/";
 
 /**
@@ -82,7 +82,7 @@ class QuestionMyself extends PureComponent {
 
   renderOneQuestion(num){
     return (
-      <Button transparent style={styles.oneQuestion} onPress={()=>Actions.myQuestionDetail({question:this.props.my_question[num]})}>
+      <Button transparent style={styles.oneQuestion} onPress={this._onPress.bind(this,this.props.my_question[num])}>
           <Image source={{uri:urls.getImage(this.props.my_question[num].img)}} style={styles.img}/>
           <Text style={styles.oneTitle}>{this.props.my_question[num].showVal}</Text>
           <TouchableHighlight  onPress={this.choose.bind(this,this.props.my_question[num])} underlayColor='#fafafa'>
@@ -90,6 +90,11 @@ class QuestionMyself extends PureComponent {
           </TouchableHighlight>
       </Button>
     )
+  }
+
+  _onPress(question){
+      let {onItemPress} = this.props;
+      onItemPress(question);
   }
 
   choose(obj){
@@ -155,6 +160,15 @@ const styles = {
     justifyContent:'flex-end',
   }
 };
+
+
+QuestionMyself.propTypes = {
+  onItemPress: React.PropTypes.func,
+}
+
+QuestionMyself.defaultProps = {
+  onItemPress: ()=>{}
+}
 
 
 const mapStateToProps = state => ({

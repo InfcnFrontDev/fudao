@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {Actions} from "react-native-router-flux";
-import {View,ToastAndroid} from "react-native";
+import {View} from "react-native";
 import {Right, Button, Icon, Text} from "native-base";
 import {Container, Content, Header, Separator} from "../../../components/index";
 import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-view";
@@ -51,7 +51,6 @@ class MyRecordDay extends PureComponent {
 	}
 
 	_renderTabBar(name, page, isTabActive, onPressHandler, onLayoutHandler){
-		// ToastAndroid.show(JSON.stringify(parseInt(name)),ToastAndroid.SHORT);
 		var disabled=(null);
 		if(parseInt(name)==this.nowDate.getDate()){
 			disabled=this.disabled.map((p,i)=>{

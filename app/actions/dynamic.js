@@ -1,7 +1,6 @@
 import * as types from "../actions/types";
 import ImagePicker from 'react-native-image-picker';
 import {request, urls,toast} from "../utils/";
-import { ToastAndroid,} from "react-native";
 import {Actions} from "react-native-router-flux";
 
 /**
@@ -247,7 +246,6 @@ export function fetchData(page,options,callback,params){
 					}).then((res)=>{
 						  if(res.datas.length>0) {
 								//有网状态下第一次加载
-								toast.show('first');
 								var arrDynamic = res.datas.slice(0,5);
 								insert(arrDynamic,params.realm,params.user.appid);
 						    let realm_res = params.realm.objects('Dynamic').sorted('publishTime');
@@ -272,7 +270,6 @@ export function fetchData(page,options,callback,params){
 						      }else{
 						        var firstresObj = res;
 						      }
-									toast.show(JSON.stringify(firstresObj));
 									firstres =Array.prototype.slice.call(firstresObj, 0);
 						      dynamicList=firstres.reverse();
 									if(res.datas.length<5){
@@ -315,19 +312,10 @@ export function fetchData(page,options,callback,params){
 							var dynamicList = params.dynamic;
 						}
 						callback(dynamicList);
-						request.getJson(urls.apis.DYNAMIC_LIST,{
-							userId:params.user.appid,
-							page:1,
-							rows:5*params.time,
-						}).then((result) =>{
-							if(result.datas.length>0){
-								insert(result.datas,params.realm,params.user.appid);
-							}
-						})
+						tongbu(params.user.appid,1,params.time,params.realm)
 					}
 			)
 		}else if(options.loadMore){
-			toast.show('loadMore'+params.page);
 				if(params.page){
 					dispatch({
 						type: types.DYNAMIC_LIST_LOAD,
@@ -370,7 +358,6 @@ export function fetchData(page,options,callback,params){
 										}
 										insert(newDynamic,params.realm,params.user.appid);
 										var dynamicList = params.dynamic.concat(newDynamic);
-
 										callback(dynamicList);
 										dispatch({
 											type: types.DYNAMIC_LIST_LOAD,
@@ -383,6 +370,24 @@ export function fetchData(page,options,callback,params){
 		  }
 		}
 	}
+}
+
+function tongbu(id,page,time,realm){
+	request.getJson(urls.apis.DYNAMIC_LIST,{
+		userId:id,
+		page:1,
+		rows:5*time,
+	}).then((result) =>{
+		if(result.datas.length>0){
+			insert(result.datas,realm,id);
+			let realm_res = realm.objects('Dynamic').sorted('publishTime');
+			let realm_data = realm_res.filtered('publishTime>="'+result.datas[result.datas.length-1].publishTime+'"');
+			if(result.datas.length<realm_data.length){
+
+			}
+
+		}
+	})
 }
 
 //数据库插入操作，本文件内调用

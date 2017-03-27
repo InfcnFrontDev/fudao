@@ -35,7 +35,7 @@ class TreatmentDaily extends PureComponent {
 
     renderRowView(row){
       return (
-        <TreatmentDailyRow row={row} title={this.props.title}/>
+        <TreatmentDailyRow row={row} title={this.props.questionDetail.showVal}/>
       )
     }
 
@@ -85,11 +85,6 @@ const styles = {
   listData:{
     color:'#949494',
   }
-
-
 }
 
-const mapStateToProps = state => ({
-  questionDetail:state.myQuestion.questionDetail,
-});
-export default connect(mapStateToProps)(TreatmentDaily);
+export default (TreatmentDaily);

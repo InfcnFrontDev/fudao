@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Header, Title, Content, Left, Button, Icon, Body, Right} from "native-base";
-import {View, Image, DeviceEventEmitter} from "react-native";
+import { Button} from "native-base";
+import {Container, Content, Header, Loading} from "../../components/index";
+import {View, Image, DeviceEventEmitter,ScrollView} from "react-native";
 import {Actions} from "react-native-router-flux";
 import QuestionMyself from './components/QuestionMyself'
 import QuestionAll from '../../components/QuestionAndExpectAll'
@@ -26,21 +27,12 @@ class MyQuestion extends PureComponent {
 
         return (
             <Container style={styles.container}>
-              <Header>
-                  <Left>
-                      <Button transparent onPress={()=>Actions.pop()}>
-                          <Icon name='arrow-back' />
-                      </Button>
-                  </Left>
-                  <Body>
-                      <Title>{this.props.title}</Title>
-                  </Body>
-                  <Right>
-                  </Right>
-              </Header>
-              <Content style={styles.content}>
-                <QuestionMyself />
-                <QuestionAll from='myquestion'/>
+              <Header {...this.props} />
+              <Content delay>
+                  <ScrollView>
+                      <QuestionMyself from='list' onItemPress={(question) => Actions.myQuestionDetail({question})}/>
+                      <QuestionAll from='myquestion'/>
+                  </ScrollView>
               </Content>
             </Container>
         )

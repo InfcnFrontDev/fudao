@@ -28,7 +28,7 @@ class TreatmentProfessionList extends PureComponent {
               <List dataArray={p.datas} renderRow={(data)=>{
                 return (
                   <ListItem  style={styles.list}>
-                    <Button transparent style={styles.button} onPress={()=>Actions['treatmentDetail']({data:data,title:this.props.title})}>
+                    <Button transparent style={styles.button} onPress={()=>Actions['treatmentDetail']({data:data,title:this.props.questionDetail.showVal})}>
                       <View style={styles.name}>
                         <Text>{data.name}</Text>
                       </View>
@@ -43,10 +43,6 @@ class TreatmentProfessionList extends PureComponent {
       })
       return item;
     }
-    //
-
-
-
 }
 
 const styles = {
@@ -79,11 +75,6 @@ const styles = {
   name:{
     flex:1,
   }
-
-
 }
 
-const mapStateToProps = state => ({
-  questionDetail:state.myQuestion.questionDetail,
-});
-export default connect(mapStateToProps)(TreatmentProfessionList);
+export default (TreatmentProfessionList);
