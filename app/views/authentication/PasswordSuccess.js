@@ -63,9 +63,7 @@ class SetPassword extends PureComponent {
                  dispatch(login(data.obj.accountInfo));
                 if (userInformation != undefined) { //基本信息已经添加完成
                     // 跳到首页
-                    Actions.index({
-                        type: ActionConst.POP_AND_REPLACE,
-                    });
+                    Actions.index();
                 } else { //没有基本信息表示第一次登录需要添写信息
                     Actions['startInformation']({
                         appid:appid

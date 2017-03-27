@@ -1,14 +1,17 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
+import {Actions,ActionConst} from "react-native-router-flux";
 import {Container,Content,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {theme,request,urls,tools,toast} from "../../utils/";
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
-import  CommitButton from "./components/CommitButton"
-import  {hex_md5} from "./components/md5"
+import  CommitButton from "./components/CommitButton";
+import  {hex_md5} from "./components/md5";
+import {login} from "../../actions/user";
 import {clearMyQuestion} from "../../actions/my-question";
 import {clearMyEmotion} from "../../actions/emotion";
 import {clearFriend} from "../../actions/friend";
+import {clearDynamic} from "../../actions/dynamic";
+import {clearPosition} from "../../actions/position";
 /**
  * 设置密码
  */
@@ -63,7 +66,8 @@ class RebuildSuccess extends PureComponent {
                     if (userInformation != undefined) { //基本信息已经添加完成
                         let user = Object.assign({}, {
                             ...data.obj.accountInfo,
-                            ...userInformation
+                            ...userInformation,
+                            ...data.obj
                         });
                         // 保存用户状态
                         this.props.dispatch(login(user));
@@ -71,6 +75,8 @@ class RebuildSuccess extends PureComponent {
                         this.props.dispatch(clearMyQuestion());
                         this.props.dispatch(clearMyEmotion());
                         this.props.dispatch(clearFriend());
+                        this.props.dispatch(clearDynamic());
+                        this.props.dispatch(clearPosition());
                         // 跳到首页
                         Actions.index();
                     } else { //没有基本信息表示第一次登录需要添写信息

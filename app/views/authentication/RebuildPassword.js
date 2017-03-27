@@ -16,6 +16,7 @@ import {checkPwd} from "./components/public";
 /**
  * 设置密码
  */
+const dismissKeyboard = require('dismissKeyboard');
 class RebuildPassword extends PureComponent {
     constructor(props){
         super(props);
@@ -62,6 +63,8 @@ class RebuildPassword extends PureComponent {
         }else if(!checkPwd(password)){
             toast.show("请填入6-12由字母或数字或下划线组成的密码！");
         }else{
+            //关闭软键盘
+            dismissKeyboard();
             const {dispatch} = this.props;
             dispatch(showLoading());
             request.getJson(urls.apis.AUTH_NEW_PASSWORD,{

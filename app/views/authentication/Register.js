@@ -17,7 +17,7 @@ import  GetCode from "./components/GetCode";
 /**
  * 注册
  */
-
+const dismissKeyboard = require('dismissKeyboard');
 class Register extends PureComponent {  // eslint-disable-line
     constructor(props){
         super(props);
@@ -95,6 +95,8 @@ class Register extends PureComponent {  // eslint-disable-line
         }else if(code==""){
             toast.show("验证码不能为空");
         }else{
+            //关闭软键盘
+            dismissKeyboard();
             /*接口*/
             dispatch(showLoading());
             request.getJson(urls.apis.AUTH_CHECK_CODE,{
@@ -105,13 +107,9 @@ class Register extends PureComponent {  // eslint-disable-line
                     dispatch(hideLoading());
                     if(data.success) {
                         this._getGode.clearTimer();
-                       Actions.setPassword({
-                            type: ActionConst.POP_AND_REPLACE,
-                           phone:phone,
-                        })
-                        /*Actions['setPassword']({
+                        Actions['setPassword']({
                             phone:phone,
-                        });*/
+                        });
                     } else {
                         toast.show("验证码错误...");
                         this.setState({

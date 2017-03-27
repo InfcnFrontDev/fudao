@@ -15,6 +15,7 @@ import {showLoading, hideLoading} from "../../actions/loading";
 /**
  * 设置密码
  */
+const dismissKeyboard = require('dismissKeyboard');
 class SetPassword extends PureComponent {
     constructor(props){
         super(props);
@@ -61,8 +62,9 @@ class SetPassword extends PureComponent {
         }else if(!checkPwd(password)){
             toast.show("请填入6-12由字母或数字或下划线组成的密码！");
         }else{
+            //关闭软键盘
+            dismissKeyboard();
             const {dispatch} = this.props;
-            /*dispatch(showLoading());*/
             let appid=tools.uuid();
             request.getJson(urls.apis.AUTH_REG,{
                         appid:appid,
@@ -72,18 +74,13 @@ class SetPassword extends PureComponent {
                 /*dispatch(hideLoading());*/
                     if(data.success) {
                         setTimeout(function() {
-                           /* Actions.passwordSuccess({
-                                type: ActionConst.POP_AND_REPLACE,
-                                phone:phone,
-                                password:password
-                            })*/
                            Actions['passwordSuccess']({phone:phone,password:password})
                         }, 1000);
                     }else{
                         toast.show("注册失败");
                     }
                 },(error)=>{
-                    /*dispatch(hideLoading());*/
+
                 })
         }
 
