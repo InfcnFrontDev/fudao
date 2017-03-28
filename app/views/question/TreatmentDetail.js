@@ -12,7 +12,7 @@ class TreatmentDetail extends PureComponent {
   }
 
     render() {
-      var content = this.props.data.details;
+      var content = this.props.data.details || this.props.data.detail;
       if(content==''){
         content = this.props.data.principle;
       }

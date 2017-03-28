@@ -49,7 +49,7 @@ class MyExpect extends PureComponent {
 	 * @private
 	 */
 	_onItemPress(expect) {
-		Actions.myQuestionDetail({expect})
+		Actions.myExpectDetail({expect})
 	}
 
 	/**

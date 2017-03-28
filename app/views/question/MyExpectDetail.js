@@ -2,49 +2,51 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Content, Header} from "../../components/index";
 import {View, Image} from "react-native";
-import QuestionMyself from "./components/QuestionMyself";
-import QuestionTab from "./components/QuestionTab";
-import {request, urls} from "../../utils/index";
+import ExpectMyself from "./components/QuestionMyself";
+import ExpectTab from "./components/QuestionTab";
+import {request, urls,toast} from "../../utils/index";
 
 /**
  * 我的问题详情
  */
-class MyQuestionDetail extends PureComponent {
+class MyExpectDetail extends PureComponent {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			question: props.question
+			expect: props.expect
 		}
 	}
 
 	render() {
-		let {myQuestions} = this.props;
-		let {question} = this.state;
+		let {myExpects} = this.props;
+		let {expect} = this.state;
+		// toast.show('expect'+JSON.stringify(expect.id));
 		return (
 			<Container style={styles.container}>
-				<Header title={question && question.showVal}/>
+				<Header title={expect && expect.name}/>
 				<Content delay>
-					<QuestionMyself
-						title="我的问题"
-						items={myQuestions}
-						selectedItem={question}
+					<ExpectMyself
+						title="我的期望"
+						items={myExpects}
+						selectedItem={expect}
 						onItemPress={(item) => this._onItemPress(item)}
 						onItemRemove={(item) => this._onItemRemove(item)}/>
-					<QuestionTab question={question} url={urls.apis.MY_QUESTION_TREETMENT}/>
+					<ExpectTab question={expect} url={urls.apis.MY_EXPECT_TREETMENT}/>
 				</Content>
 			</Container>
 		)
 	}
 
-	_onItemPress(question) {
+	_onItemPress(expect) {
+
 		let that =this;
 		this.setState({
-			question: null
+			expect: null
 		})
 		setTimeout(()=>{
 			that.setState({
-				question: question
+				expect: expect
 			})
 		},300)
 	}
@@ -61,6 +63,6 @@ const styles = {
 
 const mapStateToProps = state => ({
 	...state.user,
-	...state.question,
+	...state.expect,
 });
-export default connect(mapStateToProps)(MyQuestionDetail);
+export default connect(mapStateToProps)(MyExpectDetail);

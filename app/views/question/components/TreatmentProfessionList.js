@@ -1,8 +1,7 @@
 import React, {PureComponent} from "react";
-import { View, Text,ScrollView,ToastAndroid} from "react-native";
-import {Left, Right, Body,ListItem, Button,List} from "native-base";
+import {View,Text,ScrollView} from "react-native";
+import {ListItem, Button,List} from "native-base";
 import {Actions} from "react-native-router-flux";
-import {connect} from "react-redux";
 
 class TreatmentProfessionList extends PureComponent {
   constructor(props){
@@ -12,23 +11,24 @@ class TreatmentProfessionList extends PureComponent {
 
     render() {
         return (
-          <ScrollView style={{height:500}}>
+          <ScrollView style={styles.scrollView}>
             {this._renderList()}
           </ScrollView>
         )
     }
 
     _renderList(){
-      let item = this.props.questionDetail.professionalMethods.map((p, i) => {
+      let {professionalMethods,title} = this.props;
+      let item = professionalMethods.map((p, i) => {
         return (
           <View key={i} style={styles.oneType}>
             <View style={styles.divider}>
-                <Text>{p.type}</Text>
+                <Text>{p.type || p.type_value}</Text>
             </View>
-              <List dataArray={p.datas} renderRow={(data)=>{
+              <List dataArray={p.datas || p.methods} renderRow={(data)=>{
                 return (
                   <ListItem  style={styles.list}>
-                    <Button transparent style={styles.button} onPress={()=>Actions['treatmentDetail']({data:data,title:this.props.questionDetail.showVal})}>
+                    <Button transparent style={styles.button} onPress={()=>Actions['treatmentDetail']({data:data,title:title})}>
                       <View style={styles.name}>
                         <Text>{data.name}</Text>
                       </View>
@@ -46,6 +46,9 @@ class TreatmentProfessionList extends PureComponent {
 }
 
 const styles = {
+  scrollView:{
+    flex:1
+  },
   oneType:{
     borderTopColor:'#D8D8D8',
     borderTopWidth:2,
@@ -75,6 +78,16 @@ const styles = {
   name:{
     flex:1,
   }
+}
+
+TreatmentProfessionList.propTypes = {
+  professionalMethods: React.PropTypes.array,
+  title:  React.PropTypes.string,
+}
+
+TreatmentProfessionList.defaultProps = {
+  professionalMethods: [],
+  title:'',
 }
 
 export default (TreatmentProfessionList);
