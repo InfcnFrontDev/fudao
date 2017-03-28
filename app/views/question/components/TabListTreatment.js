@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {View,ToastAndroid} from "react-native";
 import {Text,Button} from "native-base";
 import {Content,} from "../../../components/index";
-import {request, urls} from "../../../utils/index";
+import {request, urls,toast} from "../../../utils/index";
 import TreatmentProfessionList from "./TreatmentProfessionList";
 import TreatmentDaily from "./TreatmentDaily";
 import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
@@ -20,11 +20,13 @@ class TabListTreatment extends PureComponent {
 
     componentWillMount(){
       let {question,url} = this.props;
+      // if()
       request.getJson(url,{
         diseaseId:question.id,
-        renqun:'aged',
+        renqunId:'aged',
         local:'北京'
       }).then((res)=>{
+        toast.show(JSON.stringify(res))
         this.setState({
          treatmentList: res.obj
        })
@@ -53,12 +55,12 @@ class TabListTreatment extends PureComponent {
                 <TreatmentDaily
                     key={0}
                     dailyMethods={treatmentList.dailyMethods}
-                    title={question.showVal}
+                    title={question.showVal||question.name}
                 />
                 <TreatmentProfessionList
                     key={1}
                     professionalMethods={treatmentList.professionalMethods}
-                    title={question.showVal}
+                    title={question.showVal||question.name}
                 />
             </ScrollableTabView>
 

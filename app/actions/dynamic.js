@@ -2,7 +2,7 @@ import * as types from "../actions/types";
 import ImagePicker from 'react-native-image-picker';
 import {request, urls,toast} from "../utils/";
 import {Actions} from "react-native-router-flux";
-
+import {ToastAndroid} from 'react-native'
 /**
  * 动态列表：newDynamic
  */
@@ -244,7 +244,8 @@ export function fetchData(page,options,callback,params){
 							page:1,
 							rows:6,
 					}).then((res)=>{
-						  if(res.datas.length>0) {
+
+						  if(res.datas!=[]) {
 								//有网状态下第一次加载
 								var arrDynamic = res.datas.slice(0,5);
 								insert(arrDynamic,params.realm,params.user.appid);
@@ -263,7 +264,10 @@ export function fetchData(page,options,callback,params){
 								}
 						  }else{
 								//无网状态下第一次加载
-						    let res = params.realm.objects('Dynamic').sorted('publishTime');
+								ToastAndroid.show(JSON.stringify(res),ToastAndroid.SHORT)
+
+						    let res_realm = params.realm.objects('Dynamic').sorted('publishTime');
+								let res =Array.prototype.slice.call(res_realm, 0);
 						    if(res.length>0){
 						      if(res.length>6){
 						        var firstresObj = res.slice(res.length-5,res.length);

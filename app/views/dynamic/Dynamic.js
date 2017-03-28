@@ -48,7 +48,6 @@ class Dynamic extends PureComponent {
 
     componentDidUpdate(){
       this.props.updateRealm(this.props.dynamic.update,false,this.props.user.appid,this.props.realm)
-
     }
 
 

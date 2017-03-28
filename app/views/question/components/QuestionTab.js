@@ -17,7 +17,7 @@ class QuestionTab extends PureComponent {
   }
 
   render(){
-    let {question} = this.props;
+    let {question,url} = this.props;
     if(question){
       return (
         <ScrollableTabView
@@ -28,7 +28,7 @@ class QuestionTab extends PureComponent {
           tabBarTextStyle={{color:'#000',fontWeight:"400",}}
         >
           <TabListMeridian tabLabel='经络穴位' diseaseName={question.showVal}/>
-          <TabListTreatment tabLabel='自疗方案' question={question}/>
+          <TabListTreatment tabLabel='自疗方案' question={question} url={url}/>
         </ScrollableTabView>
       )
       }
@@ -41,5 +41,16 @@ const styles = {
     flex:1,
   },
 };
+
+QuestionTab.propsTypes = {
+	question: React.PropTypes.object,
+  url:  React.PropTypes.string,
+}
+QuestionTab.defaultProps = {
+	question: {
+    showVal:'',
+  },
+  url: ''
+}
 
 export default (QuestionTab);

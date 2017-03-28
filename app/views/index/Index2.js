@@ -31,7 +31,7 @@ class Index extends PureComponent {
 
 	constructor(props) {
 		super(props);
-		this.props.newRealm();
+		this.props.newRealm(schema,props.id);
 	}
 
 
@@ -79,9 +79,12 @@ const styles = {
 };
 function bindAction(dispatch) {
 	return {
-		newRealm: () => dispatch(newRealm(schema)),
+		newRealm: (schema,id) => dispatch(newRealm(schema,id)),
 	};
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	id:state.user.loginUser.appid,
+
+});
 export default connect(mapStateToProps, bindAction)(Index);
