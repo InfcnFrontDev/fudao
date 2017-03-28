@@ -4,14 +4,13 @@ const apiPath = 'http://103.254.113.11:8080/fudao-svc/'; // 外网
 // const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
 
 // web服务器地址
-const webPath = 'http://103.254.113.11:8080/fudao-svc/app/'; // 外网
-// const webPath = 'http://192.168.10.69:8080/fudao-svc/app/'; // 内网
+// const webPath = 'http://103.254.113.11:8080/fudao-svc/app/'; // 外网
+ const webPath = 'http://192.168.10.69:8080/fudao-svc/app/'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
 // const webPath = 'http://192.168.3.204:3000/'; // 王朋
-
 // 图片服务器地址
 const picPath = 'http://103.254.113.11:9191/'; // 外网
- // const picPath = 'http://192.168.10.69:9191/'; // 内网
+// const picPath = 'http://192.168.10.69:9191/'; // 内网
 
 const urls = {
 	apiPath,
@@ -162,6 +161,16 @@ const urls = {
 		MY_QUESTION_DEL_USER_QUESTION: apiPath + 'app/threeDiseasesListAction!deleteUserDisease.action',
 		//疾病日常疗法的推荐的菜谱
 		MENU_KINDS: apiPath + 'app/threeDiseasesListAction!findIngredientsContainsCookbook.action',
+
+		// 我的期望 ---------------------------------------------------------
+		//所有期望
+		EXPECT_ALL_EXPECT_LIST: apiPath + 'app/zixiuAction!findZixiuPartContainsProject.action',
+		//用户期望
+		EXPECT_USER_EXPECT_LIST: apiPath + 'app/zixiuAction!getZixiuProjectsByUserId.action',
+		//添加用户期望
+		EXPECT_ADD_USER_EXPECT: apiPath + 'app/zixiuAction!addMyZixiu.action',
+		//删除用户期望
+		EXPECT_REMOVE_USER_EXPECT: apiPath + 'app/zixiuAction!deleteMyZixiu.action',
 
 	},
 

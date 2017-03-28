@@ -33,8 +33,9 @@ export default class Content extends PureComponent {
 	}
 
 	componentDidMount() {
-		let {delay} = this.props;
-		if (delay) {
+		let {isLoading} = this.state;
+		console.log(isLoading);
+		if (isLoading) {
 			tools.delayLoad(() => {
 				this.setState({
 					isLoading: false

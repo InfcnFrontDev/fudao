@@ -9,8 +9,7 @@ import {config, urls,theme,toast,request} from "../../utils/index";
  * 菜谱
  */
 
-var width=Dimensions.get('window').width;
-var height=Dimensions.get('window').height;
+
 class MenuDetail extends PureComponent {
     constructor(props) {
         super(props);
@@ -27,7 +26,7 @@ class MenuDetail extends PureComponent {
                     <Content>
                         <View style={styles.box1}>
                             <View style={styles.imgBox}>
-                                <Image source={{uri: urls.getImage(data.img,width,200)}} style={{width:width,height:200}}></Image>
+                                <Image source={{uri: urls.getImage(data.img)}} style={styles.img}></Image>
                             </View>
                             <ScrollView style={styles.scrollView}>
                                 <View style={{marginBottom:20}}>
@@ -70,7 +69,13 @@ const styles = {
         height:200,
         backgroundColor:'#fff',
         justifyContent: 'center',
+        alignItems:'center'
     },
+    img:{
+        width:theme.deviceWidth * 0.8,
+        height:150,
+        resizeMode:'cover'
+},
     button:{
         flex:1,
         justifyContent:'center'
@@ -110,7 +115,7 @@ const styles = {
         paddingBottom:4,
     },
     scrollView:{
-        height:height-260,
+        height:theme.deviceHeight-260,
         marginBottom:20
     }
 

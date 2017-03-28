@@ -7,9 +7,10 @@ import loading from "./loading";
 import user from "./user";
 import friend from "./friend";
 import settings from "./settings";
-import myQuestion from "./my-question";
 import question from "./question";
+import expect from "./expect";
 import emotion from "./emotion";
+
 export default combineReducers({
 	position,
 	realm,
@@ -19,7 +20,7 @@ export default combineReducers({
 	user,
 	friend,
 	settings,
-	myQuestion,
 	question,
+	expect,
 	emotion,
 });
