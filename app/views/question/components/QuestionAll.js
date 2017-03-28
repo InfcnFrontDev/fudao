@@ -53,7 +53,7 @@ class QuestionAll extends PureComponent {
 						onPress={() => onItemPress(rowData)}>
 					<View style={styles.rowView}>
 						<Image source={{uri: urls.getImage(rowData.img)}} style={styles.rowimg}/>
-						<Text style={styles.rowTitle}>{rowData.showVal}</Text>
+						<Text style={styles.rowTitle}>{rowData.showVal || rowData.name}</Text>
 						{selectedItem[rowData.id] ?
 							<TouchableHighlight underlayColor='transparent'>
 								<Image source={require('../../../assets/arrows_square_check.png')}
