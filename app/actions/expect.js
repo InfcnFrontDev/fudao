@@ -80,7 +80,7 @@ export function removeMyExpect(userId, expect) {
 	return (dispatch) => {
 		request.getJson(urls.apis.EXPECT_REMOVE_USER_EXPECT, {
 			userId: userId,
-			diseaseId: expect.id,
+			projectId: expect.id,
 		}).then((res) => {
 			dispatch({
 				type: types.EXPECT_REMOVE_MY_EXPECT,
@@ -101,7 +101,7 @@ export function addMyExpect(userId, expect) {
 	return (dispatch) => {
 		request.getJson(urls.apis.EXPECT_ADD_USER_EXPECT, {
 			userId: userId,
-			diseaseId: expect.id,
+			projectId: expect.id,
 		}).then((res) => {
 			dispatch({
 				type: types.EXPECT_ADD_MY_EXPECT,

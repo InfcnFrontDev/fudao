@@ -167,11 +167,11 @@ const urls = {
 		//所有期望
 		EXPECT_ALL_EXPECT_LIST: apiPath + 'app/zixiuAction!findZixiuPartContainsProject.action',
 		//用户期望
-		EXPECT_USER_EXPECT_LIST: apiPath + 'app/threeDiseasesListAction!getUserDiseasesByuserId.action',
+		EXPECT_USER_EXPECT_LIST: apiPath + 'app/zixiuAction!getZixiuProjectsByUserId.action',
 		//添加用户期望
-		EXPECT_ADD_USER_EXPECT: apiPath + 'app/threeDiseasesListAction!addUserDisease.action',
+		EXPECT_ADD_USER_EXPECT: apiPath + 'app/zixiuAction!addMyZixiu.action',
 		//删除用户期望
-		EXPECT_REMOVE_USER_EXPECT: apiPath + 'app/threeDiseasesListAction!deleteUserDisease.action',
+		EXPECT_REMOVE_USER_EXPECT: apiPath + 'app/zixiuAction!deleteMyZixiu.action',
 
 	},
 

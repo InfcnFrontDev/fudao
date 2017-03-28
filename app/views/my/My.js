@@ -1,8 +1,6 @@
 import React, {PureComponent} from "react";
 import {ScrollView} from "react-native";
 import {connect} from "react-redux";
-import {Right, Button, Icon} from "native-base";
-import {Actions} from "react-native-router-flux";
 import {Container, Content, Header} from "../../components/index";
 import Separator from "../../components/Separator";
 import MyPhoto from "./components/MyCover";
