@@ -28,14 +28,18 @@ class TreatmentDaily extends PureComponent {
     }
 
     onFetch(page = 1, callback, options){
-      callback(this.props.questionDetail.dailyMethods,{
+      let {dailyMethods} = this.props;
+      callback(dailyMethods,{
         allLoaded:true
       })
     }
 
     renderRowView(row){
       return (
-        <TreatmentDailyRow row={row} title={this.props.questionDetail.showVal}/>
+        <TreatmentDailyRow
+          rowData={row}
+          title={this.props.title}
+        />
       )
     }
 
@@ -85,6 +89,16 @@ const styles = {
   listData:{
     color:'#949494',
   }
+}
+
+TreatmentDailyRow.propTypes = {
+  dailyMethods: React.PropTypes.array,
+  title:  React.PropTypes.string,
+}
+
+TreatmentDailyRow.defaultProps = {
+  dailyMethods: [],
+  title:'',
 }
 
 export default (TreatmentDaily);

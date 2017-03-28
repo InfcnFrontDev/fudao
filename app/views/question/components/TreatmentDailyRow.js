@@ -1,10 +1,7 @@
 import React, {PureComponent} from "react";
-import { View,ToastAndroid} from "react-native";
-import {Left, Right, Body,ListItem, Button, List, Text} from "native-base";
+import { View} from "react-native";
+import {ListItem, Button, List, Text} from "native-base";
 import {Actions} from "react-native-router-flux";
-import TreatmentProfessionList from "./TreatmentProfessionList";
-import {skipTopCaipin} from '../../../actions/my-question.js'
-import {connect} from "react-redux";
 
 class TreatmentDailyRow extends PureComponent {
   constructor(props){
@@ -13,10 +10,11 @@ class TreatmentDailyRow extends PureComponent {
   }
 
     render() {
-      if(this.props.row.type_value=='饮食'){
-        var principle= '宜食'+this.props.row.datas.diseaseDailyMethod.yiShi+'， 忌食'+this.props.row.datas.diseaseDailyMethod.jinShi;
+      let {rowData,title} =this.props;
+      if(rowData.type_value=='饮食'){
+        var principle= '宜食'+rowData.datas.diseaseDailyMethod.yiShi+'， 忌食'+rowData.datas.diseaseDailyMethod.jinShi;
         var list = (
-          <List dataArray={this.props.row.datas.timePeriod} renderRow={(data) =>{
+          <List dataArray={rowData.datas.timePeriod} renderRow={(data) =>{
             var jishi=(null);
             if(data['禁食']){
               jishi = (
@@ -52,10 +50,10 @@ class TreatmentDailyRow extends PureComponent {
         )
       }else{
         var list = (
-          <List dataArray={this.props.row.datas.datas} renderRow={(data) =>{
+          <List dataArray={rowData.datas.datas} renderRow={(data) =>{
             return (
               <ListItem style={styles.list} >
-                <Button style={styles.button} transparent onPress={()=>Actions['treatmentDetail']({data:data.diseaseDailyMethods[0],from:'日常',title:this.props.title})}>
+                <Button style={styles.button} transparent onPress={()=>Actions['treatmentDetail']({data:data.diseaseDailyMethods[0],from:'日常',title:title})}>
                       <Text style={styles.gan}>-    {data.timePeriod}:</Text>
                       <Text  style={styles.listData}>{data.diseaseDailyMethods[0].name}</Text>
                 </Button>
@@ -69,16 +67,16 @@ class TreatmentDailyRow extends PureComponent {
           <View style={styles.container}>
             <View style={styles.sectionOne}>
                 <Text style={styles.dot}>·</Text>
-                <Text style={styles.data}>{this.props.row.type_value}</Text>
+                <Text style={styles.data}>{rowData.type_value}</Text>
             </View>
-            <Text style={styles.type}>        {this.props.row.type_value=='饮食'?principle:this.props.row.datas.principle}</Text>
+            <Text style={styles.type}>        {rowData.type_value=='饮食'?principle:rowData.datas.principle}</Text>
             {list}
           </View>
         )
     }
 
     caipu(data,flag,type,cookbook_timePeriod){
-      var {dispatch} = this.props;
+      var {dispatch,rowData} = this.props;
       var shi=(null)
       if(flag&&(type=='午餐'||type=='晚餐')){
         var caipin = data['菜品']
@@ -97,7 +95,7 @@ class TreatmentDailyRow extends PureComponent {
 
       shi = arr.map((p,i)=>{
         var obj = {
-          diseaseDailyMethodId:this.props.row.datas.diseaseDailyMethod.id,
+          diseaseDailyMethodId:rowData.datas.diseaseDailyMethod.id,
           ingredientsId:p.id,
           cookbook_timePeriod:cookbook_timePeriod,
           cookbook_type:p.cookbook_type||''
@@ -189,6 +187,16 @@ const styles = {
   color6d:{
     color:'#6D6D6D',
   },
+}
+
+TreatmentDailyRow.propTypes = {
+  rowData: React.PropTypes.object,
+  title:  React.PropTypes.string,
+}
+
+TreatmentDailyRow.defaultProps = {
+  rowData: {},
+  title:'',
 }
 
 export default (TreatmentDailyRow);

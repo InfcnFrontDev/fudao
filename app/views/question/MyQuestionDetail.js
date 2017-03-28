@@ -38,18 +38,15 @@ class MyQuestionDetail extends PureComponent {
 	}
 
 	_onItemPress(question) {
+		let that =this;
 		this.setState({
 			question: null
 		})
-		request.getJson(urls.apis.MY_QUESTION_TREETMENT, {
-			diseaseId: question.id,
-			renqun: 'aged',
-			local: '北京'
-		}).then((res) => {
-			this.setState({
-				question: Object.assign(res.obj, question)
+		setTimeout(()=>{
+			that.setState({
+				question: question
 			})
-		})
+		},300)
 	}
 }
 
