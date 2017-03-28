@@ -20,7 +20,7 @@ class MyQuestion extends PureComponent {
 				<Content delay>
 					<ScrollView>
 						<QuestionMyself
-							title="我的期望"
+							title="我的问题"
 							items={myQuestions}
 							onItemPress={(item) => this._onItemPress(item)}
 							onItemRemove={(item) => this._onItemRemove(item)}/>
