@@ -11,15 +11,6 @@ import {fetchAllQuestions, fetchMyQuestions, addToMyQuestions, removeMyQuestion}
  * 我的问题
  */
 class MyQuestion extends PureComponent {
-	constructor(props) {
-		super(props);
-		this.state = {
-			allQuestionsGroupBy: null,
-			myQuestionIds: {
-				"17": {},
-			},
-		}
-	}
 
 	render() {
 		let {allQuestionsGroupBy, myQuestions, myQuestionMap} = this.props;
@@ -28,18 +19,16 @@ class MyQuestion extends PureComponent {
 				<Header {...this.props}/>
 				<Content delay>
 					<ScrollView>
-						{myQuestions &&
 						<QuestionMyself
+							title="我的期望"
 							items={myQuestions}
 							onItemPress={(item) => this._onItemPress(item)}
 							onItemRemove={(item) => this._onItemRemove(item)}/>
-						}
-						{allQuestionsGroupBy &&
 						<QuestionAll
-							rowsData={allQuestionsGroupBy}
-							selectedData={myQuestionMap}
+							items={allQuestionsGroupBy}
+							selectedItem={myQuestionMap}
 							onItemPress={(item) => this._onItemPress(item)}
-							onItemAdd={(item)=>this._onItemAdd(item)}/>}
+							onItemAdd={(item)=>this._onItemAdd(item)}/>
 					</ScrollView>
 				</Content>
 			</Container>
@@ -48,21 +37,36 @@ class MyQuestion extends PureComponent {
 
 	componentDidMount() {
 		const {dispatch, loginUser} = this.props;
+		// 抓取所有问题
 		dispatch(fetchAllQuestions('aged'));
+		// 抓取我的问题
 		dispatch(fetchMyQuestions(loginUser.userId));
 	}
 
+	/**
+	 * 按下问题， 打开问题详情
+	 * @param question
+	 * @private
+	 */
 	_onItemPress(question) {
-		Actions.myQuestionDetail({
-			question
-		})
+		Actions.myQuestionDetail({question})
 	}
 
+	/**
+	 * 从我的问题列表中移除
+	 * @param question
+	 * @private
+	 */
 	_onItemRemove(question) {
 		const {dispatch, loginUser} = this.props;
 		dispatch(removeMyQuestion(loginUser.userId, question));
 	}
 
+	/**
+	 * 添加到我的问题列表中
+	 * @param question
+	 * @private
+	 */
 	_onItemAdd(question) {
 		const {dispatch, loginUser} = this.props;
 		dispatch(addToMyQuestions(loginUser.userId, question));

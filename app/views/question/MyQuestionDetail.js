@@ -1,18 +1,16 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Title, Left, Button, Icon, Body, Right} from "native-base";
-import {Container, Content, Header, Loading} from "../../components/index";
+import {Container, Content, Header} from "../../components/index";
 import {View, Image} from "react-native";
-import {Actions} from "react-native-router-flux";
 import QuestionMyself from "./components/QuestionMyself";
 import QuestionTab from "./components/QuestionTab";
-import {getQuestionTreetment} from '../../actions/my-question.js'
-import {request, urls, toast} from "../../utils/index";
+import {request, urls} from "../../utils/index";
 
 /**
- * 我的问题
+ * 我的问题详情
  */
 class MyQuestionDetail extends PureComponent {
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -28,6 +26,7 @@ class MyQuestionDetail extends PureComponent {
 				<Header title={question && question.showVal}/>
 				<Content delay>
 					<QuestionMyself
+						title="我的问题"
 						items={myQuestions}
 						selectedItem={question}
 						onItemPress={(item) => this._onItemPress(item)}
@@ -46,7 +45,7 @@ class MyQuestionDetail extends PureComponent {
 			diseaseId: question.id,
 			renqun: 'aged',
 			local: '北京'
-		}).then((res)=> {
+		}).then((res) => {
 			this.setState({
 				question: Object.assign(res.obj, question)
 			})

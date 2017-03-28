@@ -4,19 +4,18 @@ import Swiper from "react-native-swiper";
 import {Text, Button} from "native-base";
 import {View, Image, ToastAndroid, DeviceEventEmitter, TouchableHighlight} from "react-native";
 import {theme, urls} from "../../../utils/";
-import {delMyQuestion} from "../../../actions/my-question.js";
 import _ from "lodash";
 
 /**
- * 我所选的问题
+ * 我的问题列表组件
  */
 class QuestionMyself extends PureComponent {
 
 	render() {
-		let {items} = this.props;
+		let {items, title} = this.props;
 		return (
 			<View style={styles.myself}>
-				<Text style={styles.title}>我的问题</Text>
+				<Text style={styles.title}>{title}</Text>
 				<Swiper
 					height={140}
 					loop={false}
@@ -32,13 +31,13 @@ class QuestionMyself extends PureComponent {
 	renderPages(items) {
 		// 将 array 拆分成多个 size 长度的块，把这些块组成一个新数组。
 		let pages = _.chunk(items, 4);
-		return pages.map((page, i)=>this.renderPage(page, i));
+		return pages.map((page, i) => this.renderPage(page, i));
 	}
 
 	renderPage(page, i) {
 		return (
 			<View key={i} style={styles.page}>
-				{page.map((item, i)=> this.renderItem(item, i))}
+				{page.map((item, i) => this.renderItem(item, i))}
 			</View>
 		)
 	}
@@ -47,7 +46,7 @@ class QuestionMyself extends PureComponent {
 	renderItem(item, i) {
 		let {selectedItem} = this.props;
 		let btnStyle = {...styles.item};
-		if(selectedItem && item.id == selectedItem.id){
+		if (selectedItem && item.id == selectedItem.id) {
 			btnStyle.backgroundColor = theme.brandPrimary;
 		}
 		return (
@@ -144,6 +143,7 @@ const styles = {
 
 
 QuestionMyself.propTypes = {
+	title: React.PropTypes.string,
 	items: React.PropTypes.array,
 	selectedItem: React.PropTypes.object,
 	onItemPress: React.PropTypes.func,
@@ -151,9 +151,11 @@ QuestionMyself.propTypes = {
 }
 
 QuestionMyself.defaultProps = {
-	onItemPress: ()=> {
+	title: '我的问题',
+	items: [],
+	onItemPress: () => {
 	},
-	onItemRemove: ()=> {
+	onItemRemove: () => {
 	}
 }
 

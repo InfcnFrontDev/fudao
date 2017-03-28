@@ -5,7 +5,7 @@ import {theme, urls} from "../../../utils/index";
 
 const bgColors = ['#F1F7EE', '#F9F1EF', '#EDF4FE', '#F4F5E5'];
 /**
- * 所有问题
+ * 所有问题列表组件
  */
 class QuestionAll extends PureComponent {
 
@@ -18,16 +18,16 @@ class QuestionAll extends PureComponent {
 		});
 
 		this.state = {
-			rowsData: props.rowsData,
+			items: props.items,
 		}
 	}
 
 	render() {
-		let {rowsData} = this.state;
+		let {items} = this.state;
 		return (
 			<ListView
 				contentContainerStyle={styles.contentContainer}
-				dataSource={this.ds.cloneWithRowsAndSections(rowsData)}
+				dataSource={this.ds.cloneWithRowsAndSections(items)}
 				renderRow={this._renderRow.bind(this)}
 				pageSize={4}
 				renderSectionHeader={this._renderSectionHeader.bind(this)}
@@ -44,7 +44,7 @@ class QuestionAll extends PureComponent {
 	}
 
 	_renderRow(rowData, sectionId, rowId) {
-		let {selectedData, onItemAdd, onItemPress} = this.props;
+		let {selectedItem, onItemAdd, onItemPress} = this.props;
 
 		return (
 			<View style={styles.row}>
@@ -54,7 +54,7 @@ class QuestionAll extends PureComponent {
 					<View style={styles.rowView}>
 						<Image source={{uri: urls.getImage(rowData.img)}} style={styles.rowimg}/>
 						<Text style={styles.rowTitle}>{rowData.showVal}</Text>
-						{selectedData[rowData.id] ?
+						{selectedItem[rowData.id] ?
 							<TouchableHighlight underlayColor='transparent'>
 								<Image source={require('../../../assets/arrows_square_check.png')}
 									   style={styles.choose}/>
@@ -82,9 +82,10 @@ const styles = {
 		borderBottomColor: theme.listBorderColor,
 		borderBottomWidth: theme.borderWidth,
 		width: theme.deviceWidth + 5,
-		height: 30,
+		height: 40,
 		paddingLeft: 8,
 		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	row: {
 		width: (theme.deviceWidth - 10) / 2,
@@ -116,14 +117,14 @@ const styles = {
 };
 
 QuestionAll.propsTypes = {
-	rowsData: React.PropTypes.object,
-	selectedData: React.PropTypes.object,
+	items: React.PropTypes.object,
+	selectedItem: React.PropTypes.object,
 	onItemAdd: React.PropTypes.func,
 	onItemPress: React.PropTypes.func,
 }
 QuestionAll.defaultProps = {
-	rowsData: {},
-	selectedData: {},
+	items: {},
+	selectedItem: {},
 	onItemAdd: () => {
 	},
 	onItemPress: () => {
