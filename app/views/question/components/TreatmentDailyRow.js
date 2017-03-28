@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import { View} from "react-native";
+import { View,ToastAndroid} from "react-native";
 import {ListItem, Button, List, Text} from "native-base";
 import {Actions} from "react-native-router-flux";
 
@@ -11,6 +11,7 @@ class TreatmentDailyRow extends PureComponent {
 
     render() {
       let {rowData,title} =this.props;
+      ToastAndroid.show(JSON.stringify(rowData),ToastAndroid.SHORT)
       if(rowData.type_value=='饮食'){
         var principle= '宜食'+rowData.datas.diseaseDailyMethod.yiShi+'， 忌食'+rowData.datas.diseaseDailyMethod.jinShi;
         var list = (

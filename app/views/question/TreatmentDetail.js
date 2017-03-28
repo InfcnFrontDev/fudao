@@ -13,7 +13,7 @@ class TreatmentDetail extends PureComponent {
 
     render() {
       var content = this.props.data.details || this.props.data.detail;
-      if(content==''){
+      if(!content){
         content = this.props.data.principle;
       }
       var e=new RegExp('\n',"g");

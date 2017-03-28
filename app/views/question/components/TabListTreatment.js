@@ -26,7 +26,6 @@ class TabListTreatment extends PureComponent {
         renqunId:'aged',
         local:'北京'
       }).then((res)=>{
-        toast.show(JSON.stringify(res))
         this.setState({
          treatmentList: res.obj
        })
