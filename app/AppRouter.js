@@ -94,7 +94,7 @@ class AppRouter extends PureComponent {
 					<Scene key="menuDetail" component={MenuDetail} hideNavBar/>
 
 					{/*情绪调和*/}
-					<Scene key="emotion" component={Emotion} title="情绪调和" hideNavBar/>
+					<Scene key="emotion" component={Emotion} title="情绪调和" hideNavBar />
 
 					{/*我的期望*/}
 					<Scene key="myExpect" component={MyExpect} title="我的期望" hideNavBar/>

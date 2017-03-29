@@ -6,20 +6,41 @@ import {Container, Content, Header} from "../../components/index";
 import {calm} from "./components/EmotionData";
 import {updateMyEmotion} from "../../actions/emotion";
 import EmotionList from "./components/EmotionList";
-import EmotionSolve from "./components/EmotionSolve";
+import CoModal from "../../components/CoModal";
+import VideoBfq from "../../components/VideoBfq";
 import {request, urls, toast} from "../../utils/";
 
 /**
  * 情绪
  */
 class Emotion extends PureComponent {
-
+	constructor(props) {
+		super(props);
+		this.state={
+			img:null,
+		}
+	}
 	render() {
 		let {myEmotion} = this.props;
-
+		let {img} = this.state;
 		// 默认情绪为‘平静’
 		if (!myEmotion) {
 			myEmotion = calm[0];
+		}
+		let imgB=(null);
+		if(img){
+			let ext =img.substring(img.indexOf(".") + 1);
+			toast.show(JSON.stringify(ext))
+			if (ext == 'mp3' || ext == 'wav' || ext == 'm4a') {
+
+				imgB= (
+					<VideoBfq ref={(e)=>this._modal = e}></VideoBfq>
+				)
+			} else {
+				imgB=(
+					<CoModal ref={(e)=>this._modal = e}/>
+				)
+			}
 		}
 
 		return (
@@ -34,7 +55,7 @@ class Emotion extends PureComponent {
 				}/>
 				<Content delay>
 					<EmotionList onItemPress={this._onItemPress.bind(this)}/>
-					<EmotionSolve ref={(e)=>this._modal = e}/>
+					{imgB}
 				</Content>
 			</Container>
 		)
@@ -66,6 +87,9 @@ class Emotion extends PureComponent {
 			renqun: 'high_quality_population',
 		}).then(((data) => {
 			if (data.success && data.obj) {
+				this.setState({
+					img:data.obj.img
+				})
 				this._modal.show(data.obj)
 			} else {
 				toast.show('这种心情，我没办法了');

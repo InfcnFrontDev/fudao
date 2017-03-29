@@ -6,7 +6,7 @@ import {Right, Text, View, Button, Icon} from "native-base";
 import {Container, Content, Header,WebView} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
 import Headline from "./components/Headline.js";
-import {urls} from "../../utils/index"
+import {urls,toast} from "../../utils/index"
 
 
 /**
@@ -20,15 +20,11 @@ class Home extends PureComponent {
 
 	render() {
 		 let {loginUser} = this.props;
+
 		return (
 			<Container>
-				
-
 				<Content>
-
-					
-					<WebView uri={urls.pages.HOEM+'?userid='+this.props.loginUser.appid+'&renqun='+this.props.loginUser['renqun']}/>
-
+					<WebView uri={urls.pages.HOEM+'?userId='+loginUser.appid+'&renqun='+loginUser.renqun}/>
 					<View menu {...this.props} style={{width:Dimensions.get('window').width,
 					height:60,
 					position:'absolute',

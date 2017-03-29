@@ -13,7 +13,7 @@ import {theme, urls, request, toast} from "../../utils/";
 import CommitButton from "./components/CommitButton";
 import {login} from "../../actions/user";
 import WomanChoose from "./WomanChoose";
-import {clearMyQuestion} from "../../actions/my-question";
+import {clearMyQuestion} from "../../actions/question";
 import {clearMyEmotion} from "../../actions/emotion";
 import {clearFriend} from "../../actions/friend";
 import {clearDynamic} from "../../actions/dynamic";

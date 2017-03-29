@@ -7,7 +7,7 @@ import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import  CommitButton from "./components/CommitButton";
 import  {hex_md5} from "./components/md5";
 import {login} from "../../actions/user";
-import {clearMyQuestion} from "../../actions/my-question";
+import {clearMyQuestion} from "../../actions/question";
 import {clearMyEmotion} from "../../actions/emotion";
 import {clearFriend} from "../../actions/friend";
 import {clearDynamic} from "../../actions/dynamic";
