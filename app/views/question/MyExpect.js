@@ -34,13 +34,12 @@ class MyExpect extends PureComponent {
 			</Container>
 		)
 	}
-
 	componentDidMount() {
 		const {dispatch, loginUser} = this.props;
 		// 抓取所有问题
 		dispatch(fetchAllExpects('aged'));
 		// 抓取我的问题
-		dispatch(fetchMyExpects(loginUser.userId));
+		dispatch(fetchMyExpects(loginUser.appid));
 	}
 
 	/**

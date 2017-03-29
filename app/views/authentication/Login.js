@@ -12,7 +12,7 @@ import {checkPhone} from "./components/public";
 import {request, urls, tools, toast} from "../../utils/index";
 import {hex_md5} from "./components/md5";
 import {login} from "../../actions/user";
-import {clearMyQuestion} from "../../actions/my-question";
+import {clearMyQuestion} from "../../actions/question";
 import {clearMyEmotion} from "../../actions/emotion";
 import {clearFriend} from "../../actions/friend";
 import {clearDynamic} from "../../actions/dynamic";
@@ -108,6 +108,8 @@ class Login extends PureComponent {
 						// 保存用户状态
 						this.props.dispatch(login(user));
 						//初始化用户信息
+						ToastAndroid.show('LGOIN',ToastAndroid.SHORT)
+
 						this.props.dispatch(clearMyQuestion());
 						this.props.dispatch(clearMyEmotion());
 						this.props.dispatch(clearFriend());

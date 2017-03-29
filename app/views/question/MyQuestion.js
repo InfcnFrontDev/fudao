@@ -40,7 +40,7 @@ class MyQuestion extends PureComponent {
 		// 抓取所有问题
 		dispatch(fetchAllQuestions('aged'));
 		// 抓取我的问题
-		dispatch(fetchMyQuestions(loginUser.userId));
+		dispatch(fetchMyQuestions(loginUser.appid));
 	}
 
 	/**
