@@ -36,7 +36,7 @@ class TabListTreatment extends PureComponent {
     render() {
       let {question} = this.props;
       let {treatmentList,flag} = this.state;
-      if(treatmentList!={}){
+      if(JSON.stringify(treatmentList) != "{}"){
         return (
           <Content delay>
             <ScrollableTabView

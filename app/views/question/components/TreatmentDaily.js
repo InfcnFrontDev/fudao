@@ -29,6 +29,7 @@ class TreatmentDaily extends PureComponent {
 
     onFetch(page = 1, callback, options){
       let {dailyMethods} = this.props;
+
       callback(dailyMethods,{
         allLoaded:true
       })
