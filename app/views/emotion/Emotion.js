@@ -2,12 +2,11 @@ import React, {PureComponent} from "react";
 import {Image, DeviceEventEmitter} from "react-native";
 import {connect} from "react-redux";
 import {Right, View, Text} from "native-base";
-import {Container, Content, Header} from "../../components/index";
+import {Container, Content, Header, Modal} from "../../components/index";
 import {calm} from "./components/EmotionData";
 import {updateMyEmotion} from "../../actions/emotion";
 import EmotionList from "./components/EmotionList";
-import CoModal from "../../components/CoModal";
-import VideoBfq from "../../components/VideoBfq";
+import ImageText from "../components/ImageText";
 import {request, urls, toast} from "../../utils/";
 
 /**
@@ -16,33 +15,18 @@ import {request, urls, toast} from "../../utils/";
 class Emotion extends PureComponent {
 	constructor(props) {
 		super(props);
-		this.state={
-			img:null,
+		this.state = {
+			modalView: null,
 		}
 	}
+
 	render() {
 		let {myEmotion} = this.props;
-		let {img} = this.state;
+		let {modalView} = this.state;
 		// 默认情绪为‘平静’
 		if (!myEmotion) {
 			myEmotion = calm[0];
 		}
-		let imgB=(null);
-		if(img){
-			let ext =img.substring(img.indexOf(".") + 1);
-			toast.show(JSON.stringify(ext))
-			if (ext == 'mp3' || ext == 'wav' || ext == 'm4a') {
-
-				imgB= (
-					<VideoBfq ref={(e)=>this._modal = e}></VideoBfq>
-				)
-			} else {
-				imgB=(
-					<CoModal ref={(e)=>this._modal = e}/>
-				)
-			}
-		}
-
 		return (
 			<Container>
 				<Header {...this.props} right={
@@ -55,7 +39,9 @@ class Emotion extends PureComponent {
 				}/>
 				<Content delay>
 					<EmotionList onItemPress={this._onItemPress.bind(this)}/>
-					{imgB}
+					<Modal ref={(e)=>this._modal = e}>
+						{modalView}
+					</Modal>
 				</Content>
 			</Container>
 		)
@@ -87,14 +73,33 @@ class Emotion extends PureComponent {
 			renqun: 'high_quality_population',
 		}).then(((data) => {
 			if (data.success && data.obj) {
-				this.setState({
-					img:data.obj.img
-				})
-				this._modal.show(data.obj)
+				this.showModal(data.obj);
 			} else {
 				toast.show('这种心情，我没办法了');
 			}
 		}).bind(this))
+	}
+
+	showModal(data) {
+		let modalView = (null),
+			img = data.img;
+		if (img) {
+			let ext = img.substring(img.indexOf(".") + 1);
+			if (ext == 'mp3' || ext == 'wav' || ext == 'm4a') {
+				// imgB = (
+				// 	<VideoBfq ref={(e)=>this._modal = e}></VideoBfq>
+				// )
+			} else {
+				modalView = (
+					<ImageText title={data.mitigation_method} content={data.method_detail} image={data.img}/>
+				)
+			}
+		}
+
+		this.setState({
+			modalView
+		})
+		this._modal.show();
 	}
 }
 

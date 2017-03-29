@@ -8,6 +8,7 @@ import Separator from "./Separator";
 import Loading from "./Loading";
 import PullView from "./PullView";
 import WebView from "./WebView";
+import Modal from "./Modal";
 
 export {
 	Container,
@@ -20,4 +21,5 @@ export {
 	Loading,
 	PullView,
 	WebView,
+	Modal,
 }
