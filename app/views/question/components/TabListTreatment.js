@@ -26,7 +26,6 @@ class TabListTreatment extends PureComponent {
         renqunId:'aged',
         local:'北京'
       }).then((res)=>{
-        toast.show(JSON.stringify(res))
         this.setState({
          treatmentList: res.obj
        })
@@ -37,7 +36,7 @@ class TabListTreatment extends PureComponent {
     render() {
       let {question} = this.props;
       let {treatmentList,flag} = this.state;
-      if(treatmentList!={}){
+      if(JSON.stringify(treatmentList) != "{}"){
         return (
           <Content delay>
             <ScrollableTabView
