@@ -23,7 +23,7 @@ class DynamicHeader extends Component {
             <Text style={styles.color9b}>{this.props.user.title}</Text>
           </View>
           <View style={styles.touxiangView}>
-            <Image source={{uri: urls.getImage(this.props.user.img)}} style={styles.touxiang}/>
+            <Image source={{uri: urls.getImage(this.props.user.img,700,500)}} style={styles.touxiang}/>
           </View>
      </View>
     )

@@ -11,9 +11,9 @@ class TreatmentDailyRow extends PureComponent {
 
     render() {
       let {rowData,title} =this.props;
-      ToastAndroid.show(JSON.stringify(rowData),ToastAndroid.SHORT)
       if(rowData.type_value=='饮食'){
-        var principle= '宜食'+rowData.datas.diseaseDailyMethod.yiShi+'， 忌食'+rowData.datas.diseaseDailyMethod.jinShi;
+        let diseaseDailyMethod = rowData.datas.diseaseDailyMethod || rowData.datas.dailyMethod;
+        var principle= '宜食'+diseaseDailyMethod.yiShi+'， 忌食'+diseaseDailyMethod.jinShi;
         var list = (
           <List dataArray={rowData.datas.timePeriod} renderRow={(data) =>{
             var jishi=(null);
@@ -52,11 +52,12 @@ class TreatmentDailyRow extends PureComponent {
       }else{
         var list = (
           <List dataArray={rowData.datas.datas} renderRow={(data) =>{
+            let diseaseDailyMethods = data.diseaseDailyMethods || data.dailyMethods ;
             return (
               <ListItem style={styles.list} >
-                <Button style={styles.button} transparent onPress={()=>Actions['treatmentDetail']({data:data.diseaseDailyMethods[0],from:'日常',title:title})}>
+                <Button style={styles.button} transparent onPress={()=>Actions['treatmentDetail']({data:diseaseDailyMethods[0],from:'日常',title:title})}>
                       <Text style={styles.gan}>-    {data.timePeriod}:</Text>
-                      <Text  style={styles.listData}>{data.diseaseDailyMethods[0].name}</Text>
+                      <Text  style={styles.listData}>{diseaseDailyMethods[0].name}</Text>
                 </Button>
               </ListItem>
             )
@@ -78,6 +79,7 @@ class TreatmentDailyRow extends PureComponent {
 
     caipu(data,flag,type,cookbook_timePeriod){
       var {dispatch,rowData} = this.props;
+      let diseaseDailyMethod = rowData.datas.diseaseDailyMethod || rowData.datas.dailyMethod;
       var shi=(null)
       if(flag&&(type=='午餐'||type=='晚餐')){
         var caipin = data['菜品']
@@ -96,7 +98,7 @@ class TreatmentDailyRow extends PureComponent {
 
       shi = arr.map((p,i)=>{
         var obj = {
-          diseaseDailyMethodId:rowData.datas.diseaseDailyMethod.id,
+          diseaseDailyMethodId:diseaseDailyMethod.id,
           ingredientsId:p.id,
           cookbook_timePeriod:cookbook_timePeriod,
           cookbook_type:p.cookbook_type||''

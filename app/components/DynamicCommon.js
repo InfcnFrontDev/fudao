@@ -21,7 +21,7 @@ class DynamicCommon extends Component {
     return (
       <View  style={styles.dynamicCommon}>
         <View>
-          <Image source={{uri: urls.getImage(this.props.info.img)}}  style={styles.dynamicTouxiang}/>
+          <Image source={{uri: urls.getImage(this.props.info.img,700,500)}}  style={styles.dynamicTouxiang}/>
         </View>
         <TouchableHighlight style={styles.dynamicDetail} underlayColor='#fafafa' onPress={this._skipToDetail.bind(this)}>
 				<View>
