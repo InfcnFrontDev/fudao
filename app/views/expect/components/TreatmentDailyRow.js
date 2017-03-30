@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import { View,ToastAndroid} from "react-native";
 import {ListItem, Button, List, Text} from "native-base";
 import {Actions} from "react-native-router-flux";
-import {urls} from "../../../utils/index";
+import {urls,toast} from "../../../utils/index";
 
 class TreatmentDailyRow extends PureComponent {
   constructor(props){
@@ -90,30 +90,35 @@ class TreatmentDailyRow extends PureComponent {
         for(var i=0;i<caipin.length;i++){
           caipin_Arr_obj[i] = {};
           caipin_Arr_obj[i].cookbook_type = '菜品';
-          caipin_Arr_obj[i].name = caipin[i];
+          caipin_Arr_obj[i].id = caipin[i];
         }
         var zhushi = data['主食'];
         var zhushi_Arr_obj=[];
         for(var i=0;i<zhushi.length;i++){
           zhushi_Arr_obj[i] = {};
           zhushi_Arr_obj[i].cookbook_type = '主食';
-          zhushi_Arr_obj[i].name = zhushi_Arr_obj[i];
+          zhushi_Arr_obj[i].id = zhushi[i];
         }
-        var arr = caipin_Arr_obj.concat(zhushi);
+        var arr = caipin_Arr_obj.concat(zhushi_Arr_obj);
       }else{
-        var arr =data;
+        var arr1 = data;
+        var arr =[];
+        for(var i=0;i<arr1.length;i++){
+          arr[i]={};
+          arr[i].id = arr1[i]
+        }
       }
 
       shi = arr.map((p,i)=>{
         var obj = {
           diseaseDailyMethodId:rowData.id,
-          ingredientsId:p.name||p,
+          ingredientsId:p.id,
           cookbook_timePeriod:cookbook_timePeriod,
           cookbook_type:p.cookbook_type||''
         }
         return(
           <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?Actions['menuKinds']({data:obj,arr:arr,url:urls.apis.EXPECT_MENU_KINDS}):false}>
-          <Text style={flag?styles.shiwutext:styles.color6d}>{p.name||p}{i!=arr.length-1?'、':''}</Text>
+          <Text style={flag?styles.shiwutext:styles.color6d}>{p.id}{i!=arr.length-1?'、':''}</Text>
           </Button>
         )
       })
