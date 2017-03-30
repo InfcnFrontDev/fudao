@@ -5,28 +5,28 @@ import {View, Image, DeviceEventEmitter, ScrollView} from "react-native";
 import {Container, Content, Header} from "../../components/index";
 import QuestionMyself from "./components/QuestionMyself";
 import QuestionAll from "./components/QuestionAll";
-import {fetchAllExpects, fetchMyExpects, addMyExpect, removeMyExpect} from "../../actions/expect";
+import {fetchAllQuestions, fetchMyQuestions, addToMyQuestions, removeMyQuestion} from "../../actions/question";
 
 /**
- * 我的期望
+ * 我的问题
  */
-class MyExpect extends PureComponent {
+class MyQuestion extends PureComponent {
 
 	render() {
-		let {allExpectsGroupBy, myExpects, myExpectMap} = this.props;
+		let {allQuestionsGroupBy, myQuestions, myQuestionMap} = this.props;
 		return (
 			<Container>
 				<Header {...this.props}/>
 				<Content delay>
 					<ScrollView>
 						<QuestionMyself
-							title="我的期望"
-							items={myExpects}
+							title="我的问题"
+							items={myQuestions}
 							onItemPress={(item) => this._onItemPress(item)}
 							onItemRemove={(item) => this._onItemRemove(item)}/>
 						<QuestionAll
-							items={allExpectsGroupBy}
-							selectedItem={myExpectMap}
+							items={allQuestionsGroupBy}
+							selectedItem={myQuestionMap}
 							onItemPress={(item) => this._onItemPress(item)}
 							onItemAdd={(item)=>this._onItemAdd(item)}/>
 					</ScrollView>
@@ -34,41 +34,42 @@ class MyExpect extends PureComponent {
 			</Container>
 		)
 	}
+
 	componentDidMount() {
 		const {dispatch, loginUser} = this.props;
 		// 抓取所有问题
-		dispatch(fetchAllExpects('aged'));
+		dispatch(fetchAllQuestions('aged'));
 		// 抓取我的问题
-		dispatch(fetchMyExpects(loginUser.appid));
+		dispatch(fetchMyQuestions(loginUser.appid));
 	}
 
 	/**
 	 * 按下问题， 打开问题详情
-	 * @param expect
+	 * @param question
 	 * @private
 	 */
-	_onItemPress(expect) {
-		Actions.myExpectDetail({expect})
+	_onItemPress(question) {
+		Actions.myQuestionDetail({question})
 	}
 
 	/**
 	 * 从我的问题列表中移除
-	 * @param expect
+	 * @param question
 	 * @private
 	 */
-	_onItemRemove(expect) {
+	_onItemRemove(question) {
 		const {dispatch, loginUser} = this.props;
-		dispatch(removeMyExpect(loginUser.userId, expect));
+		dispatch(removeMyQuestion(loginUser.userId, question));
 	}
 
 	/**
 	 * 添加到我的问题列表中
-	 * @param expect
+	 * @param question
 	 * @private
 	 */
-	_onItemAdd(expect) {
+	_onItemAdd(question) {
 		const {dispatch, loginUser} = this.props;
-		dispatch(addMyExpect(loginUser.userId, expect));
+		dispatch(addToMyQuestions(loginUser.userId, question));
 	}
 
 }
@@ -77,6 +78,6 @@ const styles = {};
 
 const mapStateToProps = state => ({
 	...state.user,
-	...state.expect
+	...state.question
 });
-export default connect(mapStateToProps)(MyExpect);
+export default connect(mapStateToProps)(MyQuestion);
