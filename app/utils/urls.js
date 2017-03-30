@@ -163,7 +163,8 @@ const urls = {
 		//删除用户问题
 		MY_QUESTION_DEL_USER_QUESTION: apiPath + 'app/threeDiseasesListAction!deleteUserDisease.action',
 		//疾病日常疗法的推荐的菜谱
-		MENU_KINDS: apiPath + 'app/threeDiseasesListAction!findIngredientsContainsCookbook.action',
+		QUESTION_MENU_KINDS: apiPath + 'app/threeDiseasesListAction!findIngredientsContainsCookbook.action',
+		EXPECT_MENU_KINDS: apiPath + 'app/zixiuAction!findIngredientsContainsCookbook.action',
 
 		// 我的期望 ---------------------------------------------------------
 		//所有期望

@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import { View,ToastAndroid} from "react-native";
 import {ListItem, Button, List, Text} from "native-base";
 import {Actions} from "react-native-router-flux";
+import {urls} from "../../../utils/index";
 
 class TreatmentDailyRow extends PureComponent {
   constructor(props){
@@ -104,7 +105,7 @@ class TreatmentDailyRow extends PureComponent {
           cookbook_type:p.cookbook_type||''
         }
         return(
-          <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?Actions['menuKinds']({data:obj,arr:arr}):false}>
+          <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?Actions['menuKinds']({data:obj,arr:arr,url:urls.apis.QUESTION_MENU_KINDS}):false}>
           <Text style={flag?styles.shiwutext:styles.color6d}>{p.name}{i!=arr.length-1?'、':''}</Text>
           </Button>
         )
