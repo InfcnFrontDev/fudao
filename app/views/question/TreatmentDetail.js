@@ -16,6 +16,11 @@ class TreatmentDetail extends PureComponent {
       if(!content){
         content = this.props.data.principle;
       }
+      if(!content){
+        content = '制作方法：' +  this.props.data.makingMethod +'\n材料：'+  this.props.data.material + '\n使用方法:'+  this.props.data.usageMethod;
+      }
+      content = content.split('\\t').join('');
+      content = content.split('\\n').join('\n');
       var e=new RegExp('\n',"g");
       content = content.replace(e, '\n        ');
       var nu = ( <View style={{height:20,}}></View> )
@@ -94,7 +99,7 @@ const styles = {
      flex:1,
      flexDirection:'column',
      justifyContent:'center',
-     alignItems:'center',
+    //  alignItems:'center',
   },
   contentText:{
     fontSize:theme.DefaultFontSize,
@@ -103,9 +108,8 @@ const styles = {
     lineHeight:28,
   },
   image:{
-    marginTop:20,
-    marginBottom:20,
-    width:Dimensions.get('window').width-40,
+    margin:20,
+    width:Dimensions.get('window').width-35,
     height:200,
   }
 }
