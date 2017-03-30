@@ -108,10 +108,9 @@ class TreatmentDailyRow extends PureComponent {
           arr[i].id = arr1[i]
         }
       }
-
       shi = arr.map((p,i)=>{
         var obj = {
-          diseaseDailyMethodId:rowData.id,
+          dailyMethodId:rowData.id,
           ingredientsId:p.id,
           cookbook_timePeriod:cookbook_timePeriod,
           cookbook_type:p.cookbook_type||''

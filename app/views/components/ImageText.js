@@ -16,7 +16,7 @@ class ImageText extends PureComponent {
 				<Text style={styles.title}>{title}</Text>
 				<Text style={styles.content}>{content}</Text>
 				<View>
-					<Image source={{uri: urls.getImage(image)}} resizeMode='cover' style={styles.image}/>
+					<Image source={{uri: urls.getImage('/high_quality_population'+image)}} resizeMode='cover' style={styles.image}/>
 				</View>
 			</View>
 		)
