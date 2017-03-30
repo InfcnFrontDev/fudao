@@ -2,8 +2,8 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Content, Header} from "../../components/index";
 import {View, Image} from "react-native";
-import ExpectMyself from "../question/components/QuestionMyself";
-import ExpectTab from "../question/components/QuestionTab";
+import ExpectMyself from "../expect/components/QuestionMyself";
+import ExpectTab from "../expect/components/QuestionTab";
 import {request, urls,toast} from "../../utils/index";
 
 /**
