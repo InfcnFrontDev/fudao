@@ -34,7 +34,7 @@ class Collection extends PureComponent {
 			page
 		}).then((result) => {
 			let {datas, totalPages} = result.obj;
-			if (page === totalPages) {
+			if (page === totalPages || totalPages==0) {
 				callback(datas, {allLoaded: true});
 			} else {
 				callback(datas);

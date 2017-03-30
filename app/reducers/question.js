@@ -37,7 +37,6 @@ export default function (state = initialState, {type, payload}) {
 				myQuestionMap: _.clone(state.myQuestionMap)
 			});
 		case types.MY_QUESTION_CLEAR:
-			ToastAndroid.show('reducer',ToastAndroid.SHORT)
 			return Object.assign({}, state, initialState);
 		default:
 			return state;

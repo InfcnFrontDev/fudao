@@ -8,8 +8,6 @@ import {request, urls} from "../utils/";
 //清空我的问题和期望
 export function clearMyQuestion() {
 	return (dispatch) => {
-		ToastAndroid.show('ACTIONS',ToastAndroid.SHORT)
-
 		dispatch({
 			type: types.MY_QUESTION_CLEAR,
 		})
