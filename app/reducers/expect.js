@@ -25,16 +25,16 @@ export default function (state = initialState, {type, payload}) {
 			state.myExpects.unshift(item);
 			state.myExpectMap[item.id] = item;
 			return Object.assign({}, state, {
-				myExpects: _.slice(state.myExpects, 0),
-				myExpectMap: _.clone(state.myExpectMap)
+				myExpects: [...state.myExpects],
+				myExpectMap: {...state.myExpectMap}
 			});
 		case types.EXPECT_REMOVE_MY_EXPECT:
 			// 删除指定元素
 			_.remove(state.myExpects, (n) => n.id == payload.expect.id);
 			delete state.myExpectMap[payload.expect.id];
 			return Object.assign({}, state, {
-				myExpects: _.slice(state.myExpects, 0),
-				myExpectMap: _.clone(state.myExpectMap)
+				myExpects: [...state.myExpects],
+				myExpectMap: {...state.myExpectMap}
 			});
 		case types.EXPECT_CLEAR_ALL_AND_MY:
 			return Object.assign({}, state, initialState);

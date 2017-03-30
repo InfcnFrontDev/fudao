@@ -5,7 +5,7 @@ import {List} from "../../../components/index";
 import {Left, Right, Body, ListItem, Icon, Text, Thumbnail} from "native-base";
 import Separator from "../../../components/Separator";
 import groupBy from "lodash/groupBy";
-import {tools} from "../../../utils/index";
+import {tools, urls} from "../../../utils/index";
 
 const groups = ["*", 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
@@ -49,7 +49,7 @@ class FriendList extends PureComponent {
 							<ListItem avatar last key={i} onPress={() => Actions.userDetail({userId: f.friendId})}>
 								<Left>
 									<Thumbnail style={{width: 40, height: 40}} square
-											   source={{uri:'http://touxiang.qqzhi.com/uploads/2012-11/1111032758936.jpg'}}/>
+											   source={{uri:urls.getImage(f.img, 40, 40)}}/>
 								</Left>
 								<Body>
 								<Text>{f.friendNick}</Text>
