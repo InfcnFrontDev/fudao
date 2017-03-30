@@ -24,7 +24,7 @@ class Home extends PureComponent {
 		return (
 			<Container>
 				<Content>
-					<WebView uri={urls.pages.HOEM + '?userId=' + loginUser.appid + '&renqun=' + loginUser.renqun}/>
+					<WebView uri={urls.pages.HOEM + '?userId=867200022156895,86720002215690393791782&renqun=high_quality_population&location=1&daytype=2&seasonId=1'}/>
 					<View menu {...this.props} style={{
 						width: Dimensions.get('window').width,
 						height: 60,
@@ -35,7 +35,7 @@ class Home extends PureComponent {
 						flexDirection: 'row'
 					}}>
 						<View style={{flexDirection: 'column', justifyContent: 'center'}}>
-							<Button transparent onPress={()=> this._modal.show()}>
+							<Button transparent onPress={()=> Actions.sideBar()}>
 								<Icon name="menu" style={{color: "#fff"}}/>
 							</Button>
 						</View>
@@ -69,10 +69,6 @@ class Home extends PureComponent {
 					<View style={{width: Dimensions.get('window').width, height: 122, position: 'absolute', bottom: 0}}>
 						<MyEnter />
 					</View>
-
-					<Modal ref={(e)=>this._modal = e}>
-						<Text>aaaaaaaaaaaa</Text>
-					</Modal>
 				</Content>
 			</Container>
 		)

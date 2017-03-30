@@ -13,8 +13,6 @@ const webPath = 'http://103.254.113.11:8080/fudao-svc/app/'; // 外网
 const picPath = 'http://103.254.113.11:9191/'; // 外网
 // const picPath = 'http://192.168.10.69:9191/'; // 内网
 
-const time = new Date().getTime();
-
 const urls = {
 	apiPath,
 	picPath,
