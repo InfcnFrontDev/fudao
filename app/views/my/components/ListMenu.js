@@ -30,6 +30,12 @@ class ListMenu extends PureComponent {
 					route: 'record'
 				})}
 				{this.renderItem({
+					icon: 'ios-create-outline',
+					text: '开发完成情况',
+					bordered: true,
+					route: 'situation'
+				})}
+				{this.renderItem({
 					icon: 'ios-information-circle-outline',
 					text: '关于福道',
 					bordered: false,

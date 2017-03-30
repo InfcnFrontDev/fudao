@@ -50,6 +50,7 @@ import MenuKinds from "./views/menu_kinds/Menukinds";
 import MenuDetail from "./views/menu_kinds/MenuDetail";
 import EnergyInformation from "./views/energy/EnergyInformation";
 import EnergyQuestionnaire from "./views/energy/EnergyQuestionnaire";
+import Situation from "./views/situation/Situation";
 
 const RouterWithRedux = connect()(Router);
 
@@ -97,7 +98,7 @@ class AppRouter extends PureComponent {
 					<Scene key="emotion" component={Emotion} title="情绪调和" hideNavBar/>
 
 					{/*我的期望*/}
-					<Scene key="myExpect" component={MyExpect} title="我的期望"  hideNavBar/>
+					<Scene key="myExpect" component={MyExpect} title="我的期望" hideNavBar/>
 					<Scene key="myExpectDetail" component={MyExpectDetail} title="期望详情" hideNavBar/>
 
 					{/*搜索*/}
@@ -150,6 +151,9 @@ class AppRouter extends PureComponent {
 
 					{/*侧边栏*/}
 					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
+
+					{/*完成情况*/}
+					<Scene key="situation" component={Situation} title="开发完成情况" hideNavBar/>
 				</Scene>
 			</RouterWithRedux>
 		)
