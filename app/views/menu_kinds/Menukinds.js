@@ -25,9 +25,9 @@ class Menukinds extends PureComponent {
         let obj=this.state.obj;
         let arr=this.props.arr;
         let url=this.props.url;
-        toast.show('obj'+JSON.stringify(obj))
-        toast.show('arr'+JSON.stringify(arr))
-        toast.show('url'+JSON.stringify(url))
+        // toast.show('obj'+JSON.stringify(obj))
+        // toast.show('arr'+JSON.stringify(arr))
+        // toast.show('url'+JSON.stringify(url))
         var nowId=obj.ingredientsId;
         for(var i=0;i<arr.length;i++){
             if(arr[i].id==nowId){
@@ -37,10 +37,11 @@ class Menukinds extends PureComponent {
             }
         }
         request.getJson(url,obj).then((result) => {
-                this.setState({
+            toast.show(JSON.stringify(result.obj))
+
+            this.setState({
                     data:result.obj,
                 })
-            toast.show(JSON.stringify(result.obj))
         }, (error) => {
 
         });
@@ -136,7 +137,7 @@ class Menukinds extends PureComponent {
                 onPress={() => this._goToPage(item,index)}
                 style={itemStyle}
             >
-                <Text style={styles.textBar}>{item.name}</Text>
+                <Text style={styles.textBar}>{item.name||item.id}</Text>
             </Button  >
         )
     }
