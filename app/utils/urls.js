@@ -4,14 +4,14 @@
  const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
 
 // web服务器地址
-const webPath = 'http://103.254.113.11:8080/fudao-svc/app/'; // 外网
+// const webPath = 'http://103.254.113.11:8080/fudao-svc/app/'; // 外网
 // const webPath = 'http://192.168.10.69:8080/fudao-svc/app/'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
 // const webPath = 'http://192.168.3.204:3000/'; // 王朋
-//  const webPath = 'http://192.168.3.203:3000/'; //
+ const webPath = 'http://192.168.3.203:3000/'; //
 // 图片服务器地址
-const picPath = 'http://103.254.113.11:9191/'; // 外网
-// const picPath = 'http://192.168.10.69:9191/'; // 内网
+//  const picPath = 'http://103.254.113.11:9191/'; // 外网
+const picPath = 'http://192.168.10.69:9191/'; // 内网
 
 const time = new Date().getTime();
 

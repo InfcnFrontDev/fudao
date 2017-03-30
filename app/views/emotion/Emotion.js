@@ -7,6 +7,7 @@ import {calm} from "./components/EmotionData";
 import {updateMyEmotion} from "../../actions/emotion";
 import EmotionList from "./components/EmotionList";
 import ImageText from "../components/ImageText";
+import VideoText from "../components/VideoText";
 import {request, urls, toast} from "../../utils/";
 
 /**
@@ -86,9 +87,9 @@ class Emotion extends PureComponent {
 		if (img) {
 			let ext = img.substring(img.indexOf(".") + 1);
 			if (ext == 'mp3' || ext == 'wav' || ext == 'm4a') {
-				// imgB = (
-				// 	<VideoBfq ref={(e)=>this._modal = e}></VideoBfq>
-				// )
+				modalView = (
+					<VideoText title={data.mitigation_method} content={data.method_detail} video={data.img} basis={data.basis}/>
+				)
 			} else {
 				modalView = (
 					<ImageText title={data.mitigation_method} content={data.method_detail} image={data.img}/>
