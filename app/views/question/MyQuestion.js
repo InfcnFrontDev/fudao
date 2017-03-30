@@ -59,7 +59,7 @@ class MyQuestion extends PureComponent {
 	 */
 	_onItemRemove(question) {
 		const {dispatch, loginUser} = this.props;
-		dispatch(removeMyQuestion(loginUser.userId, question));
+		dispatch(removeMyQuestion(loginUser.appid, question));
 	}
 
 	/**
@@ -69,7 +69,7 @@ class MyQuestion extends PureComponent {
 	 */
 	_onItemAdd(question) {
 		const {dispatch, loginUser} = this.props;
-		dispatch(addToMyQuestions(loginUser.userId, question));
+		dispatch(addToMyQuestions(loginUser.appid, question));
 	}
 
 }

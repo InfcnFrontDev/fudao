@@ -58,7 +58,7 @@ class MyExpect extends PureComponent {
 	 */
 	_onItemRemove(expect) {
 		const {dispatch, loginUser} = this.props;
-		dispatch(removeMyExpect(loginUser.userId, expect));
+		dispatch(removeMyExpect(loginUser.appid, expect));
 	}
 
 	/**
@@ -68,7 +68,7 @@ class MyExpect extends PureComponent {
 	 */
 	_onItemAdd(expect) {
 		const {dispatch, loginUser} = this.props;
-		dispatch(addMyExpect(loginUser.userId, expect));
+		dispatch(addMyExpect(loginUser.appid, expect));
 	}
 
 }
