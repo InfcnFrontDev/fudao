@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import { View,ToastAndroid} from "react-native";
 import {ListItem, Button, List, Text} from "native-base";
 import {Actions} from "react-native-router-flux";
-import {urls} from "../../../utils/index";
+import {urls,toast} from "../../../utils/index";
 
 class TreatmentDailyRow extends PureComponent {
   constructor(props){
