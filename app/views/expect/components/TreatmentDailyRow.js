@@ -11,10 +11,12 @@ class TreatmentDailyRow extends PureComponent {
 
     render() {
       let {rowData,title} =this.props;
+      // var e=new RegExp("\t","g");
+      // rowData = rowData.replace(e, " ");
       if(rowData.type_value=='饮食'){
         var principle= '宜食'+rowData.yishi+'， 忌食'+rowData.jinshi;
         var list = (
-          <List dataArray={rowData.datas.timePeriod} renderRow={(data) =>{
+          <List dataArray={rowData.datas} renderRow={(data) =>{
             var jishi=(null);
             if(data['禁食']){
               jishi = (
@@ -49,6 +51,7 @@ class TreatmentDailyRow extends PureComponent {
         } />
         )
       }else{
+        var principle = rowData.datas.principle.split('\\t').join('');
         var list = (
           <List dataArray={rowData.datas.datas} renderRow={(data) =>{
             let diseaseDailyMethods = data.diseaseDailyMethods || data.dailyMethods ;
@@ -70,7 +73,7 @@ class TreatmentDailyRow extends PureComponent {
                 <Text style={styles.dot}>·</Text>
                 <Text style={styles.data}>{rowData.type_value}</Text>
             </View>
-            <Text style={styles.type}>        {rowData.type_value=='饮食'?principle:rowData.datas.principle}</Text>
+            <Text style={styles.type}>        {principle}</Text>
             {list}
           </View>
         )
@@ -78,33 +81,40 @@ class TreatmentDailyRow extends PureComponent {
 
     caipu(data,flag,type,cookbook_timePeriod){
       var {dispatch,rowData} = this.props;
+      ToastAndroid.show(rowData.id,ToastAndroid.SHORT)
+
       let diseaseDailyMethod = rowData.datas.diseaseDailyMethod || rowData.datas.dailyMethod;
       var shi=(null)
       if(flag&&(type=='午餐'||type=='晚餐')){
-        var caipin = data['菜品']
+        var caipin = data['菜品'];
+        var caipin_Arr_obj=[];
         for(var i=0;i<caipin.length;i++){
-          caipin[i].cookbook_type = '菜品';
-
+          caipin_Arr_obj[i] = {};
+          caipin_Arr_obj[i].cookbook_type = '菜品';
+          caipin_Arr_obj[i].name = caipin[i];
         }
-        var zhushi = data['主食']
+        var zhushi = data['主食'];
+        var zhushi_Arr_obj=[];
         for(var i=0;i<zhushi.length;i++){
-          zhushi[i].cookbook_type = '主食';
+          zhushi_Arr_obj[i] = {};
+          zhushi_Arr_obj[i].cookbook_type = '主食';
+          zhushi_Arr_obj[i].name = zhushi_Arr_obj[i];
         }
-        var arr = caipin.concat(zhushi);
+        var arr = caipin_Arr_obj.concat(zhushi);
       }else{
         var arr =data;
       }
 
       shi = arr.map((p,i)=>{
         var obj = {
-          diseaseDailyMethodId:diseaseDailyMethod.id,
-          ingredientsId:p.id,
+          diseaseDailyMethodId:rowData.id,
+          ingredientsId:p.name||p,
           cookbook_timePeriod:cookbook_timePeriod,
           cookbook_type:p.cookbook_type||''
         }
         return(
           <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?Actions['menuKinds']({data:obj,arr:arr}):false}>
-          <Text style={flag?styles.shiwutext:styles.color6d}>{p.name}{i!=arr.length-1?'、':''}</Text>
+          <Text style={flag?styles.shiwutext:styles.color6d}>{p.name||p}{i!=arr.length-1?'、':''}</Text>
           </Button>
         )
       })
