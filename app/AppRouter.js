@@ -50,6 +50,7 @@ import MenuKinds from "./views/menu_kinds/Menukinds";
 import MenuDetail from "./views/menu_kinds/MenuDetail";
 import EnergyInformation from "./views/energy/EnergyInformation";
 import EnergyQuestionnaire from "./views/energy/EnergyQuestionnaire";
+import Situation from "./views/situation/Situation";
 
 const RouterWithRedux = connect()(Router);
 
@@ -86,7 +87,7 @@ class AppRouter extends PureComponent {
 					{/*<Scene key="picker"  component={Picker} title="城市列表" hideNavBar/>*/}
 
 					{/*我的问题*/}
-					<Scene key="myQuestion" component={MyQuestion} title="我的问题" hideNavBar/>
+					<Scene key="myQuestion" component={MyQuestion} title="疑症自调" hideNavBar/>
 					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
 					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
 					{/*菜单*/}
@@ -94,14 +95,14 @@ class AppRouter extends PureComponent {
 					<Scene key="menuDetail" component={MenuDetail} hideNavBar/>
 
 					{/*情绪调和*/}
-					<Scene key="emotion" component={Emotion} title="情绪调和" hideNavBar />
+					<Scene key="emotion" component={Emotion} title="情绪调和" hideNavBar/>
 
 					{/*我的期望*/}
-					<Scene key="myExpect" component={MyExpect} title="我的期望"  hideNavBar/>
+					<Scene key="myExpect" component={MyExpect} title="我的期望" hideNavBar/>
 					<Scene key="myExpectDetail" component={MyExpectDetail} title="期望详情" hideNavBar/>
 
 					{/*搜索*/}
-					<Scene key="search" component={Search} title="搜索" hideNavBar/>
+					<Scene key="search" component={Search} title="搜索"/>
 					<Scene key="searchDailyLife" component={SearchDailyLife} title="日常生活" hideNavBar/>
 					<Scene key="searchFriendsCircle" component={SearchFriendsCircle} title="朋友圈" hideNavBar/>
 					<Scene key="searchHealthCare" component={SearchHealthCare} title="保健方法" hideNavBar/>
@@ -150,6 +151,9 @@ class AppRouter extends PureComponent {
 
 					{/*侧边栏*/}
 					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
+
+					{/*完成情况*/}
+					<Scene key="situation" component={Situation} title="开发完成情况" hideNavBar/>
 				</Scene>
 			</RouterWithRedux>
 		)

@@ -4,9 +4,9 @@ import {connect} from "react-redux";
 import {Container, Content} from "native-base";
 import Header from "../../components/header/SearchHeader";
 import Category from "./components/SearchCategory";
-import {searchAll, clearAll} from "../../actions/search";
 import SymptomProblemResult from "./components/SymptomProblemResult";
 import InformationResult from "./components/InformationResult";
+import {request, urls} from "../../utils/index";
 
 
 /**
@@ -18,17 +18,23 @@ class Search extends PureComponent {
 		super(props);
 		this.state = {
 			query: '',
-			results: null
+			isLoading: false,
+			symptomProblem: null,
+			information: null,
+			dailyLife: null,
+			friendsCircle: null,
+			healthCare: null,
+			offlineService: null
 		};
 	}
 
 	render() {
-		let {symptomProblem, information, dailyLife, friendsCircle, healthCare, offlineService} = this.props.search,
+		let {symptomProblem, information, dailyLife, friendsCircle, healthCare, offlineService} = this.state,
 			results = [];
-		if (symptomProblem.list.length > 0) {
+		if (symptomProblem) {
 			results.push(<SymptomProblemResult key="symptomproblem" list={symptomProblem.list}/>)
 		}
-		if (information.list.length > 0) {
+		if (information) {
 			results.push(<InformationResult key="information" list={information.list}/>)
 		}
 		if (results.length == 0) {
@@ -46,12 +52,30 @@ class Search extends PureComponent {
 
 	// 搜索
 	search(keyword) {
-		const {dispatch} = this.props;
 		if (keyword == '') {
-			dispatch(clearAll())
+			this.clearAll()
 		} else {
-			dispatch(searchAll(keyword))
+			this.searchAll(keyword)
 		}
+	}
+
+	clearAll() {
+		this.setState({
+			symptomProblem: null,
+			information: null,
+			dailyLife: null,
+			friendsCircle: null,
+			healthCare: null,
+			offlineService: null
+		})
+	}
+
+	searchAll(keyword) {
+		// 查询所有类别
+		request.getJson(urls.apis.SEARCH_ALL, {keyword})
+			.then((result) => {
+				this.setState(result.obj)
+			})
 	}
 }
 

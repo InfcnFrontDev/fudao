@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
-import {Left, Right, Body, Text, View} from "native-base";
+import {Actions} from "react-native-router-flux";
+import {Text, View} from "native-base";
 import Separator from "../../../components/Separator";
 
 /**
@@ -15,7 +16,8 @@ class SymptomProblemResult extends PureComponent {
 				<Separator title="症状和问题"/>
 				<View style={styles.itemContainer}>
 					{list.map((text) => (
-						<TouchableOpacity key={text.val} style={styles.item} onPress={() => alert(text.val)}>
+						<TouchableOpacity key={text.val} style={styles.item}
+										  onPress={() => Actions.myQuestionDetail({question: text})}>
 							<Text>{text.showVal}</Text>
 						</TouchableOpacity>
 					))}

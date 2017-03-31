@@ -31,7 +31,7 @@ class UserDetail extends PureComponent {
 							<ListItem avatar last>
 								<Left>
 									<Thumbnail square
-											   source={{uri: 'http://touxiang.qqzhi.com/uploads/2012-11/1111135112148.jpg'}}/>
+											   source={{uri: urls.getImage(user.img, 50, 50)}}/>
 								</Left>
 								<Body>
 								<Text>
