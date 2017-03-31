@@ -108,8 +108,6 @@ class Login extends PureComponent {
 						// 保存用户状态
 						this.props.dispatch(login(user));
 						//初始化用户信息
-						ToastAndroid.show('LGOIN',ToastAndroid.SHORT)
-
 						this.props.dispatch(clearMyQuestion());
 						this.props.dispatch(clearMyEmotion());
 						this.props.dispatch(clearFriend());
