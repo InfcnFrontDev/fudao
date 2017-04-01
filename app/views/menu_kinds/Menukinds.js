@@ -12,37 +12,32 @@ import {urls, theme, request} from "../../utils/index";
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 class Menukinds extends PureComponent {
-	constructor(props) {
-		super(props);
-		this.state = {
-			activeBar: 0,
-			obj: this.props.data,
-			arr: this.props.arr,
-			url: this.props.url,
-		}
-	}
-
-	componentWillMount() {
-		let obj = this.state.obj;
-		let arr = this.props.arr;
-		let url = this.props.url;
-		// toast.show('obj'+JSON.stringify(obj))
-		// toast.show('arr'+JSON.stringify(arr))
-		// toast.show('url'+JSON.stringify(url))
-		var nowId = obj.ingredientsId;
-		for (var i = 0; i < arr.length; i++) {
-			if (arr[i].id == nowId) {
-				this.setState({
-					activeBar: i
-				})
-			}
-		}
-		request.getJson(url, obj).then((result) => {
-			this.setState({
-				data: result.obj,
-			})
-		}, (error) => {
-
+    constructor(props) {
+        super(props);
+        this.state={
+          activeBar:0,
+          obj:this.props.data,
+          arr:this.props.arr,
+          url:this.props.url,
+        }
+    }
+    componentWillMount(){
+        let obj=this.state.obj;
+        let arr=this.props.arr;
+        let url=this.props.url;
+        var nowId=obj.ingredientsId;
+        for(var i=0;i<arr.length;i++){
+            if(arr[i].id==nowId){
+                this.setState({
+                    activeBar:i
+                })
+            }
+        }
+        request.getJson(url,obj).then((result) => {
+            this.setState({
+                    data:result.obj,
+                })
+        }, (error) => {
 		});
 	}
 

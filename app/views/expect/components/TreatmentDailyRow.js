@@ -3,14 +3,18 @@ import { View,ToastAndroid} from "react-native";
 import {ListItem, Button, List, Text} from "native-base";
 import {Actions} from "react-native-router-flux";
 import {urls,toast} from "../../../utils/index";
-
+import {Modal} from "../../../components/index";
+import QuestionText from "../../components/QuestionText";
 class TreatmentDailyRow extends PureComponent {
   constructor(props){
     super(props);
-
+    this.state = {
+      modalView: null,
+    }
   }
 
     render() {
+      let {modalView} = this.state;
       let {rowData,title} =this.props;
       // var e=new RegExp("\t","g");
       // rowData = rowData.replace(e, " ");
@@ -58,7 +62,7 @@ class TreatmentDailyRow extends PureComponent {
             let diseaseDailyMethods = data.diseaseDailyMethods || data.dailyMethods ;
             return (
               <ListItem style={styles.list} >
-                <Button style={styles.button} transparent onPress={()=>Actions['treatmentDetail']({data:diseaseDailyMethods[0],from:'日常',title:title})}>
+                <Button style={styles.button} transparent onPress={this.showModal.bind(this,diseaseDailyMethods[0])}>
                       <Text style={styles.gan}>-    {data.timePeriod}:</Text>
                       <Text  style={styles.listData}>{diseaseDailyMethods[0].name}</Text>
                 </Button>
@@ -76,6 +80,9 @@ class TreatmentDailyRow extends PureComponent {
             </View>
             <Text style={styles.type}>        {principle}</Text>
             {list}
+            <Modal ref={(e)=>this._modal = e}>
+              {modalView}
+            </Modal>
           </View>
         )
     }
@@ -127,6 +134,16 @@ class TreatmentDailyRow extends PureComponent {
         {shi}
         </View>
       )
+    }
+    showModal(data) {
+
+      let  modalView = (
+          <QuestionText data={data} renqun='aged'/>
+      )
+      this.setState({
+        modalView
+      })
+      this._modal.show();
     }
 
 }
