@@ -2,8 +2,9 @@ import React, {PureComponent} from "react";
 import {View, Image,ScrollView, DeviceEventEmitter,Dimensions,ScrollViewAppRegistry, StyleSheet} from "react-native";
 import {connect} from "react-redux";
 import {Container, Header, Content, Separator} from "../../components/index";
-import {Left, Right, Body, ListItem, Text, Icon,Button,Picker} from "native-base";
+import {Left, Right, Body, ListItem, Text, Icon,Button,Picker,Radio} from "native-base";
 import GroupSelectModal from "./components/GroupSelectModal";
+import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
 
 import {toast} from "../../utils/index"
 let items1 = [
@@ -84,7 +85,7 @@ let data = [
 			'男', '女'
 		], // 指标选项
 		value: '男',
-		type:1
+		type:2
 	},
 	{
 		name: '民族', // 指标名称
@@ -172,7 +173,7 @@ let data = [
 			'单亲', '双亲'
 		], // 指标选项
 		value: '双亲',
-		type:1
+		type:2
 	},
 	{
 		name: '家庭情况', // 指标名称
@@ -210,12 +211,78 @@ class EnergyQuestionnaire extends PureComponent {
 				 items: []
 			 },
 			 selected:[],
+
 			 flag:false,
 		 }
+		this.select=[
+			{
+				name: '性别', // 指标名称
+				value: '男'
+			},
+			{
+				name: '民族', // 指标名称
+				value: '汉'
+			},
+			{
+				name: '姓氏', // 指标名称
+				value: '王'
+			},
+			{
+				name: '学历', // 指标名称
+				value: '专科'
+
+			},
+			{
+				name: '高校类型', // 指标名称
+				value: '一本'
+			},
+			{
+				name: '行业', // 指标名称
+				value: '种值',
+			},
+			{
+				name: '职业', // 指标名称
+				value: '工程师',
+			},
+			{
+				name: '专业', // 指标名称
+				value: '设计',
+			},
+			{
+				name: '双亲情况', // 指标名称
+				value: '双亲',
+			},
+			{
+				name: '家庭情况', // 指标名称
+				value: '低收入'
+			},
+			{
+				name: '感情状态', // 指标名称
+				value: '单身',
+
+			},
+			{
+				name: '宗教', // 指标名称
+				value: '佛教',
+			}
+		]
 
 	}
 
-
+	onSelect(index, value){
+		if(value=='男'||value=='女'){
+			this.select[0].value=value;
+			this.setState({
+				selected:this.select
+			})
+		}
+		if(value=='单亲'||value=='双亲'){
+			this.select[8].value=value;
+			this.setState({
+				selected:this.select
+			})
+		}
+	}
 
 	onValueChange (value) {
 		this.setState({
@@ -223,12 +290,12 @@ class EnergyQuestionnaire extends PureComponent {
 		});
 	}
 	componentWillMount(){
-		let arr=[];
+
 		data.map((item,index)=>
-			arr.push(item.value)
+			this.select[index].value=item.value
 		)
 		this.setState({
-			selected:arr
+			selected:this.select
 		})
 	}
 	render() {
@@ -268,12 +335,31 @@ class EnergyQuestionnaire extends PureComponent {
 						iosHeader="Select one"
 						mode="dropdown"
 						selectedValue={this.state.selected1}
-						onValueChange={this.onValueChange.bind(this)}>
-						{item.items.map((item,index) => this.renderRadioItem(item,index))}
+						onValueChange={this.onValueChange.bind(this)}
+						style={{height:20}}
+					>
+						{item.items.map((item,index) => this.renderSelectItem(item,index))}
 					</Picker>
 				</View>
 			</ListItem>
 				)
+		}else if(item.type==2){
+			ppp=(
+				<ListItem style={styles.row}   >
+					<Right style={{width:Dimensions.get('window').width/3*1}}>
+						<Text>{item.name+':'}</Text>
+					</Right>
+					<View style={{width:Dimensions.get('window').width/3*2}} >
+						<RadioGroup
+							key={index}
+							onSelect = {(value,index) => this.onSelect(index, value)}
+							selectedIndex={item.items.indexOf(selected[index].value)}
+							style={{flexDirection:'row',alignItems:'center',height:20}} >
+							{item.items.map((item,index) => this.renderRadioItem(item,index))}
+						</RadioGroup>
+					</View>
+				</ListItem>
+			)
 		}else if(item.type==3){
 
 			ppp=(
@@ -285,7 +371,7 @@ class EnergyQuestionnaire extends PureComponent {
 						<View style={{flexDirection:'row',justifyContent:'space-between',flex:1,width:Dimensions.get('window').width/4*3-40}}
 						>
 							<Left>
-								<Text>{selected[index]}</Text>
+								<Text>{selected[index].value}</Text>
 							</Left>
 							<Right>
 								<Icon active name="ios-arrow-forward"/>
@@ -306,10 +392,10 @@ class EnergyQuestionnaire extends PureComponent {
 	openSelectBox1(index) {
 
 		this._groupSelectModal.show(items1, (rowData) => {
-			let arr=this.state.selected;
-			arr.splice(index,1,rowData.title)
+
+			this.select[index].value=rowData.title
 			this.setState({
-				selected: arr,
+				selected: this.select,
 				flag:!this.state.flag
 			})
 
@@ -318,7 +404,17 @@ class EnergyQuestionnaire extends PureComponent {
 	}
 	renderRadioItem(item,index) {
 		return (
-			<Item label={item} key={index} value={item+index}/>
+
+			<RadioButton key={index} value={item}>
+				<Text>{item}</Text>
+			</RadioButton>
+		)
+
+	}
+	renderSelectItem(item,index){
+		return (
+		<Item label={item} key={index} value={item+index}/>
+
 		)
 	}
 
@@ -329,7 +425,6 @@ const styles = {
 	row:{
 		flexDirection:'row',
 		flex:1
-
 	},
 	right:{
 		flexDirection:'row',
