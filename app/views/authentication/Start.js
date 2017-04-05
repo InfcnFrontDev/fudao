@@ -27,7 +27,7 @@ class Start extends PureComponent {
 
 	componentWillMount() {
 		let {loginUser} = this.props;
-		if (loginUser.appid) {
+		if (loginUser.userInformation) {
 			toast.show('欢迎回来，' + loginUser.title);
 			Actions.index({
 				type: ActionConst.REPLACE

@@ -1,20 +1,7 @@
-/**
- * Created by Administrator on 2017/3/8.
- */
-/**
- * Created by Administrator on 2017/3/1.
- */
 
-
-/**
- * Created by Administrator on 2017/3/1.
- */
-//noinspection JSAnnotator
 'use strict';
 import React, {PureComponent} from "react";
 import {Button,Text} from "native-base";
-
-
 
 /**
  *提交按鈕
@@ -27,7 +14,6 @@ class GetCode extends PureComponent {
             number1:"",
             number:'60',
             disabled:false,
-
         }
     }
 

@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 
-import {View,TouchableHighlight,Image,ToastAndroid} from "react-native";
-import {request, urls,toast} from "../utils/";
+import {View,TouchableHighlight,Image,} from "react-native";
+import {request, urls} from "../utils/";
 
 /**
 * 动态
@@ -16,7 +16,6 @@ class DynamicImage extends Component {
 
 
   render(){
-    // ToastAndroid.show('dynamicImage'+JSON.stringify(this.props.urls), ToastAndroid.SHORT);
     if(this.props.urls) {
       var arr_pic = this.props.urls.split(',');
       let pic = arr_pic.map((p, i) => {

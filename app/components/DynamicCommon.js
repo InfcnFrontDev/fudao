@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import {Text} from "native-base";
 import {connect} from "react-redux";
-import {View,Image,TouchableHighlight,ToastAndroid } from "react-native";
+import {View,Image,TouchableHighlight} from "react-native";
 import DynamicImage from './DynamicImage';
 import {theme} from "../utils/";
 import {Actions} from "react-native-router-flux";
 import {skipToDetail} from '../actions/dynamic.js'
-import {urls,toast} from "../utils/index";
+import {urls} from "../utils/index";
 
 /**
  * 需添加参数info
@@ -21,7 +21,7 @@ class DynamicCommon extends Component {
     return (
       <View  style={styles.dynamicCommon}>
         <View>
-          <Image source={{uri: urls.getImage(this.props.info.img)}}  style={styles.dynamicTouxiang}/>
+          <Image source={{uri: urls.getImage(this.props.info.img,700,500)}}  style={styles.dynamicTouxiang}/>
         </View>
         <TouchableHighlight style={styles.dynamicDetail} underlayColor='#fafafa' onPress={this._skipToDetail.bind(this)}>
 				<View>

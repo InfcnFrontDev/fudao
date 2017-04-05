@@ -12,10 +12,15 @@ import {checkPhone} from "./components/public";
 import {request, urls, tools, toast} from "../../utils/index";
 import {hex_md5} from "./components/md5";
 import {login} from "../../actions/user";
-
+import {clearMyQuestion} from "../../actions/question";
+import {clearMyEmotion} from "../../actions/emotion";
+import {clearFriend} from "../../actions/friend";
+import {clearDynamic} from "../../actions/dynamic";
+import {clearPosition} from "../../actions/position";
 /**
  * 登录
  */
+const dismissKeyboard = require('dismissKeyboard');
 class Login extends PureComponent {
 
 	state = {
@@ -74,7 +79,8 @@ class Login extends PureComponent {
 			toast.show("密码不能为空");
 			return;
 		}
-
+		//关闭软键盘
+		dismissKeyboard();
 		dispatch(showLoading());
 
 		// 提交登录
@@ -101,6 +107,12 @@ class Login extends PureComponent {
 						});
 						// 保存用户状态
 						this.props.dispatch(login(user));
+						//初始化用户信息
+						this.props.dispatch(clearMyQuestion());
+						this.props.dispatch(clearMyEmotion());
+						this.props.dispatch(clearFriend());
+						this.props.dispatch(clearDynamic());
+						this.props.dispatch(clearPosition());
 						// 跳到首页
 						Actions.index({
 							type: ActionConst.POP_AND_REPLACE,
@@ -152,5 +164,7 @@ const styles = {
 	}
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+
+});
 export default connect(mapStateToProps)(Login);

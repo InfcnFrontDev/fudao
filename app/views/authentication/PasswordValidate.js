@@ -16,7 +16,7 @@ import  GetCode from "./components/GetCode";
 /**
  * 注册
  */
-
+const dismissKeyboard = require('dismissKeyboard');
 class Register extends PureComponent {  // eslint-disable-line
     constructor(props){
         super(props);
@@ -64,7 +64,8 @@ class Register extends PureComponent {  // eslint-disable-line
         if(phone.toString().length<11||phone.toString().length>11){
             toast.show("请填入正确的手机号");
         }else{
-
+            //关闭软键盘
+            dismissKeyboard();
             request.getJson(urls.apis.AUTH_CHECK_PHONE,{
                     phone:phone ,
                     type:'findPwd'

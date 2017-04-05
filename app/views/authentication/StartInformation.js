@@ -5,14 +5,19 @@
 
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
+import {Actions,ActionConst} from "react-native-router-flux";
 import {Thumbnail, Text, Icon} from "native-base";
 import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePickerAndroid, Alert} from "react-native";
 import {Header, Container, Content} from "../../components/index";
 import {theme, urls, request, toast} from "../../utils/";
 import CommitButton from "./components/CommitButton";
 import {login} from "../../actions/user";
-
+import WomanChoose from "./WomanChoose";
+import {clearMyQuestion} from "../../actions/question";
+import {clearMyEmotion} from "../../actions/emotion";
+import {clearFriend} from "../../actions/friend";
+import {clearDynamic} from "../../actions/dynamic";
+import {clearPosition} from "../../actions/position";
 /**
  * 首次登录设置个人信息页
  */
@@ -33,7 +38,7 @@ class StartInformation extends PureComponent {
             month:'',
             day1:'',
             sex:0,
-            jieduan:this.props.jieduan?this.props.jieduan:'未孕阶段',
+            jieduan:'未孕阶段',
         }
     }
 
@@ -80,6 +85,7 @@ class StartInformation extends PureComponent {
         );
 
         if(this.state.showM){
+
             mbW= (
                 <TouchableOpacity onPress={this.woman.bind(this,this.state.appid)} style={{justifyContent:'center',
                     alignItems:'center'}}>
@@ -122,6 +128,7 @@ class StartInformation extends PureComponent {
                             <CommitButton  border={false} block={true} top={20} title="提交" onPress={this.tishi.bind(this)}/>
                         </View>
                     </View>
+                    <WomanChoose ref={(e)=>this._modal = e}  _jieduan={this._jieduan.bind(this)}/>
                 </Content>
             </Container>
         )
@@ -134,7 +141,7 @@ class StartInformation extends PureComponent {
         })
         let data=new Date();
         this.date(data,sex)
-        Actions['womanChoose']()
+        this._modal.show();
     }
     man(){
         let sex=1;
@@ -164,6 +171,15 @@ class StartInformation extends PureComponent {
             year1:year,
         })
     }
+
+
+    _jieduan(text){
+        this.setState({
+            jieduan:text
+        })
+    }
+
+
     tishi(){
         Alert.alert(
             '悄悄告诉你:',
@@ -276,6 +292,12 @@ class StartInformation extends PureComponent {
 
                         // 保存用户状态
                         this.props.dispatch(login(user));
+                    //初始化用户信息
+                    this.props.dispatch(clearMyQuestion());
+                    this.props.dispatch(clearMyEmotion());
+                    this.props.dispatch(clearFriend());
+                    this.props.dispatch(clearDynamic());
+                    this.props.dispatch(clearPosition());
                         // 跳到首页
                         Actions.index();
                     }, (error) => {

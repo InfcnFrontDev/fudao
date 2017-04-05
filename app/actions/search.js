@@ -7,9 +7,9 @@ export function searchAll(keyword) {
 		dispatch({
 			type: types.SEARCH_ALL_FETCH_LIST,
 		});
-
 		// 请求数据
-		request.getJson(urls.apis.SEARCH_ALL, (result) => {
+		request.getJson(urls.apis.SEARCH_ALL,{keyword:keyword})
+			.then((result) => {
 			result = result.obj;
 			/*result = {
 				symptomProblem: {

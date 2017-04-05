@@ -398,7 +398,7 @@ class EnergyQuestionnaire extends PureComponent {
 				selected: this.select,
 				flag:!this.state.flag
 			})
-			toast.show(JSON.stringify(this.state.selected));
+
 
 		});
 	}

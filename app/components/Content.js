@@ -1,11 +1,21 @@
 import React, {PureComponent} from "react";
-import {StyleSheet, View} from "react-native";
-import {theme} from "../utils/index";
+import {StyleSheet, ScrollView, View} from "react-native";
+import Loading from "./Loading";
+import {theme, tools} from "../utils/index";
 
 export default class Content extends PureComponent {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			isLoading: props.delay
+		}
+	}
+
 	render() {
-		let {children, gray, padder} = this.props,
-			contentStyle = {flex: 1};
+		let {isLoading} = this.state;
+		let {children, gray, padder} = this.props;
+		let contentStyle = {flex: 1};
 
 		if (gray) {
 			contentStyle.backgroundColor = theme.contentBgColor;
@@ -16,17 +26,33 @@ export default class Content extends PureComponent {
 
 		return (
 			<View style={contentStyle}>
-				{children}
+				<Loading isShow={isLoading}/>
+				{!isLoading && children}
 			</View>
 		)
+	}
+
+	componentDidMount() {
+		let {isLoading} = this.state;
+		console.log(isLoading);
+		if (isLoading) {
+			tools.delayLoad(() => {
+				this.setState({
+					isLoading: false
+				})
+			})
+		}
 	}
 }
 
 Content.propTypes = {
-	gray: React.PropTypes.bool,
-	padder: React.PropTypes.bool,
+	gray: React.PropTypes.bool, // 背景灰色
+	padder: React.PropTypes.bool, // 加Padding
+	delay: React.PropTypes.bool, // 延迟加载
 }
+
 Content.defaultProps = {
 	gray: false,
 	padder: false,
+	delay: false,
 }

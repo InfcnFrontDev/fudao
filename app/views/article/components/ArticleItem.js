@@ -18,25 +18,46 @@ class ArticleItem extends Component {
 		// 图片个数
 		let imgLen = article.imgs.length;
 		if (imgLen == 0)
-			return <ArticleTextItem article={article} onPress={this._onPress.bind(this)}/>
+			return <ArticleTextItem
+				article={article}
+				onPress={this._onPress.bind(this)}
+				onLongPress={this._onLongPress.bind(this)}/>
 		else if (imgLen >= 3)
-			return <ArticleMultiImageItem article={article} onPress={this._onPress.bind(this)}/>
+			return <ArticleMultiImageItem
+				article={article}
+				onPress={this._onPress.bind(this)}
+				onLongPress={this._onLongPress.bind(this)}/>
 		else
-			return <ArticleSingleImageItem article={article} onPress={this._onPress.bind(this)}/>
+			return <ArticleSingleImageItem
+				article={article}
+				onPress={this._onPress.bind(this)}
+				onLongPress={this._onLongPress.bind(this)}/>
 	}
 
 	_onPress() {
-		let {article, loginUser} = this.props;
-		Actions.webview({
-			title: '资讯详情',
-			uri: urls.pages.ARTICLE_DETAIL + "?id=" + article.id + "&userId=" + loginUser.appid,
-		})
+		let {article, loginUser, onPress} = this.props;
+
+		if (onPress)
+			onPress(article);
+		else
+			Actions.webview({
+				title: '资讯详情',
+				uri: urls.pages.ARTICLE_DETAIL + "?id=" + article.id + "&userId=" + loginUser.appid,
+			})
+	}
+
+	_onLongPress() {
+		let {article, onLongPress} = this.props;
+
+		if (onLongPress)
+			onLongPress(article);
 	}
 }
 
 ArticleItem.propTypes = {
 	article: React.PropTypes.object, // 资讯
 	onPress: React.PropTypes.func,
+	onLongPress: React.PropTypes.func,
 }
 
 const mapStateToProps = state => ({

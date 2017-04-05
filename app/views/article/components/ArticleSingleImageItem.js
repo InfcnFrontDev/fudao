@@ -1,13 +1,15 @@
 import React, {Component} from "react";
-import {Left, Right, Body, Grid, Item, Text, Row, Col, Thumbnail} from "native-base";
+import {Grid, Item, Text, Row, Col, Thumbnail} from "native-base";
 import {urls} from "../../../utils/index";
 
 class ArticleSingleImageItem extends Component {
 
 	render() {
-		let {article, onPress} = this.props;
+		let {article, onPress, onLongPress} = this.props;
 		return (
-			<Item style={styles.item} onPress={()=> onPress && onPress(article)}>
+			<Item style={styles.item}
+				  onPress={()=> onPress && onPress(article)}
+				  onLongPress={()=> onLongPress && onLongPress(article)}>
 				<Grid>
 					<Row>
 						<Col>
@@ -52,6 +54,7 @@ const styles = {
 ArticleSingleImageItem.propTypes = {
 	article: React.PropTypes.object,
 	onPress: React.PropTypes.func,
+	onLongPress: React.PropTypes.func,
 }
 
 export default (ArticleSingleImageItem);

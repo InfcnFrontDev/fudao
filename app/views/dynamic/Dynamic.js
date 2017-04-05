@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Title, Right, Body,Text,Button,Icon} from "native-base";
-import { Platform, View, ToastAndroid,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert,TouchableOpacity} from "react-native";
+import { Platform, View,Image, ScrollView, TouchableHighlight,TextInput,NetInfo,Alert,TouchableOpacity} from "react-native";
 import {Container, Content, Header} from "../../components/index";
 import styles from "./assets/styles";
 import moment from './assets/moment.js'
@@ -31,7 +31,6 @@ class Dynamic extends PureComponent {
     componentWillReceiveProps(nextProps){
       if(this.props.newnew!=nextProps.newnew){
         if(typeof nextProps.newnew=='string'){
-          // ToastAndroid.show(JSON.stringify(nextProps.newnew),ToastAndroid.SHORT)
           var that = this;
           // setTimeout(function(){
           //   that.props.del(nextProps.newnew,{callback:that.refs.gifted._postRefresh,dynamic:that.props.dynamic.dynamicList,realm:that.props.realm,from:'list'})
@@ -49,7 +48,6 @@ class Dynamic extends PureComponent {
 
     componentDidUpdate(){
       this.props.updateRealm(this.props.dynamic.update,false,this.props.user.appid,this.props.realm)
-
     }
 
 
@@ -72,8 +70,7 @@ class Dynamic extends PureComponent {
             <Container>
                 <Header menu {...this.props} right={
                   <Right>
-                    <Button transparent onPress={()=>Actions.search()}><Icon name="search"/></Button>
-                    <Button transparent onPress={this.skipToNew.bind(this)}><Icon name="ios-chatboxes"/></Button>
+                    <Button transparent onPress={this.skipToNew.bind(this)}><Icon name="ios-create-outline" /></Button>
                   </Right>
                 }/>
                 <DynamicList
@@ -194,7 +191,7 @@ class Dynamic extends PureComponent {
       }
 
     	_onFetch(page, callback, options,flag){
-        this.props.fetchData(page,options,callback,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user,time:this.props.dynamic.update});
+        this.props.fetchData(page,options,callback,{realm:this.props.realm,dynamic:this.props.dynamic.dynamicList,user:this.props.user,time:this.props.dynamic.update,page:this.props.dynamic.page});
       }
 
       skipToNew(){

@@ -9,6 +9,7 @@ const initialState = {
 	dynamicDetail:{},
 	rightButton:'发表',
 	update:1,
+	page:false,
 };
 export default function (state = initialState, {type, source}) {
 	switch (type) {
@@ -26,6 +27,8 @@ export default function (state = initialState, {type, source}) {
 			return Object.assign({}, state, {
 				...source
 			});
+		case types.DYNAMIC_CLEAR:
+			return Object.assign({}, state, initialState);
 		default:
 			return state;
 

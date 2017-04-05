@@ -18,7 +18,6 @@ class InformationResult extends PureComponent {
 					{list.map((data) => (
 						<ArticleItem key={data.title} article={data}/>
 					))}
-
 				</View>
 			</View>
 		)
