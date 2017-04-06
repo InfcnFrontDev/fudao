@@ -55,6 +55,10 @@ const urls = {
 		IMAGE: picPath + 'api/ImgApi/getImage',
 		IMAGE_UPLOAD: picPath + 'api/ImgApi/upload',
 
+		//天气-------------------------------------------------------------------------
+		WEATHER:apiPath +'/app/weatherAction!getWeather.action',
+
+
 		// 资讯 ----------------------------------------------------------------------
 		//资讯列表(ok)
 		ARTICLE_LIST: apiPath + 'app/myTerritoryAction!list.action',

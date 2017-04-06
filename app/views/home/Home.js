@@ -1,12 +1,12 @@
 import React, {PureComponent} from "react";
-import {TouchableHighlight, Dimensions} from "react-native";
+import {TouchableHighlight, Dimensions,Image} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Right, Item, Text, View, Button, Icon} from "native-base";
 import {Container, Content, Header, WebView, Modal} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
 import Headline from "./components/Headline.js";
-import {urls, toast} from "../../utils/index"
+import {urls, toast,request} from "../../utils/index"
 
 
 /**
@@ -15,11 +15,29 @@ import {urls, toast} from "../../utils/index"
 class Home extends PureComponent {
 
 	state = {
-		modalVisible: false
+		modalVisible: false,
+		wendu:'',
+		weather:'',
+
+
 	}
+
 
 	render() {
 		let {loginUser} = this.props;
+		let img=require('./assets/weather/d1/2.png');
+		request.getJson(urls.apis.WEATHER,{city:'北京'}).then((data)=>{
+
+			this.setState({
+				wendu:data.result.temperature,
+				weather:data.result.weather,
+
+
+			})
+		})
+
+
+
 
 		return (
 			<Container>
@@ -39,9 +57,14 @@ class Home extends PureComponent {
 								<Icon name="menu" style={{color: "#fff"}}/>
 							</Button>
 						</View>
-						<View style={{flexDirection: 'column', justifyContent: 'center'}}>
-							<Text style={styles.font}>北京.海淀</Text>
-							<Text style={styles.font}>春分 3~7℃</Text>
+						<View style={{flexDirection: 'column', justifyContent: 'center',width:100}}>
+							<View style={{flexDirection: 'row',justifyContent:'center'}}>
+								<Text style={styles.font}>北京.海淀</Text>
+								<Image style={{width:20,height:20}} source={img}/>
+							</View>
+
+
+							<Text style={styles.font}>{this.state.weather}{this.state.wendu}</Text>
 						</View>
 						<Right style={{flexDirection: 'row'}}>
 
@@ -51,7 +74,7 @@ class Home extends PureComponent {
 								backgroundColor: 'rgba(125,130,144,0.3)',
 								marginBottom: 10,
 								flexDirection: 'column',
-								width: Dimensions.get('window').width / 2 - 10,
+								width: Dimensions.get('window').width / 2 - 30,
 								flex: 0
 							}}
 									transparent
@@ -85,7 +108,6 @@ const styles = {
 		backgroundColor: '#ECECF0',
 	},
 	font: {
-		width: 70,
 		fontSize: 12,
 		flexDirection: 'column',
 		justifyContent: 'center',
