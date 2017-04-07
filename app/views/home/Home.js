@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {TouchableHighlight, Dimensions,Image} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Right, Item, Text, View, Button, Icon} from "native-base";
+import {Right, Item, Text, View, Button, Icon,Badge} from "native-base";
 import {Container, Content, Header, WebView, Modal} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
 import Headline from "./components/Headline.js";
@@ -18,6 +18,7 @@ class Home extends PureComponent {
 		modalVisible: false,
 		wendu:'',
 		weather:'',
+		img:'http://api.k780.com:88/upload/weather/d1/2.png'
 
 
 	}
@@ -25,12 +26,15 @@ class Home extends PureComponent {
 
 	render() {
 		let {loginUser} = this.props;
-		let img=require('./assets/weather/d1/2.png');
+
 		request.getJson(urls.apis.WEATHER,{city:'北京'}).then((data)=>{
+			let a=data.result.weatid-1;
+
 
 			this.setState({
 				wendu:data.result.temperature,
 				weather:data.result.weather,
+				img:parseInt(data.result.weatid)-1
 
 
 			})
@@ -57,14 +61,16 @@ class Home extends PureComponent {
 								<Icon name="menu" style={{color: "#fff"}}/>
 							</Button>
 						</View>
-						<View style={{flexDirection: 'column', justifyContent: 'center',width:100}}>
+						<View style={{flexDirection: 'column', justifyContent: 'center',width:80}}>
+							<Text style={styles.font}>北京.海淀</Text>
 							<View style={{flexDirection: 'row',justifyContent:'center'}}>
-								<Text style={styles.font}>北京.海淀</Text>
-								<Image style={{width:20,height:20}} source={img}/>
+								<Text style={styles.font}>{this.state.weather}</Text>
+								<Image style={{width:20,height:20}} source={{uri:'http://api.k780.com:88/upload/weather/d1/'+this.state.img+'.png'}}/>
 							</View>
 
 
-							<Text style={styles.font}>{this.state.weather}{this.state.wendu}</Text>
+
+							<Text style={styles.font}>{this.state.wendu}</Text>
 						</View>
 						<Right style={{flexDirection: 'row'}}>
 
@@ -85,6 +91,9 @@ class Home extends PureComponent {
 
 							<Button transparent onPress={()=> Actions.message()}>
 								<Icon name="ios-chatboxes" style={{color: "#fff"}}/>
+								<View style={{backgroundColor:'#f00',width:16,height:16,borderRadius:16,paddingTop:1,position:'absolute',right:10,top:0}}>
+									<Text style={{color:'#fff',fontSize:10,textAlign:'center'}}>1</Text>
+								</View>
 							</Button>
 						</Right>
 					</View>
@@ -112,7 +121,7 @@ const styles = {
 		flexDirection: 'column',
 		justifyContent: 'center',
 		textAlign: 'center',
-		color: '#fff'
+		color: '#fff',
 	},
 	// modal的样式
 	modalStyle: {
