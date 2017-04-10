@@ -21,7 +21,7 @@ class Home extends PureComponent {
 		img:'http://api.k780.com:88/upload/weather/d1/2.png'
 
 
-	}
+	};
 
 
 	render() {
@@ -38,10 +38,7 @@ class Home extends PureComponent {
 
 
 			})
-		})
-
-
-
+		});
 
 		return (
 			<Container>
@@ -86,13 +83,13 @@ class Home extends PureComponent {
 									transparent
 									onPress={()=>Actions.search()}>
 								<Icon name="search"
-									  style={{color: "#fff", alignSelf: 'flex-end', position: 'absolute', right: 10}}/>
+									  style={{color: "#fff",  position: 'absolute', right: 10}}/>
 							</Button>
 
 							<Button transparent onPress={()=> Actions.message()}>
 								<Icon name="ios-chatboxes" style={{color: "#fff"}}/>
-								<View style={{backgroundColor:'#f00',width:16,height:16,borderRadius:16,paddingTop:1,position:'absolute',right:10,top:0}}>
-									<Text style={{color:'#fff',fontSize:10,textAlign:'center'}}>1</Text>
+								<View style={{backgroundColor:'#f00',width:15,height:15,borderRadius:15,paddingTop:1,position:'absolute',right:10,top:0}}>
+									<Text style={{color:'#fff',fontSize:10,textAlign:'center'}}>10</Text>
 								</View>
 							</Button>
 						</Right>
@@ -112,77 +109,13 @@ class Home extends PureComponent {
 }
 
 const styles = {
-	container: {
-		flex: 1,
-		backgroundColor: '#ECECF0',
-	},
 	font: {
 		fontSize: 12,
 		flexDirection: 'column',
 		justifyContent: 'center',
 		textAlign: 'center',
 		color: '#fff',
-	},
-	// modal的样式
-	modalStyle: {
-		// backgroundColor:'#ccc',
-		alignItems: 'center',
-		justifyContent: 'center',
-		flex: 1,
-	},
-	// modal上子View的样式
-	subView: {
-		marginLeft: 60,
-		marginRight: 60,
-		backgroundColor: '#fff',
-		alignSelf: 'stretch',
-		justifyContent: 'center',
-		borderRadius: 10,
-		borderWidth: 0.5,
-		borderColor: '#ccc',
-	},
-	// 标题
-	titleText: {
-		marginTop: 10,
-		marginBottom: 5,
-		fontSize: 16,
-		fontWeight: 'bold',
-		textAlign: 'center',
-	},
-	// 内容
-	contentText: {
-		margin: 8,
-		fontSize: 14,
-		textAlign: 'center',
-	},
-	// 水平的分割线
-	horizontalLine: {
-		marginTop: 5,
-		height: 0.5,
-		backgroundColor: '#ccc',
-	},
-	// 按钮
-	buttonView: {
-		flexDirection: 'row',
-		alignItems: 'center',
-	},
-	buttonStyle: {
-		flex: 1,
-		height: 44,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	// 竖直的分割线
-	verticalLine: {
-		width: 0.5,
-		height: 44,
-		backgroundColor: '#ccc',
-	},
-	buttonText: {
-		fontSize: 16,
-		color: '#3393F2',
-		textAlign: 'center',
-	},
+	}
 };
 
 const mapStateToProps = state => ({
