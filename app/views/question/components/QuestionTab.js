@@ -44,13 +44,13 @@ const styles = {
 
 QuestionTab.propsTypes = {
 	question: React.PropTypes.object,
-  url:  React.PropTypes.string,
+    url:  React.PropTypes.array,
 }
 QuestionTab.defaultProps = {
 	question: {
     showVal:'',
   },
-  url: ''
+  url: []
 }
 
 export default (QuestionTab);

@@ -53,7 +53,7 @@ class QuestionMyself extends PureComponent {
 			<Button key={i} transparent style={btnStyle}
 					onPress={this._onItemPress.bind(this, item)}>
 				<Image source={{uri: urls.getImage(item.img)}} style={styles.itemImg}/>
-				<Text style={styles.itemTitle}>{item.showVal || item.name}</Text>
+				<Text style={styles.itemTitle}>{item.name}</Text>
 				<TouchableHighlight onPress={this._onItemRemove.bind(this, item)} underlayColor='#fafafa'>
 					<Image source={require('../../../assets/arrows_square_minus.png')} style={styles.choose}/>
 				</TouchableHighlight>

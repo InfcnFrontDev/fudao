@@ -23,7 +23,7 @@ class ArticleList extends Component {
 
 	_onFetch(page = 1, callback, options) {
 		let {label} = this.props;
-		request.getJson(urls.apis.ARTICLE_LIST, {
+		request.getJson(urls.apis.ARTICLE_GETARTICLELIST, {
 			name: label,
 			page
 		}).then((result) => {

@@ -1,8 +1,73 @@
 import * as types from "../actions/types";
 import {ToastAndroid} from "react-native";
 import {request, urls} from "../utils/";
+import groupBy from 'lodash/groupBy'
 
-//跳转菜单页
+//假数据
+var questionList= {
+    "ok": true,
+    "obj": [
+		{
+			"id": "17",
+			"name": "跌倒",
+			"img": "/icons/disease/diedao.png",
+			"type": "意外伤害",
+		},
+		{
+			"id": "136",
+			"name": "中毒",
+			"img": "/icons/disease/diedao.png",
+			"type": "意外伤害",
+		},
+		{
+			"id": "3",
+			"name": "麻痹震颤",
+			"img": "/icons/disease/diedao.png",
+			"type": "慢性疾病",
+		},
+		{
+			"id": "4",
+			"name": "高血脂",
+			"img": "/icons/disease/diedao.png",
+			"type": "慢性疾病",
+		},
+		{
+			"id": "5",
+			"name": "高血压",
+			"img": "/icons/disease/diedao.png",
+			"type": "慢性疾病",
+		},
+		{
+			"id": "106",
+			"name": "咽炎",
+			"img": "/icons/disease/diedao.png",
+			"type": "日常问题",
+		},
+		{
+			"id": "107",
+			"name": "咳嗽",
+			"img": "/icons/disease/diedao.png",
+			"type": "日常问题",
+		}
+	]
+}
+
+var myQuestion = {
+    "ok": true,
+    "obj": [
+        {
+            "id": "17",
+            "name": "跌倒",
+            "img": "/icons/disease/diedao.png",
+        },
+        {
+            "id": "107",
+            "name": "咳嗽",
+            "img": "/icons/disease/diedao.png",
+            "type": "日常问题",
+        }
+    ],
+}
 
 
 //清空我的问题和期望
@@ -15,26 +80,28 @@ export function clearMyQuestion() {
 }
 
 
-export function fetchAllQuestions(renqun) {
+export function fetchAllQuestions(crowd) {
 	return (dispatch) => {
-		request.getJson(urls.apis.MY_QUESTION_ALL_QUESTION, {
-			renqun
+		request.getJson(urls.apis.DISEASE_GETALLDISEASELIST, {
+            crowd
 		}).then((res) => {
-			let allQuestions = res.obj.datas,
-				allQuestionMap = {},
-				allQuestionsGroupBy = {};
+			res = questionList;//qqqqqq
+			let allQuestionMap = {};
 
+            let allQuestions = groupBy(res.obj, item => {
+                return item.type
+            })
+			// alert(JSON.stringify(allQuestions));
 			// 数据转换
-			allQuestions.forEach((item) => {
-				allQuestionsGroupBy[item.name] = item.diseases;
-				item.diseases.forEach((disease) => allQuestionMap[disease.id] = disease);
-			});
+            // res.obj.forEach((item) => {
+			// 	allQuestionMap[item.id] = item;
+			// });
+
 			dispatch({
 				type: types.QUESTION_RECEIVE_ALL_LIST,
 				payload: {
 					allQuestions,
-					allQuestionMap,
-					allQuestionsGroupBy
+					// allQuestionMap
 				}
 			})
 		})
@@ -43,30 +110,28 @@ export function fetchAllQuestions(renqun) {
 
 export function fetchMyQuestions(userId) {
 	return (dispatch) => {
-		request.getJson(urls.apis.MY_QUESTION_USER_QUESTION, {
-			userId: userId
-		}).then((res) => {
-
-			let myQuestions = res.obj,
-				myQuestionsGroupBy = {};
+        request.getJson(urls.apis.DISEASE_GETMYDISEASELIST)
+		.then((res) => {
+			res = myQuestion;
+			let myQuestions = res.obj;
+			let myQuestionMap={};
 			// 数据转换
-			myQuestions.forEach((item) => myQuestionsGroupBy[item.id] = item);
+			myQuestions.forEach((item) => myQuestionMap[item.id] = item);
 
 			dispatch({
 				type: types.QUESTION_RECEIVE_MY_LIST,
 				payload: {
 					myQuestions,
-					myQuestionsGroupBy
+                    myQuestionMap
 				}
 			})
 		})
 	}
 }
 
-export function removeMyQuestion(userId, question) {
+export function removeMyQuestion(question) {
 	return (dispatch) => {
-		request.getJson(urls.apis.MY_QUESTION_DEL_USER_QUESTION, {
-			userId: userId,
+		request.getJson(urls.apis.DISEASE_DELETEMYDISEASE, {
 			diseaseId: question.id,
 		}).then((res) => {
 			dispatch({
@@ -80,10 +145,9 @@ export function removeMyQuestion(userId, question) {
 }
 
 
-export function addToMyQuestions(userId, question) {
+export function addToMyQuestions(question) {
 	return (dispatch) => {
-		request.getJson(urls.apis.MY_QUESTION_ADD_USER_QUESTION, {
-			userId: userId,
+		request.getJson(urls.apis.DISEASE_ADDMYDISEASE, {
 			diseaseId: question.id,
 		}).then((res) => {
 			dispatch({
@@ -151,14 +215,14 @@ export function addMyQuestion(obj, my_question, id, allQuestions, callback, user
 				allQuestions: allQuestions,
 				changeRowID: id
 			}
-			var url = urls.apis.MY_QUESTION_ADD_USER_QUESTION;
+			var url = urls.apis.DISEASE_ADDMYDISEASE;
 		} else {
 			var allSource = {
 				allExpects: allQuestions,
 				changeRowID: id
 			}
 			//expect 待修改
-			var url = urls.apis.MY_QUESTION_ADD_USER_QUESTION;
+			var url = urls.apis.DISEASE_ADDMYDISEASE;
 		}
 		dispatch({
 			type: types.MY_QUESTION,
@@ -209,13 +273,13 @@ export function delMyQuestion(obj, my_question, allQuestions, userId, from) {
 				allQuestions: allQuestions,
 				changeRowID: i,
 			}
-			var url = urls.apis.MY_QUESTION_DEL_USER_QUESTION;
+			var url = urls.apis.DISEASE_DELETEMYDISEASE;
 		} else {
 			var allSource = {
 				allExpects: allQuestions,
 				changeRowID: i,
 			}
-			var url = urls.apis.MY_QUESTION_ADD_USER_QUESTION;
+			var url = urls.apis.DISEASE_ADDMYDISEASE;
 		}
 		dispatch({
 			type: types.MY_QUESTION_DEL_QUESTION_CHANGE_ALL_QUESTIONS,
@@ -231,7 +295,7 @@ export function delMyQuestion(obj, my_question, allQuestions, userId, from) {
 export function initialMyExpect(userId, my_expect) {
 	return (dispatch) => {
 		if (my_expect.length == 0) {
-			request.getJson(urls.apis.MY_QUESTION_USER_QUESTION, {
+			request.getJson(urls.apis.DISEASE_GETMYDISEASELIST, {
 				userId: userId
 			}).then((res) => {
 				dispatch({

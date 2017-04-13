@@ -6,28 +6,151 @@ import {request, urls,toast} from "../../../utils/index";
 import TreatmentProfessionList from "./TreatmentProfessionList";
 import TreatmentDaily from "./TreatmentDaily";
 import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
+import groupBy from 'lodash/groupBy'
 const Btn = require('./Button');
 
+let daily={
+    "ok":true,
+    "obj": [
+        {
+            "type": "饮食",
+            "suitable": "寒凉性的食物/豆类及豆制品/含微量元素的食物",
+            "fasting": "辛辣刺激性食物/温热性食物/油炸类食物",
+            "methods": [
+                {
+                    "timePeriod": "早餐",
+                    "suitable": ["牛奶", "薏米"]
+                },
+                {
+                    "timePeriod": "午餐",
+                    "suitable": ["牛肺", "菜花", "白豆蔻", "粳米", "小麦"],
+                    "fasting": ["狗肉", "鸭血"]
+                },
+                {
+                    "timePeriod": "下午茶",
+                    "suitable": ["香梨", "猕猴桃"]
+                },
+                {
+                    "timePeriod": "晚餐",
+                    "suitable": ["牛肺", "菜花", "白豆蔻", "粳米", "小麦"],
+                    "fasting": ["狗肉", "鸭血"]
+                }
+            ]
+        },
+        {
+            "type": "起居",
+            "principle": "保证充足高质量的睡眠，可以减少热量摄入和脂肪囤积。",
+            "methods": [
+                {
+                    "id": "36",
+                    "name": "睡前不要吃东西",
+                    "timePeriod": "睡前"
+                }
+            ]
+        },
+        {
+            "type": "动",
+            "principle": "保证充足高质量的睡眠，可以减少热量摄入和脂肪囤积。",
+            "methods": [
+                {
+                    "id": "36",
+                    "name": "睡前不要吃东西",
+                    "timePeriod": "睡前"
+                }
+            ]
+        },
+        {
+            "type": "静",
+            "principle": "保证充足高质量的睡眠，可以减少热量摄入和脂肪囤积。",
+            "methods": [
+                {
+                    "id": "36",
+                    "name": "睡前不要吃东西",
+                    "timePeriod": "睡前"
+                }
+            ]
+        },
+        {
+            "type": "娱乐",
+            "principle": "保证充足高质量的睡眠，可以减少热量摄入和脂肪囤积。",
+            "methods": [
+                {
+                    "id": "36",
+                    "name": "睡前不要吃东西",
+                    "timePeriod": "睡前"
+                }
+            ]
+        },
+    ]
+}
+let profession = {
+    "ok": true,
+    "obj":[
+        {
+            "id": "101",
+            "name": "拔罐疗法",
+            "type": "拔罐"
+        },
+        {
+            id: "25",
+            name: "金丝黄瓜汤",
+            type: "食疗"
+        },
+        {
+            id: "26",
+            name: "冬瓜笋丝海带汤",
+            type: "食疗"
+        },
+        {
+            id: "27",
+            name: "银菊平身茶",
+            type: "食疗"
+        },
+        {
+            id: "6",
+            name: "腹部按摩",
+            type: "按摩"
+        },
+        {
+            details: "患者仰卧位，术者循肺、胃、脾、肾经走行，进行推拿，按揉中府、云门、提胃、升胃、腹结、府舍、中脘、气海、关元等穴，然后患者换俯卧位，推拿膀胱经，按揉脾俞、胃俞、肾俞等穴。隔天推拿治疗1次，每天30min，隔日1次，15次为1个疗程。",
+            id: "7",
+            name: "循经点穴推拿",
+            renqunId: "aged",
+            type: "按摩"
+        }
+    ]
+}
 
 class TabListTreatment extends PureComponent {
     constructor(props){
       super(props);
       this.state={
         flag:true,
-        treatmentList:{}
+        dailyMethodList:{},
+        professionalMethodList:{}
       }
     }
 
     componentWillMount(){
       let {question,url} = this.props;
       // if()
-      request.getJson(url,{
-        diseaseId:question.id,
-        renqunId:'aged',
-        local:'北京'
+      request.getJson(url[0],{
+        diseaseId:question.id
       }).then((res)=>{
+        res = daily;
         this.setState({
-         treatmentList: res.obj
+          dailyMethodList: res.obj
+       })
+     })
+      request.getJson(url[1],{
+        diseaseId:question.id
+      }).then((res)=>{
+          res = profession;
+          let professionalMethodList = groupBy(res.obj, item => {
+              return item.type
+          })
+          this.setState({
+           professionalMethodList:professionalMethodList
        })
      })
     }
@@ -35,8 +158,8 @@ class TabListTreatment extends PureComponent {
 
     render() {
       let {question} = this.props;
-      let {treatmentList,flag} = this.state;
-      if(JSON.stringify(treatmentList) != "{}"){
+      let {dailyMethodList,professionalMethodList} = this.state;
+      if(JSON.stringify(dailyMethodList) != "{}"&&JSON.stringify(professionalMethodList) != "{}"){
         return (
           <Content delay>
             <ScrollableTabView
@@ -53,13 +176,13 @@ class TabListTreatment extends PureComponent {
             >
                 <TreatmentDaily
                     key={0}
-                    dailyMethods={treatmentList.dailyMethods}
-                    title={question.showVal||question.name}
+                    dailyMethods={dailyMethodList}
+                    title={question.name}
                 />
                 <TreatmentProfessionList
                     key={1}
-                    professionalMethods={treatmentList.professionalMethods}
-                    title={question.showVal||question.name}
+                    professionalMethods={professionalMethodList}
+                    title={question.name}
                 />
             </ScrollableTabView>
 
@@ -186,12 +309,12 @@ const styles = {
 
 TabListTreatment.propTypes = {
   question: React.PropTypes.object,
-  url: React.PropTypes.string,
+  url: React.PropTypes.array,
 }
 
 TabListTreatment.defaultProps = {
   question: {id:'40'},
-  url:urls.apis.MY_QUESTION_TREETMENT
+  url:[]
 }
 
 export default (TabListTreatment);

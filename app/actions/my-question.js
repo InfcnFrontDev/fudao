@@ -8,7 +8,7 @@ export function skipToDetail(question,from){
       if(from=='list'){
         Actions.myQuestionDetail({question:question})
       }else{
-        request.getJson(urls.apis.MY_QUESTION_TREETMENT,{
+        request.getJson(urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL,{
           diseaseId:question.id,
           renqun:'aged',
           local:'北京'
@@ -41,7 +41,7 @@ export function clearMyQuestion() {
 
 export function getQuestionTreetment(diseaseId,renqun){
   return (dispatch) => {
-    request.getJson(urls.apis.MY_QUESTION_TREETMENT,{
+    request.getJson(urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL,{
       diseaseId:diseaseId,
       renqun:'aged',
       local:'北京'
@@ -65,10 +65,10 @@ export function getAllDatas(callback,my_params,all_params,renqun,from) {
     //   })
     // }else{
       if(from=='myquestion'){
-        var url = urls.apis.MY_QUESTION_ALL_QUESTION;
+        var url = urls.apis.DISEASE_GETALLDISEASELIST;
       }else{
         //expect 待修改
-        var url = urls.apis.MY_QUESTION_ALL_QUESTION;
+        var url = urls.apis.DISEASE_GETALLDISEASELIST;
       }
       request.getJson(url,{
         renqun:'aged'
@@ -143,7 +143,7 @@ export function myQuestionToRows(allQuestion,callback) {
 export function initialMyQuestion(userId,my_question) {
   return (dispatch) => {
     if(my_question.length==0){
-      request.getJson(urls.apis.MY_QUESTION_USER_QUESTION,{
+      request.getJson(urls.apis.DISEASE_GETMYDISEASELIST,{
         userId:userId
       }).then((res)=>{
         dispatch({
@@ -187,14 +187,14 @@ export function addMyQuestion(obj,my_question,id,allQuestions,callback,userId,fr
         allQuestions:allQuestions,
         changeRowID:id
       }
-      var url=urls.apis.MY_QUESTION_ADD_USER_QUESTION;
+      var url=urls.apis.DISEASE_ADDMYDISEASE;
     }else{
       var allSource={
         allExpects:allQuestions,
         changeRowID:id
       }
       //expect 待修改
-      var url=urls.apis.MY_QUESTION_ADD_USER_QUESTION;
+      var url=urls.apis.DISEASE_ADDMYDISEASE;
     }
     dispatch({
       type: types.MY_QUESTION,
@@ -245,13 +245,13 @@ export function delMyQuestion(obj,my_question,allQuestions,userId,from) {
         allQuestions:allQuestions,
         changeRowID:i,
       }
-      var url=urls.apis.MY_QUESTION_DEL_USER_QUESTION;
+      var url=urls.apis.DISEASE_DELETEMYDISEASE;
     }else{
       var allSource={
         allExpects:allQuestions,
         changeRowID:i,
       }
-      var url=urls.apis.MY_QUESTION_ADD_USER_QUESTION;
+      var url=urls.apis.DISEASE_ADDMYDISEASE;
     }
     dispatch({
       type: types.MY_QUESTION_DEL_QUESTION_CHANGE_ALL_QUESTIONS,
@@ -267,7 +267,7 @@ export function delMyQuestion(obj,my_question,allQuestions,userId,from) {
 export function initialMyExpect(userId,my_expect) {
   return (dispatch) => {
     if(my_expect.length==0){
-      request.getJson(urls.apis.MY_QUESTION_USER_QUESTION,{
+      request.getJson(urls.apis.DISEASE_GETMYDISEASELIST,{
         userId:userId
       }).then((res)=>{
         dispatch({

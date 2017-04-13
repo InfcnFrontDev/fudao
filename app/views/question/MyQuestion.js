@@ -13,7 +13,7 @@ import {fetchAllQuestions, fetchMyQuestions, addToMyQuestions, removeMyQuestion}
 class MyQuestion extends PureComponent {
 
 	render() {
-		let {allQuestionsGroupBy, myQuestions, myQuestionMap} = this.props;
+		let {allQuestions, myQuestions, myQuestionMap} = this.props;
 		return (
 			<Container>
 				<Header {...this.props}/>
@@ -25,7 +25,7 @@ class MyQuestion extends PureComponent {
 							onItemPress={(item) => this._onItemPress(item)}
 							onItemRemove={(item) => this._onItemRemove(item)}/>
 						<QuestionAll
-							items={allQuestionsGroupBy}
+							items={allQuestions}
 							selectedItem={myQuestionMap}
 							onItemPress={(item) => this._onItemPress(item)}
 							onItemAdd={(item)=>this._onItemAdd(item)}/>
@@ -40,7 +40,7 @@ class MyQuestion extends PureComponent {
 		// 抓取所有问题
 		dispatch(fetchAllQuestions('aged'));
 		// 抓取我的问题
-		dispatch(fetchMyQuestions(loginUser.appid));
+        dispatch(fetchMyQuestions(loginUser.appid));
 	}
 
 	/**
@@ -59,7 +59,7 @@ class MyQuestion extends PureComponent {
 	 */
 	_onItemRemove(question) {
 		const {dispatch, loginUser} = this.props;
-		dispatch(removeMyQuestion(loginUser.appid, question));
+		dispatch(removeMyQuestion(question));
 	}
 
 	/**
@@ -69,7 +69,7 @@ class MyQuestion extends PureComponent {
 	 */
 	_onItemAdd(question) {
 		const {dispatch, loginUser} = this.props;
-		dispatch(addToMyQuestions(loginUser.appid, question));
+		dispatch(addToMyQuestions(question));
 	}
 
 }

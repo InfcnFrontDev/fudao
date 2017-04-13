@@ -3,9 +3,8 @@ import {ToastAndroid} from "react-native";
 import _ from "lodash";
 
 const initialState = {
-	allQuestions: [],
+	allQuestions: {},
 	allQuestionMap: {},
-	allQuestionsGroupBy: {},
 	myQuestions: [],
 	myQuestionMap: {},
 };
@@ -15,6 +14,7 @@ export default function (state = initialState, {type, payload}) {
 			return Object.assign({}, state, {
 				...payload
 			});
+
 		case types.QUESTION_RECEIVE_MY_LIST:
 			return Object.assign({}, state, {
 				...payload
