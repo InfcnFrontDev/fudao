@@ -56,7 +56,7 @@ class RebuildSuccess extends PureComponent {
         },1000)
     }
     _login(phone,password){
-        request.getJson(urls.apis.AUTH_LOGIN, {
+        request.getJson(urls.apis.USER_LOGIN, {
             account: phone,
             pwd: hex_md5(phone + password),
         }).then((data) => {

@@ -52,7 +52,7 @@ class SetPassword extends PureComponent {
     }
     _login(phone,password){
         let {dispatch}=this.props;
-        request.getJson(urls.apis.AUTH_LOGIN,{
+        request.getJson(urls.apis.USER_LOGIN,{
             account:phone,
             pwd:hex_md5(phone+password),
         }).then((data)=>{

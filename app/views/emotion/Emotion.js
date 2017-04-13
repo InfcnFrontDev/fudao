@@ -69,11 +69,11 @@ class Emotion extends PureComponent {
 		// 更新我的情绪
 		this.props.dispatch(updateMyEmotion(item));
 
-		request.getJson(urls.apis.NOW_EMOTION, {
-			name: item.title,
-			renqun: 'high_quality_population',
+		request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
+			emotion: item.title,
+			crowd: 'high_quality_population',
 		}).then(((data) => {
-			if (data.success && data.obj) {
+			if (data.ok) {
 				this.showModal(data.obj);
 			} else {
 				toast.show('这种心情，我没办法了');
@@ -82,17 +82,16 @@ class Emotion extends PureComponent {
 	}
 
 	showModal(data) {
-		let modalView = (null),
-			img = data.img;
-		if (img) {
-			let ext = img.substring(img.indexOf(".") + 1);
-			if (ext == 'mp3' || ext == 'wav' || ext == 'm4a') {
+		let modalView = (null);
+
+		if (data.path) {
+			if (data.type==3) {
 				modalView = (
-					<VideoText title={data.mitigation_method} content={data.method_detail} video={data.img} basis={data.basis}/>
+					<VideoText title={data.title} content={data.content} video={data.path} basis={data.basis}/>
 				)
-			} else {
+			} else if(data.type==1) {
 				modalView = (
-					<ImageText title={data.mitigation_method} content={data.method_detail} image={data.img}/>
+					<ImageText title={data.title} content={data.content} image={data.path}/>
 				)
 			}
 		}

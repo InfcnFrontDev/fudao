@@ -70,15 +70,15 @@ class Register extends PureComponent {  // eslint-disable-line
         if(!checkPhone(phone)){
             toast.show("请填入正确的手机号");
         }else{
-            request.getJson(urls.apis.AUTH_CHECK_PHONE,{
+            request.getJson(urls.apis.USER_CHECKPHONEREGISTERED,{
                     phone:phone ,
-                    type:'reg'
                 }).then((data)=>{
-                    if(data.success && "existence" == data.msg) {
-                        toast.show("手机号已被注册");
-                    } else if(data.success && "existence" != data.msg) {
+                    if(!data.ok) {
+                        //发送验证码接口
                         toast.show("正在发送验证码...");
                         this._getGode._click();
+                    }else{
+                        toast.show("手机号已被注册");
                     }
                 },(error)=>{
 

@@ -64,7 +64,7 @@ class EmotionList extends PureComponent {
 	solve(p) {
 
 		this.props.dispatch(updateMyEmotion(p));
-		request.getJson(urls.apis.NOW_EMOTION, {
+		request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
 			name: p.title,
 			renqun: 'high_quality_population',
 		}).then((data) => {

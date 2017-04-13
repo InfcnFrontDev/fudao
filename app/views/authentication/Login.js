@@ -84,13 +84,13 @@ class Login extends PureComponent {
 		dispatch(showLoading());
 
 		// 提交登录
-		request.getJson(urls.apis.AUTH_LOGIN, {
-			account: phone,
-			pwd: hex_md5(phone + password),
+		request.getJson(urls.apis.USER_LOGIN, {
+			phone: phone,
+			password: hex_md5(phone + password),
 		}).then((data) => {
 				dispatch(hideLoading());
 
-				if (data.success) {
+				if (data.ok) {
 					this.setState({
 						login: "yes",
 					})

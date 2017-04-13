@@ -112,7 +112,7 @@ class TreatmentDailyRow extends PureComponent {
           cookbook_type:p.cookbook_type||''
         }
         return(
-          <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?Actions['menuKinds']({data:obj,arr:arr,url:urls.apis.QUESTION_MENU_KINDS}):false}>
+          <Button key={i} transparent  style={styles.shiwubtn} onPress={()=>flag?Actions['menuKinds']({data:obj,arr:arr,url:urls.apis.INGREDIENT_GETINGREDIENT}):false}>
           <Text style={flag?styles.shiwutext:styles.color6d}>{p.name}{i!=arr.length-1?'、':''}</Text>
           </Button>
         )

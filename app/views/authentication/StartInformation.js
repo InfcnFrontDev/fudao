@@ -279,7 +279,7 @@ class StartInformation extends PureComponent {
             if (data.success) {
                 let loginUser=this.props.loginUser;
 
-                request.getJson(urls.apis.AUTH_LOGIN, {
+                request.getJson(urls.apis.USER_LOGIN, {
                     account: loginUser.phone,
                     pwd: loginUser.pwd,
                 }).then((data) => {

@@ -16,38 +16,43 @@ class Menukinds extends PureComponent {
         super(props);
         this.state={
           activeBar:0,
-          obj:this.props.data,
+			idOrName:this.props.idOrName,
           arr:this.props.arr,
-          url:this.props.url,
         }
     }
     componentWillMount(){
-        let obj=this.state.obj;
-        let arr=this.props.arr;
-        let url=this.props.url;
-        var nowId=obj.ingredientsId;
+        let {idOrName,arr}=this.state;
         for(var i=0;i<arr.length;i++){
-            if(arr[i].id==nowId){
+            if(arr[i]==idOrName){
                 this.setState({
                     activeBar:i
                 })
             }
         }
-        request.getJson(url,obj).then((result) => {
+        request.getJson(urls.apis.INGREDIENT_GETINGREDIENT,{
+			idOrName:idOrName
+		}).then((result) => {
             this.setState({
                     data:result.obj,
                 })
         }, (error) => {
 		});
+		request.getJson(urls.apis.COOKBOOK_GETCOOKBOOKLIST,{
+			ingredient:idOrName
+		}).then((result) => {
+			this.setState({
+				caiPu:result.obj,
+			})
+		}, (error) => {
+		});
 	}
 
 	render() {
-		let data = this.state.data;
-		let tab = this.state.arr;
+		let {data,caiPu,arr} = this.state
+		let tab=arr;
 		if (!data) {
 			return (<Container></Container>)
 		} else {
-			let caiPu = data.cookbook;
 			let cai = (null);
 			if (caiPu.length != 0) {
 				cai = (
@@ -67,14 +72,14 @@ class Menukinds extends PureComponent {
 							{tab.map((item, index) => this.renderTab(item, index))}
 						</View>
 						<View style={styles.imgBox}>
-							<Image source={{uri: urls.getImage(data.ingredients.img,width,200)}}
+							<Image source={{uri: urls.getImage(data.img,width,200)}}
 								   style={styles.img}></Image>
 						</View>
 						<View style={styles.textBox}>
-							<Text>        {data.ingredients['abstract_']}</Text>
+							<Text>        {data.abstract}</Text>
 						</View>
 						<View style={{flexDirection:'row',justifyContent:'center',marginTop:10}}>
-							<Text>{data.ingredients.name}</Text>
+							<Text>{data.name}</Text>
 							<Text>的营养价值表</Text>
 						</View>
 						<View style={styles.yyBox}>
@@ -97,19 +102,19 @@ class Menukinds extends PureComponent {
 							</View>
 							<View style={styles.yyBag}>
 								<View style={styles.yyBz}>
-									<Text style={styles.doc}>{data.ingredients.carbohydrate}</Text>
+									<Text style={styles.doc}>{data.carbohydrate}</Text>
 								</View>
 								<View style={styles.yyBz}>
-									<Text style={styles.doc}>{data.ingredients.cholesterol}</Text>
+									<Text style={styles.doc}>{data.cholesterol}</Text>
 								</View>
 								<View style={styles.yyBz}>
-									<Text style={styles.doc}>{data.ingredients.dietaryFiber}</Text>
+									<Text style={styles.doc}>{data.dietaryFiber}</Text>
 								</View>
 								<View style={styles.yyBz}>
-									<Text style={styles.doc}>{data.ingredients.energy}</Text>
+									<Text style={styles.doc}>{data.energy}</Text>
 								</View>
 								<View style={styles.yyBz}>
-									<Text style={styles.doc}>{data.ingredients.fat}</Text>
+									<Text style={styles.doc}>{data.fat}</Text>
 								</View>
 							</View>
 						</View>
@@ -133,7 +138,7 @@ class Menukinds extends PureComponent {
 				onPress={() => this._goToPage(item,index)}
 				style={itemStyle}
 			>
-				<Text style={styles.textBar}>{item.name || item.id}</Text>
+				<Text style={styles.textBar}>{item}</Text>
 			</Button  >
 		)
 	}
@@ -149,18 +154,16 @@ class Menukinds extends PureComponent {
 	}
 
 	_goToPage(item, index) {
-		let obj = this.state.obj;
 		this.setState({
 			activeBar: index,
 		});
-
-		obj['ingredientsId'] = item.id;
-		request.getJson(this.state.url, obj).then((result) => {
+		request.getJson(urls.apis.INGREDIENT_GETINGREDIENT,{
+			idOrName:item
+		}).then((result) => {
 			this.setState({
-				data: result.obj,
-			});
+				data:result.obj,
+			})
 		}, (error) => {
-
 		});
 	}
 

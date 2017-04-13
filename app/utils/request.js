@@ -46,7 +46,7 @@ const request = {
 		}
 
 		// console.log('GET:' + url);
-
+   
 		return new Promise(function (resolve, reject) {
 			fetch(url, {
 				method: 'GET',

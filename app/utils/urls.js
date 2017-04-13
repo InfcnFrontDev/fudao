@@ -1,6 +1,6 @@
 // 接口服务器地址
 // const apiPath = 'http://103.254.113.11:8080/fudao-svc/'; // 外网
- const apiPath = 'http://192.168.10.69:8080/fudao-svc/'; // 内网服务器
+ const apiPath = 'http://192.168.10.69:9191/api'; // 内网服务器
 
 // const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
 
@@ -12,11 +12,10 @@ const webPath = 'http://192.168.3.204:3000/'; // 王朋
 //  const webPath = 'http://192.168.3.203:3000/'; //
 // 图片服务器地址
 // const picPath = 'http://103.254.113.11:9191/'; // 外网
- const picPath = 'http://192.168.10.69:9191/'; // 内网
+ // const picPath = 'http://192.168.10.69:9191/'; // 内网
 
 const urls = {
 	apiPath,
-	picPath,
 	webPath,
 
 	/**
@@ -53,8 +52,8 @@ const urls = {
 	 */
 	apis: {
 		// 图片接口(ok)
-		IMAGE: picPath + 'api/ImgApi/getImage',
-		IMAGE_UPLOAD: picPath + 'api/ImgApi/upload',
+		IMAGE: apiPath + 'api/ImgApi/getImage',
+		IMAGE_UPLOAD: apiPath + 'api/ImgApi/upload',
 
 		//天气-------------------------------------------------------------------------
 		WEATHER:apiPath +'/app/weatherAction!getWeather.action',
@@ -104,20 +103,20 @@ const urls = {
 
 		// 注册登录(老)
 		//验证手机号
-		AUTH_CHECK_PHONE: apiPath + 'app/phoneVerificationAction!checkPhone.action',
+		USER_CHECKPHONEREGISTERED: apiPath + '/UserApi/checkPhoneRegistered',
 		//验证验证码
 
 		AUTH_CHECK_CODE: apiPath + "app/accountInfoAction!registerBefore.action",
 		//注册
 		AUTH_REG: apiPath + "app/accountInfoAction!register.action",
 		//登录
-		AUTH_LOGIN: apiPath + "app/accountInfoAction!login.action",
+		USER_LOGIN: apiPath + "/UserApi/login",
 		//设置新密码
 		AUTH_NEW_PASSWORD: apiPath + "app/accountInfoAction!retrievePassword.action",
 		//基本信息
 		AUTH_USER_INFORMATION: apiPath + "app/userInformationAction!saveUserinformation.action",
 		//情绪
-		NOW_EMOTION: apiPath + "app/emotionAction!method.action",
+		EMOTION_GETEMOTIONINTERVENE: apiPath + "/EmotionApi/getEmotionIntervene",
 
 		// 注册登录(新)
 
@@ -165,9 +164,13 @@ const urls = {
 		MY_QUESTION_ADD_USER_QUESTION: apiPath + 'app/threeDiseasesListAction!addUserDisease.action',
 		//删除用户问题
 		MY_QUESTION_DEL_USER_QUESTION: apiPath + 'app/threeDiseasesListAction!deleteUserDisease.action',
-		//疾病日常疗法的推荐的菜谱
-		QUESTION_MENU_KINDS: apiPath + 'app/threeDiseasesListAction!findIngredientsContainsCookbook.action',
-		EXPECT_MENU_KINDS: apiPath + 'app/zixiuAction!findIngredientsContainsCookbook.action',
+		//获取食材
+		INGREDIENT_GETINGREDIENT: apiPath + '/IngredientApi/getIngredient',
+		//获取菜品列表
+		COOKBOOK_GETCOOKBOOKLIST: apiPath + '/CookbookApi/getCookbookList',
+		//获取菜品详细
+		COOKBOOK_GETCOOKBOOK: apiPath + '/CookbookApi/getCookbook',
+
 
 		// 我的期望 ---------------------------------------------------------
 		//所有期望

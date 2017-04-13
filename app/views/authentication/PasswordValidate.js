@@ -66,21 +66,19 @@ class Register extends PureComponent {  // eslint-disable-line
         }else{
             //关闭软键盘
             dismissKeyboard();
-            request.getJson(urls.apis.AUTH_CHECK_PHONE,{
+            request.getJson(urls.apis.USER_CHECKPHONEREGISTERED,{
                     phone:phone ,
-                    type:'findPwd'
-                }).then((data)=>{
-                    if(data.success && "notexist" == data.msg) {
-                        toast.show("此号码没有注册过，请注册...");
-                    }else if(data.success && "" == data.msg){
-                        toast.show("正在发送验证码...");
-                        this._getGode._click();
-                    }
+            }).then((data)=>{
+                if(data.ok) {
+                    //发送验证码接口
+                    toast.show("正在发送验证码...");
+                    this._getGode._click();
+                }else{
+                    toast.show("手机号没有被注册");
+                }
+            },(error)=>{
 
-
-                },(error)=>{
-
-                })
+            })
         }
     }
     _find(){

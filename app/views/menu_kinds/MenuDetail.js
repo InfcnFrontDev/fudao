@@ -14,12 +14,22 @@ class MenuDetail extends PureComponent {
     constructor(props) {
         super(props);
         this.state={
-          data:this.props.item,
+
         }
     }
-
+    componentWillMount() {
+        let {item}=this.props;
+        request.getJson(urls.apis.COOKBOOK_GETCOOKBOOK, {
+            name: item.name
+        }).then((result) => {
+            this.setState({
+                data: result.obj,
+            })
+        }, (error) => {
+        });
+    }
     render() {
-        let data=this.state.data;
+        let {data}=this.state;
             return (
                 <Container>
                     <Header back title={data.name}></Header>
@@ -35,7 +45,7 @@ class MenuDetail extends PureComponent {
                                             <Text>主料</Text>
                                         </View>
                                         <View style={styles.cp}>
-                                            <Text>{data.ingredients}</Text>
+                                            <Text>{data.mainIngredient}</Text>
                                         </View>
                                     </View>
                                     <View>
@@ -43,7 +53,7 @@ class MenuDetail extends PureComponent {
                                             <Text>辅料</Text>
                                         </View>
                                         <View style={styles.cp}>
-                                            <Text>{data.mainIngredient}</Text>
+                                            <Text>{data.auxiliaryIngredient}</Text>
                                         </View>
                                     </View>
                                     <View>
