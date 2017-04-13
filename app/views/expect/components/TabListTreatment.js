@@ -191,7 +191,7 @@ TabListTreatment.propTypes = {
 
 TabListTreatment.defaultProps = {
   question: {id:'40'},
-  url:urls.apis.MY_QUESTION_TREETMENT
+  url:urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL
 }
 
 export default (TabListTreatment);

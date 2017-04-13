@@ -1,6 +1,6 @@
 // 接口服务器地址
-const apiPath = 'http://103.254.113.11:8080/fudao/'; // 外网
-// const apiPath = 'http://192.168.10.69:8080/fudao-svc/'; // 内网服务器
+// const apiPath = 'http://103.254.113.11:9191/api'; // 外网
+const apiPath = 'http://192.168.10.69:9191/api'; // 内网服务器
 // const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
 
 // web服务器地址
@@ -10,12 +10,11 @@ const apiPath = 'http://103.254.113.11:8080/fudao/'; // 外网
 const webPath = 'http://192.168.3.204:3000/'; // 王朋
 //  const webPath = 'http://192.168.3.203:3000/'; //
 // 图片服务器地址
-const picPath = 'http://103.254.113.11:9191/'; // 外网
+// const picPath = 'http://103.254.113.11:9191/'; // 外网
 // const picPath = 'http://192.168.10.69:9191/'; // 内网
 
 const urls = {
 	apiPath,
-	picPath,
 	webPath,
 
 	/**
@@ -52,8 +51,8 @@ const urls = {
 	 */
 	apis: {
 		// 图片接口(ok)
-		IMAGE: picPath + 'api/ImgApi/getImage',
-		IMAGE_UPLOAD: picPath + 'api/ImgApi/upload',
+		IMAGE: apiPath + '/ImgApi/getImage',
+		IMAGE_UPLOAD: apiPath + '/ImgApi/upload',
 
 		//天气-------------------------------------------------------------------------
 		WEATHER:apiPath +'/app/weatherAction!getWeather.action',
@@ -155,16 +154,18 @@ const urls = {
 
 		// 我的问题 ---------------------------------------------------------
 		//所有问题
-		MY_QUESTION_ALL_QUESTION: apiPath + 'app/threeDiseasesListAction!findDiseasesAll.action',
-		//问题详情-疗法
-		MY_QUESTION_TREETMENT: apiPath + 'app/threeDiseasesListAction!findDailyTherapy_new.action',
+		DISEASE_GETALLDISEASELIST: apiPath + '/DiseaseApi/getMyDiseaseList',
 		//用户问题
-		MY_QUESTION_USER_QUESTION: apiPath + 'app/threeDiseasesListAction!getUserDiseasesByuserId.action',
-		//添加用户问题
-		MY_QUESTION_ADD_USER_QUESTION: apiPath + 'app/threeDiseasesListAction!addUserDisease.action',
-		//删除用户问题
-		MY_QUESTION_DEL_USER_QUESTION: apiPath + 'app/threeDiseasesListAction!deleteUserDisease.action',
-		//疾病日常疗法的推荐的菜谱
+		DISEASE_GETMYDISEASELIST: apiPath + '/DiseaseApi/getMyDiseaseList',
+        //添加我的问题
+		DISEASE_ADDMYDISEASE: apiPath + '/DiseaseApi/addMyDisease',
+        //删除用户问题
+		DISEASE_DELETEMYDISEASE: apiPath + '/DiseaseApi/deleteMyDisease',
+        //问题日常疗法
+        DISEASE_GETDISEASEDAILYMETHODDETAIL: apiPath + '/DiseaseApi/getDiseaseDailyMethodList',
+		//问题专业疗法
+        DISEASE_GETDISEASEPROFESSIONALMETHODLIST: apiPath + '/DiseaseApi/getDiseaseProfessionalMethodList',
+        //疾病日常疗法的推荐的菜谱
 		QUESTION_MENU_KINDS: apiPath + 'app/threeDiseasesListAction!findIngredientsContainsCookbook.action',
 		EXPECT_MENU_KINDS: apiPath + 'app/zixiuAction!findIngredientsContainsCookbook.action',
 

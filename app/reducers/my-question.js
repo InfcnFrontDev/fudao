@@ -18,7 +18,7 @@ export default function (state = initialState, {type, source}) {
 			return Object.assign({}, state, {
 				...source
 			});
-		case types.MY_QUESTION_ALL_QUESTION:
+		case types.DISEASE_GETALLDISEASELIST:
 			return Object.assign({}, state, {
 				...source
 			});
