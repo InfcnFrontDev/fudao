@@ -1,17 +1,18 @@
 // 接口服务器地址
-// const apiPath = 'http://103.254.113.11:9191/api'; // 外网
-const apiPath = 'http://192.168.10.69:9191/api'; // 内网服务器
-// const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
+
+const apiPath = 'http://103.254.113.11:9191/api'; // 外网
+// const apiPath = 'http://192.168.10.69:9191/api'; // 内网
 
 // web服务器地址
-//const webPath = 'http://103.254.113.11:8080/fudao/app/'; // 外网
-//const webPath = 'http://192.168.10.69:8080/fudao-svc/app/'; // 内网
+const webPath = 'http://103.254.113.11:9191/web'; // 外网
+// const webPath = 'http://192.168.10.69:9191/web'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
-const webPath = 'http://192.168.3.204:3000/'; // 王朋
+// const webPath = 'http://192.168.3.204:3000/'; // 王朋
 //  const webPath = 'http://192.168.3.203:3000/'; //
 // 图片服务器地址
 // const picPath = 'http://103.254.113.11:9191/'; // 外网
 // const picPath = 'http://192.168.10.69:9191/'; // 内网
+
 
 const urls = {
 	apiPath,
@@ -26,7 +27,7 @@ const urls = {
 		// 用户协议
 		PROTOCOL: webPath + 'protocol.html',
 		// 资讯详细
-		ARTICLE_DETAIL: webPath + 'articleDetail.html',
+		ARTICLE_GETARTICLE: webPath + 'articleDetail.html',
 		// 我的时间
 		MY_TIME: webPath + 'myTime.html',
 		// 健康测评
@@ -57,12 +58,12 @@ const urls = {
 		//天气-------------------------------------------------------------------------
 		WEATHER:apiPath +'/app/weatherAction!getWeather.action',
 
-
 		// 资讯 ----------------------------------------------------------------------
-		//资讯列表(ok)
-		ARTICLE_LIST: apiPath + 'app/myTerritoryAction!list.action',
-		//资讯详细(ok)
-		ARTICLE_DETAIL: apiPath + 'app/myTerritoryAction!detail.action',
+
+		//资讯列表
+		ARTICLE_GETARTICLELIST: apiPath + '/ArticleApi/getArticleList',
+		//资讯详细
+		ARTICLE_GETARTICLE: apiPath + '/ArticleApi/getArticle',
 
 
 		// 我的收藏 ----------------------------------------------------------------------
@@ -181,6 +182,8 @@ const urls = {
 		//删除用户期望
 		MY_EXPECT_TREETMENT: apiPath + 'app/zixiuAction!findZixiuTherapy.action',
 
+		// 我的能量场 ---------------------------------------------------------
+		MY_ENEGRYMY_ACTION_INFORMATION: apiPath +'app/myEnergyAction!informationData.action'//?appid=1
 	},
 
 	// 获取图片完整路径

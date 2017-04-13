@@ -52,6 +52,7 @@ const request = {
 				method: 'GET',
 				headers: {
 					'Cache-Control': 'no-cache',
+					'authorization': '1106775f-0d7d-11e7-9b59-000c293e6828'
 				}
 			})
 				.then((response) => type == 'text' ? response.text() : response.json())
@@ -105,7 +106,9 @@ const request = {
 	},
 
 	fetchPost(url, params, type){
-		let headers = {},
+		let headers = {
+				'authorization': '1106775f-0d7d-11e7-9b59-000c293e6828',
+			},
 			body = null;
 
 		if (params) {

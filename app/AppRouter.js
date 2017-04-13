@@ -89,7 +89,7 @@ class AppRouter extends PureComponent {
 
 					{/*我的问题*/}
 					<Scene key="myQuestion" component={MyQuestion} title="疑症自调" hideNavBar/>
-					<Scene key="myQuestionDetail" component={MyQuestionDetail} initial title="问题详情" hideNavBar/>
+					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
 					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
 					{/*菜单*/}
 					<Scene key="menuKinds" component={MenuKinds} title="食材" hideNavBar/>
@@ -147,9 +147,9 @@ class AppRouter extends PureComponent {
 					<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
 
 					{/*我的能量场*/}
-					<Scene key="energy" component={Energy} title="我的能量场" hideNavBar/>
-					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar/>
-					<Scene key="energyQuestionnaire" component={EnergyQuestionnaire} title="问卷调查" hideNavBar/>
+					<Scene key="energy" component={Energy} title="我的能量场" hideNavBar />
+					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar  />
+					<Scene key="energyQuestionnaire" component={EnergyQuestionnaire} title="问卷调查" hideNavBar />
 
 					{/*侧边栏*/}
 					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
