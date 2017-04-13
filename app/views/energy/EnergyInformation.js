@@ -3,9 +3,9 @@ import {View, Image,ScrollView, DeviceEventEmitter,Dimensions,ScrollViewAppRegis
 import {connect} from "react-redux";
 import {Container, Header, Content, Separator} from "../../components/index";
 import {Left, Right, Body, ListItem, Text, Icon,Button,Picker,Radio} from "native-base";
+import {theme,request,urls} from '../../utils/index'
 import GroupSelectModal from "./components/GroupSelectModal";
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
-
 import {toast} from "../../utils/index"
 let items1 = [
 	{type: 'A', title: '安'},
@@ -78,7 +78,7 @@ let items1 = [
  * 我的能量场 > 资料填写
  */
 const Item = Picker.Item;
-let data = [
+/*let data111 = [
 	{
 		name: '性别', // 指标名称
 		items: [
@@ -200,183 +200,125 @@ let data = [
 		type:1
 
 	},
-];
+];*/
 class EnergyQuestionnaire extends PureComponent {
 	constructor(props){
 		 super(props)
+		this.select=[];
 		 this.state = {
 			 selectedItem: undefined,
-			 selected1: 'key1',
 			 results: {
 				 items: []
 			 },
-			 selected:[],
-
+			 seleted1:'',
+			 selected:this.select,
 			 flag:false,
 		 }
-		this.select=[
-			{
-				name: '性别', // 指标名称
-				value: '男'
-			},
-			{
-				name: '民族', // 指标名称
-				value: '汉'
-			},
-			{
-				name: '姓氏', // 指标名称
-				value: '王'
-			},
-			{
-				name: '学历', // 指标名称
-				value: '专科'
 
-			},
-			{
-				name: '高校类型', // 指标名称
-				value: '一本'
-			},
-			{
-				name: '行业', // 指标名称
-				value: '种值',
-			},
-			{
-				name: '职业', // 指标名称
-				value: '工程师',
-			},
-			{
-				name: '专业', // 指标名称
-				value: '设计',
-			},
-			{
-				name: '双亲情况', // 指标名称
-				value: '双亲',
-			},
-			{
-				name: '家庭情况', // 指标名称
-				value: '低收入'
-			},
-			{
-				name: '感情状态', // 指标名称
-				value: '单身',
 
-			},
-			{
-				name: '宗教', // 指标名称
-				value: '佛教',
-			}
-		]
-
-	}
-
-	onSelect(index, value){
-		if(value=='男'||value=='女'){
-			this.select[0].value=value;
-			this.setState({
-				selected:this.select
-			})
-		}
-		if(value=='单亲'||value=='双亲'){
-			this.select[8].value=value;
-			this.setState({
-				selected:this.select
-			})
-		}
-	}
-
-	onValueChange (value) {
-		this.setState({
-			selected1 : value
-		});
 	}
 	componentWillMount(){
+		request.getJson(urls.apis.MY_ENEGRYMY_ACTION_INFORMATION,{
+			appid:1,
+		}).then((data)=>{
+			data.obj.templateData.map((item,index)=>{
+                    this.select[index]={};
+                    this.select[index].name=item.name
+            })
+			this.setState({
+				data:data.obj.templateData,
+				selected:this.select
+			})
 
-		data.map((item,index)=>
-			this.select[index].value=item.value
-		)
-		this.setState({
-			selected:this.select
+		},(error)=>{
 		})
+
 	}
+
 	render() {
-
-		return (
-			<Container>
-				<Header {...this.props} flag={this.state.flag}/>
-				<Content>
-					<Separator title={'请填写您的信息'}/>
-					<ScrollView>
+        let {data,selected}=this.state;
+		if(!data && selected!=[]){
+			return (<Container></Container>)
+		}else{
+			return (
+				<Container>
+					<Header {...this.props} flag={this.state.flag}/>
+					<Content>
+						<Separator title={'请填写您的信息'}/>
+						<ScrollView>
 						{data.map((item,index)=> this.renderGroup(item,index))}
-						<View style={styles.View}>
-							<Button style={styles.Btn}>
-								<Text>完整保存</Text>
-							</Button>
-						</View>
-					</ScrollView>
-					<GroupSelectModal ref={(e)=>this._groupSelectModal = e}/>
+							<View style={styles.View}>
+								<Button style={styles.Btn} onPress={this._submmit.bind(this)}>
+									<Text>完整保存</Text>
+								</Button>
+							</View>
+						</ScrollView>
+						<GroupSelectModal ref={(e)=>this._groupSelectModal = e}/>
 
-				</Content>
-			</Container>
-		)
+					</Content>
+				</Container>
+			)
+		}
+
+
 	}
-
+//selectedIndex={item.items.indexOf(selected[index].value)}
 	renderGroup(item,index){
-		let {selected} = this.state;
+		let {selected}=this.state;
+		// toast.show(JSON.stringify(answer))
 		let ppp=(null);
-		// toast.show(JSON.stringify(item.type))
-		if(item.type==1){
+		if(item.items.length>2&&item.items.length<10){
 			ppp=(
 			<ListItem style={styles.row}   >
-				<Right style={{width:Dimensions.get('window').width/3*1}}>
+				<Right style={{width:theme.deviceWidth/3*1}}>
 					<Text>{item.name+':'}</Text>
 				</Right>
-				<View style={{width:Dimensions.get('window').width/3*2}} >
+				<View style={{width:theme.deviceWidth/3*2,height:20,}} >
 					<Picker
 						iosHeader="Select one"
 						mode="dropdown"
-						selectedValue={this.state.selected1}
-						onValueChange={this.onValueChange.bind(this)}
-						style={{height:20}}
+						selectedValue={selected[index].value}
+						onValueChange={(value)=>this.onValueChange(value,index)}
+						style={styles.pick}
 					>
 						{item.items.map((item,index) => this.renderSelectItem(item,index))}
 					</Picker>
 				</View>
 			</ListItem>
 				)
-		}else if(item.type==2){
+		}else if(item.items.length==2){
+			{/*selectedIndex={1}*/}
 			ppp=(
 				<ListItem style={styles.row}   >
-					<Right style={{width:Dimensions.get('window').width/3*1}}>
+					<Right style={{width:theme.deviceWidth/3*1}}>
 						<Text>{item.name+':'}</Text>
 					</Right>
-					<View style={{width:Dimensions.get('window').width/3*2}} >
+					<View style={{width:theme.deviceWidth/3*2}} >
 						<RadioGroup
 							key={index}
-							onSelect = {(value,index) => this.onSelect(index, value)}
-							selectedIndex={item.items.indexOf(selected[index].value)}
+							onSelect = {(index,value) => this.onSelect(index, value)}
 							style={{flexDirection:'row',alignItems:'center',height:20}} >
 							{item.items.map((item,index) => this.renderRadioItem(item,index))}
 						</RadioGroup>
 					</View>
 				</ListItem>
 			)
-		}else if(item.type==3){
+		}else if(item.items.length>10){
 
 			ppp=(
-				<ListItem style={styles.row} onPress={() => this.openSelectBox1(index)} >
-					<Right style={{width:Dimensions.get('window').width/3*1}}>
-						<Text>{item.name+':'}</Text>
+				<ListItem style={styles.row} onPress={() => this.openSelectBox1(index,item)} >
+					<Right style={{width:theme.deviceWidth/3*1}}>
+						<Text>{selected[index].name+':'}</Text>
 					</Right>
-					<View style={{width:Dimensions.get('window').width/3*2}} >
+					<View style={{width:theme.deviceWidth/3*2}} >
 						<View style={{flexDirection:'row',justifyContent:'space-between',flex:1,width:Dimensions.get('window').width/4*3-40}}
 						>
 							<Left>
-								<Text>{selected[index].value}</Text>
+								<Text>{item.selected6}</Text>
 							</Left>
 							<Right>
 								<Icon active name="ios-arrow-forward"/>
 							</Right>
-
 						</View>
 					</View>
 				</ListItem>
@@ -389,33 +331,55 @@ class EnergyQuestionnaire extends PureComponent {
 			</View>
 		)
 	}
-	openSelectBox1(index) {
-
-		this._groupSelectModal.show(items1, (rowData) => {
-
-			this.select[index].value=rowData.title
+	openSelectBox1(index,item) {
+		this._groupSelectModal.show(item, (rowData) => {
+			item.selected6=rowData.title;
+            this.select[index].value=item.selected6;
 			this.setState({
 				selected: this.select,
 				flag:!this.state.flag
 			})
 
-
 		});
 	}
 	renderRadioItem(item,index) {
 		return (
-
-			<RadioButton key={index} value={item}>
-				<Text>{item}</Text>
+			<RadioButton key={index} value={item.title}>
+				<Text>{item.title}</Text>
 			</RadioButton>
 		)
 
 	}
 	renderSelectItem(item,index){
 		return (
-		<Item label={item} key={index} value={item+index}/>
-
+		<Item label={item.title} key={index} value={item.title}/>
 		)
+	}
+	onSelect(index, value){
+		if(value=='男'||value=='女'){
+			toast.show(JSON.stringify(index),value)
+			this.select[0].value=value
+			this.setState({
+				selected:this.select
+			})
+		}else if(value=='单亲'||value=='双亲')
+
+			this.select[10].value=value
+			this.setState({
+				selected:this.select
+			})
+
+	}
+
+	onValueChange (value,index) {
+		this.select[index].value=value
+		this.setState({
+			selected:this.select,
+            flag:!this.state.flag
+		});
+	}
+	_submmit(){
+		toast.show(JSON.stringify(this.state.selected))
 	}
 
 }
@@ -424,7 +388,11 @@ class EnergyQuestionnaire extends PureComponent {
 const styles = {
 	row:{
 		flexDirection:'row',
-		flex:1
+		alignItems:'center',
+		justifyContent:'center',
+		flex:1,
+        position:'relative',
+
 	},
 	right:{
 		flexDirection:'row',
@@ -440,6 +408,10 @@ const styles = {
 		width:100,
 		height:30,
 		justifyContent:'center'
+	},
+	pick:{
+		padding:0,
+        top:-14,
 	}
 };
 

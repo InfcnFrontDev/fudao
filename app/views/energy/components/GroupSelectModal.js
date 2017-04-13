@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {Modal, View, Image, ListView} from "react-native";
 import {Icon, Button, ListItem, Text} from "native-base";
-import {theme} from "../../../utils/index";
+import {theme,toast} from "../../../utils/index";
 import _ from "lodash";
 
 /**
@@ -27,12 +27,12 @@ class GroupSelectModal extends PureComponent {
 	/**
 	 * 分组
 	 */
-	groupByItems(items) {
-		return _.groupBy(items, (item) => item.type);
+	groupByItems(data) {
+			return _.groupBy(data, (item) => item.type);
 	}
 
 	render() {
-		let {visible, rowsData} = this.state;
+		let {visible, rowsData,data} = this.state;
 
 		return (
 			<Modal
@@ -45,7 +45,7 @@ class GroupSelectModal extends PureComponent {
 				<View style={styles.content}>
 					<View style={styles.header}>
 						<View style={{flex:1}}>
-							<Text style={styles.headerText}>选择您的行业</Text>
+							<Text style={styles.headerText}>请选择：</Text>
 						</View>
 						<View style={{width:25}}>
 							<Button
@@ -77,7 +77,7 @@ class GroupSelectModal extends PureComponent {
 			onSelect
 		};
 		if (data)
-			state.rowsData = this.groupByItems(data);
+			state.rowsData = this.groupByItems(data.items);
 		this.setState(state)
 	}
 
@@ -158,12 +158,12 @@ const styles = {
 };
 
 GroupSelectModal.propTypes = {
-	items: React.PropTypes.array,
+	data: React.PropTypes.array,
 	onSelect: React.PropTypes.func,
 
 };
 GroupSelectModal.defaultProps = {
-	items: [],
+	data: [],
 	onSelect: (rowData) => alert(rowData),
 }
 

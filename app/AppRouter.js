@@ -145,9 +145,9 @@ class AppRouter extends PureComponent {
 					<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
 
 					{/*我的能量场*/}
-					<Scene key="energy" component={Energy} title="我的能量场" hideNavBar/>
-					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar/>
-					<Scene key="energyQuestionnaire" component={EnergyQuestionnaire} title="问卷调查" hideNavBar/>
+					<Scene key="energy" component={Energy} title="我的能量场" hideNavBar  initial/>
+					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar  />
+					<Scene key="energyQuestionnaire" component={EnergyQuestionnaire} title="问卷调查" hideNavBar />
 
 					{/*侧边栏*/}
 					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>

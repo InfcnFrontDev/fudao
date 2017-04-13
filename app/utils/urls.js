@@ -5,14 +5,14 @@
 // const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
 
 // web服务器地址
-const webPath = 'http://103.254.113.11:8080/fudao/app/'; // 外网
-// const webPath = 'http://192.168.10.69:8080/fudao-svc/app/'; // 内网
+//const webPath = 'http://103.254.113.11:8080/fudao/app/'; // 外网
+ const webPath = 'http://192.168.10.69:8080/fudao-svc/app/'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
 // const webPath = 'http://192.168.3.204:3000/'; // 王朋
 //  const webPath = 'http://192.168.3.203:3000/'; //
 // 图片服务器地址
-const picPath = 'http://103.254.113.11:9191/'; // 外网
-// const picPath = 'http://192.168.10.69:9191/'; // 内网
+// const picPath = 'http://103.254.113.11:9191/'; // 外网
+ const picPath = 'http://192.168.10.69:9191/'; // 内网
 
 const urls = {
 	apiPath,
@@ -177,6 +177,8 @@ const urls = {
 		//删除用户期望
 		MY_EXPECT_TREETMENT: apiPath + 'app/zixiuAction!findZixiuTherapy.action',
 
+		// 我的能量场 ---------------------------------------------------------
+		MY_ENEGRYMY_ACTION_INFORMATION: apiPath +'app/myEnergyAction!informationData.action'//?appid=1
 	},
 
 	// 获取图片完整路径
