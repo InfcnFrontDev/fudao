@@ -10,6 +10,7 @@ import settings from "./settings";
 import question from "./question";
 import expect from "./expect";
 import emotion from "./emotion";
+import message from "./message";
 
 export default combineReducers({
 	position,
@@ -23,4 +24,5 @@ export default combineReducers({
 	question,
 	expect,
 	emotion,
+    message,
 });

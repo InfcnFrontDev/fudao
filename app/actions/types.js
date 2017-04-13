@@ -96,3 +96,7 @@ export const EXPECT_ADD_MY_EXPECT = 'EXPECT_ADD_MY_EXPECT';
 export const EXPECT_REMOVE_MY_EXPECT = 'EXPECT_REMOVE_MY_EXPECT';
 export const EXPECT_CLEAR_ALL_AND_MY = 'EXPECT_CLEAR_ALL_AND_MY';
 
+// message  actions ////////////////////////////////////////
+export const MESSAGE_CHAT_LOG = 'MESSAGE_CHAT_LOG';
+export const MESSAGE_CHAT_LOG_DELETE = 'MESSAGE_CHAT_LOG_DELETE';
+

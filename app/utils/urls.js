@@ -176,6 +176,8 @@ const urls = {
 		//删除用户期望
 		MY_EXPECT_TREETMENT: apiPath + 'app/zixiuAction!findZixiuTherapy.action',
 
+		// 我的能量场 ---------------------------------------------------------
+		MY_ENEGRYMY_ACTION_INFORMATION: apiPath +'app/myEnergyAction!informationData.action'//?appid=1
 	},
 
 	// 获取图片完整路径
