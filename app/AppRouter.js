@@ -35,6 +35,7 @@ import RebuildSuccess from "./views/authentication/RebuildSuccess";
 import PasswordValidate from "./views/authentication/PasswordValidate";
 import WomanChoose from "./views/authentication/WomanChoose";
 import Message from "./views/message/Message";
+import Chat from "./views/message/Chat";
 import MsgDetail from "./views/message/MsgDetail";
 import Webview from "./views/webview/";
 import NewDynamic from "./views/dynamic/NewDynamic";
@@ -131,6 +132,7 @@ class AppRouter extends PureComponent {
 					{/*消息*/}
 					<Scene key="message" component={Message} title="消息" hideNavBar/>
 					<Scene key="msgDetail" component={MsgDetail} hideNavBar/>
+					<Scene key="chat" component={Chat} hideNavBar/>
 
 					{/*其他*/}
 					<Scene key="webview" component={Webview} title="WebView" hideNavBar/>
