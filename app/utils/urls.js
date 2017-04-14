@@ -16,7 +16,6 @@ const webPath = 'http://103.254.113.11:9191/web'; // 外网
 
 const urls = {
 	apiPath,
-	picPath,
 	webPath,
 
 	/**
@@ -196,7 +195,7 @@ const urls = {
 		MY_EXPECT_TREETMENT: apiPath + 'app/zixiuAction!findZixiuTherapy.action',
 
 		// 我的能量场 ---------------------------------------------------------
-		MY_ENEGRYMY_ACTION_INFORMATION: apiPath +'app/myEnergyAction!informationData.action'//?appid=1
+		MY_ENEGRYMY_ACTION_INFORMATION: apiPath +'app/myEnergyAction!informationData.action',//?appid=1
 		//获取区县
 		REGION_GETCOUNTYLIST:apiPath + 'RegionApi/getCountyList',
 		//获取城市列表
