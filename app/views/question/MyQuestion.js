@@ -36,11 +36,11 @@ class MyQuestion extends PureComponent {
 	}
 
 	componentDidMount() {
-		const {dispatch, loginUser} = this.props;
+		const {dispatch} = this.props;
 		// 抓取所有问题
-		dispatch(fetchAllQuestions('aged'));
+		dispatch(fetchAllQuestions());
 		// 抓取我的问题
-        dispatch(fetchMyQuestions(loginUser.appid));
+        dispatch(fetchMyQuestions());
 	}
 
 	/**
@@ -58,7 +58,7 @@ class MyQuestion extends PureComponent {
 	 * @private
 	 */
 	_onItemRemove(question) {
-		const {dispatch, loginUser} = this.props;
+		const {dispatch} = this.props;
 		dispatch(removeMyQuestion(question));
 	}
 
@@ -68,7 +68,7 @@ class MyQuestion extends PureComponent {
 	 * @private
 	 */
 	_onItemAdd(question) {
-		const {dispatch, loginUser} = this.props;
+		const {dispatch} = this.props;
 		dispatch(addToMyQuestions(question));
 	}
 

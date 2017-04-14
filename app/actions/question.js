@@ -4,54 +4,6 @@ import {request, urls} from "../utils/";
 import groupBy from 'lodash/groupBy'
 
 //假数据
-var questionList= {
-    "ok": true,
-    "obj": [
-		{
-			"id": "17",
-			"name": "跌倒",
-			"img": "/icons/disease/diedao.png",
-			"type": "意外伤害",
-		},
-		{
-			"id": "136",
-			"name": "中毒",
-			"img": "/icons/disease/diedao.png",
-			"type": "意外伤害",
-		},
-		{
-			"id": "3",
-			"name": "麻痹震颤",
-			"img": "/icons/disease/diedao.png",
-			"type": "慢性疾病",
-		},
-		{
-			"id": "4",
-			"name": "高血脂",
-			"img": "/icons/disease/diedao.png",
-			"type": "慢性疾病",
-		},
-		{
-			"id": "5",
-			"name": "高血压",
-			"img": "/icons/disease/diedao.png",
-			"type": "慢性疾病",
-		},
-		{
-			"id": "106",
-			"name": "咽炎",
-			"img": "/icons/disease/diedao.png",
-			"type": "日常问题",
-		},
-		{
-			"id": "107",
-			"name": "咳嗽",
-			"img": "/icons/disease/diedao.png",
-			"type": "日常问题",
-		}
-	]
-}
-
 var myQuestion = {
     "ok": true,
     "obj": [
@@ -80,39 +32,32 @@ export function clearMyQuestion() {
 }
 
 
-export function fetchAllQuestions(crowd) {
+export function fetchAllQuestions() {
 	return (dispatch) => {
-		request.getJson(urls.apis.DISEASE_GETALLDISEASELIST, {
-            crowd
-		}).then((res) => {
-			res = questionList;//qqqqqq
-			let allQuestionMap = {};
-
+		request.getJson(urls.apis.DISEASE_GETALLDISEASELIST,{
+            crowd:'aged'
+		})
+		.then((res) => {
             let allQuestions = groupBy(res.obj, item => {
                 return item.type
             })
-			// alert(JSON.stringify(allQuestions));
-			// 数据转换
-            // res.obj.forEach((item) => {
-			// 	allQuestionMap[item.id] = item;
-			// });
 
 			dispatch({
 				type: types.QUESTION_RECEIVE_ALL_LIST,
 				payload: {
 					allQuestions,
-					// allQuestionMap
 				}
 			})
 		})
 	}
 }
 
-export function fetchMyQuestions(userId) {
+export function fetchMyQuestions() {
 	return (dispatch) => {
         request.getJson(urls.apis.DISEASE_GETMYDISEASELIST)
 		.then((res) => {
 			res = myQuestion;
+
 			let myQuestions = res.obj;
 			let myQuestionMap={};
 			// 数据转换
