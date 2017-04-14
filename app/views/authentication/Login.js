@@ -88,47 +88,43 @@ class Login extends PureComponent {
 			phone: phone,
 			password: hex_md5(phone + password),
 		}).then((data) => {
-				dispatch(hideLoading());
-
-				if (data.ok) {
-					this.setState({
-						login: "yes",
-					})
-					AsyncStorage.setItem('login', this.state.login)
-
-					toast.show("登录成功");
-					var userInformation = data.obj.userInformation;
-					var appid=data.obj.accountInfo.appid;
-					if (userInformation != undefined) { //基本信息已经添加完成
-						let user = Object.assign({}, {
-							...data.obj.accountInfo,
-							...userInformation,
-							...data.obj
-						});
-						// 保存用户状态
-						this.props.dispatch(login(user));
-						//初始化用户信息
-						this.props.dispatch(clearMyQuestion());
-						this.props.dispatch(clearMyEmotion());
-						this.props.dispatch(clearFriend());
-						this.props.dispatch(clearDynamic());
-						this.props.dispatch(clearPosition());
-						// 跳到首页
-						Actions.index({
-							type: ActionConst.POP_AND_REPLACE,
-						});
-					} else { //没有基本信息表示第一次登录需要添写信息
-						Actions['startInformation']({appid:appid})
-					}
-
-
+			dispatch(hideLoading());
+			if (data.ok) {
+				/*this.setState({
+					login: "yes",
+				})
+				AsyncStorage.setItem('login', this.state.login)*/
+				toast.show("登录成功");
+				var birthday = data.birthday;
+				if (birthday == "") {
+					//没有基本信息表示第一次登录需要添写信息
+					Actions['startInformation']({phone:phone})
 				} else {
-					toast.show("密码错误");
+					//基本信息已经添加完成
+					let user = Object.assign({}, {
+						...data.obj
+					});
+					// 保存用户状态
+					this.props.dispatch(login(user));
+					//初始化用户信息
+					this.props.dispatch(clearMyQuestion());
+					this.props.dispatch(clearMyEmotion());
+					this.props.dispatch(clearFriend());
+					this.props.dispatch(clearDynamic());
+					this.props.dispatch(clearPosition());
+					// 跳到首页
+					Actions.index({
+						type: ActionConst.POP_AND_REPLACE,
+					});
 				}
-			}, (error) => {
-				dispatch(hideLoading());
+
+
+			} else {
+				toast.show("密码错误");
 			}
-		);
+		}, (error) => {
+			dispatch(hideLoading());
+		});
 	}
 
 	//根据是否有基本信息选择跳转页面

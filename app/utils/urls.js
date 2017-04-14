@@ -108,17 +108,20 @@ const urls = {
 		// 注册登录(老)
 		//验证手机号
 		USER_CHECKPHONEREGISTERED: apiPath + '/UserApi/checkPhoneRegistered',
+        //发送验证码
+        USER_SENDCODE: apiPath + '/UserApi/sendCode',
 		//验证验证码
-
-		AUTH_CHECK_CODE: apiPath + "app/accountInfoAction!registerBefore.action",
+		USER_CHECKCODE: apiPath + '/UserApi/checkCode',
 		//注册
-		AUTH_REG: apiPath + "app/accountInfoAction!register.action",
+		USER_REGISTER: apiPath + "/UserApi/register",
 		//登录
 		USER_LOGIN: apiPath + "/UserApi/login",
-		//设置新密码
-		AUTH_NEW_PASSWORD: apiPath + "app/accountInfoAction!retrievePassword.action",
+        //获取用户信息
+        USER_GETLOGINUSER:apiPath +  '/UserApi/getLoginUser',
+		//重置密码
+		USER_RESETPASSWORD: apiPath + "/UserApi/resetPassword",
 		//基本信息
-		AUTH_USER_INFORMATION: apiPath + "app/userInformationAction!saveUserinformation.action",
+		USER_SETUSERBASEINFO: apiPath + "/UserApi/setUserBaseInfo",
 		//情绪
 		EMOTION_GETEMOTIONINTERVENE: apiPath + "/EmotionApi/getEmotionIntervene",
 

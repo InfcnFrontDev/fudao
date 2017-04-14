@@ -67,19 +67,19 @@ class RebuildPassword extends PureComponent {
             dismissKeyboard();
             const {dispatch} = this.props;
             dispatch(showLoading());
-            request.getJson(urls.apis.AUTH_NEW_PASSWORD,{
-                    phone: phone,
-                    pwd: hex_md5(phone+password)
-                }).then((data)=>{
+            request.getJson(urls.apis.USER_RESETPASSWORD,{
+                phone: phone,
+                password: hex_md5(phone+password)
+            }).then((data)=>{
+            dispatch(hideLoading());
+            if(data.ok) {
+                    Actions['rebuildSuccess']({phone:phone,password:password})
+                }else{
+                    toast.show("修改失败...");
+                }
+            },(error)=>{
                 dispatch(hideLoading());
-                if(data.success) {
-                        Actions['rebuildSuccess']({phone:phone,password:password})
-                    }else{
-                        toast.show("修改失败...");
-                    }
-                },(error)=>{
-                    dispatch(hideLoading());
-                })
+            })
         }
 
 

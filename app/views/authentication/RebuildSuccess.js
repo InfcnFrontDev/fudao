@@ -57,16 +57,17 @@ class RebuildSuccess extends PureComponent {
     }
     _login(phone,password){
         request.getJson(urls.apis.USER_LOGIN, {
-            account: phone,
-            pwd: hex_md5(phone + password),
+            phone: phone,
+            password: hex_md5(phone + password),
         }).then((data) => {
-                if (data.success) {
-                    var userInformation = data.obj.userInformation;
-                    var appid=data.obj.accountInfo.appid;
-                    if (userInformation != undefined) { //基本信息已经添加完成
+                if (data.ok) {
+                    var birthday = data.birthday
+                    if (birthday =="") {
+                        //没有基本信息表示第一次登录需要添写信息
+                        Actions['startInformation']({phone:phone})
+                    } else {
+                        //基本信息已经添加完成
                         let user = Object.assign({}, {
-                            ...data.obj.accountInfo,
-                            ...userInformation,
                             ...data.obj
                         });
                         // 保存用户状态
@@ -79,8 +80,6 @@ class RebuildSuccess extends PureComponent {
                         this.props.dispatch(clearPosition());
                         // 跳到首页
                         Actions.index();
-                    } else { //没有基本信息表示第一次登录需要添写信息
-                        Actions['startInformation']({appid:appid})
                     }
 
                 } else {
