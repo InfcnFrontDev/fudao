@@ -71,7 +71,6 @@ class Emotion extends PureComponent {
 
 		request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
 			emotion: item.title,
-			crowd: 'high_quality_population',
 		}).then(((data) => {
 			if (data.ok) {
 				this.showModal(data.obj);

@@ -65,14 +65,12 @@ class SetPassword extends PureComponent {
             //关闭软键盘
             dismissKeyboard();
             const {dispatch} = this.props;
-            let appid=tools.uuid();
-            request.getJson(urls.apis.AUTH_REG,{
-                        appid:appid,
-                        account: phone,
-                        pwd: hex_md5(phone+password)
-                }).then((data)=>{
+            request.getJson(urls.apis.USER_REGISTER,{
+                phone: phone,
+                password: hex_md5(phone+password)
+            }).then((data)=>{
                 /*dispatch(hideLoading());*/
-                    if(data.success) {
+                    if(data.ok) {
                         setTimeout(function() {
                            Actions['passwordSuccess']({phone:phone,password:password})
                         }, 1000);

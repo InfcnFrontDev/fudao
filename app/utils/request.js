@@ -46,13 +46,13 @@ const request = {
 		}
 
 		// console.log('GET:' + url);
-   
+
 		return new Promise(function (resolve, reject) {
 			fetch(url, {
 				method: 'GET',
 				headers: {
 					'Cache-Control': 'no-cache',
-					'authorization': 'e5e28298-7190-4463-9e66-a72b77df734f'
+					'authorization': '72f4a80c-5163-4964-8fd5-a19f15ad3bbe'
 				}
 			})
 				.then((response) => type == 'text' ? response.text() : response.json())
@@ -107,7 +107,7 @@ const request = {
 
 	fetchPost(url, params, type){
 		let headers = {
-				'authorization': '1106775f-0d7d-11e7-9b59-000c293e6828',
+				'authorization': '3cd801e0-af26-4f7c-808b-5f620ca461ec'
 			},
 			body = null;
 

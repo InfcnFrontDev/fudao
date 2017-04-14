@@ -53,26 +53,29 @@ class SetPassword extends PureComponent {
     _login(phone,password){
         let {dispatch}=this.props;
         request.getJson(urls.apis.USER_LOGIN,{
-            account:phone,
-            pwd:hex_md5(phone+password),
+            phone:phone,
+            password:hex_md5(phone+password),
         }).then((data)=>{
-            if(data.success) {
-                var userInformation = data.obj.userInformation;
-                var appid=data.obj.accountInfo.appid;
+            if(data.ok) {
+                var authorization = data.obj;
+                request.getJson(urls.apis.USER_GETLOGINUSER,{
+                    authorization:authorization,
+                }).then((data)=>{
                  // 保存用户状态
-                 dispatch(login(data.obj.accountInfo));
-                if (userInformation != undefined) { //基本信息已经添加完成
+                 dispatch(login(data.obj));
+                if (!data.obj) {
+                    //没有基本信息表示第一次登录需要添写信息
+                    Actions['startInformation']({
+                        phone:phone
+                    })
+                } else {
+                    //基本信息已经添加完成
                     // 跳到首页
                     Actions.index();
-                } else { //没有基本信息表示第一次登录需要添写信息
-                    Actions['startInformation']({
-                        appid:appid
-                    })
-                   /* Actions.startInformation({
-                        type: ActionConst.POP_AND_REPLACE,
-                        appid:appid
-                    })*/
                 }
+                },(error)=>{
+
+                })
             }else{
 
             }

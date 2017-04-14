@@ -29,8 +29,7 @@ class Collection extends PureComponent {
 
 	_onFetch(page = 1, callback, options) {
 		let {loginUser} = this.props;
-		request.getJson(urls.apis.MY_COLLECTION_LIST, {
-			appid: loginUser.appid,
+		request.getJson(urls.apis.COLLECTION_GETMYCOLLECTIONLIST, {
 			page
 		}).then((result) => {
 			let {datas, totalPages} = result.obj;
@@ -57,7 +56,7 @@ class Collection extends PureComponent {
 
 	removeMyCollection(rowData) {
 		// alert(JSON.stringify(rowData));
-		request.getJson(urls.apis.MY_COLLECTION_DELETE, {
+		request.getJson(urls.apis.COLLECTION_DELETEMYCOLLECTION, {
 			id: rowData.id
 		}).then((result) => {
 			toast.show('删除成功');

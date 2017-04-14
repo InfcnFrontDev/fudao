@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {ScrollView, ListView, View, Text} from "react-native";
 import GiftedListView from "../../../components/GiftedListView";
 import ArticleItem from "./ArticleItem";
-import {request, urls} from "../../../utils/";
+import {request, urls,toast} from "../../../utils/";
 
 class ArticleList extends Component {
 
@@ -24,15 +24,17 @@ class ArticleList extends Component {
 	_onFetch(page = 1, callback, options) {
 		let {label} = this.props;
 		request.getJson(urls.apis.ARTICLE_GETARTICLELIST, {
-			name: label,
+			crowd: 'aged',
+			columnId:1,
 			page
 		}).then((result) => {
-			if (page === result.obj.totalPages) {
-				callback(result.obj.datas, {
+			toast.show(JSON.stringify(result));
+			if (page === result.obj.pageCount) {
+				callback(result.obj.list, {
 					allLoaded: true
 				});
 			} else {
-				callback(result.obj.datas);
+				callback(result.obj.list);
 			}
 		});
 	}

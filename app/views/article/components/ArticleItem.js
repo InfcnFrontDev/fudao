@@ -4,12 +4,13 @@ import {Actions} from "react-native-router-flux";
 import ArticleTextItem from "./ArticleTextItem";
 import ArticleSingleImageItem from "./ArticleSingleImageItem";
 import ArticleMultiImageItem from "./ArticleMultiImageItem";
-import {urls} from "../../../utils/index";
+import {urls,toast} from "../../../utils/index";
 
 class ArticleItem extends Component {
 
 	render() {
 		let {article} = this.props;
+		toast.show(JSON.stringify(article));
 		article.imgs = [];
 		if (article.img) {
 			article.imgs = article.img.split(',')
