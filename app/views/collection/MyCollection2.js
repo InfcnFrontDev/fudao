@@ -86,7 +86,7 @@ class MyCollection extends PureComponent {
 
 	fetchList(page = 1, callback, options) {
 		let {loginUser} = this.props;
-		request.getJson(urls.apis.MY_COLLECTION_LIST, {
+		request.getJson(urls.apis.COLLECTION_GETMYCOLLECTIONLIST, {
 			appid: loginUser.appid,
 			page
 		}).then(result => {

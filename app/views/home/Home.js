@@ -27,7 +27,7 @@ class Home extends PureComponent {
 	render() {
 		let {loginUser} = this.props;
 
-		request.getJson(urls.apis.WEATHER,{city:'北京'}).then((data)=>{
+		/*request.getJson(urls.apis.WEATHER,{city:'北京'}).then((data)=>{
 			let a=data.result.weatid-1;
 
 
@@ -38,7 +38,7 @@ class Home extends PureComponent {
 
 
 			})
-		});
+		});*/
 
 		return (
 			<Container>
@@ -61,8 +61,8 @@ class Home extends PureComponent {
 						<View style={{flexDirection: 'column', justifyContent: 'center',width:80}}>
 							<Text style={styles.font}>北京.海淀</Text>
 							<View style={{flexDirection: 'row',justifyContent:'center'}}>
-								<Text style={styles.font}>{this.state.weather}</Text>
-								<Image style={{width:20,height:20}} source={{uri:'http://api.k780.com:88/upload/weather/d1/'+this.state.img+'.png'}}/>
+			{/*					<Text style={styles.font}>{this.state.weather}</Text>
+								<Image style={{width:20,height:20}} source={{uri:'http://api.k780.com:88/upload/weather/d1/'+this.state.img+'.png'}}/>*/}
 							</View>
 
 

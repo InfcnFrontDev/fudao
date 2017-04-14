@@ -30,7 +30,7 @@ class ArticleMultiImageItem extends Component {
 					</Row>
 					<Row>
 						<Text style={styles.from}>来自：{article.source}</Text>
-						<Text style={styles.timeDiff}>{article.updatetime}</Text>
+						<Text style={styles.timeDiff}>{article.createTime}</Text>
 					</Row>
 				</Grid>
 			</Item>

@@ -64,7 +64,7 @@ class FriendApply extends PureComponent {
 
 		// 申请加为好友
 		dispatch(showLoading());
-		request.getJson(urls.apis.FRIEND_APPLY, {
+		request.getJson(urls.apis.FRIEND_APPLYADDFRIEND, {
 			activeAppid: loginUser.appid,
 			activeName: myIntro,
 			passiveAppid: friend.appid,
