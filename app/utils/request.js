@@ -4,6 +4,8 @@ import {toast} from "./index";
  */
 const request = {
 
+	token: '',
+
 	/**
 	 * GET请求，返回Json数据。
 	 *
@@ -46,7 +48,7 @@ const request = {
 		}
 
 		// console.log('GET:' + url);
-   
+
 		return new Promise(function (resolve, reject) {
 			fetch(url, {
 				method: 'GET',

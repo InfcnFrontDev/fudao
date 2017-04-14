@@ -1,6 +1,6 @@
 import * as types from "../actions/types";
-import {toast} from "../utils/index"
 const initialState = {
+	token: null,
 	loginUser: {}
 };
 export default function (state = initialState, {type, payload}) {
@@ -10,7 +10,7 @@ export default function (state = initialState, {type, payload}) {
 				...payload
 			});
 		case types.USER_LOGOUT:
-			return initialState;
+			return Object.assign({}, initialState);
 		case types.USER_UPDATE_INFO:
 			let loginUser = {};
 			loginUser[payload.field] = payload.value;
@@ -19,10 +19,10 @@ export default function (state = initialState, {type, payload}) {
 				loginUser
 			});
 		case types.USER_UPDATE_CHECK:
-			let loginUser1= {};
-			let str={};
-            str[payload.field] = payload.value;
-			loginUser1[payload.tableName]  = Object.assign({}, state.loginUser[payload.tableName], str);
+			let loginUser1 = {};
+			let str = {};
+			str[payload.field] = payload.value;
+			loginUser1[payload.tableName] = Object.assign({}, state.loginUser[payload.tableName], str);
 			loginUser = Object.assign({}, state.loginUser, loginUser1);
 			return Object.assign({}, state, {
 				loginUser

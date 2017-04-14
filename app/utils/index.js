@@ -5,6 +5,7 @@ import toast from "./toast";
 import dialogs from "./dialogs";
 import request from "./request";
 import theme from "./theme";
+import store from "./store";
 
 export {
 	config,
@@ -14,4 +15,5 @@ export {
 	dialogs,
 	request,
 	theme,
+	store,
 };

@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Actions, ActionConst} from "react-native-router-flux";
-import {Container, Left, Right, Body, Form, Item} from "native-base";
+import {Container} from "native-base";
 import {View, Image, AsyncStorage} from "react-native";
 import CommitButton from "./components/CommitButton";
 import {toast} from "../../utils/index";
@@ -26,8 +26,8 @@ class Start extends PureComponent {
 	}
 
 	componentWillMount() {
-		let {loginUser} = this.props;
-		if (loginUser.birthday!="") {
+		let {token, loginUser} = this.props;
+		if (token) {
 			toast.show('欢迎回来，' + loginUser.title);
 			Actions.index({
 				type: ActionConst.REPLACE
@@ -59,6 +59,6 @@ const styles = {
 };
 
 const mapStateToProps = state => ({
-	loginUser: state.user.loginUser,
+	...state.user
 });
 export default connect(mapStateToProps)(Start);

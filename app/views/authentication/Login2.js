@@ -1,15 +1,21 @@
 import React, {PureComponent} from "react";
 import {View, Alert, TextInput, TouchableOpacity, ToastAndroid, AsyncStorage} from "react-native";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
+import {Actions, ActionConst} from "react-native-router-flux";
 import {Text} from "native-base";
 import {Header, Container, Content} from "../../components/index";
 import {theme} from "../../utils/";
+import {hideLoading} from "../../actions/loading";
 import CommitButton from "./components/CommitButton";
 import UserInput from "./components/UserInput";
 import {checkPhone} from "./components/public";
 import {request, urls, toast} from "../../utils/index";
 import {login} from "../../actions/user";
+import {clearMyQuestion} from "../../actions/question";
+import {clearMyEmotion} from "../../actions/emotion";
+import {clearFriend} from "../../actions/friend";
+import {clearDynamic} from "../../actions/dynamic";
+import {clearPosition} from "../../actions/position";
 /**
  * 登录
  */
@@ -77,31 +83,45 @@ class Login extends PureComponent {
 
 		// 提交登录
 		request.getJson(urls.apis.USER_LOGIN, {
-			phone,
-			password
+			phone: phone,
+			password: password //hex_md5(phone + password),
 		}).then((data) => {
 			if (data.ok) {
+				/*this.setState({
+				 login: "yes",
+				 })
+				 AsyncStorage.setItem('login', this.state.login)*/
 				toast.show("登录成功");
-				loginSuccess(data.obj);
-			} else {
-				toast.show("用户名或密码错误");
-			}
-		});
-	}
-
-	loginSuccess(token) {
-		request.token = token;
-		request.getJson(urls.apis.USER_GETLOGINUSER)
-			.then((data) => {
-				if (data.ok) {
-					this.loginSuccess2(data.obj);
+				var birthday = data.birthday;
+				if (birthday == "") {
+					//没有基本信息表示第一次登录需要添写信息
+					Actions['startInformation']({phone: phone})
+				} else {
+					//基本信息已经添加完成
+					let user = Object.assign({}, {
+						...data.obj
+					});
+					// 保存用户状态
+					this.props.dispatch(login(user));
+					//初始化用户信息
+					this.props.dispatch(clearMyQuestion());
+					this.props.dispatch(clearMyEmotion());
+					this.props.dispatch(clearFriend());
+					this.props.dispatch(clearDynamic());
+					this.props.dispatch(clearPosition());
+					// 跳到首页
+					Actions.index({
+						type: ActionConst.POP_AND_REPLACE,
+					});
 				}
-			});
-	}
 
-	loginSuccess2(user) {
-		let {dispatch} = this.props;
-		dispatch(login(user));
+
+			} else {
+				toast.show("密码错误");
+			}
+		}, (error) => {
+			dispatch(hideLoading());
+		});
 	}
 
 	//根据是否有基本信息选择跳转页面
