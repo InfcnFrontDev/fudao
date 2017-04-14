@@ -1,7 +1,6 @@
 // 接口服务器地址
-const apiPath = 'http://103.254.113.11:8080/fudao/'; // 外网
-// const apiPath = 'http://192.168.10.69:8080/fudao-svc/'; // 内网服务器
-// const apiPath = 'http://192.168.3.126:18080/fudao-svc/'; // 谢鹏
+//const apiPath = 'http://103.254.113.11:9191/api/'; // 外网
+const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 
 // web服务器地址
 //const webPath = 'http://103.254.113.11:8080/fudao/app/'; // 外网
@@ -61,17 +60,17 @@ const urls = {
 
 		// 资讯 ----------------------------------------------------------------------
 		//资讯列表(ok)
-		ARTICLE_LIST: apiPath + 'app/myTerritoryAction!list.action',
-		//资讯详细(ok)
-		ARTICLE_DETAIL: apiPath + 'app/myTerritoryAction!detail.action',
+		ARTICLE_GETARTICLELIST: apiPath + 'ArticleApi/getArticleList',
+		//获取资讯栏目列表
+		ARTICLE_GETARTICLECOLUMNLIST: apiPath + 'ArticleApi/getArticleColumnList',
 
 
 		// 我的收藏 ----------------------------------------------------------------------
 
-		//我的收藏列表
-		MY_COLLECTION_LIST: apiPath + 'app/collectionAction!getMyCollection.action',
+		//获取我的收藏列表
+		COLLECTION_GETMYCOLLECTIONLIST: apiPath + 'CollectionApi/getMyCollectionList',
 		//删除(取消)我的收藏
-		MY_COLLECTION_DELETE: apiPath + 'app/collectionAction!delMyCollection.action',
+		COLLECTION_DELETEMYCOLLECTION: apiPath + 'CollectionApi/deleteMyCollection',
 
 
 		//获取用户信息
@@ -86,15 +85,18 @@ const urls = {
 		// 好友 ----------------------------------------------------------------------
 
 		//申请加为好友
-		FRIEND_APPLY: apiPath + 'app/friendDynamicAction!addFriend.action',
+		FRIEND_APPLYADDFRIEND: apiPath + 'FriendApi/applyAddFriend',
 		//同意加为好友
-		FRIEND_AGREE: apiPath + 'app/friendDynamicAction!editFriend.action',
+		FRIEND_AGREEADDFRIEND: apiPath + 'FriendApi/agreeAddFriend',
 		//好友申请列表
-		FRIEND_APPLY_LIST: apiPath + 'app/friendDynamicAction!getWaitBeFriends.action',
+		FRIEND_GETMYFRIENDAPPLYLIST: apiPath + 'FriendApi/getMyFriendApplyList',
 		//删除好友
-		FRIEND_DELETE: apiPath + 'app/friendDynamicAction!deleteFriend.action',
+		FRIEND_DELETEMYFRIEND: apiPath + 'FriendApi/deleteMyFriend',
 		//我的好友列表
-		MY_FRIENDS_LIST: apiPath + 'app/friendDynamicAction!getFriends.action',
+		FRIEND_GETMYFRIENDLIST: apiPath + 'FriendApi/getMyFriendList',
+		//修改好友备注
+		FRIEND_UPDATEFRIENDREMARK:apiPath +'FriendApi/updateFriendRemark',
+
 
 
 		//搜索------------------------------------------------------------------------
@@ -179,6 +181,18 @@ const urls = {
 		EXPECT_REMOVE_USER_EXPECT: apiPath + 'app/zixiuAction!deleteMyZixiu.action',
 		//删除用户期望
 		MY_EXPECT_TREETMENT: apiPath + 'app/zixiuAction!findZixiuTherapy.action',
+
+		//获取区县
+		REGION_GETCOUNTYLIST:apiPath + 'RegionApi/getCountyList',
+		//获取城市列表
+		REGION_GETCITYLIST:apiPath + 'RegionApi/getCityList',
+
+		//获取体检结果
+		MEDICALEXAMINATIONA_GETMEDICALINFORMATIONLIST:apiPath + 'MedicalExaminationApi/getMedicalInformationList',
+		//修改体检结果
+		MEDICALEXAMINATION_UPDATAMEDICALINFORMATIONRESULT:apiPath + 'MedicalExaminationApi/updataMedicalInformationResult',
+
+
 
 	},
 
