@@ -148,7 +148,7 @@ class UserDetail extends PureComponent {
 
 		// 获取用户信息
 		dispatch(showLoading());
-		request.getJson(urls.apis.FRIEND_DELETE, {
+		request.getJson(urls.apis.FRIEND_DELETEMYFRIEND, {
 			userId, friendId
 		}).then((result) => {
 			dispatch(hideLoading());
