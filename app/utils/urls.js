@@ -3,14 +3,16 @@
 const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 
 // web服务器地址
-//const webPath = 'http://103.254.113.11:8080/fudao/app/'; // 外网
-//const webPath = 'http://192.168.10.69:8080/fudao-svc/app/'; // 内网
+const webPath = 'http://103.254.113.11:9191/web'; // 外网
+// const webPath = 'http://192.168.10.69:9191/web'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
-const webPath = 'http://192.168.3.204:3000/'; // 王朋
+// const webPath = 'http://192.168.3.204:3000/'; // 王朋
 //  const webPath = 'http://192.168.3.203:3000/'; //
 // 图片服务器地址
-const picPath = 'http://103.254.113.11:9191/'; // 外网
-// const picPath = 'http://192.168.10.69:9191/'; // 内网
+// const picPath = 'http://103.254.113.11:9191/'; // 外网
+
+ // const picPath = 'http://192.168.10.69:9191/'; // 内网
+
 
 const urls = {
 	apiPath,
@@ -26,7 +28,7 @@ const urls = {
 		// 用户协议
 		PROTOCOL: webPath + 'protocol.html',
 		// 资讯详细
-		ARTICLE_DETAIL: webPath + 'articleDetail.html',
+		ARTICLE_GETARTICLE: webPath + 'articleDetail.html',
 		// 我的时间
 		MY_TIME: webPath + 'myTime.html',
 		// 健康测评
@@ -51,14 +53,16 @@ const urls = {
 	 */
 	apis: {
 		// 图片接口(ok)
-		IMAGE: picPath + 'api/ImgApi/getImage',
-		IMAGE_UPLOAD: picPath + 'api/ImgApi/upload',
+		IMAGE: apiPath + '/ImgApi/getImage',
+		IMAGE_UPLOAD: apiPath + '/ImgApi/upload',
+
 
 		//天气-------------------------------------------------------------------------
 		WEATHER:apiPath +'/app/weatherAction!getWeather.action',
 
-
 		// 资讯 ----------------------------------------------------------------------
+
+		//资讯列表
 		//资讯列表(ok)
 		ARTICLE_GETARTICLELIST: apiPath + 'ArticleApi/getArticleList',
 		//获取资讯栏目列表
@@ -105,20 +109,23 @@ const urls = {
 
 		// 注册登录(老)
 		//验证手机号
-		AUTH_CHECK_PHONE: apiPath + 'app/phoneVerificationAction!checkPhone.action',
+		USER_CHECKPHONEREGISTERED: apiPath + '/UserApi/checkPhoneRegistered',
+        //发送验证码
+        USER_SENDCODE: apiPath + '/UserApi/sendCode',
 		//验证验证码
-
-		AUTH_CHECK_CODE: apiPath + "app/accountInfoAction!registerBefore.action",
+		USER_CHECKCODE: apiPath + '/UserApi/checkCode',
 		//注册
-		AUTH_REG: apiPath + "app/accountInfoAction!register.action",
+		USER_REGISTER: apiPath + "/UserApi/register",
 		//登录
-		AUTH_LOGIN: apiPath + "app/accountInfoAction!login.action",
-		//设置新密码
-		AUTH_NEW_PASSWORD: apiPath + "app/accountInfoAction!retrievePassword.action",
+		USER_LOGIN: apiPath + "/UserApi/login",
+        //获取用户信息
+        USER_GETLOGINUSER:apiPath +  '/UserApi/getLoginUser',
+		//重置密码
+		USER_RESETPASSWORD: apiPath + "/UserApi/resetPassword",
 		//基本信息
-		AUTH_USER_INFORMATION: apiPath + "app/userInformationAction!saveUserinformation.action",
+		USER_SETUSERBASEINFO: apiPath + "/UserApi/setUserBaseInfo",
 		//情绪
-		NOW_EMOTION: apiPath + "app/emotionAction!method.action",
+		EMOTION_GETEMOTIONINTERVENE: apiPath + "/EmotionApi/getEmotionIntervene",
 
 		// 注册登录(新)
 
@@ -157,18 +164,24 @@ const urls = {
 
 		// 我的问题 ---------------------------------------------------------
 		//所有问题
-		MY_QUESTION_ALL_QUESTION: apiPath + 'app/threeDiseasesListAction!findDiseasesAll.action',
-		//问题详情-疗法
-		MY_QUESTION_TREETMENT: apiPath + 'app/threeDiseasesListAction!findDailyTherapy_new.action',
+		DISEASE_GETALLDISEASELIST: apiPath + '/DiseaseApi/getMyDiseaseList',
 		//用户问题
-		MY_QUESTION_USER_QUESTION: apiPath + 'app/threeDiseasesListAction!getUserDiseasesByuserId.action',
-		//添加用户问题
-		MY_QUESTION_ADD_USER_QUESTION: apiPath + 'app/threeDiseasesListAction!addUserDisease.action',
-		//删除用户问题
-		MY_QUESTION_DEL_USER_QUESTION: apiPath + 'app/threeDiseasesListAction!deleteUserDisease.action',
-		//疾病日常疗法的推荐的菜谱
-		QUESTION_MENU_KINDS: apiPath + 'app/threeDiseasesListAction!findIngredientsContainsCookbook.action',
-		EXPECT_MENU_KINDS: apiPath + 'app/zixiuAction!findIngredientsContainsCookbook.action',
+		DISEASE_GETMYDISEASELIST: apiPath + '/DiseaseApi/getMyDiseaseList',
+        //添加我的问题
+		DISEASE_ADDMYDISEASE: apiPath + '/DiseaseApi/addMyDisease',
+        //删除用户问题
+		DISEASE_DELETEMYDISEASE: apiPath + '/DiseaseApi/deleteMyDisease',
+        //问题日常疗法
+        DISEASE_GETDISEASEDAILYMETHODDETAIL: apiPath + '/DiseaseApi/getDiseaseDailyMethodList',
+		//问题专业疗法
+        DISEASE_GETDISEASEPROFESSIONALMETHODLIST: apiPath + '/DiseaseApi/getDiseaseProfessionalMethodList',
+       //获取食材
+		INGREDIENT_GETINGREDIENT: apiPath + '/IngredientApi/getIngredient',
+		//获取菜品列表
+		COOKBOOK_GETCOOKBOOKLIST: apiPath + '/CookbookApi/getCookbookList',
+		//获取菜品详细
+		COOKBOOK_GETCOOKBOOK: apiPath + '/CookbookApi/getCookbook',
+
 
 		// 我的期望 ---------------------------------------------------------
 		//所有期望
@@ -182,6 +195,8 @@ const urls = {
 		//删除用户期望
 		MY_EXPECT_TREETMENT: apiPath + 'app/zixiuAction!findZixiuTherapy.action',
 
+		// 我的能量场 ---------------------------------------------------------
+		MY_ENEGRYMY_ACTION_INFORMATION: apiPath +'app/myEnergyAction!informationData.action'//?appid=1
 		//获取区县
 		REGION_GETCOUNTYLIST:apiPath + 'RegionApi/getCountyList',
 		//获取城市列表

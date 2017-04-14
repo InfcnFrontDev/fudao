@@ -29,7 +29,6 @@ class TreatmentDaily extends PureComponent {
 
     onFetch(page = 1, callback, options){
       let {dailyMethods} = this.props;
-
       callback(dailyMethods,{
         allLoaded:true
       })
@@ -92,12 +91,12 @@ const styles = {
   }
 }
 
-TreatmentDailyRow.propTypes = {
+TreatmentDaily.propTypes = {
   dailyMethods: React.PropTypes.array,
   title:  React.PropTypes.string,
 }
 
-TreatmentDailyRow.defaultProps = {
+TreatmentDaily.defaultProps = {
   dailyMethods: [],
   title:'',
 }

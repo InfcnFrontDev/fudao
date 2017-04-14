@@ -31,7 +31,7 @@ class MyQuestionDetail extends PureComponent {
 						selectedItem={question}
 						onItemPress={(item) => this._onItemPress(item)}
 						onItemRemove={(item) => this._onItemRemove(item)}/>
-					<QuestionTab question={question} url={urls.apis.MY_QUESTION_TREETMENT}/>
+					<QuestionTab question={question} url={[urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL,urls.apis.DISEASE_GETDISEASEPROFESSIONALMETHODLIST]}/>
 				</Content>
 			</Container>
 		)

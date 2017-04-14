@@ -33,9 +33,21 @@ export default class FeedbackView extends Component{
                    dot={<View style={{width:8,height:8,backgroundColor:'gray',borderRadius:4,marginLeft:3,marginRight:3}}></View>}
                    activeDot={<View style={{width:8,height:8,backgroundColor:'orange',borderRadius:4,marginLeft:3,marginRight:3}}></View>}
                    >
-                    {this.renderImg()}
+                    {this.props.flag?this.renderOneImg():this.renderImg()}
                </Swiper>
          </View>
+        )
+    }
+    renderOneImg(){
+        return (
+            <Image
+                style={{flex:1,}}
+                resizeMode= {Image.resizeMode.contain}
+                source={{uri:this.props.image}}
+            >
+                <TouchableOpacity onPress={Actions.pop} style={{flex:1}}>
+                </TouchableOpacity>
+            </Image>
         )
     }
 

@@ -70,15 +70,24 @@ class Register extends PureComponent {  // eslint-disable-line
         if(!checkPhone(phone)){
             toast.show("请填入正确的手机号");
         }else{
-            request.getJson(urls.apis.AUTH_CHECK_PHONE,{
+            request.getJson(urls.apis.USER_CHECKPHONEREGISTERED,{
                     phone:phone ,
-                    type:'reg'
                 }).then((data)=>{
-                    if(data.success && "existence" == data.msg) {
+                    if(!data.ok) {
+                        request.getJson(urls.apis.USER_SENDCODE,{
+                            phone:phone ,
+                        }).then((data)=>{
+                            if(data.ok){
+                                toast.show("正在发送验证码...");
+                                this._getGode._click();
+                            }
+                        },(error)=>{
+
+                        })
+
+
+                    }else{
                         toast.show("手机号已被注册");
-                    } else if(data.success && "existence" != data.msg) {
-                        toast.show("正在发送验证码...");
-                        this._getGode._click();
                     }
                 },(error)=>{
 
@@ -99,13 +108,12 @@ class Register extends PureComponent {  // eslint-disable-line
             dismissKeyboard();
             /*接口*/
             dispatch(showLoading());
-            request.getJson(urls.apis.AUTH_CHECK_CODE,{
-                    account: phone,
-                    code: code,
-                    type: "reg"
+            request.getJson(urls.apis.USER_CHECKCODE,{
+                phone: phone,
+                code: code,
                 }).then((data)=>{
                     dispatch(hideLoading());
-                    if(data.success) {
+                    if(data.ok) {
                         this._getGode.clearTimer();
                         Actions['setPassword']({
                             phone:phone,

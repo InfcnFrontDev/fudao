@@ -43,7 +43,7 @@ class ArticleItem extends Component {
 		else
 			Actions.webview({
 				title: '资讯详情',
-				uri: urls.pages.ARTICLE_DETAIL + "?id=" + article.id + "&userId=" + loginUser.appid,
+				uri: urls.pages.ARTICLE_GETARTICLE + "?id=" + article.id + "&userId=" + loginUser.appid,
 			})
 	}
 

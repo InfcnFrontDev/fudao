@@ -7,7 +7,7 @@ import {request,urls,} from "../../../utils/";
 export function login(phoneVale,passwordVale,appid){
         let  phone=phoneVale;
         let  password=passwordVale;
-        request.getJson(urls.apis.AUTH_LOGIN,{
+        request.getJson(urls.apis.USER_LOGIN,{
             account:phone,
             pwd:hex_md5(phone+password),
         }).then((data)=>{

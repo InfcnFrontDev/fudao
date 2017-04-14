@@ -31,13 +31,13 @@ class StartInformation extends PureComponent {
             presetText: '选择日期,指定2016/3/5',
             showM:false,
             position:'北京市',
-            appid:this.props.appid,
+            phone:this.props.phone,
             year1:'',
             year:'',
             month1:'',
             month:'',
             day1:'',
-            sex:0,
+            sex:2,
             jieduan:'未孕阶段',
         }
     }
@@ -87,7 +87,7 @@ class StartInformation extends PureComponent {
         if(this.state.showM){
 
             mbW= (
-                <TouchableOpacity onPress={this.woman.bind(this,this.state.appid)} style={{justifyContent:'center',
+                <TouchableOpacity onPress={this.woman.bind(this,this.state.phone)} style={{justifyContent:'center',
                     alignItems:'center'}}>
                     <View style={styles.mb}></View>
                     <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/woman.png')}/>
@@ -133,8 +133,8 @@ class StartInformation extends PureComponent {
             </Container>
         )
     };
-    woman(appid){
-        let sex=0;
+    woman(phone){
+        let sex=2;
         this.setState({
             showM:false,
             sex:sex,
@@ -155,7 +155,7 @@ class StartInformation extends PureComponent {
     }
     date(myDate,sex){
         let year,year1,month,month1,day,num,year0=(null);
-        if(sex==0){
+        if(sex==2){
             num=14
         }else if(sex==1){
             num=16
@@ -193,9 +193,9 @@ class StartInformation extends PureComponent {
     commit() {
         let {dispatch}=this.props;
         let loginUser=this.props.loginUser;
-        let {position, maxText, appid, sex, jieduan} = this.state;
+        let {position, maxText, phone, sex, jieduan} = this.state;
         let womanType;
-        if (sex == 0) {
+        if (sex == 2) {
             if (jieduan == '未孕阶段' || jieduan == '备孕阶段' || jieduan == '已孕阶段') {
                 womanType = 1
             } else if (jieduan == '待产阶段') {
@@ -207,7 +207,7 @@ class StartInformation extends PureComponent {
 
         //获取地理位置
 
-        let userInformation = {};
+        /*let userInformation = {};
 
         if (womanType) {
             userInformation.womanType = womanType;
@@ -268,42 +268,33 @@ class StartInformation extends PureComponent {
             userInformation.drink = '';
             // 精神状况
             userInformation.mental_state = '';
-        }
+        }*/
 
-        request.postJson(urls.apis.AUTH_USER_INFORMATION, {
-            jsonStr: JSON.stringify(userInformation),
-            ishealthRing: "yes",
-            appid: appid,
-            city: position
+        request.postJson(urls.apis.USER_SETUSERBASEINFO, {
+            phone:phone,
+            sex: sex,
+            womanType: womanType,
+            birthday: maxText,
+            regionId:position
         }).then((data)=> {
-            if (data.success) {
-                let loginUser=this.props.loginUser;
-
-                request.getJson(urls.apis.AUTH_LOGIN, {
-                    account: loginUser.phone,
-                    pwd: loginUser.pwd,
-                }).then((data) => {
-
-                        let user = Object.assign({}, {
-                            ...data.obj.accountInfo,
-                            ...data.obj.userInformation,
-                            ...data.obj
-                        });
-
-                        // 保存用户状态
-                        this.props.dispatch(login(user));
-                    //初始化用户信息
-                    this.props.dispatch(clearMyQuestion());
-                    this.props.dispatch(clearMyEmotion());
-                    this.props.dispatch(clearFriend());
-                    this.props.dispatch(clearDynamic());
-                    this.props.dispatch(clearPosition());
-                        // 跳到首页
-                        Actions.index();
-                    }, (error) => {
-
-                    }
-                );
+            if (data.ok) {
+                let user = Object.assign({}, {
+                    phone:phone,
+                    sex: sex,
+                    womanType: womanType,
+                    birthday: maxText,
+                    regionId:position
+                });
+                // 保存用户状态
+                this.props.dispatch(login(user));
+                //初始化用户信息
+                this.props.dispatch(clearMyQuestion());
+                this.props.dispatch(clearMyEmotion());
+                this.props.dispatch(clearFriend());
+                this.props.dispatch(clearDynamic());
+                this.props.dispatch(clearPosition());
+                // 跳到首页
+                Actions.index();
             }
         })
     }

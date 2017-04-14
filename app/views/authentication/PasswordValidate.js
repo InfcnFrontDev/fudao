@@ -66,21 +66,27 @@ class Register extends PureComponent {  // eslint-disable-line
         }else{
             //关闭软键盘
             dismissKeyboard();
-            request.getJson(urls.apis.AUTH_CHECK_PHONE,{
-                    phone:phone ,
-                    type:'findPwd'
-                }).then((data)=>{
-                    if(data.success && "notexist" == data.msg) {
-                        toast.show("此号码没有注册过，请注册...");
-                    }else if(data.success && "" == data.msg){
-                        toast.show("正在发送验证码...");
-                        this._getGode._click();
-                    }
+            request.getJson(urls.apis.USER_CHECKPHONEREGISTERED,{
+                    phone:phone,
+            }).then((data)=>{
+                if(data.ok) {
+                    //发送验证码接口
+                    request.getJson(urls.apis.USER_SENDCODE,{
+                        phone:phone ,
+                    }).then((data)=>{
+                        if(data.ok){
+                            toast.show("正在发送验证码...");
+                            this._getGode._click();
+                        }
+                    },(error)=>{
 
+                    })
+                }else{
+                    toast.show("手机号没有被注册");
+                }
+            },(error)=>{
 
-                },(error)=>{
-
-                })
+            })
         }
     }
     _find(){
@@ -93,13 +99,12 @@ class Register extends PureComponent {  // eslint-disable-line
         }else{
             /*接口*/
             dispatch(showLoading());
-            request.getJson(urls.apis.AUTH_CHECK_CODE,{
-                    account: phone,
-                    code: code,
-                    type: 'findPwd',
+            request.getJson(urls.apis.USER_CHECKCODE,{
+                phone: phone,
+                code: code,
                 }).then((data)=>{
                     dispatch(hideLoading());
-                    if(data.success) {
+                    if(data.ok) {
                         this._getGode.clearTimer();
                         Actions['rebuildPassword']({phone:phone});
                     } else {
