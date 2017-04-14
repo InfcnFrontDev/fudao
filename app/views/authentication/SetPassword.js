@@ -65,7 +65,6 @@ class SetPassword extends PureComponent {
             //关闭软键盘
             dismissKeyboard();
             const {dispatch} = this.props;
-            let appid=tools.uuid();
             request.getJson(urls.apis.USER_REGISTER,{
                 phone: phone,
                 password: hex_md5(phone+password)
