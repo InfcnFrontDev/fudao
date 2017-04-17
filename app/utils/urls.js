@@ -52,12 +52,12 @@ const urls = {
 	 */
 	apis: {
 		// 图片接口(ok)
-		IMAGE: apiPath + '/ImgApi/getImage',
-		IMAGE_UPLOAD: apiPath + '/ImgApi/upload',
+		IMAGE: apiPath + 'ImgApi/getImage',
+		IMAGE_UPLOAD: apiPath + 'ImgApi/upload',
 
 
 		//天气-------------------------------------------------------------------------
-		WEATHER:apiPath +'/app/weatherAction!getWeather.action',
+		WEATHER:apiPath +'app/weatherAction!getWeather.action',
 
 		// 资讯 ----------------------------------------------------------------------
 

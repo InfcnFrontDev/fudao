@@ -28,7 +28,6 @@ class ArticleList extends Component {
 			columnId:1,
 			page
 		}).then((result) => {
-			toast.show(JSON.stringify(result));
 			if (page === result.obj.pageCount) {
 				callback(result.obj.list, {
 					allLoaded: true

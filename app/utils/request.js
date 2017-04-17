@@ -52,7 +52,7 @@ const request = {
 				method: 'GET',
 				headers: {
 					'Cache-Control': 'no-cache',
-					'authorization': '72f4a80c-5163-4964-8fd5-a19f15ad3bbe'
+					'authorization': '921cbfa6-e6a0-44ab-ae67-608dbfd5ae80'
 				}
 			})
 				.then((response) => type == 'text' ? response.text() : response.json())
