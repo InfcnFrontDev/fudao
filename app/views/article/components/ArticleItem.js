@@ -9,7 +9,10 @@ import {urls,toast} from "../../../utils/index";
 class ArticleItem extends Component {
 
 	render() {
-		let {article} = this.props;
+		let {article,list} = this.props;
+        console.log(list);
+
+        console.log(article);
 
 		article.imgs = [];
 		if (article.img) {
