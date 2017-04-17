@@ -32,18 +32,19 @@ class Collection extends PureComponent {
 		request.getJson(urls.apis.COLLECTION_GETMYCOLLECTIONLIST, {
 			page
 		}).then((result) => {
-			let {datas, totalPages} = result.obj;
-			if (page === totalPages || totalPages==0) {
-				callback(datas, {allLoaded: true});
+			let {list, totalPages} = result.obj;
+			callback(list);
+			/*if (page === totalPages || totalPages==0) {
+				callback(list, {allLoaded: true});
 			} else {
-				callback(datas);
-			}
+				callback(list);
+			}*/
 		});
 	}
 
 	_renderRowView(rowData) {
 		return (
-			<ArticleItem article={rowData.sourceObj} onLongPress={() => this._onLongPress(rowData)}/>
+			<ArticleItem article={rowData.article} onLongPress={() => this._onLongPress(rowData)}/>
 		)
 	}
 
