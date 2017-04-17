@@ -199,7 +199,7 @@ const urls = {
 
 		// 我的能量场 ---------------------------------------------------------
 
-		ENERGY_GETINFORMATIONRESULT: apiPath +'/EnergyApi/getInformationResult'//
+		ENERGY_GETINFORMATIONRESULT: apiPath +'/EnergyApi/getInformationResult',
 		MY_ENEGRYMY_ACTION_INFORMATION: apiPath +'app/myEnergyAction!informationData.action',//?appid=1
 		//获取区县
 		REGION_GETCOUNTYLIST:apiPath + 'RegionApi/getCountyList',
