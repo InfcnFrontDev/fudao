@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import {View, Alert, TextInput, TouchableOpacity, ToastAndroid, AsyncStorage} from "react-native";
 import {connect} from "react-redux";
-import {Actions} from "react-native-router-flux";
+import {Actions, ActionConst} from "react-native-router-flux";
+import {observer} from "mobx-react/native";
 import {Text} from "native-base";
 import {Header, Container, Content} from "../../components/index";
 import {theme} from "../../utils/";
@@ -9,17 +10,19 @@ import CommitButton from "./components/CommitButton";
 import UserInput from "./components/UserInput";
 import {checkPhone} from "./components/public";
 import {request, urls, toast} from "../../utils/index";
-import {login} from "../../actions/user";
+import UserStore from "../../mobx/userStore";
 /**
  * 登录
  */
 const dismissKeyboard = require('dismissKeyboard');
+
+@observer
 class Login extends PureComponent {
 
 	state = {
 		isFetching: false,
-		phone: '',
-		password: '',
+		phone: '15901097191',
+		password: '123456',
 		login: 'no'
 	}
 
@@ -36,7 +39,8 @@ class Login extends PureComponent {
 										   phone: value
 									   })
 								   }}/>
-						<UserInput text="密码" secureTextEntry={true}
+						<UserInput text="密码"
+								   secureTextEntry={true}
 								   onChangeText={(value)=> {
 									   this.setState({
 										   password: value
@@ -49,6 +53,10 @@ class Login extends PureComponent {
 							<TouchableOpacity onPress={()=>Actions['passwordValidate']()}>
 								<Text style={styles.text2}>忘记密码</Text>
 							</TouchableOpacity>
+						</View>
+						<View>
+							<Text>{UserStore.token}</Text>
+							<Text>{UserStore.loginUser.id}</Text>
 						</View>
 					</View>
 
@@ -75,17 +83,14 @@ class Login extends PureComponent {
 		//关闭软键盘
 		dismissKeyboard();
 
-		// 提交登录
-		request.getJson(urls.apis.USER_LOGIN, {
-			phone,
-			password
-		}).then((data) => {
-			if (data.ok) {
-				toast.show("登录成功");
-				loginSuccess(data.obj);
-			} else {
-				toast.show("用户名或密码错误");
-			}
+
+		UserStore.login(phone, password, () => {
+			UserStore.fetchLoginUser();
+
+			// 跳到首页
+			Actions.index({
+				type: ActionConst.POP_AND_REPLACE,
+			});
 		});
 	}
 

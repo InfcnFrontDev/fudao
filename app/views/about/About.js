@@ -4,7 +4,7 @@ import {observer} from "mobx-react/native";
 import {View, Text, Row, Thumbnail, Col, Button} from "native-base";
 import {Container, Content, Header} from "../../components/index";
 import {config, urls} from "../../utils/";
-import ListStore from "../../mobx/listStore";
+import ListStore from "../../mobx/userStore";
 
 /**
  * 关于福道
@@ -64,11 +64,10 @@ export default class About extends PureComponent {
 
 
 	declare() {
-		// Actions.webview({
-		// 	title: '隐式声明',
-		// 	uri: urls.pages.DECLARE,
-		// })
-		ListStore.addListItem('yangkk');
+		Actions.webview({
+			title: '隐式声明',
+			uri: urls.pages.DECLARE,
+		})
 	}
 
 	protocol() {

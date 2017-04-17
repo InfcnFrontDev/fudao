@@ -127,7 +127,7 @@ class AppRouter extends PureComponent {
 
 					{/*系统*/}
 					<Scene key="settings" component={Settings} title="系统设置" hideNavBar/>
-					<Scene key="about" component={About} title="关于福道" hideNavBar initial/>
+					<Scene key="about" component={About} title="关于福道" hideNavBar/>
 
 					{/*消息*/}
 					<Scene key="message" component={Message} title="消息" hideNavBar/>
