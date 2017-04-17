@@ -61,8 +61,8 @@ class RebuildSuccess extends PureComponent {
             password: hex_md5(phone + password),
         }).then((data) => {
                 if (data.ok) {
-                    var birthday = data.birthday
-                    if (birthday =="") {
+                    var birthday = data.obj.birthday
+                    if (!birthday) {
                         //没有基本信息表示第一次登录需要添写信息
                         Actions['startInformation']({phone:phone})
                     } else {

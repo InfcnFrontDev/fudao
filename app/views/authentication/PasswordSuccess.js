@@ -63,7 +63,7 @@ class SetPassword extends PureComponent {
                 }).then((data)=>{
                  // 保存用户状态
                  dispatch(login(data.obj));
-                if (data.birthdate == '') {
+                if (!data.obj) {
                     //没有基本信息表示第一次登录需要添写信息
                     Actions['startInformation']({
                         phone:phone

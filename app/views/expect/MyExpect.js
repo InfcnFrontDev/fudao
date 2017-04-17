@@ -13,7 +13,7 @@ import {fetchAllExpects, fetchMyExpects, addMyExpect, removeMyExpect} from "../.
 class MyExpect extends PureComponent {
 
 	render() {
-		let {allExpectsGroupBy, myExpects, myExpectMap} = this.props;
+		let {allExpects, myExpects, myExpectMap} = this.props;
 		return (
 			<Container>
 				<Header {...this.props}/>
@@ -25,7 +25,7 @@ class MyExpect extends PureComponent {
 							onItemPress={(item) => this._onItemPress(item)}
 							onItemRemove={(item) => this._onItemRemove(item)}/>
 						<QuestionAll
-							items={allExpectsGroupBy}
+							items={allExpects}
 							selectedItem={myExpectMap}
 							onItemPress={(item) => this._onItemPress(item)}
 							onItemAdd={(item)=>this._onItemAdd(item)}/>
@@ -35,11 +35,11 @@ class MyExpect extends PureComponent {
 		)
 	}
 	componentDidMount() {
-		const {dispatch, loginUser} = this.props;
+		const {dispatch} = this.props;
 		// 抓取所有问题
-		dispatch(fetchAllExpects('aged'));
+		dispatch(fetchAllExpects());
 		// 抓取我的问题
-		dispatch(fetchMyExpects(loginUser.appid));
+		dispatch(fetchMyExpects());
 	}
 
 	/**
@@ -57,8 +57,8 @@ class MyExpect extends PureComponent {
 	 * @private
 	 */
 	_onItemRemove(expect) {
-		const {dispatch, loginUser} = this.props;
-		dispatch(removeMyExpect(loginUser.appid, expect));
+		const {dispatch} = this.props;
+		dispatch(removeMyExpect(expect));
 	}
 
 	/**
@@ -67,8 +67,8 @@ class MyExpect extends PureComponent {
 	 * @private
 	 */
 	_onItemAdd(expect) {
-		const {dispatch, loginUser} = this.props;
-		dispatch(addMyExpect(loginUser.appid, expect));
+		const {dispatch} = this.props;
+		dispatch(addMyExpect(expect));
 	}
 
 }

@@ -1,93 +1,112 @@
 import React, {PureComponent} from "react";
-import {View,Text,ScrollView} from "react-native";
-import {ListItem, Button,List} from "native-base";
+import {View, Text, ScrollView} from "react-native";
+import {ListItem, Button, List} from "native-base";
 import {Actions} from "react-native-router-flux";
+import GiftedListView from '../../../components/GiftedListView'
 
 class TreatmentProfessionList extends PureComponent {
-  constructor(props){
-    super(props);
+    constructor(props) {
+        super(props);
 
-  }
+    }
 
     render() {
         return (
-          <ScrollView style={styles.scrollView}>
-            {this._renderList()}
-          </ScrollView>
+            <GiftedListView
+                enableEmptySections={true}
+                rowView={this.renderRowView.bind(this)}
+                onFetch={this.onFetch.bind(this)}
+                refreshable={false}
+                firstLoader={true}
+                withSections={true}
+                paginationAllLoadedView={() => {
+                }}
+                sectionHeaderView={this._renderSectionHeaderView}
+            />
         )
     }
 
-    _renderList(){
-      let {professionalMethods,title} = this.props;
-      let item = professionalMethods.map((p, i) => {
+    _renderSectionHeaderView(sectionData, sectionID) {
         return (
-          <View key={i} style={styles.oneType}>
             <View style={styles.divider}>
-                <Text>{p.type || p.type_value}</Text>
+                <Text>{sectionID}</Text>
             </View>
-              <List dataArray={p.datas || p.methods} renderRow={(data)=>{
-                return (
-                  <ListItem  style={styles.list}>
-                    <Button transparent style={styles.button} onPress={()=>Actions['treatmentDetail']({data:data,title:title})}>
-                      <View style={styles.name}>
-                        <Text>{data.name}</Text>
-                      </View>
-                      <Text>></Text>
-                    </Button>
-                  </ListItem>
-                )
-              }} />
-
-          </View>
         )
-      })
-      return item;
     }
+
+    onFetch(page = 1, callback, options) {
+        let {professionalMethods} = this.props;
+        callback(professionalMethods, {
+            allLoaded: true
+        })
+    }
+
+    renderRowView(row) {
+        let {title, module} = this.props;
+        return (
+            <Button transparent style={styles.button}
+                    onPress={() => module == 'question' ? Actions['questionTreatmentDetail']({
+                        data: row,
+                        title: title
+                    }) : Actions['expectTreatmentDetail']({data: row, title: title})}>
+                <View style={styles.borderBottom}>
+                    <View style={styles.name}>
+                        <Text>{row.name}</Text>
+                    </View>
+                    <Text>></Text>
+                </View>
+            </Button>
+        )
+    }
+
+    renderPaginationAllLoadedView() {
+        return (null)
+    }
+
 }
 
 const styles = {
-  scrollView:{
-    flex:1
-  },
-  oneType:{
-    borderTopColor:'#D8D8D8',
-    borderTopWidth:2,
-    borderBottomColor:'transparent',
-    padding:0,
-  },
-  divider:{
-    paddingLeft:20,
-    borderColor:'#D8D8D8',
-    borderBottomWidth:0.5,
-    height:40,
-    paddingTop:10,
-    paddingBottom:0,
-    backgroundColor:'#F0F0F0'
-  },
-  list:{
-    height:36,
-    padding:0,
-    margin:0,
-    paddingLeft:20,
-    flexDirection:'row',
-  },
-  button:{
-    flex:1,
-    flexDirection:'row',
-  },
-  name:{
-    flex:1,
-  }
-}
+    divider: {
+        paddingLeft: 20,
+        borderColor: '#D8D8D8',
+        borderBottomWidth: 0.5,
+        height: 40,
+        paddingTop: 10,
+        paddingBottom: 0,
+        backgroundColor: '#F0F0F0',
+    },
+    button: {
+        flex: 1,
+        padding: 0,
+        margin: 0,
+        height: 36,
+        marginTop: 0,
+        marginBottom: 0,
+
+    },
+    name: {
+        flex: 1,
+    },
+    borderBottom: {
+        borderBottomColor: '#D8D8D8',
+        flex: 1,
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        paddingLeft: 30,
+        paddingRight: 20,
+        paddingBottom: 8,
+        paddingTop: 8,
+    }
+};
 
 TreatmentProfessionList.propTypes = {
-  professionalMethods: React.PropTypes.array,
-  title:  React.PropTypes.string,
-}
+    professionalMethods: React.PropTypes.object,
+    title: React.PropTypes.string,
+};
 
 TreatmentProfessionList.defaultProps = {
-  professionalMethods: [],
-  title:'',
-}
+    professionalMethods: {},
+    title: '',
+};
 
 export default (TreatmentProfessionList);

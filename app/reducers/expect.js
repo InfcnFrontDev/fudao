@@ -3,9 +3,8 @@ import {ToastAndroid} from "react-native";
 import _ from "lodash";
 
 const initialState = {
-	allExpects: [],
+	allExpects: {},
 	allExpectMap: {},
-	allExpectsGroupBy: {},
 	myExpects: [],
 	myExpectMap: {},
 };
@@ -14,7 +13,7 @@ export default function (state = initialState, {type, payload}) {
 		case types.EXPECT_RECEIVE_ALL_EXPECT:
 			return Object.assign({}, state, {
 				...payload
-			});
+            });
 		case types.EXPECT_RECEIVE_MY_EXPECT:
 			return Object.assign({}, state, {
 				...payload

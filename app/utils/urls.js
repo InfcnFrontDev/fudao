@@ -1,4 +1,5 @@
 // 接口服务器地址
+
 //const apiPath = 'http://103.254.113.11:9191/api/'; // 外网
 const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 
@@ -11,7 +12,7 @@ const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 // 图片服务器地址
 // const picPath = 'http://103.254.113.11:9191/'; // 外网
 
- // const picPath = 'http://192.168.10.69:9191/'; // 内网
+ const picPath = 'http://192.168.10.69:9191/'; // 内网
 
 
 const urls = {
@@ -163,7 +164,7 @@ const urls = {
 
 		// 我的问题 ---------------------------------------------------------
 		//所有问题
-		DISEASE_GETALLDISEASELIST: apiPath + '/DiseaseApi/getMyDiseaseList',
+		DISEASE_GETALLDISEASELIST: apiPath + '/DiseaseApi/getAllDiseaseList',
 		//用户问题
 		DISEASE_GETMYDISEASELIST: apiPath + '/DiseaseApi/getMyDiseaseList',
         //添加我的问题
@@ -184,17 +185,21 @@ const urls = {
 
 		// 我的期望 ---------------------------------------------------------
 		//所有期望
-		EXPECT_ALL_EXPECT_LIST: apiPath + 'app/zixiuAction!findZixiuPartContainsProject.action',
+		EXPECT_GETALLEXPECTLIST: apiPath + '/ExpectApi/getAllExpectList',
 		//用户期望
-		EXPECT_USER_EXPECT_LIST: apiPath + 'app/zixiuAction!getZixiuProjectsByUserId.action',
+		EXPECT_GETMYEXPECTLIST: apiPath + '/ExpectApi/getMyExpectList',
 		//添加用户期望
-		EXPECT_ADD_USER_EXPECT: apiPath + 'app/zixiuAction!addMyZixiu.action',
+		EXPECT_ADDMYEXPECT: apiPath + '/ExpectApi/addMyExpect',
 		//删除用户期望
-		EXPECT_REMOVE_USER_EXPECT: apiPath + 'app/zixiuAction!deleteMyZixiu.action',
-		//删除用户期望
-		MY_EXPECT_TREETMENT: apiPath + 'app/zixiuAction!findZixiuTherapy.action',
+		EXPECT_DELETEMYEXPECT: apiPath + '/ExpectApi/deleteMyExpect',
+        //期望日常疗法
+        EXPECT_GETEXPECTDAILYMETHODDETAIL: apiPath + '/ExpectApi/getExpectDailyMethodDetail',
+        //期望专业疗法
+        EXPECT_GETEXPECTPROFESSIONALMETHODDETAIL: apiPath + '/ExpectApi/getExpectProfessionalMethodDetail',
 
 		// 我的能量场 ---------------------------------------------------------
+
+		ENERGY_GETINFORMATIONRESULT: apiPath +'/EnergyApi/getInformationResult'//
 		MY_ENEGRYMY_ACTION_INFORMATION: apiPath +'app/myEnergyAction!informationData.action',//?appid=1
 		//获取区县
 		REGION_GETCOUNTYLIST:apiPath + 'RegionApi/getCountyList',
@@ -205,6 +210,7 @@ const urls = {
 		MEDICALEXAMINATIONA_GETMEDICALINFORMATIONLIST:apiPath + 'MedicalExaminationApi/getMedicalInformationList',
 		//修改体检结果
 		MEDICALEXAMINATION_UPDATAMEDICALINFORMATIONRESULT:apiPath + 'MedicalExaminationApi/updataMedicalInformationResult',
+
 
 
 

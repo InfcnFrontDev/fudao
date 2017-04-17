@@ -72,6 +72,7 @@ class RebuildPassword extends PureComponent {
                 password: hex_md5(phone+password)
             }).then((data)=>{
             dispatch(hideLoading());
+                toast.show(JSON.stringify(data))
             if(data.ok) {
                     Actions['rebuildSuccess']({phone:phone,password:password})
                 }else{
