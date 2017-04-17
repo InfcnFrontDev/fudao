@@ -53,6 +53,7 @@ const request = {
 				headers: {
 					'Cache-Control': 'no-cache',
 					'authorization': '673d82fd-1686-4f79-93b8-f552c3021203'
+
 				}
 			})
 				.then((response) => type == 'text' ? response.text() : response.json())

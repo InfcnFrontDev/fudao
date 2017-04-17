@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Grid, Item, Text, Row, Col, Thumbnail} from "native-base";
-import {urls} from "../../../utils/index";
+import {urls,toast} from "../../../utils/index";
 
 class ArticleSingleImageItem extends Component {
 
@@ -22,6 +22,7 @@ class ArticleSingleImageItem extends Component {
 							</Row>
 						</Col>
 						<Col style={{width: 115, justifyContent: 'flex-end', flexDirection: 'row'}}>
+							{toast.show(JSON.stringify(article.img))}
 							<Thumbnail square source={{uri: urls.apis.IMAGE + '?filePath=' + article.img}}
 									   style={{width: 110, height: 70}}/>
 						</Col>

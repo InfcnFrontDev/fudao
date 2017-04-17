@@ -58,7 +58,7 @@ const urls = {
 
 
 		//天气-------------------------------------------------------------------------
-		WEATHER:apiPath +'/app/weatherAction!getWeather.action',
+		WEATHER:apiPath +'app/weatherAction!getWeather.action',
 
 		// 资讯 ----------------------------------------------------------------------
 
@@ -198,7 +198,9 @@ const urls = {
         EXPECT_GETEXPECTPROFESSIONALMETHODDETAIL: apiPath + '/ExpectApi/getExpectProfessionalMethodDetail',
 
 		// 我的能量场 ---------------------------------------------------------
+
 		ENERGY_GETINFORMATIONRESULT: apiPath +'/EnergyApi/getInformationResult',
+
 		//获取区县
 		REGION_GETCOUNTYLIST:apiPath + 'RegionApi/getCountyList',
 		//获取城市列表
