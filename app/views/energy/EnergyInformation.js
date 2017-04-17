@@ -1424,6 +1424,31 @@ let datas=[
 		show_view: 2
 	}
 ]
+
+
+let getData=[
+	{
+		"indicator":"性别",
+		"value": '女',
+	},
+	{
+		"indicator":"民族",
+		"value": '汉',
+	},
+	{
+		"indicator": "姓氏",
+		"value": '杨',
+	},
+	{
+		"indicator": "感情状态",
+		"value": '恋爱',
+	},
+	{
+		"indicator": "学历",
+		"value": '硕士',
+	}
+
+	]
 /**
  * 我的能量场 > 资料填写
  */
@@ -1571,25 +1596,33 @@ class EnergyQuestionnaire extends PureComponent {
 		datas.map((item,index)=>{
 			this.select[index]={};
 			this.select[index].name=item.name
-		})
-		request.getJson(urls.apis.ENERGY_GETINFORMATIONRESULT).then((data)=>{
-			/*data.obj.map((item,index)=>{
-				if(item.indicator==this.select){
-					this.select[item.indicator]=item.value;
+		});
+		//获取用户已填写数据
+		getData.map((item,index)=>{
+			this.select.map((items,indexs)=> {
+				if (item.indicator == items.name) {
+					this.select[indexs].value = item.value;
 				}
-			})*/
-			/*this.setState({
-				selected:this.select
-			})*/
-
+			})
+		});
+		//获取用户已填写数据
+		/*request.getJson(urls.apis.ENERGY_GETINFORMATIONRESULT).then((data)=>{
+		 data.obj.map((item,index)=>{
+			 this.select.map((items,indexs)=> {
+				 if (item.indicator == items.name) {
+				 this.select[indexs].value = item.value;
+			 	}
+		 	})
+		 });
 		},(error)=>{
-		})
+		})*/
 
 	}
 
 	render() {
         let {selected}=this.state;
-		if(!data && selected!=[]){
+		toast.show(JSON.stringify(this.select))
+		if(!datas && selected!=[]){
 			return (<Container></Container>)
 		}else{
 			return (
@@ -1598,7 +1631,7 @@ class EnergyQuestionnaire extends PureComponent {
 					<Content>
 						<Separator title={'请填写您的信息'}/>
 						<ScrollView>
-						{data.map((item,index)=> this.renderGroup(item,index))}
+						{datas.map((item,index)=> this.renderGroup(item,index))}
 							<View style={styles.View}>
 								<Button style={styles.Btn} onPress={this._submmit.bind(this)}>
 									<Text>完整保存</Text>
@@ -1611,13 +1644,19 @@ class EnergyQuestionnaire extends PureComponent {
 				</Container>
 			)
 		}
-
-
 	}
-//selectedIndex={item.items.indexOf(selected[index].value)}
 	renderGroup(item,index){
 		let {selected}=this.state;
-		// toast.show(JSON.stringify(answer))
+		let num=null;
+		if(item.name=="性别"){
+			if( this.select[0].value){
+				num = this.select[0].value=="男"? 0 :1;
+			}
+		}else if(item.name=="双亲情况"){
+				if( this.select[10].value){
+					num = this.select[10].value=="单亲"? 1 :0;
+				}
+		}
 		let ppp=(null);
 		if(item.show_view==2){
 			ppp=(
@@ -1629,7 +1668,7 @@ class EnergyQuestionnaire extends PureComponent {
 					<Picker
 						iosHeader="Select one"
 						mode="dropdown"
-						selectedValue={selected[index].value}
+						selectedValue={this.select[index].value}
 						onValueChange={(value)=>this.onValueChange(value,index)}
 						style={styles.pick}
 					>
@@ -1639,7 +1678,6 @@ class EnergyQuestionnaire extends PureComponent {
 			</ListItem>
 				)
 		}else if(item.show_view==1){
-			{/*selectedIndex={1}*/}
 			ppp=(
 				<ListItem style={styles.row}   >
 					<Right style={{width:theme.deviceWidth/3*1}}>
@@ -1648,6 +1686,7 @@ class EnergyQuestionnaire extends PureComponent {
 					<View style={{width:theme.deviceWidth/3*2}} >
 						<RadioGroup
 							key={index}
+							selectedIndex={num}
 							onSelect = {(index,value) => this.onSelect(index, value)}
 							style={{flexDirection:'row',alignItems:'center',height:20}} >
 							{item.items.map((item,index) => this.renderRadioItem(item,index))}
@@ -1656,7 +1695,6 @@ class EnergyQuestionnaire extends PureComponent {
 				</ListItem>
 			)
 		}else if(item.show_view==3){
-
 			ppp=(
 				<ListItem style={styles.row} onPress={() => this.openSelectBox1(index,item)} >
 					<Right style={{width:theme.deviceWidth/3*1}}>
@@ -1666,7 +1704,7 @@ class EnergyQuestionnaire extends PureComponent {
 						<View style={{flexDirection:'row',justifyContent:'space-between',flex:1,width:Dimensions.get('window').width/4*3-40}}
 						>
 							<Left>
-								<Text>{item.selected6}</Text>
+								<Text>{this.select[index].value}</Text>
 							</Left>
 							<Right>
 								<Icon active name="ios-arrow-forward"/>
@@ -1674,7 +1712,6 @@ class EnergyQuestionnaire extends PureComponent {
 						</View>
 					</View>
 				</ListItem>
-
 			)
 		}
 		return(
@@ -1685,8 +1722,7 @@ class EnergyQuestionnaire extends PureComponent {
 	}
 	openSelectBox1(index,item) {
 		this._groupSelectModal.show(item, (rowData) => {
-			item.selected6=rowData.title;
-            this.select[index].value=item.selected6;
+            this.select[index].value=rowData.title;
 			this.setState({
 				selected: this.select,
 				flag:!this.state.flag

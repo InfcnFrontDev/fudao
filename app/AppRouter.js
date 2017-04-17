@@ -97,7 +97,7 @@ class AppRouter extends PureComponent {
 					<Scene key="menuDetail" component={MenuDetail} hideNavBar/>
 
 					{/*情绪调和*/}
-					<Scene key="emotion" component={Emotion} title="情绪调和" hideNavBar/>
+					<Scene key="emotion" component={Emotion} title="情绪调和" hideNavBar initial/>
 
 					{/*我的期望*/}
 					<Scene key="myExpect" component={MyExpect} title="我的期望" hideNavBar/>
@@ -149,7 +149,7 @@ class AppRouter extends PureComponent {
 					<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
 
 					{/*我的能量场*/}
-					<Scene key="energy" component={Energy} title="我的能量场" hideNavBar initial/>
+					<Scene key="energy" component={Energy} title="我的能量场" hideNavBar />
 					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar  />
 					<Scene key="energyQuestionnaire" component={EnergyQuestionnaire} title="问卷调查" hideNavBar />
 
