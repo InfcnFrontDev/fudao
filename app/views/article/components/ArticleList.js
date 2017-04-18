@@ -23,12 +23,12 @@ class ArticleList extends Component {
 
 	_onFetch(page = 1, callback, options) {
 		let {label} = this.props;
+		toast.show(JSON.stringify(label));
 		request.getJson(urls.apis.ARTICLE_GETARTICLELIST, {
 			crowd: 'aged',
-			columnId:1,
+			columnId:label,
 			page
 		}).then((result) => {
-			toast.show(JSON.stringify(result));
 			if (page === result.obj.pageCount) {
 				callback(result.obj.list, {
 					allLoaded: true

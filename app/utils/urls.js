@@ -57,11 +57,11 @@ const urls = {
 	apis: {
 		// 图片接口(ok)
 		IMAGE: apiPath + 'ImgApi/getImage',
-		IMAGE_UPLOAD: apiPath + '/ImgApi/upload',
+		IMAGE_UPLOAD: apiPath + 'ImgApi/upload',
 
 
 		//天气-------------------------------------------------------------------------
-		WEATHER:apiPath +'/app/weatherAction!getWeather.action',
+		WEATHER:apiPath +'app/weatherAction!getWeather.action',
 
 		// 资讯 ----------------------------------------------------------------------
 
@@ -112,23 +112,23 @@ const urls = {
 
 		// 注册登录(老)
 		//验证手机号
-		USER_CHECKPHONEREGISTERED: apiPath + '/UserApi/checkPhoneRegistered',
+		USER_CHECKPHONEREGISTERED: apiPath + 'UserApi/checkPhoneRegistered',
         //发送验证码
-        USER_SENDCODE: apiPath + '/UserApi/sendCode',
+        USER_SENDCODE: apiPath + 'UserApi/sendCode',
 		//验证验证码
-		USER_CHECKCODE: apiPath + '/UserApi/checkCode',
+		USER_CHECKCODE: apiPath + 'UserApi/checkCode',
 		//注册
-		USER_REGISTER: apiPath + "/UserApi/register",
+		USER_REGISTER: apiPath + "UserApi/register",
 		//登录
-		USER_LOGIN: apiPath + "/UserApi/login",
+		USER_LOGIN: apiPath + "UserApi/login",
         //获取用户信息
-        USER_GETLOGINUSER:apiPath +  '/UserApi/getLoginUser',
+        USER_GETLOGINUSER:apiPath +  'UserApi/getLoginUser',
 		//重置密码
-		USER_RESETPASSWORD: apiPath + "/UserApi/resetPassword",
+		USER_RESETPASSWORD: apiPath + "UserApi/resetPassword",
 		//基本信息
-		USER_SETUSERBASEINFO: apiPath + "/UserApi/setUserBaseInfo",
+		USER_SETUSERBASEINFO: apiPath + "UserApi/setUserBaseInfo",
 		//情绪
-		EMOTION_GETEMOTIONINTERVENE: apiPath + "/EmotionApi/getEmotionIntervene",
+		EMOTION_GETEMOTIONINTERVENE: apiPath + "EmotionApi/getEmotionIntervene",
 
 		// 注册登录(新)
 
