@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Grid, Item, Text, Row, Col, Thumbnail} from "native-base";
-import {urls} from "../../../utils/index";
+import {urls,toast} from "../../../utils/index";
 
 class ArticleSingleImageItem extends Component {
 
@@ -18,10 +18,11 @@ class ArticleSingleImageItem extends Component {
 							</Row>
 							<Row style={{height:30}}>
 								<Text style={styles.from}>来自：{article.source}</Text>
-								<Text style={styles.timeDiff}>{article.updatetime}</Text>
+								<Text style={styles.timeDiff}>{article.createtime}</Text>
 							</Row>
 						</Col>
 						<Col style={{width: 115, justifyContent: 'flex-end', flexDirection: 'row'}}>
+							{toast.show(JSON.stringify(article.img))}
 							<Thumbnail square source={{uri: urls.apis.IMAGE + '?filePath=' + article.img}}
 									   style={{width: 110, height: 70}}/>
 						</Col>

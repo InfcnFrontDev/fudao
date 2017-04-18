@@ -6,8 +6,6 @@ import UserStore from "../mobx/userStore";
  */
 const request = {
 
-	token: '',
-
 	/**
 	 * GET请求，返回Json数据。
 	 *

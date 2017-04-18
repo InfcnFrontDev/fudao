@@ -8,28 +8,28 @@ import {Content, WebView} from "../../../components/index";
 class TabListMeridian extends PureComponent {
 
     render() {
-      let {diseaseName} = this.props;
+        let {diseaseName} = this.props;
         return (
-          <View style={styles.tablist}>
-              <WebView uri={urls.pages.MY_QUESTION_PERSON+"?question="+diseaseName}/>
-          </View>
+            <View style={styles.tablist}>
+                <WebView uri={urls.pages.MY_QUESTION_PERSON+"?question="+diseaseName}/>
+            </View>
         )
     }
 }
 
 const styles ={
-  tablist:{
-    width:Dimensions.get('window').width,
-    height:Dimensions.get('window').height-150,
-  }
+    tablist:{
+        width:Dimensions.get('window').width,
+        height:Dimensions.get('window').height-150,
+    }
 }
 
 TabListMeridian.propTypes = {
-  diseaseName: React.PropTypes.string,
+    diseaseName: React.PropTypes.string,
 }
 
 TabListMeridian.defaultProps = {
-  diseaseName: '痴呆'
+    diseaseName: '痴呆'
 }
 
 

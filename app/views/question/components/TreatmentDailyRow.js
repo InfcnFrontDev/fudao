@@ -16,74 +16,81 @@ class TreatmentDailyRow extends PureComponent {
     render() {
         let {modalView} = this.state;
         let {rowData, title} = this.props;
-        if (rowData.type == '饮食') {
-            var principle = '宜食' + rowData.suitable + '， 忌食' + rowData.fasting;
-            var list = (
-                <List dataArray={rowData.methods} renderRow={(data) => {
-                    var jishi = (null);
-                    if (data['fasting']) {
-                        jishi = (
-                            <View style={styles.oneType}>
-                                <View style={styles.title_yishi}>
-                                    <Text style={styles.listData}>忌食</Text>
-                                </View>
+        if (rowData.methods) {
+            if (rowData.type == '饮食') {
+                if (rowData.methods[0].suitable.length == 0) {
+                    return null;
+                }
+                var principle = '宜食' + rowData.suitable + '， 忌食' + rowData.fasting;
+                var list = (
+                    <List dataArray={rowData.methods} renderRow={(data) => {
+                        var jishi = (null);
+                        if (data['fasting']) {
+                            jishi = (
+                                <View style={styles.oneType}>
+                                    <View style={styles.title_yishi}>
+                                        <Text style={styles.listData}>忌食</Text>
+                                    </View>
 
-                                {this.caipu(data['fasting'], false)}
-                            </View>
+                                    {this.caipu(data['fasting'], false)}
+                                </View>
+                            )
+                        }
+                        return (
+                            <ListItem style={styles.list}>
+                                <View style={styles.yinshi1}>
+                                    <View>
+                                        <Text style={styles.gan}>- {data.timePeriod || data.time_period}:</Text>
+                                    </View>
+                                    <View>
+                                        <View style={styles.oneType}>
+                                            <View style={styles.title_yishi}>
+                                                <Text style={styles.listData}>宜食</Text>
+                                            </View>
+                                            {this.caipu(data['suitable'], true)}
+                                        </View>
+                                        {jishi}
+                                    </View>
+                                </View>
+                            </ListItem>
                         )
                     }
-                    return (
-                        <ListItem style={styles.list}>
-                            <View style={styles.yinshi1}>
-                                <View>
-                                    <Text style={styles.gan}>- {data.timePeriod}:</Text>
-                                </View>
-                                <View>
-                                    <View style={styles.oneType}>
-                                        <View style={styles.title_yishi}>
-                                            <Text style={styles.listData}>宜食</Text>
-                                        </View>
-                                        {this.caipu(data['suitable'], true)}
-                                    </View>
-                                    {jishi}
-                                </View>
-                            </View>
-                        </ListItem>
-                    )
-                }
-                }/>
-            )
-        }
-        else {
-            var list = (
-                <List dataArray={rowData.methods} renderRow={(data) => {
-                    return (
-                        <ListItem style={styles.list}>
-                            <Button style={styles.button} transparent
-                                    onPress={this.showModal.bind(this, data.id)}>
-                                <Text style={styles.gan}>- {data.timePeriod}:</Text>
-                                <Text style={styles.listData}>{data.name}</Text>
-                            </Button>
-                        </ListItem>
-                    )
-                }
-                }/>
-            )
-        }
-        return (
-            <View style={styles.container}>
-                <View style={styles.sectionOne}>
-                    <Text style={styles.dot}>·</Text>
-                    <Text style={styles.data}>{rowData.type}</Text>
+                    }/>
+                )
+            }
+            else {
+                var list = (
+                    <List dataArray={rowData.methods} renderRow={(data) => {
+                        return (
+                            <ListItem style={styles.list}>
+                                <Button style={styles.button} transparent
+                                        onPress={this.showModal.bind(this, data.id)}>
+                                    <Text style={styles.gan}>- {data.timePeriod || data.time_period}:</Text>
+                                    <Text style={styles.listData}>{data.name}</Text>
+                                </Button>
+                            </ListItem>
+                        )
+                    }
+                    }/>
+                )
+            }
+            return (
+                <View style={styles.container}>
+                    <View style={styles.sectionOne}>
+                        <Text style={styles.dot}>·</Text>
+                        <Text style={styles.data}>{rowData.type}</Text>
+                    </View>
+                    <Text
+                        style={styles.type}>        {rowData.type == '饮食' ? principle : rowData.principle}</Text>
+                    {list}
+                    <Modal ref={(e) => this._modal = e}>
+                        {modalView}
+                    </Modal>
                 </View>
-                <Text
-                    style={styles.type}>        {rowData.type == '饮食' ? principle : rowData.principle}</Text>
-                {list}
-                <Modal ref={(e) => this._modal = e}>
-                    {modalView}
-                </Modal>
-            </View>
-        )
+            )
+        }
+        return null;
+
     }
 
     caipu(data, flag) {

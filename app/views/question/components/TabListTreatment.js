@@ -6,7 +6,6 @@ import {request, urls,toast} from "../../../utils/index";
 import TreatmentProfessionList from "./TreatmentProfessionList";
 import TreatmentDaily from "./TreatmentDaily";
 import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
-import groupBy from 'lodash/groupBy'
 const Btn = require('./Button');
 
 let daily={
@@ -127,39 +126,25 @@ class TabListTreatment extends PureComponent {
       this.state={
         flag:true,
         dailyMethodList:{},
-        professionalMethodList:{}
       }
     }
 
     componentWillMount(){
       let {question,url} = this.props;
-      // if()
-      request.getJson(url[0],{
+        request.getJson(url[0],{
         diseaseId:question.id
       }).then((res)=>{
-        res = daily;
         this.setState({
           dailyMethodList: res.obj
        })
-     })
-      request.getJson(url[1],{
-        diseaseId:question.id
-      }).then((res)=>{
-          res = profession;
-          let professionalMethodList = groupBy(res.obj, item => {
-              return item.type
-          })
-          this.setState({
-           professionalMethodList:professionalMethodList
-       })
-     })
+     });
     }
 
 
     render() {
-      let {question} = this.props;
-      let {dailyMethodList,professionalMethodList} = this.state;
-      if(JSON.stringify(dailyMethodList) != "{}"&&JSON.stringify(professionalMethodList) != "{}"){
+      let {question,module,url} = this.props;
+      let {dailyMethodList} = this.state;
+      if(JSON.stringify(dailyMethodList) != "{}"){
         return (
           <Content delay>
             <ScrollableTabView
@@ -181,8 +166,10 @@ class TabListTreatment extends PureComponent {
                 />
                 <TreatmentProfessionList
                     key={1}
-                    professionalMethods={professionalMethodList}
+                    question={question}
                     title={question.name}
+                    url={url[1]}
+                    module={module}
                 />
             </ScrollableTabView>
 
@@ -305,16 +292,16 @@ const styles = {
     textAlign:'center',
     color:'#fff'
   }
-}
+};
 
 TabListTreatment.propTypes = {
   question: React.PropTypes.object,
   url: React.PropTypes.array,
-}
+};
 
 TabListTreatment.defaultProps = {
   question: {id:'40'},
-  url:[]
-}
+  url:[],
+};
 
 export default (TabListTreatment);

@@ -1,20 +1,18 @@
 // 接口服务器地址
 
-// const apiPath = 'http://103.254.113.11:8080/fudao-svc/'; // 外网
-// const apiPath = 'http://192.168.10.69:9191/api'; // 内网服务器
-const apiPath = 'http://103.254.113.11:9191/api'; // 外网
-// const apiPath = 'http://192.168.10.69:9191/api'; // 内网
+//const apiPath = 'http://103.254.113.11:9191/api/'; // 外网
+const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 
 // web服务器地址
-const webPath = 'http://103.254.113.11:9191/web'; // 外网
+//const webPath = 'http://103.254.113.11:9191/web'; // 外网
 // const webPath = 'http://192.168.10.69:9191/web'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
-// const webPath = 'http://192.168.3.204:3000/'; // 王朋
+ const webPath = 'http://192.168.3.204:3000/'; // 王朋
 //  const webPath = 'http://192.168.3.203:3000/'; //
 // 图片服务器地址
 // const picPath = 'http://103.254.113.11:9191/'; // 外网
 
- // const picPath = 'http://192.168.10.69:9191/'; // 内网
+ const picPath = 'http://192.168.10.69:9191/'; // 内网
 
 
 const urls = {
@@ -55,27 +53,28 @@ const urls = {
 	 */
 	apis: {
 		// 图片接口(ok)
-		IMAGE: apiPath + '/ImgApi/getImage',
-		IMAGE_UPLOAD: apiPath + '/ImgApi/upload',
+		IMAGE: apiPath + 'ImgApi/getImage',
+		IMAGE_UPLOAD: apiPath + 'ImgApi/upload',
 
 
 		//天气-------------------------------------------------------------------------
-		WEATHER:apiPath +'/app/weatherAction!getWeather.action',
+		WEATHER:apiPath +'app/weatherAction!getWeather.action',
 
 		// 资讯 ----------------------------------------------------------------------
 
 		//资讯列表
-		ARTICLE_GETARTICLELIST: apiPath + '/ArticleApi/getArticleList',
-		//资讯详细
-		ARTICLE_GETARTICLE: apiPath + '/ArticleApi/getArticle',
+		//资讯列表(ok)
+		ARTICLE_GETARTICLELIST: apiPath + 'ArticleApi/getArticleList',
+		//获取资讯栏目列表
+		ARTICLE_GETARTICLECOLUMNLIST: apiPath + 'ArticleApi/getArticleColumnList',
 
 
 		// 我的收藏 ----------------------------------------------------------------------
 
-		//我的收藏列表
-		MY_COLLECTION_LIST: apiPath + 'app/collectionAction!getMyCollection.action',
+		//获取我的收藏列表
+		COLLECTION_GETMYCOLLECTIONLIST: apiPath + 'CollectionApi/getMyCollectionList',
 		//删除(取消)我的收藏
-		MY_COLLECTION_DELETE: apiPath + 'app/collectionAction!delMyCollection.action',
+		COLLECTION_DELETEMYCOLLECTION: apiPath + 'CollectionApi/deleteMyCollection',
 
 
 		//获取用户信息
@@ -90,15 +89,18 @@ const urls = {
 		// 好友 ----------------------------------------------------------------------
 
 		//申请加为好友
-		FRIEND_APPLY: apiPath + 'app/friendDynamicAction!addFriend.action',
+		FRIEND_APPLYADDFRIEND: apiPath + 'FriendApi/applyAddFriend',
 		//同意加为好友
-		FRIEND_AGREE: apiPath + 'app/friendDynamicAction!editFriend.action',
+		FRIEND_AGREEADDFRIEND: apiPath + 'FriendApi/agreeAddFriend',
 		//好友申请列表
-		FRIEND_APPLY_LIST: apiPath + 'app/friendDynamicAction!getWaitBeFriends.action',
+		FRIEND_GETMYFRIENDAPPLYLIST: apiPath + 'FriendApi/getMyFriendApplyList',
 		//删除好友
-		FRIEND_DELETE: apiPath + 'app/friendDynamicAction!deleteFriend.action',
+		FRIEND_DELETEMYFRIEND: apiPath + 'FriendApi/deleteMyFriend',
 		//我的好友列表
-		MY_FRIENDS_LIST: apiPath + 'app/friendDynamicAction!getFriends.action',
+		FRIEND_GETMYFRIENDLIST: apiPath + 'FriendApi/getMyFriendList',
+		//修改好友备注
+		FRIEND_UPDATEFRIENDREMARK:apiPath +'FriendApi/updateFriendRemark',
+
 
 
 		//搜索------------------------------------------------------------------------
@@ -162,7 +164,7 @@ const urls = {
 
 		// 我的问题 ---------------------------------------------------------
 		//所有问题
-		DISEASE_GETALLDISEASELIST: apiPath + '/DiseaseApi/getMyDiseaseList',
+		DISEASE_GETALLDISEASELIST: apiPath + '/DiseaseApi/getAllDiseaseList',
 		//用户问题
 		DISEASE_GETMYDISEASELIST: apiPath + '/DiseaseApi/getMyDiseaseList',
         //添加我的问题
@@ -183,18 +185,35 @@ const urls = {
 
 		// 我的期望 ---------------------------------------------------------
 		//所有期望
-		EXPECT_ALL_EXPECT_LIST: apiPath + 'app/zixiuAction!findZixiuPartContainsProject.action',
+		EXPECT_GETALLEXPECTLIST: apiPath + '/ExpectApi/getAllExpectList',
 		//用户期望
-		EXPECT_USER_EXPECT_LIST: apiPath + 'app/zixiuAction!getZixiuProjectsByUserId.action',
+		EXPECT_GETMYEXPECTLIST: apiPath + '/ExpectApi/getMyExpectList',
 		//添加用户期望
-		EXPECT_ADD_USER_EXPECT: apiPath + 'app/zixiuAction!addMyZixiu.action',
+		EXPECT_ADDMYEXPECT: apiPath + '/ExpectApi/addMyExpect',
 		//删除用户期望
-		EXPECT_REMOVE_USER_EXPECT: apiPath + 'app/zixiuAction!deleteMyZixiu.action',
-		//删除用户期望
-		MY_EXPECT_TREETMENT: apiPath + 'app/zixiuAction!findZixiuTherapy.action',
+		EXPECT_DELETEMYEXPECT: apiPath + '/ExpectApi/deleteMyExpect',
+        //期望日常疗法
+        EXPECT_GETEXPECTDAILYMETHODDETAIL: apiPath + '/ExpectApi/getExpectDailyMethodDetail',
+        //期望专业疗法
+        EXPECT_GETEXPECTPROFESSIONALMETHODDETAIL: apiPath + '/ExpectApi/getExpectProfessionalMethodDetail',
 
 		// 我的能量场 ---------------------------------------------------------
-		MY_ENEGRYMY_ACTION_INFORMATION: apiPath +'app/myEnergyAction!informationData.action'//?appid=1
+
+		ENERGY_GETINFORMATIONRESULT: apiPath +'/EnergyApi/getInformationResult',
+		MY_ENEGRYMY_ACTION_INFORMATION: apiPath +'app/myEnergyAction!informationData.action',//?appid=1
+		//获取区县
+		REGION_GETCOUNTYLIST:apiPath + 'RegionApi/getCountyList',
+		//获取城市列表
+		REGION_GETCITYLIST:apiPath + 'RegionApi/getCityList',
+
+		//获取体检结果
+		MEDICALEXAMINATIONA_GETMEDICALINFORMATIONLIST:apiPath + 'MedicalExaminationApi/getMedicalInformationList',
+		//修改体检结果
+		MEDICALEXAMINATION_UPDATAMEDICALINFORMATIONRESULT:apiPath + 'MedicalExaminationApi/updataMedicalInformationResult',
+
+
+
+
 	},
 
 	// 获取图片完整路径
@@ -206,7 +225,7 @@ const urls = {
 			url += '&h=' + height;
 		// console.log(url);
 		return url;
-	}
+	},
 
 };
 export default urls;

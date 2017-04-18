@@ -9,7 +9,7 @@ export function fetchMyFriendList(userId, callback) {
 			type: types.FETCH_MY_FRIEND_LIST,
 		});
 		// 请求数据
-		request.getJson(urls.apis.MY_FRIENDS_LIST, {
+		request.getJson(urls.apis.FRIEND_GETMYFRIENDLIST, {
 			userId
 		}).then((result) => {
 			if (result.success) {
@@ -40,7 +40,7 @@ export function fetchNewFriendList(userId, callback) {
 		});
 
 		// 请求数据
-		request.getJson(urls.apis.FRIEND_APPLY_LIST, {
+		request.getJson(urls.apis.FRIEND_GETMYFRIENDAPPLYLIST, {
 			userId
 		}).then((result) => {
 			let newFriendList = result.obj;

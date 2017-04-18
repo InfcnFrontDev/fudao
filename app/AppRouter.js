@@ -21,9 +21,10 @@ import Record from "./views/record/Record";
 import Emotion from "./views/emotion/Emotion";
 import MyQuestion from "./views/question/MyQuestion";
 import MyQuestionDetail from "./views/question/MyQuestionDetail";
-import TreatmentDetail from "./views/question/TreatmentDetail";
+import QuestionTreatmentDetail from "./views/question/QuestionTreatmentDetail";
 import MyExpect from "./views/expect/MyExpect";
 import MyExpectDetail from "./views/expect/MyExpectDetail";
+import ExpectTreatmentDetail from "./views/expect/ExpectTreatmentDetail";
 import Start from "./views/authentication/Start";
 import Login from "./views/authentication/Login";
 import Register from "./views/authentication/Register";
@@ -90,7 +91,7 @@ class AppRouter extends PureComponent {
 					{/*我的问题*/}
 					<Scene key="myQuestion" component={MyQuestion} title="疑症自调" hideNavBar/>
 					<Scene key="myQuestionDetail" component={MyQuestionDetail} title="问题详情" hideNavBar/>
-					<Scene key="treatmentDetail" component={TreatmentDetail} title="疗法详情" hideNavBar/>
+					<Scene key="questionTreatmentDetail" component={QuestionTreatmentDetail} title="疗法详情" hideNavBar/>
 					{/*菜单*/}
 					<Scene key="menuKinds" component={MenuKinds} title="食材" hideNavBar/>
 					<Scene key="menuDetail" component={MenuDetail} hideNavBar/>
@@ -101,6 +102,7 @@ class AppRouter extends PureComponent {
 					{/*我的期望*/}
 					<Scene key="myExpect" component={MyExpect} title="我的期望" hideNavBar/>
 					<Scene key="myExpectDetail" component={MyExpectDetail} title="期望详情" hideNavBar/>
+					<Scene key="expectTreatmentDetail" component={ExpectTreatmentDetail} title="疗法详情" hideNavBar/>
 
 					{/*搜索*/}
 					<Scene key="search" component={Search} title="搜索"/>
@@ -147,7 +149,7 @@ class AppRouter extends PureComponent {
 					<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
 
 					{/*我的能量场*/}
-					<Scene key="energy" component={Energy} title="我的能量场" hideNavBar />
+					<Scene key="energy" component={Energy} title="我的能量场" hideNavBar initial/>
 					<Scene key="energyInformation" component={EnergyInformation} title="资料填写" hideNavBar  />
 					<Scene key="energyQuestionnaire" component={EnergyQuestionnaire} title="问卷调查" hideNavBar />
 
