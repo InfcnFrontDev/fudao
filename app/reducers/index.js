@@ -1,5 +1,4 @@
 import {combineReducers} from "redux";
-import position from "./position";
 import realm from "./realm";
 import search from "./search";
 import dynamic from "./dynamic";

@@ -27,14 +27,12 @@ class Start extends PureComponent {
 	}
 
 	componentWillMount() {
-		UserStore.loadData(()=>{
-			if (UserStore.token) {
-				toast.show('欢迎回来，' + UserStore.loginUser.title);
-				Actions.index({
-					type: ActionConst.REPLACE
-				});
-			}
-		});
+		if (UserStore.token) {
+			toast.show('欢迎回来，' + UserStore.loginUser.title);
+			Actions.index({
+				type: ActionConst.REPLACE
+			});
+		}
 	}
 
 }

@@ -13,11 +13,6 @@ import {theme, urls, request, toast} from "../../utils/";
 import CommitButton from "./components/CommitButton";
 import {login} from "../../actions/user";
 import WomanChoose from "./WomanChoose";
-import {clearMyQuestion} from "../../actions/question";
-import {clearMyEmotion} from "../../actions/emotion";
-import {clearFriend} from "../../actions/friend";
-import {clearDynamic} from "../../actions/dynamic";
-import {clearPosition} from "../../actions/position";
 /**
  * 首次登录设置个人信息页
  */
@@ -287,12 +282,6 @@ class StartInformation extends PureComponent {
                 });
                 // 保存用户状态
                 this.props.dispatch(login(user));
-                //初始化用户信息
-                this.props.dispatch(clearMyQuestion());
-                this.props.dispatch(clearMyEmotion());
-                this.props.dispatch(clearFriend());
-                this.props.dispatch(clearDynamic());
-                this.props.dispatch(clearPosition());
                 // 跳到首页
                 Actions.index();
             }

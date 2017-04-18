@@ -7,11 +7,6 @@ import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import  CommitButton from "./components/CommitButton";
 import  {hex_md5} from "./components/md5";
 import {login} from "../../actions/user";
-import {clearMyQuestion} from "../../actions/question";
-import {clearMyEmotion} from "../../actions/emotion";
-import {clearFriend} from "../../actions/friend";
-import {clearDynamic} from "../../actions/dynamic";
-import {clearPosition} from "../../actions/position";
 /**
  * 设置密码
  */
@@ -72,12 +67,6 @@ class RebuildSuccess extends PureComponent {
                         });
                         // 保存用户状态
                         this.props.dispatch(login(user));
-                        //初始化用户信息
-                        this.props.dispatch(clearMyQuestion());
-                        this.props.dispatch(clearMyEmotion());
-                        this.props.dispatch(clearFriend());
-                        this.props.dispatch(clearDynamic());
-                        this.props.dispatch(clearPosition());
                         // 跳到首页
                         Actions.index();
                     }
