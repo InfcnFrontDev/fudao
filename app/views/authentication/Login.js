@@ -56,7 +56,7 @@ class Login extends PureComponent {
 						</View>
 						<View>
 							<Text>{UserStore.token}</Text>
-							<Text>{UserStore.loginUser.id}</Text>
+							<Text>{JSON.stringify(UserStore.loginUser)}</Text>
 						</View>
 					</View>
 

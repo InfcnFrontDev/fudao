@@ -4,6 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "./store/configureStore";
 import AppNavigator from "./AppNavigator";
 
+
 /**
  * App
  */
@@ -30,4 +31,5 @@ export default class App extends PureComponent {
 			</Provider>
 		)
 	}
+
 }

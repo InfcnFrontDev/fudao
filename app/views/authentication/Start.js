@@ -5,6 +5,7 @@ import {Container} from "native-base";
 import {View, Image, AsyncStorage} from "react-native";
 import CommitButton from "./components/CommitButton";
 import {toast} from "../../utils/index";
+import UserStore from "../../mobx/userStore";
 
 /**
  * 开始页
@@ -26,13 +27,14 @@ class Start extends PureComponent {
 	}
 
 	componentWillMount() {
-		let {token, loginUser} = this.props;
-		if (token) {
-			toast.show('欢迎回来，' + loginUser.title);
-			Actions.index({
-				type: ActionConst.REPLACE
-			});
-		}
+		UserStore.loadData(()=>{
+			if (UserStore.token) {
+				toast.show('欢迎回来，' + UserStore.loginUser.title);
+				Actions.index({
+					type: ActionConst.REPLACE
+				});
+			}
+		});
 	}
 
 }

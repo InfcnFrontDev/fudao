@@ -117,9 +117,9 @@ const urls = {
 		//注册
 		USER_REGISTER: apiPath + "/UserApi/register",
 		//登录
-		USER_LOGIN: apiPath + "/UserApi/login",
+		USER_LOGIN: apiPath + "UserApi/login",
         //获取用户信息
-        USER_GETLOGINUSER:apiPath +  '/UserApi/getLoginUser',
+        USER_GETLOGINUSER:apiPath +  'UserApi/getLoginUser',
 		//重置密码
 		USER_RESETPASSWORD: apiPath + "/UserApi/resetPassword",
 		//基本信息
