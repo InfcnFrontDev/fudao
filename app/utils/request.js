@@ -52,7 +52,7 @@ const request = {
 				method: 'GET',
 				headers: {
 					'Cache-Control': 'no-cache',
-					'authorization': '673d82fd-1686-4f79-93b8-f552c3021203'
+					'authorization': 'aa736c75-42ed-4775-acb3-f7e46f9d50fc'
 
 				}
 			})
