@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Container, Header, Content, WebView} from "../../components/index";
-import {urls} from "../../utils/index"
 
 /**
  * 我的时间

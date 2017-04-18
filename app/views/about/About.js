@@ -3,7 +3,6 @@ import {Actions} from "react-native-router-flux";
 import {observer} from "mobx-react/native";
 import {View, Text, Row, Thumbnail, Col, Button} from "native-base";
 import {Container, Content, Header} from "../../components/index";
-import {config, urls} from "../../utils/";
 import ListStore from "../../mobx/userStore";
 
 /**

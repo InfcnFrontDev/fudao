@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Grid, Item, Text, Row} from "native-base";
 
-class ArticleTextItem extends Component {
+export default class ArticleTextItem extends Component {
 
 	render() {
 		let {article, onPress, onLongPress} = this.props;
@@ -49,5 +49,3 @@ ArticleTextItem.propTypes = {
 	onPress: React.PropTypes.func,
 	onLongPress: React.PropTypes.func,
 }
-
-export default (ArticleTextItem);

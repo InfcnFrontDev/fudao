@@ -1,5 +1,4 @@
 import {observable, runInAction, computed, action, reaction} from "mobx";
-import {request, urls, toast, storage} from "../utils/index";
 
 class UserStore {
 	@observable phone = ''

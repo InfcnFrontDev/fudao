@@ -1,7 +1,6 @@
 import {ToastAndroid} from "react-native";
 import {Actions} from "react-native-router-flux";
 import  {hex_md5} from "./md5"
-import {request,urls,} from "../../../utils/";
 
 
 export function login(phoneVale,passwordVale,appid){

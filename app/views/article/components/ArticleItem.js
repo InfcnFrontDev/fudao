@@ -1,12 +1,10 @@
 import React, {Component} from "react";
-import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import ArticleTextItem from "./ArticleTextItem";
 import ArticleSingleImageItem from "./ArticleSingleImageItem";
 import ArticleMultiImageItem from "./ArticleMultiImageItem";
-import {urls,toast} from "../../../utils/index";
 
-class ArticleItem extends Component {
+export default class ArticleItem extends Component {
 
 	render() {
 		let {article} = this.props;
@@ -41,9 +39,8 @@ class ArticleItem extends Component {
 		if (onPress)
 			onPress(article);
 		else
-			Actions.webview({
-				title: '资讯详情',
-				uri: urls.pages.ARTICLE_GETARTICLE + "?id=" + article.id + "&userId=" + loginUser.appid,
+			Actions.articleDetail({
+				articleId: article.id
 			})
 	}
 
@@ -60,8 +57,3 @@ ArticleItem.propTypes = {
 	onPress: React.PropTypes.func,
 	onLongPress: React.PropTypes.func,
 }
-
-const mapStateToProps = state => ({
-	loginUser: state.user.loginUser,
-});
-export default connect(mapStateToProps)(ArticleItem);

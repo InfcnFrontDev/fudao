@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import {Grid, Item, Text, Row, Col, Thumbnail} from "native-base";
-import {urls} from "../../../utils/index";
 
-class ArticleMultiImageItem extends Component {
+export default class ArticleMultiImageItem extends Component {
 
 	render() {
 		let {article, onPress, onLongPress} = this.props;
@@ -66,5 +65,3 @@ ArticleMultiImageItem.propTypes = {
 	onPress: React.PropTypes.func,
 	onLongPress: React.PropTypes.func,
 }
-
-export default (ArticleMultiImageItem);

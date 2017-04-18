@@ -3,7 +3,6 @@ import {View, Image, Dimensions, ScrollView} from "react-native";
 import {connect} from "react-redux";
 import {Text} from "native-base";
 import Video from "react-native-video";
-import {theme, urls, request} from "../../utils/";
 
 /**
  * 问题，期望展示组件

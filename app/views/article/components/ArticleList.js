@@ -2,9 +2,8 @@ import React, {Component} from "react";
 import {ScrollView, ListView, View, Text} from "react-native";
 import GiftedListView from "../../../components/GiftedListView";
 import ArticleItem from "./ArticleItem";
-import {request, urls,toast} from "../../../utils/";
 
-class ArticleList extends Component {
+export default class ArticleList extends Component {
 
 	render() {
 		return (
@@ -23,10 +22,9 @@ class ArticleList extends Component {
 
 	_onFetch(page = 1, callback, options) {
 		let {label} = this.props;
-		toast.show(JSON.stringify(label));
 		request.getJson(urls.apis.ARTICLE_GETARTICLELIST, {
 			crowd: 'aged',
-			columnId:label,
+			columnId: label,
 			page
 		}).then((result) => {
 			if (page === result.obj.pageCount) {
@@ -69,5 +67,3 @@ class ArticleList extends Component {
 ArticleList.propTypes = {
 	label: React.PropTypes.string, // 资讯栏目
 }
-
-export default (ArticleList);

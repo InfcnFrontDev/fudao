@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Left, Right, Body, View, Text} from "native-base";
-import {theme} from "../utils/";
 
 class Separator extends Component {
 

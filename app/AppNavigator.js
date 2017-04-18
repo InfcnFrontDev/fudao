@@ -5,7 +5,6 @@ import SplashScreen from "react-native-splash-screen";
 import AppRouter from "./AppRouter";
 import getTheme from "../native-base-theme/components/";
 import Position from "./views/position/Position";
-import {theme} from "./utils/index";
 
 
 /**

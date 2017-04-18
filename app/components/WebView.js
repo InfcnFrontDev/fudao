@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import {WebView, View, Image, Text} from "react-native";
+import userStore from "../mobx/userStore";
 
 
 /**
@@ -8,10 +9,12 @@ import {WebView, View, Image, Text} from "react-native";
 export default class InfcnWebView extends PureComponent {
 
 	render() {
+		let {uri} = this.props;
+		uri = uri + '&token=' + 'd04e62ff-7ac8-4a22-a877-44ff6f4078d2';
 		return (
 			<WebView
 				ref={(e) => this._webview = e}
-				source={{...this.props}}
+				source={{uri}}
 				startInLoadingState={true}
 				javaScriptEnabled={true}
 				domStorageEnabled={true}

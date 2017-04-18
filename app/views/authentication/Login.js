@@ -1,15 +1,12 @@
 import React, {PureComponent} from "react";
 import {View, Alert, TextInput, TouchableOpacity, ToastAndroid, AsyncStorage} from "react-native";
-import {connect} from "react-redux";
 import {Actions, ActionConst} from "react-native-router-flux";
 import {observer} from "mobx-react/native";
 import {Text} from "native-base";
 import {Header, Container, Content} from "../../components/index";
-import {theme} from "../../utils/";
 import CommitButton from "./components/CommitButton";
 import UserInput from "./components/UserInput";
 import {checkPhone} from "./components/public";
-import {request, urls, toast} from "../../utils/index";
 import UserStore from "../../mobx/userStore";
 /**
  * 登录
@@ -17,7 +14,7 @@ import UserStore from "../../mobx/userStore";
 const dismissKeyboard = require('dismissKeyboard');
 
 @observer
-class Login extends PureComponent {
+export default class Login extends PureComponent {
 
 	state = {
 		isFetching: false,
@@ -69,15 +66,15 @@ class Login extends PureComponent {
 		const {dispatch} = this.props;
 		let {phone, password} = this.state;
 		if (phone == '') {
-			toast.show("用户名不能为空");
+			utils.showToast("用户名不能为空");
 			return;
 		}
 		if (!checkPhone(phone)) {
-			toast.show("请输入正确的用户名");
+			utils.showToast("请输入正确的用户名");
 			return;
 		}
 		if (password == '') {
-			toast.show("密码不能为空");
+			utils.showToast("密码不能为空");
 			return;
 		}
 		//关闭软键盘
@@ -141,6 +138,3 @@ const styles = {
 		padding: 10
 	}
 };
-
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps)(Login);

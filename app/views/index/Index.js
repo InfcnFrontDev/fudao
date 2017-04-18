@@ -1,98 +1,62 @@
 import React, {PureComponent} from "react";
-import {connect} from "react-redux";
-import {StyleSheet, View, ToastAndroid, Text} from "react-native";
-import TabNavigator from "react-native-tab-navigator";
-import Icon from "react-native-vector-icons/Ionicons";
-import {theme} from "../../utils/index";
+import {observer} from "mobx-react/native";
+import {StyleSheet, View} from "react-native";
+import ScrollableTabView from "react-native-scrollable-tab-view";
+import TabBar from "./components/TabBar";
 import Home from "../home/Home";
 import Article from "../article/Article";
 import Dynamic from "../../views/dynamic/Dynamic";
 import My from "../../views/my/My";
-import schema from "../../realm/schema.js";
-import {newRealm} from "../../actions/realm.js";
 
-const tabs = [
-	{
-		id: 'home',
-		title: '主页',
-		icon: 'ios-home-outline',
-		selectedIcon: 'ios-home',
-		component: Home
-	},
-	{
-		id: 'article',
-		title: '资讯',
-		icon: 'ios-list-box-outline',
-		selectedIcon: 'ios-list-box',
-		component: Article
-	},
-	{
-		id: 'dynamic',
-		title: '动态',
-		icon: 'ios-compass-outline',
-		selectedIcon: 'ios-compass',
-		badge: 8,
-		component: Dynamic
-	},
-	{
-		id: 'my',
-		title: '我的',
-		icon: 'ios-person-outline',
-		selectedIcon: 'ios-person',
-		component: My
-	}
-]
+const tabTitles = [
+	'主页', '资讯', '动态', '我的'
+];
+const tabIcons = [
+	'ios-home-outline', 'ios-list-box-outline', 'ios-compass-outline', 'ios-person-outline'
+];
+const tabSelectedIcon = [
+	'ios-home', 'ios-list-box', 'ios-compass', 'ios-person'
+];
+const tabComponents = [
+	Home, Article, Dynamic, My
+];
 
 /**
  * 首页
  */
-class Index extends PureComponent {
+@observer
+export default class Index extends PureComponent {
 
-	state = {
-		selectedTab: 'home'
+	constructor(props) {
+		super(props);
 	}
 
+	_renderTabBar = () => <TabBar tabNames={tabTitles} tabIconNames={tabIcons} selectedTabIconNames={tabSelectedIcon}/>
 
 	render() {
 		return (
-			<TabNavigator>
-				{tabs.map(item => this.renderTabItem(item))}
-			</TabNavigator>
-		)
-	}
+			<ScrollableTabView
+				renderTabBar={this._renderTabBar}
+				tabBarPosition='bottom'
+				locked
+				scrollWithoutAnimation
+			>
 
-	renderTabItem(item) {
-		let Component = item.component;
-		return (
-			<TabNavigator.Item
-				key={item.id}
-				selected={this.state.selectedTab === item.id}
-				title={item.title}
-				titleStyle={styles.titleStyle}
-				selectedTitleStyle={styles.titleStyleSelected}
-				renderIcon={() => <Icon name={item.icon} style={styles.tabIcon}/>}
-				renderSelectedIcon={() => <Icon name={item.selectedIcon} style={[styles.tabIcon,styles.tabIconSelected]}/>}
-				renderBadge={() => this.renderBadge(item)}
-				badgeStyle={{backgroundColor:'red', color:'red'}}
-				onPress={() => this.setState({selectedTab: item.id})}>
-				<Component />
-			</TabNavigator.Item>
-		)
-	}
+				{tabComponents.map((Component, i) => (
+					<Component key={tabTitles[i]} title={tabTitles[i]} newnew={this.props.newnew}/>
+				))}
 
-	renderBadge(item){
-		if(item.badge){
-			return (
-				<View style={styles.badge}>
-					<Text style={styles.badgeText}>10</Text>
-				</View>
-			)
-		}
-		return null;
+			</ScrollableTabView>
+		)
 	}
 
 }
 const styles = {
+	container: {
+		flexGrow: 1
+	},
+	tabBarStyle: {},
+	sceneStyle: {},
 	titleStyle: {
 		color: theme.navTabBarTextColor,
 		fontSize: 12
@@ -102,25 +66,10 @@ const styles = {
 	},
 	tabIcon: {
 		color: theme.navTabBarTextColor,
-		fontSize: 24,
+		fontSize: 28,
 		marginBottom: -3
 	},
 	tabIconSelected: {
-		color: theme.navTabBarActiveTextColor,
+		color: theme.navTabBarActiveTextColor
 	},
-	badge:{
-		backgroundColor:'red',
-		width:15,
-		height:15,
-		borderRadius:8,
-		alignItems:'center',
-		marginTop:1,
-	},
-	badgeText:{
-		color:'#FFFFFF',
-		fontSize: 10,
-	}
-};
-
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps)(Index);
+}

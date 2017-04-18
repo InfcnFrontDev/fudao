@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import {Modal, View, Image, TouchableHighlight} from "react-native";
 import {Text} from "native-base";
-import {theme, urls} from "../../utils/index";
 
 
 /**

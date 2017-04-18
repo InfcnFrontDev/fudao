@@ -1,6 +1,5 @@
 //noinspection JSAnnotator
 import React, {PureComponent} from "react";
-import {connect} from "react-redux";
 import {Text, Button} from "native-base";
 import {View, Image, DeviceEventEmitter, TouchableHighlight} from "react-native";
 import {Actions} from "react-native-router-flux";
@@ -8,7 +7,7 @@ import {Actions} from "react-native-router-flux";
 /**
  * 我的情绪
  */
-class MyEnter extends PureComponent {
+export default  class MyEnter extends PureComponent {
 	constructor(props) {
 		super(props);
 	}
@@ -105,6 +104,3 @@ const styles = {
 function bindAction(dispatch) {
 	return {};
 }
-
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps, bindAction)(MyEnter);

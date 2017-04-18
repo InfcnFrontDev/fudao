@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import {StyleSheet, ScrollView, View} from "react-native";
 import Loading from "./Loading";
-import {theme, tools} from "../utils/index";
 
 export default class Content extends PureComponent {
 

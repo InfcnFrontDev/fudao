@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Grid, Col, Text, Icon, Button, View} from "native-base";
 import {Container, Content} from "../../components/index";
-import {theme, urls} from "../../utils/index";
 import {DefaultTabBar} from "react-native-scrollable-tab-view";
 import TabView from "./components/TabView";
 import HealthEvaluation from "./HealthEvaluation";

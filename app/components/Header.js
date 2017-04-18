@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Header, Left, Right, Body, Button, Icon, Title} from "native-base";
 
-class Header_ extends PureComponent {
+export default class Header_ extends PureComponent {
 
 	render() {
 		let {back, menu, left, center, right, title} = this.props;
@@ -69,6 +69,3 @@ Header_.defaultProps = {
 	body: null,
 	right: null
 }
-
-const mapStateToProps = state => ({});
-export default connect(mapStateToProps)(Header_)
