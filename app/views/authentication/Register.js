@@ -71,18 +71,15 @@ class Register extends PureComponent {  // eslint-disable-line
             toast.show("请填入正确的手机号");
         }else{
             request.getJson(urls.apis.USER_CHECKPHONEREGISTERED,{
-                    phone:phone ,
+                    phone:phone
                 }).then((data)=>{
+                    toast.show("正在发送验证码...");
+                    this._getGode._click();
                     if(!data.ok) {
                         request.getJson(urls.apis.USER_SENDCODE,{
                             phone:phone ,
                         }).then((data)=>{
-                            if(data.ok){
-                                toast.show("正在发送验证码...");
-                                this._getGode._click();
-                            }
                         },(error)=>{
-
                         })
 
 

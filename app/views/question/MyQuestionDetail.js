@@ -35,7 +35,7 @@ class MyQuestionDetail extends PureComponent {
                     <QuestionTab
                         question={question}
                         module="question"
-                        url={[urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL, urls.apis.DISEASE_GETDISEASEPROFESSIONALMETHODLIST]}
+                        url={[urls.apis.DISEASE_GETDISEASEDAILYMETHODLIST, urls.apis.DISEASE_GETDISEASEPROFESSIONALMETHODLIST]}
                     />
                 </Content>
             </Container>

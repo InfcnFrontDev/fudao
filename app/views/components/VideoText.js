@@ -18,7 +18,7 @@ class VideoText extends PureComponent {
 	}
 
 	render() {
-		let {title, content, video,basis} = this.props;
+		let {title,content,video,basis} = this.props;
 		return (
 					<View style={styles.View}>
 						<Image source={require('../../assets/videoBj1.png')} style={styles.bj}>

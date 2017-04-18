@@ -5,17 +5,6 @@ import {Text} from "native-base";
 import Video from "react-native-video";
 import {theme, urls, request} from "../../utils/";
 
-
-let daily = {
-    "ok": true,
-    "obj": {
-        "id": "91723491hf-ajdhfkaqwerqew1239-4193749fhaw",
-        "name": "睡前不要吃东西",
-        "img": "/photo/shuiqianbuchidongxi.jpg",
-        "threeCharacterClassic": "用粗盐，可减肥，拍废物，促代谢。",
-        "detail": "1、晚餐最好是睡前4个小时吃。除了晚餐，最好不要吃夜宵。\n2、睡前大吃大喝向来是减肥的大忌，水也要少喝。\n3、除此之外，一些坏习惯也要改改，比如上网看电视时喜欢吃东西，这是很容易堆积脂肪的，而且入睡前吃掉太多东西，很容易让人兴奋，更加不容易睡眠，这会直接影响到睡眠减肥的效果哦!",
-    }
-};
 /**
  * 问题，期望展示组件
  */
@@ -28,11 +17,16 @@ class QuestionText extends PureComponent {
     }
 
     componentWillMount() {
-        let {id} = this.props.data;
-        request.getJson(urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL, {
+        let id = this.props.data;
+        if(this.props.from=='question'){
+            var url = urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL;
+        }else{
+            var url = urls.apis.EXPECT_GETEXPECTDAILYMETHODDETAIL;
+
+        }
+        request.getJson(url, {
             id,
         }).then((res) => {
-            res = daily;
             this.setState({
                 daily: res.obj,
             })
@@ -42,10 +36,8 @@ class QuestionText extends PureComponent {
     render() {
         if (JSON.stringify(this.state.daily) != '{}') {
             var {daily} = this.state;
-            var content = daily.threeCharacterClassic + "\n" + daily.detail;
-            // if (!content) {
-            //     content = '制作方法：' + this.props.data.makingMethod + '\n材料：' + this.props.data.material + '\n使用方法:' + this.props.data.usageMethod;
-            // }
+            var content = daily.three_character_classic + "\n" + daily.detail;
+
             content = content.split('\\t').join('');
             content = content.split('\\n').join('\n');
             var e = new RegExp('\n', "g");
@@ -55,7 +47,7 @@ class QuestionText extends PureComponent {
             return (
                 <ScrollView style={styles.scrollView}>
                     <View style={styles.view}>
-                        {this.renderImg('/' + this.props.renqun + daily.img)}
+                        {this.renderImg('/aged'  + daily.img)}
                         <Text style={styles.contentText}>        {content}</Text>
                     </View>
                 </ScrollView>

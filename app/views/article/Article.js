@@ -53,13 +53,15 @@ class Article extends PureComponent {
 						scrollWithoutAnimation={false}
 						style={styles.tabView}
 					>
-						{LABELS1.obj.map((label) =><ArticleList key={label.name} tabLabel={label.name} label={label.name}/>)}
+						{LABELS1.obj.map((label) =><ArticleList key={label.id} tabLabel={label.name} label={label.id}/>)}
 					</ScrollableTabView>
 				</Container>
 			)
 		}else{
 			return (
-				<Container></Container>
+				<Container>
+					<Header menu {...this.props}/>
+				</Container>
 			)
 		}
 

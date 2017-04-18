@@ -3,27 +3,50 @@ import {View, Text, ScrollView} from "react-native";
 import {ListItem, Button, List} from "native-base";
 import {Actions} from "react-native-router-flux";
 import GiftedListView from '../../../components/GiftedListView'
+import groupBy from 'lodash/groupBy'
+import {request} from "../../../utils/index";
 
 class TreatmentProfessionList extends PureComponent {
     constructor(props) {
         super(props);
+        this.state={
+            professionalMethodList:{}
+        }
+    }
 
+
+    componentWillMount(){
+        let {question,url} = this.props;
+        request.getJson(url,{
+            expectId:question.id
+        }).then((res)=>{
+            let professionalMethodList = groupBy(res.obj, item => {
+                return item.type
+            })
+            this.setState({
+                professionalMethodList:professionalMethodList
+            })
+        })
     }
 
     render() {
-        return (
-            <GiftedListView
-                enableEmptySections={true}
-                rowView={this.renderRowView.bind(this)}
-                onFetch={this.onFetch.bind(this)}
-                refreshable={false}
-                firstLoader={true}
-                withSections={true}
-                paginationAllLoadedView={() => {
-                }}
-                sectionHeaderView={this._renderSectionHeaderView}
-            />
-        )
+        let {professionalMethodList} = this.state;
+        if(JSON.stringify(professionalMethodList) != "{}"){
+            return (
+                <GiftedListView
+                    enableEmptySections={true}
+                    rowView={this.renderRowView.bind(this)}
+                    onFetch={this.onFetch.bind(this)}
+                    refreshable={false}
+                    firstLoader={true}
+                    withSections={true}
+                    paginationAllLoadedView={() => {
+                    }}
+                    sectionHeaderView={this._renderSectionHeaderView}
+                />
+            )
+        }
+        return null;
     }
 
     _renderSectionHeaderView(sectionData, sectionID) {
@@ -35,8 +58,8 @@ class TreatmentProfessionList extends PureComponent {
     }
 
     onFetch(page = 1, callback, options) {
-        let {professionalMethods} = this.props;
-        callback(professionalMethods, {
+        let {professionalMethodList} = this.state;
+        callback(professionalMethodList, {
             allLoaded: true
         })
     }
@@ -55,6 +78,7 @@ class TreatmentProfessionList extends PureComponent {
                     </View>
                     <Text>></Text>
                 </View>
+
             </Button>
         )
     }
