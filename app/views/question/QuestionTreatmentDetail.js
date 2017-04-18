@@ -3,18 +3,8 @@ import {View, Image, Dimensions} from "react-native";
 import {connect} from "react-redux";
 import {Text} from "native-base";
 import {Container, Content, Header} from "../../components/index";
-import Video from "react-native-video";
 import {theme, urls, request} from "../../utils/";
 
-let profession = {
-    "ok": true,
-    "obj": {
-        "id": "0128340-123759183481635-91328749123",
-        "name": "拔罐疗法",
-        "detail": "取穴：中脘、三阴交、天枢、巨阙、大横、腹结。\n操作：每次选用4-5穴，根据患者肥胖程度选用大号或中号火罐，以闪火法拔罐，留罐10-20min，每日1次，15次为1个疗程。",
-        "type": "拔罐"
-    }
-};
 
 class QuestionTreatmentDetail extends PureComponent {
     constructor(props) {
@@ -26,10 +16,9 @@ class QuestionTreatmentDetail extends PureComponent {
 
     componentWillMount() {
         let {id} = this.props.data;
-        request.getJson(urls.apis.DISEASE_GETDISEASEPROFESSIONALMETHODLIST, {
+        request.getJson(urls.apis.DISEASE_GETDISEASEPROFESSIONALMETHODDETAIL, {
             id,
         }).then((res) => {
-            // res = profession;
             this.setState({
                 profession: res.obj,
             })
@@ -50,7 +39,7 @@ class QuestionTreatmentDetail extends PureComponent {
         }
         return (
             <Container style={styles.container} delay>
-                <Header {...this.props}/>
+                <Header {...this.props} title={this.props.data.name}/>
                 <Content style={styles.content}>
                     <View style={styles.from}>
                         <Text>{this.props.title} > 自疗方案 > 专业疗法 > {this.props.data.name}</Text>

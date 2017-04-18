@@ -7,7 +7,8 @@ const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 //const webPath = 'http://103.254.113.11:9191/web'; // 外网
 // const webPath = 'http://192.168.10.69:9191/web'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
- const webPath = 'http://192.168.3.204:3000/'; // 王朋
+//  const webPath = 'http://192.168.3.204:3000/'; // 王朋
+ const webPath = 'http://192.168.3.213:3000/'; // cxx
 //  const webPath = 'http://192.168.3.203:3000/'; //
 // 图片服务器地址
 // const picPath = 'http://103.254.113.11:9191/'; // 外网
@@ -46,14 +47,16 @@ const urls = {
 		//首页
 		HOEM: webPath + 'home.html',
 		//我的能量场
-		MY_ENERGY: webPath + 'myEnergy.html'
+		MY_ENERGY: webPath + 'myEnergy.html',
+		//自诊
+        SELFDIAGNOSIS:webPath+'selfDiagnosis.html',
 	},
 	/**
 	 *  接口
 	 */
 	apis: {
 		// 图片接口(ok)
-		IMAGE: apiPath + '/ImgApi/getImage',
+		IMAGE: apiPath + 'ImgApi/getImage',
 		IMAGE_UPLOAD: apiPath + '/ImgApi/upload',
 
 
@@ -164,42 +167,47 @@ const urls = {
 
 		// 我的问题 ---------------------------------------------------------
 		//所有问题
-		DISEASE_GETALLDISEASELIST: apiPath + '/DiseaseApi/getAllDiseaseList',
+		DISEASE_GETALLDISEASELIST: apiPath + 'DiseaseApi/getAllDiseaseList',
 		//用户问题
-		DISEASE_GETMYDISEASELIST: apiPath + '/DiseaseApi/getMyDiseaseList',
+		DISEASE_GETMYDISEASELIST: apiPath + 'DiseaseApi/getMyDiseaseList',
         //添加我的问题
-		DISEASE_ADDMYDISEASE: apiPath + '/DiseaseApi/addMyDisease',
+		DISEASE_ADDMYDISEASE: apiPath + 'DiseaseApi/addMyDisease',
         //删除用户问题
-		DISEASE_DELETEMYDISEASE: apiPath + '/DiseaseApi/deleteMyDisease',
+		DISEASE_DELETEMYDISEASE: apiPath + 'DiseaseApi/deleteMyDisease',
         //问题日常疗法
-        DISEASE_GETDISEASEDAILYMETHODDETAIL: apiPath + '/DiseaseApi/getDiseaseDailyMethodList',
+        DISEASE_GETDISEASEDAILYMETHODLIST: apiPath + 'DiseaseApi/getDiseaseDailyMethodList',
+        DISEASE_GETDISEASEDAILYMETHODDETAIL: apiPath + 'DiseaseApi/getDiseaseDailyMethodDetail',
 		//问题专业疗法
-        DISEASE_GETDISEASEPROFESSIONALMETHODLIST: apiPath + '/DiseaseApi/getDiseaseProfessionalMethodList',
+        DISEASE_GETDISEASEPROFESSIONALMETHODLIST: apiPath + 'DiseaseApi/getDiseaseProfessionalMethodList',
+        DISEASE_GETDISEASEPROFESSIONALMETHODDETAIL: apiPath + 'DiseaseApi/getDiseaseProfessionalMethodDetail',
        //获取食材
-		INGREDIENT_GETINGREDIENT: apiPath + '/IngredientApi/getIngredient',
+		INGREDIENT_GETINGREDIENT: apiPath + 'IngredientApi/getIngredient',
 		//获取菜品列表
-		COOKBOOK_GETCOOKBOOKLIST: apiPath + '/CookbookApi/getCookbookList',
+		COOKBOOK_GETCOOKBOOKLIST: apiPath + 'CookbookApi/getCookbookList',
 		//获取菜品详细
-		COOKBOOK_GETCOOKBOOK: apiPath + '/CookbookApi/getCookbook',
+		COOKBOOK_GETCOOKBOOK: apiPath + 'CookbookApi/getCookbook',
 
 
 		// 我的期望 ---------------------------------------------------------
 		//所有期望
-		EXPECT_GETALLEXPECTLIST: apiPath + '/ExpectApi/getAllExpectList',
+		EXPECT_GETALLEXPECTLIST: apiPath + 'ExpectApi/getAllExpectList',
 		//用户期望
-		EXPECT_GETMYEXPECTLIST: apiPath + '/ExpectApi/getMyExpectList',
+		EXPECT_GETMYEXPECTLIST: apiPath + 'ExpectApi/getMyExpectList',
 		//添加用户期望
-		EXPECT_ADDMYEXPECT: apiPath + '/ExpectApi/addMyExpect',
+		EXPECT_ADDMYEXPECT: apiPath + 'ExpectApi/addMyExpect',
 		//删除用户期望
-		EXPECT_DELETEMYEXPECT: apiPath + '/ExpectApi/deleteMyExpect',
+		EXPECT_DELETEMYEXPECT: apiPath + 'ExpectApi/deleteMyExpect',
         //期望日常疗法
-        EXPECT_GETEXPECTDAILYMETHODDETAIL: apiPath + '/ExpectApi/getExpectDailyMethodDetail',
+        EXPECT_GETEXPECTDAILYMETHODLIST: apiPath + 'ExpectApi/getExpectDailyMethodList',
+        EXPECT_GETEXPECTDAILYMETHODDETAIL: apiPath + 'ExpectApi/getExpectDailyMethodDetail',
+
         //期望专业疗法
-        EXPECT_GETEXPECTPROFESSIONALMETHODDETAIL: apiPath + '/ExpectApi/getExpectProfessionalMethodDetail',
+        EXPECT_GETEXPECTPROFESSIONALMETHODLIST: apiPath + 'ExpectApi/getExpectProfessionalMethodList',
+        EXPECT_GETEXPECTPROFESSIONALMETHODDETAIL: apiPath + 'ExpectApi/getExpectProfessionalMethodDetail',
 
 		// 我的能量场 ---------------------------------------------------------
 
-		ENERGY_GETINFORMATIONRESULT: apiPath +'/EnergyApi/getInformationResult'//
+		ENERGY_GETINFORMATIONRESULT: apiPath +'/EnergyApi/getInformationResult',//
 		MY_ENEGRYMY_ACTION_INFORMATION: apiPath +'app/myEnergyAction!informationData.action',//?appid=1
 		//获取区县
 		REGION_GETCOUNTYLIST:apiPath + 'RegionApi/getCountyList',
