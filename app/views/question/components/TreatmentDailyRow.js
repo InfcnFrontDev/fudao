@@ -59,6 +59,7 @@ class TreatmentDailyRow extends PureComponent {
                 )
             }
             else {
+                var principle = rowData.principle.split('\\t').join('');
                 var list = (
                     <List dataArray={rowData.methods} renderRow={(data) => {
                         return (
@@ -81,7 +82,7 @@ class TreatmentDailyRow extends PureComponent {
                         <Text style={styles.data}>{rowData.type}</Text>
                     </View>
                     <Text
-                        style={styles.type}>        {rowData.type == '饮食' ? principle : rowData.principle}</Text>
+                        style={styles.type}>        {principle}</Text>
                     {list}
                     <Modal ref={(e) => this._modal = e}>
                         {modalView}
@@ -116,7 +117,7 @@ class TreatmentDailyRow extends PureComponent {
     showModal(data) {
 
         let modalView = (
-            <QuestionText data={data} renqun='aged'/>
+            <QuestionText data={data} renqun='aged' from="question"/>
         )
         this.setState({
             modalView

@@ -3,25 +3,6 @@ import {ToastAndroid} from "react-native";
 import {request, urls} from "../utils/";
 import groupBy from 'lodash/groupBy'
 
-//假数据
-var myQuestion = {
-    "ok": true,
-    "obj": [
-        {
-            "id": "17",
-            "name": "跌倒",
-            "img": "/icons/disease/diedao.png",
-        },
-        {
-            "id": "107",
-            "name": "咳嗽",
-            "img": "/icons/disease/diedao.png",
-            "type": "日常问题",
-        }
-    ],
-}
-
-
 //清空我的问题和期望
 export function clearMyQuestion() {
 	return (dispatch) => {
@@ -34,13 +15,11 @@ export function clearMyQuestion() {
 
 export function fetchAllQuestions() {
 	return (dispatch) => {
-		request.getJson(urls.apis.DISEASE_GETALLDISEASELIST,{
-            crowd:'aged'
-		})
+		request.getJson(urls.apis.DISEASE_GETALLDISEASELIST)
 		.then((res) => {
             let allQuestions = groupBy(res.obj, item => {
                 return item.type
-            })
+            });
 
 			dispatch({
 				type: types.QUESTION_RECEIVE_ALL_LIST,
@@ -56,8 +35,6 @@ export function fetchMyQuestions() {
 	return (dispatch) => {
         request.getJson(urls.apis.DISEASE_GETMYDISEASELIST)
 		.then((res) => {
-			res = myQuestion;
-
 			let myQuestions = res.obj;
 			let myQuestionMap={};
 			// 数据转换

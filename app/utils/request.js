@@ -54,6 +54,7 @@ const request = {
 					'Cache-Control': 'no-cache',
 					'authorization': 'aa736c75-42ed-4775-acb3-f7e46f9d50fc'
 
+
 				}
 			})
 				.then((response) => type == 'text' ? response.text() : response.json())
