@@ -56,7 +56,6 @@ class Collection extends PureComponent {
 	}
 
 	removeMyCollection(rowData) {
-		// alert(JSON.stringify(rowData));
 		request.getJson(urls.apis.COLLECTION_DELETEMYCOLLECTION, {
 			id: rowData.id
 		}).then((result) => {
