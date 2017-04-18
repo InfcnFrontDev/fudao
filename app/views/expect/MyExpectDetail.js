@@ -36,7 +36,7 @@ class MyExpectDetail extends PureComponent {
                     <ExpectTab
                         question={expect}
                         module="expect"
-                        url={[urls.apis.EXPECT_GETEXPECTDAILYMETHODDETAIL, urls.apis.EXPECT_GETEXPECTPROFESSIONALMETHODDETAIL]}
+                        url={[urls.apis.EXPECT_GETEXPECTDAILYMETHODLIST, urls.apis.EXPECT_GETEXPECTPROFESSIONALMETHODLIST]}
                     />
                 </Content>
             </Container>

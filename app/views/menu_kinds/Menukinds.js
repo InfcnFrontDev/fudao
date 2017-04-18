@@ -4,7 +4,7 @@ import {Actions} from "react-native-router-flux";
 import {View, TouchableOpacity, TouchableHighlight, Alert, Image, Modal, Dimensions, ScrollView} from "react-native";
 import {Text, Button} from "native-base";
 import {Container, Content, Header} from "../../components/index";
-import {urls, theme, request} from "../../utils/index";
+import {urls, theme, request,toast} from "../../utils/index";
 /**
  * 菜谱
  */
@@ -17,11 +17,11 @@ class Menukinds extends PureComponent {
         this.state={
           activeBar:0,
 			idOrName:this.props.idOrName,
-          arr:this.props.arr,
+          	arr:this.props.arr,
         }
     }
     componentWillMount(){
-        let {idOrName,arr}=this.state;
+        let {idOrName,arr}=this.props;
         for(var i=0;i<arr.length;i++){
             if(arr[i]==idOrName){
                 this.setState({
@@ -30,7 +30,7 @@ class Menukinds extends PureComponent {
             }
         }
         request.getJson(urls.apis.INGREDIENT_GETINGREDIENT,{
-			idOrName:idOrName
+			name:idOrName
 		}).then((result) => {
             this.setState({
                     data:result.obj,
@@ -38,8 +38,10 @@ class Menukinds extends PureComponent {
         }, (error) => {
 		});
 		request.getJson(urls.apis.COOKBOOK_GETCOOKBOOKLIST,{
-			ingredient:idOrName
+			ingredient:idOrName,
+			num:4
 		}).then((result) => {
+			toast.show(JSON.stringify(result))
 			this.setState({
 				caiPu:result.obj,
 			})
@@ -48,7 +50,7 @@ class Menukinds extends PureComponent {
 	}
 
 	render() {
-		let {data,caiPu,arr} = this.state
+		let {data,caiPu,arr} = this.state;
 		let tab=arr;
 		if (!data) {
 			return (<Container></Container>)

@@ -19,12 +19,13 @@ class SetPassword extends PureComponent {
             phone:this.props.phone,
             password:this.props.password,
         }
+        this.interval();
     }
     render() {
         var title=(
             <Text style={styles.titleText}>{this.state.text}</Text>
         );
-        this.interval();
+
         return (
             <Container style={styles.container}>
                 <View style={styles.view}>
@@ -38,17 +39,20 @@ class SetPassword extends PureComponent {
     interval(){
         let self=this;
         let {number} = self.state;
-        var c=setInterval(function(){
-            if(number==0){
-                self._login(self.state.phone,self.state.password)
-                clearInterval(c);
-            }else{
-                number--;
-                self.setState({
-                    number:number,
-                })
-            }
-        },1000)
+            var c=setInterval(function(){
+                if(number==0){
+                    toast.show("!=0")
+                    self._login(self.state.phone,self.state.password)
+                    clearInterval(c);
+                }else{
+                    number--;
+                    self.setState({
+                        number:number,
+                    })
+                }
+            },1000)
+
+
     }
     _login(phone,password){
         let {dispatch}=this.props;
@@ -56,6 +60,7 @@ class SetPassword extends PureComponent {
             phone:phone,
             password:hex_md5(phone+password),
         }).then((data)=>{
+            toast.show(JSON.stringify(data))
             if(data.ok) {
                 var authorization = data.obj;
                 request.getJson(urls.apis.USER_GETLOGINUSER,{

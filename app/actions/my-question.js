@@ -8,7 +8,7 @@ export function skipToDetail(question,from){
       if(from=='list'){
         Actions.myQuestionDetail({question:question})
       }else{
-        request.getJson(urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL,{
+        request.getJson(urls.apis.DISEASE_GETDISEASEDAILYMETHODLIST,{
           diseaseId:question.id,
           renqun:'aged',
           local:'北京'
@@ -41,7 +41,7 @@ export function clearMyQuestion() {
 
 export function getQuestionTreetment(diseaseId,renqun){
   return (dispatch) => {
-    request.getJson(urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL,{
+    request.getJson(urls.apis.DISEASE_GETDISEASEDAILYMETHODLIST,{
       diseaseId:diseaseId,
       renqun:'aged',
       local:'北京'

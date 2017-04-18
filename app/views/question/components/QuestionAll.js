@@ -45,7 +45,7 @@ class QuestionAll extends PureComponent {
 
 	_renderRow(rowData, sectionId, rowId) {
 		let {selectedItem, onItemAdd, onItemPress} = this.props;
-
+		// alert(rowData.img)
 		return (
 			<View style={styles.row}>
 				<Button transparent

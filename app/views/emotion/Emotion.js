@@ -73,7 +73,7 @@ class Emotion extends PureComponent {
 			emotion: item.title,
 		}).then(((data) => {
 			if (data.ok) {
-				this.showModal(data.obj);
+				this.showModal(data.obj[0]);
 			} else {
 				toast.show('这种心情，我没办法了');
 			}
@@ -82,7 +82,6 @@ class Emotion extends PureComponent {
 
 	showModal(data) {
 		let modalView = (null);
-
 		if (data.path) {
 			if (data.type==3) {
 				modalView = (

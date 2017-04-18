@@ -1,8 +1,7 @@
 import React, {PureComponent} from "react";
-import {ScrollView, ListView, View,ToastAndroid,Dimensions} from "react-native";
-import {Left, Right, Body, Form, Item, Text} from "native-base";
+import { View,Dimensions} from "react-native";
 import {urls} from "../../../utils/index"
-import {Content, WebView} from "../../../components/index";
+import {WebView} from "../../../components/index";
 
 
 class TabListMeridian extends PureComponent {

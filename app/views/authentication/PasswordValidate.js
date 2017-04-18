@@ -71,13 +71,11 @@ class Register extends PureComponent {  // eslint-disable-line
             }).then((data)=>{
                 if(data.ok) {
                     //发送验证码接口
+                    toast.show("正在发送验证码...");
+                    this._getGode._click();
                     request.getJson(urls.apis.USER_SENDCODE,{
                         phone:phone ,
                     }).then((data)=>{
-                        if(data.ok){
-                            toast.show("正在发送验证码...");
-                            this._getGode._click();
-                        }
                     },(error)=>{
 
                     })
