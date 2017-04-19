@@ -30,6 +30,7 @@ class ArticleColumnStore {
 		return new Promise((resolve, reject) => {
 			request.getJson(urls.apis.ARTICLE_GETARTICLECOLUMNLIST)
 				.then(((result) => {
+					console.log(result)
 					if (result.ok) {
 						resolve(result.obj)
 					} else {

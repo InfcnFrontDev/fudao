@@ -1,5 +1,5 @@
 import utils from "./utils";
-import UserStore from "../mobx/userStore";
+import userStore from "../mobx/userStore";
 
 /**
  * network request
@@ -14,28 +14,34 @@ const request = {
 	 * getJson(url, params, callback)
 	 *
 	 * @param url 请求地址，type：string
-	 * @param params 请求类型，type：json
+	 * @param params 请求类型
 	 * @param callback 回调方法， type: function
 	 */
 	getJson(url, params){
-		return this.fetchGet(url, params, 'json');
+		return this._fetchGet(url, params);
 	},
 
-	/**
-	 * GET请求，返回Text数据。
-	 *
-	 * 支持方法重载：
-	 * getText(url, callback)
-	 * getText(url, params, callback)
-	 *
-	 * @param url 请求地址，type：string
-	 * @param params 请求类型，type：json
-	 */
-	getText(url, params){
-		return this.fetchGet(url, params, 'text');
+	_fetchGet(url, params){
+		let _fetchGet2 = this._fetchGet2;
+		return new Promise(function (resolve, reject) {
+			let successCallback = (result) => {
+				console.log(result);
+				resolve(result)
+			};
+
+			let errorCallback = (error) => {
+				console.log(error);
+				if (error.status == 450) {
+					userStore.relogin(() => {
+						_fetchGet2(url, params, successCallback, errorCallback);
+					});
+				}
+			};
+			_fetchGet2(url, params, successCallback, errorCallback)
+		})
 	},
 
-	fetchGet(url, params, type){
+	_fetchGet2(url, params, successCallback, errorCallback){
 		if (params) {
 			let paramsArray = []
 			Object.keys(params).forEach(key => paramsArray.push(key + '=' + encodeURIComponent(params[key])))
@@ -47,29 +53,26 @@ const request = {
 			}
 		}
 
-		// console.log('GET:' + url);
-
-		return new Promise(function (resolve, reject) {
-			fetch(url, {
-				method: 'GET',
-				headers: {
-					'Cache-Control': 'no-cache',
-					'authorization': 'd04e62ff-7ac8-4a22-a877-44ff6f4078d2'//UserStore.token
-				}
-			})
-				.then((response) => type == 'text' ? response.text() : response.json())
-				.then((result) => {
-					if (resolve)
-						resolve(result)
-				})
-				.catch((error) => {
-					console.log(error);
-					utils.showToast('服务器异常，请重试!');
-					if (reject) {
-						reject(error);
-					}
-				}).done();
-		})
+		fetch(url, {
+			method: 'GET',
+			headers: {
+				'Cache-Control': 'no-cache',
+				'authorization': userStore.token
+			}
+		}).then((response) => {
+			console.log(response);
+			let status = response.status;
+			if (status == 200) {
+				let result = response.json();
+				if (successCallback)
+					successCallback(result)
+			} else {
+				errorCallback(response);
+			}
+		}).catch((error) => {
+			console.log(error);
+			utils.showToast('网络异常，请重试！')
+		});
 	},
 
 
@@ -87,27 +90,10 @@ const request = {
 	 * @param callback 回调方法， type: function
 	 */
 	postJson(url, params){
-		return this.fetchPost(url, params, 'json');
+		return this._fetchPost(url, params, 'json');
 	},
 
-	/**
-	 * POST请求，返回Text数据。
-	 *
-	 * 支持方法重载：
-	 * postText(url, callback)
-	 * postText(url, body, callback)
-	 * postText(url, headers, body, callback)
-	 *
-	 * @param url 请求地址，type：string
-	 * @param headers 请求头，type：json
-	 * @param body 请求类型，type：string or json
-	 * @param callback 回调方法， type: function
-	 */
-	postText(url, params){
-		return this.fetchPost(url, params, 'text');
-	},
-
-	fetchPost(url, params, type){
+	_fetchPost(url, params, type){
 		let headers = {
 				'authorization': '1106775f-0d7d-11e7-9b59-000c293e6828',
 			},

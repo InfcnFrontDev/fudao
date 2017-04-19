@@ -20,6 +20,16 @@ class UserStore {
 	}
 
 	@action
+	relogin = async(callback) => {
+		let token = await this._login(this.phone, this.password);
+		runInAction(() => {
+			this.token = token;
+			this.saveData();
+			callback();
+		})
+	}
+
+	@action
 	fetchLoginUser = async() => {
 		let loginUser = await this._fetchLoginUser();
 		runInAction(() => {
@@ -36,10 +46,10 @@ class UserStore {
 			}).then((data) => {
 				console.log(data)
 				if (data.ok) {
-					toast.show("登录成功");
+					utils.showToast("登录成功");
 					resolve(data.obj);
 				} else {
-					toast.show("用户名或密码错误");
+					utils.showToast("用户名或密码错误");
 				}
 			});
 		});
