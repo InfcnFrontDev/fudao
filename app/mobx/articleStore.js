@@ -1,9 +1,9 @@
-import {observable, runInAction, computed, action, reaction} from "mobx";
+import {AsyncStorage} from "react-native";
+import {observable, runInAction, computed, action, reaction, autorun} from "mobx";
 
 class ArticleStore {
 	@observable articleColumnList = []
 	@observable errorMsg = ''
-	@observable isRefreshing = false
 
 	@action
 	fetchArticleColumnList() {
@@ -15,7 +15,6 @@ class ArticleStore {
 					tools.showToast('请求出错！')
 				}
 			});
-		collectionStore.isFetching = true
 	}
 
 	@computed

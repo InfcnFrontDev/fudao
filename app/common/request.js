@@ -25,12 +25,12 @@ const request = {
 		let _fetchGet2 = this._fetchGet2;
 		return new Promise(function (resolve, reject) {
 			let successCallback = (result) => {
-				console.log(result);
+				// console.log(result);
 				resolve(result)
 			};
 
 			let errorCallback = (error) => {
-				console.log(error);
+				// console.log(error);
 				if (error.status == 450) {
 					userStore.relogin(() => {
 						_fetchGet2(url, params, successCallback, errorCallback);
@@ -60,7 +60,7 @@ const request = {
 				'authorization': userStore.token
 			}
 		}).then((response) => {
-			console.log(response);
+			// console.log(response);
 			let status = response.status;
 			if (status == 200) {
 				let result = response.json();
@@ -70,7 +70,7 @@ const request = {
 				errorCallback(response);
 			}
 		}).catch((error) => {
-			console.log(error);
+			// console.log(error);
 			tools.showToast('网络异常，请重试！')
 		});
 	},
