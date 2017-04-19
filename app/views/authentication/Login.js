@@ -51,10 +51,6 @@ export default class Login extends PureComponent {
 								<Text style={styles.text2}>忘记密码</Text>
 							</TouchableOpacity>
 						</View>
-						<View>
-							<Text>{UserStore.token}</Text>
-							<Text>{JSON.stringify(UserStore.loginUser)}</Text>
-						</View>
 					</View>
 
 				</Content>

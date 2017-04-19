@@ -1,6 +1,7 @@
 import {observable, runInAction, computed, action, reaction} from "mobx";
 
 class UserStore {
+	@observable isLogin = false
 	@observable phone = ''
 	@observable password = ''
 	@observable token = ''
@@ -13,9 +14,10 @@ class UserStore {
 
 		let token = await this._login(phone, password);
 		runInAction(() => {
+			this.isLogin = true;
 			this.token = token;
-			callback();
 			this.saveData();
+			callback();
 		})
 	}
 
@@ -66,6 +68,7 @@ class UserStore {
 		storage.load({
 			key: 'user',
 		}).then(ret => {
+			this.isLogin = ret.isLogin;
 			this.token = ret.token;
 			this.phone = ret.phone;
 			this.password = ret.password;
@@ -78,6 +81,7 @@ class UserStore {
 		storage.save({
 			key: 'user',
 			rawData: {
+				isLogin: this.isLogin,
 				phone: this.phone,
 				password: this.password,
 				token: this.token,

@@ -1,22 +1,22 @@
 import React, {PureComponent} from "react";
 import {Actions, ActionConst} from "react-native-router-flux";
+import {observer} from "mobx-react/native";
 import {Container} from "native-base";
 import {View, Image, AsyncStorage} from "react-native";
-import CommitButton from "./authentication/components/CommitButton";
-import {toast} from "../utils/index";
-import UserStore from "../mobx/userStore";
+import CommitButton from "./components/CommitButton";
+import UserStore from "../../mobx/userStore";
 
 /**
  * 启始页
  */
 @observer
-export default class Index extends PureComponent {
+export default class Start extends PureComponent {
 
 	render() {
 		return (
 			<Container style={styles.container}>
 				<View style={styles.view}>
-					<Image source={require('./authentication/assets/logo.png')} style={styles.img}/>
+					<Image source={require('./assets/logo.png')} style={styles.img}/>
 					<View style={styles.viewButton}>
 						<CommitButton border={true} block={false} title="登录" onPress={()=>Actions['login']()}/>
 						<CommitButton border={false} block={false} title="注册" onPress={()=>Actions['register']()}/>
@@ -27,8 +27,7 @@ export default class Index extends PureComponent {
 	}
 
 	componentWillMount() {
-		if (UserStore.token) {
-			toast.show('欢迎回来，' + UserStore.loginUser.title);
+		if (UserStore.isLogin) {
 			Actions.index({
 				type: ActionConst.REPLACE
 			});

@@ -3,6 +3,7 @@ import {Router, Scene, Reducer} from "react-native-router-flux";
 import Index from "./views/index/Index";
 import Login from "./views/authentication/Login";
 import ArticleDetail from "./views/article/ArticleDetail";
+import Start from "./views/authentication/Start";
 
 /**
  * 路由
@@ -17,8 +18,10 @@ export default class AppRouter extends PureComponent {
 			<Router createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
 				<Scene key="root">
 
+					<Scene key="start" component={Start} title="启动页" hideNavBar initial/>
+
 					{/*首页*/}
-					<Scene key="index" component={Index} title="首页" hideNavBar initial/>
+					<Scene key="index" component={Index} title="首页" hideNavBar/>
 					{/*启动注册*/}
 					<Scene key="login" component={Login} title="登录" hideNavBar/>
 
