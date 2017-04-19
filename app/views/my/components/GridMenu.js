@@ -64,4 +64,4 @@ const styles = {
 		alignItems: 'center',
 		flex: 1,
 	}
-};
+}

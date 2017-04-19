@@ -43,14 +43,12 @@ export default class MyCover extends PureComponent {
 	}
 
 	cameraAction = () => {
-		let {loginUser} = userStore;
-
 		// {data, fileName, fileSize, height, isVertical, originalRotation, path, type, uri, width}
 		ImagePicker.showImagePicker(photoOptions, (response) => {
 			console.log(response);
 			if (response && response.fileName && response.uri) {
 				// 上传并更新头像
-				userStore.updateUserPhoto(loginUser.appid, response.fileName, response.uri);
+				userStore.updateUserPhoto(response.uri, response.fileName);
 			}
 		})
 	}

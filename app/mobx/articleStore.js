@@ -15,6 +15,7 @@ class ArticleStore {
 					tools.showToast('请求出错！')
 				}
 			});
+		collectionStore.isFetching = true
 	}
 
 	@computed

@@ -71,4 +71,4 @@ const styles = {
 	listText: {
 		fontSize: theme.fontSizeBase,
 	}
-};
+}

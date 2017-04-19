@@ -64,6 +64,40 @@ class UserStore {
 		});
 	}
 
+	@action
+	updateUserPhoto(uri, fileName) {
+		let formData = new FormData();
+		formData.append("filename", {
+			uri: uri,
+			type: 'multipart/form-data',
+			name: fileName
+		});
+
+		request.postJson(urls.apis.IMAGE_UPLOAD, formData)
+			.then(result => {
+				if (result.ok) {
+					// 修改图片路径
+					this.updateUserInfo('photo', result.obj)
+				} else {
+					tools.showToast("上传失败")
+				}
+			})
+	}
+
+	@action
+	updateUserInfo(fieldName, value) {
+		request.getJson(urls.apis.USERAPI_UPDATEUSERINFO, {
+			fieldName,
+			value
+		}).then(result => {
+			if (result.ok) {
+			} else {
+				tools.showToast("修改失败")
+			}
+		})
+	}
+
+
 	loadData(callback) {
 		storage.load({
 			key: 'user',
