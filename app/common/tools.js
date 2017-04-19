@@ -27,11 +27,18 @@ const tools = {
 	},
 
 	showDialog(options){
-		var dialog = new DialogAndroid();
+		let dialog = new DialogAndroid();
 		dialog.set(options);
 		dialog.show();
-	}
+	},
 
+	/**
+	 * 日期格式化
+	 *  dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss')
+	 */
+	dateFormat(date, pattern){
+		return '2017-04-19';
+	}
 
 };
 export default tools;

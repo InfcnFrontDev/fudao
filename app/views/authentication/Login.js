@@ -62,15 +62,15 @@ export default class Login extends PureComponent {
 		const {dispatch} = this.props;
 		let {phone, password} = this.state;
 		if (phone == '') {
-			utils.showToast("用户名不能为空");
+			tools.showToast("用户名不能为空");
 			return;
 		}
 		if (!checkPhone(phone)) {
-			utils.showToast("请输入正确的用户名");
+			tools.showToast("请输入正确的用户名");
 			return;
 		}
 		if (password == '') {
-			utils.showToast("密码不能为空");
+			tools.showToast("密码不能为空");
 			return;
 		}
 		//关闭软键盘

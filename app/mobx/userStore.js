@@ -43,10 +43,10 @@ class UserStore {
 			}).then((data) => {
 				console.log(data)
 				if (data.ok) {
-					utils.showToast("登录成功");
+					tools.showToast("登录成功");
 					resolve(data.obj);
 				} else {
-					utils.showToast("用户名或密码错误");
+					tools.showToast("用户名或密码错误");
 				}
 			});
 		});

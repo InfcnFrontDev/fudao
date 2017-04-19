@@ -12,7 +12,7 @@ class ArticleStore {
 				if (result.ok) {
 					this.articleColumnList = result.obj
 				} else {
-					utils.showToast('请求出错！')
+					tools.showToast('请求出错！')
 				}
 			});
 	}

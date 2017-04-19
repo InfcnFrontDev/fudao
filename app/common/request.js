@@ -1,4 +1,4 @@
-import utils from "./utils";
+import tools from "./tools";
 import userStore from "../mobx/userStore";
 
 /**
@@ -71,7 +71,7 @@ const request = {
 			}
 		}).catch((error) => {
 			console.log(error);
-			utils.showToast('网络异常，请重试！')
+			tools.showToast('网络异常，请重试！')
 		});
 	},
 
@@ -134,7 +134,7 @@ const request = {
 				})
 				.catch((error) => {
 					console.log(error);
-					utils.showToast('服务器异常，请重试!');
+					tools.showToast('服务器异常，请重试!');
 					if (reject) {
 						reject(error);
 					}

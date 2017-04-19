@@ -47,7 +47,7 @@ export default class AppRouter extends PureComponent {
 			return false;
 		}
 		this.lastBackPressTime = Date.now();
-		utils.showToast('再按一次退出应用');
+		tools.showToast('再按一次退出应用');
 		return true;
 	}
 

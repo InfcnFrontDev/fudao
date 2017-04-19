@@ -5,7 +5,7 @@ import urls from "./urls";
 import storage from "./storage";
 import constants from "./constants";
 import theme from "./theme";
-import utils from "./utils";
+import tools from "./tools";
 
 global.config = config;
 global._ = _;
@@ -15,4 +15,5 @@ global.urls = urls;
 global.storage = storage;
 global.constants = constants;
 global.theme = theme;
-global.utils = utils;
+//noinspection JSAnnotator
+global.tools = tools;
