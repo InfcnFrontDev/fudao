@@ -1,39 +1,33 @@
 import React, {PureComponent} from "react";
-import {ScrollView, View, Text} from "react-native";
+import {ScrollView} from "react-native";
+import {Container, Content, Header} from "../../components/index";
+import Separator from "../../components/Separator";
 import {observer} from "mobx-react/native";
-import userStore from "../../mobx/userStore";
+import MyPhoto from "./components/MyCover";
+import MyList from "./components/ListMenu";
+import MyGrid from "./components/GridMenu";
+
 
 /**
  * 我的
  */
 @observer
 export default class My extends PureComponent {
-	constructor(props) {
-		super(props);
-		this.state = {
-			stores: {
-				userStore
-			}
-		};
-	}
 
 	render() {
-		let {stores} = this.state;
-		console.log(_.mapKeys(stores))
 		return (
-			<ScrollView>
-				{_.keys(stores).map((key) => this.renderRow(key, stores[key]))}
-			</ScrollView>
+			<Container>
+				<Header menu {...this.props}/>
+				<Content gray>
+					<ScrollView>
+						<MyPhoto/>
+						<MyGrid/>
+						<Separator/>
+						<MyList />
+						<Separator/>
+					</ScrollView>
+				</Content>
+			</Container>
 		)
 	}
-
-	renderRow(key, value) {
-		return (
-			<View key={key} style={{paddingLeft:5}}>
-				<Text style={{fontWeight:'bold', fontSize:18}}>{key}</Text>
-				<Text>{JSON.stringify(value, null, '  ')}</Text>
-			</View>
-		)
-	}
-
 }
