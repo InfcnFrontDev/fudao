@@ -74,6 +74,8 @@ class UserStore {
 			this.password = ret.password;
 			this.loginUser = ret.loginUser;
 			callback()
+		}).catch(error => {
+			callback()
 		});
 	}
 
