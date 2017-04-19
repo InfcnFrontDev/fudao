@@ -5,7 +5,7 @@ import {Actions} from "react-native-router-flux";
 import {Right, Text, View, Button, Icon} from "native-base";
 import {Container, Content, WebView} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
-import {userStore} from "../../mobx/index";
+import userStore from "../../mobx/userStore";
 
 
 /**

@@ -45,7 +45,7 @@ const request = {
 		if (params) {
 			let paramsArray = []
 			Object.keys(params).forEach(key => paramsArray.push(key + '=' + encodeURIComponent(params[key])))
-			console.log(paramsArray)
+			// console.log(paramsArray)
 			if (url.search(/\?/) === -1) {
 				url += '?' + paramsArray.join('&')
 			} else {

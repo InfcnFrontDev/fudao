@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {positionStore} from "../../mobx/index";
+import positionStore from "../../mobx/positionStore";
 
 /**
  * 定位

@@ -3,7 +3,7 @@ import {observer} from "mobx-react/native";
 import {Container, Header, HeaderIcon, Loading} from "../../components/index";
 import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-view";
 import ArticleList from "./components/ArticleList";
-import articleColumnStore from "../../mobx/articleColumnStore";
+import articleStore from "../../mobx/articleStore";
 
 /**
  * 资讯
@@ -12,7 +12,7 @@ import articleColumnStore from "../../mobx/articleColumnStore";
 export default class Article extends PureComponent {
 
 	render() {
-		const {isFetching, articleColumnList} = articleColumnStore;
+		const {isFetching, articleColumnList} = articleStore;
 		return (
 			<Container>
 				<Header menu {...this.props}/>
@@ -42,7 +42,7 @@ export default class Article extends PureComponent {
 	}
 
 	componentDidMount() {
-		articleColumnStore.fetchArticleColumnList()
+		articleStore.fetchArticleColumnList()
 	}
 
 }

@@ -20,13 +20,8 @@ class UserStore {
 	}
 
 	@action
-	relogin = async(callback) => {
-		let token = await this._login(this.phone, this.password);
-		runInAction(() => {
-			this.token = token;
-			this.saveData();
-			callback();
-		})
+	relogin = (callback) => {
+		this.login(this.phone, this.password, callback)
 	}
 
 	@action
