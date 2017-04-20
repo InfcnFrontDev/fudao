@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, View, Image} from "react-native";
 
 class Container extends PureComponent {
 
@@ -7,7 +7,10 @@ class Container extends PureComponent {
 		let {children} = this.props;
 		return (
 			<View style={styles.container}>
-				{children}
+				<Image source={require('../assets/videoBj1.png')}
+					   style={styles.image}>
+					{children}
+				</Image>
 			</View>
 		)
 	}
@@ -17,7 +20,8 @@ class Container extends PureComponent {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1
-	}
+	},
+	image: {}
 })
 
 export default (Container)
