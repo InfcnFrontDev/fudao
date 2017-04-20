@@ -2,8 +2,8 @@ import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
 import GlobalContants from "./common/globalContants";
 import AppNavigator from "./AppNavigator";
+import {enableLogging} from "mobx-logger";
 import userStore from "./mobx/userStore";
-import {enableLogging} from 'mobx-logger';
 
 // mobx loggin
 enableLogging({
@@ -16,35 +16,18 @@ enableLogging({
 
 // global
 console.log(GlobalContants);
+console.log(global);
 
 /**
  * App
  */
 @observer
 export default class App extends PureComponent {
-	constructor() {
-		super();
-		this.state = {
-			isLoading: true
-		}
-	}
 
 	render() {
-		if (this.state.isLoading) {
-			return null;
+		if (userStore.hydrated) {
+			return <AppNavigator />
 		}
-		return (
-			<AppNavigator />
-		)
+		return null
 	}
-
-	componentDidMount() {
-		userStore.loadData(() => {
-			this.setState({
-				isLoading: false
-			})
-		})
-		console.log(global);
-	}
-
 }

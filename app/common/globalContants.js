@@ -6,6 +6,7 @@ import storage from "./storage";
 import constants from "./constants";
 import theme from "./theme";
 import tools from "./tools";
+import hydrate from "./hydrate";
 
 global.config = config;
 global._ = _;
@@ -17,3 +18,5 @@ global.constants = constants;
 global.theme = theme;
 //noinspection JSAnnotator
 global.tools = tools;
+//noinspection JSAnnotator
+global.hydrate = hydrate;

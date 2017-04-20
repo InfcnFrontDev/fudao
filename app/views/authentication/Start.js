@@ -4,7 +4,7 @@ import {observer} from "mobx-react/native";
 import {Container} from "native-base";
 import {View, Image, AsyncStorage} from "react-native";
 import CommitButton from "./components/CommitButton";
-import UserStore from "../../mobx/userStore";
+import userStore from "../../mobx/userStore";
 
 /**
  * 启始页
@@ -27,11 +27,11 @@ export default class Start extends PureComponent {
 	}
 
 	componentWillMount() {
-		/*if (UserStore.isLogin) {
+		if (userStore.isLogin) {
 			Actions.index({
 				type: ActionConst.REPLACE
 			});
-		}*/
+		}
 	}
 
 }
