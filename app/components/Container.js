@@ -7,7 +7,7 @@ class Container extends PureComponent {
 		let {children} = this.props;
 		return (
 			<View style={styles.container}>
-				<Image source={require('../assets/videoBj1.png')}
+				<Image source={require('../assets/bg/container.jpg')}
 					   style={styles.image}>
 					{children}
 				</Image>
@@ -21,7 +21,11 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	},
-	image: {}
+	image: {
+		width: theme.deviceWidth,
+		height: theme.deviceHeight - theme.navTabBarHeight,
+		alignSelf: "flex-end",
+	}
 })
 
 export default (Container)

@@ -47,8 +47,8 @@ export default class AppRouter extends PureComponent {
 					<Scene key="friend" component={Friend} title="好友" hideNavBar/>
 
 
-					<Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
-					<Scene key="collection" component={Collection} title="收藏" hideNavBar/>
+					<Scene title="资讯详情" key="articleDetail" component={ArticleDetail}/>
+					<Scene title="收藏" key="collection" component={Collection}/>
 
 				</Scene>
 			</Router>

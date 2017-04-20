@@ -3,9 +3,9 @@ import {ScrollView} from "react-native";
 import {Container, Content, Header} from "../../components/index";
 import Separator from "../../components/Separator";
 import {observer} from "mobx-react/native";
-import MyPhoto from "./components/MyCover";
-import MyList from "./components/ListMenu";
-import MyGrid from "./components/GridMenu";
+import MyPhoto from "./components/MyPhoto";
+import MyList from "./components/MyList";
+import MyGrid from "./components/MyGrid";
 
 
 /**
