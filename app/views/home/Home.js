@@ -79,8 +79,18 @@ export default class Home extends PureComponent {
 							</Button>
 						</Right>
 					</View>
+					<View style={{width:50,height:50,borderRadius:50,backgroundColor:'rgba(225,225,225,.2)',position: 'absolute',top:300,alignItems:'center',flexDirection:'row'}}>
+						<Text style={{textAlign:'center',width:50}}>
+							情
+						</Text>
+					</View>
+					<View style={{width:50,height:50,borderRadius:50,backgroundColor:'rgba(225,225,225,.2)',position: 'absolute',top:300,right:0,alignItems:'center',flexDirection:'row'}}>
+						<Text style={{textAlign:'center',width:50}}>
+							能
+						</Text>
+					</View>
 
-					<View style={{width: Dimensions.get('window').width, height: 122, position: 'absolute', bottom: 0}}>
+					<View style={{width: Dimensions.get('window').width, height: 102, position: 'absolute', bottom: 0}}>
 						<MyEnter />
 					</View>
 				</Content>

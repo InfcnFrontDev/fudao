@@ -19,17 +19,12 @@ export default  class MyEnter extends PureComponent {
 		return (
 			<View>
 				<View style={styles.View}>
-					<Button style={itemStyle1} transparent onPress={()=>Actions.emotion()}>
 
-						<Image source={require('../assets/langh.png')} style={styles.image}/>
-
-						<Text style={styles.text}>情绪调和</Text>
-					</Button>
-					<Button style={itemStyle} transparent onPress={()=>Actions.energy()}>
+					<Button style={itemStyle1} transparent onPress={()=>Actions.energy()}>
 
 						<Image source={require('../assets/drill.png')} style={styles.image}/>
 
-						<Text style={styles.text}>我的能量场</Text>
+						<Text style={styles.text}>诊</Text>
 					</Button>
 
 				</View>
@@ -38,13 +33,19 @@ export default  class MyEnter extends PureComponent {
 
 						<Image source={require('../assets/adjust.png')} style={styles.image}/>
 
-						<Text style={styles.text}>疑症自调</Text>
+						<Text style={styles.text}>疗</Text>
 					</Button>
 					<Button style={itemStyle} transparent onPress={()=>Actions.myExpect()}>
 
 						<Image source={require('../assets/love.png')} style={styles.image}/>
 
-						<Text style={styles.text}>完美秘籍</Text>
+						<Text style={styles.text}>养</Text>
+					</Button>
+					<Button style={itemStyle} transparent onPress={()=>Actions.emotion()}>
+
+						<Image source={require('../assets/langh.png')} style={styles.image}/>
+
+						<Text style={styles.text}>修</Text>
 					</Button>
 				</View>
 			</View>
@@ -62,7 +63,7 @@ const styles = {
 	},
 	button: {
 		flexDirection: 'row',
-		height: 60,
+		height: 50,
 		justifyContent: 'center',
 		flex: 1,
 		alignSelf: 'stretch',
