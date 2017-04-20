@@ -18,8 +18,8 @@ export default class Login extends PureComponent {
 
 	state = {
 		isFetching: false,
-		phone: '15901097191',
-		password: '123456',
+		phone: '',
+		password: '',
 		login: 'no'
 	}
 
@@ -79,7 +79,7 @@ export default class Login extends PureComponent {
 
 		UserStore.login(phone, password, () => {
 			UserStore.fetchLoginUser();
-
+			tools.showToast(JSON.stringify(userStore.loginUser))
 			// 跳到首页
 			Actions.index({
 				type: ActionConst.POP_AND_REPLACE,
@@ -87,7 +87,7 @@ export default class Login extends PureComponent {
 		});
 	}
 
-	loginSuccess(token) {
+	/*loginSuccess(token) {
 		request.token = token;
 		request.getJson(urls.apis.USER_GETLOGINUSER)
 			.then((data) => {
@@ -96,23 +96,13 @@ export default class Login extends PureComponent {
 				}
 			});
 	}
-
 	loginSuccess2(user) {
 		let {dispatch} = this.props;
 		dispatch(login(user));
-	}
+	}*/
 
 	//根据是否有基本信息选择跳转页面
-	d() {
-		let {obj} = this.props;
-		// ToastAndroid.show(JSON.stringify(obj.userInformation), ToastAndroid.SHORT);
-		var userInformation = obj.userInformation;
-		if (userInformation != undefined) { //基本信息已经添加完成
-			Actions['search']()
-		} else { //没有基本信息表示第一次登录需要添写信息
-			Actions['startInformation']()
-		}
-	}
+
 }
 const styles = {
 
