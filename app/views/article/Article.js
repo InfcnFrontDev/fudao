@@ -19,11 +19,11 @@ export default class Article extends PureComponent {
 				{!isFetching &&
 				<ScrollableTabView
 					renderTabBar={() => (
-							<ScrollableTabBar
-								activeTextColor={theme.navTabBarActiveTextColor}
-								underlineStyle={{backgroundColor: theme.navTabBarActiveTextColor}}
-							/>
-						)}
+						<ScrollableTabBar
+							activeTextColor={theme.navTabBarActiveTextColor}
+							underlineStyle={{backgroundColor: theme.navTabBarActiveTextColor}}
+						/>
+					)}
 					tabBarPosition='top'
 					scrollWithoutAnimation={false}
 					style={styles.tabView}

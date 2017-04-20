@@ -4,7 +4,7 @@ import {StyleProvider, Drawer} from "native-base";
 import SplashScreen from "react-native-splash-screen";
 import AppRouter from "./AppRouter";
 import getTheme from "../native-base-theme/components/";
-import Position from "./views/position/Position";
+import Position from "./views/components/Position";
 
 
 /**

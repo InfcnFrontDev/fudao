@@ -3,8 +3,18 @@ import {observer} from "mobx-react/native";
 import GlobalContants from "./common/globalContants";
 import AppNavigator from "./AppNavigator";
 import userStore from "./mobx/userStore";
+import {enableLogging} from 'mobx-logger';
 
-//
+// mobx loggin
+enableLogging({
+	predicate: () => __DEV__ && Boolean(window.navigator.userAgent),
+	action: true,
+	reaction: true,
+	transaction: true,
+	compute: true
+});
+
+// global
 console.log(GlobalContants);
 
 /**
@@ -34,10 +44,7 @@ export default class App extends PureComponent {
 				isLoading: false
 			})
 		})
-
-
 		console.log(global);
-
 	}
 
 }

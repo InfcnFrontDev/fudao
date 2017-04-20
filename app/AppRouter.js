@@ -3,6 +3,7 @@ import {Router, Scene, Reducer} from "react-native-router-flux";
 import Index from "./views/index/Index";
 import Login from "./views/authentication/Login";
 import ArticleDetail from "./views/article/ArticleDetail";
+import Collection from "./views/collection/Collection";
 import Start from "./views/authentication/Start";
 import Register from "./views/authentication/Register";
 import SetPassword from "./views/authentication/SetPassword";
@@ -12,6 +13,8 @@ import RebuildPassword from "./views/authentication/RebuildPassword";
 import RebuildSuccess from "./views/authentication/RebuildSuccess";
 import PasswordValidate from "./views/authentication/PasswordValidate";
 import WomanChoose from "./views/authentication/WomanChoose";
+import Friend from "./views/friend/Friend";
+
 
 /**
  * 路由
@@ -41,8 +44,11 @@ export default class AppRouter extends PureComponent {
 					<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
 					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
 
+					<Scene key="friend" component={Friend} title="好友" hideNavBar/>
+
 
 					<Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
+					<Scene key="collection" component={Collection} title="收藏" hideNavBar/>
 
 				</Scene>
 			</Router>
