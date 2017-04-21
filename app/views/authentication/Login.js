@@ -7,7 +7,7 @@ import {Header, Container, Content} from "../../components/index";
 import CommitButton from "./components/CommitButton";
 import UserInput from "./components/UserInput";
 import {checkPhone} from "./components/public";
-import UserStore from "../../mobx/userStore";
+import userStore from "../../mobx/userStore";
 /**
  * 登录
  */
@@ -18,8 +18,8 @@ export default class Login extends PureComponent {
 
 	state = {
 		isFetching: false,
-		phone: '',
-		password: '',
+		phone: '15901097191',
+		password: '123456',
 		login: 'no'
 	}
 
@@ -28,7 +28,7 @@ export default class Login extends PureComponent {
 		return (
 			<Container>
 				<Header {...this.props}></Header>
-				<Content>
+				<Content gray>
 					<View style={styles.bag}>
 						<UserInput text="用户名"
 								   onChangeText={(value)=> {
@@ -77,8 +77,8 @@ export default class Login extends PureComponent {
 		dismissKeyboard();
 
 
-		UserStore.login(phone, password, () => {
-			UserStore.fetchLoginUser();
+		userStore.login(phone, password, () => {
+			userStore.fetchLoginUser();
 			tools.showToast(JSON.stringify(userStore.loginUser))
 			// 跳到首页
 			Actions.index({
@@ -88,18 +88,18 @@ export default class Login extends PureComponent {
 	}
 
 	/*loginSuccess(token) {
-		request.token = token;
-		request.getJson(urls.apis.USER_GETLOGINUSER)
-			.then((data) => {
-				if (data.ok) {
-					this.loginSuccess2(data.obj);
-				}
-			});
-	}
-	loginSuccess2(user) {
-		let {dispatch} = this.props;
-		dispatch(login(user));
-	}*/
+	 request.token = token;
+	 request.getJson(urls.apis.USER_GETLOGINUSER)
+	 .then((data) => {
+	 if (data.ok) {
+	 this.loginSuccess2(data.obj);
+	 }
+	 });
+	 }
+	 loginSuccess2(user) {
+	 let {dispatch} = this.props;
+	 dispatch(login(user));
+	 }*/
 
 	//根据是否有基本信息选择跳转页面
 

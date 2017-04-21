@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-
-const dismissKeyboard = require('dismissKeyboard');
+import {Container, Header, HeaderIcon, Content} from "../../components/index";
 
 /**
  * 动态
@@ -13,7 +12,14 @@ export default class Dynamic extends PureComponent {
 	}
 
 	render() {
-		return null
+		return (
+			<Container>
+				<Header menu {...this.props}/>
+				<Content gray>
+
+				</Content>
+			</Container>
+		)
 	}
 
 }

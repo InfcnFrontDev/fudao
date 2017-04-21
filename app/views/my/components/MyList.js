@@ -5,7 +5,7 @@ import {View, Icon, Left, Right, Body, Text, ListItem} from "native-base";
 /**
  * my list menu
  */
-export default class ListMenu extends PureComponent {
+export default class MyList extends PureComponent {
 
 	render() {
 		return (
