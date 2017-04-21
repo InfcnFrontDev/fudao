@@ -19,6 +19,8 @@ import UserAgreement from "./views/about/UserAgreement";
 import PrivacyStatement from "./views/about/PrivacyStatement";
 import Record from "./views/record/Record";
 import MedicalExamination from "./views/medical-examination/MedicalExamination";
+import Homeapp from "./views/home/HomeDrag"
+import SideBar from "./views/sidebar/SideBar"
 
 
 /**
@@ -51,6 +53,8 @@ export default class AppRouter extends PureComponent {
 
 					<Scene key="friend" component={Friend} title="好友" hideNavBar/>
 
+					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
+
 					<Scene title="资讯详情" key="articleDetail" component={ArticleDetail} hideNavBar/>
 					<Scene title="收藏" key="collection" component={Collection} hideNavBar/>
 					<Scene title="关于福道" key="about" component={About} hideNavBar/>
@@ -61,6 +65,10 @@ export default class AppRouter extends PureComponent {
 
 					<Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
 
+
+
+
+					<Scene title="" key="homeapp" component={Homeapp}/>
 
 				</Scene>
 			</Router>

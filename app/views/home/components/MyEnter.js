@@ -19,33 +19,19 @@ export default  class MyEnter extends PureComponent {
 		return (
 			<View>
 				<View style={styles.View}>
-
 					<Button style={itemStyle1} transparent onPress={()=>Actions.energy()}>
-
-						<Image source={require('../assets/drill.png')} style={styles.image}/>
-
-						<Text style={styles.text}>诊</Text>
+						<Image source={require('../../../assets/disease/zizhen.png')} style={styles.image}/>
 					</Button>
-
 				</View>
 				<View style={styles.View}>
 					<Button style={itemStyle1} transparent onPress={()=>Actions.myQuestion()}>
-
-						<Image source={require('../assets/adjust.png')} style={styles.image}/>
-
-						<Text style={styles.text}>疗</Text>
+						<Image source={require('../../../assets/disease/ziliao.png')} style={styles.image}/>
 					</Button>
 					<Button style={itemStyle} transparent onPress={()=>Actions.myExpect()}>
-
-						<Image source={require('../assets/love.png')} style={styles.image}/>
-
-						<Text style={styles.text}>养</Text>
+						<Image source={require('../../../assets/disease/ziyang.png')} style={styles.image}/>
 					</Button>
 					<Button style={itemStyle} transparent onPress={()=>Actions.emotion()}>
-
-						<Image source={require('../assets/langh.png')} style={styles.image}/>
-
-						<Text style={styles.text}>修</Text>
+						<Image source={require('../../../assets/disease/zixiu.png')} style={styles.image}/>
 					</Button>
 				</View>
 			</View>

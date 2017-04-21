@@ -1,11 +1,14 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {TouchableHighlight, Dimensions, Image} from "react-native";
+import {TouchableHighlight, Dimensions, Image,WebView} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Right, Text, View, Button, Icon} from "native-base";
-import {Container, Content, WebView} from "../../components/index";
+import {Container, Content} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
+import Homedrag from "./HomeDrag.js";
 import userStore from "../../mobx/userStore";
+import DetailsModal from "./components/DetailsModal";
+
 
 
 /**
@@ -28,7 +31,9 @@ export default class Home extends PureComponent {
 			<Container>
 				<Content>
 					<WebView
-						uri={urls.pages.HOEM + '?userId=867200022156895,86720002215690393791782&renqun=high_quality_population&location=1&daytype=2&seasonId=1'}/>
+						onMessage={(event)=>this.openDetailsBox(event.nativeEvent.data)}
+						source={{uri:urls.pages.HOEM + '?userId=867200022156895,86720002215690393791782&renqun=high_quality_population&location=1&daytype=2&seasonId=1'}}
+					/>
 					<View menu {...this.props} style={{
 						width: Dimensions.get('window').width,
 						height: 60,
@@ -79,17 +84,17 @@ export default class Home extends PureComponent {
 							</Button>
 						</Right>
 					</View>
-					<View style={{width:50,height:50,borderRadius:50,backgroundColor:'rgba(225,225,225,.2)',position: 'absolute',top:300,alignItems:'center',flexDirection:'row'}}>
-						<Text style={{textAlign:'center',width:50}}>
-							情
-						</Text>
-					</View>
-					<View style={{width:50,height:50,borderRadius:50,backgroundColor:'rgba(225,225,225,.2)',position: 'absolute',top:300,right:0,alignItems:'center',flexDirection:'row'}}>
-						<Text style={{textAlign:'center',width:50}}>
-							能
-						</Text>
+					<View style={{height:40,borderRadius:40,backgroundColor:'rgba(225,225,225,.0)',position: 'absolute',top:60,left:10,alignItems:'center',flexDirection:'row'}}>
+						<Button transparent style={{backgroundColor:'rgba(225,225,225,.0)'}} onPress={()=>Actions.homeapp()}>
+							<Image source={require('../../assets/home/qiehuan.png')} style={{width:30,height:30}}/>
+							<Text style={{color:'#b7b7b7',fontSize:14}}>切换到通用版</Text>
+						</Button>
+
 					</View>
 
+					<Homedrag place={'left'} img={require('../../assets/home/qingxu.png')}></Homedrag>
+					<Homedrag place={'right'} img={require('../../assets/home/cengliangchang.png')}></Homedrag>
+					<DetailsModal ref={(e)=>this._groupSelectModal = e}></DetailsModal>
 					<View style={{width: Dimensions.get('window').width, height: 102, position: 'absolute', bottom: 0}}>
 						<MyEnter />
 					</View>
@@ -97,6 +102,12 @@ export default class Home extends PureComponent {
 			</Container>
 		)
 	}
+
+	openDetailsBox(data){
+		if(data==1)
+		this._groupSelectModal.show(data);
+	}
+
 
 	setModalVisible(visible) {
 		this.setState({modalVisible: visible});
@@ -110,5 +121,9 @@ const styles = {
 		justifyContent: 'center',
 		textAlign: 'center',
 		color: '#fff',
+	},
+	image:{
+		width:40,
+		height:40
 	}
 };

@@ -5,13 +5,13 @@ import {Container, Header, Content, WebView} from "../../components/index";
 /**
  * 我的时间
  */
-class MyTime extends PureComponent {
+export default class MyTime extends PureComponent {
 
 	render() {
 		let{loginUser}=this.props;
 		return (
 			<Content>
-				<WebView uri={urls.pages.MY_TIME+'?renqun='+this.props.loginUser['renqun']}/>
+				<WebView uri={urls.pages.MY_TIME+'?crowd=aged'}/>
 			</Content>
 		)
 	}
@@ -20,4 +20,3 @@ class MyTime extends PureComponent {
 const mapStateToProps = state => ({
 	loginUser: state.user.loginUser
 });
-export default connect(mapStateToProps)(MyTime);
