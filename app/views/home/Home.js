@@ -83,7 +83,7 @@ export default class Home extends PureComponent {
 						</Right>
 					</View>
 					<View style={{height:40,borderRadius:40,backgroundColor:'rgba(225,225,225,.0)',position: 'absolute',top:60,left:10,alignItems:'center',flexDirection:'row'}}>
-						<Button onPress={this.abc()}>
+						<Button transparent style={{backgroundColor:'rgba(225,225,225,.0)'}}>
 							<Image source={require('../../assets/home/qiehuan.png')} style={{width:30,height:30}}/>
 							<Text style={{color:'#b7b7b7',fontSize:14}}>切换到通用版</Text>
 						</Button>
@@ -103,9 +103,7 @@ export default class Home extends PureComponent {
 			</Container>
 		)
 	}
-	abc(){
-		this.webview.postMessage('"Hello" from React Native!');
-	}
+
 	openDetailsBox(data){
 		if(data==1)
 		this._groupSelectModal.show(data);
