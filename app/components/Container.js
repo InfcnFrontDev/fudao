@@ -6,12 +6,9 @@ class Container extends PureComponent {
 	render() {
 		let {children} = this.props;
 		return (
-			<View style={styles.container}>
-				<Image source={require('../assets/bg/container.jpg')}
-					   style={styles.image}>
-					{children}
-				</Image>
-			</View>
+			<Image source={require('../assets/bg/container.jpg')} style={styles.container}>
+				{children}
+			</Image>
 		)
 	}
 }
@@ -19,11 +16,8 @@ class Container extends PureComponent {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1
-	},
-	image: {
 		width: theme.deviceWidth,
-		height: theme.deviceHeight - theme.navTabBarHeight,
+		height: theme.deviceHeight- 20,
 		alignSelf: "flex-end",
 	}
 })

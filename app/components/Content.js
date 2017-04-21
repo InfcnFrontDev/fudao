@@ -13,12 +13,15 @@ export default class Content extends PureComponent {
 
 	render() {
 		let {isLoading} = this.state;
-		let {children, gray, padder} = this.props;
+		let {children, gray, white, padder} = this.props;
 		let contentStyle = {flex: 1};
 
 		if (gray) {
 			contentStyle.backgroundColor = theme.contentBgColor;
+		} else if (white) {
+			contentStyle.backgroundColor = '#FFFFFF';
 		}
+
 		if (padder) {
 			contentStyle.padding = 15;
 		}
@@ -33,7 +36,6 @@ export default class Content extends PureComponent {
 
 	componentDidMount() {
 		let {isLoading} = this.state;
-		console.log(isLoading);
 		if (isLoading) {
 			tools.delayLoad(() => {
 				this.setState({
@@ -46,12 +48,14 @@ export default class Content extends PureComponent {
 
 Content.propTypes = {
 	gray: React.PropTypes.bool, // 背景灰色
+	white: React.PropTypes.bool, // 背景白色
 	padder: React.PropTypes.bool, // 加Padding
 	delay: React.PropTypes.bool, // 延迟加载
 }
 
 Content.defaultProps = {
 	gray: false,
+	white: false,
 	padder: false,
 	delay: false,
 }

@@ -10,7 +10,7 @@ export default class InfcnWebView extends PureComponent {
 
 	render() {
 		let {uri} = this.props;
-		uri = uri + '&token=' + userStore.token;
+		uri += (_.endsWith(uri, '.html') ? '?' : '&') + 'token=' + userStore.token;
 		return (
 			<WebView
 				ref={(e) => this._webview = e}

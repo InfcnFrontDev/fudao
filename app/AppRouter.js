@@ -14,6 +14,11 @@ import RebuildSuccess from "./views/authentication/RebuildSuccess";
 import PasswordValidate from "./views/authentication/PasswordValidate";
 import WomanChoose from "./views/authentication/WomanChoose";
 import Friend from "./views/friend/Friend";
+import About from "./views/about/About";
+import UserAgreement from "./views/about/UserAgreement";
+import PrivacyStatement from "./views/about/PrivacyStatement";
+import Record from "./views/record/Record";
+import MedicalExamination from "./views/medical-examination/MedicalExamination";
 
 
 /**
@@ -46,9 +51,16 @@ export default class AppRouter extends PureComponent {
 
 					<Scene key="friend" component={Friend} title="好友" hideNavBar/>
 
+					<Scene title="资讯详情" key="articleDetail" component={ArticleDetail} hideNavBar/>
+					<Scene title="收藏" key="collection" component={Collection} hideNavBar/>
+					<Scene title="关于福道" key="about" component={About} hideNavBar/>
+					<Scene title="隐私声明" key="privacyStatement" component={PrivacyStatement} hideNavBar/>
+					<Scene title="用户协议" key="userAgreement" component={UserAgreement} hideNavBar/>
 
-					<Scene title="资讯详情" key="articleDetail" component={ArticleDetail}/>
-					<Scene title="收藏" key="collection" component={Collection}/>
+					<Scene title="我的记录" key="record" component={Record} hideNavBar/>
+
+					<Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
+
 
 				</Scene>
 			</Router>

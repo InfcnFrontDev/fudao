@@ -209,10 +209,9 @@ const urls = {
 		REGION_GETCITYLIST: apiPath + 'RegionApi/getCityList',
 
 		//获取体检结果
-		MEDICALEXAMINATIONA_GETMEDICALINFORMATIONLIST: apiPath + 'MedicalExaminationApi/getMedicalInformationList',
+		MEDICALEXAMINATION_GETMEDICALINFORMATIONLIST: apiPath + 'MedicalExaminationApi/getMedicalInformationList',
 		//修改体检结果
 		MEDICALEXAMINATION_UPDATAMEDICALINFORMATIONRESULT: apiPath + 'MedicalExaminationApi/updataMedicalInformationResult',
-
 	},
 
 	// 获取图片完整路径

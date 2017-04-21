@@ -100,35 +100,6 @@ class UserStore {
 			}
 		})
 	}
-
-
-	loadData(callback) {
-		storage.load({
-			key: 'user',
-		}).then(ret => {
-			this.isLogin = ret.isLogin;
-			this.token = ret.token;
-			this.phone = ret.phone;
-			this.password = ret.password;
-			this.loginUser = ret.loginUser;
-			callback()
-		}).catch(() => {
-			callback()
-		});
-	}
-
-	saveData() {
-		storage.save({
-			key: 'user',
-			rawData: {
-				isLogin: this.isLogin,
-				phone: this.phone,
-				password: this.password,
-				token: this.token,
-				loginUser: this.loginUser
-			}
-		})
-	}
 }
 
 
