@@ -15,7 +15,6 @@ export default class InfcnWebView extends PureComponent {
 			<WebView
 				ref={(e) => this._webview = e}
 				source={{uri}}
-				onMessage={onMessage.bind(this)}
 				startInLoadingState={true}
 				javaScriptEnabled={true}
 				domStorageEnabled={true}

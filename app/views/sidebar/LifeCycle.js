@@ -5,14 +5,14 @@ import {Container, Header, Content, WebView} from "../../components/index";
 /**
  * 我的生命周期
  */
-class LifeCycle extends PureComponent {
+export default class LifeCycle extends PureComponent {
 
 
 	render() {
 		let {loginUser} = this.props;
 		return (
 			<Content>
-				<WebView uri={urls.pages.LIFE_CYCLE+'?userId='+this.props.loginUser.appid+'&sex='+this.props.loginUser['sex']+'&birthdate='+this.props.loginUser['birthdate']}/>
+				<WebView uri={urls.pages.LIFE_CYCLE+'?sex=0&birthdate=1992-02-20'}/>
 			</Content>
 		)
 	}
@@ -21,4 +21,3 @@ class LifeCycle extends PureComponent {
 const mapStateToProps = state => ({
 	loginUser: state.user.loginUser
 });
-export default connect(mapStateToProps)(LifeCycle);

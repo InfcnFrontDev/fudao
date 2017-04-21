@@ -1,9 +1,9 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {TouchableHighlight, Dimensions, Image} from "react-native";
+import {TouchableHighlight, Dimensions, Image,WebView} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Right, Text, View, Button, Icon} from "native-base";
-import {Container, Content, WebView} from "../../components/index";
+import {Container, Content} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
 import Homedrag from "./HomeDrag.js";
 import userStore from "../../mobx/userStore";
@@ -32,7 +32,7 @@ export default class Home extends PureComponent {
 				<Content>
 					<WebView
 						onMessage={(event)=>this.openDetailsBox(event.nativeEvent.data)}
-						uri={urls.pages.HOEM + '?userId=867200022156895,86720002215690393791782&renqun=high_quality_population&location=1&daytype=2&seasonId=1'}
+						source={{uri:urls.pages.HOEM + '?userId=867200022156895,86720002215690393791782&renqun=high_quality_population&location=1&daytype=2&seasonId=1'}}
 					/>
 					<View menu {...this.props} style={{
 						width: Dimensions.get('window').width,

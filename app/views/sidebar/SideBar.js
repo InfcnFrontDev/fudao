@@ -42,12 +42,6 @@ const tabs = [
 		component: MyPosition
 	},
 	{
-		text: '健康测评',
-		icon: require('../../assets/sidebar/shulan-2_14.png'),
-		selectedIcon: require('../../assets/sidebar/shulan_14.png'),
-		component: HealthEvaluation
-	},
-	{
 		text: '线下服务',
 		icon: require('../../assets/sidebar/shulan-2_16.png'),
 		selectedIcon: require('../../assets/sidebar/shulan_16.png'),
@@ -55,7 +49,7 @@ const tabs = [
 	}
 ]
 
-class SideBar extends PureComponent {
+export default class SideBar extends PureComponent {
 
 	state = {
 		activeTab: 0
@@ -86,7 +80,7 @@ class SideBar extends PureComponent {
 			<View style={styles.avatar}>
 				<TouchableOpacity onPress={() => Actions.pop()}>
 					<Image
-						source={{uri: urls.getImage(loginUser.img)}}
+						source={drawerCover}
 						style={styles.thumbnail}/>
 				</TouchableOpacity>
 			</View>
@@ -132,7 +126,7 @@ class SideBar extends PureComponent {
 const sideBarWidth = 55;
 const styles = {
 	sidebar: {
-		backgroundColor: theme.toolbarDefaultBg,
+		backgroundColor: '#333',
 		width: sideBarWidth
 	},
 	avatar: {
@@ -177,4 +171,3 @@ const styles = {
 const mapStateToProps = state => ({
 	...state.user,
 });
-export default connect(mapStateToProps)(SideBar);

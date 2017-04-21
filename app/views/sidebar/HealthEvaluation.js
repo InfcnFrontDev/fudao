@@ -5,13 +5,13 @@ import {Content, WebView} from "../../components/index";
 /**
  * 健康测评
  */
-class HealthEvaluation extends PureComponent {
+export default class HealthEvaluation extends PureComponent {
 
 	render() {
 		let {loginUser} = this.props;
 		return (
 			<Content>
-				<WebView uri={urls.pages.HEALTH_APPRAISAL+'?userId='+this.props.loginUser.appid}/>
+				<WebView uri={urls.pages.HEALTH_APPRAISAL}/>
 			</Content>
 		)
 	}
@@ -20,4 +20,3 @@ class HealthEvaluation extends PureComponent {
 const mapStateToProps = state => ({
 	loginUser: state.user.loginUser
 });
-export default connect(mapStateToProps)(HealthEvaluation);

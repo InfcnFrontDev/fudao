@@ -15,6 +15,7 @@ import PasswordValidate from "./views/authentication/PasswordValidate";
 import WomanChoose from "./views/authentication/WomanChoose";
 import Friend from "./views/friend/Friend";
 import Homeapp from "./views/home/HomeDrag"
+import SideBar from "./views/sidebar/SideBar"
 
 
 /**
@@ -46,6 +47,8 @@ export default class AppRouter extends PureComponent {
 					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
 
 					<Scene key="friend" component={Friend} title="好友" hideNavBar/>
+
+					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
 
 
 					<Scene title="资讯详情" key="articleDetail" component={ArticleDetail}/>
