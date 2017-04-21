@@ -9,13 +9,13 @@ import userStore from "../mobx/userStore";
 export default class InfcnWebView extends PureComponent {
 
 	render() {
-		let {uri} = this.props;
+		let {uri,onMessage} = this.props;
 		uri = uri + '&token=' + userStore.token;
 		return (
 			<WebView
 				ref={(e) => this._webview = e}
 				source={{uri}}
-				onMessage={(event)=>alert(JSON.stringify(event.nativeEvent.data))}
+				onMessage={onMessage.bind(this)}
 				startInLoadingState={true}
 				javaScriptEnabled={true}
 				domStorageEnabled={true}
