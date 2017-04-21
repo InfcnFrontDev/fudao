@@ -14,6 +14,7 @@ import RebuildSuccess from "./views/authentication/RebuildSuccess";
 import PasswordValidate from "./views/authentication/PasswordValidate";
 import WomanChoose from "./views/authentication/WomanChoose";
 import Friend from "./views/friend/Friend";
+import Homeapp from "./views/home/HomeDrag"
 
 
 /**
@@ -49,6 +50,10 @@ export default class AppRouter extends PureComponent {
 
 					<Scene title="资讯详情" key="articleDetail" component={ArticleDetail}/>
 					<Scene title="收藏" key="collection" component={Collection}/>
+
+
+
+					<Scene title="" key="homeapp" component={Homeapp}/>
 
 				</Scene>
 			</Router>

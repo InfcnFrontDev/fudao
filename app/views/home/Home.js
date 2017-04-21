@@ -5,8 +5,10 @@ import {Actions} from "react-native-router-flux";
 import {Right, Text, View, Button, Icon} from "native-base";
 import {Container, Content, WebView} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
+import Homedrag from "./HomeDrag.js";
 import userStore from "../../mobx/userStore";
 import DetailsModal from "./components/DetailsModal";
+
 
 
 /**
@@ -83,18 +85,15 @@ export default class Home extends PureComponent {
 						</Right>
 					</View>
 					<View style={{height:40,borderRadius:40,backgroundColor:'rgba(225,225,225,.0)',position: 'absolute',top:60,left:10,alignItems:'center',flexDirection:'row'}}>
-						<Button transparent style={{backgroundColor:'rgba(225,225,225,.0)'}}>
+						<Button transparent style={{backgroundColor:'rgba(225,225,225,.0)'}} onPress={()=>Actions.homeapp()}>
 							<Image source={require('../../assets/home/qiehuan.png')} style={{width:30,height:30}}/>
 							<Text style={{color:'#b7b7b7',fontSize:14}}>切换到通用版</Text>
 						</Button>
 
 					</View>
-					<View style={{width:40,height:40,borderRadius:40,backgroundColor:'rgba(225,225,225,.0)',position: 'absolute',top:300,alignItems:'center',flexDirection:'row'}}>
-						<Image source={require('../../assets/home/qingxu.png')} style={styles.image}/>
-					 </View>
-					 <View style={{width:40,height:40,borderRadius:40,backgroundColor:'rgba(225,225,225,.0)',position: 'absolute',top:300,right:0,alignItems:'center',flexDirection:'row'}}>
-						 <Image source={require('../../assets/home/cengliangchang.png')} style={styles.image}/>
-					 </View>
+
+					<Homedrag place={'left'} img={require('../../assets/home/qingxu.png')}></Homedrag>
+					<Homedrag place={'right'} img={require('../../assets/home/cengliangchang.png')}></Homedrag>
 					<DetailsModal ref={(e)=>this._groupSelectModal = e}></DetailsModal>
 					<View style={{width: Dimensions.get('window').width, height: 102, position: 'absolute', bottom: 0}}>
 						<MyEnter />
