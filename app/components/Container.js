@@ -13,9 +13,12 @@ export default  class Container extends PureComponent {
 		}
 
 		return (
-			<Image source={require('../assets/bg/container.jpg')}
+			<Image source={require('../assets/bg/qing/1.jpg')}
 				   style={{width,height,alignSelf: "flex-end"}}>
-				{children}
+				<Image source={require('../assets/bg/container.gif')}
+					   style={{width,height,alignSelf: "flex-end"}}>
+					{children}
+				</Image>
 			</Image>
 		)
 	}

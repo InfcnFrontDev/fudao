@@ -19,8 +19,10 @@ import UserAgreement from "./views/about/UserAgreement";
 import PrivacyStatement from "./views/about/PrivacyStatement";
 import Record from "./views/record/Record";
 import MedicalExamination from "./views/medical-examination/MedicalExamination";
-import Homeapp from "./views/home/HomeDrag"
-import SideBar from "./views/sidebar/SideBar"
+import Homeapp from "./views/home/HomeDrag";
+import SideBar from "./views/sidebar/SideBar";
+import Settings from "./views/settings/Settings";
+import Personal from "./views/personal/Personal";
 
 
 /**
@@ -57,6 +59,7 @@ export default class AppRouter extends PureComponent {
 
 					<Scene title="资讯详情" key="articleDetail" component={ArticleDetail} hideNavBar/>
 					<Scene title="收藏" key="collection" component={Collection} hideNavBar/>
+
 					<Scene title="关于福道" key="about" component={About} hideNavBar/>
 					<Scene title="隐私声明" key="privacyStatement" component={PrivacyStatement} hideNavBar/>
 					<Scene title="用户协议" key="userAgreement" component={UserAgreement} hideNavBar/>
@@ -65,8 +68,9 @@ export default class AppRouter extends PureComponent {
 
 					<Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
 
+					<Scene title="系统设置" key="settings" component={Settings} hideNavBar/>
 
-
+					<Scene title="基本信息" key="personal" component={Personal} hideNavBar/>
 
 					<Scene title="" key="homeapp" component={Homeapp}/>
 

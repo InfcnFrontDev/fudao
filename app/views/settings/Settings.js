@@ -1,21 +1,23 @@
 import React, {PureComponent} from "react";
 import {Alert} from "react-native";
 import {Actions, ActionConst} from "react-native-router-flux";
+import {observer} from "mobx-react/native";
 import {Container, Header, Content, List, Separator} from "../../components/index";
 import {Body, Right, Switch, ListItem, Text} from "native-base";
+import settingsStore from "../../mobx/settingsStore";
 
 /**
  * 系统设置
  */
+@observer
 export default class Settings extends PureComponent {
 
 	render() {
-		let {dispatch, isRecommend} = this.props;
+		let {isRecommend} = settingsStore;
 		return (
 			<Container>
 				<Header {...this.props}/>
 				<Content gray>
-					<Separator/>
 					<List>
 						<ListItem last>
 							<Body>
@@ -23,7 +25,7 @@ export default class Settings extends PureComponent {
 							</Body>
 							<Right>
 								<Switch value={isRecommend}
-										onValueChange={()=> dispatch(updateSettings({isRecommend: !isRecommend}))}/>
+										onValueChange={()=> settingsStore.isRecommend = !isRecommend}/>
 							</Right>
 						</ListItem>
 					</List>
