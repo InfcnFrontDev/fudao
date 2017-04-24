@@ -28,7 +28,7 @@ export default class Home extends PureComponent {
 	render() {
 		let {loginUser} = userStore;
 		return (
-			<Container>
+			<Container isTabPanel>
 				<Content>
 					<WebView
 						onMessage={(event)=>this.openDetailsBox(event.nativeEvent.data)}

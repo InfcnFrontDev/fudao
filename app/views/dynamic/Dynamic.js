@@ -15,7 +15,7 @@ export default class Dynamic extends PureComponent {
 		return (
 			<Container>
 				<Header menu {...this.props}/>
-				<Content gray>
+				<Content>
 
 				</Content>
 			</Container>

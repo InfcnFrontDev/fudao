@@ -64,8 +64,8 @@ export default class HomeDrap extends Component {
             return (
                 <View
                     style={{
-                        width: 40,
-                        height: 40,
+                        width: 35,
+                        height: 35,
                         position: 'absolute',
                         left:place=='left'? this.state.left:null,
                         right:place=='right'? this.state.right:null,
@@ -86,8 +86,8 @@ export default class HomeDrap extends Component {
 }
 const styles = {
     image:{
-        width:40,
-        height:40
+        width:35,
+        height:35
     }
 };
 
