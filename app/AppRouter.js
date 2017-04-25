@@ -19,6 +19,10 @@ import UserAgreement from "./views/about/UserAgreement";
 import PrivacyStatement from "./views/about/PrivacyStatement";
 import Record from "./views/record/Record";
 import MedicalExamination from "./views/medical-examination/MedicalExamination";
+import Homeapp from "./views/home/HomeDrag"
+import SideBar from "./views/sidebar/SideBar"
+import Diagnosis from "./views/diagnosis/Diagnosis"
+import Evaluation from "./views/diagnosis/Evaluation";
 import Homeapp from "./views/home/HomeDrag";
 import SideBar from "./views/sidebar/SideBar";
 import Settings from "./views/settings/Settings";
@@ -32,32 +36,32 @@ import Energy from "./views/energy/Energy";
  */
 export default class AppRouter extends PureComponent {
 
-	// 最后一次触Back键的时间
-	lastBackPressTime = 0;
+    // 最后一次触Back键的时间
+    lastBackPressTime = 0;
 
-	render() {
-		return (
-			<Router createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
-				<Scene key="root">
+    render() {
+        return (
+            <Router createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
+                <Scene key="root">
 
-					<Scene key="start" component={Start} title="启动页" hideNavBar initial/>
+                    <Scene key="start" component={Start} title="启动页" hideNavBar initial/>
 
-					{/*首页*/}
-					<Scene key="index" component={Index} title="首页" hideNavBar/>
-					{/*启动注册*/}
-					<Scene key="register" component={Register} title="注册" hideNavBar/>
-					<Scene key="login" component={Login} title="登录" hideNavBar/>
-					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
-					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
-					<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
-					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
-					<Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
-					<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
-					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
+                    {/*首页*/}
+                    <Scene key="index" component={Index} title="首页" hideNavBar/>
+                    {/*启动注册*/}
+                    <Scene key="register" component={Register} title="注册" hideNavBar/>
+                    <Scene key="login" component={Login} title="登录" hideNavBar/>
+                    <Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
+                    <Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
+                    <Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
+                    <Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
+                    <Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
+                    <Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
+                    <Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
 
-					<Scene key="friend" component={Friend} title="好友" hideNavBar/>
+                    <Scene key="friend" component={Friend} title="好友" hideNavBar/>
 
-					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
+                    <Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
 
 					<Scene title="资讯详情" key="articleDetail" component={ArticleDetail} hideNavBar/>
 					<Scene title="收藏" key="collection" component={Collection} hideNavBar/>
@@ -66,15 +70,16 @@ export default class AppRouter extends PureComponent {
 					<Scene title="隐私声明" key="privacyStatement" component={PrivacyStatement} hideNavBar/>
 					<Scene title="用户协议" key="userAgreement" component={UserAgreement} hideNavBar/>
 
-					<Scene title="我的记录" key="record" component={Record} hideNavBar/>
+                    <Scene title="我的记录" key="record" component={Record} hideNavBar/>
 
-					<Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
+                    <Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
 
 					<Scene title="系统设置" key="settings" component={Settings} hideNavBar/>
 
 					<Scene title="基本信息" key="personal" component={Personal} hideNavBar/>
 
 					<Scene title="" key="homeapp" component={Homeapp}/>
+                    <Scene title="" key="homeapp" component={Homeapp}/>
 
 					<Scene title="自疗" key="disease" component={Disease} hideNavBar/>
 					<Scene title="能量场" key="energy" component={Energy} hideNavBar/>
@@ -82,6 +87,14 @@ export default class AppRouter extends PureComponent {
 			</Router>
 		)
 	}
+                    {/*自诊*/}
+                    <Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
+                    <Scene key="evaluation" component={Evaluation} title="测评" hideNavBar/>
+
+                </Scene>
+            </Router>
+        )
+    }
 
 	reducerCreate(params) {
 		const defaultReducer = Reducer(params)

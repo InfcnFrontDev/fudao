@@ -14,12 +14,11 @@ export default  class MyEnter extends PureComponent {
 
 
 	render() {
-		let itemStyle1 = Object.assign({}, styles.button, styles.mgl10);
 		let itemStyle = Object.assign({}, styles.button, styles.mgl);
 		return (
 			<View>
 				<View style={styles.View}>
-					<Button style={itemStyle1} transparent onPress={()=>Actions.energy()}>
+					<Button style={styles.button} transparent onPress={()=>Actions.energy()}>
 						<Image source={require('../../../assets/disease/zizhen.png')} style={styles.image}/>
 					</Button>
 				</View>
