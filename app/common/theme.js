@@ -1,5 +1,6 @@
 import {Platform, Dimensions, PixelRatio} from "react-native";
 import material from "../../native-base-theme/variables/material";
+import color from "color";
 const platformStyle = 'fudao';
 
 export default Object.assign(material, {
@@ -15,12 +16,17 @@ export default Object.assign(material, {
 	brandSidebar: '#252932',
 
 	// Header背景颜色
-	toolbarDefaultBg: '#3C3C40',
+	toolbarDefaultBg: 'transparent',
 
 	// fudao
 	contentBgColor: '#EAEEEF',
 
+	get statusBarColor() {
+		return '#0a2761';
+	},
+
 	// 底部Nav TabBar
+	navTabBarHeight: 50,
 	navTabBarBgColor: '#FAFBFD',
 	navTabBarBorderWidth: (1 / PixelRatio.getPixelSizeForLayoutSize(1)),
 	navTabBarBorderColor: '#d9d9d9',

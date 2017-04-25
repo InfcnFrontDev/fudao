@@ -5,14 +5,14 @@ import {Content, WebView} from "../../components/index";
 /**
  * 我的位置
  */
-class MyEnergy extends PureComponent {
+export default class MyEnergy extends PureComponent {
 
 	render() {
 		let {lastPosition}=this.props;
 		return (
 			<Content>
 				<WebView
-					uri={urls.pages.MY_LOCATION+'?x=' + lastPosition.coords.longitude + '&y=' + lastPosition.coords.latitude}/>
+					uri={urls.pages.MY_LOCATION+'?c=116.311132&y=39.982196'}/>
 			</Content>
 		)
 	}
@@ -21,4 +21,3 @@ class MyEnergy extends PureComponent {
 const mapStateToProps = state => ({
 	...state.position
 });
-export default connect(mapStateToProps)(MyEnergy);

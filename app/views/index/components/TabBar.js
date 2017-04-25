@@ -41,7 +41,7 @@ export default class TabBar extends Component {
 const styles = {
 	tabs: {
 		flexDirection: 'row',
-		height: 50,
+		height: theme.navTabBarHeight,
 		borderTopColor: theme.navTabBarBorderColor,
 		borderTopWidth: theme.navTabBarBorderWidth,
 	},

@@ -25,12 +25,12 @@ const defaultPhoto = require('../../../assets/my-photos/photo.jpg');
 /**
  * 我的封面
  */
-export default class MyCover extends PureComponent {
+export default class MyPhoto extends PureComponent {
 
 	render() {
 		let {loginUser} = userStore;
 		return (
-			<Thumbnail source={require('../../../assets/my-covers/pic01.jpg')} style={styles.myCover}>
+			<Thumbnail source={require('../../../assets/bg/my.jpg')} style={styles.myCover}>
 				<View style={{flexDirection: 'column', alignItems: 'center'}}>
 					<TouchableOpacity activeOpacity={1} onPress={()=> this.cameraAction()}>
 						<Image style={styles.myPhoto}

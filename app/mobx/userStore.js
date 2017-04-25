@@ -1,11 +1,15 @@
 import {observable, runInAction, computed, action, reaction} from "mobx";
+import {AsyncStorage} from "react-native";
+import {create, persist} from "mobx-persist";
+import hydrate from "../common/hydrate";
 
 class UserStore {
-	@observable isLogin = false
-	@observable phone = ''
-	@observable password = ''
-	@observable token = ''
-	@observable loginUser = {}
+	@observable hydrated = false
+	@persist @observable isLogin = false
+	@persist @observable phone = ''
+	@persist @observable password = ''
+	@persist @observable token = ''
+	@persist('object') @observable loginUser = {}
 
 	@action
 	login = async(phone, password, callback) => {
@@ -16,7 +20,7 @@ class UserStore {
 		runInAction(() => {
 			this.isLogin = true;
 			this.token = token;
-			this.saveData();
+			// this.saveData();
 			callback();
 		})
 	}
@@ -31,7 +35,7 @@ class UserStore {
 		let loginUser = await this._fetchLoginUser();
 		runInAction(() => {
 			this.loginUser = loginUser;
-			this.saveData();
+			// this.saveData();
 		})
 	}
 
@@ -96,37 +100,12 @@ class UserStore {
 			}
 		})
 	}
-
-
-	loadData(callback) {
-		storage.load({
-			key: 'user',
-		}).then(ret => {
-			this.isLogin = ret.isLogin;
-			this.token = ret.token;
-			this.phone = ret.phone;
-			this.password = ret.password;
-			this.loginUser = ret.loginUser;
-			callback()
-		}).catch(() => {
-			callback()
-		});
-	}
-
-	saveData() {
-		storage.save({
-			key: 'user',
-			rawData: {
-				isLogin: this.isLogin,
-				phone: this.phone,
-				password: this.password,
-				token: this.token,
-				loginUser: this.loginUser
-			}
-		})
-	}
 }
 
 
 const userStore = new UserStore()
 export default userStore
+hydrate('user', userStore).then(() => {
+	userStore.hydrated = true
+	console.log('user hydrated', userStore)
+})

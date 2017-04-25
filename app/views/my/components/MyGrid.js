@@ -3,11 +3,10 @@ import {TouchableOpacity} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Grid, Icon, Text} from "native-base";
 
-
 /**
  * my grid menu
  */
-export default class GridMenu extends PureComponent {
+export default class MyGrid extends PureComponent {
 
 	render() {
 		return (
