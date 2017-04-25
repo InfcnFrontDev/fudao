@@ -1,117 +1,80 @@
-import React, {PureComponent} from "react";
-import {View, Image, ListView, TouchableHighlight} from "react-native";
-import {Text, Button} from "native-base";
+import React, {Component} from "react";
+import {StyleSheet, View, TouchableOpacity, Image} from "react-native";
 
-export default class AllDiseaseTab extends PureComponent {
+const tabImages = [
+	require('../../../assets/disease/liaoshen.png'),
+	require('../../../assets/disease/liaoxin.png')
+]
 
-	dataSource = new ListView.DataSource({
-		rowHasChanged: (row1, row2) => row1 !== row2,
-		sectionHeaderHasChanged: (section1, section2) => section1 !== section2,
-	})
+export default class AllDiseaseTabBar extends Component {
+
+	static propType = {
+		goToPage: React.PropTypes.func,
+		activeTab: React.PropTypes.number,
+		tabs: React.PropTypes.array,
+		tabNames: React.PropTypes.array,
+		tabIconNames: React.PropTypes.array
+	};
 
 	render() {
-		let {data} = this.props;
+		let {activeTab} = this.props;
 		return (
-			<ListView
-				contentContainerStyle={styles.contentContainer}
-				dataSource={this.dataSource.cloneWithRowsAndSections(data)}
-				renderRow={this._renderRow.bind(this)}
-				pageSize={4}
-				renderSectionHeader={this._renderSectionHeader.bind(this)}
-			/>
-		)
-	}
-
-	_renderSectionHeader(sectionData, sectionID) {
-		return (
-			<View style={styles.sectionHeader}>
-				<Text style={{fontWeight: 'bold'}}>{sectionID}</Text>
+			<View style={styles.tabs}>
+				{tabImages.map((img, i) => this.renderItem(img, i))}
 			</View>
 		)
 	}
 
-	_renderRow(rowData, sectionId, rowId) {
-		let {selectedItem, onItemAdd, onItemPress} = this.props;
-		// alert(rowData.img)
+	renderItem(img, i) {
+		let {activeTab} = this.props;
 		return (
-			<View style={styles.row}>
-				<Button transparent style={{padding: 0, margin: 6}} onPress={() => onItemPress(rowData)}>
-					<View style={styles.rowView}>
-						<Image source={{uri: urls.getImage(rowData.img)}} style={styles.rowimg}/>
-						<Text style={styles.rowTitle}>{rowData.name}</Text>
-						{selectedItem[rowData.id] ?
-							<TouchableHighlight underlayColor='transparent'>
-								<Image source={require('../../../assets/arrows_square_check.png')}
-									   style={styles.choose}/>
-							</TouchableHighlight>
-							:
-							<TouchableHighlight onPress={() => onItemAdd(rowData)} underlayColor='transparent'>
-								<Image source={require('../../../assets/arrows_square_plus.png')}
-									   style={styles.choose}/>
-							</TouchableHighlight>
-						}
-					</View>
-				</Button>
-			</View>
+			<TouchableOpacity
+				key={i}
+				activeOpacity={0.8}
+				style={[styles.tab, activeTab === i ? styles.tabSelected :{}]}
+				onPress={() => this.props.goToPage(i)}
+			>
+				<View style={styles.tabItem}>
+					<Image source={img} style={styles.image}/>
+					{activeTab !== i || <View style={styles.sanjiao}/>}
+				</View>
+			</TouchableOpacity>
 		)
 	}
 }
 
 const styles = {
-	contentContainer: {
-		flexDirection: 'row', //设置横向布局
-		flexWrap: 'wrap',    //设置换行显示
-		width: theme.deviceWidth + 5
+	tabs: {
+		flexDirection: 'row',
+		height: 50,
 	},
-	sectionHeader: {
-		borderBottomColor: theme.listBorderColor,
-		borderBottomWidth: theme.borderWidth,
-		width: theme.deviceWidth + 5,
-		height: 40,
-		paddingLeft: 8,
+
+	tab: {
+		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+		backgroundColor: '#8294B4',
 	},
-	row: {
-		width: (theme.deviceWidth - 10) / 2,
-		height: 60,
-		marginLeft: 5,
+	tabSelected: {
+		backgroundColor: '#9FADC6',
 	},
-	rowView: {
-		marginLeft: 8,
-		marginRight: 8,
-		flex: 1,
-		flexDirection: 'row',
+	tabItem: {
+		flexDirection: 'column',
 		alignItems: 'center',
-		justifyContent: 'flex-start',
+		justifyContent: 'space-around',
 	},
-	rowTitle: {
-		color: '#000',
-		flex: 1,
+	image: {
+		height: 35, width: 60
 	},
-	rowimg: {
-		width: 36,
-		height: 36,
-		marginRight: 4,
-	},
-	choose: {
-		width: 20,
-		height: 20,
-		justifyContent: 'flex-end',
+	sanjiao: {
+		width: 0,
+		height: 0,
+		marginBottom: -8,
+		borderLeftWidth: 8,
+		borderLeftColor: 'transparent',
+		borderRightWidth: 8,
+		borderRightColor: 'transparent',
+		borderBottomWidth: 8,
+		borderBottomColor: '#FFF'
 	}
-};
-
-AllDiseaseTab.propsTypes = {
-	items: React.PropTypes.object,
-	selectedItem: React.PropTypes.object,
-	onItemAdd: React.PropTypes.func,
-	onItemPress: React.PropTypes.func,
-}
-AllDiseaseTab.defaultProps = {
-	items: {},
-	selectedItem: {},
-	onItemAdd: () => {
-	},
-	onItemPress: () => {
-	},
 }

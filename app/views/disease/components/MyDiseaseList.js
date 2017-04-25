@@ -9,8 +9,21 @@ import OperationButton from "./OperationButton";
  */
 export default class MyDisease extends PureComponent {
 
+	static propTypes = {
+		data: React.PropTypes.array,
+		selectedItem: React.PropTypes.object,
+		onItemPress: React.PropTypes.func,
+		onItemRemove: React.PropTypes.func,
+	}
+
+	static defaultProps = {
+		data: [],
+		onItemPress: () => console.log('onItemPress'),
+		onItemRemove: () => console.log('onItemRemove'),
+	}
+
 	render() {
-		let {items, title} = this.props;
+		let {data} = this.props;
 		return (
 			<Swiper
 				height={140}
@@ -18,7 +31,7 @@ export default class MyDisease extends PureComponent {
 				dot={<View style={styles.dot}></View>}
 				activeDot={<View style={styles.activeDot}></View>}
 			>
-				{this.renderPages(items)}
+				{this.renderPages(data)}
 			</Swiper>
 		)
 	}
@@ -123,21 +136,3 @@ const styles = {
 		marginRight: 3
 	}
 };
-
-
-MyDisease.propTypes = {
-	title: React.PropTypes.string,
-	items: React.PropTypes.array,
-	selectedItem: React.PropTypes.object,
-	onItemPress: React.PropTypes.func,
-	onItemRemove: React.PropTypes.func,
-}
-
-MyDisease.defaultProps = {
-	title: '我的问题',
-	items: [],
-	onItemPress: () => {
-	},
-	onItemRemove: () => {
-	}
-}

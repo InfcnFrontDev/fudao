@@ -19,6 +19,7 @@ let myDiseaseData = [
 		"type": "衰老问题"
 	},
 	{
+
 		"id": "103e3f772cc042a78f93d33db53521c7",
 		"img": "/icons/disease/pifusaoyang.png",
 		"name": "皮肤瘙痒",
@@ -243,8 +244,8 @@ export default class MyQuestion extends PureComponent {
 					<View>
 						<Text style={styles.title}>我的问题</Text>
 					</View>
-					<DiseaseMy data={myDiseaseData}/>
-					<DiseaseAll data={allDiseaseData}/>
+					<DiseaseMy data={myDiseaseData} onItemPress={(item)=>Actions.diseaseDetail(item)}/>
+					<DiseaseAll data={allDiseaseData} onItemPress={(item)=>Actions.diseaseDetail(item)}/>
 				</Content>
 			</Container>
 		)

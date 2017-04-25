@@ -1,40 +1,24 @@
 import React, {PureComponent} from "react";
 import {View, Image, ListView, TouchableHighlight} from "react-native";
-import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
 import {Text, Button} from "native-base";
 
-const bgColors = ['#F1F7EE', '#F9F1EF', '#EDF4FE', '#F4F5E5'];
-/**
- * 所有问题列表组件
- */
-export default class DiseaseAll extends PureComponent {
+export default class AllDiseaseTab extends PureComponent {
 
-	constructor(props) {
-		super(props);
-
-		this.ds = new ListView.DataSource({
-			rowHasChanged: (row1, row2) => row1 !== row2,
-			sectionHeaderHasChanged: (section1, section2) => section1 !== section2,
-		});
-
-		this.state = {
-			items: props.items,
-		}
-	}
+	dataSource = new ListView.DataSource({
+		rowHasChanged: (row1, row2) => row1 !== row2,
+		sectionHeaderHasChanged: (section1, section2) => section1 !== section2,
+	})
 
 	render() {
-		let {items} = this.state;
+		let {data} = this.props;
 		return (
-			<ScrollableTabView
-				style={styles.tabView}
-				renderTabBar={() => <DefaultTabBar />}
-				locked={false}
-				tabBarUnderlineStyle={{backgroundColor: '#A0CD01', height: 4,}}
-				tabBarTextStyle={{color: '#000', fontWeight: "400",}}
-			>
-				<TabListMeridian tabLabel='经络穴位' diseaseName={question.showVal}/>
-				<TabListTreatment tabLabel='自疗方案' question={question} url={url} module={module}/>
-			</ScrollableTabView>
+			<ListView
+				contentContainerStyle={styles.contentContainer}
+				dataSource={this.dataSource.cloneWithRowsAndSections(data)}
+				renderRow={this._renderRow.bind(this)}
+				pageSize={4}
+				renderSectionHeader={this._renderSectionHeader.bind(this)}
+			/>
 		)
 	}
 
@@ -51,9 +35,7 @@ export default class DiseaseAll extends PureComponent {
 		// alert(rowData.img)
 		return (
 			<View style={styles.row}>
-				<Button transparent
-						style={{padding: 0, margin: 6, backgroundColor: bgColors[rowId % 4]}}
-						onPress={() => onItemPress(rowData)}>
+				<Button transparent style={{padding: 0, margin: 6}} onPress={() => onItemPress(rowData)}>
 					<View style={styles.rowView}>
 						<Image source={{uri: urls.getImage(rowData.img)}} style={styles.rowimg}/>
 						<Text style={styles.rowTitle}>{rowData.name}</Text>
@@ -119,13 +101,13 @@ const styles = {
 	}
 };
 
-DiseaseAll.propsTypes = {
+AllDiseaseTab.propsTypes = {
 	items: React.PropTypes.object,
 	selectedItem: React.PropTypes.object,
 	onItemAdd: React.PropTypes.func,
 	onItemPress: React.PropTypes.func,
 }
-DiseaseAll.defaultProps = {
+AllDiseaseTab.defaultProps = {
 	items: {},
 	selectedItem: {},
 	onItemAdd: () => {
@@ -133,4 +115,3 @@ DiseaseAll.defaultProps = {
 	onItemPress: () => {
 	},
 }
-

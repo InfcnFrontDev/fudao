@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import {View, Image, ListView, TouchableHighlight} from "react-native";
 import {Text, Button} from "native-base";
-import {theme, urls} from "../../../utils/index";
 
 const bgColors = ['#F1F7EE', '#F9F1EF', '#EDF4FE', '#F4F5E5'];
 /**
@@ -9,25 +8,17 @@ const bgColors = ['#F1F7EE', '#F9F1EF', '#EDF4FE', '#F4F5E5'];
  */
 class QuestionAll extends PureComponent {
 
-	constructor(props) {
-		super(props);
-
-		this.ds = new ListView.DataSource({
-			rowHasChanged: (row1, row2) => row1 !== row2,
-			sectionHeaderHasChanged: (section1, section2) => section1 !== section2,
-		});
-
-		this.state = {
-			items: props.items,
-		}
-	}
+	dataSource = new ListView.DataSource({
+		rowHasChanged: (row1, row2) => row1 !== row2,
+		sectionHeaderHasChanged: (section1, section2) => section1 !== section2,
+	})
 
 	render() {
-		let {items} = this.state;
+		let {data} = this.props;
 		return (
 			<ListView
 				contentContainerStyle={styles.contentContainer}
-				dataSource={this.ds.cloneWithRowsAndSections(items)}
+				dataSource={this.dataSource.cloneWithRowsAndSections(data)}
 				renderRow={this._renderRow.bind(this)}
 				pageSize={4}
 				renderSectionHeader={this._renderSectionHeader.bind(this)}
