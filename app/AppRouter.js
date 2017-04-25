@@ -23,6 +23,8 @@ import Homeapp from "./views/home/HomeDrag";
 import SideBar from "./views/sidebar/SideBar";
 import Settings from "./views/settings/Settings";
 import Personal from "./views/personal/Personal";
+import Disease from "./views/disease/Disease";
+import Energy from "./views/energy/Energy";
 
 
 /**
@@ -74,6 +76,8 @@ export default class AppRouter extends PureComponent {
 
 					<Scene title="" key="homeapp" component={Homeapp}/>
 
+					<Scene title="自疗" key="disease" component={Disease} hideNavBar/>
+					<Scene title="能量场" key="energy" component={Energy} hideNavBar/>
 				</Scene>
 			</Router>
 		)

@@ -24,7 +24,7 @@ export default  class MyEnter extends PureComponent {
 					</Button>
 				</View>
 				<View style={styles.View}>
-					<Button style={itemStyle1} transparent onPress={()=>Actions.myQuestion()}>
+					<Button style={itemStyle1} transparent onPress={()=>Actions.disease()}>
 						<Image source={require('../../../assets/disease/ziliao.png')} style={styles.image}/>
 					</Button>
 					<Button style={itemStyle} transparent onPress={()=>Actions.myExpect()}>

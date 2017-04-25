@@ -1,4 +1,4 @@
-const rowsData = {
+let rowsData = {
 	'基本信息': [
 		{
 			title: '姓名',

@@ -20,6 +20,12 @@ export default class Personal extends PureComponent {
 	}
 
 	render() {
+		let {loginUser} = userStore;
+		_.values(rowsData).forEach((item) => {
+			item.forEach((rowData) => {
+				rowData.value = loginUser[rowData.field] || ''
+			})
+		})
 		return (
 			<Container>
 				<Header {...this.props}/>
@@ -36,7 +42,6 @@ export default class Personal extends PureComponent {
 	}
 
 	_renderRow(rowData, sectionId, rowId) {
-		let {loginUser} = userStore;
 		return (
 			<ListItem
 				key={rowData.title}
@@ -48,7 +53,7 @@ export default class Personal extends PureComponent {
 				<Text style={{fontSize: theme.fontSizeH5}}>{rowData.title}</Text>
 				</Body>
 				<Right>
-					<Text note>{this.substr(loginUser[rowData.field])}</Text>
+					<Text note>{this.substr(rowData.value)}</Text>
 					<Icon active name="ios-arrow-forward"/>
 				</Right>
 			</ListItem>
