@@ -14,7 +14,8 @@ import RebuildSuccess from "./views/authentication/RebuildSuccess";
 import PasswordValidate from "./views/authentication/PasswordValidate";
 import WomanChoose from "./views/authentication/WomanChoose";
 import Friend from "./views/friend/Friend";
-
+import Diagnosis from "./views/diagnosis/Diagnosis";
+import Evaluation from "./views/diagnosis/Evaluation";
 
 /**
  * 路由
@@ -49,6 +50,9 @@ export default class AppRouter extends PureComponent {
 
 					<Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
 					<Scene key="collection" component={Collection} title="收藏" hideNavBar/>
+                    {/*自诊*/}
+					<Scene key="diagnosis" component={Diagnosis} title="自诊" initial hideNavBar/>
+					<Scene key="evaluation" component={Evaluation} title="测评" hideNavBar/>
 
 				</Scene>
 			</Router>
