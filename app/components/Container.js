@@ -13,11 +13,23 @@ export default  class Container extends PureComponent {
 		}
 
 		return (
-			<Image source={require('../assets/bg/container.jpg')}
-				   style={{width,height,alignSelf: "flex-end"}}>
-				{children}
-			</Image>
+			<View style={styles.container}>
+				<Image source={require('../assets/bg/container.jpg')}
+					   style={{width,height,alignSelf: "flex-end"}}>
+                    {children}
+				</Image>
+			</View>
 		)
 	}
-
 }
+
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1
+	},
+	image: {
+		width:theme.deviceWidth+5,
+		height:theme.deviceHeight,
+	}
+});
