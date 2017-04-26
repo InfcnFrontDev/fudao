@@ -15,7 +15,7 @@ export default class ArticleTextItem extends Component {
 					</Row>
 					<Row style={{height:30}}>
 						<Text style={styles.from}>来自：{article.source}</Text>
-						<Text style={styles.timeDiff}>{article.createTime}</Text>
+						<Text style={styles.timeDiff}>{tools.dateFormat(new Date(article.createTime),'yyyy-MM-dd')}</Text>
 					</Row>
 				</Grid>
 			</Item>
