@@ -1,15 +1,13 @@
 import React, {PureComponent} from "react";
 import {View, Image, ListView, TouchableHighlight} from "react-native";
 import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
-import AllDiseaseTabBar from "./AllDiseaseTabBar";
-import AllDiseaseTabLiaoShen from "./AllDiseaseTabLiaoShen";
-import AllDiseaseTabLiaoXin from "./AllDiseaseTabLiaoXin";
+import DiseaseMethodTabBar from "./DiseaseMethodTabBar";
+import DiseaseMethodTab from "./DiseaseMethodTab";
 
-const bgColors = ['#F1F7EE', '#F9F1EF', '#EDF4FE', '#F4F5E5'];
 /**
  * 所有问题列表组件
  */
-export default class AllDiseaseTabView extends PureComponent {
+export default class DiseaseMethodTabView extends PureComponent {
 
 	static propsTypes = {
 		data: React.PropTypes.array,
@@ -27,11 +25,9 @@ export default class AllDiseaseTabView extends PureComponent {
 		return (
 			<ScrollableTabView
 				style={styles.tabView}
-				renderTabBar={() => <AllDiseaseTabBar/>}
-				locked={false}
-			>
-				<AllDiseaseTabLiaoShen data={data.liaoSheng}/>
-				<AllDiseaseTabLiaoXin data={data.liaoXin}/>
+				renderTabBar={() => <DiseaseMethodTabBar/>}
+				locked={false}>
+				{data.map((item) => <DiseaseMethodTab key={item.type} tabLabel={item.type} data={item}/>)}
 			</ScrollableTabView>
 		)
 	}

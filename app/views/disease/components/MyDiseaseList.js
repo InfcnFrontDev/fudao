@@ -7,7 +7,7 @@ import OperationButton from "./OperationButton";
 /**
  * 我的问题列表组件
  */
-export default class MyDisease extends PureComponent {
+export default class MyDiseaseList extends PureComponent {
 
 	static propTypes = {
 		data: React.PropTypes.array,
@@ -25,14 +25,16 @@ export default class MyDisease extends PureComponent {
 	render() {
 		let {data} = this.props;
 		return (
-			<Swiper
-				height={140}
-				loop={false}
-				dot={<View style={styles.dot}></View>}
-				activeDot={<View style={styles.activeDot}></View>}
-			>
-				{this.renderPages(data)}
-			</Swiper>
+			<View style={{height: 126}}>
+				<Swiper
+					height={140}
+					loop={false}
+					dot={<View style={styles.dot}></View>}
+					activeDot={<View style={styles.activeDot}></View>}
+				>
+					{this.renderPages(data)}
+				</Swiper>
+			</View>
 		)
 	}
 

@@ -2,7 +2,20 @@ import React, {PureComponent} from "react";
 import {View, Image, ListView, TouchableHighlight} from "react-native";
 import {Text, Button} from "native-base";
 
-export default class AllDiseaseTab extends PureComponent {
+export default class AllDiseaseTabLiaoShen extends PureComponent {
+
+	static propsTypes = {
+		data: React.PropTypes.object,
+		selectedItem: React.PropTypes.object,
+		onItemAdd: React.PropTypes.func,
+		onItemPress: React.PropTypes.func,
+	}
+	static defaultProps = {
+		data: {},
+		selectedItem: {},
+		onItemAdd: () => console.log('onItemAdd'),
+		onItemPress: () => console.log('onItemPress'),
+	}
 
 	dataSource = new ListView.DataSource({
 		rowHasChanged: (row1, row2) => row1 !== row2,
@@ -100,18 +113,3 @@ const styles = {
 		justifyContent: 'flex-end',
 	}
 };
-
-AllDiseaseTab.propsTypes = {
-	items: React.PropTypes.object,
-	selectedItem: React.PropTypes.object,
-	onItemAdd: React.PropTypes.func,
-	onItemPress: React.PropTypes.func,
-}
-AllDiseaseTab.defaultProps = {
-	items: {},
-	selectedItem: {},
-	onItemAdd: () => {
-	},
-	onItemPress: () => {
-	},
-}
