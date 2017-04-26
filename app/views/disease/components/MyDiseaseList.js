@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import Swiper from "react-native-swiper";
 import {Text, Button} from "native-base";
 import {View, Image, ToastAndroid, DeviceEventEmitter, TouchableHighlight} from "react-native";
-import OperationButton from "./OperationButton";
+import ListOperationButton from "./ListOperationButton";
 
 /**
  * 我的问题列表组件
@@ -64,7 +64,7 @@ export default class MyDiseaseList extends PureComponent {
 					onPress={this._onItemPress.bind(this, item)}>
 				<Image source={{uri: urls.getImage(item.img)}} style={styles.itemImg}/>
 				<Text style={styles.itemTitle}>{item.name}</Text>
-				<OperationButton iconName={'remove'}/>
+				<ListOperationButton iconName={'remove'}/>
 			</Button>
 		)
 	}

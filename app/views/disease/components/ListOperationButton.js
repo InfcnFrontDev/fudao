@@ -5,7 +5,17 @@ import {View, Image, ToastAndroid, DeviceEventEmitter, TouchableHighlight} from 
 /**
  * 列表操作按钮
  */
-export default class OperationButton extends PureComponent {
+export default class ListOperationButton extends PureComponent {
+
+	static propTypes = {
+		color: React.PropTypes.string,
+		iconName: React.PropTypes.string,
+	}
+
+	static defaultProps = {
+		color: '#FFFFFF',
+		iconName: 'add',
+	}
 
 	render() {
 		let {color, iconName} = this.props,
@@ -43,14 +53,3 @@ const styles = {
 		marginBottom: 0
 	}
 };
-
-
-OperationButton.propTypes = {
-	color: React.PropTypes.string,
-	iconName: React.PropTypes.string,
-}
-
-OperationButton.defaultProps = {
-	color: '#FFFFFF',
-	iconName: 'add',
-}

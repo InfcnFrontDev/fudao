@@ -75,7 +75,7 @@ export default class AppRouter extends PureComponent {
 
 					<Scene title="主页" key="homeapp" component={Homeapp}/>
 
-					<Scene title="自疗" key="disease" component={Disease} hideNavBar initial/>
+					<Scene title="自疗" key="disease" component={Disease} hideNavBar/>
 					<Scene title="疾病详情" key="diseaseDetail" component={DiseaseDetail} hideNavBar/>
 					<Scene title="能量场" key="energy" component={Energy} hideNavBar/>
 

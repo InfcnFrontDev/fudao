@@ -46,7 +46,21 @@ export default class DiseaseMethodTab extends PureComponent {
 				{methods.map((method) => (
 					<View style={styles.method} key={method.timePeriod}>
 						<Text style={styles.text}>{' - ' + method.timePeriod + ' : '}</Text>
-						<Text style={styles.textLink}>{method.timePeriod}</Text>
+						<View style={{flexDirection:'column'}}>
+							<View style={{flexDirection:'row'}}>
+								<Text style={styles.text}>{'宜食 '}</Text>
+								{method.suitable.map((text) =>
+									<Text key={text} style={styles.textLink}>{text + '; '}</Text>)}
+							</View>
+							{
+								method.fasting &&
+								<View style={{flexDirection:'row'}}>
+									<Text style={styles.text}>{'忌食 '}</Text>
+									{method.fasting.map((text) =>
+										<Text key={text} style={styles.textLink}>{text + '; '}</Text>)}
+								</View>
+							}
+						</View>
 					</View>
 				))}
 			</View>
