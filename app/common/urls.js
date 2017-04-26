@@ -41,7 +41,7 @@ const urls = {
         // 我的位置
         MY_LOCATION: webPath + 'myLocation.html',
         //首页
-        HOEM: webPath + 'home.html',
+        HOME: webPath + 'home.html',
         //我的能量场
         MY_ENERGY: webPath + 'myEnergy.html',
         //自诊

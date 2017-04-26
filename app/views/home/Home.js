@@ -81,7 +81,7 @@ export default class Home extends PureComponent {
 				<Content>
 					<WebView
 						onMessage={(event)=>this.openDetailsBox(event.nativeEvent.data)}
-						source={{uri:urls.pages.HOEM + '?userId=867200022156895,86720002215690393791782&renqun=high_quality_population&location=1&daytype=2&seasonId=1'}}
+						source={{uri:urls.pages.HOME + '?userId=867200022156895,86720002215690393791782&renqun=high_quality_population&location=1&daytype=2&seasonId=1'}}
 						style={{backgroundColor:'rgba(0,0,0,.0)'}}
 					/>
 
