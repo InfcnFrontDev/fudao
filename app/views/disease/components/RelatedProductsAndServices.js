@@ -25,7 +25,7 @@ export default class RelatedProductsAndServices extends PureComponent {
 				<View style={styles.productsView}>
 					<View style={styles.productView0}>
 						<View style={styles.imageView}>
-							<Image source={require('../../../assets/temp/img1.jpg')} style={styles.image}/>
+							<Image source={require('../assets/img1.jpg')} style={styles.image}/>
 						</View>
 						<View style={{flex:1}}>
 							<Text>隔水炖养生壶全自动加璃家...</Text>
@@ -33,7 +33,7 @@ export default class RelatedProductsAndServices extends PureComponent {
 					</View>
 					<View style={styles.productView1}>
 						<View style={styles.imageView}>
-							<Image source={require('../../../assets/temp/img2.jpg')} style={styles.image}/>
+							<Image source={require('../assets/img2.jpg')} style={styles.image}/>
 						</View>
 						<View style={{flex:1}}>
 							<Text>隔水炖养生壶全自动加厚玻...</Text>
