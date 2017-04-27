@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {ScrollView, View, Image, ListView, TouchableHighlight} from "react-native";
+import {ScrollView, View, Image, ListView, TouchableOpacity} from "react-native";
 import {Text} from "native-base";
 import RelatedProductsAndServices from "./RelatedProductsAndServices";
 
@@ -50,14 +50,16 @@ export default class DiseaseMethodTab extends PureComponent {
 							<View style={{flexDirection:'row'}}>
 								<Text style={styles.text}>{'宜食 '}</Text>
 								{method.suitable.map((text) =>
-									<Text key={text} style={styles.textLink}>{text + '; '}</Text>)}
+									<TouchableOpacity key={text} onPress={()=>alert('')}>
+										<Text style={styles.textLink}>{text + '; '}</Text>
+									</TouchableOpacity>)}
 							</View>
 							{
 								method.fasting &&
 								<View style={{flexDirection:'row'}}>
 									<Text style={styles.text}>{'忌食 '}</Text>
 									{method.fasting.map((text) =>
-										<Text key={text} style={styles.textLink}>{text + '; '}</Text>)}
+										<Text key={text} style={styles.text}>{text + '; '}</Text>)}
 								</View>
 							}
 						</View>
@@ -73,7 +75,9 @@ export default class DiseaseMethodTab extends PureComponent {
 				{methods.map((method) => (
 					<View style={styles.method} key={method.timePeriod}>
 						<Text style={styles.text}>{ ' - ' + method.timePeriod + ' : '}</Text>
-						<Text style={styles.textLink}>{ method.name}</Text>
+						<TouchableOpacity onPress={()=>alert('')}>
+							<Text style={styles.textLink}>{ method.name}</Text>
+						</TouchableOpacity>
 					</View>
 				))}
 			</View>
