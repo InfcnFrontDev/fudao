@@ -14,37 +14,23 @@ export default  class MyEnter extends PureComponent {
 
 
 	render() {
-		let itemStyle1 = Object.assign({}, styles.button, styles.mgl10);
 		let itemStyle = Object.assign({}, styles.button, styles.mgl);
 		return (
 			<View>
 				<View style={styles.View}>
-					<Button style={itemStyle1} transparent onPress={()=>Actions.emotion()}>
-
-						<Image source={require('../assets/langh.png')} style={styles.image}/>
-
-						<Text style={styles.text}>情绪调和</Text>
+					<Button style={styles.button} transparent onPress={()=>Actions.energy()}>
+						<Image source={require('../../../assets/disease/zizhen.png')} style={styles.image}/>
 					</Button>
-					<Button style={itemStyle} transparent onPress={()=>Actions.energy()}>
-
-						<Image source={require('../assets/drill.png')} style={styles.image}/>
-
-						<Text style={styles.text}>我的能量场</Text>
-					</Button>
-
 				</View>
 				<View style={styles.View}>
-					<Button style={itemStyle1} transparent onPress={()=>Actions.myQuestion()}>
-
-						<Image source={require('../assets/adjust.png')} style={styles.image}/>
-
-						<Text style={styles.text}>疑症自调</Text>
+					<Button style={itemStyle} transparent onPress={()=>Actions.disease()}>
+						<Image source={require('../../../assets/disease/ziliao.png')} style={styles.image}/>
 					</Button>
 					<Button style={itemStyle} transparent onPress={()=>Actions.myExpect()}>
-
-						<Image source={require('../assets/love.png')} style={styles.image}/>
-
-						<Text style={styles.text}>完美秘籍</Text>
+						<Image source={require('../../../assets/disease/ziyang.png')} style={styles.image}/>
+					</Button>
+					<Button style={itemStyle} transparent onPress={()=>Actions.emotion()}>
+						<Image source={require('../../../assets/disease/zixiu.png')} style={styles.image}/>
 					</Button>
 				</View>
 			</View>
@@ -62,7 +48,7 @@ const styles = {
 	},
 	button: {
 		flexDirection: 'row',
-		height: 60,
+		height: 50,
 		justifyContent: 'center',
 		flex: 1,
 		alignSelf: 'stretch',

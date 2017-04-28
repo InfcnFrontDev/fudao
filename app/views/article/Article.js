@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {Container, Header, HeaderIcon, Loading} from "../../components/index";
+import {Container, Header, HeaderIcon, Content, Loading} from "../../components/index";
 import ScrollableTabView, {ScrollableTabBar} from "react-native-scrollable-tab-view";
 import ArticleList from "./components/ArticleList";
 import articleStore from "../../mobx/articleStore";
@@ -16,26 +16,28 @@ export default class Article extends PureComponent {
 		return (
 			<Container>
 				<Header menu {...this.props}/>
-				{!isFetching &&
-				<ScrollableTabView
-					renderTabBar={() => (
+				<Content white>
+					{!isFetching &&
+					<ScrollableTabView
+						renderTabBar={() => (
 						<ScrollableTabBar
 							activeTextColor={theme.navTabBarActiveTextColor}
 							underlineStyle={{backgroundColor: theme.navTabBarActiveTextColor}}
 						/>
 					)}
-					tabBarPosition='top'
-					scrollWithoutAnimation={false}
-					style={styles.tabView}
-				>
-					{articleColumnList.map((column) => (
-						<ArticleList key={column.id}
-									 tabLabel={column.name}
-									 label={column.id}/>)
-					)}
-				</ScrollableTabView>
-				}
-				<Loading isShow={isFetching}/>
+						tabBarPosition='top'
+						scrollWithoutAnimation={false}
+						style={styles.tabView}
+					>
+						{articleColumnList.map((column) => (
+							<ArticleList key={column.id}
+										 tabLabel={column.name}
+										 label={column.id}/>)
+						)}
+					</ScrollableTabView>
+					}
+					<Loading isShow={isFetching}/>
+				</Content>
 			</Container>
 		)
 

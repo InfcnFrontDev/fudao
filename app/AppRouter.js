@@ -15,6 +15,21 @@ import PasswordValidate from "./views/authentication/PasswordValidate";
 import WomanChoose from "./views/authentication/WomanChoose";
 import Friend from "./views/friend/Friend";
 import Emotion from "./views/emotion/Emotion";
+import About from "./views/about/About";
+import UserAgreement from "./views/about/UserAgreement";
+import PrivacyStatement from "./views/about/PrivacyStatement";
+import Record from "./views/record/Record";
+import MedicalExamination from "./views/medical-examination/MedicalExamination";
+import Homeapp from "./views/home/HomeDrag";
+import SideBar from "./views/sidebar/SideBar";
+import Diagnosis from "./views/diagnosis/Diagnosis";
+import Evaluation from "./views/diagnosis/Evaluation";
+import Settings from "./views/settings/Settings";
+import Personal from "./views/personal/Personal";
+import Disease from "./views/disease/Disease";
+import DiseaseDetail from "./views/disease/DiseaseDetail";
+import Energy from "./views/energy/Energy";
+
 
 /**
  * 路由
@@ -46,12 +61,32 @@ export default class AppRouter extends PureComponent {
 
 					<Scene key="friend" component={Friend} title="好友" hideNavBar/>
 
-
+					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
 					<Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
 					<Scene key="collection" component={Collection} title="收藏" hideNavBar/>
 					{/*情绪调和*/}
 					<Scene key="emotion" component={Emotion} title="情绪调和" hideNavBar initial />
+					<Scene title="资讯详情" key="articleDetail" component={ArticleDetail} hideNavBar/>
+					<Scene title="收藏" key="collection" component={Collection} hideNavBar/>
 
+
+					<Scene title="关于福道" key="about" component={About} hideNavBar/>
+					<Scene title="隐私声明" key="privacyStatement" component={PrivacyStatement} hideNavBar/>
+					<Scene title="用户协议" key="userAgreement" component={UserAgreement} hideNavBar/>
+					<Scene title="我的记录" key="record" component={Record} hideNavBar/>
+					<Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
+					<Scene title="系统设置" key="settings" component={Settings} hideNavBar/>
+					<Scene title="基本信息" key="personal" component={Personal} hideNavBar/>
+
+					<Scene title="主页" key="homeapp" component={Homeapp}/>
+
+					<Scene title="自疗" key="disease" component={Disease} hideNavBar/>
+					<Scene title="疾病详情" key="diseaseDetail" component={DiseaseDetail} hideNavBar/>
+					<Scene title="能量场" key="energy" component={Energy} hideNavBar/>
+
+					{/*自诊*/}
+					<Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
+					<Scene key="evaluation" component={Evaluation} title="测评" hideNavBar/>
 				</Scene>
 			</Router>
 		)

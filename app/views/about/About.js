@@ -3,7 +3,6 @@ import {Actions} from "react-native-router-flux";
 import {observer} from "mobx-react/native";
 import {View, Text, Row, Thumbnail, Col, Button} from "native-base";
 import {Container, Content, Header} from "../../components/index";
-import ListStore from "../../mobx/userStore";
 
 /**
  * 关于福道
@@ -14,9 +13,9 @@ export default class About extends PureComponent {
 		return (
 			<Container>
 				<Header {...this.props}/>
-				<Content padder style={{backgroundColor: '#FFFFFF'}}>
+				<Content padder white>
 					<View style={styles.title}>
-						<Thumbnail source={require('../../assets/logo.png')}/>
+						<Thumbnail square source={require('../../assets/logo.png')}/>
 						<Text style={styles.titleText}>{config.appName}</Text>
 						<Text>{config.appVersion}</Text>
 					</View>
@@ -41,41 +40,19 @@ export default class About extends PureComponent {
 					</View>
 					<View>
 						<Text>商务合作：fudao@infcn.com.cn</Text>
-						{ListStore.list.map((item) => <Text>{item.name}</Text>)}
 					</View>
 					<Row style={{marginTop: 30}}>
 						<Col style={styles.center}>
-							<Button onPress={()=> this.declare()}><Text>隐式声明</Text></Button>
+							<Button onPress={()=> Actions.privacyStatement()}><Text>隐式声明</Text></Button>
 						</Col>
 						<Col style={styles.center}>
-							<Button onPress={()=> this.protocol()}><Text>用户协议</Text></Button>
+							<Button onPress={()=> Actions.userAgreement()}><Text>用户协议</Text></Button>
 						</Col>
 					</Row>
 				</Content>
 			</Container>
 		);
 	}
-
-	componentDidMount() {
-		ListStore.addListItem('yangkk');
-		console.log(ListStore.list);
-	}
-
-
-	declare() {
-		Actions.webview({
-			title: '隐式声明',
-			uri: urls.pages.DECLARE,
-		})
-	}
-
-	protocol() {
-		Actions.webview({
-			title: '用户协议',
-			uri: urls.pages.PROTOCOL,
-		})
-	}
-
 }
 
 const styles = {

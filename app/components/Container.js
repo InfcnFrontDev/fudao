@@ -1,17 +1,26 @@
 import React, {PureComponent} from "react";
 import {StyleSheet, View, Image} from "react-native";
 
-class Container extends PureComponent {
+export default  class Container extends PureComponent {
 
 	render() {
-		let {children} = this.props;
+		let {children, isTabPanel} = this.props,
+			width = theme.deviceWidth,
+			height = theme.deviceHeight - 20;
+
+		if (isTabPanel) {
+			height -= theme.navTabBarHeight;
+		}
+
 		return (
-			<View style={styles.container}>
-				<Image source={require('../assets/bg/default.jpg')}
-					   style={styles.image}>
+
+			<Image source={require('../assets/bg/qing/1.jpg')}
+				   style={{width,height,alignSelf: "flex-end"}}>
+				<Image source={require('../assets/bg/container.gif')}
+					   style={{width,height,alignSelf: "flex-end"}}>
 					{children}
 				</Image>
-			</View>
+			</Image>
 		)
 	}
 }
@@ -27,4 +36,5 @@ const styles = StyleSheet.create({
 	}
 })
 
-export default (Container)
+
+}
