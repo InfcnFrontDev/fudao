@@ -14,7 +14,7 @@ import RebuildSuccess from "./views/authentication/RebuildSuccess";
 import PasswordValidate from "./views/authentication/PasswordValidate";
 import WomanChoose from "./views/authentication/WomanChoose";
 import Friend from "./views/friend/Friend";
-
+import Emotion from "./views/emotion/Emotion";
 
 /**
  * 路由
@@ -49,6 +49,8 @@ export default class AppRouter extends PureComponent {
 
 					<Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
 					<Scene key="collection" component={Collection} title="收藏" hideNavBar/>
+					{/*情绪调和*/}
+					<Scene key="emotion" component={Emotion} title="情绪调和" hideNavBar initial />
 
 				</Scene>
 			</Router>

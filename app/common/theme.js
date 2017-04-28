@@ -5,7 +5,6 @@ const platformStyle = 'fudao';
 export default Object.assign(material, {
 	//
 	platformStyle,
-
 	// 按钮颜色
 	brandPrimary: '#9FCC2D',
 	brandInfo: '#3F57D3',
