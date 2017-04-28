@@ -1,7 +1,13 @@
 import {observable, runInAction, computed, action, reaction} from "mobx";
 import {AsyncStorage} from "react-native";
-import {create, persist} from "mobx-persist";
+import {persist} from "mobx-persist";
 import hydrate from "../common/hydrate";
+
+
+class User {
+
+}
+
 
 class UserStore {
 	@observable hydrated = false
@@ -90,11 +96,19 @@ class UserStore {
 
 	@action
 	updateUserInfo(fieldName, value) {
+
+		let user0 = {...this.loginUser};
+		user0[fieldName] = value;
+		this.loginUser = user0;
+
 		request.getJson(urls.apis.USERAPI_UPDATEUSERINFO, {
 			fieldName,
 			value
 		}).then(result => {
 			if (result.ok) {
+				let user0 = {...this.loginUser};
+				user0[fieldName] = value;
+				this.loginUser = user0;
 			} else {
 				tools.showToast("修改失败")
 			}

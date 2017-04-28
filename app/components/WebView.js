@@ -1,11 +1,13 @@
 import React, {PureComponent} from "react";
 import {WebView, View, Image, Text} from "react-native";
+import {observer} from "mobx-react/native";
 import userStore from "../mobx/userStore";
 
 
 /**
  * WebView
  */
+@observer
 export default class InfcnWebView extends PureComponent {
 
 	render() {
