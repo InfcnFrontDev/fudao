@@ -21,7 +21,7 @@ export default class Friend extends PureComponent {
 			<Container>
 				<Header {...this.props} right={
 					<Right>
-						<Button><Icon name="add"/></Button>
+						<Button transparent onPress={()=>Actions.searchUser()}><Icon name="add"/></Button>
 					</Right>
 				}/>
 				<Content gray delay>
