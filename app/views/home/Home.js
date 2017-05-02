@@ -102,9 +102,9 @@ export default class Home extends PureComponent {
 					<View style={leftBtnStyle}>
 						<Image source={require('../../assets/home/qingxu.png')} style={styles.image}/>
 					</View>
-					<View style={rightBtnStyle}>
+					<Button transparent style={rightBtnStyle} onPress={()=> Actions.energy()}>
 						<Image source={require('../../assets/home/cengliangchang.png')} style={styles.image}/>
-					</View>
+					</Button>
 					<DetailsModal ref={(e)=>this._groupSelectModal = e}></DetailsModal>
 
 				</Content>
