@@ -20,7 +20,8 @@ class FriendList extends PureComponent {
 
 		// 按首字母分组
 		let listGroupBy = groupBy(list, (friend) => {
-			let firstChar = tools.getFirstChar(friend.friendNick).toUpperCase();
+			alert(JSON.stringify(friend));
+			let firstChar = tools.getFirstChar(friend.friendremark).toUpperCase();
 			if (groups.find((g) => g == firstChar))
 				return firstChar;
 			return groups[0]

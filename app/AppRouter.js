@@ -29,6 +29,10 @@ import Personal from "./views/personal/Personal";
 import Disease from "./views/disease/Disease";
 import DiseaseDetail from "./views/disease/DiseaseDetail";
 import Energy from "./views/energy/Energy";
+import FriendApply from "./views/friend/FriendApply";
+import AgreeFriendApply from "./views/friend/AgreeFriendApply";
+import NewFriend from "./views/friend/NewFriend";
+import UserDetail from "./views/user/UserDetail";
 
 /**
  * 路由
@@ -57,8 +61,13 @@ export default class AppRouter extends PureComponent {
                     <Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
                     <Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
                     <Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
-
+                    {/*好友*/}
                     <Scene key="friend" component={Friend} title="好友" hideNavBar/>
+                    <Scene key="friendApply" component={FriendApply} title="好友申请" hideNavBar/>
+                    <Scene key="newFriend" component={NewFriend} title="新的朋友" hideNavBar/>
+                    <Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
+                    {/*用户*/}
+                    <Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
 
                     <Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
 
@@ -77,7 +86,7 @@ export default class AppRouter extends PureComponent {
                     <Scene title="" key="homeapp" component={Homeapp}/>
 
                     {/*自诊*/}
-                    <Scene key="diagnosis" component={Diagnosis} title="自诊" initial hideNavBar/>
+                    <Scene key="diagnosis" component={Diagnosis} title="自诊"  hideNavBar/>
                     <Scene key="evaluation" component={Evaluation} title="测评"  hideNavBar/>
                     <Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自诊"  hideNavBar/>
 
