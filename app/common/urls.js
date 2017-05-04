@@ -57,7 +57,8 @@ const urls = {
 
 
         //天气-------------------------------------------------------------------------
-        WEATHER: apiPath + 'app/weatherAction!getWeather.action',
+		WEATHER_GETWEATHER: apiPath + 'WeatherApi/getWeather',
+		WEATHER_GETPM25: apiPath + 'WeatherApi/getPM25',
 
         // 资讯 ----------------------------------------------------------------------
 

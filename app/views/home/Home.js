@@ -1,14 +1,14 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {TouchableHighlight, Dimensions, Image,WebView} from "react-native";
+import {TouchableHighlight, Dimensions, Image, WebView} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Right, Text, View, Button, Icon} from "native-base";
 import {Container, Content} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
-import Homedrag from "./HomeDrag.js";
 import userStore from "../../mobx/userStore";
+import positionStore from "../../mobx/positionStore";
+import weatherStore from "../../mobx/weatherStore";
 import DetailsModal from "./components/DetailsModal";
-
 
 
 /**
@@ -43,7 +43,7 @@ export default class Home extends PureComponent {
 						</Button>
 					</View>
 					<View style={{flexDirection: 'column', justifyContent: 'center',width:80}}>
-						<Text style={styles.font}>北京.海淀</Text>
+						<Text style={styles.font}>{weatherStore.currentWeather.result.weather}</Text>
 						<View style={{flexDirection: 'row',justifyContent:'center'}}>
 							{/*					<Text style={styles.font}>{this.state.weather}</Text>
 							 <Image style={{width:20,height:20}} source={{uri:'http://api.k780.com:88/upload/weather/d1/'+this.state.img+'.png'}}/>*/}
