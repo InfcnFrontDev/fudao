@@ -30,6 +30,10 @@ import Personal from "./views/personal/Personal";
 import Disease from "./views/disease/Disease";
 import DiseaseDetail from "./views/disease/DiseaseDetail";
 import Energy from "./views/energy/Energy";
+import FriendApply from "./views/friend/FriendApply";
+import AgreeFriendApply from "./views/friend/AgreeFriendApply";
+import NewFriend from "./views/friend/NewFriend";
+import UserDetail from "./views/user/UserDetail";
 
 /**
  * 路由
@@ -114,6 +118,5 @@ export default class AppRouter extends PureComponent {
 	shouldComponentUpdate() {
 		return false
 	}
-
 }
 

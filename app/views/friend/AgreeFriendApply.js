@@ -4,9 +4,9 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, Separator, HeaderButton} from "../../components/index";
 import {Text, ListItem, Item, Input} from "native-base";
-import {showLoading, hideLoading} from "../../actions/loading";
+/*import {showLoading, hideLoading} from "../../actions/loading";
 import {fetchNewFriendList, fetchMyFriendList} from "../../actions/friend";
-import {request, urls, toast} from "../../utils/index";
+import {request, urls, toast} from "../../utils/index";*/
 
 /**
  * 接受好友申请
