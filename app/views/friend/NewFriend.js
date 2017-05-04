@@ -18,6 +18,7 @@ export default class NewFriend extends PureComponent {
 	render() {
 		let {isNewFetching, NewFriendList} =friendStore,
 			count = NewFriendList.length;
+		alert(JSON.stringify(NewFriendList));
 		return (
 			<Container>
 				<Header {...this.props}/>
@@ -32,8 +33,8 @@ export default class NewFriend extends PureComponent {
 												   source={{uri:'http://touxiang.qqzhi.com/uploads/2012-11/1111032758936.jpg'}}/>
 									</Left>
 									<Body>
-									<Text>{f.friendNick}</Text>
-									<Text note>{f.tip}</Text>
+									<Text>{f.nickname}</Text>
+									<Text note>{f.introduce}</Text>
 									</Body>
 									<Right style={{justifyContent:'center'}}>
 										{f.state == 0 ?
