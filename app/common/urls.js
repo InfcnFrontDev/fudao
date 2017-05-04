@@ -29,7 +29,9 @@ const urls = {
         // 我的时间
         MY_TIME: webPath + 'myTime.html',
         // 健康测评
-        HEALTH_APPRAISAL: webPath + 'healthAppraisal.html',
+        HEALTH_APPRAISAL: webPath + 'assessmentResult.html',
+        // 深度自诊
+        DEEP_DIAGNOSIS: webPath + 'deepDiagnosis.html',
         // 测试题
         ASSESSMENT_TEST: webPath + 'assessmentTest.html',
         // 健康圈
@@ -41,7 +43,7 @@ const urls = {
         // 我的位置
         MY_LOCATION: webPath + 'myLocation.html',
         //首页
-        HOEM: webPath + 'home.html',
+        HOME: webPath + 'home.html',
         //我的能量场
         MY_ENERGY: webPath + 'myEnergy.html',
         //自诊

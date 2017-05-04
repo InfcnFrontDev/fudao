@@ -2,6 +2,7 @@ import {ToastAndroid} from "react-native";
 import DialogAndroid from "react-native-dialogs";
 import uuid from "uuid";
 import config from "./config";
+import pinyin from "./pinyin";
 const tools = {
 	/**
 	 * 生成UUID
@@ -60,7 +61,21 @@ const tools = {
 		str = str.replace(/s|S/g, date.getSeconds());
 
 		return str;
-	}
+	},
+	/**
+	 * 获取首字母
+	 * @param str
+	 */
+	getFirstChar(str){
+		return pinyin.getFullChars(str).substring(0, 1);
+	},
+	/**
+	 * 获得拼音
+	 * @param str
+	 */
+	pinyin(str){
+		return pinyin.getFullChars(str);
+	},
 
 };
 export default tools;

@@ -1,14 +1,15 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {TouchableHighlight, Dimensions, Image, WebView} from "react-native";
+import {TouchableHighlight, Dimensions, Image,WebView} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Right, Text, View, Button, Icon} from "native-base";
 import {Container, Content} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
+import Homedrag from "./HomeDrag.js";
 import userStore from "../../mobx/userStore";
-import positionStore from "../../mobx/positionStore";
-import weatherStore from "../../mobx/weatherStore";
 import DetailsModal from "./components/DetailsModal";
+
+
 
 
 /**
@@ -21,7 +22,8 @@ export default class Home extends PureComponent {
 		modalVisible: false,
 		wendu: '',
 		weather: '',
-		img: 'http://api.k780.com:88/upload/weather/d1/2.png'
+		img: 'http://api.k780.com:88/upload/weather/d1/2.png',
+		status:true
 	};
 
 
@@ -35,7 +37,8 @@ export default class Home extends PureComponent {
 					width: Dimensions.get('window').width,
 					height: 60,
 					backgroundColor: 'rgba(225,225,225,0.2)',
-					flexDirection: 'row'
+					flexDirection: 'row',
+
 				}}>
 					<View style={{flexDirection: 'column', justifyContent: 'center'}}>
 						<Button transparent onPress={()=> Actions.sideBar()}>
@@ -43,7 +46,7 @@ export default class Home extends PureComponent {
 						</Button>
 					</View>
 					<View style={{flexDirection: 'column', justifyContent: 'center',width:80}}>
-						<Text style={styles.font}>{weatherStore.currentWeather.result.weather}</Text>
+						<Text style={styles.font}>北京.海淀</Text>
 						<View style={{flexDirection: 'row',justifyContent:'center'}}>
 							{/*					<Text style={styles.font}>{this.state.weather}</Text>
 							 <Image style={{width:20,height:20}} source={{uri:'http://api.k780.com:88/upload/weather/d1/'+this.state.img+'.png'}}/>*/}
@@ -79,16 +82,19 @@ export default class Home extends PureComponent {
 					</Right>
 				</View>
 				<Content>
+
 					<WebView
+						source={{uri:urls.pages.HOME + '?status='+this.state.status+'&token='+userStore.token}}
 						onMessage={(event)=>this.openDetailsBox(event.nativeEvent.data)}
-						source={{uri:urls.pages.HOEM + '?userId=867200022156895,86720002215690393791782&renqun=high_quality_population&location=1&daytype=2&seasonId=1'}}
 						style={{backgroundColor:'rgba(0,0,0,.0)'}}
+						//uri={urls.pages.HOME + '?status='+this.state.status}
+
 					/>
 
 					<View style={{height:40,borderRadius:40,backgroundColor:'rgba(225,225,225,.0)',position: 'absolute',top:0,left:0,alignItems:'center',flexDirection:'row'}}>
-						<Button transparent style={{backgroundColor:'rgba(225,225,225,.0)'}} onPress={()=>Actions.homeapp()}>
+						<Button transparent style={{backgroundColor:'rgba(225,225,225,.0)'}} onPress={()=>this.changeStatus()}>
 							<Image source={require('../../assets/home/qiehuan.png')} style={{width:20,height:20}}/>
-							<Text style={{color:'#b7b7b7',fontSize:14}}>切换到通用版</Text>
+							<Text style={{color:'#b7b7b7',fontSize:14}}>{this.state.status?'切换到通用版':'切换到我的版'}</Text>
 						</Button>
 
 					</View>
@@ -107,6 +113,11 @@ export default class Home extends PureComponent {
 				</View>
 			</Container>
 		)
+	}
+	changeStatus(){
+		this.setState({
+			status:!this.state.status
+		})
 	}
 
 	openDetailsBox(data){
