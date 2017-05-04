@@ -2,13 +2,12 @@ import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
 import {Text,WebView} from "react-native";
 import {Container, Header, Content, Loading} from "../../components/index";
-import {Actions} from "react-native-router-flux";
 
 /**
  * 自诊
  */
 @observer
-export default class Evaluation extends PureComponent {
+export default class DeepDiagnosis extends PureComponent {
 
     render() {
         return (
@@ -17,7 +16,7 @@ export default class Evaluation extends PureComponent {
                 <Content>
                     <WebView
                         onMessage={(event)=>this.gotoDeep(event.nativeEvent.data)}
-                        source={{uri:urls.pages.HEALTH_APPRAISAL}}
+                        source={{uri:urls.pages.DEEP_DIAGNOSIS}}
                         style={{backgroundColor:'rgba(0,0,0,0)'}}
                     />
                 </Content>
@@ -26,7 +25,7 @@ export default class Evaluation extends PureComponent {
     }
 
     gotoDeep(data){
-        Actions.deepDiagnosis();
+        // Actions
     }
 
 

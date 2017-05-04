@@ -24,12 +24,12 @@ import Homeapp from "./views/home/HomeDrag";
 import SideBar from "./views/sidebar/SideBar";
 import Diagnosis from "./views/diagnosis/Diagnosis";
 import Evaluation from "./views/diagnosis/Evaluation";
+import DeepDiagnosis from "./views/diagnosis/DeepDiagnosis";
 import Settings from "./views/settings/Settings";
 import Personal from "./views/personal/Personal";
 import Disease from "./views/disease/Disease";
 import DiseaseDetail from "./views/disease/DiseaseDetail";
 import Energy from "./views/energy/Energy";
-
 
 /**
  * 路由
@@ -87,6 +87,7 @@ export default class AppRouter extends PureComponent {
 					{/*自诊*/}
 					<Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
 					<Scene key="evaluation" component={Evaluation} title="测评" hideNavBar/>
+					<Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自诊"  hideNavBar/>
 				</Scene>
 			</Router>
 		)
@@ -113,5 +114,6 @@ export default class AppRouter extends PureComponent {
 	shouldComponentUpdate() {
 		return false
 	}
+
 }
 

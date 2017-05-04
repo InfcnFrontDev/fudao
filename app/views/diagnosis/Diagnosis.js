@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import {View, ScrollView, TouchableHighlight, TouchableOpacity, TextInput} from "react-native";
 import {Text} from "native-base";
 import {observer} from "mobx-react/native";
+import {Actions} from "react-native-router-flux";
 import {Container, Header, Content, Loading} from "../../components/index";
 import CommonList from "./components/CommonList"
 import diagnosisStore from "../../mobx/diagnosiStore";
@@ -117,9 +118,9 @@ export default class Diagnosis extends PureComponent {
                                            value={this.state.text} placeholder="找不到您的问题？那就写下来吧！"
                                            multiline={true}
                                            underlineColorAndroid="transparent"/>
-                                <TouchableHighlight style={styles.customizeButton}>
+                                <TouchableOpacity style={styles.customizeButton}>
                                     <Text style={styles.customizeButtonText}>确定</Text>
-                                </TouchableHighlight>
+                                </TouchableOpacity>
                             </View>
                         </ScrollView>
                         <View style={styles.questionChoosed}>
@@ -127,12 +128,12 @@ export default class Diagnosis extends PureComponent {
                                 {this.renderChoosed(diagnosisDisease)}
                             </ScrollView>
                             <View style={styles.buttonContainer}>
-                                <TouchableHighlight style={styles.button}>
+                                <TouchableOpacity style={styles.button}>
                                     <Text style={styles.buttonText}>完成自诊去自疗</Text>
-                                </TouchableHighlight>
-                                <TouchableHighlight style={styles.button} onPress={()=>Actions.evaluation()}>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.button} onPress={()=>Actions.evaluation()}>
                                     <Text style={styles.buttonText}>提交并继续自诊</Text>
-                                </TouchableHighlight>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
