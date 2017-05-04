@@ -25,7 +25,7 @@ import Diagnosis from "./views/diagnosis/Diagnosis";
 import Evaluation from "./views/diagnosis/Evaluation";
 import DeepDiagnosis from "./views/diagnosis/DeepDiagnosis";
 import Settings from "./views/settings/Settings";
-import Personal from "./views/personal/Personal";
+import Personal from "./views/base-info/BaseInfo";
 import Disease from "./views/disease/Disease";
 import DiseaseDetail from "./views/disease/DiseaseDetail";
 import Energy from "./views/energy/Energy";
@@ -33,6 +33,7 @@ import FriendApply from "./views/friend/FriendApply";
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import NewFriend from "./views/friend/NewFriend";
 import UserDetail from "./views/user/UserDetail";
+import BaseInfo from "./views/base-info/BaseInfo"
 
 /**
  * 路由
@@ -80,6 +81,8 @@ export default class AppRouter extends PureComponent {
                     <Scene title="用户协议" key="userAgreement" component={UserAgreement} hideNavBar/>
 
                     <Scene title="我的记录" key="record" component={Record} hideNavBar/>
+
+                    <Scene title="基本信息" key="baseInfo" component={BaseInfo} hideNavBar/>
 
                     <Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
 

@@ -8,6 +8,8 @@ import MyEnter from "./components/MyEnter.js";
 import Homedrag from "./HomeDrag.js";
 import userStore from "../../mobx/userStore";
 import DetailsModal from "./components/DetailsModal";
+import positionStore from "../../mobx/positionStore";
+import weatherStore from "../../mobx/weatherStore";
 
 
 
@@ -46,7 +48,7 @@ export default class Home extends PureComponent {
 						</Button>
 					</View>
 					<View style={{flexDirection: 'column', justifyContent: 'center',width:80}}>
-						<Text style={styles.font}>北京.海淀</Text>
+						<Text style={styles.font}>{positionStore.currentPosition.city}</Text>
 						<View style={{flexDirection: 'row',justifyContent:'center'}}>
 							{/*					<Text style={styles.font}>{this.state.weather}</Text>
 							 <Image style={{width:20,height:20}} source={{uri:'http://api.k780.com:88/upload/weather/d1/'+this.state.img+'.png'}}/>*/}
