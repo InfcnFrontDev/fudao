@@ -112,7 +112,7 @@ let myDiseaseData = [
 ]
 
 let allDiseaseData = {
-	'liaoSheng': {
+	'liaoShen': {
 		"意外伤害": [
 			{
 				"id": "077fbcc94bd843f7a308519bc4f9b532",
