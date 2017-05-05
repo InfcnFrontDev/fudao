@@ -17,33 +17,34 @@ export default class AllDiseaseTabLiaoXin extends PureComponent {
 		onItemPress: () => console.log('onItemPress'),
 	}
 
-	dataSource = new ListView.DataSource({
-		rowHasChanged: (row1, row2) => row1 !== row2,
-	})
-
 	render() {
-		let {data} = this.props;
-		return (
+		let {data} = this.props
+        return (
 			<ListView
+				enableEmptySections={true}
 				contentContainerStyle={styles.contentContainer}
-				dataSource={this.dataSource.cloneWithRows(data)}
+				dataSource={data}
 				renderRow={this._renderRow.bind(this)}
 				pageSize={4}
-				enableEmptySections
 			/>
 		)
 	}
 
 	_renderRow(rowData, sectionId, rowId) {
 		let {selectedItem, onItemAdd, onItemPress} = this.props;
-		// alert(rowData.img)
+		let contains = false
+		selectedItem.map((item,index)=>{
+			if(item.id === rowData.id){
+                contains = true;
+            }
+		})
 		return (
 			<View style={styles.row}>
 				<Button transparent style={{padding: 0, margin: 6}} onPress={() => onItemPress(rowData)}>
 					<View style={styles.rowView}>
 						<Image source={{uri: urls.getImage(rowData.img)}} style={styles.rowimg}/>
 						<Text style={styles.rowTitle}>{rowData.name}</Text>
-						{selectedItem[rowData.id] ?
+						{contains ?
 							<TouchableHighlight underlayColor='transparent'>
 								<Image source={require('../../../assets/arrows_square_check.png')}
 									   style={styles.choose}/>

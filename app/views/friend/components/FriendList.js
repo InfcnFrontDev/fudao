@@ -20,7 +20,7 @@ class FriendList extends PureComponent {
 
 		// 按首字母分组
 		let listGroupBy = groupBy(list, (friend) => {
-			alert(JSON.stringify(friend));
+
 			let firstChar = tools.getFirstChar(friend.friendremark).toUpperCase();
 			if (groups.find((g) => g == firstChar))
 				return firstChar;
@@ -42,18 +42,19 @@ class FriendList extends PureComponent {
 
 		if (listGroupBy.hasOwnProperty(group)) {
 			let friendList = listGroupBy[group];
+			alert(JSON.stringify(friendList));
 			return (
 				<View key={group}>
 					<Separator title={group}/>
 					<List containerStyle={styles.list}>
 						{friendList.map((f, i) => (
-							<ListItem avatar last key={i} onPress={() => Actions.userDetail({userId: f.friendId})}>
+							<ListItem avatar last key={i} onPress={() => Actions.userDetail({userId: f.id})}>
 								<Left>
 									<Thumbnail style={{width: 40, height: 40}} square
 											   source={{uri:urls.getImage(f.img, 40, 40)}}/>
 								</Left>
 								<Body>
-								<Text>{f.friendNick}</Text>
+								<Text>{f.friendremark}</Text>
 								<Text note>{f.phone}</Text>
 								</Body>
 								<Right style={{justifyContent:'center'}}>

@@ -15,11 +15,12 @@ import {toast} from "../../utils/index";*/
 @observer
 export default class Friend extends PureComponent {
 
+	componentWillMount() {
+		friendStore.fetchMyFriendList();
+	}
+
 	render() {
 		const {isFetching, MyFriendList} = friendStore;
-		//alert("B"+ JSON.stringify(MyFriendList));
-
-		//let {isFetching, friendList} = this.props;
 		return (
 			<Container>
 				<Header {...this.props} right={
@@ -52,21 +53,11 @@ export default class Friend extends PureComponent {
 		)
 	}
 
-	componentWillMount() {
-		// let {dispatch, loginUser, friendList} = this.props;
-		//dispatch(fetchMyFriendList(loginUser.appid));
-		friendStore.fetchMyFriendList()
-	}
+
 
 	_onRefresh() {
-		let {loginUser, dispatch} = this.props;
-		dispatch(fetchMyFriendList(loginUser.appid, (success) => {
-			if (success) {
-				toast.show('刷新成功');
-			} else {
-				toast.show('刷新失败');
-			}
-		}));
+		friendStore.fetchMyFriendList();
+		ToastAndroid.show('刷新成功', ToastAndroid.SHORT);
 	}
 
 }

@@ -3,7 +3,7 @@ import {ListView, DatePickerAndroid} from "react-native";
 import {observer} from "mobx-react/native";
 import {ListItem, Body, Right, Text, Icon} from "native-base";
 import {Container, Content, Header, Separator} from "../../components/index";
-import rowsData from "./data";
+import rowsData from "./data/rowsData";
 import userStore from "../../mobx/userStore";
 
 /**

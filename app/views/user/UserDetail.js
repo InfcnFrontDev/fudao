@@ -16,12 +16,20 @@ import {request, urls, toast} from "../../utils/index";*/
 export default class UserDetail extends PureComponent {
 
 	state = {
-		user: null
+		user: {
+			img:'zixun/1.1.jpg',
+			title:'234',
+			appid:'567888888888888888888888888',
+			sex:'1'
+		}
 	}
 
 	render() {
 		let {user}  = this.state;
-		let {friendNickMap} = this.props;
+
+		let {userId} = this.props;
+		alert(userId);
+
 		return (
 			<Container>
 				<Header {...this.props}/>
@@ -37,13 +45,13 @@ export default class UserDetail extends PureComponent {
 								</Left>
 								<Body>
 								<Text>
-									{friendNickMap[user.appid] || user.title}
+									{/*{friendNickMap[user.appid] || user.title}*/}
 									&nbsp;
 									{user.sex == '1' ? <Icon name="ios-man" style={styles.manIcon}/> :
 										<Icon name="ios-woman" style={styles.womanIcon}/>}
 								</Text>
 								<Text note style={{paddingBottom: 20}}>
-									{friendNickMap[user.appid] ? '昵称：' + user.title : ''}
+									{/*{friendNickMap[user.appid] ? '昵称：' + user.title : ''}*/}
 								</Text>
 								</Body>
 								<Right>
@@ -61,7 +69,7 @@ export default class UserDetail extends PureComponent {
 							</ListItem>
 						</List>
 						<Separator/>
-						{this.renderButtons()}
+						{/*{this.renderButtons()}*/}
 					</View> : null}
 				</Content>
 			</Container>
