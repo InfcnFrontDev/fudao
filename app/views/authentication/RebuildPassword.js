@@ -29,13 +29,13 @@ export default class RebuildPassword extends PureComponent {
                 <Header {...this.props}></Header>
                 <Content>
                     <View style={styles.bag}>
-                        <UserInput text="新密码" placeholder={"6-12位由字母或数字或下划线组成"}  value={this.state.password} secureTextEntry={true}
+                        <UserInput text="新密码" placeholder={"6-12位密码"}  placeholderTextColor="#fff"  value={this.state.password} secureTextEntry={true}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password:value
                                        })
                                    }}/>
-                        <UserInput text="重复密码" placeholder={"6-12位由字母或数字或下划线组成"} value={this.state.password1} secureTextEntry={true}
+                        <UserInput text="重复密码" placeholder={"6-12位密码"}  placeholderTextColor="#fff" value={this.state.password1} secureTextEntry={true}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password1:value
@@ -62,14 +62,12 @@ export default class RebuildPassword extends PureComponent {
         }else{
             //关闭软键盘
             dismissKeyboard();
-           /* const {dispatch} = this.props;
-            dispatch(showLoading());*/
+           /* dispatch(showLoading());*/
             request.getJson(urls.apis.USER_RESETPASSWORD,{
                 phone: phone,
-                password: hex_md5(phone+password)
+                password:password
             }).then((data)=>{
            /* dispatch(hideLoading());*/
-                tools.showToast(JSON.stringify(data))
             if(data.ok) {
                     Actions['rebuildSuccess']({phone:phone,password:password})
                 }else{

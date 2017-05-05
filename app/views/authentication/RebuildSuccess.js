@@ -1,13 +1,15 @@
 import React, {PureComponent} from "react";
 import {Actions,ActionConst} from "react-native-router-flux";
+import {observer} from "mobx-react/native";
 import {Container,Content,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import  CommitButton from "./components/CommitButton";
 import  {hex_md5} from "./components/md5";
-
+import userStore from "../../mobx/userStore";
 /**
  * 设置密码
  */
+@observer
 export default class RebuildSuccess extends PureComponent {
     constructor(props){
         super(props);
@@ -17,12 +19,12 @@ export default class RebuildSuccess extends PureComponent {
             phone:this.props.phone,
             password:this.props.password,
         }
+        this.interval();
     }
     render() {
         var title=(
             <Text style={styles.titleText}>{this.state.text}</Text>
         );
-        this.interval();
         return (
             <Container style={styles.container}>
                 <View style={styles.view}>
@@ -49,35 +51,18 @@ export default class RebuildSuccess extends PureComponent {
         },1000)
     }
     _login(phone,password){
-        request.getJson(urls.apis.USER_LOGIN, {
-            phone: phone,
-            password: hex_md5(phone + password),
-        }).then((data) => {
-                if (data.ok) {
-                    var birthday = data.obj.birthday
-                    if (!birthday) {
-                        //没有基本信息表示第一次登录需要添写信息
-                        Actions['startInformation']({phone:phone})
-                    } else {
-                        //基本信息已经添加完成
-                       /* let user = Object.assign({}, {
-                            ...data.obj
-                        });
-                        // 保存用户状态
-                        this.props.dispatch(login(user));*/
-
-
-                        // 跳到首页
-                        Actions.index();
-                    }
-
-                } else {
-
-                }
-            }, (error) => {
-
+        userStore.login(phone, password, () => {
+            userStore.fetchLoginUser();
+            tools.showToast(JSON.stringify(userStore.loginUser))
+            // 跳到首页
+            if(!userStore.loginUser.sex){
+                Actions.startInformation({phone:this.state.phone})
+            }else{
+                Actions.index({
+                    type: ActionConst.POP_AND_REPLACE,
+                });
             }
-        );
+        });
     }
 }
 const styles = {

@@ -2,6 +2,7 @@
 import React, {PureComponent} from "react";
 import {Modal, View, Image, TouchableHighlight,TextInput,ScrollView,TouchableOpacity } from "react-native";
 import {Text,Button,ListItem,CheckBox, } from "native-base";
+import MicrocosmicFactor from "./MicrocosmicFactor";
 /*import CheckBox from 'react-native-check-box'*/
 
 /**
@@ -17,7 +18,6 @@ export default class EmotionFactor extends PureComponent {
             show: false,
             sel:false,
             color:'#fff',
-            weiguan:null,
             flag:true,
             grade:null,
             flag1:true,
@@ -31,16 +31,10 @@ export default class EmotionFactor extends PureComponent {
     }
 
     componentWillMount(){
-
-
         let grade=this.props.data.grade;
         let reasons=this.props.data.reasons;
         tools.showToast(JSON.stringify(reasons))
-        for(var i=0;i<reasons.length;i++){
-            this.select[i]={};
-            this.select[i].name= reasons[i];
-            this.select[i].value= false;
-        }
+
         for(var i=0;i<grade.length;i++){
             this.grade[i]={};
             this.grade[i].name= grade[i].name;
@@ -51,15 +45,13 @@ export default class EmotionFactor extends PureComponent {
         this.setState({
             data:this.props.data,
             img:this.props.emotionImg,
-            weiguan:this.select,
-            reason:null,
             grade:this.grade,
         });
     }
     render() {
-        let {data,img,weiguan,grade} = this.state;
+        let {data,img,grade} = this.state;
         let slider=(null);
-        if(!data||!img||!weiguan||!grade)
+        if(!data||!img||!grade)
             return null
        if(data.grade.length>1) {
            slider = (
@@ -98,11 +90,7 @@ export default class EmotionFactor extends PureComponent {
                                 <Text>{data.emotion}</Text>
                                 <Text>呢？</Text>
                             </View>
-                            <View style={{height:150}}>
-                                <ScrollView style={{height:150}}>
-                                    {weiguan.map((item,index)=>this.renderCheckBox(item,index))}
-                                 </ScrollView>
-                            </View>
+                            <MicrocosmicFactor microcosmic={this.props.data.reasons}></MicrocosmicFactor>
                             <View style={{alignItems:'center'}}>
                                 <View style={styles.input}>
                                     <TextInput underlineColorAndroid="transparent" placeholder="请输入您的原因" onChangeText={(value)=>{this.selfReason=value}}></TextInput>
@@ -220,7 +208,7 @@ export default class EmotionFactor extends PureComponent {
               emotion: name,
               grade:fenji,
              }).then((data) => {
-
+                    this.hide();
              })
         }else{
             request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {

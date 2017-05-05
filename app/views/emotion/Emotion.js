@@ -9,26 +9,43 @@ import EmotionSolve from "./components/EmotionSolve";
 import ImageText from "../components/ImageText";
 import VideoText from "../components/VideoText";
 import {good, calm, bad} from "./components/EmotionData";
-
+import {observer} from "mobx-react/native";
+import EmotionStore from "../../mobx/emotionStore";
 /**
  * 情绪
  */
+@observer
 export default class Emotion extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
 			modalView: null,
 			EmoModal:null,
-			FactorModal:null
+			FactorModal:null,
+		}
+	}
+	/**
+	 * 一小时后情绪修改为平静， 进入页面时处理
+	 */
+	componentWillMount() {
+		let {myEmotion,updateTime}=EmotionStore;
+		if (myEmotion) {
+			let currentTime = new Date().getTime();
+			if (currentTime - updateTime > 1000 * 60 * 60) {
+				EmotionStore.updateMyEmotion(calm[0]);
+			}
+			this.setState({
+				myEmotion:myEmotion
+			})
 		}
 	}
 	render() {
-		let {myEmotion} = this.props;
 		let {EmoModal} = this.state;
-		// 默认情绪为‘平静’
-		if (!myEmotion) {
-			myEmotion = calm[0];
+		let myEmotion=EmotionStore.myEmotion;
+		if(!myEmotion){
+			myEmotion=calm[0]
 		}
+		// 默认情绪为‘平静’
 		return (
 			<Container>
 				<Header {...this.props} right={
@@ -59,15 +76,17 @@ export default class Emotion extends PureComponent {
 	 */
 	_onItemPress(items) {
 		// 更新我的情绪
-		/*this.props.dispatch(updateMyEmotion(item));*/
+		let updateTime = new Date().getTime();
+		EmotionStore.updateMyEmotion(items);
+		EmotionStore.updateMyTime(updateTime);
 			let goods="goods";
 			let bads="bads";
-
-			if(items.title=="愉悦"||items.title=="兴奋"||items.title=="兴趣"||items.title=="满足"||items.title=="平静"||items.title=="平淡"){
+			/*if(items.title=="愉悦"||items.title=="兴奋"||items.title=="兴趣"||items.title=="满足"||items.title=="平静"||items.title=="平淡"){
 				request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
 				 	emotion: items.title,
 					weather:"晴"
 				 }).then((data) => {
+					tools.showToast("兴奋")
 				 	let fenji=null;
 				 	if (data.ok) {
 						if(data.obj.grade.length==1){
@@ -90,8 +109,74 @@ export default class Emotion extends PureComponent {
 
 				})
 
-			}else{
-				request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
+			}else{*/
+			let data={
+			 "obj": {
+			 "emotion": "沮丧",
+			 "reasons": [
+			 "有长期不明原因的疲劳感",
+			 "患有季节性疾患",
+			 "肥胖给自己的生活带来烦扰",
+			 "记忆力较差",
+			 "最近总是担心自己生了大病",
+			 "睡眠不规律",
+			 "每周晚间12点后入睡的次数2次及以上",
+			 "睡眠时长小于7小时",
+			 "醒后感觉精力不能恢复",
+			 "最近失眠",
+			 "近期食欲不好",
+			 "最近的体检报告中有不合格的项目",
+			 "对目的居住条件不满意",
+			 "对目前的财务收入状况不满意",
+			 "财务管理方式为基金或股票",
+			 "平时几乎不进行任何休闲娱乐活动",
+			 "平时经常感觉无所事事",
+			 "不喜欢现在的工作氛围",
+			 "现在工作不能实现自己的价值",
+			 "认为组织激励机制是不公平的",
+			 "对自己的外貌不满意",
+			 "对自己的身材不满意",
+			 "对自己的体重不满意",
+			 "感觉自己受到不公平的待遇",
+			 "经常责怪自己",
+			 "感觉自己不如别人",
+			 "感觉别人拥有自己没有的",
+			 "认为自己还未做出足够的努力",
+			 "很难接纳自己的缺点",
+			 "担心别人指出自己的缺点或过错",
+			 "通常情况下感觉自己没有受到尊重",
+			 "与配偶/伴侣经常吵架",
+			 "遇到困难时没有可以倾诉的朋友",
+			 "近期发生令人担忧的生活事件"
+			 ],
+			 "grade": [
+			 {
+			 "name": "一级",
+			 "title": "沮丧"
+			 },
+			 {
+			 "name": "二级",
+			 "title": "悲伤"
+			 },
+			 {
+			 "name": "三级",
+			 "title": "悲痛"
+			 }
+			 ],
+			 "macroscopic": [
+			 {
+			 "img": "/emotion/macro/rizhao.png",
+			 "name": "阴"
+			 }
+			 ]
+			 },
+			 "ok": true
+			 }
+			 if(data.obj){
+                 this.showModal(data.obj,bads,items.img);
+             }
+
+				/*request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
 				 	emotion:items.title,
 					weather:"阴"
 				 }).then((data) => {
@@ -103,7 +188,8 @@ export default class Emotion extends PureComponent {
 				 },(error)=>{
 
 				})
-			}
+				}*/
+
 	}
 	showModal(data,id,img) {
 
@@ -117,17 +203,23 @@ export default class Emotion extends PureComponent {
 					<EmotionFactor data={data} emotionImg={img}></EmotionFactor>
 				</Modal>
 			)
+			this.setState({
+				EmoModal:Emotion
+			});
+			this._modal.show();
 		}else{
 			Emotion=(
-				<EmotionModal ref={(e)=>this._modal = e}>
+				<EmotionModal ref={(e)=>this._modalS = e}>
 					<EmotionSolve data={data} emotionImg={img}></EmotionSolve>
 				</EmotionModal>
 			)
+			this.setState({
+				EmoModal:Emotion
+			});
+			this._modalS.show();
 		}
-		this.setState({
-			EmoModal:Emotion
-		});
-		this._modal.show();
+
+
 	}
 }
 

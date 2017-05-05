@@ -51,8 +51,6 @@ class EmotionModal extends PureComponent {
         })
     }
 }
-
-
 const styles = {
     opacityView: {
         flex: 1,

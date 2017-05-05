@@ -63,12 +63,12 @@ export default  class WomanChoose extends PureComponent {
                                     <Text>产后恢复阶段</Text>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={this.choose.bind(this,'已孕阶段')}>
+                            <TouchableOpacity onPress={this.choose.bind(this,'已育阶段')}>
                                 <View  style={styles.photo}>
                                     <View  style={styles.left} >
                                         <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
                                     </View>
-                                    <Text>已孕阶段</Text>
+                                    <Text>已育阶段</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>

@@ -73,7 +73,7 @@ export default class StartInformation extends PureComponent {
             <TouchableOpacity onPress={this.woman.bind(this)}>
                 <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
                 <View style={{height:20,width:90}}>
-                    <Text style={{textAlign:'center'}}>{this.state.jieduan}</Text>
+                    <Text style={{textAlign:'center',color:'#fff'}}>{this.state.jieduan}</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -86,7 +86,7 @@ export default class StartInformation extends PureComponent {
                     <View style={styles.mb}></View>
                     <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/woman.png')}/>
                     <View style={{height:20,width:80}}>
-                        <Text style={{textAlign:'center'}}>{this.state.jieduan}</Text>
+                        <Text style={{textAlign:'center',color:"#fff"}}>{this.state.jieduan}</Text>
                     </View>
                 </TouchableOpacity>
             )
@@ -188,14 +188,26 @@ export default class StartInformation extends PureComponent {
        /* let {dispatch}=this.props;*/
        /* let loginUser=this.props.loginUser;*/
         let {position, maxText, phone, sex, jieduan} = this.state;
-        let womanType;
+        let crowd;
         if (sex == 2) {
-            if (jieduan == '未孕阶段' || jieduan == '备孕阶段' || jieduan == '已孕阶段') {
-                womanType = 1
-            } else if (jieduan == '待产阶段') {
-                womanType = 2
-            } else {
-                womanType = 3
+            switch(jieduan)
+            {
+                case '未孕阶段':
+                    crowd = "woman_un";
+                    break;
+                case '备孕阶段':
+                    crowd = "woman_pre";
+                    break;
+                case  '已育阶段':
+                    crowd = "woman_next";
+                    break;
+                case '待产阶段':
+                    crowd = "woman_ing";
+                    break;
+                default:
+                    crowd = "woman_ed";
+                    break;
+
             }
         }
 
@@ -263,16 +275,16 @@ export default class StartInformation extends PureComponent {
             // 精神状况
             userInformation.mental_state = '';
         }*/
-
-        request.postJson(urls.apis.USER_SETUSERBASEINFO, {
+        request.getJson(urls.apis.USER_SETUSERBASEINFO, {
             phone:phone,
             sex: sex,
-            womanType: womanType,
+            crowd: crowd,
             birthday: maxText,
-            regionId:position
+            regionId:110000
         }).then((data)=> {
             if (data.ok) {
-                let user = Object.assign({}, {
+
+               /* let user = Object.assign({}, {
                     phone:phone,
                     sex: sex,
                     womanType: womanType,
@@ -286,7 +298,7 @@ export default class StartInformation extends PureComponent {
                 this.props.dispatch(clearMyEmotion());
                 this.props.dispatch(clearFriend());
                 this.props.dispatch(clearDynamic());
-                this.props.dispatch(clearPosition());
+                this.props.dispatch(clearPosition());*/
                 // 跳到首页
                 Actions.index();
             }
@@ -328,16 +340,19 @@ const styles = {
     },
     text1:{
         textAlign:'center',
-        fontSize:theme.DefaultFontSize+2
+        fontSize:theme.DefaultFontSize+2,
+        color:'#fff'
 
     },
     text2:{
         textAlign:'center',
         fontSize:theme.DefaultFontSize+2,
+        color:'#fff'
     },
     text3:{
         textAlign:'center',
         fontSize:theme.DefaultFontSize-3,
+        color:'#fff'
     },
     btn:{
         borderWidth:1,
