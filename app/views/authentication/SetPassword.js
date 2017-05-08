@@ -28,13 +28,13 @@ export default class SetPassword extends PureComponent {
                 <Header {...this.props}></Header>
                 <Content>
                     <View style={styles.bag}>
-                        <UserInput text="设置密码" placeholder={"6-12位由字母或数字或下划线组成"} secureTextEntry={true}  value={this.state.password}
+                        <UserInput text="设置密码" placeholder={"6-12位密码"} placeholderTextColor="#fff" secureTextEntry={true}  value={this.state.password}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password:value
                                        })
                                    }}/>
-                        <UserInput text="重复密码" placeholder={"6-12位由字母或数字或下划线组成"} secureTextEntry={true} value={this.state.password1}
+                        <UserInput text="重复密码" placeholder={"6-12位密码"}  placeholderTextColor="#fff" secureTextEntry={true} value={this.state.password1}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password1:value
@@ -58,14 +58,14 @@ export default class SetPassword extends PureComponent {
                 password1:''
             })
         }else if(!checkPwd(password)){
-            tools.showToast("请填入6-12由字母或数字或下划线组成的密码！");
+            tools.showToast("6-12密码！");
         }else{
             //关闭软键盘
             dismissKeyboard();
            /* const {dispatch} = this.props;*/
             request.getJson(urls.apis.USER_REGISTER,{
                 phone: phone,
-                password: hex_md5(phone+password)
+                password: password
             }).then((data)=>{
                 /*dispatch(hideLoading());*/
                     if(data.ok) {

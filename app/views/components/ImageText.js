@@ -9,13 +9,12 @@ import {Text} from "native-base";
 class ImageText extends PureComponent {
 
 	render() {
-		let {title, content, image} = this.props;
 		return (
 			<View style={styles.container}>
-				<Text style={styles.title}>{title}</Text>
-				<Text style={styles.content}>{content}</Text>
+				<Text style={styles.title}>121212</Text>
+				<Text style={styles.content}>12121212</Text>
 				<View>
-					<Image source={{uri: urls.getImage('/high_quality_population'+image)}} resizeMode='cover' style={styles.image}/>
+					{/*<Image source={{uri: urls.getImage('/high_quality_population'+image)}} resizeMode='cover' style={styles.image}/>*/}
 				</View>
 			</View>
 		)

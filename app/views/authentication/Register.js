@@ -39,9 +39,9 @@ export default class Register extends PureComponent {  // eslint-disable-line
                                    }}/>
                         <View style={styles.box}>
                             <View style={styles.border}>
-                                <Text>验证码</Text>
+                                <Text style={{color:"#fff"}}>验证码</Text>
                             </View>
-                            <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
+                            <TextInput style={{flex:1,color:'#fff'}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
                                        onChangeText={(value)=>{
                                            this.setState({
                                                code:value
@@ -70,23 +70,19 @@ export default class Register extends PureComponent {  // eslint-disable-line
             request.getJson(urls.apis.USER_CHECKPHONEREGISTERED,{
                     phone:phone
                 }).then((data)=>{
-                    tools.showToast("正在发送验证码...");
-                    this._getGode._click();
-                    if(!data.ok) {
+                    if(data.message!="用户已注册") {
+                        this._getGode._click();
                         request.getJson(urls.apis.USER_SENDCODE,{
                             phone:phone ,
                         }).then((data)=>{
                         },(error)=>{
                         })
-
-
                     }else{
-                        tools.showToast("手机号已被注册");
+                        tools.showToast(data.message);
                     }
                 },(error)=>{
 
                 })
-
         }
     }
     _zhuce(){
@@ -137,7 +133,7 @@ const styles = {
         fontSize:theme.DefaultFontSize-4,
         textAlign:'center',
         marginTop:6,
-        color:'#666'
+        color:'#fff'
     },
     box:{
         height:54,
@@ -146,7 +142,6 @@ const styles = {
         alignItems:'center',
         borderColor:'#D4D4D4',
         borderBottomWidth:1,
-
     },
     bag:{
         padding:10,
@@ -156,7 +151,7 @@ const styles = {
         flexDirection:'row',
         justifyContent:'center',
         borderRightWidth:1,
-        borderRightColor:"#D4D4D4",
+        borderRightColor:"#fff",
 
     },
 };

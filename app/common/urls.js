@@ -2,13 +2,11 @@
 // const apiPath = 'http://103.254.113.11:9191/api/'; // 外网
 const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 
-// web服务器地址
-// const webPath = 'http://103.254.113.11:9191/web/'; // 外网
-
 // const webPath = 'http://192.168.10.69:9191/web/'; // 内网
+
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
-// const webPath = 'http://192.168.3.204:3000/'; // 王朋
-const webPath = 'http://192.168.3.213:3000/'; // cxx
+const webPath = 'http://192.168.3.204:3000/'; // 王朋
+// const webPath = 'http://192.168.3.213:3000/'; // cxx
 // const webPath = 'http://192.168.3.203:3000/'; //
 
 
@@ -43,7 +41,7 @@ const urls = {
         // 我的位置
         MY_LOCATION: webPath + 'myLocation.html',
         //首页
-        HOEM: webPath + 'home.html',
+        HOME: webPath + 'home.html',
         //我的能量场
         MY_ENERGY: webPath + 'myEnergy.html',
         //自诊
@@ -59,7 +57,8 @@ const urls = {
 
 
         //天气-------------------------------------------------------------------------
-        WEATHER: apiPath + 'app/weatherAction!getWeather.action',
+		WEATHER_GETWEATHER: apiPath + 'WeatherApi/getWeather',
+		WEATHER_GETPM25: apiPath + 'WeatherApi/getPM25',
 
         // 资讯 ----------------------------------------------------------------------
 
@@ -222,7 +221,6 @@ const urls = {
 
 
     },
-
     // 获取图片完整路径
     getImage(filePath, width, height){
         let url = this.apis.IMAGE + '?filePath=' + filePath;
@@ -233,6 +231,5 @@ const urls = {
         // console.log(url);
         return url;
     },
-
 };
 export default urls;

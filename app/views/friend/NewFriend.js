@@ -4,33 +4,37 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, Separator, PullView} from "../../components/index";
 import {Left, Body, Right, ListItem, Thumbnail, Text, Button} from "native-base";
-import {fetchNewFriendList} from "../../actions/friend";
-import {toast, config} from "../../utils/index";
+import friendStore from "../../mobx/friendStore";
+import {observer} from "mobx-react/native";
+/*import {fetchNewFriendList} from "../../actions/friend";
+import {toast, config} from "../../utils/index";*/
 
 /**
  * 新朋友（加好友申请列表）
  */
-class NewFriend extends PureComponent {
+@observer
+export default class NewFriend extends PureComponent {
 
 	render() {
-		let {isFetching, newFriendList} = this.props,
-			count = newFriendList.length;
+		let {isNewFetching, NewFriendList} =friendStore,
+			count = NewFriendList.length;
+		alert(JSON.stringify(NewFriendList));
 		return (
 			<Container>
 				<Header {...this.props}/>
 				<Content gray>
-					<PullView isRefreshing={isFetching} onRefresh={this._onRefresh.bind(this)}>
+					<PullView isRefreshing={isNewFetching} onRefresh={this._onRefresh.bind(this)}>
 						<Separator title="新的朋友"/>
 						<List containerStyle={styles.list}>
-							{newFriendList.map((f, i) => (
+							{NewFriendList.map((f, i) => (
 								<ListItem avatar key={i}>
 									<Left>
 										<Thumbnail style={{width: 40, height: 40}} square
 												   source={{uri:'http://touxiang.qqzhi.com/uploads/2012-11/1111032758936.jpg'}}/>
 									</Left>
 									<Body>
-									<Text>{f.friendNick}</Text>
-									<Text note>{f.tip}</Text>
+									<Text>{f.nickname}</Text>
+									<Text note>{f.introduce}</Text>
 									</Body>
 									<Right style={{justifyContent:'center'}}>
 										{f.state == 0 ?
@@ -52,21 +56,23 @@ class NewFriend extends PureComponent {
 	}
 
 	componentDidMount() {
-		let {dispatch, loginUser} = this.props;
+		friendStore.fetchNewFriendList()
+
+		/*let {dispatch, loginUser} = this.props;
 		setTimeout(() => {
 			dispatch(fetchNewFriendList(loginUser.appid));
-		}, config.loadingDelayTime)
+		}, config.loadingDelayTime)*/
 	}
 
 	_onRefresh() {
-		let {loginUser, dispatch} = this.props;
+		/*let {loginUser, dispatch} = this.props;
 		dispatch(fetchNewFriendList(loginUser.appid, (success) => {
 			if (success) {
 				toast.show('刷新成功');
 			} else {
 				toast.show('刷新失败');
 			}
-		}));
+		}));*/
 	}
 
 }
@@ -90,4 +96,3 @@ const mapStateToProps = state => ({
 	loginUser: state.user.loginUser,
 	...state.friend,
 });
-export default connect(mapStateToProps)(NewFriend);

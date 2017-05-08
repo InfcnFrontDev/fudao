@@ -36,9 +36,9 @@ export default class Register extends PureComponent {  // eslint-disable-line
                                    }}/>
                         <View style={styles.box}>
                             <View style={styles.border}>
-                                <Text>验证码</Text>
+                                <Text style={{color:'#'}}>验证码</Text>
                             </View>
-                            <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
+                            <TextInput style={{flex:1,color:'#fff'}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
                                        onChangeText={(value)=>{
                                            this.setState({
                                                code:value
@@ -85,20 +85,19 @@ export default class Register extends PureComponent {  // eslint-disable-line
         }
     }
     _find(){
-        const {dispatch} = this.props;
         let {phone,code} = this.state;
         if(phone==""){
-            ToastAndroid.show("手机号不能为空", ToastAndroid.SHORT);
+            tools.showToast("手机号不能为空");
         }else if(code==""){
-            ToastAndroid.show("验证码不能为空", ToastAndroid.SHORT);
+            tools.showToast("验证码不能为空");
         }else{
             /*接口*/
-            dispatch(showLoading());
+           /* dispatch(showLoading());*/
             request.getJson(urls.apis.USER_CHECKCODE,{
                 phone: phone,
                 code: code,
                 }).then((data)=>{
-                    dispatch(hideLoading());
+                 /*   dispatch(hideLoading());*/
                     if(data.ok) {
                         this._getGode.clearTimer();
                         Actions['rebuildPassword']({phone:phone});
@@ -109,7 +108,7 @@ export default class Register extends PureComponent {  // eslint-disable-line
                         })
                     }
                 },(error)=>{
-                    dispatch(hideLoading());
+                   /* dispatch(hideLoading());*/
                 })
         }
     }

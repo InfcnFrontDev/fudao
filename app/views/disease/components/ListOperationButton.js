@@ -24,7 +24,10 @@ export default class ListOperationButton extends PureComponent {
 		iconStyle.color = color;
 		iconBorderStyle.borderColor = color;
 		return (
-			<TouchableHighlight underlayColor='#fafafa'>
+			<TouchableHighlight
+				underlayColor='#fafafa'
+				onPress={this.props.onPress}
+			>
 				<View style={iconBorderStyle}>
 					<Icon name={iconName} style={iconStyle}/>
 				</View>

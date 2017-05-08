@@ -1,7 +1,10 @@
+import {AsyncStorage} from "react-native";
 import {observable, runInAction, computed, action, reaction} from "mobx";
 
 class FriendStore {
-    @observable MyFriendList = []
+    @observable MyFriendList =[];
+    @observable errorMsg = '';
+    @observable NewFriendList=[];
 
 
     @action
@@ -9,7 +12,19 @@ class FriendStore {
         request.getJson(urls.apis.FRIEND_GETMYFRIENDLIST)
         .then((result) => {
             if (result.ok) {
-                this.MyFriendList = result.obj
+                this.MyFriendList = result.obj;
+            } else {
+                tools.showToast('请求出错！')
+            }
+        });
+    }
+    @action
+    fetchNewFriendList(){
+        request.getJson(urls.apis.FRIEND_GETMYFRIENDAPPLYLIST)
+        .then((result) => {
+            if (result.ok) {
+                this.NewFriendList = result.obj;
+
             } else {
                 tools.showToast('请求出错！')
             }
@@ -18,7 +33,11 @@ class FriendStore {
 
     @computed
     get isFetching() {
-        return this.MyFriendList.length == 0
+        return this.MyFriendList.length == 0 && this.errorMsg == ''
+    }
+    @computed
+    get isNewFetching() {
+        return this.NewFriendList.length == 0 && this.errorMsg == ''
     }
 }
 

@@ -1,8 +1,8 @@
 import React, {PureComponent} from "react";
 import {ScrollView, View, ToastAndroid} from "react-native";
-import {connect} from "react-redux";
+import {observer} from "mobx-react/native";
 import {Actions} from "react-native-router-flux";
-import {Container, Content, Header, List, PullView} from "../../components/index";
+import {Container, Content, Header, List, PullView,Loading} from "../../components/index";
 import {Left, Body, Right, ListItem, Button, Icon, Text} from "native-base";
 import FriendList from "./components/FriendList";
 import friendStore from "../../mobx/friendStore";
@@ -12,16 +12,20 @@ import {toast} from "../../utils/index";*/
 /**
  * 好友列表
  */
+@observer
 export default class Friend extends PureComponent {
+
+	componentWillMount() {
+		friendStore.fetchMyFriendList();
+	}
 
 	render() {
 		const {isFetching, MyFriendList} = friendStore;
-		//let {isFetching, friendList} = this.props;
 		return (
 			<Container>
 				<Header {...this.props} right={
 					<Right>
-						<Button><Icon name="add"/></Button>
+						<Button transparent onPress={()=>Actions.searchUser()}><Icon name="add"/></Button>
 					</Right>
 				}/>
 				<Content gray delay>
@@ -42,25 +46,18 @@ export default class Friend extends PureComponent {
 						</List>
 						<FriendList list={MyFriendList}/>
 					</PullView>
-				</Content>
+
+
+			</Content>
 			</Container>
 		)
 	}
 
-	/*componentDidMount() {
-		let {dispatch, loginUser, friendList} = this.props;
-		//dispatch(fetchMyFriendList(loginUser.appid));
-	}*/
+
 
 	_onRefresh() {
-		let {loginUser, dispatch} = this.props;
-		dispatch(fetchMyFriendList(loginUser.appid, (success) => {
-			if (success) {
-				toast.show('刷新成功');
-			} else {
-				toast.show('刷新失败');
-			}
-		}));
+		friendStore.fetchMyFriendList();
+		ToastAndroid.show('刷新成功', ToastAndroid.SHORT);
 	}
 
 }

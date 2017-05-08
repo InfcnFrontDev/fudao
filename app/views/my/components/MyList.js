@@ -14,7 +14,7 @@ export default class MyList extends PureComponent {
 					icon: 'ios-list-box-outline',
 					text: '基本信息',
 					bordered: true,
-					route: 'personal'
+					route: 'baseInfo'
 				})}
 				{this.renderItem({
 					icon: 'ios-stopwatch-outline',

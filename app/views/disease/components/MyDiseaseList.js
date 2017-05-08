@@ -1,29 +1,76 @@
 import React, {PureComponent} from "react";
 import Swiper from "react-native-swiper";
 import {Text, Button} from "native-base";
+import {observer} from "mobx-react/native";
 import {View, Image, ToastAndroid, DeviceEventEmitter, TouchableHighlight} from "react-native";
 import ListOperationButton from "./ListOperationButton";
+import myDiseaseListStore from "../../../mobx/myDiseaseListStore";
+import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
+import allDiseaseListStore from "../../../mobx/allDiseaseListStore";
+
 
 /**
  * 我的问题列表组件
  */
+
+@observer
 export default class MyDiseaseList extends PureComponent {
 
-	static propTypes = {
-		data: React.PropTypes.array,
-		selectedItem: React.PropTypes.object,
-		onItemPress: React.PropTypes.func,
-		onItemRemove: React.PropTypes.func,
-	}
+    componentDidMount(){
+        myDiseaseListStore.fetchMyDiseaseList()
+    }
 
-	static defaultProps = {
-		data: [],
-		onItemPress: () => console.log('onItemPress'),
-		onItemRemove: () => console.log('onItemRemove'),
-	}
+    renderPages(items) {
+        // 将 array 拆分成多个 size 长度的块，把这些块组成一个新数组。
+        let pages = _.chunk(items, 4);
+        return pages.map((page, i) => this.renderPage(page, i));
+    }
+
+    renderPage(page, i) {
+        return (
+			<View key={i} style={styles.page}>
+                {page.map((item, i) => this.renderItem(item, i))}
+			</View>
+        )
+    }
+
+    renderItem(item, i) {
+        let {selectedItemId} = myDiseaseListStore;
+        let btnStyle = {...styles.item};
+        if (selectedItemId && item.id == selectedItemId) {
+            btnStyle.backgroundColor = theme.brandPrimary;
+        }
+        return (
+			<Button key={i} transparent style={btnStyle}
+					onPress={this._onItemPress.bind(this, item)}>
+				<Image source={{uri: urls.getImage(item.img)}} style={styles.itemImg}/>
+				<Text style={styles.itemTitle}>{item.name}</Text>
+				<ListOperationButton
+					iconName={'remove'}
+					onPress={this._onItemRemove.bind(this, item,i)}/>
+			</Button>
+        )
+    }
+
+    _onItemPress(item) {
+        myDiseaseListStore.selectedItemId = item.id
+    	if(this.props.onItemPress){
+            this.props.onItemPress(item)
+		} else {
+    		this.props.onTransPress(item)
+		}
+    }
+
+    _onItemRemove(item,i) {
+        let {myDiseaseList,deleteMyDiseaseListItem} = myDiseaseListStore;
+        myDiseaseList.splice(i, 1);
+		deleteMyDiseaseListItem(item.id)
+        allDiseaseListStore.fetchAllDiseaseList()
+
+    }
 
 	render() {
-		let {data} = this.props;
+        let {myDiseaseList} = myDiseaseListStore;
 		return (
 			<View style={{height: 126}}>
 				<Swiper
@@ -32,53 +79,11 @@ export default class MyDiseaseList extends PureComponent {
 					dot={<View style={styles.dot}></View>}
 					activeDot={<View style={styles.activeDot}></View>}
 				>
-					{this.renderPages(data)}
+					{this.renderPages(myDiseaseList)}
 				</Swiper>
 			</View>
 		)
 	}
-
-	renderPages(items) {
-		// 将 array 拆分成多个 size 长度的块，把这些块组成一个新数组。
-		let pages = _.chunk(items, 4);
-		return pages.map((page, i) => this.renderPage(page, i));
-	}
-
-	renderPage(page, i) {
-		return (
-			<View key={i} style={styles.page}>
-				{page.map((item, i) => this.renderItem(item, i))}
-			</View>
-		)
-	}
-
-
-	renderItem(item, i) {
-		let {selectedItem} = this.props;
-		let btnStyle = {...styles.item};
-		if (selectedItem && item.id == selectedItem.id) {
-			btnStyle.backgroundColor = theme.brandPrimary;
-		}
-		return (
-			<Button key={i} transparent style={btnStyle}
-					onPress={this._onItemPress.bind(this, item)}>
-				<Image source={{uri: urls.getImage(item.img)}} style={styles.itemImg}/>
-				<Text style={styles.itemTitle}>{item.name}</Text>
-				<ListOperationButton iconName={'remove'}/>
-			</Button>
-		)
-	}
-
-	_onItemPress(question) {
-		let {onItemPress} = this.props;
-		onItemPress(question);
-	}
-
-	_onItemRemove(question) {
-		const {onItemRemove} = this.props;
-		onItemRemove(question);
-	}
-
 }
 
 const styles = {
@@ -87,7 +92,6 @@ const styles = {
 		backgroundColor: '#F0F0F0',
 		borderBottomColor: '#D8D8D8',
 	},
-
 	page: {
 		flex: 1,
 		flexDirection: 'row', //设置横向布局
@@ -105,7 +109,7 @@ const styles = {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'flex-start',
-		backgroundColor: '#556794',
+		// backgroundColor: '#556794',
 	},
 	itemTitle: {
 		color: '#FFF',
