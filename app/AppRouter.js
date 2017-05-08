@@ -14,6 +14,7 @@ import RebuildSuccess from "./views/authentication/RebuildSuccess";
 import PasswordValidate from "./views/authentication/PasswordValidate";
 import WomanChoose from "./views/authentication/WomanChoose";
 import Friend from "./views/friend/Friend";
+import Emotion from "./views/emotion/Emotion";
 import About from "./views/about/About";
 import UserAgreement from "./views/about/UserAgreement";
 import PrivacyStatement from "./views/about/PrivacyStatement";
@@ -29,6 +30,9 @@ import Personal from "./views/base-info/BaseInfo";
 import Disease from "./views/disease/Disease";
 import DiseaseDetail from "./views/disease/DiseaseDetail";
 import Energy from "./views/energy/Energy";
+import NewDynamic from "./views/dynamic/NewDynamic"
+import DynamicDetail from "./views/dynamic/DynamicDetail"
+import DynamicPicture from "./views/dynamic/DynamicPicture"
 import FriendApply from "./views/friend/FriendApply";
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import NewFriend from "./views/friend/NewFriend";
@@ -86,12 +90,21 @@ export default class AppRouter extends PureComponent {
 
                     <Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
 
-                    <Scene title="" key="homeapp" component={Homeapp}/>
+                    <Scene title="主页" key="homeapp" component={Homeapp}/>
 
+
+                    <Scene title="自疗" key="disease" component={Disease} hideNavBar/>
+                    <Scene title="疾病详情" key="diseaseDetail" component={DiseaseDetail} hideNavBar/>
+                    <Scene title="能量场" key="energy" component={Energy} hideNavBar/>
                     {/*自诊*/}
-                    <Scene key="diagnosis" component={Diagnosis} title="自诊"  hideNavBar/>
+                    <Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
                     <Scene key="evaluation" component={Evaluation} title="测评"  hideNavBar/>
                     <Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自诊"  hideNavBar/>
+
+                    {/*动态*/}
+                    <Scene key="newDynamic" component={NewDynamic} title="新动态" hideNavBar/>
+                    <Scene key="dynamicDetail" component={DynamicDetail} title="动态详情" hideNavBar/>
+                    <Scene key="dynamicPicture" component={DynamicPicture} title="动态详情" hideNavBar/>
 
                 </Scene>
             </Router>

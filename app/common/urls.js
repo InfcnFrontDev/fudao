@@ -2,10 +2,8 @@
 // const apiPath = 'http://103.254.113.11:9191/api/'; // 外网
 const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 
-// web服务器地址
-// const webPath = 'http://103.254.113.11:9191/web/'; // 外网
-
 // const webPath = 'http://192.168.10.69:9191/web/'; // 内网
+
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
 const webPath = 'http://192.168.3.204:3000/'; // 王朋
 // const webPath = 'http://192.168.3.213:3000/'; // cxx
@@ -29,7 +27,7 @@ const urls = {
         // 我的时间
         MY_TIME: webPath + 'myTime.html',
         // 健康测评
-        HEALTH_APPRAISAL: webPath + 'assessmentResult.html',
+        HEALTH_APPRAISAL: webPath + 'healthAppraisal.html',
         // 深度自诊
         DEEP_DIAGNOSIS: webPath + 'deepDiagnosis.html',
         // 测试题
@@ -151,17 +149,17 @@ const urls = {
 
         // 动态 ---------------------------------------------------------
         //动态列表
-        DYNAMIC_LIST: apiPath + 'app/friendDynamicAction!getDynamics.action',
+        DYNAMIC_GETMYDYNAMICSLIST: apiPath + 'DynamicApi/getMyDynamicsList',
         //添加动态
-        DYNAMIC_ADD_DYNAMIC: apiPath + 'app/friendDynamicAction!addDynamic.action',
+        DYNAMIC_ADDDYNAMIC: apiPath + 'DynamicApi/addDynamic',
         //删除动态
-        DYNAMIC_DELETE_DYNAMIC: apiPath + 'app/friendDynamicAction!deleteDynamic.action',
+        DYNAMIC_DELETEDYNAMIC: apiPath + 'DynamicApi/deleteDynamic',
         //添加评论
-        DYNAMIC_ADD_COMMENT: apiPath + 'app/friendDynamicAction!addDynamicComment.action',
+        DYNAMIC_ADDDYNAMICCOMMENT: apiPath + 'DynamicApi/addDynamicComment',
         //点赞
-        DYNAMIC_ADD_PRAISE: apiPath + 'app/friendDynamicAction!addDynamicPraise.action',
+        DYNAMIC_ADDDYNAMICPRAISE: apiPath + 'DynamicApi/addDynamicPraise',
         //取消点赞
-        DYNAMIC_DELETE_PRAISE: apiPath + 'app/friendDynamicAction!deleteDynamicPraiseByUserIdAndDynamicId.action',
+        DYNAMIC_DELETEDYNAMICPRAISE: apiPath + 'DynamicApi/deleteDynamicPraise',
 
         // 我的问题 ---------------------------------------------------------
         //所有问题
@@ -219,10 +217,10 @@ const urls = {
 
         // 自诊 ---------------------------------------------------------
         DIAGNOSIS_GETCOMMONDISEASELIST: apiPath + 'DiagnosisApi/getCommonDiseaseList',
+        DIAGNOSIS_ADDMYDISEASES: apiPath + 'DiagnosisApi/addMyDiseases',
 
 
     },
-
     // 获取图片完整路径
     getImage(filePath, width, height){
         let url = this.apis.IMAGE + '?filePath=' + filePath;
@@ -233,6 +231,5 @@ const urls = {
         // console.log(url);
         return url;
     },
-
 };
 export default urls;

@@ -101,9 +101,9 @@ export default class Home extends PureComponent {
 
 					</View>
 
-					<View style={leftBtnStyle}>
+					<Button style={leftBtnStyle} onPress={()=> Actions.emotion()}>
 						<Image source={require('../../assets/home/qingxu.png')} style={styles.image}/>
-					</View>
+					</Button>
 					<Button transparent style={rightBtnStyle} onPress={()=> Actions.energy()}>
 						<Image source={require('../../assets/home/cengliangchang.png')} style={styles.image}/>
 					</Button>

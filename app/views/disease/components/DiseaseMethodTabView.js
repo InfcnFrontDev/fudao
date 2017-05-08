@@ -3,6 +3,7 @@ import {View, Image, ListView, TouchableHighlight} from "react-native";
 import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
 import DiseaseMethodTabBar from "./DiseaseMethodTabBar";
 import DiseaseMethodTab from "./DiseaseMethodTab";
+import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
 
 /**
  * 所有问题列表组件
@@ -19,15 +20,18 @@ export default class DiseaseMethodTabView extends PureComponent {
 		onItemAdd: () => console.log('onItemAdd'),
 		onItemPress: () => console.log('onItemPress'),
 	}
-
+    componentDidMount(){
+        let {diseaseId} = this.props
+        diseaseMethodStore.fetchDiseaseMethod(diseaseId)
+    }
 	render() {
-		let {data} = this.props;
+        const {diseaseMethod} = diseaseMethodStore;
 		return (
 			<ScrollableTabView
 				style={styles.tabView}
 				renderTabBar={() => <DiseaseMethodTabBar/>}
 				locked={false}>
-				{data.map((item) => <DiseaseMethodTab key={item.type} tabLabel={item.type} data={item}/>)}
+				{diseaseMethod.map((item) => <DiseaseMethodTab key={item.type} tabLabel={item.type} data={item}/>)}
 			</ScrollableTabView>
 		)
 	}

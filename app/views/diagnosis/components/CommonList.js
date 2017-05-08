@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {View, Image, ListView,TouchableOpacity,ToastAndroid} from "react-native";
+import {View, Image, ListView, TouchableOpacity, ToastAndroid} from "react-native";
 import {Text, Button} from "native-base";
 /**
  * 常见问题列表组件
@@ -37,18 +37,21 @@ class CommonList extends PureComponent {
     _renderRow(rowData, sectionId, rowId) {
         let {selectedItem, onItemAdd, onItemPress} = this.props;
         return (
-            <View style={styles.row}>
-                <Text style={styles.rowTitle}>{rowData.name}</Text>
-                {selectedItem[rowData.id] ?
+            selectedItem[rowData.name] ?
+                <View style={styles.row}>
+                    <Text style={styles.choosedRowTitle}>{rowData.name}</Text>
                     <TouchableOpacity underlayColor='transparent'>
-                        <Text style={styles.choose}>-</Text>
+                        <Text style={styles.choosed}>+</Text>
                     </TouchableOpacity>
-                    :
-                    <TouchableOpacity onPress={() => onItemAdd(rowData)} >
+                </View>
+                :
+                <View style={styles.row}>
+                    <Text style={styles.rowTitle}>{rowData.name}</Text>
+                    <TouchableOpacity onPress={() => onItemAdd(rowData)}>
                         <Text style={styles.choose}>+</Text>
                     </TouchableOpacity>
-                }
-            </ View >
+                </View>
+
         )
     }
 }
@@ -57,21 +60,21 @@ const styles = {
     title: {
         color: "rgba(188,188,188,0.6)",
         marginLeft: 8,
-        marginTop:10,
+        marginTop: 10,
     },
     contentContainer: {
         flexDirection: 'row', //设置横向布局
         flexWrap: 'wrap',    //设置换行显示
-        width: (theme.deviceWidth-28) / 2,
+        width: (theme.deviceWidth - 28) / 2,
 
     },
     row: {
         width: (theme.deviceWidth - 87) / 4,
         height: 36,
-        margin:2,
+        margin: 2,
         marginLeft: 7,
         marginRight: 7,
-        padding:4,
+        padding: 4,
         backgroundColor: 'rgba(255,255,255,0.2)',
 
         flexDirection: 'row',
@@ -83,13 +86,25 @@ const styles = {
         color: '#fff',
         flex: 1,
     },
+    choosedRowTitle: {
+        color: '#6A79A2',
+        flex: 1,
+    },
     choose: {
-        fontSize:20,
-        fontWeight:'100',
-        paddingBottom:5,
-        color:'#fff',
+        fontSize: 20,
+        fontWeight: '100',
+        paddingBottom: 5,
+        color: '#fff',
         justifyContent: 'flex-end',
-    }
+    },
+    choosed: {
+        fontSize: 20,
+        fontWeight: '100',
+        paddingBottom: 5,
+        color: '#6A79A2',
+        justifyContent: 'flex-end',
+    },
+    hui: {}
 };
 
 CommonList.propsTypes = {

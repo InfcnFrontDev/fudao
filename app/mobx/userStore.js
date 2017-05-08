@@ -56,7 +56,6 @@ class UserStore {
 				phone,
 				password
 			}).then((data) => {
-				console.log(data)
 				if (data.ok) {
 					tools.showToast("登录成功");
 					resolve(data.obj);

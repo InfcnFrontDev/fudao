@@ -23,13 +23,17 @@ class QuestionText extends PureComponent {
             var url = urls.apis.EXPECT_GETEXPECTDAILYMETHODDETAIL;
 
         }
-        request.getJson(url, {
-            id,
-        }).then((res) => {
-            this.setState({
-                daily: res.obj,
-            })
-        })
+        if(id){
+            request.getJson(url, {
+                id,
+            }).then((res) => {
+                this.setState({
+                    daily: res.obj,
+                })
+            }).catch((error)=>{
+                console.log("Api call error");
+            });
+        }
     }
 
     render() {
@@ -112,6 +116,6 @@ const styles = {
 
  }*/
 
-export default (QuestionText);
+export default QuestionText
 
 

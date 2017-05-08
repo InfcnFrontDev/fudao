@@ -2,6 +2,8 @@ import React, {PureComponent} from "react";
 import {ScrollView, View, Image, ListView, TouchableOpacity} from "react-native";
 import {Text} from "native-base";
 import RelatedProductsAndServices from "./RelatedProductsAndServices";
+import {Actions} from "react-native-router-flux";
+import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
 
 export default class DiseaseMethodTab extends PureComponent {
 
@@ -11,10 +13,20 @@ export default class DiseaseMethodTab extends PureComponent {
 	static defaultProps = {
 		data: {},
 	}
-
+    onMethod0Press(idOrName,arr){
+        Actions.menuKinds({
+            idOrName: idOrName,
+            arr: arr
+        })
+    }
+    onMethod1Press(id){
+        diseaseMethodStore.questionId = id
+        diseaseMethodStore.modalShow = true
+    }
 	render() {
 		let {data} = this.props;
-		return (
+        // alert(JSON.stringify(data))
+        return (
 			<ScrollView>
 				{data.type == '饮食' ? this.renderPrinciple0(data) : this.renderPrinciple1(data)}
 				{data.type == '饮食' ? this.renderMethod0(data.methods) : this.renderMethod1(data.methods)}
@@ -26,7 +38,7 @@ export default class DiseaseMethodTab extends PureComponent {
 	renderPrinciple0(data) {
 		return (
 			<View style={styles.principle}>
-				<Text style={styles.text}>{'        宜食：' + data.suitable + '忌食：' + data.fasting}</Text>
+				<Text style={styles.text}>{'\t\t宜食：' + data.suitable + '\n\t\t忌食：' + data.fasting}</Text>
 			</View>
 		)
 	}
@@ -39,7 +51,6 @@ export default class DiseaseMethodTab extends PureComponent {
 		)
 	}
 
-
 	renderMethod0(methods) {
 		return (
 			<View style={styles.methods}>
@@ -50,7 +61,7 @@ export default class DiseaseMethodTab extends PureComponent {
 							<View style={{flexDirection:'row'}}>
 								<Text style={styles.text}>{'宜食 '}</Text>
 								{method.suitable.map((text) =>
-									<TouchableOpacity key={text} onPress={()=>alert('')}>
+									<TouchableOpacity key={text} onPress={()=>this.onMethod0Press(text,method.suitable)}>
 										<Text style={styles.textLink}>{text + '; '}</Text>
 									</TouchableOpacity>)}
 							</View>
@@ -69,13 +80,14 @@ export default class DiseaseMethodTab extends PureComponent {
 		)
 	}
 
+
 	renderMethod1(methods) {
 		return (
 			<View style={styles.methods}>
 				{methods.map((method) => (
 					<View style={styles.method} key={method.timePeriod}>
 						<Text style={styles.text}>{ ' - ' + method.timePeriod + ' : '}</Text>
-						<TouchableOpacity onPress={()=>alert('')}>
+						<TouchableOpacity onPress={()=>this.onMethod1Press(method.id)}>
 							<Text style={styles.textLink}>{ method.name}</Text>
 						</TouchableOpacity>
 					</View>

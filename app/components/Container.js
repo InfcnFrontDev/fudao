@@ -13,6 +13,7 @@ export default  class Container extends PureComponent {
 		}
 
 		return (
+
 			<Image source={require('../assets/bg/qing/1.jpg')}
 				   style={{width,height,alignSelf: "flex-end"}}>
 				<Image source={require('../assets/bg/container.gif')}
@@ -22,5 +23,17 @@ export default  class Container extends PureComponent {
 			</Image>
 		)
 	}
-
 }
+
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1
+	},
+	image: {
+		width:theme.deviceWidth+5,
+		height:theme.deviceHeight
+	}
+})
+
+
