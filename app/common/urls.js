@@ -82,7 +82,7 @@ const urls = {
         //获取用户信息
         USER_DETAIL: apiPath + 'app/accountInfoAction!getUserInformationByUserId.action',
         //修改用户信息
-        USERAPI_UPDATEUSERINFO: apiPath + 'api/UserApi/updateUserInfo',
+        USER_UPDATEUSERINFO: apiPath + 'UserApi/updateUserInfo',
         //搜索用户
         USER_SEARCH: apiPath + 'app/friendDynamicAction!getUserByPhone.action',
         //修改用户体检信息
