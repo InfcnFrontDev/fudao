@@ -6,6 +6,7 @@ class WeatherStore {
 
 	@action
 	fetchCurrentWeather = async(weaid) => {
+		weaid='北京市'
 
 		weaid = weaid.replace('市', '');
 

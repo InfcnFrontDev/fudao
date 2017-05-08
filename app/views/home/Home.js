@@ -7,6 +7,8 @@ import {Container, Content} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
 import Homedrag from "./HomeDrag.js";
 import userStore from "../../mobx/userStore";
+import positionStore from "../../mobx/positionStore";
+import weatherStore from "../../mobx/weatherStore";
 import DetailsModal from "./components/DetailsModal";
 
 
@@ -22,13 +24,23 @@ export default class Home extends PureComponent {
 		modalVisible: false,
 		wendu: '',
 		weather: '',
-		img: 'http://api.k780.com:88/upload/weather/d1/2.png',
+		img: '1',
 		status:true
 	};
+	componentWillMount(){
+		weatherStore.fetchCurrentWeather();
+		let {currentWeather} = weatherStore;
+		this.setState({
+			img:currentWeather.weatid
+		})
+	}
 
 
 	render() {
 		let {loginUser} = userStore;
+		let {currentWeather} = weatherStore;
+
+		let imgStr='http://api.k780.com:88/upload/weather/d1/'+(currentWeather.weatid-1)+'.png'
 		let leftBtnStyle = Object.assign({}, styles.floatBtn, styles.leftBtn)
 		 ,rightBtnStyle = Object.assign({}, styles.floatBtn, styles.rightBtn);
 		return (
@@ -48,12 +60,12 @@ export default class Home extends PureComponent {
 					<View style={{flexDirection: 'column', justifyContent: 'center',width:80}}>
 						<Text style={styles.font}>北京.海淀</Text>
 						<View style={{flexDirection: 'row',justifyContent:'center'}}>
-							{/*					<Text style={styles.font}>{this.state.weather}</Text>
-							 <Image style={{width:20,height:20}} source={{uri:'http://api.k780.com:88/upload/weather/d1/'+this.state.img+'.png'}}/>*/}
+							<Text style={styles.font}>{currentWeather.weather}</Text>
+							<Image style={{width:20,height:20}} source={{uri:imgStr}}/>
 						</View>
 
 
-						<Text style={styles.font}>{this.state.wendu}</Text>
+						<Text style={styles.font}>{currentWeather.temperature}</Text>
 					</View>
 					<Right style={{flexDirection: 'row'}}>
 
@@ -87,8 +99,6 @@ export default class Home extends PureComponent {
 						source={{uri:urls.pages.HOME + '?status='+this.state.status+'&token='+userStore.token}}
 						onMessage={(event)=>this.openDetailsBox(event.nativeEvent.data)}
 						style={{backgroundColor:'rgba(0,0,0,.0)'}}
-						//uri={urls.pages.HOME + '?status='+this.state.status}
-
 					/>
 
 					<View style={{height:40,borderRadius:40,backgroundColor:'rgba(225,225,225,.0)',position: 'absolute',top:0,left:0,alignItems:'center',flexDirection:'row'}}>

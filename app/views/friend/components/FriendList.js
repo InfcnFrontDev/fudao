@@ -42,7 +42,6 @@ class FriendList extends PureComponent {
 
 		if (listGroupBy.hasOwnProperty(group)) {
 			let friendList = listGroupBy[group];
-			alert(JSON.stringify(friendList));
 			return (
 				<View key={group}>
 					<Separator title={group}/>

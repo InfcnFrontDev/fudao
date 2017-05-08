@@ -28,6 +28,8 @@ const urls = {
         ARTICLE_GETARTICLE: webPath + 'articleDetail.html',
         // 我的时间
         MY_TIME: webPath + 'myTime.html',
+        //修改时间
+        MODIFICATION_TIME: webPath + 'modificationTime.html',
         // 健康测评
         HEALTH_APPRAISAL: webPath + 'assessmentResult.html',
         // 深度自诊
@@ -121,6 +123,8 @@ const urls = {
         USER_LOGIN: apiPath + "UserApi/login",
         //获取用户信息
         USER_GETLOGINUSER: apiPath + 'UserApi/getLoginUser',
+        //获取指定用户信息
+        USER_GETUSER: apiPath + 'UserApi/getUser',
         //重置密码
         USER_RESETPASSWORD: apiPath + "UserApi/resetPassword",
         //基本信息
