@@ -5,6 +5,7 @@ import {observer} from "mobx-react/native";
 import {Container, Header, Content, List, Separator} from "../../components/index";
 import {Body, Right, Switch, ListItem, Text} from "native-base";
 import settingsStore from "../../mobx/settingsStore";
+import userStore from "../../mobx/userStore";
 
 /**
  * 系统设置
@@ -50,7 +51,7 @@ export default class Settings extends PureComponent {
 	}
 
 	quit() {
-		this.props.dispatch(logout());
+		userStore.logout();
 		Actions.start({
 			type: ActionConst.POP_AND_REPLACE
 		});

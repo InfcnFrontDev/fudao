@@ -115,6 +115,11 @@ class UserStore {
 			}
 		})
 	}
+
+	@action
+	logout() {
+		this.isLogin = false;
+	}
 }
 
 
