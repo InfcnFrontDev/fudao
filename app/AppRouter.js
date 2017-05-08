@@ -29,6 +29,9 @@ import Personal from "./views/personal/Personal";
 import Disease from "./views/disease/Disease";
 import DiseaseDetail from "./views/disease/DiseaseDetail";
 import Energy from "./views/energy/Energy";
+import NewDynamic from "./views/dynamic/NewDynamic"
+import DynamicDetail from "./views/dynamic/DynamicDetail"
+import DynamicPicture from "./views/dynamic/DynamicPicture"
 
 /**
  * 路由
@@ -77,9 +80,14 @@ export default class AppRouter extends PureComponent {
                     <Scene title="" key="homeapp" component={Homeapp}/>
 
                     {/*自诊*/}
-                    <Scene key="diagnosis" component={Diagnosis} title="自诊" initial hideNavBar/>
+                    <Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
                     <Scene key="evaluation" component={Evaluation} title="测评"  hideNavBar/>
                     <Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自诊"  hideNavBar/>
+
+                    {/*动态*/}
+                    <Scene key="newDynamic" component={NewDynamic} title="新动态" hideNavBar/>
+                    <Scene key="dynamicDetail" component={DynamicDetail} title="动态详情" hideNavBar/>
+                    <Scene key="dynamicPicture" component={DynamicPicture} title="动态详情" hideNavBar/>
 
                 </Scene>
             </Router>

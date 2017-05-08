@@ -80,7 +80,7 @@ var diagnosisList = [
         ]
     }
 ]
-
+var i = 0;
 /**
  * 自诊
  */
@@ -91,58 +91,123 @@ export default class Diagnosis extends PureComponent {
         super(props);
         this.state = {
             text: "",
+            diagnosisList: []
         }
+    }
+
+    componentWillMount() {
+        // var that = this;
+        request.getJson(urls.apis.DIAGNOSIS_GETCOMMONDISEASELIST, {
+            region: "北京"
+        }).then((result) => {
+            if (result.ok) {
+                this.setState({
+                    // diagnosisList:diagnosisList
+                    diagnosisList: result.obj
+                })
+            } else {
+                tools.showToast('请求出错！')
+            }
+        });
+        setTimeout(() => {
+
+        }, 600)
     }
 
 
     render() {
         const {isFetching, diagnosisDisease} = diagnosisStore;
-        // const {diagnosisList} = this.state;
-        return (
-            <Container>
-                <Header {...this.props}/>
-                {!isFetching && <View style={styles.content}>
-                    <Text style={styles.h1}>在以下问题中选出您存在的问题</Text>
-                    <View style={styles.questionList}>
-                        <ScrollView style={{flex: 1}}>
-                            <View style={styles.oneLine}>
-                                <CommonList items={diagnosisList[0]} onItemAdd={(item) => this._onItemAdd(item)}/>
-                                <CommonList items={diagnosisList[1]} onItemAdd={(item) => this._onItemAdd(item)}/>
-                            </View>
-                            <View style={styles.oneLine}>
-                                <CommonList items={diagnosisList[2]} onItemAdd={(item) => this._onItemAdd(item)}/>
-                                <CommonList items={diagnosisList[3]} onItemAdd={(item) => this._onItemAdd(item)}/>
-                            </View>
-                            <View style={styles.customize}>
-                                <TextInput style={styles.textInput} onChangeText={(text) => this.setState({text})}
-                                           value={this.state.text} placeholder="找不到您的问题？那就写下来吧！"
-                                           multiline={true}
-                                           underlineColorAndroid="transparent"/>
-                                <TouchableOpacity style={styles.customizeButton}>
-                                    <Text style={styles.customizeButtonText}>确定</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </ScrollView>
-                        <View style={styles.questionChoosed}>
-                            <ScrollView style={styles.choosedScrollView}>
-                                {this.renderChoosed(diagnosisDisease)}
+        const {diagnosisList,text} = this.state;
+        i = 0;
+        if (diagnosisList.length > 0) {
+            return (
+                <Container>
+                    <Header {...this.props}/>
+                    <View style={styles.content}>
+                        <Text style={styles.h1}>在以下问题中选出您存在的问题</Text>
+                        <View style={styles.questionList}>
+                            <ScrollView style={{flex: 1}}>
+                                {this.renderList(diagnosisList)}
+                                <View style={styles.customize}>
+                                    <TextInput style={styles.textInput} onChangeText={(text) => this.setState({text})}
+                                               value={this.state.text} placeholder="找不到您的问题？那就写下来吧！"
+                                               multiline={true}
+                                               underlineColorAndroid="transparent"/>
+                                    <TouchableOpacity style={styles.customizeButton} onPress={text?this.addCustomizeDisease.bind(this):null}>
+                                        <Text style={styles.customizeButtonText}>确定</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </ScrollView>
-                            <View style={styles.buttonContainer}>
-                                <TouchableOpacity style={styles.button}>
-                                    <Text style={styles.buttonText}>完成自诊去自疗</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.button} onPress={()=>Actions.evaluation()}>
-                                    <Text style={styles.buttonText}>提交并继续自诊</Text>
-                                </TouchableOpacity>
+                            <View style={styles.questionChoosed}>
+                                <ScrollView style={styles.choosedScrollView}>
+                                    {this.renderChoosed(diagnosisDisease)}
+                                </ScrollView>
+                                <View style={styles.buttonContainer}>
+                                    <TouchableOpacity style={styles.button}>
+                                        <Text style={styles.buttonText}>完成自诊去自疗</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.button} onPress={() => this.gotoCeping()}>
+                                        <Text style={styles.buttonText}>提交并继续自诊</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
-                    </View>
 
+                    </View>
+                </Container>
+            )
+        } else {
+            return (
+                <Container>
+                    <Header {...this.props}/>
+                    <Loading isShow={isFetching}/>
+                </Container>
+            )
+        }
+    }
+
+    renderList(list) {
+        const {diagnosisDiseaseOrderBy} = diagnosisStore;
+        i = 0;
+        var listView = list.map((items, index) => {
+            if (items.list.length > 0) {
+                i++;
+                return (
+                    <CommonList key={index} items={items} selectedItem={diagnosisDiseaseOrderBy} onItemAdd={(item) => this._onItemAdd(item)}/>
+                )
+            }
+            return null;
+        })
+        var res = i <= 2 ?
+            (
+                <View style={styles.oneLine}>
+                    {listView}
                 </View>
-                }
-                <Loading isShow={isFetching}/>
-            </Container>
-        )
+            )
+            :
+            listView[0] && listView[1] ?
+                (<View>
+                    <View style={styles.oneLine}>
+                        {listView.slice(0, 2)}
+                    </View>
+                    <View style={styles.oneLine}>
+                        {listView.slice(2,4)}
+                    </View>
+                </View>)
+                :
+                (
+                    (<View>
+                        <View style={styles.oneLine}>
+                            {listView.slice(0, 3)}
+                        </View>
+                        <View style={styles.oneLine}>
+                            {listView.slice(3,4)}
+                        </View>
+                    </View>)
+                );
+
+        return res;
+
     }
 
     renderChoosed(diagnosis) {
@@ -150,7 +215,7 @@ export default class Diagnosis extends PureComponent {
             return (
                 <View style={styles.row} key={index}>
                     <Text style={styles.rowTitle}>{item.name}</Text>
-                    <TouchableOpacity underlayColor='transparent'>
+                    <TouchableOpacity underlayColor='transparent' onPress={this.delChoosed.bind(this,index)}>
                         <Text style={styles.deleteChoosed}>一</Text>
                     </TouchableOpacity>
                 </ View >
@@ -164,13 +229,26 @@ export default class Diagnosis extends PureComponent {
 
     }
 
-    _onItemAdd(item) {
-        diagnosisStore.addDisease(item);
-
+    delChoosed(index){
+        diagnosisStore.delDisease(index);
     }
 
-    componentDidMount() {
-        diagnosisStore.fetchDiagnosisColumnList();
+    _onItemAdd(item) {
+        diagnosisStore.addDisease(item);
+    }
+
+    addCustomizeDisease() {
+        diagnosisStore.addDisease({
+            name:this.state.text
+        });
+        this.setState({
+            text:''
+        })
+    }
+
+    gotoCeping(){
+        diagnosisStore.addMyDiseaseToBackstage();
+        Actions.evaluation()
     }
 
 }
@@ -189,6 +267,7 @@ const styles = {
         flexDirection: 'row',
         marginLeft: 14,
         marginRight: 14,
+        flexWrap: 'wrap',
     },
     customize: {
         margin: 20,
@@ -242,23 +321,23 @@ const styles = {
         fontSize: 15,
         textAlign: 'center',
     },
-    chooseView:{
-        flexDirection:'row',
-        flexWrap:'wrap'
+    chooseView: {
+        flexDirection: 'row',
+        flexWrap: 'wrap'
     },
     row: {
         backgroundColor: '#C2C2C2',
-        flexDirection:'row',
-        margin:4,
-        height:30,
+        flexDirection: 'row',
+        margin: 4,
+        height: 30,
     },
-    rowTitle:{
-        padding:4,
+    rowTitle: {
+        padding: 4,
     },
-    deleteChoosed:{
-        padding:5,
-        fontSize:12,
-        fontWeight:'500',
-        color:'#fff',
+    deleteChoosed: {
+        padding: 5,
+        fontSize: 12,
+        fontWeight: '500',
+        color: '#fff',
     }
 };
