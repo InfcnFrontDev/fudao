@@ -4,11 +4,6 @@ import {persist} from "mobx-persist";
 import hydrate from "../common/hydrate";
 
 
-class User {
-
-}
-
-
 class UserStore {
 	@observable hydrated = false
 	@persist @observable isLogin = false
@@ -16,6 +11,16 @@ class UserStore {
 	@persist @observable password = ''
 	@persist @observable token = ''
 	@persist('object') @observable loginUser = {}
+
+
+	fieldMap = {
+		'personalHistory': 'personal_history',
+		'familyHistory': 'family_history',
+		'obstetricalHistory': 'obstetrical_history',
+		'medicationHistory': 'medication_history',
+		'mentalState': 'mental_state',
+	}
+
 
 	@action
 	login = async(phone, password, callback) => {
@@ -51,7 +56,6 @@ class UserStore {
 				phone,
 				password
 			}).then((data) => {
-				console.log(data)
 				if (data.ok) {
 					tools.showToast("登录成功");
 					resolve(data.obj);
@@ -95,24 +99,26 @@ class UserStore {
 	}
 
 	@action
-	updateUserInfo(fieldName, value) {
-
+	updateUserInfo(property, value) {
 		let user0 = {...this.loginUser};
-		user0[fieldName] = value;
+		user0[property] = value;
 		this.loginUser = user0;
 
-		request.getJson(urls.apis.USERAPI_UPDATEUSERINFO, {
-			fieldName,
+		request.getJson(urls.apis.USER_UPDATEUSERINFO, {
+			fieldName: this.fieldMap[property] || property,
 			value
 		}).then(result => {
 			if (result.ok) {
-				let user0 = {...this.loginUser};
-				user0[fieldName] = value;
-				this.loginUser = user0;
+				// ...
 			} else {
 				tools.showToast("修改失败")
 			}
 		})
+	}
+
+	@action
+	logout() {
+		this.isLogin = false;
 	}
 }
 

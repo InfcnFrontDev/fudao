@@ -28,7 +28,7 @@ export default class Login extends PureComponent {
 		return (
 			<Container>
 				<Header {...this.props}></Header>
-				<Content gray>
+				<Content>
 					<View style={styles.bag}>
 						<UserInput text="用户名"
 								   onChangeText={(value)=> {
@@ -81,9 +81,13 @@ export default class Login extends PureComponent {
 			userStore.fetchLoginUser();
 			tools.showToast(JSON.stringify(userStore.loginUser))
 			// 跳到首页
-			Actions.index({
-				type: ActionConst.POP_AND_REPLACE,
-			});
+			if(!userStore.loginUser.sex){
+				Actions.startInformation({phone:this.state.phone})
+			}else{
+				Actions.index({
+					type: ActionConst.POP_AND_REPLACE,
+				});
+			}
 		});
 	}
 
@@ -117,7 +121,7 @@ const styles = {
 	},
 	text2: {
 		fontSize: theme.DefaultFontSize - 2,
-		color: '#666',
+		color: '#fff',
 		textDecorationLine: 'underline'
 	},
 	bag: {

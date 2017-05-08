@@ -1,13 +1,15 @@
 import React, {PureComponent} from "react";
 import {Actions,ActionConst} from "react-native-router-flux";
+import {observer} from "mobx-react/native";
 import {Container,Content,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import  CommitButton from "./components/CommitButton"
 import  {hex_md5} from "./components/md5"
-
+import userStore from "../../mobx/userStore";
 /**
  * 设置密码
  */
+@observer
 export default class SetPassword extends PureComponent {
     constructor(props){
         super(props);
@@ -48,42 +50,19 @@ export default class SetPassword extends PureComponent {
                     })
                 }
             },1000)
-
-
     }
-    _login(phone,password){
-       /* let {dispatch}=this.props;*/
-        request.getJson(urls.apis.USER_LOGIN,{
-            phone:phone,
-            password:hex_md5(phone+password),
-        }).then((data)=>{
-            tools.showToast(JSON.stringify(data))
-            if(data.ok) {
-                var authorization = data.obj;
-                request.getJson(urls.apis.USER_GETLOGINUSER,{
-                    authorization:authorization,
-                }).then((data)=>{
-                 // 保存用户状态
-                /* dispatch(login(data.obj));*/
-                if (!data.obj) {
-                    //没有基本信息表示第一次登录需要添写信息
-                    Actions['startInformation']({
-                        phone:phone
-                    })
-                } else {
-                    //基本信息已经添加完成
-                    // 跳到首页
-                    Actions.index();
-                }
-                },(error)=>{
-
-                })
+    _login(phone,password) {
+        userStore.login(phone, password, () => {
+            userStore.fetchLoginUser();
+            // 跳到首页
+            if(!userStore.loginUser.sex){
+                Actions.startInformation({phone:this.state.phone})
             }else{
-
+                Actions.index({
+                    type: ActionConst.POP_AND_REPLACE,
+                });
             }
-        },(error)=>{
-
-        })
+        });
     }
 }
 const styles = {

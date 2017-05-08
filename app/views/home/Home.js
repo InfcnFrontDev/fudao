@@ -10,6 +10,8 @@ import userStore from "../../mobx/userStore";
 import positionStore from "../../mobx/positionStore";
 import weatherStore from "../../mobx/weatherStore";
 import DetailsModal from "./components/DetailsModal";
+import positionStore from "../../mobx/positionStore";
+import weatherStore from "../../mobx/weatherStore";
 
 
 
@@ -58,7 +60,7 @@ export default class Home extends PureComponent {
 						</Button>
 					</View>
 					<View style={{flexDirection: 'column', justifyContent: 'center',width:80}}>
-						<Text style={styles.font}>北京.海淀</Text>
+						<Text style={styles.font}>{positionStore.currentPosition.city}</Text>
 						<View style={{flexDirection: 'row',justifyContent:'center'}}>
 							<Text style={styles.font}>{currentWeather.weather}</Text>
 							<Image style={{width:20,height:20}} source={{uri:imgStr}}/>
@@ -109,9 +111,9 @@ export default class Home extends PureComponent {
 
 					</View>
 
-					<View style={leftBtnStyle}>
+					<Button style={leftBtnStyle} onPress={()=> Actions.emotion()}>
 						<Image source={require('../../assets/home/qingxu.png')} style={styles.image}/>
-					</View>
+					</Button>
 					<Button transparent style={rightBtnStyle} onPress={()=> Actions.energy()}>
 						<Image source={require('../../assets/home/cengliangchang.png')} style={styles.image}/>
 					</Button>

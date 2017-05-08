@@ -5,7 +5,7 @@ import {View, Image, DeviceEventEmitter, ScrollView, Text} from "react-native";
 import {Container, Content, Header} from "../../components/index";
 import MyDiseaseList from "./components/MyDiseaseList";
 import AllDiseaseTabView from "./components/AllDiseaseTabView";
-
+import diseaseMethodStore from "../../mobx/diseaseMethodStore";
 let myDiseaseData = [
 	{
 		"id": "077fbcc94bd843f7a308519bc4f9b532",
@@ -110,7 +110,6 @@ let myDiseaseData = [
 		"type": "意外伤害"
 	}
 ]
-
 let allDiseaseData = {
 	'liaoShen': {
 		"意外伤害": [
@@ -229,6 +228,10 @@ let allDiseaseData = {
  */
 @observer
 export default class MyQuestion extends PureComponent {
+    onItemPress(item){
+        Actions.diseaseDetail({title: item.name, data: item})
+        diseaseMethodStore.diseaseId = item.id
+	}
 
 	render() {
 		return (
@@ -238,12 +241,8 @@ export default class MyQuestion extends PureComponent {
 					<View>
 						<Text style={styles.title}>我的问题</Text>
 					</View>
-					<MyDiseaseList
-						data={myDiseaseData}
-						onItemPress={(item)=>Actions.diseaseDetail({title: item.name, data: item})}/>
-					<AllDiseaseTabView
-						data={allDiseaseData}
-						onItemPress={(item)=>Actions.diseaseDetail({title: item.name, data: item})}/>
+					<MyDiseaseList onItemPress={(item) => this.onItemPress(item)}/>
+					<AllDiseaseTabView/>
 				</Content>
 			</Container>
 		)
