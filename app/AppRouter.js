@@ -105,6 +105,8 @@ export default class AppRouter extends PureComponent {
                     <Scene key="dynamicDetail" component={DynamicDetail} title="动态详情" hideNavBar/>
                     <Scene key="dynamicPicture" component={DynamicPicture} title="动态详情" hideNavBar/>
 
+                    <Scene key="emotion" component={Emotion} title="动态详情" hideNavBar/>
+
                 </Scene>
             </Router>
         )
