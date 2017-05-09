@@ -63,65 +63,7 @@ export default class AllDiseaseTabLiaoShen extends PureComponent {
     }
 
 	render() {
-        let data = this.props.data
-        // let data = {
-        //     "意外伤害": [
-        //     {
-        //         "id": "077fbcc94bd843f7a308519bc4f9b532",
-        //         "img": "/icons/disease/dianxian.png",
-        //         "name": "癫痫",
-        //     },
-        // ],
-        //     "日常问题": [
-        //     {
-        //         "id": "131f725025e04c1485c9463bcf0e8b86",
-        //         "img": "/icons/disease/toutong.png",
-        //         "name": "头痛",
-        //     },
-        //     {
-        //         "id": "16b6ead6e3824c319fc67c5e4192c1b0",
-        //         "img": "/icons/disease/kouqiangkuiyang.png",
-        //         "name": "口腔溃疡",
-        //     },
-        //     {
-        //         "id": "1fd3a62662d24e6390b5e535b0bdf6c4",
-        //         "img": "/icons/disease/fuxie.png",
-        //         "name": "腹泻",
-        //     },
-        // ],
-        //     "衰老问题": [
-        //     {
-        //         "id": "17f7d8511be64daf985b883c1dddb1be",
-        //         "img": "/icons/disease/fanyingchidun.png",
-        //         "name": "反应迟钝",
-        //     },
-        //     {
-        //         "id": "19f67244a0a342c9b57b755c766423c1",
-        //         "img": "/icons/disease/feipang.png",
-        //         "name": "肥胖",
-        //     },
-        //     {
-        //         "id": "2312515984574208925f87820a72fc75",
-        //         "img": "/icons/disease/dabianshijin.png",
-        //         "name": "大便失禁",
-        //     },
-        //     {
-        //         "id": "245719653ed042ff9b41abfdfc26a666",
-        //         "img": "/icons/disease/niaoshijin.png",
-        //         "name": "尿失禁",
-        //     },
-        //     {
-        //         "id": "081f638682084b558d2b3ba08ae89dad",
-        //         "img": "/icons/disease/kouqiangganzao.png",
-        //         "name": "口腔干燥",
-        //     },
-        //     {
-        //         "id": "103e3f772cc042a78f93d33db53521c7",
-        //         "img": "/icons/disease/pifusaoyang.png",
-        //         "name": "皮肤瘙痒",
-        //     }
-        // ]
-        // }
+        let {data} = this.props
         if(data){
             let liaoShen = {}
             for(let k in data){

@@ -17,18 +17,20 @@ class QuestionText extends PureComponent {
 
     componentWillMount() {
         let id = this.props.data;
-        if(this.props.from=='question'){
+        if(this.props.from === 'question'){
             var url = urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL;
-        }else{
+        }else if(this.props.from === 'expect'){
             var url = urls.apis.EXPECT_GETEXPECTDAILYMETHODDETAIL;
-
+        }else {
+            var url = urls.apis.HEALTH_GETHEALTHDAILYMETHODDETAIL;
         }
         if(id){
             request.getJson(url, {
                 id,
             }).then((res) => {
                 this.setState({
-                    daily: res.obj,
+                    daily: res.obj[0],
+
                 })
             }).catch((error)=>{
                 console.log("Api call error");
@@ -39,7 +41,7 @@ class QuestionText extends PureComponent {
     render() {
         if (JSON.stringify(this.state.daily) != '{}') {
             var {daily} = this.state;
-            var content = daily.three_character_classic + "\n" + daily.detail;
+            var content = daily.threeCharacterClassic + "\n" + daily.detail;
 
             content = content.split('\\t').join('');
             content = content.split('\\n').join('\n');

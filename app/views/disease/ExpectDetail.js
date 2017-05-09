@@ -1,60 +1,60 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {View, Image, DeviceEventEmitter, ScrollView, Text} from "react-native";
+import {View, Image, Text} from "react-native";
 import {Container, Content, Header,Modal} from "../../components/index";
 import MyDiseaseList from "./components/MyDiseaseList";
 import DiseaseMethodTabView from "./components/DiseaseMethodTabView";
-import diseaseMethodStore from "../../mobx/diseaseMethodStore";
 import QuestionText from "../components/QuestionText"
 import DetailModal from "./components/DetailsModal"
-import myDiseaseListStore from "../../mobx/myDiseaseListStore";
-import allDiseaseListStore from "../../mobx/allDiseaseListStore";
-
+import expectMethodStore from "../../mobx/expectMethodStore";
+import myExpectListStore from "../../mobx/myExpectListStore";
+import allExpectListStore from "../../mobx/allExpectListStore";
 
 /**
  * 我的问题
  */
 @observer
-export default class DiseaseDetail extends PureComponent {
+export default class ExpectDetail extends PureComponent {
 
     componentDidMount(){
-        diseaseMethodStore.fetchDiseaseMethod()
+        expectMethodStore.fetchExpectMethod()
     }
 
     onTransPress(item){
-        myDiseaseListStore.selectedItemName = item.name
-        myDiseaseListStore.selectedItemId = item.id
-        diseaseMethodStore.diseaseId = item.id
-        diseaseMethodStore.fetchDiseaseMethod()
+        myExpectListStore.selectedItemName = item.name
+        myExpectListStore.selectedItemId = item.id
+        expectMethodStore.expectId = item.id
+        expectMethodStore.fetchExpectMethod()
 	}
 
     onItemRemove(item,i) {
         let {myDiseaseList,deleteMyDiseaseListItem} = myDiseaseListStore;
         myDiseaseList.splice(i, 1);
         deleteMyDiseaseListItem(item.id)
-        allDiseaseListStore.fetchAllDiseaseList()
+        allExpectListStore.fetchAllExpectList()
     }
 
 	render() {
-        let {myDiseaseList,selectedItemId,selectedItemName} = myDiseaseListStore;
-        const {diseaseMethod,modalShow,questionId} = diseaseMethodStore;
+        let {myExpectList,selectedItemId,selectedItemName} = myExpectListStore;
+        const {expectMethod,modalShow,questionId} = expectMethodStore;
+        // alert(questionId)
 		return (
 			<Container>
-				<Header title = {selectedItemName || this.props.title}/>
+                <Header title = {selectedItemName || this.props.title}/>
 				<Content delay>
 					<View>
 						<Text style={styles.title}>我的问题</Text>
 					</View>
 					<MyDiseaseList
-						data={myDiseaseList}
+						data={myExpectList}
 						onTransPress = {(item) => this.onTransPress(item)}
 						onItemRemove={(item,i) => this.onItemRemove(item,i)}
 						selectedItemId={selectedItemId}
 					/>
-					<DiseaseMethodTabView data={diseaseMethod} pageKey={'disease'}/>
+					<DiseaseMethodTabView data={expectMethod} pageKey={'expect'}/>
 				</Content>
-                <DetailModal visible={modalShow} pageKey={'disease'}>
-                    <QuestionText data={questionId} from={'question'}/>
+                <DetailModal visible={modalShow} pageKey={'expect'}>
+                    <QuestionText data={questionId} from={'expect'}/>
                 </DetailModal>
 			</Container>
 		)

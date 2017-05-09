@@ -30,6 +30,12 @@ import Personal from "./views/base-info/BaseInfo";
 import Disease from "./views/disease/Disease";
 import DiseaseDetail from "./views/disease/DiseaseDetail";
 import Energy from "./views/energy/Energy";
+import MenuDetail from "./views/disease/components/MenuDetail";
+import MenuKinds from "./views/disease/components/MenuKinds";
+import Expect from "./views/disease/Expect";
+import ExpectDetail from "./views/disease/ExpectDetail";
+import Health from "./views/disease/Health";
+
 import NewDynamic from "./views/dynamic/NewDynamic"
 import DynamicDetail from "./views/dynamic/DynamicDetail"
 import DynamicPicture from "./views/dynamic/DynamicPicture"
@@ -99,6 +105,16 @@ export default class AppRouter extends PureComponent {
                     <Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
                     <Scene key="evaluation" component={Evaluation} title="测评"  hideNavBar/>
                     <Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自诊"  hideNavBar/>
+                    {/*自疗*/}
+                    <Scene key="disease" component={Disease}   hideNavBar/>
+                    <Scene key="diseaseDetail" component={DiseaseDetail}   hideNavBar/>
+                    <Scene key="menuKinds" component={MenuKinds}   hideNavBar/>
+                    <Scene key="menuDetail" component={MenuDetail}   hideNavBar/>
+                    {/*自修*/}
+                    <Scene key="expect" component={Expect}   hideNavBar/>
+                    <Scene key="expectDetail" component={ExpectDetail}   hideNavBar/>
+                    {/*自养*/}
+                    <Scene key="health" component={Health}   hideNavBar/>
 
                     {/*动态*/}
                     <Scene key="newDynamic" component={NewDynamic} title="新动态" hideNavBar/>
