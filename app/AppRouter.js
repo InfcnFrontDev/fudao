@@ -14,7 +14,6 @@ import RebuildSuccess from "./views/authentication/RebuildSuccess";
 import PasswordValidate from "./views/authentication/PasswordValidate";
 import WomanChoose from "./views/authentication/WomanChoose";
 import Friend from "./views/friend/Friend";
-import Emotion from "./views/emotion/Emotion";
 import About from "./views/about/About";
 import UserAgreement from "./views/about/UserAgreement";
 import PrivacyStatement from "./views/about/PrivacyStatement";
@@ -26,7 +25,6 @@ import Diagnosis from "./views/diagnosis/Diagnosis";
 import Evaluation from "./views/diagnosis/Evaluation";
 import DeepDiagnosis from "./views/diagnosis/DeepDiagnosis";
 import Settings from "./views/settings/Settings";
-import BaseInfo from "./views/base-info/BaseInfo";
 import Disease from "./views/disease/Disease";
 import DiseaseDetail from "./views/disease/DiseaseDetail";
 import Energy from "./views/energy/Energy";
@@ -43,7 +41,7 @@ import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import NewFriend from "./views/friend/NewFriend";
 import UserDetail from "./views/user/UserDetail";
 import RemarkSet from "./views/user/RemarkSet";
-import BaseInfo from "./views/base-info/BaseInfo"
+import BaseInfo from "./views/base-info/BaseInfo";
 
 import Emotion from "./views/emotion/Emotion";
 import Search from "./views/search/Search";
