@@ -2,31 +2,38 @@ import React, {PureComponent} from "react";
 import {Alert} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
-import {Container, Content, Header, List, Separator, HeaderButton} from "../../components/index";
-import {Text, ListItem, Item, Input} from "native-base";
-/*import {showLoading, hideLoading} from "../../actions/loading";
-import {fetchNewFriendList, fetchMyFriendList} from "../../actions/friend";
+import {Container, Content, Header, List, Separator} from "../../components/index";
+import {Text, ListItem, Item, Input,Button,Right} from "native-base";
+/*import {fetchNewFriendList, fetchMyFriendList} from "../actions/friend";
 import {request, urls, toast} from "../../utils/index";*/
 
 /**
  * 接受好友申请
  */
-class FriendApply extends PureComponent {
+export default class AgreeFriendApply extends PureComponent {
 
 	constructor(props) {
 		super(props);
-		let {friend, loginUser} = props;
+		let {friend} = props;
+		alert(JSON.stringify(friend));
 		this.state = {
-			friendRemark: friend.friendNick
+			friendRemark: friend.nickname
 		}
 	}
 
-	render() {
-		let {friend}  = this.props;
+	render(){
+		/*let {friend}  = this.props;*/
 		return (
 			<Container>
+
 				<Header {...this.props} right={
-					<HeaderButton text="完成" onPress={this._agree.bind(this)}/>
+					<Right>
+						<Button transparent onPress={()=>this._agree()}>
+							<Text>
+								完成
+							</Text>
+						</Button>
+					</Right>
 				}/>
 
 				<Content gray>
@@ -51,51 +58,45 @@ class FriendApply extends PureComponent {
 	}
 
 	_agree() {
-		let {loginUser, friend, dispatch} = this.props;
+		let {friend} = this.props;
 		let {friendRemark} = this.state;
 
-		// 申请加为好友
-		dispatch(showLoading());
-		request.getJson(urls.apis.FRIEND_APPLYADDFRIEND, {
+		request.getJson(urls.apis.FRIEND_AGREEADDFRIEND, {
 			id: friend.id,
-			passiveName: friendRemark,
+			friendRemark: friendRemark,
 		}).then(((result) => {
-			dispatch(hideLoading());
-			if (result.success) {
-				toast.show('已发送');
+			if (result.ok) {
+				alert('已发送');
 				// 返回上一页
 				Actions.pop();
 
 				// 刷新新朋友列表, 我的好友列表
-				this.refreshFriendList();
+				//this.refreshFriendList();
 
 			} else {
 				toast.show('发送失败，请重试');
 			}
 		}).bind(this), (error) => {
-			dispatch(hideLoading());
 			alert(JSON.stringify(error));
 		});
-
 	}
 
 	// 刷新新朋友列表, 我的好友列表
-	refreshFriendList() {
-		let {dispatch, loginUser} = this.props;
-		// 新朋友
+	/*refreshFriendList() {
+		/!*!// 新朋友
 		dispatch(fetchNewFriendList(loginUser.appid));
 		// 我的好友
-		dispatch(fetchMyFriendList(loginUser.appid));
-	}
+		dispatch(fetchMyFriendList(loginUser.appid));*!/
+	}*/
 }
 
 const styles = {};
 
-FriendApply.propTypes = {
+/*
+AgreeFriendApply.propTypes = {
 	friend: React.PropTypes.object, // 用户ID
 }
 
 const mapStateToProps = state => ({
 	loginUser: state.user.loginUser
-});
-export default connect(mapStateToProps)(FriendApply);
+});*/

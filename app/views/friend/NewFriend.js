@@ -37,7 +37,7 @@ export default class NewFriend extends PureComponent {
 									<Text note>{f.introduce}</Text>
 									</Body>
 									<Right style={{justifyContent:'center'}}>
-										{f.state == 0 ?
+										{f.status == 1 ?
 											<Button small onPress={() => Actions.agreeFriendApply({friend:f})}>
 												<Text>接受</Text>
 											</Button> :
