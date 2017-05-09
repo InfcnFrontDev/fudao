@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {Container, Header, WebView} from "../../components/index";
+import {Container, Content, Header, WebView} from "../../components/index";
 
 /**
  * 我的时间
@@ -13,8 +13,10 @@ export default class ArticleDetail extends PureComponent {
 		return (
 			<Container>
 				<Header {...this.props}/>
-				<WebView
-					uri={urls.pages.ARTICLE_GETARTICLE + '?id=' + articleId}/>
+				<Content white>
+					<WebView
+						uri={urls.pages.ARTICLE_GETARTICLE + '?id=' + articleId}/>
+				</Content>
 			</Container>
 		)
 	}
