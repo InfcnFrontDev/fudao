@@ -8,6 +8,8 @@ import MyEnter from "./components/MyEnter.js";
 import Homedrag from "./HomeDrag.js";
 import userStore from "../../mobx/userStore";
 import DetailsModal from "./components/DetailsModal";
+import TimeModal from "./components/TimeModal";
+
 import weatherStore from "../../mobx/weatherStore";
 
 
@@ -115,6 +117,7 @@ export default class Home extends PureComponent {
 						<Image source={require('../../assets/home/cengliangchang.png')} style={styles.image}/>
 					</Button>
 					<DetailsModal ref={(e)=>this._groupSelectModal = e}></DetailsModal>
+					<TimeModal ref={(e)=>this._TimeModal = e}></TimeModal>
 
 				</Content>
 				<View style={{width: Dimensions.get('window').width, height: 107,}}>
@@ -130,7 +133,12 @@ export default class Home extends PureComponent {
 	}
 
 	openDetailsBox(data){
-		this._groupSelectModal.show(data);
+		if(data=='修改时间'){
+			this._TimeModal.show(data);
+		}else{
+			this._groupSelectModal.show(data);
+		}
+
 	}
 
 
