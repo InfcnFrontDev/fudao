@@ -37,14 +37,11 @@ import MenuKinds from "./views/disease/components/MenuKinds";
 import Expect from "./views/disease/Expect";
 import ExpectDetail from "./views/disease/ExpectDetail";
 import Health from "./views/disease/Health";
-
-import NewDynamic from "./views/dynamic/NewDynamic"
-import DynamicDetail from "./views/dynamic/DynamicDetail"
-import DynamicPicture from "./views/dynamic/DynamicPicture"
 import FriendApply from "./views/friend/FriendApply";
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import NewFriend from "./views/friend/NewFriend";
 import UserDetail from "./views/user/UserDetail";
+import Emotion from "./views/emotion/Emotion";
 import Search from "./views/search/Search";
 import SearchSymptomProblem from "./views/search/SearchSymptomProblem";
 import SearchDailyLife from "./views/search/SearchDailyLife";
@@ -52,6 +49,9 @@ import SearchFriendsCircle from "./views/search/SearchFriendsCircle";
 import SearchHealthCare from "./views/search/SearchHealthCare";
 import SearchInformation from "./views/search/SearchInformation";
 import SearchOfflineService from "./views/search/SearchOfflineService";
+import Message from "./views/message/Message";
+import MsgDetail from "./views/message/MsgDetail";
+import Chat from "./views/message/Chat";
 /**
  * 路由
  */
@@ -79,52 +79,58 @@ export default class AppRouter extends PureComponent {
 					<Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
 					<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
 					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
+
+					{/*主页*/}
+					<Scene title="主页" key="homeapp" component={Homeapp}/>
+
 					{/*好友*/}
 					<Scene key="friend" component={Friend} title="好友" hideNavBar/>
 					<Scene key="friendApply" component={FriendApply} title="好友申请" hideNavBar/>
 					<Scene key="newFriend" component={NewFriend} title="新的朋友" hideNavBar/>
 					<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
+
 					{/*用户*/}
 					<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
 
+					{/*侧边栏*/}
 					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
 
-					<Scene key="articleDetail" component={ArticleDetail} title="资讯详情"/>
-					<Scene key="collection" component={Collection} title="收藏" hideNavBar/>
+					{/*资讯*/}
 					<Scene title="资讯详情" key="articleDetail" component={ArticleDetail} hideNavBar/>
+
+					{/*收藏*/}
 					<Scene title="收藏" key="collection" component={Collection} hideNavBar/>
+
+					{/*我的*/}
 					<Scene title="关于福道" key="about" component={About} hideNavBar/>
 					<Scene title="隐私声明" key="privacyStatement" component={PrivacyStatement} hideNavBar/>
 					<Scene title="用户协议" key="userAgreement" component={UserAgreement} hideNavBar/>
-
-					<Scene title="我的记录" key="record" component={Record} hideNavBar/>
 					<Scene title="基本信息" key="baseInfo" component={BaseInfo} hideNavBar/>
+					<Scene title="我的记录" key="record" component={Record} hideNavBar/>
 					<Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
 					<Scene title="系统设置" key="settings" component={Settings} hideNavBar/>
 
-					<Scene title="主页" key="homeapp" component={Homeapp}/>
+					{/*能量场*/}
+					<Scene title="能量场" key="energy" component={Energy} hideNavBar/>
 
+					{/*自诊*/}
+					<Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
+					<Scene key="evaluation" component={Evaluation} title="测评" hideNavBar/>
+					<Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自诊" hideNavBar/>
 
-                    <Scene title="自疗" key="disease" component={Disease} hideNavBar/>
-                    <Scene title="疾病详情" key="diseaseDetail" component={DiseaseDetail} hideNavBar/>
-                    <Scene title="能量场" key="energy" component={Energy} hideNavBar/>
-                    {/*自诊*/}
-                    <Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
-                    <Scene key="evaluation" component={Evaluation} title="测评"  hideNavBar/>
-                    <Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自诊"  hideNavBar/>
-                    {/*自疗*/}
-                    <Scene key="disease" component={Disease}   hideNavBar/>
-                    <Scene key="diseaseDetail" component={DiseaseDetail}   hideNavBar/>
-                    <Scene key="menuKinds" component={MenuKinds}   hideNavBar/>
-                    <Scene key="menuDetail" component={MenuDetail}   hideNavBar/>
-                    {/*自修*/}
-                    <Scene key="expect" component={Expect}   hideNavBar/>
-                    <Scene key="expectDetail" component={ExpectDetail}   hideNavBar/>
-                    {/*自养*/}
-                    <Scene key="health" component={Health}   hideNavBar/>
+					{/*自疗*/}
 					<Scene title="自疗" key="disease" component={Disease} hideNavBar/>
 					<Scene title="疾病详情" key="diseaseDetail" component={DiseaseDetail} hideNavBar/>
-					<Scene title="能量场" key="energy" component={Energy} hideNavBar/>
+					<Scene key="menuKinds" component={MenuKinds} hideNavBar/>
+					<Scene key="menuDetail" component={MenuDetail} hideNavBar/>
+
+					{/*自修*/}
+					<Scene key="expect" component={Expect} hideNavBar/>
+					<Scene key="expectDetail" component={ExpectDetail} hideNavBar/>
+
+					{/*自养*/}
+					<Scene key="health" component={Health} hideNavBar/>
+
 					{/*自诊*/}
 					<Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
 					<Scene key="evaluation" component={Evaluation} title="测评" hideNavBar/>
@@ -133,47 +139,49 @@ export default class AppRouter extends PureComponent {
 					{/*动态*/}
 					<Scene key="newDynamic" component={NewDynamic} title="新动态" hideNavBar/>
 					<Scene key="dynamicDetail" component={DynamicDetail} title="动态详情" hideNavBar/>
-					<Scene key="dynamicPicture" component={DynamicPicture} title="动态详情" hideNavBar/>
+					<Scene key="dynamicPicture" component={DynamicPicture} title="动态图片" hideNavBar/>
 
-                    <Scene key="emotion" component={Emotion} title="动态详情" hideNavBar/>
+					{/*情绪*/}
+					<Scene key="emotion" component={Emotion} title="情绪" hideNavBar/>
 
-                </Scene>
-            </Router>
-        )
-    }
 					{/*搜索*/}
-					<Scene title="搜索" key="search" component={Search} hideNavBar initial/>
+					<Scene title="搜索" key="search" component={Search} hideNavBar/>
 					<Scene title="搜索日常生活" key="searchDailyLife" component={SearchDailyLife} hideNavBar/>
 					<Scene title="搜索朋友圈" key="searchFriendsCircle" component={SearchFriendsCircle} hideNavBar/>
 					<Scene title="搜索保健方法" key="searchHealthCare" component={SearchHealthCare} hideNavBar/>
 					<Scene title="搜索资讯" key="searchInformation" component={SearchInformation} hideNavBar/>
 					<Scene title="搜索线下服务" key="searchOfflineService" component={SearchOfflineService} hideNavBar/>
 					<Scene title="搜索症状与问题" key="searchSymptomProblem" component={SearchSymptomProblem} hideNavBar/>
+
+					{/*消息*/}
+					<Scene title="消息" key="message" component={Message} hideNavBar/>
+					<Scene title="聊天消息" key="chat" component={Chat} hideNavBar/>
+					<Scene title="系统消息" key="msgDetail" component={MsgDetail} hideNavBar/>
 				</Scene>
 			</Router>
 		)
 	}
 
-    reducerCreate(params) {
-        const defaultReducer = Reducer(params)
-        return (state, action) => {
-            // console.log(state);
-            // console.log(action);
-            return defaultReducer(state, action)
-        }
-    }
+	reducerCreate(params) {
+		const defaultReducer = Reducer(params)
+		return (state, action) => {
+			// console.log(state);
+			// console.log(action);
+			return defaultReducer(state, action)
+		}
+	}
 
-    appExit() {
-        if (this.lastBackPressTime && this.lastBackPressTime + 2000 >= Date.now()) {
-            return false;
-        }
-        this.lastBackPressTime = Date.now();
-        tools.showToast('再按一次退出应用');
-        return true;
-    }
+	appExit() {
+		if (this.lastBackPressTime && this.lastBackPressTime + 2000 >= Date.now()) {
+			return false;
+		}
+		this.lastBackPressTime = Date.now();
+		tools.showToast('再按一次退出应用');
+		return true;
+	}
 
-    shouldComponentUpdate() {
-        return false
-    }
+	shouldComponentUpdate() {
+		return false
+	}
 }
 
