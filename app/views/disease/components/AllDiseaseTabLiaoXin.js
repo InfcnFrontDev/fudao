@@ -16,14 +16,17 @@ export default class AllDiseaseTabLiaoXin extends PureComponent {
 		onItemAdd: () => console.log('onItemAdd'),
 		onItemPress: () => console.log('onItemPress'),
 	}
-
+    ds = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2
+    });
 	render() {
 		let {data} = this.props
+		data = data.slice()
         return (
 			<ListView
 				enableEmptySections={true}
 				contentContainerStyle={styles.contentContainer}
-				dataSource={data}
+				dataSource={this.ds.cloneWithRows(data)}
 				renderRow={this._renderRow.bind(this)}
 				pageSize={4}
 			/>
