@@ -43,6 +43,7 @@ import FriendApply from "./views/friend/FriendApply";
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import NewFriend from "./views/friend/NewFriend";
 import UserDetail from "./views/user/UserDetail";
+import RemarkSet from "./views/user/RemarkSet";
 import BaseInfo from "./views/base-info/BaseInfo"
 
 /**
@@ -79,6 +80,7 @@ export default class AppRouter extends PureComponent {
                     <Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
                     {/*用户*/}
                     <Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
+                    <Scene key="remarkSet" component={RemarkSet} title="设置备注" hideNavBar/>
 
                     <Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
 

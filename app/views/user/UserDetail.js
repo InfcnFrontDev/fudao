@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Alert} from "react-native";
+import {Alert,ToastAndroid} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Header, Content, List, Separator} from "../../components/index";
@@ -8,6 +8,7 @@ import {observer} from "mobx-react/native";
 /*import {showLoading, hideLoading} from "../../actions/loading";
 import {fetchMyFriendList} from "../../actions/friend";
 import {request, urls, toast} from "../../utils/index";*/
+import friendStore from "../../mobx/friendStore";
 
 /**
  * 用户详情
@@ -16,19 +17,33 @@ import {request, urls, toast} from "../../utils/index";*/
 export default class UserDetail extends PureComponent {
 
 	state = {
-		user: {
-			img:'zixun/1.1.jpg',
-			title:'234',
-			appid:'567888888888888888888888888',
-			sex:'1'
-		}
+		user: {}
+	}
+	componentWillMount(){
+		//USER_GETUSER
+		let {userId} = this.props;
+		request.getJson(urls.apis.USER_GETUSER, {
+			id: userId,
+
+		}).then(((result) => {
+			if (result.ok) {
+				this.setState({
+					user:result.obj
+				})
+
+			} else {
+				ToastAndroid.show('发送申请失败，请重试', ToastAndroid.SHORT);
+
+			}
+		}).bind(this), (error) => {
+			alert(JSON.stringify(error));
+		});
 	}
 
 	render() {
 		let {user}  = this.state;
 
 		let {userId} = this.props;
-		alert(userId);
 
 		return (
 			<Container>
@@ -47,11 +62,13 @@ export default class UserDetail extends PureComponent {
 								<Text>
 									{/*{friendNickMap[user.appid] || user.title}*/}
 									&nbsp;
-									{user.sex == '1' ? <Icon name="ios-man" style={styles.manIcon}/> :
-										<Icon name="ios-woman" style={styles.womanIcon}/>}
+									{/*{user.sex == '1' ? <Icon name="ios-man" style={styles.manIcon}/> :
+										<Icon name="ios-woman" style={styles.womanIcon}/>}*/}
+									电话：{user.phone}
 								</Text>
 								<Text note style={{paddingBottom: 20}}>
 									{/*{friendNickMap[user.appid] ? '昵称：' + user.title : ''}*/}
+									用户名：{user.username}
 								</Text>
 								</Body>
 								<Right>
@@ -60,16 +77,19 @@ export default class UserDetail extends PureComponent {
 						</List>
 						<Separator/>
 						<List>
-							<ListItem last>
+							<ListItem last onPress={() => Actions.remarkSet({userId: user.id})}>
 								<Body>
-								<Text>设置备注和标签</Text>
+								<Text>设置备注</Text>
 								</Body>
 								<Right>
+									<Icon name="ios-arrow-forward"/>
 								</Right>
 							</ListItem>
 						</List>
 						<Separator/>
-						{/*{this.renderButtons()}*/}
+						<Button danger block style={styles.button} onPress={this._deleteFriend.bind(this)}>
+							<Text>删除该好友</Text>
+						</Button>
 					</View> : null}
 				</Content>
 			</Container>
@@ -116,7 +136,7 @@ export default class UserDetail extends PureComponent {
 					user
 				})
 			} else {
-				toast.show('获取用户信息失败');
+				ToastAndroid.show('获取用户信息失败', ToastAndroid.SHORT);
 			}
 		}, (error) => {
 			dispatch(hideLoading());
@@ -143,7 +163,7 @@ export default class UserDetail extends PureComponent {
 	// 删除好友
 	_deleteFriend() {
 		let {user} = this.state;
-		Alert.alert("删除好友", '您确定要删除好友' + user.title + '吗？', [{
+		Alert.alert("删除好友", '您确定要删除好友' + user.username + '吗？', [{
 			text: '取消'
 		}, {
 			text: '确定', onPress: () => this.deleteFriend()
@@ -151,23 +171,21 @@ export default class UserDetail extends PureComponent {
 	}
 
 	deleteFriend() {
-		let {loginUser, dispatch} = this.props,
-			{user} = this.state,
-			userId = loginUser.appid,
-			friendId = user.appid;
+		let {user} = this.state;
+
 
 		// 获取用户信息
 		//dispatch(showLoading());
 		request.getJson(urls.apis.FRIEND_DELETEMYFRIEND, {
-			userId, friendId
+			friendId:user.id
 		}).then((result) => {
-			dispatch(hideLoading());
-			if (result.success) {
-				toast.show('删除成功');
-				// 刷新我的好友列表
-				dispatch(fetchMyFriendList(userId));
+			if (result.ok) {
+				ToastAndroid.show('删除成功', ToastAndroid.SHORT);
+				Actions.pop()
+				friendStore.fetchMyFriendList();
 			} else {
-				toast.show('删除失败');
+				ToastAndroid.show('删除失败', ToastAndroid.SHORT);
+
 			}
 		}, (error) => {
 			dispatch(hideLoading());
