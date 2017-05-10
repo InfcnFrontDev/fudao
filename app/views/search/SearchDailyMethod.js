@@ -3,7 +3,7 @@ import {Container, Content, Text} from "native-base";
 import Header from "../../components/header/SearchHeader";
 
 /**
- * 搜索 -> 日常生活
+ * 搜索 -> 保健方法
  */
 export default class SearchDailyLife extends PureComponent {
 
@@ -15,7 +15,7 @@ export default class SearchDailyLife extends PureComponent {
 	render() {
 		return (
 			<Container>
-				<Header placeholder="搜索日常生活"/>
+				<Header placeholder="搜索保健方法"/>
 				<Content>
 					<Text>日常生活</Text>
 				</Content>

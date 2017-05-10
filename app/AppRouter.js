@@ -46,7 +46,7 @@ import BaseInfo from "./views/base-info/BaseInfo";
 import Emotion from "./views/emotion/Emotion";
 import Search from "./views/search/Search";
 import SearchSymptomProblem from "./views/search/SearchSymptomProblem";
-import SearchDailyLife from "./views/search/SearchDailyLife";
+import SearchDailyLife from "./views/search/SearchDailyMethod";
 import SearchFriendsCircle from "./views/search/SearchFriendsCircle";
 import SearchHealthCare from "./views/search/SearchHealthCare";
 import SearchInformation from "./views/search/SearchInformation";
