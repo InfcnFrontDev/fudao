@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
+import {Actions} from "react-native-router-flux";
 import {Text,WebView} from "react-native";
 import {Container, Header, Content, Loading} from "../../components/index";
 
@@ -25,7 +26,9 @@ export default class DeepDiagnosis extends PureComponent {
     }
 
     gotoDeep(data){
-        // Actions
+        Actions.pop()
+        // Actions.pop({refresh: {newnew: false}})
+        // alert(data);
     }
 
 

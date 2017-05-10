@@ -83,6 +83,11 @@ class DynamicStore {
                 let allList = this.getAll();
                 cb(res, allList);
             }
+            else{
+                callback([],{
+                    allLoaded:true
+                })
+            }
         })
         // .then(() => {
         //     let allList = this.getAll();

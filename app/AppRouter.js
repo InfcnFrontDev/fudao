@@ -57,8 +57,8 @@ export default class AppRouter extends PureComponent {
                     {/*首页*/}
                     <Scene key="index" component={Index} title="首页" hideNavBar/>
                     {/*启动注册*/}
-                    <Scene key="register" component={Register} title="注册" hideNavBar/>
-                    <Scene key="login" component={Login} title="登录" hideNavBar/>
+                    <Scene key="register" component={Register} title="注册"  hideNavBar/>
+                    <Scene key="login" component={Login} title="登录"  hideNavBar/>
                     <Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
                     <Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
                     <Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
@@ -97,7 +97,7 @@ export default class AppRouter extends PureComponent {
                     <Scene title="疾病详情" key="diseaseDetail" component={DiseaseDetail} hideNavBar/>
                     <Scene title="能量场" key="energy" component={Energy} hideNavBar/>
                     {/*自诊*/}
-                    <Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
+                    <Scene key="diagnosis" component={Diagnosis} title="自诊"  hideNavBar/>
                     <Scene key="evaluation" component={Evaluation} title="测评"  hideNavBar/>
                     <Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自诊"  hideNavBar/>
 
