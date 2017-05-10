@@ -67,7 +67,7 @@ export default class Menukinds extends PureComponent {
 			return (
 				<Container>
 					<Header back {...this.props}></Header>
-					<Content>
+					<Content white>
 						<View style={styles.bar}>
 							{tab.map((item, index) => this.renderTab(item, index))}
 						</View>

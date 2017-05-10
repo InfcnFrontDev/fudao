@@ -14,7 +14,35 @@ import healthMethodStore from "../../mobx/healthMethodStore";
 @observer
 export default class Health extends PureComponent {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: "",
+            img: "",
+            detail: ""
+        };
+
+    }
+    fetchWeather(){
+        let self = this
+        request.getJson(urls.apis.HEALTH_GETSOLARTERM)
+            .then((result) => {
+                if (result.ok && result.obj) {
+                    let data = result.obj[0]
+                    self.setState({
+                        name: data.name,
+                        img: data.img,
+                        detail: data.detail
+                    })
+                } else {
+                    tools.showToast('请求出错！')
+                }
+            }).catch((error)=>{
+            console.log("Api call error");
+        });
+    }
     componentDidMount(){
+        this.fetchWeather()
         healthMethodStore.fetchHealthMethod()
     }
 
@@ -25,8 +53,12 @@ export default class Health extends PureComponent {
 			<Container>
 				<Header {...this.props}/>
 				<Content delay>
-                    <View style={{height: 140}}>
-
+                    <View style={styles.container}>
+                        <Image source={{uri: urls.getImage(this.state.img)}} />
+                        <View style={styles.box}>
+                            <Text style={styles.name}>{this.state.name}</Text>
+                            <Text style={styles.detail}>{this.state.detail}</Text>
+                        </View>
                     </View>
 					<DiseaseMethodTabView data={healthMethod}  pageKey={'health'}/>
 				</Content>
@@ -39,6 +71,26 @@ export default class Health extends PureComponent {
 }
 
 const styles = {
+    container:{
+        height: 140,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        paddingRight: 30
+    },
+    box: {
+        justifyContent: 'center'
+
+    },
+    name: {
+        color: '#FFF',
+        fontSize: 20,
+        fontFamily: 'SanFrancisco'
+    },
+    detail: {
+        color: '#FFF',
+        fontSize: 18,
+        fontFamily: 'Microsoft YaHei'
+    },
 	title: {
 		fontSize: theme.DefaultFontSize,
 		color: '#FFF',
