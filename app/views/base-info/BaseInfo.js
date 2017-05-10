@@ -124,9 +124,9 @@ export default class Personal extends PureComponent {
 	substr(str) {
 		if (str == null)
 			str = '';
-		else if (str == '0')
+		else if (str ==2)
 			str = '女';
-		else if (str == '1')
+		else if (str ==1)
 			str = '男';
 		else if (str.length > 10)
 			str = str.substr(0, 10) + '...';

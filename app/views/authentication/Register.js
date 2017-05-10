@@ -29,7 +29,7 @@ export default class Register extends PureComponent {  // eslint-disable-line
         return (
             <Container>
                 <Header title={this.state.title}></Header>
-                <Content>
+                <Content white>
                     <View style={styles.bag}>
                         <UserInput text="手机号"
                                    onChangeText={(value)=>{
@@ -39,9 +39,9 @@ export default class Register extends PureComponent {  // eslint-disable-line
                                    }}/>
                         <View style={styles.box}>
                             <View style={styles.border}>
-                                <Text style={{color:"#fff"}}>验证码</Text>
+                                <Text>验证码</Text>
                             </View>
-                            <TextInput style={{flex:1,color:'#fff'}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
+                            <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
                                        onChangeText={(value)=>{
                                            this.setState({
                                                code:value
@@ -133,7 +133,7 @@ const styles = {
         fontSize:theme.DefaultFontSize-4,
         textAlign:'center',
         marginTop:6,
-        color:'#fff'
+        color:'#333'
     },
     box:{
         height:54,
@@ -151,7 +151,7 @@ const styles = {
         flexDirection:'row',
         justifyContent:'center',
         borderRightWidth:1,
-        borderRightColor:"#fff",
+        borderRightColor:"#D4D4D4",
 
     },
 };

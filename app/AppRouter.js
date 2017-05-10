@@ -81,7 +81,7 @@ export default class AppRouter extends PureComponent {
                     <Scene title="隐私声明" key="privacyStatement" component={PrivacyStatement} hideNavBar/>
                     <Scene title="用户协议" key="userAgreement" component={UserAgreement} hideNavBar/>
 
-                    <Scene title="我的记录" key="record" component={Record} hideNavBar/>
+                    <Scene title="我的记录" key="record" component={Record} hideNavBar />
 
                     <Scene title="基本信息" key="baseInfo" component={BaseInfo} hideNavBar/>
 
@@ -98,6 +98,8 @@ export default class AppRouter extends PureComponent {
                     <Scene key="evaluation" component={Evaluation} title="测评"  hideNavBar/>
                     <Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自诊"  hideNavBar/>
 
+
+                    <Scene key="emotion" component={Emotion} title="情绪"  hideNavBar/>
                 </Scene>
             </Router>
         )

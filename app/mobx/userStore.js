@@ -113,6 +113,10 @@ class UserStore {
 			}
 		})
 	}
+	@action
+	userInfo(obj) {
+		this.loginUser=obj;
+	}
 }
 
 

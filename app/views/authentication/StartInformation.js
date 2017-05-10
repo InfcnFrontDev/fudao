@@ -5,16 +5,20 @@
 
 import React, {PureComponent} from "react";
 import {Actions,ActionConst} from "react-native-router-flux";
+import {observer} from "mobx-react/native";
 import {Thumbnail, Text, Icon} from "native-base";
 import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePickerAndroid, Alert} from "react-native";
 import {Header, Container, Content} from "../../components/index";
 import CommitButton from "./components/CommitButton";
+import userStore from "../../mobx/userStore";
+
 /*import {login} from "../../actions/user";*/
 import WomanChoose from "./WomanChoose";
 
 /**
  * 首次登录设置个人信息页
  */
+@observer
 export default class StartInformation extends PureComponent {
 
     constructor(props) {
@@ -73,7 +77,7 @@ export default class StartInformation extends PureComponent {
             <TouchableOpacity onPress={this.woman.bind(this)}>
                 <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
                 <View style={{height:20,width:90}}>
-                    <Text style={{textAlign:'center',color:'#fff'}}>{this.state.jieduan}</Text>
+                    <Text style={{textAlign:'center'}}>{this.state.jieduan}</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -102,7 +106,7 @@ export default class StartInformation extends PureComponent {
         return (
             <Container style={styles.container}>
                 <Header  {...this.props}></Header>
-                <Content padder >
+                <Content padder white>
                     <View style={styles.bigBox}>
                         <View style={styles.box}>
                             <View style={styles.photo}>
@@ -210,7 +214,13 @@ export default class StartInformation extends PureComponent {
 
             }
         }
-
+        userStore.userInfo({
+            phone:phone,
+            sex: sex,
+            crowd: crowd,
+            birthday: maxText,
+            regionId:110000
+        });
         //获取地理位置
 
         /*let userInformation = {};
@@ -341,18 +351,15 @@ const styles = {
     text1:{
         textAlign:'center',
         fontSize:theme.DefaultFontSize+2,
-        color:'#fff'
 
     },
     text2:{
         textAlign:'center',
         fontSize:theme.DefaultFontSize+2,
-        color:'#fff'
     },
     text3:{
         textAlign:'center',
         fontSize:theme.DefaultFontSize-3,
-        color:'#fff'
     },
     btn:{
         borderWidth:1,

@@ -27,15 +27,15 @@ export default class RebuildPassword extends PureComponent {
         return (
             <Container>
                 <Header {...this.props}></Header>
-                <Content>
+                <Content white>
                     <View style={styles.bag}>
-                        <UserInput text="新密码" placeholder={"6-12位密码"}  placeholderTextColor="#fff"  value={this.state.password} secureTextEntry={true}
+                        <UserInput text="新密码" placeholder={"6-12位密码"}  value={this.state.password} secureTextEntry={true}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password:value
                                        })
                                    }}/>
-                        <UserInput text="重复密码" placeholder={"6-12位密码"}  placeholderTextColor="#fff" value={this.state.password1} secureTextEntry={true}
+                        <UserInput text="重复密码" placeholder={"6-12位密码"}  value={this.state.password1} secureTextEntry={true}
                                    onChangeText={(value)=>{
                                        this.setState({
                                            password1:value
