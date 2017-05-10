@@ -46,11 +46,9 @@ import BaseInfo from "./views/base-info/BaseInfo";
 import Emotion from "./views/emotion/Emotion";
 import Search from "./views/search/Search";
 import SearchSymptomProblem from "./views/search/SearchSymptomProblem";
-import SearchDailyLife from "./views/search/SearchDailyMethod";
+import SearchDailyMethod from "./views/search/SearchDailyMethod";
 import SearchFriendsCircle from "./views/search/SearchFriendsCircle";
-import SearchHealthCare from "./views/search/SearchHealthCare";
 import SearchInformation from "./views/search/SearchInformation";
-import SearchOfflineService from "./views/search/SearchOfflineService";
 import Message from "./views/message/Message";
 import MsgDetail from "./views/message/MsgDetail";
 import Chat from "./views/message/Chat";
@@ -148,11 +146,9 @@ export default class AppRouter extends PureComponent {
 
 					{/*搜索*/}
 					<Scene title="搜索" key="search" component={Search} hideNavBar/>
-					<Scene title="搜索日常生活" key="searchDailyLife" component={SearchDailyLife} hideNavBar/>
+					<Scene title="搜索保健方法" key="searchDailyLife" component={SearchDailyMethod} hideNavBar/>
 					<Scene title="搜索朋友圈" key="searchFriendsCircle" component={SearchFriendsCircle} hideNavBar/>
-					<Scene title="搜索保健方法" key="searchHealthCare" component={SearchHealthCare} hideNavBar/>
 					<Scene title="搜索资讯" key="searchInformation" component={SearchInformation} hideNavBar/>
-					<Scene title="搜索线下服务" key="searchOfflineService" component={SearchOfflineService} hideNavBar/>
 					<Scene title="搜索症状与问题" key="searchSymptomProblem" component={SearchSymptomProblem} hideNavBar/>
 
 					{/*消息*/}
