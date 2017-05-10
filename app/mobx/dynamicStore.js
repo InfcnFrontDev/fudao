@@ -83,7 +83,7 @@ class DynamicStore {
                 let allList = this.getAll();
                 cb(res, allList);
             }
-        })
+        });
         // .then(() => {
         //     let allList = this.getAll();
         //     let listRender = allList.slice((this.page - 1) * 5, this.page * 5)

@@ -214,13 +214,7 @@ export default class StartInformation extends PureComponent {
 
             }
         }
-        userStore.userInfo({
-            phone:phone,
-            sex: sex,
-            crowd: crowd,
-            birthday: maxText,
-            regionId:110000
-        });
+
         //获取地理位置
 
         /*let userInformation = {};

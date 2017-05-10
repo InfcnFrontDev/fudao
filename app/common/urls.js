@@ -129,7 +129,7 @@ const urls = {
         USER_SETUSERBASEINFO: apiPath + "UserApi/setUserBaseInfo",
         //情绪
         EMOTION_GETEMOTIONINTERVENE: apiPath + "EmotionApi/getEmotionIntervene",
-
+        EMOTION_GETEMOTIONFACTOR:apiPath + "EmotionApi/getemotionfactor",
         // 注册登录(新)
 
         /*//检测用户是否存在

@@ -1,8 +1,10 @@
 
 import React, {PureComponent} from "react";
 import {Modal, View, Image, TouchableHighlight,TextInput,ScrollView,TouchableOpacity } from "react-native";
+import {observer} from "mobx-react/native";
 import {Text,Button,ListItem,CheckBox, } from "native-base";
 import MicrocosmicFactor from "./MicrocosmicFactor";
+import EmotionStore from "../../../mobx/emotionStore";
 /*import CheckBox from 'react-native-check-box'*/
 
 /**
@@ -10,7 +12,7 @@ import MicrocosmicFactor from "./MicrocosmicFactor";
  */
 
 
-
+@observer
 export default class EmotionFactor extends PureComponent {
     constructor(props) {
         super(props);
@@ -19,22 +21,16 @@ export default class EmotionFactor extends PureComponent {
             sel:false,
             color:'#fff',
             flag:true,
-            grade:null,
             flag1:true,
             selfReason:null
            /* '#008F81'*/
         };
-        this.select=[];
         this.grade=[];
-        this.selected=[];
-        this.selfReason=""
+        this.selfReason="";
     }
 
     componentWillMount(){
         let grade=this.props.data.grade;
-        let reasons=this.props.data.reasons;
-        tools.showToast(JSON.stringify(reasons))
-
         for(var i=0;i<grade.length;i++){
             this.grade[i]={};
             this.grade[i].name= grade[i].name;
@@ -42,14 +38,15 @@ export default class EmotionFactor extends PureComponent {
             this.grade[i].value= false;
         }
         this.grade[0].value= true;
+        EmotionStore.grade(this.grade);
         this.setState({
             data:this.props.data,
             img:this.props.emotionImg,
-            grade:this.grade,
         });
     }
     render() {
-        let {data,img,grade} = this.state;
+        let {data,img} = this.state;
+        let grade=EmotionStore.gradeList;
         let slider=(null);
         if(!data||!img||!grade)
             return null
@@ -151,27 +148,22 @@ export default class EmotionFactor extends PureComponent {
             </TouchableOpacity>
         )
     }
-    selectGrade(item,index){
-        tools.showToast(JSON.stringify(item))
-        if(!this.grade[index].value){
-            for(var i=0;i<=index;i++){
-                this.grade[i].value=true;
+    selectGrade(item,index) {
+        if (!this.grade[index].value) {
+            for (var i = 0; i <= index; i++) {
+                this.grade[i].value = true;
             }
-        }else{
-            for(var i=index;i<this.grade.length;i++){
-                this.grade[i].value=false;
+        } else {
+            for (var i = index; i < this.grade.length; i++) {
+                this.grade[i].value = false;
             }
         }
-        this.grade[0].value=true;
-        this.setState({
-            grade: this.grade,
-            flag1:!this.state.flag1,
-        })
+        this.grade[0].value = true;
+        EmotionStore.grade(this.grade)
     }
-    show(data) {
+    show() {
         this.setState({
             show: true,
-            data
         })
     }
 
@@ -181,47 +173,8 @@ export default class EmotionFactor extends PureComponent {
             data: null
         })
     }
-    submit(name){
-
-        let c=0;
-        for(var i=0;i<this.grade.length;i++){
-            if(this.grade[i].value){
-                c++;
-            }
-        }
-        let fenji=null;
-        if(c==1){
-            fenji="一级"
-        }else if(c==2){
-            fenji="二级"
-        }else{
-            fenji="三级"
-        }
-        let weiguan=[];
-        for(var i=0;i<this.select.length;i++){
-            if(this.select[i].value){
-                weiguan.push(this.select[i].name);
-            }
-        }
-        if(weiguan.length==0){
-            request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
-              emotion: name,
-              grade:fenji,
-             }).then((data) => {
-                    this.hide();
-             })
-        }else{
-            request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
-                emotion: name,
-                grade:fenji,
-                factor:weiguan
-            }).then((data) => {
-
-            })
-        }
-
-
-
+    submit(name) {
+        EmotionStore.submmitHuanjie(name)
     }
 }
 

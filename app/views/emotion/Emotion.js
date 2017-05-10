@@ -79,14 +79,15 @@ export default class Emotion extends PureComponent {
 		let updateTime = new Date().getTime();
 		EmotionStore.updateMyEmotion(items);
 		EmotionStore.updateMyTime(updateTime);
+		tools.showToast("点击")
 			let goods="goods";
 			let bads="bads";
-			/*if(items.title=="愉悦"||items.title=="兴奋"||items.title=="兴趣"||items.title=="满足"||items.title=="平静"||items.title=="平淡"){
+			if(items.title=="愉悦"||items.title=="兴奋"||items.title=="兴趣"||items.title=="满足"||items.title=="平静"||items.title=="平淡"){
+				tools.showToast(items.title);
 				request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
 				 	emotion: items.title,
 					weather:"晴"
 				 }).then((data) => {
-					tools.showToast("兴奋")
 				 	let fenji=null;
 				 	if (data.ok) {
 						if(data.obj.grade.length==1){
@@ -96,12 +97,7 @@ export default class Emotion extends PureComponent {
 						 }else if(data.obj.grade.length==3){
 						 	fenji="三级";
 						 }
-						request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
-							emotion: items.title,
-							grade:fenji
-						 }).then((data) => {
-							this.showModal(data.obj,goods,items.img);
-						 })
+						EmotionStore.getEmotionIntervene({emotion: items,grade:fenji,word:goods,img:items.img},this.showModal)
 					 } else {
 				 		tools.showToast('这种心情，我没办法了');
 					}
@@ -109,7 +105,7 @@ export default class Emotion extends PureComponent {
 
 				})
 
-			}else{*/
+			}else{
 			let data={
 			 "obj": {
 			 "emotion": "沮丧",
@@ -187,12 +183,11 @@ export default class Emotion extends PureComponent {
 				 	}
 				 },(error)=>{
 
-				})
-				}*/
+				})*/
+				}
 
 	}
 	showModal(data,id,img) {
-
 		let Emotion=(null);
 		/*<EmotionModal ref={(e)=>this._modal = e}>
 			{/!*<EmotionSolve data={data}></EmotionSolve>*!/}
@@ -202,24 +197,19 @@ export default class Emotion extends PureComponent {
 				<Modal ref={(e)=>this._modal = e}>
 					<EmotionFactor data={data} emotionImg={img}></EmotionFactor>
 				</Modal>
-			)
-			this.setState({
-				EmoModal:Emotion
-			});
-			this._modal.show();
+			);
 		}else{
 			Emotion=(
-				<EmotionModal ref={(e)=>this._modalS = e}>
+				<EmotionModal ref={(e)=>this._modal = e}>
 					<EmotionSolve data={data} emotionImg={img}></EmotionSolve>
 				</EmotionModal>
 			)
-			this.setState({
-				EmoModal:Emotion
-			});
-			this._modalS.show();
+
 		}
-
-
+		this.setState({
+			EmoModal:Emotion
+		});
+		this._modal.show();
 	}
 }
 

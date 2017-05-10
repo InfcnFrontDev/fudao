@@ -17,7 +17,6 @@ export default class MicrocosmicFactor extends PureComponent {
             weiguan:this.props.microcosmic,
         };
         this.select=[];
-        this.selected=[];
     }
     componentWillMount(){
         let reasons=this.props.microcosmic;
