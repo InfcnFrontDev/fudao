@@ -24,24 +24,14 @@ export default class Category extends PureComponent {
 							category: 'HealthCare',
 						},
 						{
-							icon: 'cart',
-							text: '线下服务',
-							category: 'OfflineService',
-						}
-					]
-				},
-				{
-					cols: [
-						{
-							icon: 'bicycle',
-							text: '日常生活',
-							category: 'DailyLife',
-						},
-						{
 							icon: 'images',
 							text: '资讯',
 							category: 'Information',
 						},
+					]
+				},
+				{
+					cols: [
 						{
 							icon: 'aperture',
 							text: '圈子',
