@@ -3,93 +3,16 @@
  */
 import {AsyncStorage} from "react-native";
 import {observable, runInAction, computed, action, reaction, autorun} from "mobx";
-var dataList = {
-    "ok": true,
-    "obj": [
-        {
-            "title": "北京",
-            "list": [
-                {
-                    "id": "17",
-                    "name": "脱发",
-                },
-                {
-                    "id": "13",
-                    "name": "口腔干燥",
-                },
-
-                {
-                    "id": "13",
-                    "name": "头痛",
-                },
-                {
-                    "id": "12",
-                    "name": "肥胖",
-                },
-                {
-                    "id": "17",
-                    "name": "呕吐",
-                },
-
-            ]
-        },
-        {
-            "title": "40岁用户",
-            "list": [
-                {
-                    "id": "17",
-                    "name": "心绞痛",
-                },
-                {
-                    "id": "17",
-                    "name": "噎食",
-                }, {
-                    "id": "17",
-                    "name": "高血压",
-                },
-                {
-                    "id": "17",
-                    "name": "慢性支气管炎",
-                },
-
-            ]
-        },
-        {
-            "title": "春季",
-            "list": [
-                {
-                    "id": "17",
-                    "name": "骨质疏松",
-                },
-                {
-                    "id": "17",
-                    "name": "咳嗽",
-                },
-
-            ]
-        },
-        {
-            "title": "女性",
-            "list": [
-                {
-                    "id": "17",
-                    "name": "晕厥",
-                }
-            ]
-        }
-    ]
-}
+import groupBy from 'lodash/groupBy'
 
 class DiagnosisStore {
     @observable diagnosisList = [];
     @observable diagnosisDisease = [];
+    @observable diagnosisDiseaseOrderBy = {};
     @observable errorMsg = '';
 
     @action
     fetchDiagnosisColumnList() {
-        setTimeout(()=>{
-            this.diagnosisList = dataList.obj;
-        },600)
         // request.getJson(urls.apis.DIAGNOSIS_GETCOMMONDISEASELIST)
         //     .then((result) => {
         //         alert(result);
@@ -104,8 +27,29 @@ class DiagnosisStore {
 
     @action
     addDisease(disease) {
-        this.diagnosisDisease.push(disease)
-        // alert('aaaaaaaaaaaaa'+JSON.stringify(this.diagnosisDisease))
+        this.diagnosisDisease.push(disease);
+        this.diagnosisDiseaseOrderBy = groupBy(this.diagnosisDisease, item => {
+            return item.name
+        });
+    }
+
+    @action
+    delDisease(index) {
+        this.diagnosisDisease.splice(index,1);
+        this.diagnosisDiseaseOrderBy = groupBy(this.diagnosisDisease, item => {
+            return item.name
+        });
+    }
+
+    @action
+    addMyDiseaseToBackstage(){
+        var ids='';
+        for(var i=0;i<this.diagnosisDisease.length;i++){
+            ids+=this.diagnosisDisease[i].id+',';
+        }
+        // request.getJson(urls.apis.DIAGNOSIS_ADDMYDISEASES,{
+        //     ids
+        // });
     }
 
     @computed

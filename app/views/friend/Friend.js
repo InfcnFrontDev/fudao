@@ -15,7 +15,7 @@ import {toast} from "../../utils/index";*/
 @observer
 export default class Friend extends PureComponent {
 
-	componentWillMount() {
+	componentDidMount() {
 		friendStore.fetchMyFriendList();
 	}
 

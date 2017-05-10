@@ -26,8 +26,10 @@ const urls = {
         ARTICLE_GETARTICLE: webPath + 'articleDetail.html',
         // 我的时间
         MY_TIME: webPath + 'myTime.html',
+        //修改时间
+        MODIFICATION_TIME: webPath + 'modificationTime.html',
         // 健康测评
-        HEALTH_APPRAISAL: webPath + 'assessmentResult.html',
+        HEALTH_APPRAISAL: webPath + 'healthAppraisal.html',
         // 深度自诊
         DEEP_DIAGNOSIS: webPath + 'deepDiagnosis.html',
         // 测试题
@@ -80,7 +82,7 @@ const urls = {
         //获取用户信息
         USER_DETAIL: apiPath + 'app/accountInfoAction!getUserInformationByUserId.action',
         //修改用户信息
-        USERAPI_UPDATEUSERINFO: apiPath + 'api/UserApi/updateUserInfo',
+        USER_UPDATEUSERINFO: apiPath + 'UserApi/updateUserInfo',
         //搜索用户
         USER_SEARCH: apiPath + 'app/friendDynamicAction!getUserByPhone.action',
         //修改用户体检信息
@@ -119,6 +121,8 @@ const urls = {
         USER_LOGIN: apiPath + "UserApi/login",
         //获取用户信息
         USER_GETLOGINUSER: apiPath + 'UserApi/getLoginUser',
+        //获取指定用户信息
+        USER_GETUSER: apiPath + 'UserApi/getUser',
         //重置密码
         USER_RESETPASSWORD: apiPath + "UserApi/resetPassword",
         //基本信息
@@ -149,17 +153,17 @@ const urls = {
 
         // 动态 ---------------------------------------------------------
         //动态列表
-        DYNAMIC_LIST: apiPath + 'app/friendDynamicAction!getDynamics.action',
+        DYNAMIC_GETMYDYNAMICSLIST: apiPath + 'DynamicApi/getMyDynamicsList',
         //添加动态
-        DYNAMIC_ADD_DYNAMIC: apiPath + 'app/friendDynamicAction!addDynamic.action',
+        DYNAMIC_ADDDYNAMIC: apiPath + 'DynamicApi/addDynamic',
         //删除动态
-        DYNAMIC_DELETE_DYNAMIC: apiPath + 'app/friendDynamicAction!deleteDynamic.action',
+        DYNAMIC_DELETEDYNAMIC: apiPath + 'DynamicApi/deleteDynamic',
         //添加评论
-        DYNAMIC_ADD_COMMENT: apiPath + 'app/friendDynamicAction!addDynamicComment.action',
+        DYNAMIC_ADDDYNAMICCOMMENT: apiPath + 'DynamicApi/addDynamicComment',
         //点赞
-        DYNAMIC_ADD_PRAISE: apiPath + 'app/friendDynamicAction!addDynamicPraise.action',
+        DYNAMIC_ADDDYNAMICPRAISE: apiPath + 'DynamicApi/addDynamicPraise',
         //取消点赞
-        DYNAMIC_DELETE_PRAISE: apiPath + 'app/friendDynamicAction!deleteDynamicPraiseByUserIdAndDynamicId.action',
+        DYNAMIC_DELETEDYNAMICPRAISE: apiPath + 'DynamicApi/deleteDynamicPraise',
 
         // 我的问题 ---------------------------------------------------------
         //所有问题
@@ -217,6 +221,7 @@ const urls = {
 
         // 自诊 ---------------------------------------------------------
         DIAGNOSIS_GETCOMMONDISEASELIST: apiPath + 'DiagnosisApi/getCommonDiseaseList',
+        DIAGNOSIS_ADDMYDISEASES: apiPath + 'DiagnosisApi/addMyDiseases',
 
 
     },

@@ -18,18 +18,18 @@ export default  class MyEnter extends PureComponent {
 		return (
 			<View>
 				<View style={styles.View}>
-					<Button style={styles.button} transparent onPress={()=>Actions.energy()}>
+					<Button style={styles.button} transparent onPress={()=>Actions.diagnosis()}>
 						<Image source={require('../../../assets/disease/zizhen.png')} style={styles.image}/>
 					</Button>
 				</View>
 				<View style={styles.View}>
-					<Button style={itemStyle} transparent onPress={()=>Actions.disease()}>
+					<Button style={itemStyle} transparent onPress={()=>Actions.disease({title: '疗身'})}>
 						<Image source={require('../../../assets/disease/ziliao.png')} style={styles.image}/>
 					</Button>
-					<Button style={itemStyle} transparent onPress={()=>Actions.myExpect()}>
+					<Button style={itemStyle} transparent onPress={()=>Actions.health({title: '疗养'})}>
 						<Image source={require('../../../assets/disease/ziyang.png')} style={styles.image}/>
 					</Button>
-					<Button style={itemStyle} transparent onPress={()=>Actions.emotion()}>
+					<Button style={itemStyle} transparent onPress={()=>Actions.expect({title: '疗修'})}>
 						<Image source={require('../../../assets/disease/zixiu.png')} style={styles.image}/>
 					</Button>
 				</View>

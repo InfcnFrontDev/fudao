@@ -10,7 +10,7 @@ import userStore from "../../mobx/userStore";
  * 个人信息
  */
 @observer
-export default class Personal extends PureComponent {
+export default class BaseInfo extends PureComponent {
 
 	state = {
 		dataSource: new ListView.DataSource({
@@ -19,11 +19,15 @@ export default class Personal extends PureComponent {
 		})
 	}
 
+	componentDidMount() {
+		userStore.fetchLoginUser();
+	}
+
 	render() {
 		let {loginUser} = userStore;
 		_.values(rowsData).forEach((item) => {
 			item.forEach((rowData) => {
-				rowData.value = loginUser[rowData.field] || ''
+				rowData.value = loginUser[rowData.property] || ''
 			})
 		})
 		return (
@@ -53,7 +57,7 @@ export default class Personal extends PureComponent {
 				<Text style={{fontSize: theme.fontSizeH5}}>{rowData.title}</Text>
 				</Body>
 				<Right>
-					<Text note>{this.substr(rowData.value)}</Text>
+					<Text note>{this.valueToString(rowData.property, rowData.value)}</Text>
 					<Icon active name="ios-arrow-forward"/>
 				</Right>
 			</ListItem>
@@ -87,7 +91,7 @@ export default class Personal extends PureComponent {
 				title: item.title,
 				items: item.items,
 				selectedIndex: selectedIndex,
-				itemsCallbackSingleChoice: (id, text) => userStore.updateUserInfo(item.field, id)
+				itemsCallbackSingleChoice: (id, text) => userStore.updateUserInfo(item.property, id)
 			})
 		} else if (item.type == 'multiChoice') {
 
@@ -104,7 +108,7 @@ export default class Personal extends PureComponent {
 				items: item.items,
 				selectedIndices: selectedIndicesId,
 				positiveText: "确定",
-				itemsCallbackMultiChoice: (id, text) => userStore.updateUserInfo(item.field, text.filter((t) => t != null && t != '').join(','))
+				itemsCallbackMultiChoice: (id, text) => userStore.updateUserInfo(item.property, text.filter((t) => t != null && t != '').join(','))
 			})
 		} else if (item.type == 'input') {
 			tools.showDialog({
@@ -114,22 +118,25 @@ export default class Personal extends PureComponent {
 					prefill: loginUser[item.field] || '',
 					allowEmptyInput: false,
 					maxLength: 10,
-					callback: (text) => userStore.updateUserInfo(item.field, text)
+					callback: (text) => userStore.updateUserInfo(item.property, text)
 				}
 			});
-
 		}
 	}
 
-	substr(str) {
-		if (str == null)
-			str = '';
-		else if (str ==2)
-			str = '女';
-		else if (str ==1)
-			str = '男';
-		else if (str.length > 10)
-			str = str.substr(0, 10) + '...';
-		return str
+	valueToString(property, value) {
+		value = value || '';
+
+		if (property == 'sex') {
+			return value == '1' ? '男' : '女';
+		} else if (property == 'birthday') {
+			return tools.dateFormat(new Date(value), 'yyyy-MM-dd');
+		} else {
+			if (_.isString(value) && value.length > 10) {
+				return value.substr(0, 10) + '...';
+			} else {
+				return value;
+			}
+		}
 	}
 }
