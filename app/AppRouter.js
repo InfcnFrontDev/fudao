@@ -25,7 +25,6 @@ import Diagnosis from "./views/diagnosis/Diagnosis";
 import Evaluation from "./views/diagnosis/Evaluation";
 import DeepDiagnosis from "./views/diagnosis/DeepDiagnosis";
 import Settings from "./views/settings/Settings";
-import BaseInfo from "./views/base-info/BaseInfo";
 import Disease from "./views/disease/Disease";
 import DiseaseDetail from "./views/disease/DiseaseDetail";
 import Energy from "./views/energy/Energy";
@@ -41,6 +40,9 @@ import FriendApply from "./views/friend/FriendApply";
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import NewFriend from "./views/friend/NewFriend";
 import UserDetail from "./views/user/UserDetail";
+import RemarkSet from "./views/user/RemarkSet";
+import BaseInfo from "./views/base-info/BaseInfo";
+
 import Emotion from "./views/emotion/Emotion";
 import Search from "./views/search/Search";
 import SearchSymptomProblem from "./views/search/SearchSymptomProblem";
@@ -91,7 +93,7 @@ export default class AppRouter extends PureComponent {
 
 					{/*用户*/}
 					<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
-
+					<Scene key="remarkSet" component={RemarkSet} title="设置备注" hideNavBar/>
 					{/*侧边栏*/}
 					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
 
