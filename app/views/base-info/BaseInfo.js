@@ -82,7 +82,7 @@ export default class BaseInfo extends PureComponent {
 			let selectedIndex = 0;
 
 			try {
-				let value = loginUser[item.field];
+				let value = loginUser[item.property];
 				selectedIndex = _.isNumber(value) ? value : 0;
 			} catch (e) {
 			}
@@ -98,7 +98,7 @@ export default class BaseInfo extends PureComponent {
 			// text -> id
 			let selectedIndicesText = [], selectedIndicesId = [];
 			try {
-				selectedIndicesText = loginUser[item.field].split(',');
+				selectedIndicesText = loginUser[item.property].split(',');
 				selectedIndicesId = selectedIndicesText.map((t) => item.items.findIndex((tt) => tt == t));
 			} catch (e) {
 			}
@@ -111,11 +111,15 @@ export default class BaseInfo extends PureComponent {
 				itemsCallbackMultiChoice: (id, text) => userStore.updateUserInfo(item.property, text.filter((t) => t != null && t != '').join(','))
 			})
 		} else if (item.type == 'input') {
+			let prefill = '';
+			if(loginUser[item.property]){
+				prefill += loginUser[item.property]
+			}
 			tools.showDialog({
 				title: item.title,
 				input: {
 					hint: item.title,
-					prefill: loginUser[item.field] || '',
+					prefill: prefill,
 					allowEmptyInput: false,
 					maxLength: 10,
 					callback: (text) => userStore.updateUserInfo(item.property, text)
