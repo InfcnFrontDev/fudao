@@ -21,6 +21,7 @@ export default class Disease extends PureComponent {
     }
 
     onItemPress(item){
+        myDiseaseListStore.selectedItemName = item.name
         myDiseaseListStore.selectedItemId = item.id
         Actions.diseaseDetail({title: item.name, data: item})
         diseaseMethodStore.diseaseId = item.id
