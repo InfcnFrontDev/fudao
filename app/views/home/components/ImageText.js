@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Modal, View, Image, TouchableHighlight} from "react-native";
+import {Modal, View, Image, TouchableHighlight,ScrollView} from "react-native";
 import {Text} from "native-base";
 
 /**
@@ -10,11 +10,11 @@ class ImageText extends PureComponent {
 	render() {
 		let {title, content, image} = this.props;
 		return (
-			<View style={styles.container}>
+			<ScrollView  style={styles.container}>
 				<Text style={styles.title}>{title}</Text>
 				<Image source={{uri: urls.getImage(image)}} resizeMode='cover' style={styles.image}/>
 				<Text style={styles.content}>{content}</Text>
-			</View>
+			</ScrollView>
 		)
 	}
 }
@@ -23,8 +23,6 @@ const styles = {
 	container: {
 		flex: 1,
 		flexDirection: 'column',
-		justifyContent: 'center',
-		alignItems: 'center',
 		marginBottom: 30,
 		borderRadius: 10
 	},
@@ -46,6 +44,7 @@ const styles = {
 		width: 250,
 		height: 200,
 		justifyContent: 'center',
+		alignSelf:'center',
 		marginBottom: 30,
 	},
 };

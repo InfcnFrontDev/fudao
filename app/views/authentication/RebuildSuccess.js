@@ -38,9 +38,9 @@ export default class RebuildSuccess extends PureComponent {
     interval(){
         let self=this;
         let {number} = self.state;
-        var c=setInterval(function(){
+        self.timer=setInterval(function(){
             if(number==0){
-                self._login(self.state.phone,self.state.password)
+                self._login(self.state.phone,self.state.password);
                 clearInterval(c);
             }else{
                 number--;
@@ -51,9 +51,10 @@ export default class RebuildSuccess extends PureComponent {
         },1000)
     }
     _login(phone,password){
+        clearInterval(this.timer);
         userStore.login(phone, password, () => {
             userStore.fetchLoginUser();
-            tools.showToast(JSON.stringify(userStore.loginUser))
+            tools.showToast(JSON.stringify(userStore.loginUser));
             // 跳到首页
             if(!userStore.loginUser.sex){
                 Actions.startInformation({phone:this.state.phone})

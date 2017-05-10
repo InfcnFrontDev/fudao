@@ -20,18 +20,16 @@ export default class DiseaseMethodTabView extends PureComponent {
 		onItemAdd: () => console.log('onItemAdd'),
 		onItemPress: () => console.log('onItemPress'),
 	}
-    componentDidMount(){
-        let {diseaseId} = this.props
-        diseaseMethodStore.fetchDiseaseMethod(diseaseId)
-    }
+
 	render() {
-        const {diseaseMethod} = diseaseMethodStore;
+        // const {diseaseMethod} = diseaseMethodStore;
+        let {data,pageKey} = this.props
 		return (
 			<ScrollableTabView
 				style={styles.tabView}
 				renderTabBar={() => <DiseaseMethodTabBar/>}
 				locked={false}>
-				{diseaseMethod.map((item) => <DiseaseMethodTab key={item.type} tabLabel={item.type} data={item}/>)}
+				{data.map((item,index) => <DiseaseMethodTab key={index} tabLabel={item.type} data={item} pageKey={pageKey}/>)}
 			</ScrollableTabView>
 		)
 	}

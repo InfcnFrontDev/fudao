@@ -1,7 +1,9 @@
 import React, {PureComponent} from "react";
-import {Modal, View, Image, ListView} from "react-native";
+import {Modal, View, Image, ListView,ScrollView} from "react-native";
 import {Icon, Button, ListItem, Text} from "native-base";
 import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
+import expectMethodStore from "../../../mobx/expectMethodStore";
+import healthMethodStore from "../../../mobx/healthMethodStore";
 
 
 /**
@@ -17,7 +19,7 @@ class DetailsModal extends PureComponent {
     }
 
     render() {
-        let {visible,data,children} = this.props;
+        let {visible, data, children} = this.props;
         return (
             <Modal
                 animationType={'fade'}
@@ -28,22 +30,18 @@ class DetailsModal extends PureComponent {
                 <View style={styles.opacityView}/>
                 <View style={styles.content}>
                     <View style={styles.header}>
-
-                        <View style={{width:25}}>
+                        <View style={{width: 25}}>
                             <Button
                                 onPress={() => this.hide()}
                                 style={styles.closeButton}>
-                                <Icon name="close" style={{color:'#FFF', fontSize: 20}}/>
+                                <Icon name="close" style={{color: '#FFF', fontSize: 20}}/>
                             </Button>
                         </View>
                     </View>
-                    <View style={styles.child}>
+                    <ScrollView style={styles.child}>
                         {children}
-                    </View>
-
+                    </ScrollView>
                 </View>
-
-
             </Modal>
         )
     }
@@ -52,7 +50,14 @@ class DetailsModal extends PureComponent {
      * 关闭对话框
      */
     hide() {
-        diseaseMethodStore.modalShow = false
+        if (this.props.pageKey === 'disease') {
+            diseaseMethodStore.modalShow = false
+        } else if (this.props.pageKey === 'expect') {
+            expectMethodStore.modalShow = false
+        } else {
+            healthMethodStore.modalShow = false
+        }
+
     }
 
 

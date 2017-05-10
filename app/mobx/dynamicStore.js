@@ -82,8 +82,7 @@ class DynamicStore {
                 this.insert(res.obj.list);
                 let allList = this.getAll();
                 cb(res, allList);
-            }
-            else{
+            }else{
                 callback([],{
                     allLoaded:true
                 })

@@ -28,6 +28,7 @@ class DetailsModal extends PureComponent {
     render() {
         let {visible,text} = this.state;
         let data=JSON.parse(text);
+
         return (
             <Modal
                 animationType={'fade'}
@@ -48,7 +49,7 @@ class DetailsModal extends PureComponent {
                         </View>
                     </View>
                     <View style={{width:300,height:500}}>
-                        <ImageText title={data.title} content={data.content} image={data.imgPath}/>
+                        <ImageText title={data.principle} content={data.detail} image={data.img}/>
                     </View>
 
                 </View>

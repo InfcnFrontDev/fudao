@@ -5,7 +5,7 @@ import {observer} from "mobx-react/native";
 import {View, Image, ToastAndroid, DeviceEventEmitter, TouchableHighlight} from "react-native";
 import ListOperationButton from "./ListOperationButton";
 import myDiseaseListStore from "../../../mobx/myDiseaseListStore";
-import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
+import myExpectListStore from "../../../mobx/myExpectListStore";
 import allDiseaseListStore from "../../../mobx/allDiseaseListStore";
 
 
@@ -15,10 +15,6 @@ import allDiseaseListStore from "../../../mobx/allDiseaseListStore";
 
 @observer
 export default class MyDiseaseList extends PureComponent {
-
-    componentDidMount(){
-        myDiseaseListStore.fetchMyDiseaseList()
-    }
 
     renderPages(items) {
         // 将 array 拆分成多个 size 长度的块，把这些块组成一个新数组。
@@ -35,25 +31,24 @@ export default class MyDiseaseList extends PureComponent {
     }
 
     renderItem(item, i) {
-        let {selectedItemId} = myDiseaseListStore;
+        let {selectedItemId} = this.props;
         let btnStyle = {...styles.item};
         if (selectedItemId && item.id == selectedItemId) {
             btnStyle.backgroundColor = theme.brandPrimary;
         }
         return (
 			<Button key={i} transparent style={btnStyle}
-					onPress={this._onItemPress.bind(this, item)}>
+					onPress={this.onItemPress.bind(this, item)}>
 				<Image source={{uri: urls.getImage(item.img)}} style={styles.itemImg}/>
 				<Text style={styles.itemTitle}>{item.name}</Text>
 				<ListOperationButton
 					iconName={'remove'}
-					onPress={this._onItemRemove.bind(this, item,i)}/>
+					onPress={this.props.onItemRemove.bind(this, item,i)}/>
 			</Button>
         )
     }
 
-    _onItemPress(item) {
-        myDiseaseListStore.selectedItemId = item.id
+    onItemPress(item) {
     	if(this.props.onItemPress){
             this.props.onItemPress(item)
 		} else {
@@ -61,16 +56,8 @@ export default class MyDiseaseList extends PureComponent {
 		}
     }
 
-    _onItemRemove(item,i) {
-        let {myDiseaseList,deleteMyDiseaseListItem} = myDiseaseListStore;
-        myDiseaseList.splice(i, 1);
-		deleteMyDiseaseListItem(item.id)
-        allDiseaseListStore.fetchAllDiseaseList()
-
-    }
-
 	render() {
-        let {myDiseaseList} = myDiseaseListStore;
+        let {data} = this.props;
 		return (
 			<View style={{height: 126}}>
 				<Swiper
@@ -79,7 +66,7 @@ export default class MyDiseaseList extends PureComponent {
 					dot={<View style={styles.dot}></View>}
 					activeDot={<View style={styles.activeDot}></View>}
 				>
-					{this.renderPages(myDiseaseList)}
+					{this.renderPages(data)}
 				</Swiper>
 			</View>
 		)

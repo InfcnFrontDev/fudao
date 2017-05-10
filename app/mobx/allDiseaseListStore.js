@@ -3,6 +3,7 @@ import {observable, runInAction, computed, action, reaction, autorun} from "mobx
 import {ListView} from "react-native";
 
 class AllDiseaseListStore {
+	@observable allDiseaseList = []
 	@observable allDiseaseListLiaoShen = []
 	@observable allDiseaseListLiaoXin = []
 	@observable errorMsg = ''
@@ -12,6 +13,7 @@ class AllDiseaseListStore {
 		request.getJson(urls.apis.DISEASE_GETALLDISEASELIST)
 			.then((result) => {
 				if (result.ok && result.obj) {
+					this.allDiseaseList = result.obj
 					this.allDiseaseListLiaoShen = result.obj.liaoshen
                     this.allDiseaseListLiaoXin = result.obj.liaoxin
 				} else {

@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {StyleSheet, View, ListView, RefreshControl} from "react-native";
+import {StyleSheet, View, ListView, RefreshControl,Alert,ToastAndroid} from "react-native";
 import {observer} from "mobx-react/native";
 import Loading from "./Loading";
 import LoadFooter from "./LoadFooter";
@@ -23,11 +23,7 @@ export default class CollectionList extends PureComponent {
 		CollectionListStore.fetchCollectionList()
 	}
 
-	_renderRow(rowData) {
-		return (
-			<ArticleItem article={rowData.article}/>
-		)
-	}
+
 
 	_onRefresh = () => {
 		CollectionListStore.isRefreshing = true
@@ -54,6 +50,7 @@ export default class CollectionList extends PureComponent {
 		})
 	}
 
+
 	render() {
 		const {isRefreshing, isFetching, collectionList} = CollectionListStore
 		return (
@@ -61,7 +58,7 @@ export default class CollectionList extends PureComponent {
 				{!isFetching &&
 				<ListView
 					dataSource={this.state.dataSource.cloneWithRows(collectionList.slice(0))}
-					renderRow={this._renderRow}
+					renderRow={this._renderRow.bind(this)}
 					renderFooter={this._renderFooter}
 					enableEmptySections
 					initialListSize={3}
@@ -80,6 +77,31 @@ export default class CollectionList extends PureComponent {
 				<Loading isShow={isFetching}/>
 			</View>
 		)
+	}
+	_renderRow(rowData) {
+		return (
+			<ArticleItem article={rowData.article}  onLongPress={() =>this.longPress(rowData)} />
+		)
+	}
+	longPress(rowData) {
+		Alert.alert('操作提示', '您确定要取消该收藏吗', [
+			{text: '取消'},
+			{text: '删除', onPress: () => this.removeMyCollection(rowData)},
+		])
+	}
+	removeMyCollection(rowData) {
+		request.getJson(urls.apis.COLLECTION_DELETEMYCOLLECTION, {
+			id: rowData.id
+		}).then((result) => {
+			if(result.ok){
+				ToastAndroid.show('删除成功',ToastAndroid.SHORT);
+				CollectionListStore.fetchCollectionList()
+			}
+
+
+		});
+		//this._giftedListview._refresh();
+
 	}
 }
 const styles = StyleSheet.create({

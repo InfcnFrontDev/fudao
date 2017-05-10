@@ -28,7 +28,7 @@ export default class Login extends PureComponent {
 		return (
 			<Container>
 				<Header {...this.props}></Header>
-				<Content>
+				<Content white>
 					<View style={styles.bag}>
 						<UserInput text="用户名"
 								   onChangeText={(value)=> {
@@ -121,7 +121,7 @@ const styles = {
 	},
 	text2: {
 		fontSize: theme.DefaultFontSize - 2,
-		color: '#fff',
+		color: '#666',
 		textDecorationLine: 'underline'
 	},
 	bag: {

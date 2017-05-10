@@ -23,13 +23,13 @@ export default  class MyEnter extends PureComponent {
 					</Button>
 				</View>
 				<View style={styles.View}>
-					<Button style={itemStyle} transparent onPress={()=>Actions.disease()}>
+					<Button style={itemStyle} transparent onPress={()=>Actions.disease({title: '自疗'})}>
 						<Image source={require('../../../assets/disease/ziliao.png')} style={styles.image}/>
 					</Button>
-					<Button style={itemStyle} transparent onPress={()=>Actions.myExpect()}>
+					<Button style={itemStyle} transparent onPress={()=>Actions.health({title: '自养'})}>
 						<Image source={require('../../../assets/disease/ziyang.png')} style={styles.image}/>
 					</Button>
-					<Button style={itemStyle} transparent onPress={()=>Actions.emotion()}>
+					<Button style={itemStyle} transparent onPress={()=>Actions.expect({title: '自修'})}>
 						<Image source={require('../../../assets/disease/zixiu.png')} style={styles.image}/>
 					</Button>
 				</View>

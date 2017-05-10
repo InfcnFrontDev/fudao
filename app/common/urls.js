@@ -26,6 +26,8 @@ const urls = {
         ARTICLE_GETARTICLE: webPath + 'articleDetail.html',
         // 我的时间
         MY_TIME: webPath + 'myTime.html',
+        //修改时间
+        MODIFICATION_TIME: webPath + 'modificationTime.html',
         // 健康测评
         HEALTH_APPRAISAL: webPath + 'healthAppraisal.html',
         // 测评结果
@@ -82,7 +84,7 @@ const urls = {
         //获取用户信息
         USER_DETAIL: apiPath + 'app/accountInfoAction!getUserInformationByUserId.action',
         //修改用户信息
-        USERAPI_UPDATEUSERINFO: apiPath + 'api/UserApi/updateUserInfo',
+        USER_UPDATEUSERINFO: apiPath + 'UserApi/updateUserInfo',
         //搜索用户
         USER_SEARCH: apiPath + 'app/friendDynamicAction!getUserByPhone.action',
         //修改用户体检信息
@@ -121,13 +123,15 @@ const urls = {
         USER_LOGIN: apiPath + "UserApi/login",
         //获取用户信息
         USER_GETLOGINUSER: apiPath + 'UserApi/getLoginUser',
+        //获取指定用户信息
+        USER_GETUSER: apiPath + 'UserApi/getUser',
         //重置密码
         USER_RESETPASSWORD: apiPath + "UserApi/resetPassword",
         //基本信息
         USER_SETUSERBASEINFO: apiPath + "UserApi/setUserBaseInfo",
         //情绪
         EMOTION_GETEMOTIONINTERVENE: apiPath + "EmotionApi/getEmotionIntervene",
-
+        EMOTION_GETEMOTIONFACTOR:apiPath + "EmotionApi/getemotionfactor",
         // 注册登录(新)
 
         /*//检测用户是否存在
