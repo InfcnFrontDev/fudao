@@ -65,44 +65,47 @@ export default class EmotionFactor extends PureComponent {
            )
        }
         return (
-             <View style={styles.container}>
-                        <View style={styles.View}>
-                            <View style={{flexDirection:'row'}}>
-                                <Text style={styles.title}>这样的乌云让你</Text>
-                                <Text style={styles.title}>{data.emotion}</Text>
-                                <Text style={styles.title}>了</Text>
+            <ScrollView>
+                <View style={styles.container}>
+                    <View style={styles.View}>
+                        <View style={{flexDirection:'row'}}>
+                            <Text style={styles.title}>这样的乌云让你</Text>
+                            <Text style={styles.title}>{data.emotion}</Text>
+                            <Text style={styles.title}>了</Text>
+                        </View>
+                        <Image source={require('../../../assets/emotion/wuyun.png')} style={styles.wuyunBox} resizeMode="contain">
+                            <View style={styles.box}>
+                                {data.macroscopic.map((item,index)=>this.renderMacroscopic(item,index))}
                             </View>
-                            <Image source={require('../../../assets/emotion/wuyun.png')} style={styles.wuyunBox} resizeMode="contain">
-                                <View style={styles.box}>
-                                    {data.macroscopic.map((item,index)=>this.renderMacroscopic(item,index))}
-                                </View>
-                            </Image>
-                            <View style={styles.emotion}>
-                                <Image source={img} style={styles.itemImg}/>
-                                <Text style={styles.itemText}>{data.emotion}</Text>
-                            </View>
-                              {slider}
-                            <View style={{marginTop:10,flexDirection:'row'}}>
-                                <Text>还有什么让你</Text>
-                                <Text>{data.emotion}</Text>
-                                <Text>呢？</Text>
-                            </View>
-                            <MicrocosmicFactor microcosmic={this.props.data.reasons}></MicrocosmicFactor>
-                            <View style={{alignItems:'center'}}>
-                                <View style={styles.input}>
-                                    <TextInput underlineColorAndroid="transparent" placeholder="请输入您的原因" onChangeText={(value)=>{this.selfReason=value}}></TextInput>
-                                </View>
-                            </View>
-                            <View style={{alignItems:'center',justifyContent:'center'}}>
-                                <View>
-                                    <Button style={{marginTop:10,height:30}}onPress={()=>this.submit(data.emotion)}>
-                                        <Text>帮您缓解</Text>
-                                    </Button>
-                                </View>
-
+                        </Image>
+                        <View style={styles.emotion}>
+                            <Image source={img} style={styles.itemImg}/>
+                            <Text style={styles.itemText}>{data.emotion}</Text>
+                        </View>
+                        {slider}
+                        <View style={{marginTop:10,flexDirection:'row'}}>
+                            <Text>还有什么让你</Text>
+                            <Text>{data.emotion}</Text>
+                            <Text>呢？</Text>
+                        </View>
+                        <MicrocosmicFactor microcosmic={this.props.data.reasons}></MicrocosmicFactor>
+                        <View style={{alignItems:'center'}}>
+                            <View style={styles.input}>
+                                <TextInput underlineColorAndroid="transparent" placeholder="请输入您的原因" onChangeText={(value)=>{this.selfReason=value}}></TextInput>
                             </View>
                         </View>
+                        <View style={{alignItems:'center',justifyContent:'center'}}>
+                            <View>
+                                <Button style={{marginTop:10,height:30}}onPress={()=>this.submit(data.emotion)}>
+                                    <Text>帮您缓解</Text>
+                                </Button>
+                            </View>
+
+                        </View>
                     </View>
+                </View>
+            </ScrollView>
+
         )
     }
     renderMacroscopic(item,index){

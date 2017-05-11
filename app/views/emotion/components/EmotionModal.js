@@ -1,9 +1,11 @@
 import React, {PureComponent} from "react";
 import {Modal, View, Image, TouchableNativeFeedback} from "react-native";
-
+import {observer} from "mobx-react/native";
+import EmotionStore from "../../../mobx/emotionStore";
 /**
- * 我的能量场 > 资料填写
+ * 情绪干预弹框-框
  */
+@observer
 class EmotionModal extends PureComponent {
 
     constructor(props) {
@@ -46,9 +48,11 @@ class EmotionModal extends PureComponent {
      * 关闭对话框
      */
     hide() {
+        EmotionStore.hide(false)
         this.setState({
             visible: false
         })
+
     }
 }
 const styles = {

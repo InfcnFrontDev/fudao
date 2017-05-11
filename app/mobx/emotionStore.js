@@ -8,6 +8,10 @@ class EmotionStore {
     @observable myEmotion = null;
     @observable microcosmic = [];
     @observable gradeList = [];
+    @observable  data=null
+    @observable img=null
+    @observable showMol1=null
+    @observable showMol2=false
 
     @action
     updateMyEmotion(emotion){
@@ -24,6 +28,10 @@ class EmotionStore {
     @action
     grade(list){
         this.gradeList=list;
+    };
+    @action
+    hide(flag){
+        this.showMol2=flag;
     };
     @action
     microcosmicClick = async(updateTime) => {
@@ -65,7 +73,9 @@ class EmotionStore {
                 emotion: name,
                 grade:fenji,
             }).then((data) => {
-                this.hide();
+                    this.data=data.obj,
+                    this.showMol1=false,
+                    this.showMol2=true
             })
         }else{
             request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
@@ -73,11 +83,27 @@ class EmotionStore {
                 grade:fenji,
                 factor:weiguan
             }).then((data) => {
-
+                    this.data=data.obj,
+                    this.showMol1=false,
+                    this.showMol2=true
             })
         }
     }
+    @action
+    showModal(data,id,img) {
+        if(id=="bads"){
+            this.data=data,
+            this.img=img,
+            this.showMol1=true,
+            this.showMol2=false
 
+        }else{
+            this.data=data,
+                this.img=img,
+                this.showMol2=true,
+                this.showMol1=false
+        }
+    }
 }
 
 const emotionStore = new EmotionStore();
