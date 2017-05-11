@@ -7,7 +7,7 @@ import {Header, Container, Content} from "../../components/index";
 import CommitButton from "./components/CommitButton";
 import UserInput from "./components/UserInput";
 import {checkPhone} from "./components/public";
-import userStore from "../../mobx/userStore";
+import UserStore from "../../mobx/userStore";
 /**
  * 登录
  */
@@ -77,10 +77,10 @@ export default class Login extends PureComponent {
 		dismissKeyboard();
 
 
-		userStore.login(phone, password, () => {
-			userStore.fetchLoginUser();
+		UserStore.login(phone, password, () => {
+			UserStore.fetchLoginUser();
 			// 跳到首页
-			if(!userStore.loginUser.sex){
+			if(!UserStore.loginUser.sex){
 				Actions.startInformation({phone:this.state.phone})
 			}else{
 				Actions.index({

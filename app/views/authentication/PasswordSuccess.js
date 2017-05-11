@@ -5,7 +5,7 @@ import {Container,Content,Text, Thumbnail, Col, Button,Item,Label,Input,Form} fr
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import  CommitButton from "./components/CommitButton"
 import  {hex_md5} from "./components/md5"
-import userStore from "../../mobx/userStore";
+import UserStore from "../../mobx/userStore";
 /**
  * 设置密码
  */
@@ -52,10 +52,10 @@ export default class SetPassword extends PureComponent {
     }
     _login(phone,password) {
         clearInterval(this.timer);
-        userStore.login(phone, password, () => {
-            userStore.fetchLoginUser();
+        UserStore.login(phone, password, () => {
+            UserStore.fetchLoginUser();
             // 跳到首页
-            if(!userStore.loginUser.sex){
+            if(!UserStore.loginUser.sex){
                 Actions.startInformation({phone:this.state.phone})
             }else{
                 Actions.index({
