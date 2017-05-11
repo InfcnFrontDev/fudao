@@ -22,6 +22,9 @@ export default class Emotion extends PureComponent {
 			modalView: null,
 			EmoModal:null,
 			FactorModal:null,
+			showMol1:null,
+			data:null,
+			img:null
 		}
 	}
 	/**
@@ -40,11 +43,42 @@ export default class Emotion extends PureComponent {
 		}
 	}
 	render() {
-		let {EmoModal} = this.state;
+		let {showMol1,showMol2,data,img}=EmotionStore;
+		if(showMol1){
+			if(showMol1){
+				this._modal1.show()
+				this._modal2.hide()
+			}else{
+				this._modal2.show()
+				this._modal1.hide()
+			}
+		}
+		if(showMol2){
+
+			if(showMol1){
+				this._modal1.show()
+				this._modal2.hide()
+			}else{
+				this._modal2.show()
+				this._modal1.hide()
+			}
+		}
 		let myEmotion=EmotionStore.myEmotion;
 		if(!myEmotion){
 			myEmotion=calm[0]
 		}
+		let text=null;
+		if(showMol2){
+
+		}else{
+			text=(
+				<View tyle={styles.titleBox}>
+					<Text style={styles.titleDoc}>不好的情绪影响一天的生活，</Text>
+					<Text style={styles.titleDoc}>一起调节一下吧！</Text>
+				</View>
+			)
+		}
+
 		// 默认情绪为‘平静’
 		return (
 			<Container>
@@ -59,13 +93,15 @@ export default class Emotion extends PureComponent {
 				<Content delay padder>
 					<View style={styles.topBox}>
 						<Image style={styles.puImg} source={require('../../assets/emotion/pugongying.png')}></Image>
-						<View tyle={styles.titleBox}>
-							<Text style={styles.titleDoc}>不好的情绪影响一天的生活，</Text>
-							<Text style={styles.titleDoc}>一起调节一下吧！</Text>
-						</View>
+						{text}
 					</View>
 					<EmotionList onItemPress={this._onItemPress.bind(this)}/>
-					{EmoModal}
+					<Modal ref={(e)=>this._modal1 = e}>
+						<EmotionFactor data={data} emotionImg={img}></EmotionFactor>
+					</Modal>
+					<EmotionModal ref={(e)=>this._modal2 = e}>
+						<EmotionSolve data={data} emotionImg={img}></EmotionSolve>
+					</EmotionModal>
 				</Content>
 			</Container>
 		)
@@ -81,12 +117,11 @@ export default class Emotion extends PureComponent {
 		EmotionStore.updateMyTime(updateTime);
 			let goods="goods";
 			let bads="bads";
-			/*if(items.title=="愉悦"||items.title=="兴奋"||items.title=="兴趣"||items.title=="满足"||items.title=="平静"||items.title=="平淡"){
-				request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
+			if(items.title=="愉悦"||items.title=="兴奋"||items.title=="兴趣"||items.title=="满足"||items.title=="平静"||items.title=="平淡"){
+			/*	request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
 				 	emotion: items.title,
 					weather:"晴"
 				 }).then((data) => {
-					tools.showToast("兴奋")
 				 	let fenji=null;
 				 	if (data.ok) {
 						if(data.obj.grade.length==1){
@@ -96,20 +131,41 @@ export default class Emotion extends PureComponent {
 						 }else if(data.obj.grade.length==3){
 						 	fenji="三级";
 						 }
-						request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
-							emotion: items.title,
-							grade:fenji
-						 }).then((data) => {
-							this.showModal(data.obj,goods,items.img);
-						 })
-					 } else {
+						EmotionStore.getEmotionIntervene({emotion: items,grade:fenji,word:goods,img:items.img},this.showModal)*/
+					/* } else {
 				 		tools.showToast('这种心情，我没办法了');
 					}
 				 },(error)=>{
 
-				})
-
-			}else{*/
+				})*/
+				let data={
+					"obj": {
+						"emotion": "兴奋",
+						"methods": [
+							{
+								"fenji": "一级",
+								"title": "温馨寄语",
+								"content": "祝您度过温馨愉快的一天！",
+								"img": "/emotion/intervene/wen9.jpg",
+								"type": 1,
+								"remarks": "颜舒展，心雀跃，新一天，好心情。"
+							},
+							{
+								"fenji": "三级",
+								"title": "呼吸放松训练",
+								"content": "《呼吸冥想》",
+								"img": "/emotion/intervene/huximingiang.mp3",
+								"type": 3,
+								"remarks": "过兴奋，易伤身，常冥想，平身心。"
+							}
+						],
+						"threeCharacterClassic": "若兴奋，身激动。勿过度，适时停。",
+						"influence": "兴奋使人心跳加快、血压升高，组织耗氧量增加。"
+					},
+					"ok": true
+				};
+				EmotionStore.showModal(data.obj,goods,items.img);
+			}else{
 			let data={
 			 "obj": {
 			 "emotion": "沮丧",
@@ -172,9 +228,9 @@ export default class Emotion extends PureComponent {
 			 },
 			 "ok": true
 			 }
-			 if(data.obj){
-                 this.showModal(data.obj,bads,items.img);
-             }
+
+				EmotionStore.showModal(data.obj,bads,items.img);
+
 
 				/*request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
 				 	emotion:items.title,
@@ -187,40 +243,11 @@ export default class Emotion extends PureComponent {
 				 	}
 				 },(error)=>{
 
-				})
-				}*/
+				})*/
+				}
 
 	}
-	showModal(data,id,img) {
 
-		let Emotion=(null);
-		/*<EmotionModal ref={(e)=>this._modal = e}>
-			{/!*<EmotionSolve data={data}></EmotionSolve>*!/}
-		</EmotionModal>*/
-		if(id=="bads"){
-			Emotion=(
-				<Modal ref={(e)=>this._modal = e}>
-					<EmotionFactor data={data} emotionImg={img}></EmotionFactor>
-				</Modal>
-			)
-			this.setState({
-				EmoModal:Emotion
-			});
-			this._modal.show();
-		}else{
-			Emotion=(
-				<EmotionModal ref={(e)=>this._modalS = e}>
-					<EmotionSolve data={data} emotionImg={img}></EmotionSolve>
-				</EmotionModal>
-			)
-			this.setState({
-				EmoModal:Emotion
-			});
-			this._modalS.show();
-		}
-
-
-	}
 }
 
 const styles = {

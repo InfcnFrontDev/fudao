@@ -45,11 +45,12 @@ class DiagnosisStore {
     addMyDiseaseToBackstage(){
         var ids='';
         for(var i=0;i<this.diagnosisDisease.length;i++){
-            ids+=this.diagnosisDisease[i].id+',';
+            ids+=this.diagnosisDisease[i].id||this.diagnosisDisease[i].name+',';
         }
-        // request.getJson(urls.apis.DIAGNOSIS_ADDMYDISEASES,{
-        //     ids
-        // });
+        request.getJson(urls.apis.DIAGNOSIS_ADDMYDISEASES,{
+            ids
+        });
+        this.diagnosisDisease = [];
     }
 
     @computed

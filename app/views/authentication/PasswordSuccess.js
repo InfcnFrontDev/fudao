@@ -5,7 +5,7 @@ import {Container,Content,Text, Thumbnail, Col, Button,Item,Label,Input,Form} fr
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import  CommitButton from "./components/CommitButton"
 import  {hex_md5} from "./components/md5"
-import userStore from "../../mobx/userStore";
+import UserStore from "../../mobx/userStore";
 /**
  * 设置密码
  */
@@ -39,10 +39,9 @@ export default class SetPassword extends PureComponent {
     interval(){
         let self=this;
         let {number} = self.state;
-            var c=setInterval(function(){
+        self.timer=setInterval(function(){
                 if(number==0){
                     self._login(self.state.phone,self.state.password)
-                    clearInterval(c);
                 }else{
                     number--;
                     self.setState({
@@ -52,15 +51,17 @@ export default class SetPassword extends PureComponent {
             },1000)
     }
     _login(phone,password) {
-        userStore.login(phone, password, () => {
-            userStore.fetchLoginUser();
+        clearInterval(this.timer);
+        UserStore.login(phone, password, () => {
+            UserStore.fetchLoginUser();
             // 跳到首页
-            if(!userStore.loginUser.sex){
-                Actions.startInformation({phone:this.state.phone})
-            }else{
+
+            if(UserStore.loginUser.sex){
                 Actions.index({
                     type: ActionConst.POP_AND_REPLACE,
                 });
+            }else{
+                Actions.startInformation({phone:this.state.phone})
             }
         });
     }
@@ -69,7 +70,6 @@ const styles = {
     container:{
         justifyContent:'center',
         alignItems:'center',
-
     },
 
     view:{

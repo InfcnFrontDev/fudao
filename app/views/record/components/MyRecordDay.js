@@ -41,7 +41,7 @@ export default class MyRecordDay extends PureComponent {
 					tabBarPosition='top'
 					scrollWithoutAnimation={false}
 				>
-					{this.labels.map((label, i) => <MyRecordeList key={i} tabLabel={label} label={label} type='day'/>)}
+					{this.labels.map((label, i) => <MyRecordeList key={i} btn={i} tabLabel={label} label={label} type='day'/>)}
 				</ScrollableTabView>
 			</View>
 		)
@@ -98,7 +98,8 @@ const styles = {
 	tabView: {
 		flex: 1,
 		flexGrow: 1,
-		marginBottom: 70,
+		//底部日记录、周记录、月记录的背景框
+		// marginBottom: 70,
 		borderBottomColor: '#D8D8D8',
 		borderBottomWidth: 1,
 	},

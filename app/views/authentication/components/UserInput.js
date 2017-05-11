@@ -30,9 +30,9 @@ class UrseInput extends PureComponent {
         return (
             <View style={styles.box}>
                 <View style={styles.border}>
-                    <Text style={{color:"#fff"}}>{this.props.text}</Text>
+                    <Text>{this.props.text}</Text>
                 </View>
-                <TextInput style={{flex:1,color:'#fff'}} underlineColorAndroid='transparent' placeholder={this.props.placeholder} keyboardType={key} secureTextEntry={this.props.secureTextEntry} value={this.props.value}
+                <TextInput style={{flex:1}} underlineColorAndroid='transparent' placeholder={this.props.placeholder} keyboardType={key} secureTextEntry={this.props.secureTextEntry} value={this.props.value}
                            onChangeText={this.props.onChangeText}
                 ></TextInput>
             </View>
@@ -59,7 +59,7 @@ const styles = {
         flexDirection:'row',
         justifyContent:'center',
         borderRightWidth:1,
-        borderRightColor:"#fff",
+        borderRightColor:"#D4D4D4",
 
     },
 

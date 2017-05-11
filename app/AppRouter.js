@@ -177,7 +177,6 @@ export default class AppRouter extends PureComponent {
 		tools.showToast('再按一次退出应用');
 		return true;
 	}
-
 	shouldComponentUpdate() {
 		return false
 	}

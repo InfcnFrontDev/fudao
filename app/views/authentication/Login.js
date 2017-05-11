@@ -7,7 +7,7 @@ import {Header, Container, Content} from "../../components/index";
 import CommitButton from "./components/CommitButton";
 import UserInput from "./components/UserInput";
 import {checkPhone} from "./components/public";
-import userStore from "../../mobx/userStore";
+import UserStore from "../../mobx/userStore";
 /**
  * 登录
  */
@@ -18,8 +18,8 @@ export default class Login extends PureComponent {
 
 	state = {
 		isFetching: false,
-		phone: '15901097191',
-		password: '123456',
+		phone: '',
+		password: '',
 		login: 'no'
 	}
 
@@ -28,7 +28,7 @@ export default class Login extends PureComponent {
 		return (
 			<Container>
 				<Header {...this.props}></Header>
-				<Content>
+				<Content white>
 					<View style={styles.bag}>
 						<UserInput text="用户名"
 								   onChangeText={(value)=> {
@@ -77,11 +77,10 @@ export default class Login extends PureComponent {
 		dismissKeyboard();
 
 
-		userStore.login(phone, password, () => {
-			userStore.fetchLoginUser();
-			tools.showToast(JSON.stringify(userStore.loginUser))
+		UserStore.login(phone, password, () => {
+			UserStore.fetchLoginUser();
 			// 跳到首页
-			if(!userStore.loginUser.sex){
+			if(!UserStore.loginUser.sex){
 				Actions.startInformation({phone:this.state.phone})
 			}else{
 				Actions.index({
@@ -121,7 +120,7 @@ const styles = {
 	},
 	text2: {
 		fontSize: theme.DefaultFontSize - 2,
-		color: '#fff',
+		color: '#666',
 		textDecorationLine: 'underline'
 	},
 	bag: {
