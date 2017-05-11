@@ -2,11 +2,13 @@
 // const apiPath = 'http://103.254.113.11:9191/api/'; // 外网
 const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 
-// const webPath = 'http://192.168.10.69:9191/web/'; // 内网
+// web服务器地址
+// const webPath = 'http://103.254.113.11:9191/web/'; // 外网
 
+const webPath = 'http://192.168.10.69:9191/web/'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
- const webPath = 'http://192.168.3.204:3000/'; // 王朋
-//const webPath = 'http://192.168.3.213:3000/'; // cxx
+// const webPath = 'http://192.168.3.204:3000/'; // 王朋
+// const webPath = 'http://192.168.3.213:3000/'; // cxx
 // const webPath = 'http://192.168.3.203:3000/'; //
 
 
@@ -30,8 +32,6 @@ const urls = {
         MODIFICATION_TIME: webPath + 'modificationTime.html',
         // 健康测评
         HEALTH_APPRAISAL: webPath + 'healthAppraisal.html',
-        // 测评结果
-        ASSESSMENT_RESULT :webPath+'assessmentResult.html',
         // 深度自诊
         DEEP_DIAGNOSIS: webPath + 'deepDiagnosis.html',
         // 测试题
@@ -108,7 +108,12 @@ const urls = {
 
         //搜索------------------------------------------------------------------------
         //全部搜索
-        SEARCH_ALL: apiPath + 'app/searchAction!searchAll.action?type=woman&page=1&pageSize=5',
+        SEARCH_ALL: apiPath + 'SearchApi/searchAll',
+        SEARCH_SYMPTOMPROBLEM: apiPath + 'SearchApi/searchSymptomProblem',
+        SEARCH_INFORMATION: apiPath + 'SearchApi/searchInformation',
+        SEARCH_DAILYMETHOD: apiPath + 'SearchApi/searchDailyMethod',
+        SEARCH_DAILYMETHOD: apiPath + 'SearchApi/searchDailyMethod',
+        SEARCH_FRIENDCIRCLE: apiPath + 'SearchApi/searchFriendsCircle',
 
         // 注册登录(老)
         //验证手机号
@@ -131,7 +136,7 @@ const urls = {
         USER_SETUSERBASEINFO: apiPath + "UserApi/setUserBaseInfo",
         //情绪
         EMOTION_GETEMOTIONINTERVENE: apiPath + "EmotionApi/getEmotionIntervene",
-        EMOTION_GETEMOTIONFACTOR:apiPath + "EmotionApi/getemotionfactor",
+
         // 注册登录(新)
 
         /*//检测用户是否存在
@@ -206,6 +211,11 @@ const urls = {
         //期望专业疗法
         EXPECT_GETEXPECTPROFESSIONALMETHODLIST: apiPath + 'ExpectApi/getExpectProfessionalMethodList',
         EXPECT_GETEXPECTPROFESSIONALMETHODDETAIL: apiPath + 'ExpectApi/getExpectProfessionalMethodDetail',
+
+        // 自养 ---------------------------------------------------------
+       HEALTH_GETSOLARTERM: apiPath + 'HealthApi/getSolarTerm',
+       HEALTH_GETHEALTHDAILYMETHODLIST: apiPath + 'HealthApi/getHealthDailyMethodList',
+       HEALTH_GETHEALTHDAILYMETHODDETAIL: apiPath + 'HealthApi/getHealthDailyMethodDetail',
 
         // 我的能量场 ---------------------------------------------------------
 
