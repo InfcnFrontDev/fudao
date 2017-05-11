@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Container, Content, Text} from "native-base";
+import {Container, Content, SearchHeader} from "../../components/index";
 import Header from "../../components/header/SearchHeader";
 
 /**
@@ -15,9 +15,8 @@ export default class SearchFriendsCircle extends PureComponent {
     render() {
         return (
             <Container>
-                <Header placeholder="搜索朋友圈" />
-                <Content>
-                    <Text>朋友圈</Text>
+                <SearchHeader placeholder="搜索朋友圈" />
+                <Content white>
                 </Content>
             </Container>
         );

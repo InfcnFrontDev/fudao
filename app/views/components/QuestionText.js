@@ -17,7 +17,7 @@ class QuestionText extends PureComponent {
 
     componentWillMount() {
         let id = this.props.data;
-        if(this.props.from === 'question'){
+        if(this.props.from === 'disease'){
             var url = urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL;
         }else if(this.props.from === 'expect'){
             var url = urls.apis.EXPECT_GETEXPECTDAILYMETHODDETAIL;
@@ -42,7 +42,6 @@ class QuestionText extends PureComponent {
         if (JSON.stringify(this.state.daily) != '{}') {
             var {daily} = this.state;
             var content = daily.threeCharacterClassic + "\n" + daily.detail;
-
             content = content.split('\\t').join('');
             content = content.split('\\n').join('\n');
             var e = new RegExp('\n', "g");
@@ -52,7 +51,7 @@ class QuestionText extends PureComponent {
             return (
                 <ScrollView style={styles.scrollView}>
                     <View style={styles.view}>
-                        {this.renderImg('/aged'  + daily.img)}
+                        {this.renderImg(daily.img)}
                         <Text style={styles.contentText}>        {content}</Text>
                     </View>
                 </ScrollView>

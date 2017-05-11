@@ -2,43 +2,46 @@ import React, {PureComponent} from "react";
 import {TouchableOpacity} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Text, View} from "native-base";
-import Separator from "../../../components/Separator";
-
+import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
+import myDiseaseListStore from "../../../mobx/myDiseaseListStore";
 /**
  * result
  */
 export default class SymptomProblemResult extends PureComponent {
+    onPress(item) {
+        myDiseaseListStore.fetchMyDiseaseList()
+        myDiseaseListStore.selectedItemName = item.name
+        myDiseaseListStore.selectedItemId = item.id
+        Actions.diseaseDetail()
+        diseaseMethodStore.diseaseId = item.id
+    }
 
-	render() {
-		let {list} = this.props;
-		return (
-			<View>
-				<Separator title="症状和问题"/>
-				<View style={styles.itemContainer}>
-					{list.map((text) => (
-						<TouchableOpacity key={text.val} style={styles.item}
-										  onPress={() => Actions.myQuestionDetail({question: text})}>
-							<Text>{text.showVal}</Text>
-						</TouchableOpacity>
-					))}
-				</View>
-			</View>
-		)
-	}
+    render() {
+        let {list} = this.props.data;
+        return (
+            <View style={styles.itemContainer}>
+                {list && list.map((item, i) => (
+                    <TouchableOpacity key={i} style={styles.item} onPress={() => this.onPress(item)}>
+                        <Text>{item.name}</Text>
+                    </TouchableOpacity>
+                ))}
+            </View>
+        )
+    }
 }
 const styles = {
-	itemContainer: {
-		padding: 14,
-		backgroundColor: '#FFFFFF',
-		flexDirection: 'row',
-		flexWrap: 'wrap'
-	},
-	item: {
-		backgroundColor: '#eeeeee',
-		margin: 5,
-		padding: 10,
-		height: 30,
-		justifyContent: 'center',
-		borderRadius: 5,
-	}
+    itemContainer: {
+        padding: 14,
+        backgroundColor: '#FFFFFF',
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
+    item: {
+        backgroundColor: '#eeeeee',
+        margin: 5,
+        padding: 10,
+        height: 30,
+        justifyContent: 'center',
+        borderRadius: 5,
+    }
 };
