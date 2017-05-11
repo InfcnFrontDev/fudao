@@ -28,16 +28,11 @@ export default class Start extends PureComponent {
 
 	componentWillMount() {
 		if (UserStore.isLogin) {
-			if(!UserStore.loginUser.sex){
-				Actions.login({
-					type: ActionConst.REPLACE
-				});
-			}else{
+			if(UserStore.loginUser.sex){
 				Actions.index({
 					type: ActionConst.REPLACE
 				});
 			}
-
 		}
 	}
 
