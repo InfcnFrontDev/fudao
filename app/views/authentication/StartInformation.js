@@ -304,7 +304,9 @@ export default class StartInformation extends PureComponent {
                 this.props.dispatch(clearDynamic());
                 this.props.dispatch(clearPosition());*/
                 // 跳到首页
-                Actions.index();
+                Actions.index({
+                    type: ActionConst.POP_AND_REPLACE,
+                });
             }
         })
     }
