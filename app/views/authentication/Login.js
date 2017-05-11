@@ -18,8 +18,8 @@ export default class Login extends PureComponent {
 
 	state = {
 		isFetching: false,
-		phone: '15901097191',
-		password: '123456',
+		phone: '',
+		password: '',
 		login: 'no'
 	}
 
@@ -79,7 +79,6 @@ export default class Login extends PureComponent {
 
 		userStore.login(phone, password, () => {
 			userStore.fetchLoginUser();
-			tools.showToast(JSON.stringify(userStore.loginUser))
 			// 跳到首页
 			if(!userStore.loginUser.sex){
 				Actions.startInformation({phone:this.state.phone})

@@ -7,7 +7,7 @@ import EmotionStore from "../../../mobx/emotionStore";
 
 
 /**
- * 情绪
+ *微观因素组件
  */
 @observer
 export default class MicrocosmicFactor extends PureComponent {
