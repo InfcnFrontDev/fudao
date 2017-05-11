@@ -39,10 +39,9 @@ export default class SetPassword extends PureComponent {
     interval(){
         let self=this;
         let {number} = self.state;
-            var c=setInterval(function(){
+        self.timer=setInterval(function(){
                 if(number==0){
                     self._login(self.state.phone,self.state.password)
-                    clearInterval(c);
                 }else{
                     number--;
                     self.setState({
@@ -52,6 +51,7 @@ export default class SetPassword extends PureComponent {
             },1000)
     }
     _login(phone,password) {
+        clearInterval(this.timer);
         userStore.login(phone, password, () => {
             userStore.fetchLoginUser();
             // 跳到首页
@@ -69,7 +69,6 @@ const styles = {
     container:{
         justifyContent:'center',
         alignItems:'center',
-
     },
 
     view:{

@@ -10,7 +10,7 @@ import ArticleItem from "../../article/components/ArticleItem";
 export default class InformationResult extends PureComponent {
 
 	render() {
-		let {list} = this.props;
+		let {list} = this.props.data;
 		return (
 			<View>
 				<Separator title="资讯"/>
