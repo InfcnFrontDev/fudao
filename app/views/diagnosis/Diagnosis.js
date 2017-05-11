@@ -117,7 +117,7 @@ export default class Diagnosis extends PureComponent {
 
     render() {
         const {isFetching, diagnosisDisease} = diagnosisStore;
-        const {diagnosisList,text} = this.state;
+        const {diagnosisList, text} = this.state;
         i = 0;
         if (diagnosisList.length > 0) {
             return (
@@ -133,7 +133,8 @@ export default class Diagnosis extends PureComponent {
                                                value={this.state.text} placeholder="找不到您的问题？那就写下来吧！"
                                                multiline={true}
                                                underlineColorAndroid="transparent"/>
-                                    <TouchableOpacity style={styles.customizeButton} onPress={text?this.addCustomizeDisease.bind(this):null}>
+                                    <TouchableOpacity style={styles.customizeButton}
+                                                      onPress={text ? this.addCustomizeDisease.bind(this) : null}>
                                         <Text style={styles.customizeButtonText}>确定</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -143,10 +144,10 @@ export default class Diagnosis extends PureComponent {
                                     {this.renderChoosed(diagnosisDisease)}
                                 </ScrollView>
                                 <View style={styles.buttonContainer}>
-                                    <TouchableOpacity style={styles.button}>
+                                    <TouchableOpacity style={styles.button} onPress={() => this.gotoCeping(false)}>
                                         <Text style={styles.buttonText}>完成自诊去自疗</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={styles.button} onPress={() => this.gotoCeping()}>
+                                    <TouchableOpacity style={styles.button} onPress={() => this.gotoCeping(true)}>
                                         <Text style={styles.buttonText}>提交并继续自诊</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -173,7 +174,8 @@ export default class Diagnosis extends PureComponent {
             if (items.list.length > 0) {
                 i++;
                 return (
-                    <CommonList key={index} items={items} selectedItem={diagnosisDiseaseOrderBy} onItemAdd={(item) => this._onItemAdd(item)}/>
+                    <CommonList key={index} items={items} selectedItem={diagnosisDiseaseOrderBy}
+                                onItemAdd={(item) => this._onItemAdd(item)}/>
                 )
             }
             return null;
@@ -191,7 +193,7 @@ export default class Diagnosis extends PureComponent {
                         {listView.slice(0, 2)}
                     </View>
                     <View style={styles.oneLine}>
-                        {listView.slice(2,4)}
+                        {listView.slice(2, 4)}
                     </View>
                 </View>)
                 :
@@ -201,7 +203,7 @@ export default class Diagnosis extends PureComponent {
                             {listView.slice(0, 3)}
                         </View>
                         <View style={styles.oneLine}>
-                            {listView.slice(3,4)}
+                            {listView.slice(3, 4)}
                         </View>
                     </View>)
                 );
@@ -215,21 +217,20 @@ export default class Diagnosis extends PureComponent {
             return (
                 <View style={styles.row} key={index}>
                     <Text style={styles.rowTitle}>{item.name}</Text>
-                    <TouchableOpacity underlayColor='transparent' onPress={this.delChoosed.bind(this,index)}>
+                    <TouchableOpacity underlayColor='transparent' onPress={this.delChoosed.bind(this, index)}>
                         <Text style={styles.deleteChoosed}>一</Text>
                     </TouchableOpacity>
                 </ View >
             )
-        })
+        });
         return (
             <View style={styles.chooseView}>
                 {list}
             </View>
         )
-
     }
 
-    delChoosed(index){
+    delChoosed(index) {
         diagnosisStore.delDisease(index);
     }
 
@@ -239,16 +240,20 @@ export default class Diagnosis extends PureComponent {
 
     addCustomizeDisease() {
         diagnosisStore.addDisease({
-            name:this.state.text
+            name: this.state.text
         });
         this.setState({
-            text:''
+            text: ''
         })
     }
 
-    gotoCeping(){
+    gotoCeping(flag) {
         diagnosisStore.addMyDiseaseToBackstage();
-        Actions.evaluation()
+        if(flag){
+            Actions.evaluation()
+        }else{
+            Actions.disease()
+        }
     }
 
 }

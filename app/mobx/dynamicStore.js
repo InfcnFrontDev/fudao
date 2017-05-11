@@ -82,8 +82,12 @@ class DynamicStore {
                 this.insert(res.obj.list);
                 let allList = this.getAll();
                 cb(res, allList);
+            }else{
+                callback([],{
+                    allLoaded:true
+                })
             }
-        });
+        })
         // .then(() => {
         //     let allList = this.getAll();
         //     let listRender = allList.slice((this.page - 1) * 5, this.page * 5)
