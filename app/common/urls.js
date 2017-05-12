@@ -112,7 +112,6 @@ const urls = {
         SEARCH_SYMPTOMPROBLEM: apiPath + 'SearchApi/searchSymptomProblem',
         SEARCH_INFORMATION: apiPath + 'SearchApi/searchInformation',
         SEARCH_DAILYMETHOD: apiPath + 'SearchApi/searchDailyMethod',
-        SEARCH_DAILYMETHOD: apiPath + 'SearchApi/searchDailyMethod',
         SEARCH_FRIENDCIRCLE: apiPath + 'SearchApi/searchFriendsCircle',
 
         // 注册登录(老)
