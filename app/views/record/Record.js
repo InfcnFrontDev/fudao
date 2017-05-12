@@ -26,7 +26,8 @@ export default class Record extends PureComponent {
 				<Content delay gray>
 					{this.state.flag == 'day' ? <MyRecordDay /> : (this.state.flag == 'week' ? <MyRecordWeek /> :
 							<MyRecordMonth />)}
-					<View style={styles.typeTitle}>
+{/*		底部日记录、周记录、月记录按钮
+	<View style={styles.typeTitle}>
 						<Button transparent onPress={()=> {
 							this.setState({flag: 'day'})
 						}}
@@ -48,7 +49,7 @@ export default class Record extends PureComponent {
 							<Text
 								style={this.state.flag == 'month' ? styles.titleTextChoosed : styles.titleText}>月记录</Text>
 						</Button>
-					</View>
+					</View>*/}
 				</Content>
 
 			</Container>

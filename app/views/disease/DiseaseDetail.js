@@ -54,7 +54,7 @@ export default class DiseaseDetail extends PureComponent {
 					<DiseaseMethodTabView data={diseaseMethod} pageKey={'disease'}/>
 				</Content>
                 <DetailModal visible={modalShow} pageKey={'disease'}>
-                    <QuestionText data={questionId} from={'question'}/>
+                    <QuestionText data={questionId} from={'disease'}/>
                 </DetailModal>
 			</Container>
 		)

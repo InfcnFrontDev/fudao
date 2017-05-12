@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import {Modal, View, Image, ListView,WebView,Dimensions} from "react-native";
 import {Icon, Button, ListItem, Text} from "native-base";
 import ImageText from './ImageText'
+import userStore from "../../../mobx/userStore";
 
 
 /**
@@ -50,7 +51,7 @@ class TimeModal extends PureComponent {
                     </View>
                     <View style={{flex: 1}}>
                         <WebView
-                            source={{uri:urls.pages.MODIFICATION_TIME}}
+                            source={{uri:urls.pages.MODIFICATION_TIME+'?token='+userStore.token}}
                             style={{backgroundColor:'rgba(0,0,0,.0)'}}
                         />
                     </View>

@@ -7,7 +7,7 @@ import EmotionStore from "../../../mobx/emotionStore";
 
 
 /**
- * 情绪
+ *微观因素组件
  */
 @observer
 export default class MicrocosmicFactor extends PureComponent {
@@ -17,7 +17,6 @@ export default class MicrocosmicFactor extends PureComponent {
             weiguan:this.props.microcosmic,
         };
         this.select=[];
-        this.selected=[];
     }
     componentWillMount(){
         let reasons=this.props.microcosmic;

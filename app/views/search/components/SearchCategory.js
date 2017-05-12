@@ -16,17 +16,17 @@ export default class Category extends PureComponent {
 						{
 							icon: 'medkit',
 							text: '症状和问题',
-							category: 'SymptomProblem',
+							category: 'searchSymptomProblem',
 						},
 						{
 							icon: 'pizza',
 							text: '保健方法',
-							category: 'HealthCare',
+							category: 'searchDailyLife',
 						},
 						{
 							icon: 'images',
 							text: '资讯',
-							category: 'Information',
+							category: 'searchInformation',
 						},
 					]
 				},
@@ -35,7 +35,7 @@ export default class Category extends PureComponent {
 						{
 							icon: 'aperture',
 							text: '圈子',
-							category: 'FriendsCircle',
+							category: 'searchSymptomProblem',
 						}
 					]
 				}
@@ -73,7 +73,7 @@ export default class Category extends PureComponent {
 	}
 
 	categorySearch(category) {
-		Actions['search' + category]();
+		Actions[category]();
 	}
 }
 
