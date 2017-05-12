@@ -54,11 +54,11 @@ export default class Health extends PureComponent {
 				<Header {...this.props}/>
 				<Content delay>
                     <View style={styles.container}>
-                        <Image source={{uri: urls.getImage(this.state.img)}} />
-                        <View style={styles.box}>
-                            <Text style={styles.name}>{this.state.name}</Text>
-                            <Text style={styles.detail}>{this.state.detail}</Text>
-                        </View>
+                        <Image source={{uri: urls.getImage(this.state.img)}} style={styles.img} />
+                        {/*<View style={styles.box}>*/}
+                            {/*<Text style={styles.name}>{this.state.name}</Text>*/}
+                            {/*<Text style={styles.detail}>{this.state.detail}</Text>*/}
+                        {/*</View>*/}
                     </View>
 					<DiseaseMethodTabView data={healthMethod}  pageKey={'health'}/>
 				</Content>
@@ -73,23 +73,10 @@ export default class Health extends PureComponent {
 const styles = {
     container:{
         height: 140,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        paddingRight: 30
     },
-    box: {
-        justifyContent: 'center'
-
-    },
-    name: {
-        color: '#FFF',
-        fontSize: 20,
-        fontFamily: 'SanFrancisco'
-    },
-    detail: {
-        color: '#FFF',
-        fontSize: 18,
-        fontFamily: 'Microsoft YaHei'
+    img: {
+        height: 140,
+        width: theme.deviceWidth,
     },
 	title: {
 		fontSize: theme.DefaultFontSize,

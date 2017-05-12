@@ -1,32 +1,40 @@
 import React, {PureComponent} from "react";
-import {Container, Content} from "native-base";
-import Header from "../../components/header/SearchHeader";
-import Result from "./components/InformationResult";
+import {ScrollView} from "react-native";
+import {Container, Content, SearchHeader} from "../../components/index";
+import InformationResult from "./components/InformationResult";
+import {observer} from "mobx-react/native";
+import searchStore from "../../mobx/searchStore";
+
 
 /**
  * 搜索 -> 资讯
  */
+
+@observer
 export default class SearchInformation extends PureComponent {
 
+    // 搜索
+    search() {
+        searchStore.fetchInformation()
+        // const {dispatch} = this.props;
+        // if (keyword == '') {
+        // 	dispatch(clearInformation())
+        // } else {
+        // 	dispatch(searchInformation(keyword))
+        // }
+    }
+
 	render() {
-		let {isLoading, information} = this.props;
+		let {information} = searchStore;
 		return (
 			<Container>
-				<Header placeholder="搜索资讯" onSearch={this.search.bind(this)}/>
-				<Content>
-					{information.list.length > 0 ? <Result list={information.list}/> : null}
-				</Content>
+				<SearchHeader placeholder="搜索资讯" onSearch={this.search.bind(this)} onChangeText ={(keyword) =>  searchStore.keyword = keyword}/>
+                <Content white>
+                    <ScrollView>
+                        <InformationResult key="information" data={information}/>
+                    </ScrollView>
+                </Content>
 			</Container>
 		);
-	}
-
-	// 搜索
-	search(keyword) {
-		const {dispatch} = this.props;
-		if (keyword == '') {
-			dispatch(clearInformation())
-		} else {
-			dispatch(searchInformation(keyword))
-		}
 	}
 }
