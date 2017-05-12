@@ -3,6 +3,7 @@ import {Alert,ToastAndroid} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, Separator} from "../../components/index";
 import {Text, ListItem, Item, Input,Button,Right} from "native-base";
+import friendStore from "../../mobx/friendStore";
 
 
 /**
@@ -56,6 +57,7 @@ export default class RmarkSet extends PureComponent {
         }).then(((result) => {
             if (result.ok) {
                 ToastAndroid.show('修改成功',ToastAndroid.SHORT);
+                friendStore.fetchMyFriendList()
                 Actions.pop();
             } else {
                 ToastAndroid.show('发送申请失败，请重试',ToastAndroid.SHORT);
