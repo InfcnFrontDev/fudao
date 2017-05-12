@@ -38,12 +38,12 @@ class EmotionStore {
         this.updateTime=updateTime;
     };
     @action
-    getEmotionIntervene (ob,callback){
+    getEmotionIntervene (ob){
         request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
             emotion: ob.emotion,
-            grade:ob.grade
+            grade:ob.fenJi
         }).then((data) => {
-            callback(data.obj,ob.word,ob.img);
+            this.showModal(data.obj,ob.word,ob.img);
         })
     }
     @action

@@ -27,7 +27,7 @@ export default class StartInformation extends PureComponent {
             presetDate: new Date(2016, 3, 5),
             maxText: '',
             presetText: '选择日期,指定2016/3/5',
-            showM:false,
+            showM:true,
             position:'北京市',
             phone:this.props.phone,
             year1:'',
@@ -35,7 +35,7 @@ export default class StartInformation extends PureComponent {
             month1:'',
             month:'',
             day1:'',
-            sex:2,
+            sex:1,
             jieduan:'未孕阶段',
         }
     }
@@ -110,8 +110,8 @@ export default class StartInformation extends PureComponent {
                     <View style={styles.bigBox}>
                         <View style={styles.box}>
                             <View style={styles.photo}>
-                                {mbW}
                                 {mbM}
+                                {mbW}
                             </View>
                             <View  style={styles.row1}>
                                 <Text style={styles.text1}>请选择您的生日</Text>

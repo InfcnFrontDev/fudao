@@ -26,7 +26,7 @@ export default class Register extends PureComponent {  // eslint-disable-line
         return (
             <Container>
                 <Header {...this.props}></Header>
-                <Content>
+                <Content white>
                     <View style={styles.bag}>
                         <UserInput text="手机号" btn={false}
                                    onChangeText={(value)=>{
@@ -36,9 +36,9 @@ export default class Register extends PureComponent {  // eslint-disable-line
                                    }}/>
                         <View style={styles.box}>
                             <View style={styles.border}>
-                                <Text style={{color:'#'}}>验证码</Text>
+                                <Text>验证码</Text>
                             </View>
-                            <TextInput style={{flex:1,color:'#fff'}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
+                            <TextInput style={{flex:1}} underlineColorAndroid='transparent' keyboardType='numeric' value={this.state.code}
                                        onChangeText={(value)=>{
                                            this.setState({
                                                code:value

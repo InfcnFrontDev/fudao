@@ -18,7 +18,6 @@ export default class NewFriend extends PureComponent {
 	render() {
 		let {isNewFetching, NewFriendList} =friendStore,
 			count = NewFriendList.length;
-		alert(JSON.stringify(NewFriendList));
 		return (
 			<Container>
 				<Header {...this.props}/>
