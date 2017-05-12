@@ -18,15 +18,15 @@ export default class MicrocosmicFactor extends PureComponent {
         };
         this.select=[];
     }
-    componentWillMount(){
-        let reasons=this.props.microcosmic;
-        for(var i=0;i<reasons.length;i++){
-            this.select[i]={};
-            this.select[i].name= reasons[i];
-            this.select[i].value= false;
-        }
-        EmotionStore.microcosmicList(this.select)
-    }
+    // componentWillMount(){
+    //     let reasons=this.props.microcosmic;
+    //     for(var i=0;i<reasons.length;i++){
+    //         this.select[i]={};
+    //         this.select[i].name= reasons[i];
+    //         this.select[i].value= false;
+    //     }
+    //     EmotionStore.microcosmicList(this.select)
+    // }
     render() {
         let weiguan = EmotionStore.microcosmic;
         if (!weiguan)

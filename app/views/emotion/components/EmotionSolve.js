@@ -15,56 +15,54 @@ export default class EmotionSolve extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
-		 show: false,
-		 solve:null,
-	};
+			show: false,
+			solve: null,
+			data: props.data,
+			img: props.emotionImg,
+		};
 	}
-	componentWillMount(){
-		this.setState({
-			data:this.props.data,
-			img:this.props.emotionImg,
-		})
 
-	}
 	render() {
-		let {data,img}=this.state;
-		if(!data)
+		let {data, img}=this.state;
+		if (!data)
 			return null
 		return (
 			<View style={styles.container}>
-					<View style={styles.View}>
-						<View style={styles.emotionBox}>
-							<Image source={img} style={{width:60,height:60}}></Image>
-							<Text style={{color:'#fff'}}>{data.emotion}</Text>
-						</View>
-						<View  style={{width:theme.deviceWidth*0.9-95,paddingRight:10,paddingTop:30}}>
-							<Text style={{color:'#E3B335',marginBottom:10}}>{data.threeCharacterClassic}</Text>
-							<Text style={{color:'#fff',fontSize:theme.DefaultFontSize-2}}>        {data.influence}</Text>
-						</View>
+				<View style={styles.View}>
+					<View style={styles.emotionBox}>
+						<Image source={img} style={{width:60,height:60}}></Image>
+						<Text style={{color:'#fff'}}>{data.emotion}</Text>
 					</View>
-					<View style={styles.imgViewBox}>
-						<ScrollableTabView   tabBarPosition='top'
-							renderTabBar={() => <DefaultTabBar activeTextColor={theme.navTabBarActiveTextColor}
-															   underlineStyle={{backgroundColor: theme.navTabBarActiveTextColor}}/>}>
-							{data.methods.map((item,index)=>this.renderSolve(item,index))}
-						</ScrollableTabView>
+					<View style={{width:theme.deviceWidth*0.9-95,paddingRight:10,paddingTop:30}}>
+						<Text style={{color:'#E3B335',marginBottom:10}}>{data.threeCharacterClassic}</Text>
+						<Text style={{color:'#fff',fontSize:theme.DefaultFontSize-2}}>        {data.influence}</Text>
 					</View>
 				</View>
+				<View style={styles.imgViewBox}>
+					<ScrollableTabView tabBarPosition='top'
+									   renderTabBar={() => <DefaultTabBar activeTextColor={theme.navTabBarActiveTextColor}
+															   underlineStyle={{backgroundColor: theme.navTabBarActiveTextColor}}/>}>
+						{data.methods.map((item, index) => this.renderSolve(item, index))}
+					</ScrollableTabView>
+				</View>
+			</View>
 		)
 	}
 
-	renderSolve(item,index) {
-		if (item.type==1) {
-			return(
-				<ImageSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content} img={item.img}></ImageSolve>
+	renderSolve(item, index) {
+		if (item.type == 1) {
+			return (
+				<ImageSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
+							img={item.img}></ImageSolve>
 			)
-		} else if(item.type==2) {
-		 return(
+		} else if (item.type == 2) {
+			return (
 				<TextSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}></TextSolve>
 			)
-		} else if(item.type==3){
-		 return(
-				<VideoSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content} video={item.img}></VideoSolve>
+		} else if (item.type == 3) {
+			return (
+				<VideoSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
+							video={item.img}></VideoSolve>
 			)
 		}
 	}
@@ -89,19 +87,19 @@ const styles = {
 		backgroundColor: 'rgba(255,255,255,0.3)',
 	},
 	View: {
-		width:theme.deviceWidth*0.9,
-		height:160,
-		flexDirection:'row',
+		width: theme.deviceWidth * 0.9,
+		height: 160,
+		flexDirection: 'row',
 	},
-	imgViewBox:{
-		width:theme.deviceWidth*0.9,
-		height:theme.deviceHeight-220,
-		backgroundColor:'#fff',
+	imgViewBox: {
+		width: theme.deviceWidth * 0.9,
+		height: theme.deviceHeight - 220,
+		backgroundColor: '#fff',
 	},
-	emotionBox:{
-       width:90,
-		justifyContent:'center',
-		alignItems:'center'
+	emotionBox: {
+		width: 90,
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	tabView: {
 		flex: 1,

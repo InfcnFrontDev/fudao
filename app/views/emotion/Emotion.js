@@ -24,45 +24,49 @@ export default class Emotion extends PureComponent {
 			FactorModal:null,
 			showMol1:null,
 			data:null,
-			img:null
+			img:null,
+
+
+			showMol1:false,
+			showMol2:false,
 		}
 	}
 	/**
 	 * 一小时后情绪修改为平静， 进入页面时处理
 	 */
 	componentWillMount() {
-		let {myEmotion,updateTime}=EmotionStore;
-		if (myEmotion) {
-			let currentTime = new Date().getTime();
-			if (currentTime - updateTime > 1000 * 60 * 60) {
-				EmotionStore.updateMyEmotion(calm[0]);
-			}
-			this.setState({
-				myEmotion:myEmotion
-			})
-		}
+		// let {myEmotion,updateTime}=EmotionStore;
+		// if (myEmotion) {
+		// 	let currentTime = new Date().getTime();
+		// 	if (currentTime - updateTime > 1000 * 60 * 60) {
+		// 		EmotionStore.updateMyEmotion(calm[0]);
+		// 	}
+		// 	this.setState({
+		// 		myEmotion:myEmotion
+		// 	})
+		// }
 	}
 	render() {
 		let {showMol1,showMol2,data,img}=EmotionStore;
-		if(showMol1){
-			if(showMol1){
-				this._modal1.show()
-				this._modal2.hide()
-			}else{
-				this._modal2.show()
-				this._modal1.hide()
-			}
-		}
-		if(showMol2){
-
-			if(showMol1){
-				this._modal1.show()
-				this._modal2.hide()
-			}else{
-				this._modal2.show()
-				this._modal1.hide()
-			}
-		}
+		// if(showMol1){
+		// 	if(showMol1){
+		// 		this._modal1.show()
+		// 		this._modal2.hide()
+		// 	}else{
+		// 		this._modal2.show()
+		// 		this._modal1.hide()
+		// 	}
+		// }
+		// if(showMol2){
+		//
+		// 	if(showMol1){
+		// 		this._modal1.show()
+		// 		this._modal2.hide()
+		// 	}else{
+		// 		this._modal2.show()
+		// 		this._modal1.hide()
+		// 	}
+		// }
 		let myEmotion=EmotionStore.myEmotion;
 		if(!myEmotion){
 			myEmotion=calm[0]
@@ -96,10 +100,10 @@ export default class Emotion extends PureComponent {
 						{text}
 					</View>
 					<EmotionList onItemPress={this._onItemPress.bind(this)}/>
-					<Modal ref={(e)=>this._modal1 = e}>
+					<Modal ref={(e)=>this._modal1 = e} visible={showMol1}>
 						<EmotionFactor data={data} emotionImg={img}></EmotionFactor>
 					</Modal>
-					<EmotionModal ref={(e)=>this._modal2 = e}>
+					<EmotionModal ref={(e)=>this._modal2 = e} visible={showMol2}>
 						<EmotionSolve data={data} emotionImg={img}></EmotionSolve>
 					</EmotionModal>
 				</Content>

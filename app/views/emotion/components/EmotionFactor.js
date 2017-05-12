@@ -22,28 +22,26 @@ export default class EmotionFactor extends PureComponent {
             color:'#fff',
             flag:true,
             flag1:true,
-            selfReason:null
+            selfReason:null,
+			data:props.data,
+			img:props.emotionImg,
            /* '#008F81'*/
         };
         this.grade=[];
         this.selfReason="";
     }
 
-    componentWillMount(){
-        let grade=this.props.data.grade;
-        for(var i=0;i<grade.length;i++){
-            this.grade[i]={};
-            this.grade[i].name= grade[i].name;
-            this.grade[i].title= grade[i].title;
-            this.grade[i].value= false;
-        }
-        this.grade[0].value= true;
-        EmotionStore.grade(this.grade);
-        this.setState({
-            data:this.props.data,
-            img:this.props.emotionImg,
-        });
-    }
+    // componentWillMount(){
+    //     let grade=this.props.data.grade;
+    //     for(var i=0;i<grade.length;i++){
+    //         this.grade[i]={};
+    //         this.grade[i].name= grade[i].name;
+    //         this.grade[i].title= grade[i].title;
+    //         this.grade[i].value= false;
+    //     }
+    //     this.grade[0].value= true;
+    //     EmotionStore.grade(this.grade);
+    // }
     render() {
         let {data,img} = this.state;
         let grade=EmotionStore.gradeList;
@@ -62,7 +60,7 @@ export default class EmotionFactor extends PureComponent {
                        </View>
                    </View>
                </View>
-           )
+       )
        }
         return (
             <ScrollView>
