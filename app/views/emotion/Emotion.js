@@ -68,9 +68,7 @@ export default class Emotion extends PureComponent {
 			myEmotion=calm[0]
 		}
 		let text=null;
-		if(showMol2){
-
-		}else{
+		if(!showMol2){
 			text=(
 				<View tyle={styles.titleBox}>
 					<Text style={styles.titleDoc}>不好的情绪影响一天的生活，</Text>
@@ -97,10 +95,10 @@ export default class Emotion extends PureComponent {
 					</View>
 					<EmotionList onItemPress={this._onItemPress.bind(this)}/>
 					<Modal ref={(e)=>this._modal1 = e}>
-						<EmotionFactor data={data} emotionImg={img}></EmotionFactor>
+						<EmotionFactor></EmotionFactor>
 					</Modal>
 					<EmotionModal ref={(e)=>this._modal2 = e}>
-						<EmotionSolve data={data} emotionImg={img}></EmotionSolve>
+						<EmotionSolve></EmotionSolve>
 					</EmotionModal>
 				</Content>
 			</Container>
@@ -112,16 +110,19 @@ export default class Emotion extends PureComponent {
 	 */
 	_onItemPress(items) {
 		// 更新我的情绪
+
 		let updateTime = new Date().getTime();
 		EmotionStore.updateMyEmotion(items);
 		EmotionStore.updateMyTime(updateTime);
 			let goods="goods";
 			let bads="bads";
 			if(items.title=="愉悦"||items.title=="兴奋"||items.title=="兴趣"||items.title=="满足"||items.title=="平静"||items.title=="平淡"){
-			/*	request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
+				tools.showToast("yuyue")
+				request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
 				 	emotion: items.title,
 					weather:"晴"
 				 }).then((data) => {
+					tools.showToast("yuy")
 				 	let fenji=null;
 				 	if (data.ok) {
 						if(data.obj.grade.length==1){
@@ -131,14 +132,14 @@ export default class Emotion extends PureComponent {
 						 }else if(data.obj.grade.length==3){
 						 	fenji="三级";
 						 }
-						EmotionStore.getEmotionIntervene({emotion: items,grade:fenji,word:goods,img:items.img},this.showModal)*/
-					/* } else {
+						EmotionStore.getEmotionIntervene({emotion: items,fenJi:fenji,word:goods,img:items.img})
+					 } else {
 				 		tools.showToast('这种心情，我没办法了');
 					}
 				 },(error)=>{
 
-				})*/
-				let data={
+				})
+				/*let data={
 					"obj": {
 						"emotion": "兴奋",
 						"methods": [
@@ -164,9 +165,10 @@ export default class Emotion extends PureComponent {
 					},
 					"ok": true
 				};
-				EmotionStore.showModal(data.obj,goods,items.img);
+				EmotionStore.showModal(data.obj,goods,items.img);*/
 			}else{
-			let data={
+				tools.showToast("kuku")
+			/*let data={
 			 "obj": {
 			 "emotion": "沮丧",
 			 "reasons": [
@@ -227,23 +229,25 @@ export default class Emotion extends PureComponent {
 			 ]
 			 },
 			 "ok": true
-			 }
+			 }*/
+/*
 
 				EmotionStore.showModal(data.obj,bads,items.img);
+*/
 
 
-				/*request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
+				request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
 				 	emotion:items.title,
 					weather:"阴"
 				 }).then((data) => {
 				 	if (data.ok) {
-						this.showModal(data.obj,bads,items.img);
+						EmotionStore.showModal(data.obj,bads,items.img);
 					 } else {
 				 		toast.show('这种心情，我没办法了');
 				 	}
 				 },(error)=>{
 
-				})*/
+				})
 				}
 
 	}

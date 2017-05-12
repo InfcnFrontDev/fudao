@@ -41,7 +41,6 @@ export default class RebuildSuccess extends PureComponent {
         self.timer=setInterval(function(){
             if(number==0){
                 self._login(self.state.phone,self.state.password);
-                clearInterval(c);
             }else{
                 number--;
                 self.setState({
@@ -55,13 +54,6 @@ export default class RebuildSuccess extends PureComponent {
         UserStore.login(phone, password, () => {
             UserStore.fetchLoginUser();
             // 跳到首页
-            if(!UserStore.loginUser.sex){
-                Actions.startInformation({phone:this.state.phone})
-            }else{
-                Actions.index({
-                    type: ActionConst.POP_AND_REPLACE,
-                });
-            }
         });
     }
 }

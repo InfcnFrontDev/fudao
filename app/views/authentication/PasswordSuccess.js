@@ -55,14 +55,6 @@ export default class SetPassword extends PureComponent {
         UserStore.login(phone, password, () => {
             UserStore.fetchLoginUser();
             // 跳到首页
-
-            if(UserStore.loginUser.sex){
-                Actions.index({
-                    type: ActionConst.POP_AND_REPLACE,
-                });
-            }else{
-                Actions.startInformation({phone:this.state.phone})
-            }
         });
     }
 }

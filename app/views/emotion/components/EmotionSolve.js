@@ -1,15 +1,16 @@
 import React, {PureComponent} from "react";
 import {Modal, View, Image, TouchableHighlight} from "react-native";
 import {Text} from "native-base";
+import {observer} from "mobx-react/native";
 import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
 import ImageSolve from "./ImageSolve";
 import VideoSolve from "./VideoSolve";
 import TextSolve from "./TextSolve";
-
+import EmotionStore from "../../../mobx/emotionStore";
 /**
  * 情绪干预， 弹出
  */
-
+@observer
 export default class EmotionSolve extends PureComponent {
 
 	constructor(props) {
@@ -20,14 +21,14 @@ export default class EmotionSolve extends PureComponent {
 	};
 	}
 	componentWillMount(){
-		this.setState({
+		/*this.setState({
 			data:this.props.data,
 			img:this.props.emotionImg,
-		})
+		})*/
 
 	}
 	render() {
-		let {data,img}=this.state;
+		let {data,img}=EmotionStore;
 		if(!data)
 			return null
 		return (
@@ -38,7 +39,7 @@ export default class EmotionSolve extends PureComponent {
 							<Text style={{color:'#fff'}}>{data.emotion}</Text>
 						</View>
 						<View  style={{width:theme.deviceWidth*0.9-95,paddingRight:10,paddingTop:30}}>
-							<Text style={{color:'#E3B335',marginBottom:10}}>{data.threeCharacterClassic}</Text>
+							<Text style={{color:'#fff',marginBottom:10,fontSize:theme.DefaultFontSize-2,textAlign:'center'}}>{data.threeCharacterClassic}</Text>
 							<Text style={{color:'#fff',fontSize:theme.DefaultFontSize-2}}>        {data.influence}</Text>
 						</View>
 					</View>
@@ -86,7 +87,7 @@ export default class EmotionSolve extends PureComponent {
 
 const styles = {
 	container: {
-		backgroundColor: 'rgba(255,255,255,0.3)',
+		backgroundColor: 'rgba(255,255,255,0.2)',
 	},
 	View: {
 		width:theme.deviceWidth*0.9,
