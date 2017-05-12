@@ -98,7 +98,7 @@ export default class Diagnosis extends PureComponent {
     componentWillMount() {
         // var that = this;
         request.getJson(urls.apis.DIAGNOSIS_GETCOMMONDISEASELIST, {
-            region: "北京"
+            region: "北京市"
         }).then((result) => {
             if (result.ok) {
                 this.setState({
@@ -169,6 +169,7 @@ export default class Diagnosis extends PureComponent {
 
     renderList(list) {
         const {diagnosisDiseaseOrderBy} = diagnosisStore;
+        console.log(list);
         i = 0;
         var listView = list.map((items, index) => {
             if (items.list.length > 0) {
