@@ -30,7 +30,7 @@ export default class EmotionFactor extends PureComponent {
     }
 
     componentWillMount(){
-        let grade=this.props.data.grade;
+        let grade=EmotionStore.data.grade;
         for(var i=0;i<grade.length;i++){
             this.grade[i]={};
             this.grade[i].name= grade[i].name;
@@ -39,13 +39,13 @@ export default class EmotionFactor extends PureComponent {
         }
         this.grade[0].value= true;
         EmotionStore.grade(this.grade);
-        this.setState({
+       /* this.setState({
             data:this.props.data,
             img:this.props.emotionImg,
-        });
+        });*/
     }
     render() {
-        let {data,img} = this.state;
+        let {data,img} = EmotionStore;
         let grade=EmotionStore.gradeList;
         let slider=(null);
         if(!data||!img||!grade)
@@ -157,7 +157,7 @@ export default class EmotionFactor extends PureComponent {
                 this.grade[i].value = true;
             }
         } else {
-            for (var i = index; i < this.grade.length; i++) {
+            for (var i = index+1; i < this.grade.length; i++) {
                 this.grade[i].value = false;
             }
         }

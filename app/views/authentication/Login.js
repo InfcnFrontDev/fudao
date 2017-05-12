@@ -59,7 +59,7 @@ export default class Login extends PureComponent {
 	}
 
 	_login() {
-		const {dispatch} = this.props;
+
 		let {phone, password} = this.state;
 		if (phone == '') {
 			tools.showToast("用户名不能为空");
@@ -75,18 +75,9 @@ export default class Login extends PureComponent {
 		}
 		//关闭软键盘
 		dismissKeyboard();
-
-
 		UserStore.login(phone, password, () => {
 			UserStore.fetchLoginUser();
 			// 跳到首页
-			if(!UserStore.loginUser.sex){
-				Actions.startInformation({phone:this.state.phone})
-			}else{
-				Actions.index({
-					type: ActionConst.POP_AND_REPLACE,
-				});
-			}
 		});
 	}
 

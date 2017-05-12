@@ -1,4 +1,5 @@
 import {observable, runInAction, computed, action, reaction} from "mobx";
+import {Actions, ActionConst} from "react-native-router-flux";
 import {AsyncStorage} from "react-native";
 import {persist} from "mobx-persist";
 import hydrate from "../common/hydrate";
@@ -11,6 +12,7 @@ class UserStore {
 	@persist @observable password = ''
 	@persist @observable token = ''
 	@persist('object') @observable loginUser = {}
+
 
 
 	fieldMap = {
@@ -46,7 +48,15 @@ class UserStore {
 		let loginUser = await this._fetchLoginUser();
 		runInAction(() => {
 			this.loginUser = loginUser;
+
 			// this.saveData();
+				if(!this.loginUser.sex){
+					Actions.startInformation({phone:this.loginUser.phone})
+				}else{
+					Actions.index({
+						type: ActionConst.POP_AND_REPLACE,
+					});
+				}
 		})
 	}
 
@@ -65,8 +75,6 @@ class UserStore {
 			});
 		});
 	}
-
-
 	_fetchLoginUser() {
 		return new Promise(function (resolve, reject) {
 			request.getJson(urls.apis.USER_GETLOGINUSER)
@@ -111,7 +119,7 @@ class UserStore {
 			if (result.ok) {
 				// ...
 			} else {
-				tools.showToast("修改失败")
+				tools.showToast("修改失败");
 			}
 		})
 	}
@@ -122,9 +130,9 @@ class UserStore {
 }
 
 
-const userStore = new UserStore()
+const userStore = new UserStore();
 export default userStore
 hydrate('user', userStore).then(() => {
-	userStore.hydrated = true
+	userStore.hydrated = true;
 	console.log('user hydrated', userStore)
-})
+});
