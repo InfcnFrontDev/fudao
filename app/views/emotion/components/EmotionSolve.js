@@ -17,32 +17,33 @@ export default class EmotionSolve extends PureComponent {
 		this.state = {
 			show: false,
 			solve: null,
-			data: props.data,
 			img: props.emotionImg,
+			emotion: props.data.emotion,
+			influence: props.data.influence,
+			threeCharacterClassic:props.data.threeCharacterClassic,
+			methods:props.data.methods,
 		};
 	}
 
 	render() {
-		let {data, img}=this.state;
-		if (!data)
-			return null
+		let {emotion,influence,threeCharacterClassic,methods, img}=this.state;
 		return (
 			<View style={styles.container}>
 				<View style={styles.View}>
 					<View style={styles.emotionBox}>
 						<Image source={img} style={{width:60,height:60}}></Image>
-						<Text style={{color:'#fff'}}>{data.emotion}</Text>
+						<Text style={{color:'#fff'}}>{emotion}</Text>
 					</View>
 					<View style={{width:theme.deviceWidth*0.9-95,paddingRight:10,paddingTop:30}}>
-						<Text style={{color:'#E3B335',marginBottom:10}}>{data.threeCharacterClassic}</Text>
-						<Text style={{color:'#fff',fontSize:theme.DefaultFontSize-2}}>        {data.influence}</Text>
+						<Text style={{color:'#E3B335',marginBottom:10}}>{threeCharacterClassic}</Text>
+						<Text style={{color:'#fff',fontSize:theme.DefaultFontSize-2}}>        {influence}</Text>
 					</View>
 				</View>
 				<View style={styles.imgViewBox}>
 					<ScrollableTabView tabBarPosition='top'
 									   renderTabBar={() => <DefaultTabBar activeTextColor={theme.navTabBarActiveTextColor}
 															   underlineStyle={{backgroundColor: theme.navTabBarActiveTextColor}}/>}>
-						{data.methods.map((item, index) => this.renderSolve(item, index))}
+						{methods.map((item, index) => this.renderSolve(item, index))}
 					</ScrollableTabView>
 				</View>
 			</View>

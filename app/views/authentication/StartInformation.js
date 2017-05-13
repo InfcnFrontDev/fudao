@@ -10,7 +10,7 @@ import {Thumbnail, Text, Icon} from "native-base";
 import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePickerAndroid, Alert} from "react-native";
 import {Header, Container, Content} from "../../components/index";
 import CommitButton from "./components/CommitButton";
-import userStore from "../../mobx/userStore";
+import UserStore from "../../mobx/userStore";
 
 /*import {login} from "../../actions/user";*/
 import WomanChoose from "./WomanChoose";
@@ -30,6 +30,7 @@ export default class StartInformation extends PureComponent {
             showM:true,
             position:'北京市',
             phone:this.props.phone,
+            password:this.props.password,
             year1:'',
             year:'',
             month1:'',
@@ -191,7 +192,7 @@ export default class StartInformation extends PureComponent {
     commit() {
        /* let {dispatch}=this.props;*/
        /* let loginUser=this.props.loginUser;*/
-        let {position, maxText, phone, sex, jieduan} = this.state;
+        let {position, maxText, phone, password,sex, jieduan} = this.state;
         let crowd;
         if (sex == 2) {
             switch(jieduan)
@@ -287,7 +288,10 @@ export default class StartInformation extends PureComponent {
             regionId:110000
         }).then((data)=> {
             if (data.ok) {
-
+                UserStore.login(phone,password, () => {
+                    UserStore.fetchLoginUser();
+                    // 跳到首页
+                });
                /* let user = Object.assign({}, {
                     phone:phone,
                     sex: sex,
@@ -304,9 +308,7 @@ export default class StartInformation extends PureComponent {
                 this.props.dispatch(clearDynamic());
                 this.props.dispatch(clearPosition());*/
                 // 跳到首页
-                Actions.index({
-                    type: ActionConst.REPLACE,
-                });
+
             }
         })
     }

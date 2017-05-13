@@ -7,7 +7,7 @@ import  CommitButton from "./components/CommitButton"
 import  {hex_md5} from "./components/md5"
 import UserStore from "../../mobx/userStore";
 /**
- * 设置密码
+ * 设置密码成功
  */
 @observer
 export default class SetPassword extends PureComponent {
@@ -18,7 +18,7 @@ export default class SetPassword extends PureComponent {
             text:this.props.text,
             phone:this.props.phone,
             password:this.props.password,
-        }
+        };
         this.interval();
     }
     render() {
@@ -52,10 +52,13 @@ export default class SetPassword extends PureComponent {
     }
     _login(phone,password) {
         clearInterval(this.timer);
-        UserStore.login(phone, password, () => {
+        Actions.startInformation({
+            phone:this.state.phone,
+            password:this.state.password,
+        })
+      /* UserStore.login(phone, password, () => {
             UserStore.fetchLoginUser();
-            // 跳到首页
-        });
+        });*/
     }
 }
 const styles = {
