@@ -45,8 +45,8 @@ export default class Settings extends PureComponent {
 
 	quitAlert() {
 		Alert.alert('提示信息', '确定要退出吗？', [
-			{text: '确定', onPress: () => this.quit()},
 			{text: '取消'},
+			{text: '确定', onPress: () => this.quit()},
 		])
 	}
 

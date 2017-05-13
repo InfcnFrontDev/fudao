@@ -3,17 +3,20 @@ import {Modal, StyleSheet, View, Text, Image, ActivityIndicator} from "react-nat
 
 export default class Loading extends React.Component {
 
-	state = {
-		isShow: false,
-		text: '正在加载...'
-	};
+	constructor(props) {
+		super(props)
+		this.state = {
+			visible: props.visible,
+			text: '正在加载...'
+		}
+	}
 
 	render() {
-		let {isShow, text} = this.state;
+		let {visible, text} = this.state;
 		return (
 			<Modal
 				transparent
-				visible={isShow}
+				visible={visible}
 				onRequestClose={() => this.hide()}
 			>
 				<View style={styles.container}>
@@ -26,15 +29,23 @@ export default class Loading extends React.Component {
 		)
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.visible != this.state.visible) {
+			this.setState({
+				visible: nextProps.visible
+			})
+		}
+	}
+
 	show() {
 		this.setState({
-			isShow: true,
+			visible: true,
 		})
 	}
 
 	hide() {
 		this.setState({
-			isShow: false,
+			visible: false,
 		})
 	}
 }
@@ -65,10 +76,10 @@ const styles = StyleSheet.create({
 
 Loading.propTypes = {
 	text: React.PropTypes.string,
-	isShow: React.PropTypes.bool,
+	visible: React.PropTypes.bool,
 }
 
 Loading.defaultProps = {
 	text: '正在加载...',
-	isShow: false,
+	visible: false,
 }

@@ -4,7 +4,6 @@
 
 // web服务器地址
 const webPath = 'http://103.254.113.11:9191/web/'; // 外网
-
 //const webPath = 'http://192.168.10.69:9191/web/'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
 // const webPath = 'http://192.168.3.204:3000/'; // 王朋
@@ -114,29 +113,30 @@ const urls = {
         SEARCH_DAILYMETHOD: apiPath + 'SearchApi/searchDailyMethod',
         SEARCH_FRIENDCIRCLE: apiPath + 'SearchApi/searchFriendsCircle',
 
-        // 注册登录(老)
-        //验证手机号
-        USER_CHECKPHONEREGISTERED: apiPath + 'UserApi/checkPhoneRegistered',
-        //发送验证码
-        USER_SENDCODE: apiPath + 'UserApi/sendCode',
-        //验证验证码
-        USER_CHECKCODE: apiPath + 'UserApi/checkCode',
-        //注册
-        USER_REGISTER: apiPath + "UserApi/register",
-        //登录
-        USER_LOGIN: apiPath + "UserApi/login",
-        //获取用户信息
-        USER_GETLOGINUSER: apiPath + 'UserApi/getLoginUser',
-        //获取指定用户信息
-        USER_GETUSER: apiPath + 'UserApi/getUser',
-        //重置密码
-        USER_RESETPASSWORD: apiPath + "UserApi/resetPassword",
-        //基本信息
-        USER_SETUSERBASEINFO: apiPath + "UserApi/setUserBaseInfo",
-        //情绪
-        EMOTION_GETEMOTIONINTERVENE: apiPath + "EmotionApi/getEmotionIntervene",
+		// 注册登录(老)
+		//验证手机号
+		USER_CHECKPHONEREGISTERED: apiPath + 'UserApi/checkPhoneRegistered',
+		//发送验证码
+		USER_SENDCODE: apiPath + 'UserApi/sendCode',
+		//验证验证码
+		USER_CHECKCODE: apiPath + 'UserApi/checkCode',
+		//注册
+		USER_REGISTER: apiPath + "UserApi/register",
+		//登录
+		USER_LOGIN: apiPath + "UserApi/login",
+		//获取用户信息
+		USER_GETLOGINUSER: apiPath + 'UserApi/getLoginUser',
+		//获取指定用户信息
+		USER_GETUSER: apiPath + 'UserApi/getUser',
+		//重置密码
+		USER_RESETPASSWORD: apiPath + "UserApi/resetPassword",
+		//基本信息
+		USER_SETUSERBASEINFO: apiPath + "UserApi/setUserBaseInfo",
+		//情绪
+		EMOTION_GETEMOTIONFACTOR: apiPath + "EmotionApi/getEmotionFactor",
+		EMOTION_GETEMOTIONINTERVENE: apiPath + "EmotionApi/getEmotionIntervene",
 
-        // 注册登录(新)
+		// 注册登录(新)
 
         /*//检测用户是否存在
          CHECK_PHONE: apiPath + 'checkUserExists',

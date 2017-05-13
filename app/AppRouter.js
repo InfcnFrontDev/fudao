@@ -42,7 +42,6 @@ import NewFriend from "./views/friend/NewFriend";
 import UserDetail from "./views/user/UserDetail";
 import RemarkSet from "./views/user/RemarkSet";
 import BaseInfo from "./views/base-info/BaseInfo";
-
 import Emotion from "./views/emotion/Emotion";
 import Search from "./views/search/Search";
 import SearchSymptomProblem from "./views/search/SearchSymptomProblem";
@@ -177,6 +176,7 @@ export default class AppRouter extends PureComponent {
 		tools.showToast('再按一次退出应用');
 		return true;
 	}
+
 	shouldComponentUpdate() {
 		return false
 	}
