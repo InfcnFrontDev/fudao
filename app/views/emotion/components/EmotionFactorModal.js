@@ -8,6 +8,7 @@ import {Modal} from "../../../components/index";
 
 
 export default class EmotionFactorModal extends PureComponent {
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -22,20 +23,9 @@ export default class EmotionFactorModal extends PureComponent {
 		};
 	}
 
-	// componentWillMount(){
-	//     let grade=this.props.data.grade;
-	//     for(var i=0;i<grade.length;i++){
-	//         this.grade[i]={};
-	//         this.grade[i].name= grade[i].name;
-	//         this.grade[i].title= grade[i].title;
-	//         this.grade[i].value= false;
-	//     }
-	//     this.grade[0].value= true;
-	//     EmotionStore.grade(this.grade);
-	// }
-
 	render() {
 		let {visible, emotion} = this.state;
+		console.log(visible)
 		return (
 			<Modal ref={(e)=>this._modal = e} visible={visible}>
 				{emotion != null && <ScrollView>
@@ -161,13 +151,16 @@ export default class EmotionFactorModal extends PureComponent {
 	show(emotion) {
 		this.setState({
 			visible: true,
-			emotion
+			emotion,
+			selectedGradeIndex: 0,
+			selectedGradeName: '一级',
+			selectedReasons: [],
 		})
 	}
 
 	hide() {
 		this.setState({
-			visible: false
+			visible: false,
 		})
 	}
 

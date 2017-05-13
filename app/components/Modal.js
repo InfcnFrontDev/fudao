@@ -2,9 +2,17 @@ import React, {PureComponent} from "react";
 import {Modal, View, Image, TouchableNativeFeedback} from "react-native";
 
 /**
- * 我的能量场 > 资料填写
+ * BaseModal
  */
-class Modal_ extends PureComponent {
+export default class BaseModal extends PureComponent {
+
+	static propTypes = {
+		visible: React.PropTypes.bool,
+	}
+
+	static defaultProps = {
+		visible: false,
+	}
 
 	constructor(props) {
 		super(props);
@@ -78,12 +86,3 @@ const styles = {
 		flex: 1,
 	},
 };
-
-Modal_.propTypes = {
-	visible: React.PropTypes.bool,
-};
-Modal_.defaultProps = {
-	visible: false,
-}
-
-export default  (Modal_);
