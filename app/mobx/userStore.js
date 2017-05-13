@@ -48,10 +48,9 @@ class UserStore {
 		let loginUser = await this._fetchLoginUser();
 		runInAction(() => {
 			this.loginUser = loginUser;
-
 			// this.saveData();
 				if(!this.loginUser.sex){
-					Actions.startInformation({phone:this.loginUser.phone})
+					Actions.startInformation({phone:this.loginUser.phone,password:this.loginUser.password})
 				}else{
 					Actions.index({
 						type: ActionConst.POP_AND_REPLACE,
@@ -59,7 +58,14 @@ class UserStore {
 				}
 		})
 	}
+	@action
+	fetchLoginUserBase = async() => {
+		let loginUser = await this._fetchLoginUser();
+		runInAction(() => {
+			this.loginUser = loginUser;
 
+		})
+	}
 	_login(phone, password) {
 		return new Promise(function (resolve, reject) {
 			request.getJson(urls.apis.USER_LOGIN, {
