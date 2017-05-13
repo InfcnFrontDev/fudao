@@ -42,7 +42,6 @@ import NewFriend from "./views/friend/NewFriend";
 import UserDetail from "./views/user/UserDetail";
 import RemarkSet from "./views/user/RemarkSet";
 import BaseInfo from "./views/base-info/BaseInfo";
-
 import Emotion from "./views/emotion/Emotion";
 import Search from "./views/search/Search";
 import SearchSymptomProblem from "./views/search/SearchSymptomProblem";
@@ -142,7 +141,7 @@ export default class AppRouter extends PureComponent {
 					<Scene key="dynamicPicture" component={DynamicPicture} title="动态图片" hideNavBar/>
 
 					{/*情绪*/}
-					<Scene key="emotion" component={Emotion} title="情绪" hideNavBar/>
+					<Scene key="emotion" component={Emotion} title="情绪" hideNavBar initial/>
 
 					{/*搜索*/}
 					<Scene title="搜索" key="search" component={Search} hideNavBar/>
@@ -177,6 +176,7 @@ export default class AppRouter extends PureComponent {
 		tools.showToast('再按一次退出应用');
 		return true;
 	}
+
 	shouldComponentUpdate() {
 		return false
 	}

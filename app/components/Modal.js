@@ -33,6 +33,14 @@ class Modal_ extends PureComponent {
 		)
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.visible != this.state.visible) {
+			this.setState({
+				visible: nextProps.visible
+			})
+		}
+	}
+
 	/**
 	 * 打开对话框
 	 */
