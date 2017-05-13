@@ -120,10 +120,7 @@ export default class Register extends PureComponent {  // eslint-disable-line
         }
     }
     protocol() {
-        Actions.webview({
-            title: '用户协议',
-            uri: urls.pages.PROTOCOL,
-        })
+        Actions.userAgreement()
     }
 
 }

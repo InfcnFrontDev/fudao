@@ -20,16 +20,15 @@ export default class BaseInfo extends PureComponent {
 	}
 
 	componentDidMount() {
-		userStore.fetchLoginUser();
+		userStore.fetchLoginUserBase();
 	}
-
 	render() {
 		let {loginUser} = userStore;
 		_.values(rowsData).forEach((item) => {
 			item.forEach((rowData) => {
 				rowData.value = loginUser[rowData.property] || ''
 			})
-		})
+		});
 		return (
 			<Container>
 				<Header {...this.props}/>

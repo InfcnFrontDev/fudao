@@ -3,7 +3,7 @@ import {Actions, ActionConst} from "react-native-router-flux";
 import {observer} from "mobx-react/native";
 import {Container} from "native-base";
 import {View, Image, AsyncStorage} from "react-native";
-import CommitButton from "./components/CommitButton";
+import CommitBtn from "./components/commitBtn";
 import UserStore from "../../mobx/userStore";
 
 /**
@@ -18,8 +18,8 @@ export default class Start extends PureComponent {
 				<View style={styles.view}>
 					<Image source={require('./assets/logo.png')} style={styles.img}/>
 					<View style={styles.viewButton}>
-						<CommitButton border={true} block={false} title="登录" onPress={()=>Actions['login']()}/>
-						<CommitButton border={false} block={false} title="注册" onPress={()=>Actions['register']()}/>
+						<CommitBtn border={true} block={false} title="登录" onPress={()=>Actions['login']()}/>
+						<CommitBtn border={false} block={false} title="注册" onPress={()=>Actions['register']()}/>
 					</View>
 				</View>
 			</Container>
