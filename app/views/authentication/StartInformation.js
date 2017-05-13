@@ -11,8 +11,6 @@ import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePic
 import {Header, Container, Content} from "../../components/index";
 import CommitButton from "./components/CommitButton";
 import UserStore from "../../mobx/userStore";
-
-/*import {login} from "../../actions/user";*/
 import WomanChoose from "./WomanChoose";
 
 /**
@@ -190,8 +188,6 @@ export default class StartInformation extends PureComponent {
         )
     }
     commit() {
-       /* let {dispatch}=this.props;*/
-       /* let loginUser=this.props.loginUser;*/
         let {position, maxText, phone, password,sex, jieduan} = this.state;
         let crowd;
         if (sex == 2) {
@@ -215,71 +211,6 @@ export default class StartInformation extends PureComponent {
 
             }
         }
-
-        //获取地理位置
-
-        /*let userInformation = {};
-
-        if (womanType) {
-            userInformation.womanType = womanType;
-            userInformation.appid = loginUser.appid;
-            userInformation.sex = sex;
-            userInformation.birthdate = maxText;
-            userInformation.location = position
-            userInformation.tops = '';
-            userInformation.bmi = '';
-            userInformation.weight = '';
-            userInformation.title = '';
-            // 个人史
-            userInformation.personal_history = '';
-            // 家族史
-            userInformation.family_history = '';
-            // 婚育史
-            userInformation.obstetrical_history = '';
-            // 用药史
-            userInformation.medication_history = '';
-            // 饮食
-            userInformation.diet = '';
-            // 运动
-            userInformation.motion = '';
-            // 睡眠
-            userInformation.sleep = '';
-            // 吸烟
-            userInformation.smoke = '';
-            // 饮酒
-            userInformation.drink = '';
-            // 精神状况
-            userInformation.mental_state = '';
-        } else {
-            userInformation.appid = appid;
-            userInformation.sex = sex;
-            userInformation.birthdate = maxText;
-            userInformation.location = position
-            userInformation.tops = '';
-            userInformation.bmi = '';
-            userInformation.weight = '';
-            userInformation.title = '';
-            // 个人史
-            userInformation.personal_history = '';
-            // 家族史
-            userInformation.family_history = '';
-            // 婚育史
-            userInformation.obstetrical_history = '';
-            // 用药史
-            userInformation.medication_history = '';
-            // 饮食
-            userInformation.diet = '';
-            // 运动
-            userInformation.motion = '';
-            // 睡眠
-            userInformation.sleep = '';
-            // 吸烟
-            userInformation.smoke = '';
-            // 饮酒
-            userInformation.drink = '';
-            // 精神状况
-            userInformation.mental_state = '';
-        }*/
         request.getJson(urls.apis.USER_SETUSERBASEINFO, {
             phone:phone,
             sex: sex,
@@ -290,25 +221,7 @@ export default class StartInformation extends PureComponent {
             if (data.ok) {
                 UserStore.login(phone,password, () => {
                     UserStore.fetchLoginUser();
-                    // 跳到首页
                 });
-               /* let user = Object.assign({}, {
-                    phone:phone,
-                    sex: sex,
-                    womanType: womanType,
-                    birthday: maxText,
-                    regionId:position
-                });
-                // 保存用户状态
-                this.props.dispatch(login(user));
-                //初始化用户信息
-                this.props.dispatch(clearMyQuestion());
-                this.props.dispatch(clearMyEmotion());
-                this.props.dispatch(clearFriend());
-                this.props.dispatch(clearDynamic());
-                this.props.dispatch(clearPosition());*/
-                // 跳到首页
-
             }
         })
     }
