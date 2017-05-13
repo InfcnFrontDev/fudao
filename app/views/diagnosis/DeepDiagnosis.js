@@ -16,7 +16,7 @@ export default class DeepDiagnosis extends PureComponent {
                 <Header {...this.props}/>
                 <Content>
                     <WebView
-                        onMessage={(event)=>this.gotoDeep(event.nativeEvent.data)}
+                        onMessage={(event) => this.gotoDeep(event.nativeEvent.data)}
                         source={{uri:urls.pages.DEEP_DIAGNOSIS}}
                         style={{backgroundColor:'rgba(0,0,0,0)'}}
                     />
@@ -26,9 +26,10 @@ export default class DeepDiagnosis extends PureComponent {
     }
 
     gotoDeep(data){
-        Actions.pop()
-        // Actions.pop({refresh: {newnew: false}})
-        // alert(data);
+        if(data==2){
+            Actions.pop()
+        }
+
     }
 
 
