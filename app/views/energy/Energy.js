@@ -8,11 +8,16 @@ import {Container, Header, Content, WebView} from "../../components/index";
 export default class Energy extends PureComponent {
 
 	render() {
+		let city = "北京";
+		let weather = "晴";
+		let winp = "5级";
+		let air_scope = "50-100";
+		let uri = urls.pages.MY_ENERGY + "?city=" + city + "&weather=" + weather + "&winp=" + winp + "&air_scope=" + air_scope + "";
 		return (
 			<Container>
 				<Header {...this.props} />
 				<Content>
-					<WebView uri={urls.pages.MY_ENERGY}/>
+					<WebView uri={uri}/>
 				</Content>
 			</Container>
 		)
