@@ -34,6 +34,7 @@ export default class MedicalExamination extends PureComponent {
 					<ListView
 						dataSource={this.state.dataSource.cloneWithRowsAndSections(medicalExaminationGroup)}
 						renderRow={this._renderRow.bind(this)}
+						initialListSize={12}
 						pageSize={20}
 						renderSectionHeader={this._renderSectionHeader.bind(this)}
 						enableEmptySections
