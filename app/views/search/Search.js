@@ -50,22 +50,22 @@ export default class Search extends PureComponent {
 
 	render() {
 		let {symptomProblem, information, dailyMethod} = searchStore
-		let	isShowCategory = this.isEmptyObject(symptomProblem) && this.isEmptyObject(dailyMethod) && this.isEmptyObject(information)
+		let	isShowCategory = this.isEmptyObject(symptomProblem)&& this.isEmptyObject(information) && !dailyMethod.length > 0
 		return (
 			<Container>
 				<SearchHeader placeholder="搜索" onSearch={this.search.bind(this)} onChangeText ={(keyword) => this.onChangeText(keyword)}/>
 				<Content white>
 					<ScrollView>
                         {isShowCategory && <Category key="category"/>}
-                        {!this.isEmptyObject(symptomProblem) && <View>
+                        {this.isEmptyObject(symptomProblem) ? <View/>: <View>
                             <Separator title="症状和问题"/>
                             <SymptomProblemResult key="symptomProblem" data={symptomProblem}/>
                         </View>}
-                        {!this.isEmptyObject(dailyMethod) && <View>
+                        {dailyMethod.length > 0 ? <View>
                             <Separator title="保健方法"/>
                             <DailyMethodResult key="dailyMethod" data={dailyMethod}/>
-                        </View>}
-                        {!this.isEmptyObject(information) && <View>
+                        </View>: <View/>}
+                        {this.isEmptyObject(information) ? <View/>: <View>
                             <Separator title="咨询"/>
                             <InformationResult key="information" data={information}/>
                         </View>}
