@@ -1,5 +1,4 @@
 import React, {PureComponent} from "react";
-import {TouchableOpacity} from "react-native";
 import {View} from "native-base";
 import ArticleItem from "../../article/components/ArticleItem";
 

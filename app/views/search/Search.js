@@ -33,27 +33,21 @@ export default class Search extends PureComponent {
     search() {
         let keyword = searchStore.keyword
         if (!keyword) {
-            this.clearAll()
+            searchStore.symptomProblem = {}
+            searchStore.information = {}
+            searchStore.dailyMethod = {}
         } else {
-            this.searchAll()
+            searchStore.fetchAll()
         }
     }
 
-    clearAll() {
-        searchStore.symptomProblem = {}
-        searchStore.information = {}
-        searchStore.dailyMethod = {}
-    }
    isEmptyObject(obj) {
         for (var key in obj) {
             return false;
         }
         return true;
     }
-    searchAll() {
-        //查询所有类别
-        searchStore.fetchAll()
-    }
+
 	render() {
 		let {symptomProblem, information, dailyMethod} = searchStore
 		let	isShowCategory = this.isEmptyObject(symptomProblem) && this.isEmptyObject(dailyMethod) && this.isEmptyObject(information)
