@@ -15,8 +15,6 @@ class FriendStore {
             if (result.ok) {
                 this.MyFriendList = result.obj;
                 this.MyFriendList .forEach((f) => {
-                    alert(JSON.stringify(f));
-
                     this.friendNickMap[f.id] = new Date().getTime()//f.friendNick;
                 });
             } else {
