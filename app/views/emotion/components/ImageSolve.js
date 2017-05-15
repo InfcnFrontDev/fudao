@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Modal, View, Image, TouchableHighlight} from "react-native";
+import {Modal, View, Image, TouchableHighlight,ScrollView} from "react-native";
 import {Text} from "native-base";
 
 
@@ -14,7 +14,11 @@ class ImageSolve extends PureComponent {
             <View  style={styles.container}>
                 <View style={{flexDirection: 'column',alignItems: 'center',}}>
                     <Image source={{uri: urls.getImage(img)}} resizeMode='cover' style={styles.image}/>
-                    <Text style={styles.content}>        {content}</Text>
+                    <ScrollView>
+                        <View style={{height:170}}>
+                            <Text style={styles.content}>        {content}</Text>
+                        </View>
+                    </ScrollView>
                 </View>
             </View>
         )

@@ -50,6 +50,7 @@ class DetailsModal extends PureComponent {
      * 关闭对话框
      */
     hide() {
+
         if (this.props.pageKey === 'disease') {
             diseaseMethodStore.modalShow = false
         } else if (this.props.pageKey === 'expect') {

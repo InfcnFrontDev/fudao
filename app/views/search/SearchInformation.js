@@ -5,23 +5,19 @@ import InformationResult from "./components/InformationResult";
 import {observer} from "mobx-react/native";
 import searchStore from "../../mobx/searchStore";
 
-
-/**
- * 搜索 -> 资讯
- */
-
 @observer
 export default class SearchInformation extends PureComponent {
 
-    // 搜索
     search() {
-        searchStore.fetchInformation()
-        // const {dispatch} = this.props;
-        // if (keyword == '') {
-        // 	dispatch(clearInformation())
-        // } else {
-        // 	dispatch(searchInformation(keyword))
-        // }
+        let keyword = searchStore.keyword
+        if (!keyword) {
+            searchStore.symptomProblem = {}
+            searchStore.information = {}
+            searchStore.dailyMethod = {}
+        } else {
+            searchStore.fetchInformation()
+
+        }
     }
 
 	render() {

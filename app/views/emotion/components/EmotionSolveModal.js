@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {View, Image, TouchableHighlight} from "react-native";
+import {View, Image, TouchableHighlight,ScrollView} from "react-native";
 import {Text} from "native-base";
 import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
 import {Modal} from "../../../components/index";
@@ -32,9 +32,14 @@ export default class EmotionSolveModal extends PureComponent {
 							<Text style={{color:'#fff'}}>{emotion.title}</Text>
 						</View>
 						<View style={{width:theme.deviceWidth*0.9-95,paddingRight:10,paddingTop:30}}>
-							<Text style={{color:'#E3B335',marginBottom:10}}>{emotion.threeCharacterClassic}</Text>
-							<Text
-								style={{color:'#fff',fontSize:theme.DefaultFontSize-2}}>        {emotion.influence}</Text>
+							<Text style={{color:'#E3B335',marginBottom:10,fontSize: theme.DefaultFontSize -2}}>{emotion.threeCharacterClassic}</Text>
+							<ScrollView>
+								<View style={{height:100}}>
+									<Text
+										style={{color:'#fff',fontSize:theme.DefaultFontSize-2}}>        {emotion.influence}</Text>
+								</View>
+							</ScrollView>
+
 						</View>
 					</View>
 					<View style={styles.imgViewBox}>

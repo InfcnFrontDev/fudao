@@ -20,7 +20,6 @@ export default class DailyMethodResult extends PureComponent {
         })
     }
     onPress2(type,id) {
-
         if (type === 'disease') {
             diseaseMethodStore.questionId = id
             diseaseMethodStore.modalShow = true
@@ -31,8 +30,6 @@ export default class DailyMethodResult extends PureComponent {
             healthMethodStore.questionId = id
             healthMethodStore.modalShow = true
         }
-
-
     }
 
     render() {
