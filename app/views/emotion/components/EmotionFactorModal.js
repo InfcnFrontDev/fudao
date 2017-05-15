@@ -25,7 +25,6 @@ export default class EmotionFactorModal extends PureComponent {
 
 	render() {
 		let {visible, emotion} = this.state;
-		console.log(visible)
 		return (
 			<Modal ref={(e)=>this._modal = e} visible={visible}>
 				{emotion != null && <ScrollView>

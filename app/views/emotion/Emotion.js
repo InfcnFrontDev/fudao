@@ -9,7 +9,7 @@ import EmotionSolveModal from "./components/EmotionSolveModal";
 import {calm} from "./components/EmotionData";
 import {observer} from "mobx-react/native";
 import EmotionStore from "../../mobx/emotionStore";
-
+import weatherStore from "../../mobx/weatherStore";
 
 /**
  * 情绪
@@ -93,6 +93,7 @@ export default class Emotion extends PureComponent {
 	 */
 	async _onItemPress(item) {
 		// 更新我的情绪
+
 		let updateTime = new Date().getTime();
 		EmotionStore.updateMyEmotion(item);
 		EmotionStore.updateMyTime(updateTime);
@@ -109,7 +110,8 @@ export default class Emotion extends PureComponent {
 					...result
 				});
 			} else {
-				const result = await this._fetchEmotionFactor(item.title, '阴')
+				let weather=weatherStore.currentWeather.weather;
+				const result = await this._fetchEmotionFactor(item.title, weather)
 				this._factorModal.show({
 					title: item.title,
 					img: item.img,
