@@ -1,12 +1,14 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {View, Image, DeviceEventEmitter, ScrollView, Text} from "react-native";
+import {View, Image, Text} from "react-native";
+import {Button} from "native-base";
 import {Container, Content, Header,Modal} from "../../components/index";
 import MyDiseaseList from "./components/MyDiseaseList";
 import DiseaseMethodTabView from "./components/DiseaseMethodTabView";
 import diseaseMethodStore from "../../mobx/diseaseMethodStore";
 import QuestionText from "../components/QuestionText"
-import DetailModal from "./components/DetailsModal"
+import DetailModal from "./components/DetailModal"
+import BodyModal from "./components/BodyModal"
 import myDiseaseListStore from "../../mobx/myDiseaseListStore";
 import allDiseaseListStore from "../../mobx/allDiseaseListStore";
 
@@ -24,6 +26,7 @@ export default class DiseaseDetail extends PureComponent {
     onTransPress(item){
         myDiseaseListStore.selectedItemName = item.name
         myDiseaseListStore.selectedItemId = item.id
+        allDiseaseListStore.selectedItemName=item.name
         diseaseMethodStore.diseaseId = item.id
         diseaseMethodStore.fetchDiseaseMethod()
 	}
@@ -52,10 +55,14 @@ export default class DiseaseDetail extends PureComponent {
 						selectedItemId={selectedItemId}
 					/>
 					<DiseaseMethodTabView data={diseaseMethod} pageKey={'disease'}/>
+					<Button transparent style={styles.btnStyle} onPress={()=> allDiseaseListStore.modalShow =true}>
+						<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
+					</Button>
 				</Content>
                 <DetailModal visible={modalShow} pageKey={'disease'}>
                     <QuestionText data={questionId} from={'disease'}/>
                 </DetailModal>
+                <BodyModal visible={allDiseaseListStore.modalShow}/>
 			</Container>
 		)
 	}
@@ -69,5 +76,19 @@ const styles = {
 		marginTop: 10,
 		marginBottom: 10,
 		marginLeft: 12,
-	}
+	},
+    btnStyle:{
+        width: 65,
+        height: 65,
+        position: 'absolute',
+        right:0,
+        bottom: 100,
+        backgroundColor:'rgba(0,0,0,.0)',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    image:{
+        width:50,
+        height:50
+    }
 }

@@ -5,7 +5,7 @@ import {Container, Content, Header,Modal} from "../../components/index";
 import MyDiseaseList from "./components/MyDiseaseList";
 import DiseaseMethodTabView from "./components/DiseaseMethodTabView";
 import QuestionText from "../components/QuestionText"
-import DetailModal from "./components/DetailsModal"
+import DetailModal from "./components/DetailModal"
 import healthMethodStore from "../../mobx/healthMethodStore";
 
 /**
