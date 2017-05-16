@@ -44,6 +44,7 @@ import RemarkSet from "./views/user/RemarkSet";
 import BaseInfo from "./views/base-info/BaseInfo";
 import Emotion from "./views/emotion/Emotion";
 import Search from "./views/search/Search";
+import SearchUser from "./views/search/SearchUser";
 import SearchSymptomProblem from "./views/search/SearchSymptomProblem";
 import SearchDailyMethod from "./views/search/SearchDailyMethod";
 import SearchFriendsCircle from "./views/search/SearchFriendsCircle";
@@ -149,6 +150,7 @@ export default class AppRouter extends PureComponent {
 					<Scene title="搜索朋友圈" key="searchFriendsCircle" component={SearchFriendsCircle} hideNavBar/>
 					<Scene title="搜索资讯" key="searchInformation" component={SearchInformation} hideNavBar/>
 					<Scene title="搜索症状与问题" key="searchSymptomProblem" component={SearchSymptomProblem} hideNavBar/>
+					<Scene title="搜索症状与问题" key="searchUser" component={SearchUser} hideNavBar/>
 
 					{/*消息*/}
 					<Scene title="消息" key="message" component={Message} hideNavBar/>

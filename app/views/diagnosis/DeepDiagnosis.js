@@ -11,6 +11,7 @@ import {Container, Header, Content, Loading} from "../../components/index";
 export default class DeepDiagnosis extends PureComponent {
 
     render() {
+        alert("请到我的页去完善基本信息")
         return (
             <Container>
                 <Header {...this.props}/>
@@ -27,7 +28,7 @@ export default class DeepDiagnosis extends PureComponent {
 
     gotoDeep(data){
         if(data==2){
-            Actions.pop()
+            Actions.disease()
         }
 
     }
