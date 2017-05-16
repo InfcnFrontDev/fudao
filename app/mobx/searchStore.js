@@ -34,46 +34,56 @@ class SearchStore {
                 } else {
                     tools.showToast('请求出错！')
                 }
-            }).catch((error)=>{
-            console.log("Api call error")})
+            }).catch((error)=>{console.log("Api call error")})
 	}
     fetchSymptomProblem() {
-        request.getJson(urls.apis.SEARCH_SYMPTOMPROBLEM, {keyword:this.keyword,page: 1,pageSize: 3})
+        request.getJson(urls.apis.SEARCH_SYMPTOMPROBLEM, {keyword:this.keyword})
             .then((result) => {
-                if (result.ok && result.obj) {
-                    this.symptomProblem = result.obj
+                if (result.ok) {
+                    let data = result.obj
+                    if(Object.keys(data).length === 0) {
+                        tools.showToast('暂无相关内容！')
+                        return
+                    }
+                    this.symptomProblem = data
                 } else {
                     tools.showToast('请求出错！')
                 }
-            }).catch((error)=>{
-            console.log("Api call error")})
+            }).catch((error)=>{console.log("Api call error")})
     }
     fetchInformation() {
-        request.getJson(urls.apis.SEARCH_INFORMATION, {keyword:this.keyword,page: 1,pageSize: 3})
+        request.getJson(urls.apis.SEARCH_INFORMATION, {keyword:this.keyword})
             .then((result) => {
-                if (result.ok && result.obj) {
-                    this.information = result.obj
+                if (result.ok) {
+                    let data = result.obj
+                    if(Object.keys(data).length === 0) {
+                        tools.showToast('暂无相关内容！')
+                        return
+                    }
+                    this.information = data
                 } else {
                     tools.showToast('请求出错！')
                 }
-            }).catch((error)=>{
-            console.log("Api call error")})
+            }).catch((error)=>{console.log("Api call error")})
     }
     fetchDailyMethod() {
-        request.getJson(urls.apis.SEARCH_DAILYMETHOD, {keyword:this.keyword,page: 1,pageSize: 3})
+        request.getJson(urls.apis.SEARCH_DAILYMETHOD, {keyword:this.keyword})
             .then((result) => {
-                if (result.ok && result.obj) {
-                    this.dailyMethod = result.obj
+                if (result.ok) {
+                    let data = result.obj
+                    if(data.length === 0) {
+                        tools.showToast('暂无相关内容！')
+                        return
+                    }
+                    this.dailyMethod = data
                 } else {
                     tools.showToast('请求出错！')
                 }
-            }).catch((error)=>{
-            console.log("Api call error")})
+            }).catch((error)=>{console.log("Api call error")})
     }
 
     @computed
-	get isShowCategory() { return }
-	get liaoShenDataSource() {return }
+	get isShow() { return false}
 }
 
 const searchStore = new SearchStore()

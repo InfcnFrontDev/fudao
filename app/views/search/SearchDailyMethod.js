@@ -9,17 +9,21 @@ import expectMethodStore from "../../mobx/expectMethodStore";
 import healthMethodStore from "../../mobx/healthMethodStore";
 import QuestionText from "../components/QuestionText"
 import DetailModal from "../disease/components/DetailsModal"
-/**
- * 搜索 -> 保健方法
- */
 
 @observer
 export default class SearchDailyMethod extends PureComponent {
 
     search() {
-        searchStore.fetchDailyMethod()
-
+        let keyword = searchStore.keyword
+        if (!keyword) {
+            searchStore.symptomProblem = {}
+            searchStore.information = {}
+            searchStore.dailyMethod = {}
+        } else {
+            searchStore.fetchDailyMethod()
+        }
     }
+
 	render() {
         let {dailyMethod} = searchStore;
         return (

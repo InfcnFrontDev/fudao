@@ -87,9 +87,7 @@ export default class UserDetail extends PureComponent {
 							</ListItem>
 						</List>
 						<Separator/>
-						<Button danger block style={styles.button} onPress={this._deleteFriend.bind(this)}>
-							<Text>删除该好友</Text>
-						</Button>
+						{this.renderButtons()}
 					</View> : null}
 				</Content>
 			</Container>
@@ -97,13 +95,10 @@ export default class UserDetail extends PureComponent {
 	}
 
 	renderButtons() {
-		let {loginUser, friendNickMap} = this.props,
+		let {friendNickMap} = friendStore,
 			{user} = this.state;
-
-		if (loginUser.appid === user.appid) {// 自己
-
-			return null;
-		} else if (friendNickMap[user.appid]) {// 好友
+		alert(JSON.stringify(friendNickMap));
+		if (friendNickMap[user.id]) {// 好友
 			return (
 				<Button danger block style={styles.button} onPress={this._deleteFriend.bind(this)}>
 					<Text>删除该好友</Text>
@@ -146,13 +141,10 @@ export default class UserDetail extends PureComponent {
 
 	// 添加好友
 	_addFriend() {
-		let {loginUser, dispatch} = this.props;
+
 		let {user} = this.state;
 
-		if (!loginUser) {
-			toast.show('请登录后重试');
-			return;
-		}
+
 
 		// 跳转到添加好友申请页面
 		Actions.friendApply({

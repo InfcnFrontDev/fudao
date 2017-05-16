@@ -10,13 +10,13 @@ import {request, urls, tools, toast} from "../../utils/index";*/
 /**
  * 好友申请
  */
-class FriendApply extends PureComponent {
+export default class FriendApply extends PureComponent {
 
 	constructor(props) {
 		super(props);
-		let {friend, loginUser} = props;
+		let {friend} = props;
 		this.state = {
-			myIntro: '我叫' + loginUser.title,
+			//myIntro: '我叫' + loginUser.title,
 			friendRemark: friend.title
 		}
 	}
@@ -34,7 +34,7 @@ class FriendApply extends PureComponent {
 						<Text note>你需要发送验证申请，等对方通过</Text>
 						<Item underline success>
 							<Input onChangeText={(myIntro) => this.setState({myIntro})}
-								   value={this.state.myIntro}
+								   //value={this.state.myIntro}
 							/>
 						</Item>
 					</List>
@@ -95,4 +95,3 @@ FriendApply.propTypes = {
 const mapStateToProps = state => ({
 	loginUser: state.user.loginUser
 });
-export default connect(mapStateToProps)(FriendApply);

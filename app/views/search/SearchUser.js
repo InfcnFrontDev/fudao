@@ -8,7 +8,7 @@ import Header from "../../components/header/SearchHeader";
 /**
  * 搜索用户
  */
-class SearchUser extends PureComponent {
+export default class SearchUser extends PureComponent {
 
 	state = {
 		notExist: false,
@@ -36,19 +36,17 @@ class SearchUser extends PureComponent {
 
 	// 搜索
 	_onSearch(phone) {
-		const {dispatch} = this.props;
 
-		dispatch(showLoading());
 		request.getJson(urls.apis.USER_SEARCH, {phone})
 			.then(((result) => {
-				dispatch(hideLoading());
-				if (result.success) {
+
+				if (result.ok) {
 					if (result.obj) {
 						this.setState({
 							notExist: false
 						})
 						Actions.userDetail({
-							userId: result.obj.appid
+							userId: result.obj.id
 						})
 					} else {
 						this.setState({
@@ -71,4 +69,3 @@ const styles = {
 	}
 };
 const mapStateToProps = state => ({});
-export default connect(mapStateToProps)(SearchUser);
