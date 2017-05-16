@@ -1,9 +1,9 @@
 import React, {PureComponent} from "react";
-import {Alert} from "react-native";
+import {Alert,ToastAndroid} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, Separator, HeaderButton} from "../../components/index";
-import {Text, Button, ListItem, Item, Input} from "native-base";
+import {Text, Button, ListItem, Item, Input,Right} from "native-base";
 /*import {showLoading, hideLoading} from "../../actions/loading";
 import {request, urls, tools, toast} from "../../utils/index";*/
 
@@ -15,18 +15,27 @@ export default class FriendApply extends PureComponent {
 	constructor(props) {
 		super(props);
 		let {friend} = props;
+
 		this.state = {
-			//myIntro: '我叫' + loginUser.title,
-			friendRemark: friend.title
+			myIntro: '我叫'+friend.username ,
+			friendRemark: friend.username
 		}
 	}
 
 	render() {
 		let {friend}  = this.props;
+
 		return (
 			<Container>
+
 				<Header {...this.props} right={
-					<HeaderButton text="发送" onPress={this._addApplyFriend.bind(this)}/>
+					<Right>
+						<Button transparent onPress={()=>this._addApplyFriend()}>
+							<Text>
+								发送
+							</Text>
+						</Button>
+					</Right>
 				}/>
 
 				<Content gray>
@@ -34,7 +43,7 @@ export default class FriendApply extends PureComponent {
 						<Text note>你需要发送验证申请，等对方通过</Text>
 						<Item underline success>
 							<Input onChangeText={(myIntro) => this.setState({myIntro})}
-								   //value={this.state.myIntro}
+								   value={this.state.myIntro}
 							/>
 						</Item>
 					</List>
@@ -59,26 +68,24 @@ export default class FriendApply extends PureComponent {
 	}
 
 	_addApplyFriend() {
-		let {loginUser, friend, dispatch} = this.props;
+		let {friend} = this.props;
 		let {myIntro, friendRemark} = this.state;
 
 		// 申请加为好友
-		dispatch(showLoading());
+
 		request.getJson(urls.apis.FRIEND_APPLYADDFRIEND, {
-			activeAppid: loginUser.appid,
-			activeName: myIntro,
-			passiveAppid: friend.appid,
-			passiveName: friendRemark,
+			friendId:friend.id,
+			introduce: myIntro,
+			friendRemark: friendRemark,
 		}).then(((result) => {
-			dispatch(hideLoading());
-			if (result.success) {
-				toast.show('已发送申请');
+			if (result.ok) {
+				ToastAndroid.show('已发送申请', ToastAndroid.SHORT);
 				Actions.pop();
 			} else {
-				toast.show('发送申请失败，请重试');
+				ToastAndroid.show('发送申请失败，请重试',ToastAndroid.SHORT);
 			}
 		}).bind(this), (error) => {
-			dispatch(hideLoading());
+			//dispatch(hideLoading());
 			alert(JSON.stringify(error));
 		});
 
