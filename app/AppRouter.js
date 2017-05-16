@@ -52,6 +52,7 @@ import SearchInformation from "./views/search/SearchInformation";
 import Message from "./views/message/Message";
 import MsgDetail from "./views/message/MsgDetail";
 import Chat from "./views/message/Chat";
+import Feedback from "./views/feedback/Feedback";
 /**
  * 路由
  */
@@ -156,6 +157,10 @@ export default class AppRouter extends PureComponent {
 					<Scene title="消息" key="message" component={Message} hideNavBar/>
 					<Scene title="聊天消息" key="chat" component={Chat} hideNavBar/>
 					<Scene title="系统消息" key="msgDetail" component={MsgDetail} hideNavBar/>
+
+					{/*意见反馈*/}
+					<Scene title="意见反馈" key="feedback" component={Feedback} hideNavBar/>
+
 				</Scene>
 			</Router>
 		)

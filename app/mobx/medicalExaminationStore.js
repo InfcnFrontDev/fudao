@@ -8,8 +8,8 @@ class MedicalExaminationStore {
 	@observable medical = {}
 
 	@action
-	fetchMedicalExaminationList = async() => {
-		try {
+	fetchMedicalExaminationList (){
+
 			/*this.isFetching = true*/
 
 			request.getJson(urls.apis.MEDICALEXAMINATION_GETMEDICALINFORMATIONLIST)
@@ -19,11 +19,6 @@ class MedicalExaminationStore {
 					}
 					/*this.isFetching = false*/
 				});
-
-		} catch (error) {
-			this.errorMsg = error
-			this.isFetching = false
-		}
 	}
 	@action
 	updataMedicalExamination (name,value){
