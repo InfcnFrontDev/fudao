@@ -8,7 +8,7 @@ import diseaseMethodStore from "../../mobx/diseaseMethodStore";
 import expectMethodStore from "../../mobx/expectMethodStore";
 import healthMethodStore from "../../mobx/healthMethodStore";
 import QuestionText from "../components/QuestionText"
-import DetailModal from "../disease/components/DetailsModal"
+import DetailModal from "../disease/components/DetailModal"
 
 @observer
 export default class SearchDailyMethod extends PureComponent {

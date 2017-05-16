@@ -23,6 +23,7 @@ export default class Expect extends PureComponent {
     onItemPress(item){
         myExpectListStore.selectedItemName = item.name
         myExpectListStore.selectedItemId = item.id
+        allExpectListStore.selectedItemName = item.name
         Actions.expectDetail({title: item.name, data: item})
         expectMethodStore.expectId = item.id
     }
