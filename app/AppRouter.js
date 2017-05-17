@@ -108,7 +108,7 @@ export default class AppRouter extends PureComponent {
 					<Scene title="用户协议" key="userAgreement" component={UserAgreement} hideNavBar/>
 					<Scene title="基本信息" key="baseInfo" component={BaseInfo} hideNavBar/>
 					<Scene title="我的记录" key="record" component={Record} hideNavBar/>
-					<Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar initial/>
+					<Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
 					<Scene title="系统设置" key="settings" component={Settings} hideNavBar/>
 
 					{/*能量场*/}
@@ -143,7 +143,7 @@ export default class AppRouter extends PureComponent {
 					<Scene key="dynamicPicture" component={DynamicPicture} title="动态图片" hideNavBar/>
 
 					{/*情绪*/}
-					<Scene key="emotion" component={Emotion} title="情绪" hideNavBar/>
+					<Scene key="emotion" component={Emotion} title="情绪" hideNavBar />
 
 					{/*搜索*/}
 					<Scene title="搜索" key="search" component={Search} hideNavBar/>

@@ -18,6 +18,7 @@ export default class EmotionSolveModal extends PureComponent {
 		this.state = {
 			visible: false,
 			emotion: null,
+			stop:true
 		};
 	}
 
@@ -49,7 +50,9 @@ export default class EmotionSolveModal extends PureComponent {
 								<DefaultTabBar
 									activeTextColor={theme.navTabBarActiveTextColor}
 									underlineStyle={{backgroundColor: theme.navTabBarActiveTextColor}}/>
-							)}>
+							)}
+							onChangeTab={(obj) => {this._indexChange(obj)}}
+						>
 							{emotion.methods.map((item, index) => this.renderSolve(item, index))}
 						</ScrollableTabView>
 					</View>
@@ -57,7 +60,12 @@ export default class EmotionSolveModal extends PureComponent {
 			</Modal>
 		)
 	}
-
+	_indexChange(obj){
+		for(var i=0;i<3;i++){
+			if(this.refs["video"+i])
+				this.refs["video"+i].close();
+		}
+	}
 	renderSolve(item, index) {
 		if (item.type == 1) {
 			return (
@@ -69,9 +77,10 @@ export default class EmotionSolveModal extends PureComponent {
 				<TextSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}></TextSolve>
 			)
 		} else if (item.type == 3) {
+			var str = "video"+index;
 			return (
-				<VideoSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
-							video={item.img}></VideoSolve>
+				<VideoSolve key={index}  index={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
+							video={item.img} ref= {str}></VideoSolve>
 			)
 		}
 	}
