@@ -29,6 +29,12 @@ export default class MyList extends PureComponent {
 					route: 'record'
 				})}
 				{this.renderItem({
+					icon: 'ios-create-outline',
+					text: '意见反馈',
+					bordered: true,
+					route: 'feedback'
+				})}
+				{this.renderItem({
 					icon: 'ios-information-circle-outline',
 					text: '关于福道',
 					bordered: false,

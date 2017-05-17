@@ -234,6 +234,8 @@ const urls = {
         DIAGNOSIS_GETCOMMONDISEASELIST: apiPath + 'DiagnosisApi/getCommonDiseaseList',
         DIAGNOSIS_ADDMYDISEASES: apiPath + 'DiagnosisApi/addMyDiseases',
 
+        // 意见反馈 ---------------------------------------------------------
+        FEEDBACK_SUBMIT: apiPath + 'FeedbackApi/submit',
 
     },
     // 获取图片完整路径
