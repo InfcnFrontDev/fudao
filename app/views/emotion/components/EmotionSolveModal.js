@@ -25,7 +25,7 @@ export default class EmotionSolveModal extends PureComponent {
 	render() {
 		let {visible, emotion}=this.state;
 		return (
-			<Modal ref={(e)=>this._modal = e} visible={visible}>
+			<Modal ref={(e)=>this._modal = e} visible={visible} transparent>
 				{emotion && <View style={styles.container}>
 					<View style={styles.View}>
 						<View style={styles.emotionBox}>
@@ -109,7 +109,7 @@ const styles = {
 		width: theme.deviceWidth * 0.9,
 		height: 160,
 		flexDirection: 'row',
-		backgroundColor: '#67769D'
+		backgroundColor: 'rgba(255,255,255,0.3)'
 	},
 	imgViewBox: {
 		width: theme.deviceWidth * 0.9,
