@@ -39,9 +39,11 @@ class DynamicStore {
         } else if (options.refresh) {
             this.refresh = true;
             this.fetchData((res, all) => {
-                for (var i in res.obj.list) {
-                    if (res.obj.list[i].id == this.dynamicList[0].id) {
-                        break;
+                if(this.dynamicList.length>0){
+                    for (var i in res.obj.list) {
+                        if (res.obj.list[i].id == this.dynamicList[0].id) {
+                            break;
+                        }
                     }
                 }
                 if (i != 0) {
