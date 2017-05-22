@@ -19,7 +19,7 @@ export default class DynamicCommon extends Component {
                 <TouchableHighlight style={styles.dynamicDetail} underlayColor='#fafafa'
                                     onPress={this._skipToDetail.bind(this)}>
                     <View>
-                        <Text style={styles.dynamicName}>{info.user.nickname}</Text>
+                        <Text style={styles.dynamicName}>{info.user.nickname||"用户"+info.user.id.substr(0,4)}</Text>
                         <Text style={styles.dynamicContent}>{info.content}</Text>
                         <DynamicImage imagePath={info.path}/>
                     </View>
@@ -30,7 +30,7 @@ export default class DynamicCommon extends Component {
 
     _skipToDetail() {
         let {info} = this.props;
-        dynamicStore.dynamicDetail(info)
+        dynamicStore.dynamicDetail(info);
         Actions.dynamicDetail()
         // const {dispatch} = this.props;
         // dispatch(skipToDetail(this.props.info, this.props.newnew));

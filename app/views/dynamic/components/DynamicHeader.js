@@ -15,7 +15,7 @@ export default class DynamicHeader extends PureComponent {
                     <Image source={require('../../../assets/dy2.jpg')} style={styles.bgImg}/>
                 </View>
                 <View style={styles.person}>
-                    <Text style={styles.color9b}>{user.nickname||user.username}</Text>
+                    <Text style={styles.color9b}>{user.nickname||"用户"+user.id.substr(0,4)}</Text>
                 </View>
                 <View style={styles.touxiangView}>
                     <Image source={{uri: urls.getImage(user.photo, 700, 500)}} style={styles.touxiang}/>
