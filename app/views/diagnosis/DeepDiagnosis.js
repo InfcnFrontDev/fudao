@@ -30,7 +30,6 @@ export default class DeepDiagnosis extends PureComponent {
         if(data==2){
             Actions.disease()
         }
-
     }
 
 
