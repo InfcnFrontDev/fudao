@@ -69,17 +69,17 @@ export default class EmotionSolveModal extends PureComponent {
 	renderSolve(item, index) {
 		if (item.type == 1) {
 			return (
-				<ImageSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
+				<ImageSolve key={index} tabLabel={"第"+item.fenji+item.title} title={item.title} content={item.content}
 							img={item.img}></ImageSolve>
 			)
 		} else if (item.type == 2) {
 			return (
-				<TextSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}></TextSolve>
+				<TextSolve key={index} tabLabel={"第"+item.fenji+item.title} title={item.title} content={item.content}></TextSolve>
 			)
 		} else if (item.type == 3) {
 			var str = "video"+index;
 			return (
-				<VideoSolve key={index}  index={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
+				<VideoSolve key={index}  index={index} tabLabel={"第"+item.fenji+item.title} title={item.title} content={item.content}
 							video={item.img} ref= {str}></VideoSolve>
 			)
 		}
@@ -109,7 +109,7 @@ const styles = {
 		width: theme.deviceWidth * 0.9,
 		height: 160,
 		flexDirection: 'row',
-		backgroundColor: 'rgba(255,255,255,0.3)'
+		backgroundColor: '#69769C'
 	},
 	imgViewBox: {
 		width: theme.deviceWidth * 0.9,

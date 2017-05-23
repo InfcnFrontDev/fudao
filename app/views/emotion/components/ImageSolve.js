@@ -52,7 +52,7 @@ ImageSolve.propsTypes = {
     title: React.PropTypes.string,
     content: React.PropTypes.string,
     img: React.PropTypes.string,
-}
+};
 
 export default (ImageSolve);
 
