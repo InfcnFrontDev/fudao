@@ -56,11 +56,17 @@ export default class SideBar extends PureComponent {
 	}
 
 	render() {
+		let textStyle = Object.assign({}, styles.tabBarItemText, styles.tabBarItemTextSelected);
 		return (
 			<Container>
 				<Content>
 					<Grid>
 						<Col style={styles.sidebar}>
+							<Button transparent
+									style={styles.tabButton}
+									onPress={() => Actions.pop()}>
+								<Text style={textStyle}>返回主页>></Text>
+							</Button>
 							{this.renderAvater()}
 							{tabs.map((item, index) => this.renderTabBar(item, index))}
 						</Col>
@@ -78,7 +84,8 @@ export default class SideBar extends PureComponent {
 		let {loginUser} = this.props;
 		return (
 			<View style={styles.avatar}>
-				<TouchableOpacity onPress={() => Actions.pop()}>
+				<TouchableOpacity>
+
 					<Image
 						source={drawerCover}
 						style={styles.thumbnail}/>
@@ -165,6 +172,16 @@ const styles = {
 	tabBarItemTextSelected: {
 		color: theme.brandPrimary
 	},
+	tabButton:{
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: sideBarWidth,
+		flexDirection: 'column',
+		paddingLeft: 0,
+		paddingRight: 0,
+		backgroundColor:'rgba(0,0,0,.0)',
+		marginTop:20
+	}
 }
 
 
