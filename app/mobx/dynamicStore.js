@@ -1,11 +1,12 @@
 /**
  * Created by ljunb on 2017/2/22.
  */
-import {observable, runInAction, computed, action, reaction} from 'mobx'
-import Realm from 'realm';
+import {action, computed, observable, reaction, runInAction} from "mobx";
+import Realm from "realm";
 import {Actions} from "react-native-router-flux";
 import schema from "../realm/schema.js";
 import userStore from "./userStore";
+var callB = ()=>{}
 
 class DynamicStore {
     @observable dynamicList = [];
@@ -27,7 +28,7 @@ class DynamicStore {
     fetchDynamicList(options, callback) {
         this.nowShow = "";
         if (options.firstLoad) {
-
+            callB=callback;
             this.fetchData((res, all) => {
 
                 this.dynamicList = all.slice(0, 5);
@@ -39,7 +40,7 @@ class DynamicStore {
         } else if (options.refresh) {
             this.refresh = true;
             this.fetchData((res, all) => {
-                if(this.dynamicList.length>0){
+                if (this.dynamicList.length > 0) {
                     for (var i in res.obj.list) {
                         if (res.obj.list[i].id == this.dynamicList[0].id) {
                             break;
@@ -48,7 +49,7 @@ class DynamicStore {
                 }
                 if (i != 0) {
                     let newList = all.slice(0, i);
-                    let arr = Array.prototype.slice.call(this.dynamicList,0)
+                    let arr = Array.prototype.slice.call(this.dynamicList, 0)
                     this.dynamicList = newList.concat(arr);
                 }
                 this.allLoadedFun(res.obj.pageCount);
@@ -84,9 +85,9 @@ class DynamicStore {
                 this.insert(res.obj.list);
                 let allList = this.getAll();
                 cb(res, allList);
-            }else{
-                callback([],{
-                    allLoaded:true
+            } else {
+                callback([], {
+                    allLoaded: true
                 })
             }
         })
@@ -222,7 +223,7 @@ class DynamicStore {
             callback(this.dynamicList, {
                 allLoaded: this.allLoaded
             });
-        }else{
+        } else {
             this.info = data;
         }
 
@@ -260,7 +261,7 @@ class DynamicStore {
                 callback(this.dynamicList, {
                     allLoaded: this.allLoaded
                 });
-            }else{
+            } else {
                 this.info = realm_dynamic.filtered('id="' + id + '"')[0];
             }
             request.getJson(urls.apis.DYNAMIC_ADDDYNAMICCOMMENT, {
@@ -281,8 +282,9 @@ class DynamicStore {
         this.dynamicList.splice(i, 1);
         if (from == 'list') {
             callback(this.dynamicList)
-        }else{
-            Actions.pop({refresh: {newnew: true}})
+        } else {
+            callB(this.dynamicList)
+            Actions.pop()
         }
         this.realm.write(() => {
             var delDynamic = this.realm.objects('Dynamic').filtered('id="' + id + '"');

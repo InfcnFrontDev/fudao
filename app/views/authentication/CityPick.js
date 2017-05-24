@@ -6,7 +6,7 @@ import {observer} from "mobx-react/native";
 import {View, Alert, TextInput, TouchableOpacity} from "react-native";
 import {Content} from "../../components/index";
 import {Text} from "native-base";
-import cityData from "./assets/city.json";
+// import cityData from "./assets/city.json";
 import UserStore from "../../mobx/userStore";
 
 @observer
@@ -131,6 +131,7 @@ import UserStore from "../../mobx/userStore";
                 cell={this.Cell}
                 cellHeight={30}
                 sectionHeaderHeight={22.5}
+                initialListSize={300}
             />
         </Content>
 
