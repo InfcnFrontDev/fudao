@@ -131,6 +131,7 @@ import UserStore from "../../mobx/userStore";
                 cell={this.Cell}
                 cellHeight={30}
                 sectionHeaderHeight={22.5}
+                initialListSize={300}
             />
         </Content>
 

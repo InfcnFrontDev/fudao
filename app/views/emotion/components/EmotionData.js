@@ -68,12 +68,12 @@ const bad = [
 		img: require('../assets/zibei.png'),
 		// grade: '三级'
 	},
-	{
+	/*{
 		name: 'gudu',
 		title: '孤独',
 		img: require('../assets/gudu.png'),
 		// grade: '一级'
-	},
+	},*/
 	{
 		name: 'fangan',
 		title: '反感',

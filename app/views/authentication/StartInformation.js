@@ -25,7 +25,7 @@ export default class StartInformation extends PureComponent {
             presetDate: new Date(2016, 3, 5),
             maxText: '',
             presetText: '选择日期,指定2016/3/5',
-            showM:false,
+            showM:true,
             phone:this.props.phone,
             password:this.props.password,
             year1:'',
@@ -68,12 +68,12 @@ export default class StartInformation extends PureComponent {
         let position=UserStore.position.name;
         var mbM=(
             <TouchableOpacity onPress={this.man.bind(this)}>
-                <Thumbnail style={styles.touxiang} size={80} source={require('./assets/man.png')}/>
+                <Thumbnail style={styles.touxiang} size={80} source={require('./assets/m.png')}/>
             </TouchableOpacity>
         );
         var mbW=(
             <TouchableOpacity onPress={this.woman.bind(this)}>
-                <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
+                <Thumbnail style={styles.touxiang} size={80} source={require('./assets/w.png')}/>
                 <View style={{height:20,width:90}}>
                     <Text style={{textAlign:'center'}}>{this.state.jieduan}</Text>
                 </View>
@@ -85,8 +85,7 @@ export default class StartInformation extends PureComponent {
             mbW= (
                 <TouchableOpacity onPress={this.woman.bind(this,this.state.phone)} style={{justifyContent:'center',
                     alignItems:'center'}}>
-                   <View style={styles.mb}></View>
-                    <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/woman.png')}/>
+                    <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/w-h.png')}/>
                     <View style={{height:20,width:80}}>
                         <Text style={{textAlign:'center',color:"#fff"}}>{this.state.jieduan}</Text>
                     </View>
@@ -95,8 +94,7 @@ export default class StartInformation extends PureComponent {
         }else{
             mbM =(
                 <TouchableOpacity onPress={this.man.bind(this)}>
-                    <View style={styles.mb}></View>
-                    <Thumbnail style={styles.touxiang} size={80} source={require('./assets/man.png')}/>
+                    <Thumbnail style={styles.touxiang} size={80} source={require('./assets/m-h.png')}/>
                 </TouchableOpacity>
             )
         }
