@@ -2,6 +2,8 @@ import {observable, runInAction, computed, action, reaction, autorun} from "mobx
 
 class AllExpectListStore {
 	@observable allExpectList = []
+    @observable selectedItemName = ''
+    @observable modalShow = false
 	@observable allExpectListLiaoShen = []
 	@observable allExpectListLiaoXin = []
 	@observable errorMsg = ''

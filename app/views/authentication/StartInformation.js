@@ -25,8 +25,7 @@ export default class StartInformation extends PureComponent {
             presetDate: new Date(2016, 3, 5),
             maxText: '',
             presetText: '选择日期,指定2016/3/5',
-            showM:true,
-            position:'北京市',
+            showM:false,
             phone:this.props.phone,
             password:this.props.password,
             year1:'',
@@ -66,7 +65,7 @@ export default class StartInformation extends PureComponent {
 
 
     render() {
-
+        let position=UserStore.position.name;
         var mbM=(
             <TouchableOpacity onPress={this.man.bind(this)}>
                 <Thumbnail style={styles.touxiang} size={80} source={require('./assets/man.png')}/>
@@ -86,7 +85,7 @@ export default class StartInformation extends PureComponent {
             mbW= (
                 <TouchableOpacity onPress={this.woman.bind(this,this.state.phone)} style={{justifyContent:'center',
                     alignItems:'center'}}>
-                    <View style={styles.mb}></View>
+                   <View style={styles.mb}></View>
                     <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/woman.png')}/>
                     <View style={{height:20,width:80}}>
                         <Text style={{textAlign:'center',color:"#fff"}}>{this.state.jieduan}</Text>
@@ -118,9 +117,9 @@ export default class StartInformation extends PureComponent {
                                     <Text style={styles.text2}>{this.state.maxText}</Text>
                                 </TouchableOpacity>
                             </View>
-                            <TouchableOpacity style={styles.btn1}>
+                            <TouchableOpacity style={styles.btn1} onPress={()=>Actions.cityPick()}>
                                 <Icon  name='navigate' />
-                                <Text  style={styles.text3}>{this.state.position}</Text>
+                                <Text  style={styles.text3}>{position}</Text>
                             </TouchableOpacity>
                             <CommitButton  border={false} block={true} top={20} title="提交" onPress={this.tishi.bind(this)}/>
                         </View>
@@ -216,7 +215,7 @@ export default class StartInformation extends PureComponent {
             sex: sex,
             crowd: crowd,
             birthday: maxText,
-            regionId:110000
+            regionId:UserStore.position.city_id
         }).then((data)=> {
             if (data.ok) {
                 UserStore.login(phone,password, () => {

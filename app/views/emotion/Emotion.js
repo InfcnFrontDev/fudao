@@ -27,25 +27,20 @@ export default class Emotion extends PureComponent {
 	 * 一小时后情绪修改为平静， 进入页面时处理
 	 */
 	componentWillMount() {
-		// let {myEmotion,updateTime}=EmotionStore;
-		// if (myEmotion) {
-		// 	let currentTime = new Date().getTime();
-		// 	if (currentTime - updateTime > 1000 * 60 * 60) {
-		// 		EmotionStore.updateMyEmotion(calm[0]);
-		// 	}
-		// 	this.setState({
-		// 		myEmotion:myEmotion
-		// 	})
-		// }
+		let {myEmotion,updateTime}=EmotionStore;
+		 if (myEmotion) {
+		 	let currentTime = new Date().getTime();
+			if (currentTime - updateTime > 1000 * 60*60) {
+		 		EmotionStore.myEmotion=calm[0]
+		 	}
+		 }
 	}
-
 	render() {
-		let {isLoading} = this.state;
+		let {isLoading,textShow} = this.state;
 		let myEmotion = EmotionStore.myEmotion;
 		if (!myEmotion) {
 			myEmotion = calm[0]
 		}
-
 		// 默认情绪为‘平静’
 		return (
 			<Container>
@@ -95,14 +90,14 @@ export default class Emotion extends PureComponent {
 		// 更新我的情绪
 
 		let updateTime = new Date().getTime();
-		EmotionStore.updateMyEmotion(item);
-		EmotionStore.updateMyTime(updateTime);
+		EmotionStore.updateMyEmotion(item,updateTime)
 
 		// 解决总是先弹第一个框
 		this._factorModal.hide();
 
 		try {
 			if (item.grade) {
+				let textShow=this.state;
 				const result = await this._fetchEmotionIntervene(item.title, item.grade, [])
 				this._solveModal.show({
 					title: item.title,
@@ -172,7 +167,6 @@ export default class Emotion extends PureComponent {
 			isLoading: false
 		})
 	}
-
 }
 
 const styles = {
@@ -193,7 +187,7 @@ const styles = {
 		justifyContent: 'center'
 	},
 	titleDoc: {
-		color: '#fff',
+		color: '#eef0f1',
 		textAlign: 'center',
 	},
 	selectedEmotion: {

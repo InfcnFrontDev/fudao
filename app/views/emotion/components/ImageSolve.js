@@ -15,7 +15,7 @@ class ImageSolve extends PureComponent {
                 <View style={{flexDirection: 'column',alignItems: 'center',}}>
                     <Image source={{uri: urls.getImage(img)}} resizeMode='cover' style={styles.image}/>
                     <ScrollView>
-                        <View style={{height:170}}>
+                        <View style={{height:130}}>
                             <Text style={styles.content}>        {content}</Text>
                         </View>
                     </ScrollView>
@@ -52,7 +52,7 @@ ImageSolve.propsTypes = {
     title: React.PropTypes.string,
     content: React.PropTypes.string,
     img: React.PropTypes.string,
-}
+};
 
 export default (ImageSolve);
 

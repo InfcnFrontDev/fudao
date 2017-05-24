@@ -1,14 +1,16 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
 import {View, Image, Text} from "react-native";
+import {Button} from "native-base";
 import {Container, Content, Header,Modal} from "../../components/index";
 import MyDiseaseList from "./components/MyDiseaseList";
 import DiseaseMethodTabView from "./components/DiseaseMethodTabView";
 import QuestionText from "../components/QuestionText"
-import DetailModal from "./components/DetailsModal"
+import DetailModal from "./components/DetailModal"
 import expectMethodStore from "../../mobx/expectMethodStore";
 import myExpectListStore from "../../mobx/myExpectListStore";
 import allExpectListStore from "../../mobx/allExpectListStore";
+import ExpectModal from "./components/ExpectModal"
 
 /**
  * 我的问题
@@ -23,6 +25,7 @@ export default class ExpectDetail extends PureComponent {
     onTransPress(item){
         myExpectListStore.selectedItemName = item.name
         myExpectListStore.selectedItemId = item.id
+        allExpectListStore.selectedItemName = item.name
         expectMethodStore.expectId = item.id
         expectMethodStore.fetchExpectMethod()
 	}
@@ -52,10 +55,14 @@ export default class ExpectDetail extends PureComponent {
 						selectedItemId={selectedItemId}
 					/>
 					<DiseaseMethodTabView data={expectMethod} pageKey={'expect'}/>
+					<Button transparent style={styles.btnStyle} onPress={()=> allExpectListStore.modalShow =true}>
+						<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
+					</Button>
 				</Content>
                 <DetailModal visible={modalShow} pageKey={'expect'}>
                     <QuestionText data={questionId} from={'expect'}/>
                 </DetailModal>
+				<ExpectModal visible={allExpectListStore.modalShow}/>
 			</Container>
 		)
 	}
@@ -69,5 +76,19 @@ const styles = {
 		marginTop: 10,
 		marginBottom: 10,
 		marginLeft: 12,
-	}
+	},
+    btnStyle:{
+        width: 65,
+        height: 65,
+        position: 'absolute',
+        right:0,
+        bottom: 100,
+        backgroundColor:'rgba(0,0,0,.0)',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    image:{
+        width:50,
+        height:50
+    }
 }

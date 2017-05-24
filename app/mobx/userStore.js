@@ -11,6 +11,10 @@ class UserStore {
 	@persist @observable phone = ''
 	@persist @observable password = ''
 	@persist @observable token = ''
+	@observable position = {
+		name:'北京市',
+		city_id:'110000'
+	}
 	@persist('object') @observable loginUser = {}
 
 

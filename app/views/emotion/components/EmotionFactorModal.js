@@ -62,7 +62,7 @@ export default class EmotionFactorModal extends PureComponent {
 								renderRow={this.renderReasonRow.bind(this)}
 								enableEmptySections
 								initialListSize={5}
-								style={{height: 150}}
+								style={{height: 120}}
 							/>
 							<View style={{alignItems:'center'}}>
 								<View style={styles.input}>
@@ -76,7 +76,6 @@ export default class EmotionFactorModal extends PureComponent {
 										<Text>帮您缓解</Text>
 									</Button>
 								</View>
-
 							</View>
 						</View>
 					</View>
@@ -259,7 +258,7 @@ const styles = {
 	},
 	input: {
 		width: theme.deviceWidth * 0.8,
-		height: 50,
+		height: 40,
 		borderWidth: 1,
 		borderColor: '#666',
 		padding: 0,
