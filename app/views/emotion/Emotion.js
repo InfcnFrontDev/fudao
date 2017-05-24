@@ -98,7 +98,6 @@ export default class Emotion extends PureComponent {
 		try {
 			if (item.grade) {
 				let textShow=this.state;
-
 				const result = await this._fetchEmotionIntervene(item.title, item.grade, [])
 				this._solveModal.show({
 					title: item.title,

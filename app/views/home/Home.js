@@ -9,6 +9,7 @@ import Homedrag from "./HomeDrag.js";
 import userStore from "../../mobx/userStore";
 import DetailsModal from "./components/DetailsModal";
 import TimeModal from "./components/TimeModal";
+import YunDongModal from "./components/YunDongModal";
 
 import weatherStore from "../../mobx/weatherStore";
 
@@ -118,6 +119,7 @@ export default class Home extends PureComponent {
 					</Button>
 					<DetailsModal ref={(e)=>this._groupSelectModal = e}></DetailsModal>
 					<TimeModal ref={(e)=>this._TimeModal = e}></TimeModal>
+					<YunDongModal ref={(e)=>this._YunDongModal = e}></YunDongModal>
 
 				</Content>
 				<View style={{width: Dimensions.get('window').width, height: 107,}}>
@@ -133,8 +135,11 @@ export default class Home extends PureComponent {
 	}
 
 	openDetailsBox(data){
+		//alert(data.substring(0,4));
 		if(data=='修改时间'){
 			this._TimeModal.show(data);
+		}else if(data.substring(0,4)=='获取运动'){
+			this._YunDongModal.show(data.substring(4,data.length));
 		}else{
 			this._groupSelectModal.show(data);
 		}

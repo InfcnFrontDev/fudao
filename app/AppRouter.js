@@ -53,6 +53,7 @@ import Message from "./views/message/Message";
 import MsgDetail from "./views/message/MsgDetail";
 import Chat from "./views/message/Chat";
 import Feedback from "./views/feedback/Feedback";
+import CityPick from "./views/authentication/CityPick";
 /**
  * 路由
  */
@@ -76,7 +77,7 @@ export default class AppRouter extends PureComponent {
 					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
 					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
 					<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
-					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
+					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar initial/>
 					<Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
 					<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
 					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
@@ -161,6 +162,8 @@ export default class AppRouter extends PureComponent {
 					{/*意见反馈*/}
 					<Scene title="意见反馈" key="feedback" component={Feedback} hideNavBar/>
 
+					{/*城市列表*/}
+					<Scene title="" key="cityPick" component={CityPick} hideNavBar/>
 				</Scene>
 			</Router>
 		)
