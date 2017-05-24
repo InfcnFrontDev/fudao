@@ -58,10 +58,10 @@ export default class EmotionFactorModal extends PureComponent {
 								<Text>呢？</Text>
 							</View>
 							<ListView
+								renderScrollComponent={props => <ScrollView {...props} showsVerticalScrollIndicator={true}/>}
 								dataSource={this.state.dataSource.cloneWithRows(emotion.reasons.slice(0))}
 								renderRow={this.renderReasonRow.bind(this)}
 								enableEmptySections
-								initialListSize={5}
 								style={{height: 120}}
 							/>
 							<View style={{alignItems:'center'}}>
