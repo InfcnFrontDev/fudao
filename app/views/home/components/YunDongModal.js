@@ -29,7 +29,6 @@ class YunDongModal extends PureComponent {
     render() {
         let {visible,text} = this.state;
         let data=JSON.parse(text);
-
         return (
             <Modal
                 animationType={'fade'}
@@ -51,7 +50,7 @@ class YunDongModal extends PureComponent {
                         </View>
                     </View>
                     <View style={{flex: 1}}>
-                        <ImageText title={data.title} content={data.detail} image={data.img}/>
+                        <ImageText title={data.principle} content={data.detail} image={data.img}/>
                     </View>
 
                 </View>
