@@ -33,14 +33,18 @@ export default class StartInformation extends PureComponent {
             month1:'',
             month:'',
             day1:'',
-            sex:1,
+            sex:0,
             jieduan:'未孕阶段',
+            sexChose:1,
+            flag:false
         }
     }
 
     componentDidMount(){
         let date=new Date;
-        this.date(date,this.state.sex)
+        this.date(date,this.state.sexChose)
+
+
     }
     async showPicker(stateKey, options,text) {
         try {
@@ -79,9 +83,8 @@ export default class StartInformation extends PureComponent {
                 </View>
             </TouchableOpacity>
         );
-
+    if(this.state.flag){
         if(this.state.showM){
-
             mbW= (
                 <TouchableOpacity onPress={this.woman.bind(this,this.state.phone)} style={{justifyContent:'center',
                     alignItems:'center'}}>
@@ -98,6 +101,8 @@ export default class StartInformation extends PureComponent {
                 </TouchableOpacity>
             )
         }
+    }
+
 
         return (
             <Container style={styles.container}>
@@ -128,30 +133,36 @@ export default class StartInformation extends PureComponent {
         )
     };
     woman(phone){
-        let sex=2;
+        let sexChose=2;
         this.setState({
+            flag:true,
             showM:false,
-            sex:sex,
+            sexChose:sexChose,
+            sex:2
+
         })
         let data=new Date();
-        this.date(data,sex)
+        this.date(data,sexChose)
         this._modal.show();
     }
     man(){
-        let sex=1;
+        let sexChose=1;
         this.setState({
+            flag:true,
             showM:true,
-            sex:sex,
-            jieduan:''
+            sexChose:sexChose,
+            jieduan:'',
+            sex:1
+
         })
         let data=new Date();
-        this.date(data,sex)
+        this.date(data,sexChose)
     }
-    date(myDate,sex){
+    date(myDate,sexChose){
         let year,year1,month,month1,day,num,year0=(null);
-        if(sex==2){
+        if(sexChose==2){
             num=14
-        }else if(sex==1){
+        }else if(sexChose==1){
             num=16
         }
         year=myDate.getFullYear()-num;
@@ -185,42 +196,50 @@ export default class StartInformation extends PureComponent {
         )
     }
     commit() {
-        let {position, maxText, phone, password,sex, jieduan} = this.state;
-        let crowd;
-        if (sex == 2) {
-            switch(jieduan)
-            {
-                case '未孕阶段':
-                    crowd = "woman_un";
-                    break;
-                case '备孕阶段':
-                    crowd = "woman_pre";
-                    break;
-                case  '已育阶段':
-                    crowd = "woman_next";
-                    break;
-                case '待产阶段':
-                    crowd = "woman_ing";
-                    break;
-                default:
-                    crowd = "woman_ed";
-                    break;
 
+        let {sex,position, maxText, phone, password,sexChose, jieduan} = this.state;
+        let crowd;
+        if(sex==0){
+            tools.showToast("请点击选择您的性别")
+        }else{
+            if (sexChose == 2) {
+                switch(jieduan)
+                {
+                    case '未孕阶段':
+                        crowd = "woman_un";
+                        break;
+                    case '备孕阶段':
+                        crowd = "woman_pre";
+                        break;
+                    case  '已育阶段':
+                        crowd = "woman_next";
+                        break;
+                    case '待产阶段':
+                        crowd = "woman_ing";
+                        break;
+                    default:
+                        crowd = "woman_ed";
+                        break;
+
+                }
             }
+
         }
-        request.getJson(urls.apis.USER_SETUSERBASEINFO, {
-            phone:phone,
-            sex: sex,
-            crowd: crowd,
-            birthday: maxText,
-            regionId:UserStore.position.city_id
-        }).then((data)=> {
-            if (data.ok) {
-                UserStore.login(phone,password, () => {
-                    UserStore.fetchLoginUser();
-                });
-            }
-        })
+
+         request.getJson(urls.apis.USER_SETUSERBASEINFO, {
+         phone:phone,
+         sex: sex,
+         crowd: crowd,
+         birthday: maxText,
+         regionId:UserStore.position.city_id
+         }).then((data)=> {
+         if (data.ok) {
+         UserStore.login(phone,password, () => {
+         UserStore.fetchLoginUser();
+         });
+         }
+         })
+
     }
 }
 const styles = {

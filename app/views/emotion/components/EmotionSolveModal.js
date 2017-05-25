@@ -33,7 +33,7 @@ export default class EmotionSolveModal extends PureComponent {
 							<Text style={{color:'#fff'}}>{emotion.title}</Text>
 						</View>
 						<View style={{width:theme.deviceWidth*0.9-95,paddingRight:10,paddingTop:30}}>
-							<Text style={{color:'#E3B335',marginBottom:10,fontSize: theme.DefaultFontSize -2}}>{emotion.threeCharacterClassic}</Text>
+							<Text style={{fontWeight:"bold",marginBottom:10,fontSize: theme.DefaultFontSize -2,color:'#fff'}}>{emotion.threeCharacterClassic}</Text>
 							<ScrollView>
 								<View style={{height:100}}>
 									<Text
@@ -69,17 +69,17 @@ export default class EmotionSolveModal extends PureComponent {
 	renderSolve(item, index) {
 		if (item.type == 1) {
 			return (
-				<ImageSolve key={index} tabLabel={"第"+item.fenji+item.title} title={item.title} content={item.content}
+				<ImageSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
 							img={item.img}></ImageSolve>
 			)
 		} else if (item.type == 2) {
 			return (
-				<TextSolve key={index} tabLabel={"第"+item.fenji+item.title} title={item.title} content={item.content}></TextSolve>
+				<TextSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}></TextSolve>
 			)
 		} else if (item.type == 3) {
 			var str = "video"+index;
 			return (
-				<VideoSolve key={index}  index={index} tabLabel={"第"+item.fenji+item.title} title={item.title} content={item.content}
+				<VideoSolve key={index}  index={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
 							video={item.img} ref= {str}></VideoSolve>
 			)
 		}

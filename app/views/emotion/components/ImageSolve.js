@@ -13,8 +13,9 @@ class ImageSolve extends PureComponent {
         return (
             <View  style={styles.container}>
                 <View style={{flexDirection: 'column',alignItems: 'center',}}>
+                    <Text style={styles.title}>{title}</Text>
                     <Image source={{uri: urls.getImage(img)}} resizeMode='cover' style={styles.image}/>
-                    <ScrollView>
+                    <ScrollView >
                         <View style={{height:130}}>
                             <Text style={styles.content}>        {content}</Text>
                         </View>
@@ -31,7 +32,12 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
     },
-
+    title: {
+        textAlign: 'center',
+        fontSize: theme.DefaultFontSize + 4,
+        marginTop:20,
+        marginBottom:10
+    },
     content: {
         fontSize: theme.DefaultFontSize,
         marginLeft: 20,
@@ -40,7 +46,7 @@ const styles = {
         color:'#6A6A6A'
     },
     image: {
-        marginTop:30,
+        marginTop:10,
         width: 220,
         height: 160,
         justifyContent: 'center',
