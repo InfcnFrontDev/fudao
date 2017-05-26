@@ -22,12 +22,7 @@ export default class Evaluation extends PureComponent {
         return (
             <Container>
                 <Content>
-                    <Button transparent style={{position:'absolute',top:0,left:0,zIndex:999999}} onPress={()=>Actions.pop({popNum: 2})}>
-                        <View style={{flexDirection:'row'}}>
-                            <Icon name="arrow-back" style={{color:"#fff",fontSize:25,}}/>
-                            <Text style={{color:"#fff",fontSize:18,paddingLeft:30}}>返回首页</Text>
-                        </View>
-                    </Button>
+
                     <WebView
                         onMessage={(event) => this.gotoDeep(event.nativeEvent.data)}
                         source={{uri: urls.pages.HEALTH_APPRAISAL + "?token=" + userStore.token}}
@@ -41,7 +36,11 @@ export default class Evaluation extends PureComponent {
 
 
     gotoDeep(data) {
-        Actions.deepDiagnosis();
+        if(data=="gotoHome"){
+            Actions.pop({popNum: 2})
+        }else{
+            Actions.deepDiagnosis();
+        }
     }
 
 
