@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import {Modal, View, Image, ListView} from "react-native";
 import {Icon, Button, ListItem, Text} from "native-base";
-import ImageText from './ImageText'
 
 
 /**
@@ -16,7 +15,7 @@ class DetailsModal extends PureComponent {
         this.state = {
             ...props,
             visible: false,
-            text:'{"imgPath":"zixun/1.3.jpg","title":"点一支薰衣草窗前明月光的休息一下吧~","content":"以两手搓热环摸脐周，谁知盘中餐，少用力按摩腹部提拿腹肌，以一手会当临绝顶，一览众山小"}'
+            text:''
         }
     }
 
@@ -27,7 +26,25 @@ class DetailsModal extends PureComponent {
 
     render() {
         let {visible,text} = this.state;
-        let data=JSON.parse(text);
+        //let data=JSON.parse(text);
+        let m=(null);
+        //tools.showToast(text)
+        if(text.indexOf('#')>0){
+
+            m = (
+                <View>
+                    <Text>{text.split('#')[0]}</Text>
+                    <Text>{text.split('#')[1]}</Text>
+                </View>
+
+            );
+        }else{
+            m=(
+
+                <Text>{text}</Text>
+
+            )
+        }
 
         return (
             <Modal
@@ -48,8 +65,8 @@ class DetailsModal extends PureComponent {
                             </Button>
                         </View>
                     </View>
-                    <View style={{width:300,height:500}}>
-                        <ImageText title={data.name} content={data.detail} image={data.img}/>
+                    <View style={{width:300,height:500,padding:30}}>
+                        {m}
                     </View>
 
                 </View>
@@ -58,6 +75,7 @@ class DetailsModal extends PureComponent {
             </Modal>
         )
     }
+
 
     /**
      * 打开对话框
@@ -90,6 +108,16 @@ const styles = {
         flex: 1,
         backgroundColor: '#6c6c6c',
         opacity: 0.5,
+    },
+    text:{
+        textAlign: 'center',
+        fontSize: theme.DefaultFontSize + 2,
+        marginLeft: 30,
+        marginRight: 30,
+        lineHeight: 28,
+    },
+    textstyle:{
+        fontWeight:'bold'
     },
     content: {
         position: "absolute",

@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {Container, Header, Content, WebView} from "../../components/index";
+import {Container, Header, Content} from "../../components/index";
+import DetailsModal from "./components/DetailsModal";
+import {WebView} from "react-native";
 
 /**
  * 我的时间
@@ -11,9 +13,16 @@ export default class MyTime extends PureComponent {
 		let{loginUser}=this.props;
 		return (
 			<Content>
-				<WebView uri={urls.pages.MY_TIME+'?crowd=aged'}/>
+				<WebView source={{uri:urls.pages.MY_TIME+'?crowd=aged'}}
+						 onMessage={(event)=>this.openDetailsBox(event.nativeEvent.data)}
+				/>
+				<DetailsModal ref={(e)=>this._groupSelectModal = e}></DetailsModal>
 			</Content>
 		)
+	}
+	openDetailsBox(data){
+
+		this._groupSelectModal.show(data)
 	}
 }
 
