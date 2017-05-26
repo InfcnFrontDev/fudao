@@ -152,7 +152,7 @@ export default class AppRouter extends PureComponent {
 					<Scene title="搜索朋友圈" key="searchFriendsCircle" component={SearchFriendsCircle} hideNavBar/>
 					<Scene title="搜索资讯" key="searchInformation" component={SearchInformation} hideNavBar/>
 					<Scene title="搜索症状与问题" key="searchSymptomProblem" component={SearchSymptomProblem} hideNavBar/>
-					<Scene title="搜索症状与问题" key="searchUser" component={SearchUser} hideNavBar/>
+					<Scene title="搜索用户" key="searchUser" component={SearchUser} hideNavBar/>
 
 					{/*消息*/}
 					<Scene title="消息" key="message" component={Message} hideNavBar/>

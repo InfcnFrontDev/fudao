@@ -37,50 +37,36 @@ class QuestionText extends PureComponent {
     }
 
     render() {
-        const title = questionStore.questionName
-        if (JSON.stringify(this.state.daily) != '{}') {
-            var {daily} = this.state;
-            var content = daily.threeCharacterClassic + "\n" + daily.detail;
-            content = content.split('\\t').join('');
-            content = content.split('\\n').join('\n');
-            var e = new RegExp('\n', "g");
-            content = content.replace(e, '\n        ');
-
-            var nu = ( <View style={{height: 20,}}></View> );
+        let {daily} = this.state
+        if (JSON.stringify(daily) != '{}') {
             return (
                 <View style={styles.view}>
-                    <Text style={styles.titleText}>{title}</Text>
-                    {this.renderImg(daily.img)}
-                    <Text style={styles.contentText}>        {content}</Text>
+                    {this.renderImg(daily)}
                 </View>
             )
         }
         return null;
     }
 
-    renderImg(img) {
-        let ext = img.substring(img.indexOf(".") + 1);
+    renderImg(data) {
+        let ext = data.img.substring(data.img.indexOf(".") + 1);
         if (ext == 'mp3' || ext == 'wav' || ext == 'm4a') {
             return (
-                <Video source={{uri: urls.getImage(img)}} // 视频的URL地址，或者本地地址，都可以.
-                       rate={1.0}                   // 控制暂停/播放，0 代表暂停paused, 1代表播放normal.
-                       volume={1.0}                 // 声音的放大倍数，0 代表没有声音，就是静音muted, 1 代表正常音量 normal，更大的数字表示放大的倍数
-                       muted={false}                // true代表静音，默认为false.
-                       paused={false}               // true代表暂停，默认为false
-                       resizeMode="cover"           // 视频的自适应伸缩铺放行为，
-                       repeat={true}                // 是否重复播放
-                       playInBackground={false}     // 当app转到后台运行的时候，播放是否暂停
-                       playWhenInactive={false}     // [iOS] Video continues to play when control or notification center are shown. 仅适用于IOS
-                       onLoadStart={this.loadStart} // 当视频开始加载时的回调函数
-                       onLoad={this.setDuration}    // 当视频加载完毕时的回调函数
-                       onProgress={this.setTime}    //  进度控制，每250ms调用一次，以获取视频播放的进度
-                       onEnd={this.onEnd}           // 当视频播放完毕后的回调函数
-                       onError={this.videoError}    // 当视频不能加载，或出错后的回调函数
-                />
+                <VideoText title={data.name} content={data.detail} video={data.img} basis={data.threeCharacterClassic}/>
             )
         } else {
+            const title = questionStore.questionName
+            var content = data.threeCharacterClassic + "\n" + data.detail;
+            content = content.split('\\t').join('');
+            content = content.split('\\n').join('\n');
+            var e = new RegExp('\n', "g");
+            content = content.replace(e, '\n        ');
             return (
-                <Image source={{uri: urls.getImage(img)}} style={styles.image}/>
+                <View style={styles.view}>
+                    <Text style={styles.titleText}>{title}</Text>
+                    <Image source={{uri: urls.getImage(data.img)}} style={styles.image}/>
+                    <Text style={styles.contentText}>        {content}</Text>
+                </View>
             )
         }
     }
