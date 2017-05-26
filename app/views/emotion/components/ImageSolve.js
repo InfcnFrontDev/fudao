@@ -15,11 +15,11 @@ class ImageSolve extends PureComponent {
                 <View style={{flexDirection: 'column',alignItems: 'center',}}>
                     <Text style={styles.title}>{title}</Text>
                     <Image source={{uri: urls.getImage(img)}} resizeMode='cover' style={styles.image}/>
-                    <ScrollView >
-                        <View style={{height:130}}>
+                    <View style={{height:80,marginLeft:20,marginRight:20}}>
+                        <ScrollView showsHorizontalScrollIndicator ={true}>
                             <Text style={styles.content}>        {content}</Text>
-                        </View>
-                    </ScrollView>
+                        </ScrollView>
+                    </View>
                 </View>
             </View>
         )
@@ -40,17 +40,17 @@ const styles = {
     },
     content: {
         fontSize: theme.DefaultFontSize,
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop:20,
         color:'#6A6A6A'
     },
     image: {
-        marginTop:10,
         width: 220,
-        height: 160,
+        height: 150,
+        marginBottom:10,
         justifyContent: 'center',
     },
+    scrollV:{
+        height: 80,
+    }
 };
 
 ImageSolve.propsTypes = {

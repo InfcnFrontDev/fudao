@@ -75,9 +75,9 @@ export default class AppRouter extends PureComponent {
 					<Scene key="register" component={Register} title="注册" hideNavBar/>
 					<Scene key="login" component={Login} title="登录" hideNavBar/>
 					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
-					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
+					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar  />
 					<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
-					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
+					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar />
 					<Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
 					<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
 					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
@@ -168,6 +168,7 @@ export default class AppRouter extends PureComponent {
 			</Router>
 		)
 	}
+
 
 	reducerCreate(params) {
 		const defaultReducer = Reducer(params)

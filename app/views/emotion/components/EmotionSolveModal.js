@@ -34,13 +34,12 @@ export default class EmotionSolveModal extends PureComponent {
 						</View>
 						<View style={{width:theme.deviceWidth*0.9-95,paddingRight:10,paddingTop:30}}>
 							<Text style={{fontWeight:"bold",marginBottom:10,fontSize: theme.DefaultFontSize -2,color:'#fff'}}>{emotion.threeCharacterClassic}</Text>
+							<View style={{height:100}}>
 							<ScrollView>
-								<View style={{height:100}}>
 									<Text
 										style={{color:'#fff',fontSize:theme.DefaultFontSize-2}}>        {emotion.influence}</Text>
-								</View>
 							</ScrollView>
-
+							</View>
 						</View>
 					</View>
 					<View style={styles.imgViewBox}>

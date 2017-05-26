@@ -34,9 +34,10 @@ export default class StartInformation extends PureComponent {
             month:'',
             day1:'',
             sex:0,
-            jieduan:'未孕阶段',
+            jieduan:'',
             sexChose:1,
-            flag:false
+            flagM:false,
+            flagD:true
         }
     }
 
@@ -60,6 +61,7 @@ export default class StartInformation extends PureComponent {
                 var formatedStr = year + '-' + month +'-' + day ;
                 newState[stateKey + 'Text'] = formatedStr;
                 newState[stateKey + 'Date'] = date;
+                newState['flagD'] = false;
             }
             this.setState(newState);
         } catch ({code, message}) {
@@ -76,20 +78,20 @@ export default class StartInformation extends PureComponent {
             </TouchableOpacity>
         );
         var mbW=(
-            <TouchableOpacity onPress={this.woman.bind(this)}>
+            <TouchableOpacity onPress={this.woman.bind(this)} style={{alignItems:'center'}}>
                 <Thumbnail style={styles.touxiang} size={80} source={require('./assets/w.png')}/>
-                <View style={{height:20,width:90}}>
-                    <Text style={{textAlign:'center'}}>{this.state.jieduan}</Text>
+                <View style={{height:20,width:90,justifyContent:'center',
+                    alignItems:'center',marginTop:4}}>
+                    <Text style={{textAlign:'center',fontSize:theme.DefaultFontSize-2}}>{this.state.jieduan}</Text>
                 </View>
             </TouchableOpacity>
         );
-    if(this.state.flag){
+    if(this.state.flagM){
         if(this.state.showM){
             mbW= (
-                <TouchableOpacity onPress={this.woman.bind(this,this.state.phone)} style={{justifyContent:'center',
-                    alignItems:'center'}}>
+                <TouchableOpacity onPress={this.woman.bind(this,this.state.phone)}>
                     <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/w-h.png')}/>
-                    <View style={{height:20,width:80}}>
+                    <View style={{height:20,width:90}}>
                         <Text style={{textAlign:'center',color:"#fff"}}>{this.state.jieduan}</Text>
                     </View>
                 </TouchableOpacity>
@@ -134,48 +136,57 @@ export default class StartInformation extends PureComponent {
     };
     woman(phone){
         let sexChose=2;
+        let {flagD}=this.state;
+        if(flagD){
+            let data=new Date();
+            this.date(data,sexChose)
+        }
+
         this.setState({
-            flag:true,
+            flagM:true,
             showM:false,
             sexChose:sexChose,
-            sex:2
-
+            sex:2,
         })
-        let data=new Date();
-        this.date(data,sexChose)
+
         this._modal.show();
     }
     man(){
         let sexChose=1;
+        let {flagD}=this.state;
+        if(flagD){
+            let data=new Date();
+            this.date(data,sexChose)
+        }
         this.setState({
-            flag:true,
+            flagM:true,
             showM:true,
             sexChose:sexChose,
             jieduan:'',
-            sex:1
-
+            sex:1,
         })
-        let data=new Date();
-        this.date(data,sexChose)
+
     }
     date(myDate,sexChose){
-        let year,year1,month,month1,day,num,year0=(null);
-        if(sexChose==2){
-            num=14
-        }else if(sexChose==1){
-            num=16
+            let year,year1,month,month1,day,num,year0=(null);
+            if(sexChose==2){
+                num=14
+            }else if(sexChose==1){
+                num=16
+            }
+            year=myDate.getFullYear()-num;
+            month1=myDate.getMonth();
+            month=month1+1;
+            day=myDate.getDate();
+            this.setState({
+                maxText:year+"-"+month+"-"+day,
+                month1:month1,
+                day1:day,
+                year1:year,
+            })
+
         }
-        year=myDate.getFullYear()-num;
-        month1=myDate.getMonth();
-        month=month1+1;
-        day=myDate.getDate();
-        this.setState({
-            maxText:year+"-"+month+"-"+day,
-            month1:month1,
-            day1:day,
-            year1:year,
-        })
-    }
+
 
 
     _jieduan(text){
@@ -225,8 +236,7 @@ export default class StartInformation extends PureComponent {
             }
 
         }
-
-         request.getJson(urls.apis.USER_SETUSERBASEINFO, {
+        request.getJson(urls.apis.USER_SETUSERBASEINFO, {
          phone:phone,
          sex: sex,
          crowd: crowd,
@@ -261,7 +271,7 @@ const styles = {
     touxiang:{
         width:80,
         height:80,
-        borderRadius:40,
+        borderRadius:45,
     },
     row1:{
         marginTop:40,
