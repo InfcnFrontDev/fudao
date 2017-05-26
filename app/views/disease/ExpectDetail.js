@@ -10,11 +10,10 @@ import DetailModal from "./components/DetailModal"
 import expectMethodStore from "../../mobx/expectMethodStore";
 import myExpectListStore from "../../mobx/myExpectListStore";
 import allExpectListStore from "../../mobx/allExpectListStore";
+import questionStore from "../../mobx/questionStore";
 import ExpectModal from "./components/ExpectModal"
 
-/**
- * 我的问题
- */
+
 @observer
 export default class ExpectDetail extends PureComponent {
 
@@ -39,9 +38,10 @@ export default class ExpectDetail extends PureComponent {
 
 	render() {
         let {myExpectList,selectedItemId,selectedItemName} = myExpectListStore;
-        const {expectMethod,modalShow,questionId} = expectMethodStore;
-        // alert(questionId)
-		return (
+        const {expectMethod} = expectMethodStore;
+        const {modalShow,questionId} = questionStore;
+
+        return (
 			<Container>
                 <Header title = {selectedItemName || this.props.title}/>
 				<Content delay>
@@ -59,7 +59,7 @@ export default class ExpectDetail extends PureComponent {
 						<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
 					</Button>
 				</Content>
-                <DetailModal visible={modalShow} pageKey={'expect'}>
+                <DetailModal visible={modalShow}>
                     <QuestionText data={questionId} from={'expect'}/>
                 </DetailModal>
 				<ExpectModal visible={allExpectListStore.modalShow}/>

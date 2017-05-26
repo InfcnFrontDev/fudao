@@ -35,7 +35,7 @@ export default class Category extends PureComponent {
 						{
 							icon: 'aperture',
 							text: '圈子',
-							category: 'searchSymptomProblem',
+							category: 'searchFriendsCircle',
 						}
 					]
 				}

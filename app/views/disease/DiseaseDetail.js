@@ -5,17 +5,14 @@ import {Button} from "native-base";
 import {Container, Content, Header,Modal} from "../../components/index";
 import MyDiseaseList from "./components/MyDiseaseList";
 import DiseaseMethodTabView from "./components/DiseaseMethodTabView";
-import diseaseMethodStore from "../../mobx/diseaseMethodStore";
 import QuestionText from "../components/QuestionText"
 import DetailModal from "./components/DetailModal"
 import BodyModal from "./components/BodyModal"
-import myDiseaseListStore from "../../mobx/myDiseaseListStore";
 import allDiseaseListStore from "../../mobx/allDiseaseListStore";
+import myDiseaseListStore from "../../mobx/myDiseaseListStore";
+import diseaseMethodStore from "../../mobx/diseaseMethodStore";
+import questionStore from "../../mobx/questionStore";
 
-
-/**
- * 我的问题
- */
 @observer
 export default class DiseaseDetail extends PureComponent {
 
@@ -40,7 +37,8 @@ export default class DiseaseDetail extends PureComponent {
 
 	render() {
         let {myDiseaseList,selectedItemId,selectedItemName} = myDiseaseListStore;
-        const {diseaseMethod,modalShow,questionId} = diseaseMethodStore;
+        const {diseaseMethod} = diseaseMethodStore;
+        const {modalShow,questionId} = questionStore;
 		return (
 			<Container>
 				<Header title = {selectedItemName || this.props.title}/>
@@ -59,7 +57,7 @@ export default class DiseaseDetail extends PureComponent {
 						<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
 					</Button>
 				</Content>
-                <DetailModal visible={modalShow} pageKey={'disease'}>
+                <DetailModal visible={modalShow}>
                     <QuestionText data={questionId} from={'disease'}/>
                 </DetailModal>
                 <BodyModal visible={allDiseaseListStore.modalShow}/>
