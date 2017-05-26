@@ -12,6 +12,7 @@ const Dynamic = {
         content: 'string',// 动态内容
         path: {type: 'string', default: ''},
         user:{type:'User'},
+        time: 'string',
         createTime: 'int',// 发表时间,
         type: 'int',
         praises: {type: 'list', objectType: 'DynamicPraise'},
@@ -51,7 +52,6 @@ const DynamicComment = {
         id: {type: 'string', optional: true},
         user: {type: 'User', optional: true},
         content: 'string',
-        createTime: 'int',// 发表时间,
         atUser:{type: 'User', optional: true},
     }
 };
@@ -68,7 +68,7 @@ const MyQuestion = {
 
 module.exports = {
     schema: [Dynamic, DynamicPraise, DynamicComment, User],
-    schemaVersion: 26,
+    schemaVersion: 30,
     migration: () => {
     }
 };
