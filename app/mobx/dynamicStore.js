@@ -240,8 +240,7 @@ class DynamicStore {
                     id: userStore.loginUser.id,
                     nickname: userStore.loginUser.nickname
                 },
-                content: event.nativeEvent.text,
-                createTime: Date.parse(new Date()),
+                content: event.nativeEvent.text
             };
             this.realm.write(() => {
                 this.realm.create('Dynamic', {
