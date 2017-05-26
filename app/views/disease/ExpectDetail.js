@@ -11,7 +11,7 @@ import expectMethodStore from "../../mobx/expectMethodStore";
 import myExpectListStore from "../../mobx/myExpectListStore";
 import allExpectListStore from "../../mobx/allExpectListStore";
 import questionStore from "../../mobx/questionStore";
-import ExpectModal from "./components/ExpectModal"
+import BodyModal from "./components/BodyModal"
 
 
 @observer
@@ -55,14 +55,14 @@ export default class ExpectDetail extends PureComponent {
 						selectedItemId={selectedItemId}
 					/>
 					<DiseaseMethodTabView data={expectMethod} pageKey={'expect'}/>
-					<Button transparent style={styles.btnStyle} onPress={()=> allExpectListStore.modalShow =true}>
+					<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jModalShow=true}>
 						<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
 					</Button>
 				</Content>
                 <DetailModal visible={modalShow}>
                     <QuestionText data={questionId} from={'expect'}/>
                 </DetailModal>
-				<ExpectModal visible={allExpectListStore.modalShow}/>
+                <BodyModal visible={questionStore.jModalShow} pageKey={'expect'}/>
 			</Container>
 		)
 	}

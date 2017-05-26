@@ -3,6 +3,8 @@ import {Modal, View, ScrollView,WebView,Text} from "react-native";
 import {Button} from "native-base";
 import {Container, Content} from "../../../components/index";
 import allDiseaseListStore from "../../../mobx/allDiseaseListStore";
+import allExpectListStore from "../../../mobx/allExpectListStore";
+import questionStore from "../../../mobx/questionStore";
 
 
 
@@ -19,8 +21,8 @@ export default class BodyModal extends PureComponent {
     }
 
     render() {
-        let {visible} = this.props;
-        let id = encodeURI(allDiseaseListStore.selectedItemName)
+        let {visible,pageKey} = this.props;
+        let id = pageKey === 'disease' ? encodeURI(allDiseaseListStore.selectedItemName) :encodeURI(allExpectListStore.selectedItemName)
         return (
             <Modal
                 animationType={'fade'}
@@ -42,10 +44,10 @@ export default class BodyModal extends PureComponent {
                                 </Text>
                             </View>
                             <View style={styles.buttonView}>
-                                <Button block onPress={() => allDiseaseListStore.modalShow = false} style={{marginRight:20,backgroundColor: '#ccc'}}>
+                                <Button block onPress={() => questionStore.jModalShow= false} style={{marginRight:20,backgroundColor: '#ccc'}}>
                                     <Text>知道了</Text>
                                 </Button>
-                                <Button block onPress={() => allDiseaseListStore.modalShow = false}>
+                                <Button block onPress={() => questionStore.jModalShow = false}>
                                     <Text>教我自疗</Text>
                                 </Button>
                             </View>

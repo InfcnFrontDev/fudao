@@ -14,32 +14,18 @@ export default class MedicalExamination extends PureComponent {
 			sectionHeaderHasChanged: (section1, section2) => section1 !== section2,
 		}),
 		rowsAndSections: {},
-		Svalue:''
 	}
 
 	componentDidMount() {
 		let value='';
 		this.fetchMedicalExaminationList(value)
 	}
-	isEmptyObject(e) {
-		var t;
-		for (t in e)
-			return !1;
-		return !0
-	}
 	fetchMedicalExaminationList(value) {
 		request.getJson(urls.apis.MEDICALEXAMINATION_GETMEDICALINFORMATIONLIST,{keyword:value})
 				.then((result) => {
-				if (result.ok) {
-					if(this.isEmptyObject(result.obj)){
-						this.fetchMedicalExaminationList('')
-					}else{
 						this.setState({
 							rowsAndSections: result.obj
 						})
-					}
-
-				}
 			});
 	}
 
@@ -51,7 +37,7 @@ export default class MedicalExamination extends PureComponent {
 				<Header {...this.props}/>
 				<Content delay white>
 					<Item rounded style={styles.inputGroup}>
-						<TouchableOpacity onPress={this.search.bind(this)}>
+						<TouchableOpacity>
 							<Icon name="search" style={styles.inputIcon} />
 						</TouchableOpacity>
 						<Input
@@ -74,14 +60,7 @@ export default class MedicalExamination extends PureComponent {
 		)
 	}
 	_onChangeText(text) {
-		this.setState({
-			Svalue:text
-		})
-	}
-
-	search(){
-		let {Svalue}=this.state;
-		this.fetchMedicalExaminationList(Svalue)
+		this.fetchMedicalExaminationList(text)
 	}
 	_renderRow(rowData, sectionId, rowId) {
 		let {rowsAndSections} = this.state;
@@ -274,7 +253,7 @@ const styles = {
 	backCol: {width: 35, justifyContent: 'center'},
 	inputCol: {height: 30,justifyContent: 'center'},
 	backButton: {marginLeft: -10},
-	inputGroup: {height: 40, backgroundColor: '#ffffff',width:250,justifyContent:'center',alignItems:'center'},
+	inputGroup: {height: 40, backgroundColor: '#ffffff',justifyContent:'center',alignItems:'center',marginLeft:50,marginRight:50,marginTop:5,marginBottom:5},
 	inputIcon: {color: '#666666'},
 	inputText: {color: '#666666', marginBottom: 2},
 };

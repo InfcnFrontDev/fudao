@@ -17,14 +17,14 @@ class VideoSolve extends PureComponent {
     }
 
     render() {
-        let {title,content,video,index} = this.props;
+        let {title,content,video} = this.props;
         return (
             <View style={styles.View}>
                         <Text style={styles.title}>{title}</Text>
                         <View style={styles.btn}>
                             <TouchableOpacity onPress={this._btn.bind(this)}>
                                 <View style={{width: 80, height: 80,justifyContent:'center',alignItems:'center'}}>
-                                    <Image source={this.state.cc} style={{width: 80, height: 80,resizeMode:'contain'}}></Image>
+                                    <Image source={this.state.cc} style={{width: 80, height: 80,resizeMode:'contain'}}/>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -123,7 +123,7 @@ VideoSolve.propsTypes = {
     title: React.PropTypes.string,
     content: React.PropTypes.string,
     video: React.PropTypes.string,
-}
+};
 export default (VideoSolve);
 
 

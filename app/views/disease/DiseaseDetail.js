@@ -53,14 +53,14 @@ export default class DiseaseDetail extends PureComponent {
 						selectedItemId={selectedItemId}
 					/>
 					<DiseaseMethodTabView data={diseaseMethod} pageKey={'disease'}/>
-					<Button transparent style={styles.btnStyle} onPress={()=> allDiseaseListStore.modalShow =true}>
+					<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jModalShow =true}>
 						<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
 					</Button>
 				</Content>
                 <DetailModal visible={modalShow}>
                     <QuestionText data={questionId} from={'disease'}/>
                 </DetailModal>
-                <BodyModal visible={allDiseaseListStore.modalShow}/>
+                <BodyModal visible={questionStore.jModalShow} pageKey={'disease'}/>
 			</Container>
 		)
 	}
