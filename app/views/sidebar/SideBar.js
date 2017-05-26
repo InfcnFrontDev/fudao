@@ -12,9 +12,10 @@ import LifeCycle from "./LifeCycle";
 import MyPosition from "./MyPosition";
 import MyTime from "./MyTime";
 import OfflineService from "./OfflineService";
+import userStore from "../../mobx/userStore";
 
 
-const drawerCover = require('../../assets/my-photos/photo.jpg');
+//const drawerCover = require('../../assets/my-photos/photo.jpg');
 
 const tabs = [
 	{
@@ -41,12 +42,12 @@ const tabs = [
 		selectedIcon: require('../../assets/sidebar/shulan_12.png'),
 		component: MyPosition
 	},
-	{
+	/*{
 		text: '线下服务',
 		icon: require('../../assets/sidebar/shulan-2_16.png'),
 		selectedIcon: require('../../assets/sidebar/shulan_16.png'),
 		component: OfflineService
-	}
+	}*/
 ]
 
 export default class SideBar extends PureComponent {
@@ -57,6 +58,8 @@ export default class SideBar extends PureComponent {
 
 	render() {
 		let textStyle = Object.assign({}, styles.tabBarItemText, styles.tabBarItemTextSelected);
+		let {loginUser} = userStore;
+		let drawerCover = {uri: urls.getImage(userStore.loginUser.photo, 300, 300)};
 		return (
 			<Container>
 				<Content>
@@ -65,7 +68,7 @@ export default class SideBar extends PureComponent {
 							<Button transparent
 									style={styles.tabButton}
 									onPress={() => Actions.pop()}>
-								<Text style={textStyle}>返回主页>></Text>
+								<Text style={textStyle}>{'<<返回主页'}</Text>
 							</Button>
 							{this.renderAvater()}
 							{tabs.map((item, index) => this.renderTabBar(item, index))}
@@ -87,7 +90,7 @@ export default class SideBar extends PureComponent {
 				<TouchableOpacity>
 
 					<Image
-						source={drawerCover}
+						source={{uri: urls.getImage(userStore.loginUser.photo, 300, 300)}}
 						style={styles.thumbnail}/>
 				</TouchableOpacity>
 			</View>
