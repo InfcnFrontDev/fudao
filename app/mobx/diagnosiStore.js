@@ -51,6 +51,7 @@ class DiagnosisStore {
             ids
         });
         this.diagnosisDisease = [];
+        this.diagnosisDiseaseOrderBy = {};
     }
 
     @computed

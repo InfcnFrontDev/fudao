@@ -6,7 +6,7 @@ import {observer} from "mobx-react/native";
 import {View, Alert, TextInput, TouchableOpacity} from "react-native";
 import {Content} from "../../components/index";
 import {Text} from "native-base";
-// import cityData from "./assets/city.json";
+import cityData from "./assets/city.json";
 import UserStore from "../../mobx/userStore";
 
 @observer
@@ -14,37 +14,6 @@ import UserStore from "../../mobx/userStore";
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            data: {
-                A: ['some','entries','are here'],
-                B: ['some','entries','are here'],
-                C: ['some','entries','are here'],
-                D: ['some','entries','are here'],
-                E: ['some','entries','are here'],
-                F: ['some','entries','are here'],
-                G: ['some','entries','are here'],
-                H: ['some','entries','are here'],
-                I: ['some','entries','are here'],
-                J: ['some','entries','are here'],
-                K: ['some','entries','are here'],
-                L: ['some','entries','are here'],
-                M: ['some','entries','are here'],
-                N: ['some','entries','are here'],
-                O: ['some','entries','are here'],
-                P: ['some','entries','are here'],
-                Q: ['some','entries','are here'],
-                R: ['some','entries','are here'],
-                S: ['some','entries','are here'],
-                T: ['some','entries','are here'],
-                U: ['some','entries','are here'],
-                V: ['some','entries','are here'],
-                W: ['some','entries','are here'],
-                X: ['some','entries','are here'],
-                Y: ['some','entries','are here'],
-                Z: ['some','entries','are here'],
-            }
-        };
     }
     componentWillMount(){
         let array={};
@@ -70,7 +39,6 @@ import UserStore from "../../mobx/userStore";
         array["X"]=[];
         array["Y"]=[];
         array["Z"]=[];
-
         cityData.allcity.map((item,index)=>{
            if(item.pinyin.slice(0,1)=="a"){
               array["A"].push(item)
@@ -126,12 +94,17 @@ import UserStore from "../../mobx/userStore";
     render() {
         return (
         <Content padder>
+            <View style={styles.title}>
+                <Text style={{fontSize:theme.DefaultFontSize+2,fontWeight:'bold'}}>当前城市：</Text>
+                <Text  style={{fontSize:theme.DefaultFontSize,fontWeight:'bold'}}>{UserStore.position.name}</Text>
+            </View>
             <AlphabetListView
                 data={this.state.data}
                 cell={this.Cell}
                 cellHeight={30}
                 sectionHeaderHeight={22.5}
-                initialListSize={300}
+                initialListSize={500}
+                pageSize={100}
             />
         </Content>
 
@@ -152,6 +125,12 @@ import UserStore from "../../mobx/userStore";
     }
 }
 const styles = {
+    title:{
+      height:30,
+        flexDirection:'row',
+        alignItems:'center',
+
+    },
     textStyle : {
         textAlign:'center',
         color:'#fff',

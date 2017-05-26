@@ -81,16 +81,16 @@ export default class Dynamic extends PureComponent {
     _renderRowView(info, sectionID, rowID) {
         let {loginUser} = userStore;
 
-        var m = '刚刚';
-        if (info.createTime) {
-            m = moment(info.createTime).fromNow();
-        }
+        // var m = '刚刚';
+        // if (info.createTime) {
+        //     m = moment(info.createTime).fromNow();
+        // }
         return (
             <View style={styles.dynamic}>
                 <DynamicCommon info={info} newnew={this.props.newnew}/>
                 <View style={styles.showContain}>
                     <View style={styles.timeAndDelete}>
-                        <Text style={styles.time}>{m}</Text>
+                        <Text style={styles.time}>{info.time}</Text>
                         {info.user && info.user.id == loginUser.id ? (
                             <TouchableOpacity onPress={this._delete.bind(this, info.id)}>
                                 <Text style={styles.delete}>删除</Text>

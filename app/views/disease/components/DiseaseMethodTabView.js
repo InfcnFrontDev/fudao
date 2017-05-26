@@ -10,19 +10,7 @@ import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
  */
 export default class DiseaseMethodTabView extends PureComponent {
 
-	static propsTypes = {
-		data: React.PropTypes.array,
-		onItemAdd: React.PropTypes.func,
-		onItemPress: React.PropTypes.func,
-	}
-	static defaultProps = {
-		data: {},
-		onItemAdd: () => console.log('onItemAdd'),
-		onItemPress: () => console.log('onItemPress'),
-	}
-
 	render() {
-        // const {diseaseMethod} = diseaseMethodStore;
         let {data,pageKey} = this.props
 		return (
 			<ScrollableTabView

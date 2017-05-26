@@ -29,10 +29,6 @@ export default class DynamicDetail extends PureComponent {
     render() {
         let {loginUser} = userStore;
         let {info} = dynamicStore;
-        var m = '刚刚';
-        if (info.createTime) {
-            m = moment(info.createTime).fromNow();
-        }
         return (
             <Container>
                 <Header  {...this.props} title="详情" left={
@@ -47,7 +43,7 @@ export default class DynamicDetail extends PureComponent {
                         <DynamicCommon info={info} newnew={this.props.newnew}/>
                         <View style={styles.showContain}>
                             <View style={styles.timeAndDelete}>
-                                <Text style={styles.time}>{m}</Text>
+                                <Text style={styles.time}>{info.time}</Text>
                                 {info.user && info.user.id == loginUser.id ? (
                                     <TouchableOpacity onPress={this._delete.bind(this, info.id)}>
                                         <Text style={styles.delete}>删除</Text>

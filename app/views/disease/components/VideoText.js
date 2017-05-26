@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import {Text} from "native-base";
 import {View, Image, TouchableOpacity, TouchableHighlight, Dimensions, Modal} from "react-native";
+import {theme, urls, toast} from "../../utils/index";
 import Video from "react-native-video";
 /**
  * 播放器
@@ -35,7 +36,7 @@ class VideoText extends PureComponent {
 									<Text  style={styles.basis}>        {basis}</Text>
 								</View>
 							<Video
-								source={{uri: urls.getImage(video)}} // 视频的URL地址，或者本地地址，都可以.
+								source={{uri: urls.getImage('/high_quality_population/' + video)}} // 视频的URL地址，或者本地地址，都可以.
 								rate={1.0}                   // 控制暂停/播放，0 代表暂停paused, 1代表播放normal.
 								volume={1.0}                 // 声音的放大倍数，0 代表没有声音，就是静音muted, 1 代表正常音量 normal，更大的数字表示放大的倍数
 								muted={false}                // true代表静音，默认为false.
