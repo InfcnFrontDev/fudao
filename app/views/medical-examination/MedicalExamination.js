@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {ScrollView, DatePickerAndrofield, ListView,View,TouchableOpacity} from "react-native";
-import {ListItem,Button, Body, Right,Input,Item, Text, Icon} from "native-base";
+import {ListItem, Body, Right,Input,Item, Text, Icon} from "native-base";
 import {Container, Content, Separator, Header, Loading} from "../../components/index";
 
 /**
