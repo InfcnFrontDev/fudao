@@ -29,7 +29,7 @@ export default class EmotionSolveModal extends PureComponent {
 				{emotion && <View style={styles.container}>
 					<View style={styles.View}>
 						<View style={styles.emotionBox}>
-							<Image source={emotion.img} style={{width:60,height:60}}></Image>
+							<Image source={emotion.img} style={{width:60,height:60}}/>
 							<Text style={{color:'#fff'}}>{emotion.title}</Text>
 						</View>
 						<View style={{width:theme.deviceWidth*0.9-95,paddingRight:10,paddingTop:30}}>
@@ -69,17 +69,17 @@ export default class EmotionSolveModal extends PureComponent {
 		if (item.type == 1) {
 			return (
 				<ImageSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
-							img={item.img}></ImageSolve>
+							img={item.img}/>
 			)
 		} else if (item.type == 2) {
 			return (
-				<TextSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}></TextSolve>
+				<TextSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}/>
 			)
 		} else if (item.type == 3) {
 			var str = "video"+index;
 			return (
 				<VideoSolve key={index}  index={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
-							video={item.img} ref= {str}></VideoSolve>
+							video={item.img} ref= {str}/>
 			)
 		}
 	}

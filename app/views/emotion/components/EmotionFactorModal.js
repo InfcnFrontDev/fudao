@@ -67,7 +67,7 @@ export default class EmotionFactorModal extends PureComponent {
 							<View style={{alignItems:'center'}}>
 								<View style={styles.input}>
 									<TextInput underlineColorAndroid="transparent" placeholder="请输入您的原因"
-											   onChangeText={(value)=>{this.selfReason=value}}></TextInput>
+											   onChangeText={(value)=>{this.selfReason=value}}/>
 								</View>
 							</View>
 							<View style={{alignItems:'center',justifyContent:'center'}}>
@@ -86,7 +86,6 @@ export default class EmotionFactorModal extends PureComponent {
 
 
 	renderMacroscopic(item, index) {
-
 		return (
 			<View key={index} style={styles.hongGuanBox}>
 				<Image source={{uri:urls.getImage(item.img)}} style={styles.hongGuanImg}/>
