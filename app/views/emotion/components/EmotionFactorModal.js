@@ -86,10 +86,12 @@ export default class EmotionFactorModal extends PureComponent {
 
 
 	renderMacroscopic(item, index) {
+
 		return (
 			<View key={index} style={styles.hongGuanBox}>
 				<Image source={{uri:urls.getImage(item.img)}} style={styles.hongGuanImg}/>
 				<Text style={styles.itemText}>{item.name}</Text>
+
 			</View>
 		)
 	}
@@ -197,17 +199,17 @@ const styles = {
 	},
 	box: {
 		marginLeft: 10,
-		marginTop: 38,
+		marginTop: 42,
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'space-around',
 	},
 	itemText: {
-		fontSize: theme.DefaultFontSize - 2,
-
+		fontSize: theme.DefaultFontSize - 6,
+		textAlign:'center'
 	},
 	hongGuanBox: {
-		justifyContent: 'center',
-		alignItems: 'center'
+		width:50,
+		alignItems: 'center',
 	},
 	hongGuanImg: {
 		width: 40,

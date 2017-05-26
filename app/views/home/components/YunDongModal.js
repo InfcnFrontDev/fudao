@@ -50,7 +50,7 @@ class YunDongModal extends PureComponent {
                         </View>
                     </View>
                     <View style={{flex: 1}}>
-                        <ImageText title={data.principle} content={data.detail} image={data.img}/>
+                        <ImageText title={data.name} content={data.detail} image={data.img}/>
                     </View>
 
                 </View>

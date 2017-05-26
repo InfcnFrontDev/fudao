@@ -84,7 +84,7 @@ export default class MedicalExamination extends PureComponent {
 		// 当前编辑项
 		this.curentItem = item;
 		this.curentGroup = group;
-
+tools.showToast(JSON.stringify(item))
 		if (item.items)
 			if (item.items[0] == "阴性") {
 				item.limit = 'yinx_yangx';
@@ -100,10 +100,11 @@ export default class MedicalExamination extends PureComponent {
 				title: item.name,
 				input: {
 					hint: item.name,
-					prefill: "",
-					allowEmptyInput: false,
+					prefill: item.value,
+					allowEmptyInput: true,
 					keyboardType: 'numeric',
 					maxLength: 10,
+					minLength: 0,
 					callback: (id, text) => this._yanzheng(id, item.id, item.inputType)
 				}
 			});
@@ -113,9 +114,10 @@ export default class MedicalExamination extends PureComponent {
 				input: {
 					hint: item.name,
 					prefill: "",
-					allowEmptyInput: false,
+					allowEmptyInput: true,
 					keyboardType: 'default',
 					maxLength: 10,
+					minLength: 0,
 					callback: (id, text) => this._yanzheng(id, item.id, item.inputType)
 				}
 			});
@@ -135,12 +137,24 @@ export default class MedicalExamination extends PureComponent {
 				selectedIndex: selectedIndex,
 				itemsCallbackSingleChoice: (id, text) => this._singleChoice(id, item.id, item.limit)
 			})
+		}else if (item.inputType == "4") {
+			tools.showDialog({
+				title: item.name,
+				input: {
+					hint: item.name,
+					prefill: item.value,
+					allowEmptyInput: true,
+					keyboardType: 'default',
+					maxLength: 10,
+					callback: (id, text) => this._yanzheng(id, item.id, item.inputType)
+				}
+			});
 		}
 	}
 
 	_yanzheng(id, Id, inputType) {
 		if (inputType == '1') {
-			if (this.reg("^[0-9]*$", id)) {
+			if (this.reg("^[0-9]+([.]{1}[0-9]+){0,1}$", id)||id=='') {
 				this.updataMedicalExamination(Id, id);
 			} else {
 				tools.showToast("请输入数字")
@@ -149,10 +163,10 @@ export default class MedicalExamination extends PureComponent {
 			this.updataMedicalExamination(Id, id)
 		} else if (inputType == '4') {
 			this.reg("^[0-9]*\/[0-9]*$", id)
-			if (this.reg("^[0-9]*\/[0-9]*$", id)) {
+			if (this.reg("^[0-9]*\/[0-9]*$", id)||id=='') {
 				this.updataMedicalExamination(Id, id)
 			} else {
-				tools.showToast("请输入,高压/低压")
+				tools.showToast("请输入数字/数字")
 			}
 		}
 
