@@ -6,7 +6,7 @@ import {observer} from "mobx-react/native";
 import {View, Alert, TextInput, TouchableOpacity} from "react-native";
 import {Content} from "../../components/index";
 import {Text} from "native-base";
-// import cityData from "./assets/city.json";
+import cityData from "./assets/city.json";
 import UserStore from "../../mobx/userStore";
 
 @observer

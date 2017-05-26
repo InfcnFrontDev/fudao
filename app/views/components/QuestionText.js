@@ -3,10 +3,10 @@ import {View, Image, Dimensions, ScrollView} from "react-native";
 import {connect} from "react-redux";
 import {Text} from "native-base";
 import Video from "react-native-video";
+import VideoText from "../components/VideoText";
+import questionStore from "../../mobx/questionStore";
 
-/**
- * 问题，期望展示组件
- */
+
 class QuestionText extends PureComponent {
     constructor(props) {
         super(props);
@@ -17,28 +17,27 @@ class QuestionText extends PureComponent {
 
     componentWillMount() {
         let id = this.props.data;
-        if(this.props.from === 'disease'){
+        if (this.props.from === 'disease') {
             var url = urls.apis.DISEASE_GETDISEASEDAILYMETHODDETAIL;
-        }else if(this.props.from === 'expect'){
+        } else if (this.props.from === 'expect') {
             var url = urls.apis.EXPECT_GETEXPECTDAILYMETHODDETAIL;
-        }else {
+        } else {
             var url = urls.apis.HEALTH_GETHEALTHDAILYMETHODDETAIL;
         }
-        if(id){
-            request.getJson(url, {
-                id,
-            }).then((res) => {
-                this.setState({
-                    daily: res.obj[0],
-
+        if (id) {
+            request.getJson(url, {id})
+                .then((res) => {
+                    this.setState({
+                        daily: res.obj[0],
+                    })
                 })
-            }).catch((error)=>{
-                console.log("Api call error");
+                .catch((error) => {console.log("Api call error");
             });
         }
     }
 
     render() {
+        const title = questionStore.questionName
         if (JSON.stringify(this.state.daily) != '{}') {
             var {daily} = this.state;
             var content = daily.threeCharacterClassic + "\n" + daily.detail;
@@ -49,12 +48,11 @@ class QuestionText extends PureComponent {
 
             var nu = ( <View style={{height: 20,}}></View> );
             return (
-                <ScrollView style={styles.scrollView}>
-                    <View style={styles.view}>
-                        {this.renderImg(daily.img)}
-                        <Text style={styles.contentText}>        {content}</Text>
-                    </View>
-                </ScrollView>
+                <View style={styles.view}>
+                    <Text style={styles.titleText}>{title}</Text>
+                    {this.renderImg(daily.img)}
+                    <Text style={styles.contentText}>        {content}</Text>
+                </View>
             )
         }
         return null;
@@ -94,7 +92,9 @@ const styles = {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        //  alignItems:'center',
+    },
+    titleText: {
+        textAlign: 'center'
     },
     contentText: {
         fontSize: theme.DefaultFontSize,
@@ -106,16 +106,8 @@ const styles = {
         margin: 20,
         width: theme.deviceWidth * 0.78,
         height: 200,
-    },
-    scrollView: {
-        marginBottom: 10,
     }
 };
-
-/*QuestionText.propsTypes = {
- data: React.PropTypes.string,
-
- }*/
 
 export default QuestionText
 

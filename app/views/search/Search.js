@@ -10,9 +10,7 @@ import InformationResult from "./components/InformationResult";
 import {observer} from "mobx-react/native";
 import searchStore from "../../mobx/searchStore";
 
-import diseaseMethodStore from "../../mobx/diseaseMethodStore";
-import expectMethodStore from "../../mobx/expectMethodStore";
-import healthMethodStore from "../../mobx/healthMethodStore";
+import questionStore from "../../mobx/questionStore";
 import QuestionText from "../components/QuestionText"
 import DetailModal from "../disease/components/DetailModal"
 /**
@@ -50,7 +48,8 @@ export default class Search extends PureComponent {
 
 	render() {
 		let {symptomProblem, information, dailyMethod} = searchStore
-		let	isShowCategory = this.isEmptyObject(symptomProblem)&& this.isEmptyObject(information) && !dailyMethod.length > 0
+        const {modalShow,questionId,questionType} = questionStore;
+        let	isShowCategory = this.isEmptyObject(symptomProblem)&& this.isEmptyObject(information) && !dailyMethod.length > 0
 		return (
 			<Container>
 				<SearchHeader placeholder="搜索" onSearch={this.search.bind(this)} onChangeText ={(keyword) => this.onChangeText(keyword)}/>
@@ -69,15 +68,8 @@ export default class Search extends PureComponent {
                             <Separator title="咨询"/>
                             <InformationResult key="information" data={information}/>
                         </View>}
-
-                        <DetailModal visible={diseaseMethodStore.modalShow} pageKey={'disease'}>
-                            <QuestionText data={diseaseMethodStore.questionId} from={'disease'}/>
-                        </DetailModal>
-                        <DetailModal visible={expectMethodStore.modalShow} pageKey={'expect'}>
-                            <QuestionText data={expectMethodStore.questionId} from={'expect'}/>
-                        </DetailModal>
-                        <DetailModal visible={healthMethodStore.modalShow} pageKey={'health'}>
-                            <QuestionText data={healthMethodStore.questionId} from={'health'}/>
+                        <DetailModal visible={modalShow}>
+                            <QuestionText data={questionId} from={questionType}/>
                         </DetailModal>
 					</ScrollView>
 				</Content>

@@ -4,11 +4,8 @@ import {Icon, Button, ListItem, Text} from "native-base";
 import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
 import expectMethodStore from "../../../mobx/expectMethodStore";
 import healthMethodStore from "../../../mobx/healthMethodStore";
+import questionStore from "../../../mobx/questionStore";
 
-
-/**
- * 我的能量场 > 资料填写
- */
 export default class DetailModal extends PureComponent {
 
     constructor(props) {
@@ -46,22 +43,16 @@ export default class DetailModal extends PureComponent {
         )
     }
 
-    /**
-     * 关闭对话框
-     */
     hide() {
-
-        if (this.props.pageKey === 'disease') {
-            diseaseMethodStore.modalShow = false
-        } else if (this.props.pageKey === 'expect') {
-            expectMethodStore.modalShow = false
-        } else {
-            healthMethodStore.modalShow = false
-        }
-
+        questionStore.modalShow = false
+        // if (this.props.pageKey === 'disease') {
+        //     diseaseMethodStore.modalShow = false
+        // } else if (this.props.pageKey === 'expect') {
+        //     expectMethodStore.modalShow = false
+        // } else {
+        //     healthMethodStore.modalShow = false
+        // }
     }
-
-
 }
 
 
@@ -102,6 +93,9 @@ const styles = {
         paddingLeft: 0,
         paddingRight: 0,
     },
+    child: {
+        marginBottom: 20,
+    }
 };
 
 

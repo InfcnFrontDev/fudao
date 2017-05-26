@@ -6,15 +6,9 @@ import {Actions} from "react-native-router-flux";
 import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
 import expectMethodStore from "../../../mobx/expectMethodStore";
 import healthMethodStore from "../../../mobx/healthMethodStore";
+import questionStore from "../../../mobx/questionStore";
 
 export default class DiseaseMethodTab extends PureComponent {
-
-    static propsTypes = {
-        data: React.PropTypes.object,
-    }
-    static defaultProps = {
-        data: {},
-    }
 
     onMethod0Press(idOrName, arr) {
         Actions.menuKinds({
@@ -23,24 +17,24 @@ export default class DiseaseMethodTab extends PureComponent {
         })
     }
 
-    onMethod1Press(id) {
-        if (this.props.pageKey === 'disease') {
-            diseaseMethodStore.questionId = id
-            diseaseMethodStore.modalShow = true
-        } else if (this.props.pageKey === 'expect') {
-            expectMethodStore.questionId = id
-            expectMethodStore.modalShow = true
-        } else {
-            healthMethodStore.questionId = id
-            healthMethodStore.modalShow = true
-        }
-
-
+    onMethod1Press(id,name) {
+        questionStore.questionId = id
+        questionStore.questionName = name
+        questionStore.modalShow = true
+        // if (this.props.pageKey === 'disease') {
+        //     diseaseMethodStore.questionId = id
+        //     diseaseMethodStore.modalShow = true
+        // } else if (this.props.pageKey === 'expect') {
+        //     expectMethodStore.questionId = id
+        //     expectMethodStore.modalShow = true
+        // } else {
+        //     healthMethodStore.questionId = id
+        //     healthMethodStore.modalShow = true
+        // }
     }
 
     render() {
         let {data} = this.props;
-        // alert(JSON.stringify(data))
         return (
             <ScrollView>
                 {data.type == '饮食' ? this.renderPrinciple0(data) : this.renderPrinciple1(data)}
@@ -68,6 +62,7 @@ export default class DiseaseMethodTab extends PureComponent {
         }
 
     }
+
     clearNullArr(arr){
         for(let i=0,len = arr.length;i<len;i++){
             if(!arr[i]||arr[i]==''||arr[i] === undefined || arr[i] === null){
@@ -77,8 +72,8 @@ export default class DiseaseMethodTab extends PureComponent {
             }
         }
         return arr;
-
     }
+
     renderMethod0(methods) {
         let self = this
         return (
@@ -119,7 +114,7 @@ export default class DiseaseMethodTab extends PureComponent {
                     methods.map((method, index) => (
                     <View style={styles.method} key={index}>
                         <Text style={styles.text}>{ ' - ' + method.timePeriod + ' : '}</Text>
-                        <TouchableOpacity onPress={() => this.onMethod1Press(method.id)}>
+                        <TouchableOpacity onPress={() => this.onMethod1Press(method.id,method.name)}>
                             <Text style={styles.textLink}>{ method.name}</Text>
                         </TouchableOpacity>
                     </View>)) : <View/>
