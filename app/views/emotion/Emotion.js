@@ -93,7 +93,7 @@ export default class Emotion extends PureComponent {
 		EmotionStore.updateMyEmotion(item,updateTime);
 
 		// 解决总是先弹第一个框
-		/*this._factorModal.hide();*/
+		this._factorModal.hide();
 
 		try {
 			if (item.grade) {
