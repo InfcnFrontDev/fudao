@@ -7,10 +7,8 @@ import DiseaseMethodTabView from "./components/DiseaseMethodTabView";
 import QuestionText from "../components/QuestionText"
 import DetailModal from "./components/DetailModal"
 import healthMethodStore from "../../mobx/healthMethodStore";
+import questionStore from "../../mobx/questionStore";
 
-/**
- * 我的问题
- */
 @observer
 export default class Health extends PureComponent {
 
@@ -46,23 +44,20 @@ export default class Health extends PureComponent {
         healthMethodStore.fetchHealthMethod()
     }
 
-
 	render() {
-        let {healthMethod,modalShow,questionId} = healthMethodStore;
-		return (
+        let {healthMethod} = healthMethodStore;
+        const {modalShow,questionId} = questionStore;
+
+        return (
 			<Container>
 				<Header {...this.props}/>
 				<Content delay>
                     <View style={styles.container}>
                         <Image source={{uri: urls.getImage(this.state.img)}} style={styles.img} />
-                        {/*<View style={styles.box}>*/}
-                            {/*<Text style={styles.name}>{this.state.name}</Text>*/}
-                            {/*<Text style={styles.detail}>{this.state.detail}</Text>*/}
-                        {/*</View>*/}
                     </View>
 					<DiseaseMethodTabView data={healthMethod}  pageKey={'health'}/>
 				</Content>
-                <DetailModal visible={modalShow} pageKey={'health'}>
+                <DetailModal visible={modalShow}>
                     <QuestionText data={questionId} from={'health'}/>
                 </DetailModal>
 			</Container>

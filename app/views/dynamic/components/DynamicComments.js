@@ -14,7 +14,7 @@ export default class DynamicComments extends Component {
                 return (
                     <View key={i} style={styles.oneComment}>
                         <Text style={styles.commentName}>
-                            {p.user.nickname}:
+                            {p.user.nickname||"用户"+p.user.id.substr(0,4)}:
                         </Text>
                         <Text style={styles.commentContent}>
                             {p.content}

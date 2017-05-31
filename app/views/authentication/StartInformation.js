@@ -26,7 +26,6 @@ export default class StartInformation extends PureComponent {
             maxText: '',
             presetText: '选择日期,指定2016/3/5',
             showM:true,
-            position:'北京市',
             phone:this.props.phone,
             password:this.props.password,
             year1:'',
@@ -34,14 +33,19 @@ export default class StartInformation extends PureComponent {
             month1:'',
             month:'',
             day1:'',
-            sex:1,
-            jieduan:'未孕阶段',
+            sex:0,
+            jieduan:'',
+            sexChose:1,
+            flagM:false,
+            flagD:true
         }
     }
 
     componentDidMount(){
         let date=new Date;
-        this.date(date,this.state.sex)
+        this.date(date,this.state.sexChose)
+
+
     }
     async showPicker(stateKey, options,text) {
         try {
@@ -57,6 +61,7 @@ export default class StartInformation extends PureComponent {
                 var formatedStr = year + '-' + month +'-' + day ;
                 newState[stateKey + 'Text'] = formatedStr;
                 newState[stateKey + 'Date'] = date;
+                newState['flagD'] = false;
             }
             this.setState(newState);
         } catch ({code, message}) {
@@ -66,29 +71,27 @@ export default class StartInformation extends PureComponent {
 
 
     render() {
-
+        let position=UserStore.position.name;
         var mbM=(
             <TouchableOpacity onPress={this.man.bind(this)}>
-                <Thumbnail style={styles.touxiang} size={80} source={require('./assets/man.png')}/>
+                <Thumbnail style={styles.touxiang} size={80} source={require('./assets/m.png')}/>
             </TouchableOpacity>
         );
         var mbW=(
-            <TouchableOpacity onPress={this.woman.bind(this)}>
-                <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
-                <View style={{height:20,width:90}}>
-                    <Text style={{textAlign:'center'}}>{this.state.jieduan}</Text>
+            <TouchableOpacity onPress={this.woman.bind(this)} style={{alignItems:'center'}}>
+                <Thumbnail style={styles.touxiang} size={80} source={require('./assets/w.png')}/>
+                <View style={{height:20,width:90,justifyContent:'center',
+                    alignItems:'center',marginTop:4}}>
+                    <Text style={{textAlign:'center',fontSize:theme.DefaultFontSize-2}}>{this.state.jieduan}</Text>
                 </View>
             </TouchableOpacity>
         );
-
+    if(this.state.flagM){
         if(this.state.showM){
-
             mbW= (
-                <TouchableOpacity onPress={this.woman.bind(this,this.state.phone)} style={{justifyContent:'center',
-                    alignItems:'center'}}>
-                    <View style={styles.mb}></View>
-                    <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/woman.png')}/>
-                    <View style={{height:20,width:80}}>
+                <TouchableOpacity onPress={this.woman.bind(this,this.state.phone)}>
+                    <Thumbnail style={styles.touxiang} size={80}  source={require('./assets/w-h.png')}/>
+                    <View style={{height:20,width:90}}>
                         <Text style={{textAlign:'center',color:"#fff"}}>{this.state.jieduan}</Text>
                     </View>
                 </TouchableOpacity>
@@ -96,11 +99,12 @@ export default class StartInformation extends PureComponent {
         }else{
             mbM =(
                 <TouchableOpacity onPress={this.man.bind(this)}>
-                    <View style={styles.mb}></View>
-                    <Thumbnail style={styles.touxiang} size={80} source={require('./assets/man.png')}/>
+                    <Thumbnail style={styles.touxiang} size={80} source={require('./assets/m-h.png')}/>
                 </TouchableOpacity>
             )
         }
+    }
+
 
         return (
             <Container style={styles.container}>
@@ -118,9 +122,9 @@ export default class StartInformation extends PureComponent {
                                     <Text style={styles.text2}>{this.state.maxText}</Text>
                                 </TouchableOpacity>
                             </View>
-                            <TouchableOpacity style={styles.btn1}>
+                            <TouchableOpacity style={styles.btn1} onPress={()=>Actions.cityPick()}>
                                 <Icon  name='navigate' />
-                                <Text  style={styles.text3}>{this.state.position}</Text>
+                                <Text  style={styles.text3}>{position}</Text>
                             </TouchableOpacity>
                             <CommitButton  border={false} block={true} top={20} title="提交" onPress={this.tishi.bind(this)}/>
                         </View>
@@ -131,43 +135,58 @@ export default class StartInformation extends PureComponent {
         )
     };
     woman(phone){
-        let sex=2;
+        let sexChose=2;
+        let {flagD}=this.state;
+        if(flagD){
+            let data=new Date();
+            this.date(data,sexChose)
+        }
+
         this.setState({
+            flagM:true,
             showM:false,
-            sex:sex,
+            sexChose:sexChose,
+            sex:2,
         })
-        let data=new Date();
-        this.date(data,sex)
+
         this._modal.show();
     }
     man(){
-        let sex=1;
-        this.setState({
-            showM:true,
-            sex:sex,
-            jieduan:''
-        })
-        let data=new Date();
-        this.date(data,sex)
-    }
-    date(myDate,sex){
-        let year,year1,month,month1,day,num,year0=(null);
-        if(sex==2){
-            num=14
-        }else if(sex==1){
-            num=16
+        let sexChose=1;
+        let {flagD}=this.state;
+        if(flagD){
+            let data=new Date();
+            this.date(data,sexChose)
         }
-        year=myDate.getFullYear()-num;
-        month1=myDate.getMonth();
-        month=month1+1;
-        day=myDate.getDate();
         this.setState({
-            maxText:year+"-"+month+"-"+day,
-            month1:month1,
-            day1:day,
-            year1:year,
+            flagM:true,
+            showM:true,
+            sexChose:sexChose,
+            jieduan:'',
+            sex:1,
         })
+
     }
+    date(myDate,sexChose){
+            let year,year1,month,month1,day,num,year0=(null);
+            if(sexChose==2){
+                num=14
+            }else if(sexChose==1){
+                num=16
+            }
+            year=myDate.getFullYear()-num;
+            month1=myDate.getMonth();
+            month=month1+1;
+            day=myDate.getDate();
+            this.setState({
+                maxText:year+"-"+month+"-"+day,
+                month1:month1,
+                day1:day,
+                year1:year,
+            })
+
+        }
+
 
 
     _jieduan(text){
@@ -188,42 +207,49 @@ export default class StartInformation extends PureComponent {
         )
     }
     commit() {
-        let {position, maxText, phone, password,sex, jieduan} = this.state;
-        let crowd;
-        if (sex == 2) {
-            switch(jieduan)
-            {
-                case '未孕阶段':
-                    crowd = "woman_un";
-                    break;
-                case '备孕阶段':
-                    crowd = "woman_pre";
-                    break;
-                case  '已育阶段':
-                    crowd = "woman_next";
-                    break;
-                case '待产阶段':
-                    crowd = "woman_ing";
-                    break;
-                default:
-                    crowd = "woman_ed";
-                    break;
 
+        let {sex,position, maxText, phone, password,sexChose, jieduan} = this.state;
+        let crowd;
+        if(sex==0){
+            tools.showToast("请点击选择您的性别")
+        }else{
+            if (sexChose == 2) {
+                switch(jieduan)
+                {
+                    case '未孕阶段':
+                        crowd = "woman_un";
+                        break;
+                    case '备孕阶段':
+                        crowd = "woman_pre";
+                        break;
+                    case  '已育阶段':
+                        crowd = "woman_next";
+                        break;
+                    case '待产阶段':
+                        crowd = "woman_ing";
+                        break;
+                    default:
+                        crowd = "woman_ed";
+                        break;
+
+                }
             }
+
         }
         request.getJson(urls.apis.USER_SETUSERBASEINFO, {
-            phone:phone,
-            sex: sex,
-            crowd: crowd,
-            birthday: maxText,
-            regionId:110000
-        }).then((data)=> {
-            if (data.ok) {
-                UserStore.login(phone,password, () => {
-                    UserStore.fetchLoginUser();
-                });
-            }
-        })
+         phone:phone,
+         sex: sex,
+         crowd: crowd,
+         birthday: maxText,
+         regionId:UserStore.position.city_id
+         }).then((data)=> {
+         if (data.ok) {
+         UserStore.login(phone,password, () => {
+         UserStore.fetchLoginUser();
+         });
+         }
+         })
+
     }
 }
 const styles = {
@@ -245,7 +271,7 @@ const styles = {
     touxiang:{
         width:80,
         height:80,
-        borderRadius:40,
+        borderRadius:45,
     },
     row1:{
         marginTop:40,

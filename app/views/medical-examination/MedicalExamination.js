@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
-import {ScrollView, DatePickerAndrofield, ListView} from "react-native";
-import {ListItem, Body, Right, Text, Icon} from "native-base";
+import {ScrollView, DatePickerAndrofield, ListView,View,TouchableOpacity} from "react-native";
+import {ListItem, Body, Right,Input,Item, Text, Icon} from "native-base";
 import {Container, Content, Separator, Header, Loading} from "../../components/index";
 
 /**
@@ -13,21 +13,19 @@ export default class MedicalExamination extends PureComponent {
 			rowHasChanged: (row1, row2) => row1 !== row2,
 			sectionHeaderHasChanged: (section1, section2) => section1 !== section2,
 		}),
-		rowsAndSections: {}
+		rowsAndSections: {},
 	}
 
 	componentDidMount() {
-		this.fetchMedicalExaminationList()
+		let value='';
+		this.fetchMedicalExaminationList(value)
 	}
-
-	fetchMedicalExaminationList() {
-		request.getJson(urls.apis.MEDICALEXAMINATION_GETMEDICALINFORMATIONLIST)
-			.then((result) => {
-				if (result.ok) {
-					this.setState({
-						rowsAndSections: result.obj
-					})
-				}
+	fetchMedicalExaminationList(value) {
+		request.getJson(urls.apis.MEDICALEXAMINATION_GETMEDICALINFORMATIONLIST,{keyword:value})
+				.then((result) => {
+						this.setState({
+							rowsAndSections: result.obj
+						})
 			});
 	}
 
@@ -38,6 +36,14 @@ export default class MedicalExamination extends PureComponent {
 			<Container>
 				<Header {...this.props}/>
 				<Content delay white>
+					<Item rounded style={styles.inputGroup}>
+						<TouchableOpacity>
+							<Icon name="search" style={styles.inputIcon} />
+						</TouchableOpacity>
+						<Input
+							onChangeText={(text) => this._onChangeText(text)}
+							style={styles.inputText}/>
+					</Item>
 					{!isFetching &&
 					<ListView
 						dataSource={this.state.dataSource.cloneWithRowsAndSections(rowsAndSections)}
@@ -53,7 +59,9 @@ export default class MedicalExamination extends PureComponent {
 			</Container>
 		)
 	}
-
+	_onChangeText(text) {
+		this.fetchMedicalExaminationList(text)
+	}
 	_renderRow(rowData, sectionId, rowId) {
 		let {rowsAndSections} = this.state;
 		return (
@@ -84,7 +92,7 @@ export default class MedicalExamination extends PureComponent {
 		// 当前编辑项
 		this.curentItem = item;
 		this.curentGroup = group;
-
+tools.showToast(JSON.stringify(item))
 		if (item.items)
 			if (item.items[0] == "阴性") {
 				item.limit = 'yinx_yangx';
@@ -100,10 +108,11 @@ export default class MedicalExamination extends PureComponent {
 				title: item.name,
 				input: {
 					hint: item.name,
-					prefill: "",
-					allowEmptyInput: false,
+					prefill: item.value,
+					allowEmptyInput: true,
 					keyboardType: 'numeric',
 					maxLength: 10,
+					minLength: 0,
 					callback: (id, text) => this._yanzheng(id, item.id, item.inputType)
 				}
 			});
@@ -113,9 +122,10 @@ export default class MedicalExamination extends PureComponent {
 				input: {
 					hint: item.name,
 					prefill: "",
-					allowEmptyInput: false,
+					allowEmptyInput: true,
 					keyboardType: 'default',
 					maxLength: 10,
+					minLength: 0,
 					callback: (id, text) => this._yanzheng(id, item.id, item.inputType)
 				}
 			});
@@ -135,12 +145,24 @@ export default class MedicalExamination extends PureComponent {
 				selectedIndex: selectedIndex,
 				itemsCallbackSingleChoice: (id, text) => this._singleChoice(id, item.id, item.limit)
 			})
+		}else if (item.inputType == "4") {
+			tools.showDialog({
+				title: item.name,
+				input: {
+					hint: item.name,
+					prefill: item.value,
+					allowEmptyInput: true,
+					keyboardType: 'default',
+					maxLength: 10,
+					callback: (id, text) => this._yanzheng(id, item.id, item.inputType)
+				}
+			});
 		}
 	}
 
 	_yanzheng(id, Id, inputType) {
 		if (inputType == '1') {
-			if (this.reg("^[0-9]*$", id)) {
+			if (this.reg("^[0-9]+([.]{1}[0-9]+){0,1}$", id)||id=='') {
 				this.updataMedicalExamination(Id, id);
 			} else {
 				tools.showToast("请输入数字")
@@ -149,10 +171,10 @@ export default class MedicalExamination extends PureComponent {
 			this.updataMedicalExamination(Id, id)
 		} else if (inputType == '4') {
 			this.reg("^[0-9]*\/[0-9]*$", id)
-			if (this.reg("^[0-9]*\/[0-9]*$", id)) {
+			if (this.reg("^[0-9]*\/[0-9]*$", id)||id=='') {
 				this.updataMedicalExamination(Id, id)
 			} else {
-				tools.showToast("请输入,高压/低压")
+				tools.showToast("请输入数字/数字")
 			}
 		}
 
@@ -221,4 +243,17 @@ export default class MedicalExamination extends PureComponent {
 	}
 }
 
-const styles = {};
+const styles = {
+	inputBox:{
+		height:50,
+		backgroundColor:'#333',
+		justifyContent:'center',
+		alignItems:'center',
+	},
+	backCol: {width: 35, justifyContent: 'center'},
+	inputCol: {height: 30,justifyContent: 'center'},
+	backButton: {marginLeft: -10},
+	inputGroup: {height: 40, backgroundColor: '#ffffff',justifyContent:'center',alignItems:'center',marginLeft:50,marginRight:50,marginTop:5,marginBottom:5},
+	inputIcon: {color: '#666666'},
+	inputText: {color: '#666666', marginBottom: 2},
+};

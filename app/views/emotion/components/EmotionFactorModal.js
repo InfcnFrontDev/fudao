@@ -58,16 +58,16 @@ export default class EmotionFactorModal extends PureComponent {
 								<Text>呢？</Text>
 							</View>
 							<ListView
+								renderScrollComponent={props => <ScrollView {...props} showsVerticalScrollIndicator={true}/>}
 								dataSource={this.state.dataSource.cloneWithRows(emotion.reasons.slice(0))}
 								renderRow={this.renderReasonRow.bind(this)}
 								enableEmptySections
-								initialListSize={5}
-								style={{height: 150}}
+								style={{height: 120}}
 							/>
 							<View style={{alignItems:'center'}}>
 								<View style={styles.input}>
 									<TextInput underlineColorAndroid="transparent" placeholder="请输入您的原因"
-											   onChangeText={(value)=>{this.selfReason=value}}></TextInput>
+											   onChangeText={(value)=>{this.selfReason=value}}/>
 								</View>
 							</View>
 							<View style={{alignItems:'center',justifyContent:'center'}}>
@@ -76,7 +76,6 @@ export default class EmotionFactorModal extends PureComponent {
 										<Text>帮您缓解</Text>
 									</Button>
 								</View>
-
 							</View>
 						</View>
 					</View>
@@ -91,6 +90,7 @@ export default class EmotionFactorModal extends PureComponent {
 			<View key={index} style={styles.hongGuanBox}>
 				<Image source={{uri:urls.getImage(item.img)}} style={styles.hongGuanImg}/>
 				<Text style={styles.itemText}>{item.name}</Text>
+
 			</View>
 		)
 	}
@@ -198,17 +198,17 @@ const styles = {
 	},
 	box: {
 		marginLeft: 10,
-		marginTop: 38,
+		marginTop: 42,
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'space-around',
 	},
 	itemText: {
-		fontSize: theme.DefaultFontSize - 2,
-
+		fontSize: theme.DefaultFontSize - 6,
+		textAlign:'center'
 	},
 	hongGuanBox: {
-		justifyContent: 'center',
-		alignItems: 'center'
+		width:50,
+		alignItems: 'center',
 	},
 	hongGuanImg: {
 		width: 40,
@@ -259,7 +259,7 @@ const styles = {
 	},
 	input: {
 		width: theme.deviceWidth * 0.8,
-		height: 50,
+		height: 40,
 		borderWidth: 1,
 		borderColor: '#666',
 		padding: 0,

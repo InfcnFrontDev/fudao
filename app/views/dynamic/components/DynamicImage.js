@@ -24,7 +24,7 @@ class DynamicImage extends Component {
                 </View>
             )
         }
-        return ( null );
+        return (null);
     }
 
 }

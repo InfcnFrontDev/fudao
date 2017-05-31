@@ -4,9 +4,7 @@ import {Container, Content, SearchHeader} from "../../components/index";
 import DailyMethodResult from "./components/DailyMethodResult";
 import {observer} from "mobx-react/native";
 import searchStore from "../../mobx/searchStore";
-import diseaseMethodStore from "../../mobx/diseaseMethodStore";
-import expectMethodStore from "../../mobx/expectMethodStore";
-import healthMethodStore from "../../mobx/healthMethodStore";
+import questionStore from "../../mobx/questionStore";
 import QuestionText from "../components/QuestionText"
 import DetailModal from "../disease/components/DetailModal"
 
@@ -26,20 +24,15 @@ export default class SearchDailyMethod extends PureComponent {
 
 	render() {
         let {dailyMethod} = searchStore;
+        const {modalShow,questionId,questionType} = questionStore;
         return (
 			<Container>
 				<SearchHeader placeholder="搜索保健方法" onSearch={this.search.bind(this)} onChangeText ={(keyword) =>  searchStore.keyword = keyword}/>
                 <Content white>
                     <ScrollView>
                         <DailyMethodResult key="dailyMethod" data={dailyMethod}/>
-                        <DetailModal visible={diseaseMethodStore.modalShow} pageKey={'disease'}>
-                            <QuestionText data={diseaseMethodStore.questionId} from={'disease'}/>
-                        </DetailModal>
-                        <DetailModal visible={expectMethodStore.modalShow} pageKey={'expect'}>
-                            <QuestionText data={expectMethodStore.questionId} from={'expect'}/>
-                        </DetailModal>
-                        <DetailModal visible={healthMethodStore.modalShow} pageKey={'health'}>
-                            <QuestionText data={healthMethodStore.questionId} from={'health'}/>
+                        <DetailModal visible={modalShow}>
+                            <QuestionText data={questionId} from={questionType}/>
                         </DetailModal>
                     </ScrollView>
                 </Content>

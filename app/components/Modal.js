@@ -8,10 +8,14 @@ export default class BaseModal extends PureComponent {
 
 	static propTypes = {
 		visible: React.PropTypes.bool,
+		white: React.PropTypes.bool, // 背景白色
+		transparent: React.PropTypes.bool, // 背景透明
 	}
 
 	static defaultProps = {
 		visible: false,
+		white:true,
+		transparent:false,
 	}
 
 	constructor(props) {
@@ -23,7 +27,21 @@ export default class BaseModal extends PureComponent {
 
 	render() {
 		let {visible} = this.state;
-		let {children} = this.props;
+		let {children,transparent,white} = this.props;
+		let content={
+				position: "absolute",
+				top: 30,
+				bottom: 30,
+				left: 20,
+				right: 20,
+				opacity: 1,
+				flex: 1,
+			};
+		if(transparent){
+			content.backgroundColor='transparent'
+		}else if(white){
+			content.backgroundColor='#fff'
+		}
 		return (
 			<Modal
 				animationType={'fade'}
@@ -34,7 +52,7 @@ export default class BaseModal extends PureComponent {
 				<TouchableNativeFeedback onPress={() => this.hide()}>
 					<View style={styles.opacityView}/>
 				</TouchableNativeFeedback>
-				<View style={styles.content}>
+				<View style={content}>
 					{children}
 				</View>
 			</Modal>
@@ -77,7 +95,6 @@ const styles = {
 	},
 	content: {
 		position: "absolute",
-		backgroundColor: '#FFFFFF',
 		top: 30,
 		bottom: 30,
 		left: 20,

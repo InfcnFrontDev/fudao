@@ -18,28 +18,28 @@ export default class EmotionSolveModal extends PureComponent {
 		this.state = {
 			visible: false,
 			emotion: null,
+			stop:true
 		};
 	}
 
 	render() {
 		let {visible, emotion}=this.state;
 		return (
-			<Modal ref={(e)=>this._modal = e} visible={visible}>
+			<Modal ref={(e)=>this._modal = e} visible={visible} transparent>
 				{emotion && <View style={styles.container}>
 					<View style={styles.View}>
 						<View style={styles.emotionBox}>
-							<Image source={emotion.img} style={{width:60,height:60}}></Image>
+							<Image source={emotion.img} style={{width:60,height:60}}/>
 							<Text style={{color:'#fff'}}>{emotion.title}</Text>
 						</View>
 						<View style={{width:theme.deviceWidth*0.9-95,paddingRight:10,paddingTop:30}}>
-							<Text style={{color:'#E3B335',marginBottom:10,fontSize: theme.DefaultFontSize -2}}>{emotion.threeCharacterClassic}</Text>
+							<Text style={{fontWeight:"bold",marginBottom:10,fontSize: theme.DefaultFontSize -2,color:'#fff'}}>{emotion.threeCharacterClassic}</Text>
+							<View style={{height:100}}>
 							<ScrollView>
-								<View style={{height:100}}>
 									<Text
 										style={{color:'#fff',fontSize:theme.DefaultFontSize-2}}>        {emotion.influence}</Text>
-								</View>
 							</ScrollView>
-
+							</View>
 						</View>
 					</View>
 					<View style={styles.imgViewBox}>
@@ -49,7 +49,9 @@ export default class EmotionSolveModal extends PureComponent {
 								<DefaultTabBar
 									activeTextColor={theme.navTabBarActiveTextColor}
 									underlineStyle={{backgroundColor: theme.navTabBarActiveTextColor}}/>
-							)}>
+							)}
+							onChangeTab={(obj) => {this._indexChange(obj)}}
+						>
 							{emotion.methods.map((item, index) => this.renderSolve(item, index))}
 						</ScrollableTabView>
 					</View>
@@ -57,21 +59,27 @@ export default class EmotionSolveModal extends PureComponent {
 			</Modal>
 		)
 	}
-
+	_indexChange(obj){
+		for(var i=0;i<3;i++){
+			if(this.refs["video"+i])
+				this.refs["video"+i].close();
+		}
+	}
 	renderSolve(item, index) {
 		if (item.type == 1) {
 			return (
 				<ImageSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
-							img={item.img}></ImageSolve>
+							img={item.img}/>
 			)
 		} else if (item.type == 2) {
 			return (
-				<TextSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}></TextSolve>
+				<TextSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}/>
 			)
 		} else if (item.type == 3) {
+			var str = "video"+index;
 			return (
-				<VideoSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
-							video={item.img}></VideoSolve>
+				<VideoSolve key={index}  index={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
+							video={item.img} ref= {str}/>
 			)
 		}
 	}
@@ -100,7 +108,7 @@ const styles = {
 		width: theme.deviceWidth * 0.9,
 		height: 160,
 		flexDirection: 'row',
-		backgroundColor: '#67769D'
+		backgroundColor: '#69769C'
 	},
 	imgViewBox: {
 		width: theme.deviceWidth * 0.9,

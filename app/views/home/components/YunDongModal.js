@@ -1,64 +1,89 @@
 import React, {PureComponent} from "react";
-import {Modal, View, Image, ListView,ScrollView} from "react-native";
+import {Modal, View, Image, ListView,WebView,Dimensions} from "react-native";
 import {Icon, Button, ListItem, Text} from "native-base";
-import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
-import expectMethodStore from "../../../mobx/expectMethodStore";
-import healthMethodStore from "../../../mobx/healthMethodStore";
+import ImageText from './ImageText'
+import userStore from "../../../mobx/userStore";
 
 
 /**
  * 我的能量场 > 资料填写
  */
-class DetailsModal extends PureComponent {
+class YunDongModal extends PureComponent {
 
     constructor(props) {
         super(props);
+
+
         this.state = {
+            ...props,
             visible: false,
+            text:'{"img":"zixun/1.3.jpg","title":"拉伸运动","content":"以两手搓热环摸脐周，谁知盘中餐，少用力按摩腹部提拿腹肌，以一手会当临绝顶，一览众山小"}'
         }
     }
 
+    /**
+     * 分组
+     */
+
+
     render() {
-        let {visible, data, children} = this.props;
+        let {visible,text} = this.state;
+        let data=JSON.parse(text);
         return (
             <Modal
                 animationType={'fade'}
                 transparent={true}
                 visible={visible}
                 onRequestClose={() => this.hide()}
+                onLayout={({nativeEvent:e})=>this.layout(e)}
             >
                 <View style={styles.opacityView}/>
                 <View style={styles.content}>
                     <View style={styles.header}>
-                        <View style={{width: 25}}>
+
+                        <View style={{width:25}}>
                             <Button
                                 onPress={() => this.hide()}
                                 style={styles.closeButton}>
-                                <Icon name="close" style={{color: '#FFF', fontSize: 20}}/>
+                                <Icon name="close" style={{color:'#FFF', fontSize: 20}}/>
                             </Button>
                         </View>
                     </View>
-                    <ScrollView style={styles.child}>
-                        {children}
-                    </ScrollView>
+                    <View style={{flex: 1}}>
+                        <ImageText title={data.name} content={data.detail} image={data.img}/>
+                    </View>
+
                 </View>
+
+
             </Modal>
         )
+    }
+    layout(data){
+        alert(JSON.stringify(data));
+
+    }
+
+    /**
+     * 打开对话框
+     * @param data
+     */
+    show(data) {
+        let state = {
+            visible: true,
+            text: data
+        };
+        this.setState(state);
+
     }
 
     /**
      * 关闭对话框
      */
     hide() {
-
-        if (this.props.pageKey === 'disease') {
-            diseaseMethodStore.modalShow = false
-        } else if (this.props.pageKey === 'expect') {
-            expectMethodStore.modalShow = false
-        } else {
-            healthMethodStore.modalShow = false
-        }
-
+        this.setState({
+            visible: false
+        })
     }
 
 
@@ -105,5 +130,7 @@ const styles = {
 };
 
 
-export default  DetailsModal;
+export default  (YunDongModal);
+
+
 

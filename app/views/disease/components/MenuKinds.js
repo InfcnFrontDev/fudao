@@ -80,7 +80,7 @@ export default class Menukinds extends PureComponent {
 						</View>
 						<View style={{flexDirection:'row',justifyContent:'center',marginTop:10}}>
 							<Text>{data.name}</Text>
-							<Text>的营养价值表</Text>
+							<Text>的营养价值表(每100g)</Text>
 						</View>
 						<View style={styles.yyBox}>
 							<View style={styles.yyBag}>

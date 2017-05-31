@@ -5,6 +5,7 @@ import {Actions} from "react-native-router-flux";
 import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
 import expectMethodStore from "../../../mobx/expectMethodStore";
 import healthMethodStore from "../../../mobx/healthMethodStore";
+import questionStore from "../../../mobx/questionStore";
 import QuestionText from "../../components/QuestionText"
 import DetailModal from "../../disease/components/DetailModal"
 /**
@@ -19,17 +20,21 @@ export default class DailyMethodResult extends PureComponent {
             arr: arr
         })
     }
-    onPress2(type,id) {
-        if (type === 'disease') {
-            diseaseMethodStore.questionId = id
-            diseaseMethodStore.modalShow = true
-        } else if (type === 'expect') {
-            expectMethodStore.questionId = id
-            expectMethodStore.modalShow = true
-        } else {
-            healthMethodStore.questionId = id
-            healthMethodStore.modalShow = true
-        }
+    onPress2(type,id,name) {
+        questionStore.questionType = type
+        questionStore.questionId = id
+        questionStore.questionName = name
+        questionStore.modalShow = true
+        // if (type === 'disease') {
+        //     diseaseMethodStore.questionId = id
+        //     diseaseMethodStore.modalShow = true
+        // } else if (type === 'expect') {
+        //     expectMethodStore.questionId = id
+        //     expectMethodStore.modalShow = true
+        // } else {
+        //     healthMethodStore.questionId = id
+        //     healthMethodStore.modalShow = true
+        // }
     }
 
     render() {
@@ -50,7 +55,7 @@ export default class DailyMethodResult extends PureComponent {
                                 )
                             ) :
                             item.list.map((items, i) => (
-                                    <TouchableOpacity key={i} onPress={() => this.onPress2(items.methodType,items.id)} style={styles.item}>
+                                    <TouchableOpacity key={i} onPress={() => this.onPress2(items.methodType,items.id,items.name)} style={styles.item}>
                                         <Text style={styles.text}>{ items.timePeriod + ' : ' + items.name}</Text>
                                     </TouchableOpacity>
                                 )

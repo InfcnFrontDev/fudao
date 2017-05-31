@@ -11,32 +11,32 @@ class VideoSolve extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            btn: false,
-            cc: require('../../../assets/emotion/pause.png')
+            btn:true,//true表示暂停
+            cc: require('../../../assets/emotion/play.png')
         }
     }
 
     render() {
-        let {title,content,video,basis} = this.props;
+        let {title,content,video} = this.props;
         return (
             <View style={styles.View}>
                         <Text style={styles.title}>{title}</Text>
                         <View style={styles.btn}>
                             <TouchableOpacity onPress={this._btn.bind(this)}>
                                 <View style={{width: 80, height: 80,justifyContent:'center',alignItems:'center'}}>
-                                    <Image source={this.state.cc} style={{width: 80, height: 80,resizeMode:'contain'}}></Image>
+                                    <Image source={this.state.cc} style={{width: 80, height: 80,resizeMode:'contain'}}/>
                                 </View>
                             </TouchableOpacity>
                         </View>
                         <Text style={styles.content}>{content}</Text>
                         <Video
                             source={{uri: urls.getImage(video)}} // 视频的URL地址，或者本地地址，都可以.
-                            rate={1.0}                   // 控制暂停/播放，0 代表暂停paused, 1代表播放normal.
+                            rate={0}                   // 控制暂停/播放，0 代表暂停paused, 1代表播放normal.（初始进来是暂停或播放）
                             volume={1.0}                 // 声音的放大倍数，0 代表没有声音，就是静音muted, 1 代表正常音量 normal，更大的数字表示放大的倍数
                             muted={false}                // true代表静音，默认为false.
                             resizeMode="cover"           // 视频的自适应伸缩铺放行为，
                             repeat={false}                // 是否重复播放
-                            playInBackground={false}     // 当app转到后台运行的时候，播放是否暂停
+                            playInBackground={true}     // 当app转到后台运行的时候，播放是否暂停//
                             playWhenInactive={false}     // [iOS] Video continues to play when control or notification center are shown. 仅适用于IOS
                             onLoadStart={this.loadStart} // 当视频开始加载时的回调函数
                             onLoad={this.setDuration}    // 当视频加载完毕时的回调函数
@@ -49,7 +49,14 @@ class VideoSolve extends PureComponent {
             </View>
         )
     }
-
+    close(){
+        let {btn}=this.state;
+        if(!btn)
+            this.setState({
+                btn:true,
+                cc: require('../../../assets/emotion/play.png')
+            })
+    }
 
     _btn() {
         let {btn}=this.state;
@@ -116,7 +123,7 @@ VideoSolve.propsTypes = {
     title: React.PropTypes.string,
     content: React.PropTypes.string,
     video: React.PropTypes.string,
-}
+};
 export default (VideoSolve);
 
 

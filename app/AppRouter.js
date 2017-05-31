@@ -53,6 +53,7 @@ import Message from "./views/message/Message";
 import MsgDetail from "./views/message/MsgDetail";
 import Chat from "./views/message/Chat";
 import Feedback from "./views/feedback/Feedback";
+import CityPick from "./views/authentication/CityPick";
 /**
  * 路由
  */
@@ -74,9 +75,9 @@ export default class AppRouter extends PureComponent {
 					<Scene key="register" component={Register} title="注册" hideNavBar/>
 					<Scene key="login" component={Login} title="登录" hideNavBar/>
 					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
-					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar/>
+					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar  />
 					<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
-					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar/>
+					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar />
 					<Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
 					<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
 					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
@@ -143,7 +144,7 @@ export default class AppRouter extends PureComponent {
 					<Scene key="dynamicPicture" component={DynamicPicture} title="动态图片" hideNavBar/>
 
 					{/*情绪*/}
-					<Scene key="emotion" component={Emotion} title="情绪" hideNavBar/>
+					<Scene key="emotion" component={Emotion} title="情绪" hideNavBar />
 
 					{/*搜索*/}
 					<Scene title="搜索" key="search" component={Search} hideNavBar/>
@@ -151,7 +152,7 @@ export default class AppRouter extends PureComponent {
 					<Scene title="搜索朋友圈" key="searchFriendsCircle" component={SearchFriendsCircle} hideNavBar/>
 					<Scene title="搜索资讯" key="searchInformation" component={SearchInformation} hideNavBar/>
 					<Scene title="搜索症状与问题" key="searchSymptomProblem" component={SearchSymptomProblem} hideNavBar/>
-					<Scene title="搜索症状与问题" key="searchUser" component={SearchUser} hideNavBar/>
+					<Scene title="搜索用户" key="searchUser" component={SearchUser} hideNavBar/>
 
 					{/*消息*/}
 					<Scene title="消息" key="message" component={Message} hideNavBar/>
@@ -161,10 +162,13 @@ export default class AppRouter extends PureComponent {
 					{/*意见反馈*/}
 					<Scene title="意见反馈" key="feedback" component={Feedback} hideNavBar/>
 
+					{/*城市列表*/}
+					<Scene title="" key="cityPick" component={CityPick} hideNavBar/>
 				</Scene>
 			</Router>
 		)
 	}
+
 
 	reducerCreate(params) {
 		const defaultReducer = Reducer(params)

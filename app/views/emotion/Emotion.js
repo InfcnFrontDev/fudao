@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
-import {Image, DeviceEventEmitter, Text} from "react-native";
-import {Right, View} from "native-base";
+import {Image,View, DeviceEventEmitter} from "react-native";
+import {Right,Text} from "native-base";
 import {Container, Content, Header} from "../../components/index";
 import LoadingModal from "../../components/LoadingModal";
 import EmotionList from "./components/EmotionList";
@@ -27,25 +27,20 @@ export default class Emotion extends PureComponent {
 	 * 一小时后情绪修改为平静， 进入页面时处理
 	 */
 	componentWillMount() {
-		// let {myEmotion,updateTime}=EmotionStore;
-		// if (myEmotion) {
-		// 	let currentTime = new Date().getTime();
-		// 	if (currentTime - updateTime > 1000 * 60 * 60) {
-		// 		EmotionStore.updateMyEmotion(calm[0]);
-		// 	}
-		// 	this.setState({
-		// 		myEmotion:myEmotion
-		// 	})
-		// }
+		let {myEmotion,updateTime}=EmotionStore;
+		 if (myEmotion) {
+		 	let currentTime = new Date().getTime();
+			if (currentTime - updateTime > 1000 * 60*60) {
+		 		EmotionStore.myEmotion=calm[0]
+		 	}
+		 }
 	}
-
 	render() {
 		let {isLoading} = this.state;
 		let myEmotion = EmotionStore.myEmotion;
 		if (!myEmotion) {
 			myEmotion = calm[0]
 		}
-
 		// 默认情绪为‘平静’
 		return (
 			<Container>
@@ -59,7 +54,7 @@ export default class Emotion extends PureComponent {
 				}/>
 				<Content delay padder>
 					<View style={styles.topBox}>
-						<Image style={styles.puImg} source={require('../../assets/emotion/pugongying.png')}></Image>
+						<Image style={styles.puImg} source={require('../../assets/emotion/pugongying.png')}/>
 						<View tyle={styles.titleBox}>
 							<Text style={styles.titleDoc}>不好的情绪影响一天的生活，</Text>
 							<Text style={styles.titleDoc}>一起调节一下吧！</Text>
@@ -79,7 +74,7 @@ export default class Emotion extends PureComponent {
 	}
 
 	async _emotionFactorModal_onSubmit(emotion, selectedGrade, selectedReasons) {
-		const result = await this._fetchEmotionIntervene(emotion.title, selectedGrade, selectedReasons)
+		const result = await this._fetchEmotionIntervene(emotion.title, selectedGrade, selectedReasons);
 		this._solveModal.show({
 			title: emotion.title,
 			img: emotion.img,
@@ -95,15 +90,14 @@ export default class Emotion extends PureComponent {
 		// 更新我的情绪
 
 		let updateTime = new Date().getTime();
-		EmotionStore.updateMyEmotion(item);
-		EmotionStore.updateMyTime(updateTime);
+		EmotionStore.updateMyEmotion(item,updateTime);
 
 		// 解决总是先弹第一个框
 		this._factorModal.hide();
 
 		try {
 			if (item.grade) {
-				const result = await this._fetchEmotionIntervene(item.title, item.grade, [])
+				const result = await this._fetchEmotionIntervene(item.title, item.grade, []);
 				this._solveModal.show({
 					title: item.title,
 					img: item.img,
@@ -111,7 +105,7 @@ export default class Emotion extends PureComponent {
 				});
 			} else {
 				let weather=weatherStore.currentWeather.weather;
-				const result = await this._fetchEmotionFactor(item.title, weather)
+				const result = await this._fetchEmotionFactor(item.title, weather);
 				this._factorModal.show({
 					title: item.title,
 					img: item.img,
@@ -123,39 +117,39 @@ export default class Emotion extends PureComponent {
 	}
 
 	_fetchEmotionFactor(emotion, weather) {
-		this.showLoading()
+		this.showLoading();
 		return new Promise((resolve, reject) => {
 			request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
 				emotion,
 				weather
 			}).then((data) => {
-				this.hideLoading()
+				this.hideLoading();
 				if (data.ok) {
 					resolve(data.obj)
 				} else {
 					reject(data.message)
 				}
 			}, (error) => {
-				this.hideLoading()
+				this.hideLoading();
 				reject(error)
 			})
 		})
 	}
 
 	_fetchEmotionIntervene(emotion, grade, factors) {
-		this.showLoading()
+		this.showLoading();
 		return new Promise((resolve, reject) => {
 			request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
 				emotion, grade, factors
 			}).then((data) => {
-				this.hideLoading()
+				this.hideLoading();
 				if (data.ok) {
 					resolve(data.obj)
 				} else {
 					reject(data.message)
 				}
 			}, (error) => {
-				this.hideLoading()
+				this.hideLoading();
 				reject(error)
 			})
 		})
@@ -172,7 +166,6 @@ export default class Emotion extends PureComponent {
 			isLoading: false
 		})
 	}
-
 }
 
 const styles = {
@@ -193,7 +186,7 @@ const styles = {
 		justifyContent: 'center'
 	},
 	titleDoc: {
-		color: '#fff',
+		color: '#eef0f1',
 		textAlign: 'center',
 	},
 	selectedEmotion: {

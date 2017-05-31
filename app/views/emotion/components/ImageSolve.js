@@ -13,12 +13,13 @@ class ImageSolve extends PureComponent {
         return (
             <View  style={styles.container}>
                 <View style={{flexDirection: 'column',alignItems: 'center',}}>
+                    <Text style={styles.title}>{title}</Text>
                     <Image source={{uri: urls.getImage(img)}} resizeMode='cover' style={styles.image}/>
-                    <ScrollView>
-                        <View style={{height:170}}>
+                    <View style={{height:80,marginLeft:20,marginRight:20}}>
+                        <ScrollView showsHorizontalScrollIndicator ={true}>
                             <Text style={styles.content}>        {content}</Text>
-                        </View>
-                    </ScrollView>
+                        </ScrollView>
+                    </View>
                 </View>
             </View>
         )
@@ -31,20 +32,25 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
     },
-
+    title: {
+        textAlign: 'center',
+        fontSize: theme.DefaultFontSize + 4,
+        marginTop:20,
+        marginBottom:10
+    },
     content: {
         fontSize: theme.DefaultFontSize,
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop:20,
         color:'#6A6A6A'
     },
     image: {
-        marginTop:30,
         width: 220,
-        height: 160,
+        height: 150,
+        marginBottom:10,
         justifyContent: 'center',
     },
+    scrollV:{
+        height: 80,
+    }
 };
 
 ImageSolve.propsTypes = {
@@ -52,7 +58,7 @@ ImageSolve.propsTypes = {
     title: React.PropTypes.string,
     content: React.PropTypes.string,
     img: React.PropTypes.string,
-}
+};
 
 export default (ImageSolve);
 

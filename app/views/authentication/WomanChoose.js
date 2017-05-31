@@ -34,7 +34,7 @@ export default  class WomanChoose extends PureComponent {
                             <TouchableOpacity onPress={this.choose.bind(this,'未孕阶段')}>
                                 <View style={styles.photo}>
                                     <View  style={styles.left} >
-                                        <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
+                                        <Thumbnail style={styles.touxiang} size={80} source={require('./assets/w.png')}/>
                                     </View>
                                     <Text>未孕阶段</Text>
                                 </View>
@@ -42,7 +42,7 @@ export default  class WomanChoose extends PureComponent {
                             <TouchableOpacity onPress={this.choose.bind(this,'备孕阶段')}>
                                 <View  style={styles.photo}>
                                     <View  style={styles.left} >
-                                        <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
+                                        <Thumbnail style={styles.touxiang} size={80} source={require('./assets/w.png')}/>
                                     </View>
                                     <Text>备孕阶段</Text>
                                 </View>
@@ -50,7 +50,7 @@ export default  class WomanChoose extends PureComponent {
                             <TouchableOpacity onPress={this.choose.bind(this,'待产阶段')}>
                                 <View  style={styles.photo}>
                                     <View  style={styles.left} >
-                                        <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
+                                        <Thumbnail style={styles.touxiang} size={80} source={require('./assets/w.png')}/>
                                     </View>
                                     <Text>待产阶段</Text>
                                 </View>
@@ -58,7 +58,7 @@ export default  class WomanChoose extends PureComponent {
                             <TouchableOpacity onPress={this.choose.bind(this,'产后恢复阶段')}>
                                 <View  style={styles.photo}>
                                     <View  style={styles.left} >
-                                        <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
+                                        <Thumbnail style={styles.touxiang} size={80} source={require('./assets/w.png')}/>
                                     </View>
                                     <Text>产后恢复阶段</Text>
                                 </View>
@@ -66,7 +66,7 @@ export default  class WomanChoose extends PureComponent {
                             <TouchableOpacity onPress={this.choose.bind(this,'已育阶段')}>
                                 <View  style={styles.photo}>
                                     <View  style={styles.left} >
-                                        <Thumbnail style={styles.touxiang} size={80} source={require('./assets/woman.png')}/>
+                                        <Thumbnail style={styles.touxiang} size={80} source={require('./assets/w.png')}/>
                                     </View>
                                     <Text>已育阶段</Text>
                                 </View>
