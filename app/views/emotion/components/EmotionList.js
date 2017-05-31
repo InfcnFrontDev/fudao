@@ -1,6 +1,5 @@
 import React, {PureComponent} from "react";
 import {ListView, ScrollView, View, Image, ToastAndroid, DeviceEventEmitter} from "react-native";
-import {Actions} from "react-native-router-flux";
 import {Text, Button} from "native-base";
 import {good, calm, bad} from "./EmotionData";
 
@@ -11,7 +10,6 @@ export default class EmotionList extends PureComponent {
 
 	ds = new ListView.DataSource({
 		rowHasChanged: (row1, row2) => row1 !== row2,
-		sectionHeaderHasChanged: (section1, section2) => section1 !== section2,
 	});
 
 	state = {
@@ -93,10 +91,10 @@ const styles = {
 
 EmotionList.propTypes = {
 	onItemPress: React.PropTypes.func,
-}
+};
 EmotionList.defaultProps = {
 	onItemPress: () => {
 	}
-}
+};
 
 
