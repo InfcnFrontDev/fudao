@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import {Image,View, DeviceEventEmitter} from "react-native";
 import {Right,Text} from "native-base";
 import {Container, Content, Header} from "../../components/index";
-import LoadingModal from "../../components/LoadingModal";
 import EmotionList from "./components/EmotionList";
 import EmotionFactorModal from "./components/EmotionFactorModal";
 import EmotionSolveModal from "./components/EmotionSolveModal";
@@ -18,9 +17,6 @@ import weatherStore from "../../mobx/weatherStore";
 export default class Emotion extends PureComponent {
 	constructor(props) {
 		super(props);
-		this.state = {
-			isLoading: false,
-		}
 	}
 
 	/**
@@ -28,15 +24,14 @@ export default class Emotion extends PureComponent {
 	 */
 	componentWillMount() {
 		let {myEmotion,updateTime}=EmotionStore;
-		 if (myEmotion) {
-		 	let currentTime = new Date().getTime();
+		if (myEmotion) {
+			let currentTime = new Date().getTime();
 			if (currentTime - updateTime > 1000 * 60*60) {
-		 		EmotionStore.myEmotion=calm[0]
-		 	}
-		 }
+				EmotionStore.myEmotion=calm[0]
+			}
+		}
 	}
 	render() {
-		let {isLoading} = this.state;
 		let myEmotion = EmotionStore.myEmotion;
 		if (!myEmotion) {
 			myEmotion = calm[0]
@@ -66,8 +61,6 @@ export default class Emotion extends PureComponent {
 										onSubmit={this._emotionFactorModal_onSubmit.bind(this)}/>
 
 					<EmotionSolveModal ref={(e)=>this._solveModal = e}/>
-
-					<LoadingModal visible={isLoading}/>
 				</Content>
 			</Container>
 		)
@@ -117,53 +110,35 @@ export default class Emotion extends PureComponent {
 	}
 
 	_fetchEmotionFactor(emotion, weather) {
-		this.showLoading();
 		return new Promise((resolve, reject) => {
 			request.getJson(urls.apis.EMOTION_GETEMOTIONFACTOR, {
 				emotion,
 				weather
 			}).then((data) => {
-				this.hideLoading();
 				if (data.ok) {
 					resolve(data.obj)
 				} else {
 					reject(data.message)
 				}
 			}, (error) => {
-				this.hideLoading();
 				reject(error)
 			})
 		})
 	}
 
 	_fetchEmotionIntervene(emotion, grade, factors) {
-		this.showLoading();
 		return new Promise((resolve, reject) => {
 			request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
 				emotion, grade, factors
 			}).then((data) => {
-				this.hideLoading();
 				if (data.ok) {
 					resolve(data.obj)
 				} else {
 					reject(data.message)
 				}
 			}, (error) => {
-				this.hideLoading();
 				reject(error)
 			})
-		})
-	}
-
-	showLoading() {
-		this.setState({
-			isLoading: true
-		})
-	}
-
-	hideLoading() {
-		this.setState({
-			isLoading: false
 		})
 	}
 }

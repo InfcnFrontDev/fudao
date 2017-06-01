@@ -19,7 +19,7 @@ export default  class MyEnter extends PureComponent {
 			<View>
 				<View style={styles.View}>
 					<Button style={styles.button} transparent onPress={()=>Actions.diagnosis()}>
-						<Image source={require('../../../assets/disease/zizhen.png')} style={styles.image}/>
+						<Image source={require('../../../assets/disease/zicha.png')} style={styles.image}/>
 					</Button>
 				</View>
 				<View style={styles.View}>
@@ -41,6 +41,9 @@ export default  class MyEnter extends PureComponent {
 }
 
 const styles = {
+	zi:{
+		color:'#f0c728'
+	},
 	View: {
 		flexDirection: 'row',
 		marginTop: 1
@@ -74,8 +77,8 @@ const styles = {
 		borderRadius: 48,
 	},
 	image: {
-		width: 32,
-		height: 32,
+		width: 60,
+		height: 40,
 	},
 	color2: {
 		backgroundColor: '#E5B2A8',
