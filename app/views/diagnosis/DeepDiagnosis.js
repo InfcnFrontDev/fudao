@@ -22,7 +22,7 @@ export default class DeepDiagnosis extends PureComponent {
                 onPress: () => Actions.medicalExamination()
             }
         ])
-        myDiseaseListStore.fetchMyDiseaseList();
+        // myDiseaseListStore.fetchMyDiseaseList();
     }
 
     render() {
@@ -44,6 +44,7 @@ export default class DeepDiagnosis extends PureComponent {
         if (data == 2) {
             request.getJson(urls.apis.DISEASE_GETMYDISEASELIST).then((res) => {
                 var item = res.obj[0];
+                myDiseaseListStore.myDiseaseList = res.obj
                 myDiseaseListStore.selectedItemName = item.name
                 myDiseaseListStore.selectedItemId = item.id
                 allDiseaseListStore.selectedItemName = item.name

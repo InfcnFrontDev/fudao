@@ -21,8 +21,10 @@ class CommonList extends PureComponent {
     render() {
         let {items} = this.state;
         return (
-            <View>
-                <Text style={styles.title}>{items.title}常见问题</Text>
+            <View style={styles.background}>
+                <View style={styles.titleView}>
+                    <Text style={styles.title}>{items.title}常见问题</Text>
+                </View>
                 <ListView
                     contentContainerStyle={styles.contentContainer}
                     dataSource={this.ds.cloneWithRows(items.list)}
@@ -39,15 +41,15 @@ class CommonList extends PureComponent {
         return (
             selectedItem[rowData.name] ?
                 <View style={styles.row}>
-                    <Text style={styles.choosedRowTitle}>{rowData.name}</Text>
-                    <TouchableOpacity underlayColor='transparent'>
+                    <TouchableOpacity underlayColor='transparent' style={styles.touchFle}>
+                        <Text style={styles.choosedRowTitle}>{rowData.name}</Text>
                         <Text style={styles.choosed}>+</Text>
                     </TouchableOpacity>
                 </View>
                 :
                 <View style={styles.row}>
-                    <Text style={styles.rowTitle}>{rowData.name}</Text>
-                    <TouchableOpacity onPress={() => onItemAdd(rowData)}>
+                    <TouchableOpacity onPress={() => onItemAdd(rowData)} style={styles.touchFle}>
+                        <Text style={styles.rowTitle}>{rowData.name}</Text>
                         <Text style={styles.choose}>+</Text>
                     </TouchableOpacity>
                 </View>
@@ -57,29 +59,43 @@ class CommonList extends PureComponent {
 }
 
 const styles = {
-    title: {
-        color: "rgba(188,188,188,0.6)",
-        marginLeft: 8,
+    background: {
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        marginRight: 8,
         marginTop: 10,
+
+    },
+    titleView: {
+        backgroundColor: "#D9D9E5",
+        // marginLeft: 7,
+    },
+    title: {
+        color: "#000",
+        marginLeft: 5,
+        fontSize: 14
+
     },
     contentContainer: {
         flexDirection: 'row', //设置横向布局
         flexWrap: 'wrap',    //设置换行显示
+        justifyContent: 'space-between',
+        paddingRight: 4,
+        paddingLeft: 4,
         width: (theme.deviceWidth - 28) / 2,
-
     },
     row: {
-        width: (theme.deviceWidth - 87) / 4,
-        height: 36,
-        margin: 2,
-        marginLeft: 7,
-        marginRight: 7,
-        padding: 4,
+        width: (theme.deviceWidth - 84) / 4,
+        height: 40,
+        margin: 3,
         backgroundColor: 'rgba(255,255,255,0.2)',
-
+    },
+    touchFle: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        padding: 4,
+        paddingTop: 2,
+        paddingBottom: 2,
     },
 
     rowTitle: {
