@@ -29,7 +29,7 @@ export default class Friend extends PureComponent {
 					</Right>
 				}/>
 				<Content gray delay>
-					<PullView isRefreshing={isFetching} onRefresh={this._onRefresh.bind(this)}>
+					<PullView isRefreshing={false} onRefresh={this._onRefresh.bind(this)}>
 						<List>
 							<ListItem icon last style={{height: 55}} onPress={() => Actions.newFriend()}>
 								<Left>
