@@ -6,11 +6,6 @@ import allDiseaseListStore from "../../../mobx/allDiseaseListStore";
 import allExpectListStore from "../../../mobx/allExpectListStore";
 import questionStore from "../../../mobx/questionStore";
 
-
-
-/**
- * 我的能量场 > 资料填写
- */
 export default class BodyModal extends PureComponent {
 
     constructor(props) {
@@ -19,7 +14,11 @@ export default class BodyModal extends PureComponent {
             visible: false,
         }
     }
+    onPressEvent(){
+        questionStore.jlModalShow = false
+        questionStore.teachModalShow = true
 
+    }
     render() {
         let {visible,pageKey} = this.props;
         let id = pageKey === 'disease' ? encodeURI(allDiseaseListStore.selectedItemName) :encodeURI(allExpectListStore.selectedItemName)
@@ -44,10 +43,10 @@ export default class BodyModal extends PureComponent {
                                 </Text>
                             </View>
                             <View style={styles.buttonView}>
-                                <Button block onPress={() => questionStore.jModalShow= false} style={{marginRight:20,backgroundColor: '#ccc'}}>
+                                <Button block onPress={() => questionStore.jlModalShow= false} style={{marginRight:20,backgroundColor: '#ccc'}}>
                                     <Text>知道了</Text>
                                 </Button>
-                                <Button block onPress={() => questionStore.jModalShow = false}>
+                                <Button block onPress={this.onPressEvent.bind(this)}>
                                     <Text>教我自疗</Text>
                                 </Button>
                             </View>
