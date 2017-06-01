@@ -3,11 +3,11 @@
  //const apiPath = 'http://103.254.113.11:9090/api/'; // 外网
  const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 // web服务器地址
-//const webPath = 'http://103.254.113.11:9191/web/'; // 外网
-//const webPath = 'http://103.254.113.11:9090/web/'; // 内网
+//const webPath = 'http://103.254.113.11:9090/web/'; // 外网
+// const webPath = 'http://103.254.113.11:9191/web/'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
-const webPath = 'http://192.168.3.204:3000/'; // 王朋
-//const webPath = 'http://192.168.3.213:3000/'; // cxx
+ //const webPath = 'http://192.168.3.204:3000/'; // 王朋
+const webPath = 'http://192.168.3.213:3000/'; // cxx
 // const webPath = 'http://192.168.3.203:3000/'; //
 
 
