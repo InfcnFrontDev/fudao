@@ -51,8 +51,7 @@ export default class Emotion extends PureComponent {
 					<View style={styles.topBox}>
 						<Image style={styles.puImg} source={require('../../assets/emotion/pugongying.png')}/>
 						<View tyle={styles.titleBox}>
-							<Text style={styles.titleDoc}>感谢生活与经历，请继续微笑，</Text>
-							<Text style={styles.titleDoc}>愿您时刻好心情！</Text>
+							<Text style={styles.titleDoc}>天天好心情，快乐伴随您！</Text>
 						</View>
 					</View>
 					<EmotionList onItemPress={this._onItemPress.bind(this)}/>
