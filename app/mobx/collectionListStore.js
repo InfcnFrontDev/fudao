@@ -36,7 +36,7 @@ class CollectionListStore {
 
 	@computed
 	get isNoResult() {
-		return this.collectionList.length == 0
+		return this.collectionList.length !== 0
 	}
 
 	@computed

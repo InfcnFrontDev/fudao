@@ -6,80 +6,10 @@ import {Actions} from "react-native-router-flux";
 import {Container, Header, Content, Loading} from "../../components/index";
 import CommonList from "./components/CommonList"
 import diagnosisStore from "../../mobx/diagnosiStore";
+import allDiseaseListStore from "../../mobx/allDiseaseListStore";
+import diseaseMethodStore from "../../mobx/diseaseMethodStore";
+import myDiseaseListStore from "../../mobx/myDiseaseListStore";
 
-var diagnosisList = [
-    {
-        "title": "北京",
-        "list": [
-            {
-                "id": "17",
-                "name": "脱发",
-            },
-            {
-                "id": "13",
-                "name": "口腔干燥",
-            },
-
-            {
-                "id": "13",
-                "name": "头痛",
-            },
-            {
-                "id": "12",
-                "name": "肥胖",
-            },
-            {
-                "id": "17",
-                "name": "呕吐",
-            },
-
-        ]
-    },
-    {
-        "title": "40岁用户",
-        "list": [
-            {
-                "id": "17",
-                "name": "心绞痛",
-            },
-            {
-                "id": "17",
-                "name": "噎食",
-            }, {
-                "id": "17",
-                "name": "高血压",
-            },
-            {
-                "id": "17",
-                "name": "慢性支气管炎",
-            },
-
-        ]
-    },
-    {
-        "title": "春季",
-        "list": [
-            {
-                "id": "17",
-                "name": "骨质疏松",
-            },
-            {
-                "id": "17",
-                "name": "咳嗽",
-            },
-
-        ]
-    },
-    {
-        "title": "女性",
-        "list": [
-            {
-                "id": "17",
-                "name": "晕厥",
-            }
-        ]
-    }
-]
 var i = 0;
 /**
  * 自诊
@@ -131,6 +61,7 @@ export default class Diagnosis extends PureComponent {
                                 <View style={styles.customize}>
                                     <TextInput style={styles.textInput} onChangeText={(text) => this.setState({text})}
                                                value={this.state.text} placeholder="找不到您的问题？那就写下来吧！"
+                                               placeholderTextColor="rgba(200,200,200,0.6)"
                                                multiline={true}
                                                underlineColorAndroid="transparent"/>
                                     <TouchableOpacity style={styles.customizeButton}
@@ -145,10 +76,10 @@ export default class Diagnosis extends PureComponent {
                                 </ScrollView>
                                 <View style={styles.buttonContainer}>
                                     <TouchableOpacity style={styles.button} onPress={() => this.gotoCeping(false)}>
-                                        <Text style={styles.buttonText}>完成自诊去自疗</Text>
+                                        <Text style={styles.buttonText}>完成自查</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.button} onPress={() => this.gotoCeping(true)}>
-                                        <Text style={styles.buttonText}>提交并继续自诊</Text>
+                                        <Text style={styles.buttonText}>继续自测</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -214,16 +145,28 @@ export default class Diagnosis extends PureComponent {
     }
 
     renderChoosed(diagnosis) {
-        let list = diagnosis.map((item, index) => {
-            return (
-                <View style={styles.row} key={index}>
-                    <Text style={styles.rowTitle}>{item.name}</Text>
-                    <TouchableOpacity underlayColor='transparent' onPress={this.delChoosed.bind(this, index)}>
-                        <Text style={styles.deleteChoosed}>一</Text>
-                    </TouchableOpacity>
-                </ View >
+        if (diagnosis.length == 0) {
+            var list = (
+                <View style={styles.tishiView}>
+                    <Text style={styles.tishi}>点击添加上面的问题到这里</Text>
+
+                </View>
             )
-        });
+        } else {
+            var list = diagnosis.map((item, index) => {
+                return (
+                    <View style={styles.row} key={index}>
+                        <TouchableOpacity underlayColor='transparent' onPress={this.delChoosed.bind(this, index)} style={{flexDirection: 'row'}}>
+                            <Text style={styles.rowTitle}>{item.name}</Text>
+
+                            <Text style={styles.deleteChoosed}>一</Text>
+                        </TouchableOpacity>
+                    </View>
+                )
+            });
+        }
+
+
         return (
             <View style={styles.chooseView}>
                 {list}
@@ -250,10 +193,17 @@ export default class Diagnosis extends PureComponent {
 
     gotoCeping(flag) {
         diagnosisStore.addMyDiseaseToBackstage();
-        if(flag){
+        if (flag) {
             Actions.evaluation()
-        }else{
-            Actions.disease()
+        } else {
+            request.getJson(urls.apis.DISEASE_GETMYDISEASELIST).then((res) => {
+                var item = res.obj[0];
+                myDiseaseListStore.myDiseaseList = res.obj
+                myDiseaseListStore.selectedItem = item
+                allDiseaseListStore.selectedItemName = item.name
+                diseaseMethodStore.diseaseId = item.id
+                Actions.diseaseDetail({title: item.name, data: item})
+            })
         }
     }
 
@@ -265,18 +215,19 @@ const styles = {
     h1: {
         color: "#fff",
         fontSize: 16,
+        marginLeft: 16,
     },
     questionList: {
         flex: 1,
     },
     oneLine: {
         flexDirection: 'row',
-        marginLeft: 14,
-        marginRight: 14,
+        marginLeft: 10,
+        // marginRight: 2,
         flexWrap: 'wrap',
     },
     customize: {
-        margin: 20,
+        margin: 10,
         backgroundColor: 'rgba(255,255,255,0.4)',
         borderWidth: 0.5,
         borderColor: '#fff',
@@ -284,14 +235,15 @@ const styles = {
         padding: 8,
     },
     textInput: {
-        height: 60,
+        height: 40,
         flex: 1,
         textAlignVertical: 'top',
         padding: 0,
         margin: 0,
+        color: "rgba(200,200,200,0.6)"
     },
     customizeButton: {
-        height: 60,
+        height: 40,
         backgroundColor: '#C4D2DF',
         borderRadius: 5,
     },
@@ -300,7 +252,16 @@ const styles = {
         fontSize: 18,
         padding: 7,
         // textAlignVertical: 'center',
-        paddingTop: 16
+        // paddingTop: 10
+    },
+    tishiView: {
+        width: theme.deviceWidth,
+    },
+    tishi: {
+        color: "#909193",
+        fontSize: 16,
+        marginTop: theme.deviceHeight / 10,
+        textAlign: 'center',
     },
     questionChoosed: {
         height: theme.deviceHeight / 3,
@@ -312,13 +273,16 @@ const styles = {
     },
     buttonContainer: {
         flexDirection: 'row',
-        height: 90,
+        height: 70,
+        paddingTop: 18,
+        // paddingBottom:15,
         justifyContent: 'space-around',
+        backgroundColor: '#EBEBEB'
     },
     button: {
         backgroundColor: "#A1CF00",
-        width: 82,
-        height: 54,
+        width: (theme.deviceWidth - 30) / 2,
+        height: 36,
         borderRadius: 5,
     },
     buttonText: {
@@ -329,7 +293,7 @@ const styles = {
     },
     chooseView: {
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
     },
     row: {
         backgroundColor: '#C2C2C2',

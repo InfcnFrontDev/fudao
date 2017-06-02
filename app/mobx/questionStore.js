@@ -5,7 +5,8 @@ class QuestionStore {
 	@observable questionName = ''
 	@observable questionType = ''
 	@observable modalShow = false
-	@observable jModalShow = false
+	@observable jlModalShow = false
+	@observable teachModalShow = false
 	@observable errorMsg = ''
 
 }

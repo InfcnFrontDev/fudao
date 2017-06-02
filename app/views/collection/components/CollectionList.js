@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import {StyleSheet, View, ListView, RefreshControl,Alert,ToastAndroid} from "react-native";
 import {observer} from "mobx-react/native";
 import Loading from "./Loading";
+import NoList from "./NoList";
 import LoadFooter from "./LoadFooter";
 import ArticleItem from "../../article/components/ArticleItem";
 import CollectionListStore from "../../../mobx/collectionListStore";
@@ -52,7 +53,7 @@ export default class CollectionList extends PureComponent {
 
 
 	render() {
-		const {isRefreshing, isFetching, collectionList} = CollectionListStore
+		const {isRefreshing, isFetching, collectionList,isNoResult} = CollectionListStore
 		return (
 			<View style={styles.listView}>
 				{!isFetching &&
@@ -74,7 +75,7 @@ export default class CollectionList extends PureComponent {
                     }
 				/>
 				}
-				<Loading isShow={isFetching}/>
+				<NoList isShow={isNoResult}/>
 			</View>
 		)
 	}

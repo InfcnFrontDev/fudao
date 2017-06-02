@@ -8,6 +8,7 @@ import DiseaseMethodTabView from "./components/DiseaseMethodTabView";
 import QuestionText from "../components/QuestionText"
 import DetailModal from "./components/DetailModal"
 import BodyModal from "./components/BodyModal"
+import TeachModal from "./components/TeachModal"
 import allDiseaseListStore from "../../mobx/allDiseaseListStore";
 import myDiseaseListStore from "../../mobx/myDiseaseListStore";
 import diseaseMethodStore from "../../mobx/diseaseMethodStore";
@@ -53,14 +54,15 @@ export default class DiseaseDetail extends PureComponent {
 						selectedItemId={selectedItemId}
 					/>
 					<DiseaseMethodTabView data={diseaseMethod} pageKey={'disease'}/>
-					<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jModalShow =true}>
+					<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jlModalShow =true}>
 						<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
 					</Button>
 				</Content>
                 <DetailModal visible={modalShow}>
                     <QuestionText data={questionId} from={'disease'}/>
                 </DetailModal>
-                <BodyModal visible={questionStore.jModalShow} pageKey={'disease'}/>
+                <BodyModal visible={questionStore.jlModalShow} pageKey={'disease'}/>
+                <TeachModal visible={questionStore.teachModalShow} pageKey={'disease'}/>
 			</Container>
 		)
 	}
