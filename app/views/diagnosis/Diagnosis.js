@@ -6,9 +6,9 @@ import {Actions} from "react-native-router-flux";
 import {Container, Header, Content, Loading} from "../../components/index";
 import CommonList from "./components/CommonList"
 import diagnosisStore from "../../mobx/diagnosiStore";
-import allDiseaseListStore from "../../mobx/allDiseaseListStore";
-import diseaseMethodStore from "../../mobx/diseaseMethodStore";
-import myDiseaseListStore from "../../mobx/myDiseaseListStore";
+// import allDiseaseListStore from "../../mobx/allDiseaseListStore";
+// import diseaseMethodStore from "../../mobx/diseaseMethodStore";
+// import myDiseaseListStore from "../../mobx/myDiseaseListStore";
 
 var i = 0;
 /**
@@ -192,18 +192,9 @@ export default class Diagnosis extends PureComponent {
     }
 
     gotoCeping(flag) {
-        diagnosisStore.addMyDiseaseToBackstage();
+        diagnosisStore.addMyDiseaseToBackstage(flag);
         if (flag) {
             Actions.evaluation()
-        } else {
-            request.getJson(urls.apis.DISEASE_GETMYDISEASELIST).then((res) => {
-                var item = res.obj[0];
-                myDiseaseListStore.myDiseaseList = res.obj
-                myDiseaseListStore.selectedItem = item
-                allDiseaseListStore.selectedItem = item
-                diseaseMethodStore.diseaseId = item.id
-                Actions.diseaseDetail({pageKey:'zicha'})
-            })
         }
     }
 
