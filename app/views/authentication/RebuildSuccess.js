@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import {Actions,ActionConst} from "react-native-router-flux";
 import {observer} from "mobx-react/native";
-import {Container,Content,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
+import {Container,Content} from "../../components/index";
+import {Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import  CommitButton from "./components/CommitButton";
 import  {hex_md5} from "./components/md5";

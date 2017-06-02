@@ -22,9 +22,9 @@ export default class EmotionList extends PureComponent {
 		let {dataSource1, dataSource2, dataSource3} = this.state;
 		return (
 			<View>
-				{this._renderGroup(dataSource3)}
-				{this._renderGroup(dataSource2)}
 				{this._renderGroup(dataSource1)}
+				{this._renderGroup(dataSource2)}
+				{this._renderGroup(dataSource3)}
 			</View>
 		)
 	}

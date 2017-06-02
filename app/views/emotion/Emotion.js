@@ -51,8 +51,8 @@ export default class Emotion extends PureComponent {
 					<View style={styles.topBox}>
 						<Image style={styles.puImg} source={require('../../assets/emotion/pugongying.png')}/>
 						<View tyle={styles.titleBox}>
-							<Text style={styles.titleDoc}>不好的情绪影响一天的生活，</Text>
-							<Text style={styles.titleDoc}>一起调节一下吧！</Text>
+							<Text style={styles.titleDoc}>感谢生活与经历，请继续微笑，</Text>
+							<Text style={styles.titleDoc}>愿您时刻好心情！</Text>
 						</View>
 					</View>
 					<EmotionList onItemPress={this._onItemPress.bind(this)}/>
@@ -87,7 +87,6 @@ export default class Emotion extends PureComponent {
 
 		// 解决总是先弹第一个框
 		this._factorModal.hide();
-
 		try {
 			if (item.grade) {
 				const result = await this._fetchEmotionIntervene(item.title, item.grade, []);
