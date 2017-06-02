@@ -17,7 +17,6 @@ export default class Position extends PureComponent {
 	}
 
 	componentDidMount() {
-		let {dispatch} = this.props;
 		// 获取当前位置
 		navigator.geolocation.getCurrentPosition(
 			(position) => this.updatePosition(position),
@@ -27,7 +26,6 @@ export default class Position extends PureComponent {
 
 		// 监听位置变化
 		this.watchID = navigator.geolocation.watchPosition((position) => {
-			// positionStore.lastPosition = position
 			this.updatePosition(position)
 		});
 	}

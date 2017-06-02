@@ -1,4 +1,4 @@
-import {ToastAndroid} from "react-native";
+import {ToastAndroid, Alert} from "react-native";
 import DialogAndroid from "react-native-dialogs";
 import uuid from "uuid";
 import config from "./config";
@@ -76,6 +76,10 @@ const tools = {
 	pinyin(str){
 		return pinyin.getFullChars(str);
 	},
+
+	notOpen(){
+		Alert.alert('提示', '该功能暂未开放！')
+	}
 
 };
 export default tools;

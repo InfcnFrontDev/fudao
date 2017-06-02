@@ -4,7 +4,6 @@ import {StyleProvider, Drawer} from "native-base";
 import SplashScreen from "react-native-splash-screen";
 import AppRouter from "./AppRouter";
 import getTheme from "../native-base-theme/components/";
-import Position from "./views/components/Position";
 
 
 /**
@@ -20,7 +19,6 @@ export default class AppNavigator extends PureComponent {
 						hidden={false}
 						backgroundColor={theme.statusBarColor}/>
 					<AppRouter/>
-					<Position />
 				</Drawer>
 			</StyleProvider>
 		)
