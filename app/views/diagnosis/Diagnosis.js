@@ -200,7 +200,7 @@ export default class Diagnosis extends PureComponent {
                 var item = res.obj[0];
                 myDiseaseListStore.myDiseaseList = res.obj
                 myDiseaseListStore.selectedItem = item
-                allDiseaseListStore.selectedItemName = item.name
+                allDiseaseListStore.selectedItem = item
                 diseaseMethodStore.diseaseId = item.id
                 Actions.diseaseDetail({title: item.name, data: item})
             })

@@ -21,9 +21,8 @@ export default class Expect extends PureComponent {
     }
 
     onItemPress(item){
-        myExpectListStore.selectedItemName = item.name
-        myExpectListStore.selectedItemId = item.id
-        allExpectListStore.selectedItemName = item.name
+        myExpectListStore.selectedItem= item
+        allExpectListStore.selectedItem = item
         Actions.expectDetail({title: item.name, data: item})
         expectMethodStore.expectId = item.id
     }
@@ -42,7 +41,7 @@ export default class Expect extends PureComponent {
     }
     render() {
         let {allExpectList} = allExpectListStore;
-        let {myExpectList,selectedItemId} = myExpectListStore;
+        let {myExpectList,selectedItem} = myExpectListStore;
         return (
 			<Container>
 				<Header {...this.props}/>
@@ -54,7 +53,7 @@ export default class Expect extends PureComponent {
 						data={myExpectList}
 						onItemPress={(item) => this.onItemPress(item)}
 						onItemRemove={(item,i) => this.onItemRemove(item,i)}
-						selectedItemId={selectedItemId}
+						selectedItemId={selectedItem.id}
                     />
 					<AllDiseaseTabView
 						data={allExpectList}

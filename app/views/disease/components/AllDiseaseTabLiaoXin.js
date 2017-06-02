@@ -4,18 +4,6 @@ import {Text, Button} from "native-base";
 
 export default class AllDiseaseTabLiaoXin extends PureComponent {
 
-	static propsTypes = {
-		data: React.PropTypes.array,
-		selectedItem: React.PropTypes.object,
-		onItemAdd: React.PropTypes.func,
-		onItemPress: React.PropTypes.func,
-	}
-	static defaultProps = {
-		data: [],
-		selectedItem: {},
-		onItemAdd: () => console.log('onItemAdd'),
-		onItemPress: () => console.log('onItemPress'),
-	}
     ds = new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2
     });
