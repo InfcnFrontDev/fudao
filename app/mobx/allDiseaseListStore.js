@@ -4,6 +4,7 @@ import {ListView} from "react-native";
 
 class AllDiseaseListStore {
 	@observable allDiseaseList = []
+	@observable data = []
     @observable selectedItem = {}
     @observable modalShow = false
     @observable allDiseaseListLiaoShen = []
@@ -24,6 +25,18 @@ class AllDiseaseListStore {
 			}).catch((error)=>{
             console.log("Api call error");
         });
+	}
+	fetchData(){
+        request.getJson(urls.apis.DISEASE_ACUPOINTS,{diseaseType:this.selectedItem.type,disease: this.selectedItem.name})
+            .then((result) => {
+                if (result.ok) {
+                    this.data = result.obj
+                } else {
+                    tools.showToast('请求出错！')
+                }
+            }).catch((error)=>{
+            console.log("Api call error");
+        })
 	}
     ds1 = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     ds2 = new ListView.DataSource({

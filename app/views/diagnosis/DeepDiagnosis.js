@@ -41,17 +41,20 @@ export default class DeepDiagnosis extends PureComponent {
     }
 
     gotoDeep(data) {
-        if (data == 2) {
+
+        if (data == "2"||data=='err') {
+
             request.getJson(urls.apis.DISEASE_GETMYDISEASELIST).then((res) => {
                 var item = res.obj[0];
                 myDiseaseListStore.myDiseaseList = res.obj
                 myDiseaseListStore.selectedItem = item
                 allDiseaseListStore.selectedItem = item
                 diseaseMethodStore.diseaseId = item.id
-                Actions.diseaseDetail({title: item.name, data: item})
+                Actions.diseaseDetail({pageKey:'zicha'})
             })
 
         }
+
     }
 
 

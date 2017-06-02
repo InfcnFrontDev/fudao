@@ -1,11 +1,14 @@
 import React, {PureComponent} from "react";
 import {Modal, View,Text,Image,TouchableOpacity,ScrollView} from "react-native";
+import {observer} from "mobx-react/native";
 import {Button} from "native-base";
 import {Container, Content} from "../../../components/index";
 import allDiseaseListStore from "../../../mobx/allDiseaseListStore";
 import allExpectListStore from "../../../mobx/allExpectListStore";
 import questionStore from "../../../mobx/questionStore";
 import Swiper from "react-native-swiper"
+
+@observer
 export default class TeachModal extends PureComponent {
 
     constructor(props) {
@@ -15,30 +18,16 @@ export default class TeachModal extends PureComponent {
             visible: false,
         }
     }
-    fetchData() {
-        let {selectedItem} = allDiseaseListStore
-        request.getJson(urls.apis.DISEASE_ACUPOINTS,{diseaseType:selectedItem.type,disease: selectedItem.name})
-            .then((result) => {
-                if (result.ok) {
-                    this.setState({
-                       data: result.obj
-                   })
-                } else {
-                    tools.showToast('请求出错！')
-                }
-            }).catch((error)=>{
-            console.log("Api call error");
-        });
-    }
-    componentDidMount(){
-        this.fetchData()
-    }
-    onPressEvent(){
 
+    componentDidMount(){
+        let {pageKey} = this.props;
+        pageKey === 'disease' ?
+        allDiseaseListStore.fetchData() : allExpectListStore.fetchData()
     }
+
     render() {
         let {visible,pageKey} = this.props;
-        let {data} = this.state
+        let {data} = pageKey === 'disease' ? allDiseaseListStore : allExpectListStore
 
         return (
             <Modal
@@ -54,7 +43,7 @@ export default class TeachModal extends PureComponent {
                         showsButtons={false}
                         showsPagination={true}
                         height={theme.deviceHeight}
-                        paginationStyle={{bottom: 15}}
+                        paginationStyle={{bottom: 120}}
                         activeDot={<View style={{backgroundColor: '#00cf92', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />}
 
                     >
