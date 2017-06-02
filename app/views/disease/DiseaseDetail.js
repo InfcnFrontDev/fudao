@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
 import {View, Image, Text} from "react-native";
-import {Button} from "native-base";
+import {Button,Left,Icon} from "native-base";
+import {Actions} from "react-native-router-flux";
 import {Container, Content, Header,Modal} from "../../components/index";
 import MyDiseaseList from "./components/MyDiseaseList";
 import DiseaseMethodTabView from "./components/DiseaseMethodTabView";
@@ -26,6 +27,7 @@ export default class DiseaseDetail extends PureComponent {
         allDiseaseListStore.selectedItem = item
         diseaseMethodStore.diseaseId = item.id
         diseaseMethodStore.fetchDiseaseMethod()
+        allDiseaseListStore.fetchData()
 	}
 
     onItemRemove(item,i) {
@@ -41,7 +43,12 @@ export default class DiseaseDetail extends PureComponent {
         const {modalShow,questionId} = questionStore;
 		return (
 			<Container>
-				<Header title = {selectedItem.name || this.props.title}/>
+				<Header title = {selectedItem.name || this.props.title} left={
+                    <Left>
+                        <Button transparent onPress={this.props.pageKey == 'zicha'?  ()=>Actions.index() : ()=> Actions.pop()}><Icon
+                            name="arrow-back"/></Button>
+                    </Left>
+                }/>
 				<Content delay>
 					<View>
 						<Text style={styles.title}>我的问题</Text>

@@ -6,9 +6,9 @@ import {Actions} from "react-native-router-flux";
 import {Container, Header, Content, Loading} from "../../components/index";
 import CommonList from "./components/CommonList"
 import diagnosisStore from "../../mobx/diagnosiStore";
-import allDiseaseListStore from "../../mobx/allDiseaseListStore";
-import diseaseMethodStore from "../../mobx/diseaseMethodStore";
-import myDiseaseListStore from "../../mobx/myDiseaseListStore";
+// import allDiseaseListStore from "../../mobx/allDiseaseListStore";
+// import diseaseMethodStore from "../../mobx/diseaseMethodStore";
+// import myDiseaseListStore from "../../mobx/myDiseaseListStore";
 
 var i = 0;
 /**
@@ -75,7 +75,7 @@ export default class Diagnosis extends PureComponent {
                                     {this.renderChoosed(diagnosisDisease)}
                                 </ScrollView>
                                 <View style={styles.buttonContainer}>
-                                    <TouchableOpacity style={styles.button} onPress={() => this.gotoCeping(false)}>
+                                    <TouchableOpacity style={diagnosisDisease.length>0?styles.button:styles.button2} onPress={() => diagnosisDisease.length>0?this.gotoCeping(false):null}>
                                         <Text style={styles.buttonText}>完成自查</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.button} onPress={() => this.gotoCeping(true)}>
@@ -92,7 +92,7 @@ export default class Diagnosis extends PureComponent {
             return (
                 <Container>
                     <Header {...this.props}/>
-                    <Loading isShow={isFetching}/>
+                    {/*<Loading isShow={isFetching}/>*/}
                 </Container>
             )
         }
@@ -192,18 +192,9 @@ export default class Diagnosis extends PureComponent {
     }
 
     gotoCeping(flag) {
-        diagnosisStore.addMyDiseaseToBackstage();
+        diagnosisStore.addMyDiseaseToBackstage(flag);
         if (flag) {
             Actions.evaluation()
-        } else {
-            request.getJson(urls.apis.DISEASE_GETMYDISEASELIST).then((res) => {
-                var item = res.obj[0];
-                myDiseaseListStore.myDiseaseList = res.obj
-                myDiseaseListStore.selectedItem = item
-                allDiseaseListStore.selectedItem = item
-                diseaseMethodStore.diseaseId = item.id
-                Actions.diseaseDetail({title: item.name, data: item})
-            })
         }
     }
 
@@ -281,6 +272,12 @@ const styles = {
     },
     button: {
         backgroundColor: "#A1CF00",
+        width: (theme.deviceWidth - 30) / 2,
+        height: 36,
+        borderRadius: 5,
+    },
+    button2: {
+        backgroundColor: "#ccc",
         width: (theme.deviceWidth - 30) / 2,
         height: 36,
         borderRadius: 5,

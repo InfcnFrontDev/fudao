@@ -27,13 +27,16 @@ export default class RebuildSuccess extends PureComponent {
             <Text style={styles.titleText}>{this.state.text}</Text>
         );
         return (
-            <Container style={styles.container}>
-                <View style={styles.view}>
-                    <Text style={styles.titleText}>密码设置成功！</Text>
-                    <Text style={{textAlign:'center',marginTop:120}}>{this.state.number}s后自动登录...</Text>
-                    <CommitButton title="登录" block={true} border={false} top={20}  onPress={this._login.bind(this,this.state.phone,this.state.password)} />
+            <Content white >
+                <View style={styles.container}>
+                    <View style={styles.view}>
+                        <Text style={styles.titleText}>密码设置成功！</Text>
+                        <Text style={{textAlign:'center',marginTop:120}}>{this.state.number}s后自动登录...</Text>
+                        <CommitButton title="登录" block={true} border={false} top={20}  onPress={this._login.bind(this,this.state.phone,this.state.password)} />
+                    </View>
                 </View>
-            </Container>
+
+            </Content>
         );
     }
     interval(){
@@ -60,6 +63,7 @@ export default class RebuildSuccess extends PureComponent {
 }
 const styles = {
     container:{
+        flex:1,
         justifyContent:'center',
         alignItems:'center',
 

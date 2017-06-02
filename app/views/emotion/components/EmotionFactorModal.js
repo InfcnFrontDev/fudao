@@ -36,7 +36,8 @@ export default class EmotionFactorModal extends PureComponent {
 		}
 		return (
 			<Modal ref={(e)=>this._modal = e} visible={visible}>
-				{emotion != null && <ScrollView>
+				{emotion != null &&
+				<ScrollView style={{marginBottom:10,marginTop:10}}>
 					<View style={styles.container}>
 						<View style={styles.View}>
 							<View style={{flexDirection:'row'}}>
@@ -74,7 +75,7 @@ export default class EmotionFactorModal extends PureComponent {
 								</View>}
 							</View>
 
-							<View style={{marginTop:10,flexDirection:'row'}}>
+							<View style={{marginTop:12,flexDirection:'row',marginBottom:5}}>
 								<Text style={{fontWeight:'bold'}}>请选择其他影响您</Text>
 								<Text style={{fontWeight:'bold'}}>{emotion.title}</Text>
 								<Text style={{fontWeight:'bold'}}>的原因：</Text>
@@ -84,9 +85,8 @@ export default class EmotionFactorModal extends PureComponent {
 								dataSource={this.state.dataSource.cloneWithRows(emotion.reasons.slice(0))}
 								renderRow={this.renderReasonRow.bind(this)}
 								enableEmptySections
-								style={{height: 120}}
 							/>
-							<View style={{alignItems:'center'}}>
+							<View style={{alignItems:'center',marginTop:10,marginBottom:10}}>
 								<View style={styles.input}>
 									<TextInput underlineColorAndroid="transparent" placeholder="请输入您的原因"
 											   onChangeText={(value)=>{this.selfReason=value}}/>
@@ -94,7 +94,7 @@ export default class EmotionFactorModal extends PureComponent {
 							</View>
 							<View style={{alignItems:'center',justifyContent:'center'}}>
 								<View>
-									<Button style={{marginTop:10,height:30}} onPress={()=>this.submit()}>
+									<Button style={{marginTop:10,height:40}} onPress={()=>this.submit()}>
 										<Text>帮您缓解</Text>
 									</Button>
 								</View>
@@ -196,14 +196,15 @@ export default class EmotionFactorModal extends PureComponent {
 const styles = {
 	container: {
 		flex: 1,
-		paddingTop: 10,
 		paddingBottom: 10,
 		paddingRight: 10,
-		paddingLeft: 10
+		paddingLeft: 10,
+		backgroundColor:'#fff'
 	},
 	View: {
-		flex: 1,
 		flexDirection: 'column',
+		marginBottom:10,
+		backgroundColor:'#fff'
 	},
 	title: {
 		fontSize: theme.DefaultFontSize,
@@ -278,7 +279,7 @@ const styles = {
 		lineHeight: 28,
 	},
 	input: {
-		width: theme.deviceWidth * 0.8,
+		width: theme.deviceWidth * 0.75,
 		height: 40,
 		borderWidth: 1,
 		borderColor: '#666',

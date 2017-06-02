@@ -7,11 +7,12 @@ import MyDiseaseList from "./components/MyDiseaseList";
 import DiseaseMethodTabView from "./components/DiseaseMethodTabView";
 import QuestionText from "../components/QuestionText"
 import DetailModal from "./components/DetailModal"
+import BodyModal from "./components/BodyModal"
+import TeachModal from "./components/TeachModal"
 import expectMethodStore from "../../mobx/expectMethodStore";
 import myExpectListStore from "../../mobx/myExpectListStore";
 import allExpectListStore from "../../mobx/allExpectListStore";
 import questionStore from "../../mobx/questionStore";
-import BodyModal from "./components/BodyModal"
 
 
 @observer
@@ -26,7 +27,8 @@ export default class ExpectDetail extends PureComponent {
         allExpectListStore.selectedItem = item
         expectMethodStore.expectId = item.id
         expectMethodStore.fetchExpectMethod()
-	}
+        allExpectListStore.fetchData()
+    }
 
     onItemRemove(item,i) {
         let {myDiseaseList,deleteMyDiseaseListItem} = myDiseaseListStore;
@@ -62,7 +64,8 @@ export default class ExpectDetail extends PureComponent {
                     <QuestionText data={questionId} from={'expect'}/>
                 </DetailModal>
                 <BodyModal visible={questionStore.jlModalShow} pageKey={'expect'}/>
-			</Container>
+                <TeachModal visible={questionStore.teachModalShow} pageKey={'expect'}/>
+            </Container>
 		)
 	}
 }

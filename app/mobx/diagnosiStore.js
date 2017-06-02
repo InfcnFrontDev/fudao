@@ -4,6 +4,10 @@
 import {AsyncStorage} from "react-native";
 import {observable, runInAction, computed, action, reaction, autorun} from "mobx";
 import groupBy from 'lodash/groupBy'
+import allDiseaseListStore from "./allDiseaseListStore";
+import diseaseMethodStore from "./diseaseMethodStore";
+import myDiseaseListStore from "./myDiseaseListStore";
+import {Actions} from "react-native-router-flux";
 
 class DiagnosisStore {
     @observable diagnosisList = [];
@@ -13,16 +17,7 @@ class DiagnosisStore {
 
     @action
     fetchDiagnosisColumnList() {
-        // request.getJson(urls.apis.DIAGNOSIS_GETCOMMONDISEASELIST)
-        //     .then((result) => {
-        //         alert(result);
-        //         result = dataList;
-        //         if (result.ok) {
-        //             this.diagnosisList = result.obj
-        //         } else {
-        //             tools.showToast('请求出错！')
-        //         }
-        //     });
+
     }
 
     @action
@@ -42,14 +37,30 @@ class DiagnosisStore {
     }
 
     @action
-    addMyDiseaseToBackstage(){
+    addMyDiseaseToBackstage(flag){
         var ids='';
         for(var i=0;i<this.diagnosisDisease.length;i++){
             ids+=this.diagnosisDisease[i].id+',';
         }
         request.getJson(urls.apis.DIAGNOSIS_ADDMYDISEASES,{
             ids
-        });
+        }).then(()=>{
+            if(!flag){
+                request.getJson(urls.apis.DISEASE_GETMYDISEASELIST).then((res) => {
+                    if(res.obj.length>0){
+                        var item = res.obj[0];
+                        myDiseaseListStore.myDiseaseList = res.obj
+                        myDiseaseListStore.selectedItem = item
+                        allDiseaseListStore.selectedItem = item
+                        diseaseMethodStore.diseaseId = item.id
+                        Actions.diseaseDetail({pageKey:'zicha'})
+                    }else{
+                        Actions.disease();
+                    }
+
+                })
+            }
+        })
         // this.diagnosisDisease = [];
         // this.diagnosisDiseaseOrderBy = {};
     }

@@ -24,7 +24,7 @@ export default class NewFriend extends PureComponent {
 				<Content gray>
 					<PullView isRefreshing={false} onRefresh={this._onRefresh.bind(this)}>
 						<Separator title="新的朋友"/>
-						<List containerStyle={styles.list}>0
+						<List containerStyle={styles.list}>
 							{NewFriendList.map((f, i) => (
 								<ListItem avatar key={i}>
 									<Left>

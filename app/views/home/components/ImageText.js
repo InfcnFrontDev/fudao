@@ -33,7 +33,7 @@ const styles = {
 		marginRight: 30,
 	},
 	content: {
-		textAlign: 'center',
+
 		fontSize: theme.DefaultFontSize + 2,
 		marginLeft: 30,
 		marginRight: 30,
