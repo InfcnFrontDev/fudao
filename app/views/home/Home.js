@@ -85,8 +85,7 @@ export default class Home extends PureComponent {
 							<Icon name="search"
 								  style={{color: "#fff",  position: 'absolute', right: 10}}/>
 						</Button>
-
-						<Button transparent >{/*onPress={()=> Actions.message()}*/}
+						<Button transparent onPress={()=> Actions.feedback()}>
 							<Icon name="ios-chatboxes" style={{color: "#fff"}}/>
 							{/*<View
 								style={{backgroundColor:'#f00',width:15,height:15,borderRadius:15,paddingTop:1,position:'absolute',right:10,top:0}}>
@@ -117,9 +116,9 @@ export default class Home extends PureComponent {
 					<Button transparent style={rightBtnStyle} onPress={()=> Actions.energy()}>
 						<Image source={require('../../assets/home/cengliangchang.png')} style={styles.image}/>
 					</Button>
-					<DetailsModal ref={(e)=>this._groupSelectModal = e}></DetailsModal>
-					<TimeModal ref={(e)=>this._TimeModal = e}></TimeModal>
-					<YunDongModal ref={(e)=>this._YunDongModal = e}></YunDongModal>
+					<DetailsModal ref={(e)=>this._groupSelectModal = e}/>
+					<TimeModal ref={(e)=>this._TimeModal = e}/>
+					<YunDongModal ref={(e)=>this._YunDongModal = e}/>
 
 				</Content>
 				<View style={{width: Dimensions.get('window').width, height: 107,}}>
@@ -179,5 +178,8 @@ const styles = {
 	image:{
 		width:35,
 		height:35
-	}
+	},
+	back:{
+		marginRight:20
+	},
 };
