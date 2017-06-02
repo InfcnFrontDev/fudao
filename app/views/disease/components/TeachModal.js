@@ -11,38 +11,33 @@ export default class TeachModal extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            data: [],
             visible: false,
         }
+    }
+    fetchData() {
+        request.getJson(urls.apis.DISEASE_ACUPOINTS)
+            .then((result) => {
+                if (result.ok && result.obj) {
+                   this.setState({
+                       data: result.obj
+                   })
+                } else {
+                    tools.showToast('请求出错！')
+                }
+            }).catch((error)=>{
+            console.log("Api call error");
+        });
+    }
+    componentDidMount(){
+        this.fetchData()
     }
     onPressEvent(){
 
     }
     render() {
         let {visible,pageKey} = this.props;
-        let data = [
-            {
-                "acupoint": "膈俞",
-                "part": "背部",
-                "location": "在脊柱区，第7胸椎棘突下，后正中线旁开1.5寸。",
-                "healthEffect": "活血行血，补血养血。",
-                "healthMethod": "他人代为按揉。施术者两手置于被施术者上背部，双手拇指指腹分别按揉两侧的膈俞穴。按揉的手法要均匀、柔和，以局部有酸痛感为佳。早晚各1次，每次按揉2～3分钟，两侧膈俞穴同时按揉。",
-                "simpleAcupointSelection": "在肩胛下角水平连线，后正中线旁开2横指处。",
-                "mattersNeedAttention": null,
-                "contraindication": null,
-                "img": "/disease/photo/jiashutou.jpg",
-            },
-            {
-                "acupoint": "膈俞",
-                "part": "背部",
-                "location": "在脊柱区，第7胸椎棘突下，后正中线旁开1.5寸。",
-                "healthEffect": "活血行血，补血养血。",
-                "healthMethod": "他人代为按揉。施术者两手置于被施术者上背部，双手拇指指腹分别按揉两侧的膈俞穴。按揉的手法要均匀、柔和，以局部有酸痛感为佳。早晚各1次，每次按揉2～3分钟，两侧膈俞穴同时按揉。",
-                "simpleAcupointSelection": "在肩胛下角水平连线，后正中线旁开2横指处。",
-                "mattersNeedAttention": null,
-                "contraindication": null,
-                "img": "/disease/photo/chenqicao.jpg",
-            },
-        ]
+        let data = this.state
 
 
         return (
@@ -54,18 +49,6 @@ export default class TeachModal extends PureComponent {
             >
                 <View style={styles.opacityView}/>
                 <View style={styles.content}>
-                    {/*<Swiper style={styles.wrapper}*/}
-                            {/*sdot={<View style={{backgroundColor:'rgba(255,255,255,.3)', width: 13, height: 13,borderRadius: 7, marginLeft: 7, marginRight: 7}} />}*/}
-                            {/*activeDot={<View style={{backgroundColor: '#f1f1f1', width: 13, height: 13, borderRadius: 7, marginLeft: 7, marginRight: 7}} />}*/}
-                            {/*paginationStyle={{bottom: 50}}*/}
-                            {/*loop={false}>*/}
-                        {/*<View style={styles.row}>*/}
-                            {/*<Image style={styles.image} source={require('../../../assets/bg/my.jpg')}/>*/}
-                        {/*</View>*/}
-                        {/*<View style={styles.row}>*/}
-                            {/*<Image style={styles.image} source={require('../../../assets/bg/my.jpg')}/>*/}
-                        {/*</View>*/}
-                    {/*</Swiper>*/}
                     <Swiper
                         style={styles.wrapper}
                         showsButtons={false}
@@ -76,7 +59,7 @@ export default class TeachModal extends PureComponent {
 
                     >
                         {
-                            data.map((item, index)=> {
+                            data.length > 0 ? data.map((item, index)=> {
                                 return (
                                     <View key={index}>
                                         <Image style={styles.img} source={{uri:urls.getImage(item.img)}}/>
@@ -93,7 +76,7 @@ export default class TeachModal extends PureComponent {
 
                                     </View>
                                 )
-                            })
+                            }) : <View/>
                         }
                     </Swiper>
 

@@ -22,9 +22,8 @@ export default class ExpectDetail extends PureComponent {
     }
 
     onTransPress(item){
-        myExpectListStore.selectedItemName = item.name
-        myExpectListStore.selectedItemId = item.id
-        allExpectListStore.selectedItemName = item.name
+        myExpectListStore.selectedItem = item
+        allExpectListStore.selectedItem = item
         expectMethodStore.expectId = item.id
         expectMethodStore.fetchExpectMethod()
 	}
@@ -37,13 +36,13 @@ export default class ExpectDetail extends PureComponent {
     }
 
 	render() {
-        let {myExpectList,selectedItemId,selectedItemName} = myExpectListStore;
+        let {myExpectList,selectedItem} = myExpectListStore;
         const {expectMethod} = expectMethodStore;
         const {modalShow,questionId} = questionStore;
 
         return (
 			<Container>
-                <Header title = {selectedItemName || this.props.title}/>
+                <Header title = {selectedItem.name || this.props.title}/>
 				<Content delay>
 					<View>
 						<Text style={styles.title}>我的问题</Text>
@@ -52,17 +51,17 @@ export default class ExpectDetail extends PureComponent {
 						data={myExpectList}
 						onTransPress = {(item) => this.onTransPress(item)}
 						onItemRemove={(item,i) => this.onItemRemove(item,i)}
-						selectedItemId={selectedItemId}
+						selectedItemId={selectedItem.id}
 					/>
 					<DiseaseMethodTabView data={expectMethod} pageKey={'expect'}/>
-					<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jModalShow=true}>
+					<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jlModalShow=true}>
 						<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
 					</Button>
 				</Content>
                 <DetailModal visible={modalShow}>
                     <QuestionText data={questionId} from={'expect'}/>
                 </DetailModal>
-                <BodyModal visible={questionStore.jModalShow} pageKey={'expect'}/>
+                <BodyModal visible={questionStore.jlModalShow} pageKey={'expect'}/>
 			</Container>
 		)
 	}

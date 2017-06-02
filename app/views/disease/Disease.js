@@ -21,9 +21,8 @@ export default class Disease extends PureComponent {
     }
 
     onItemPress(item){
-        myDiseaseListStore.selectedItemName = item.name
-        myDiseaseListStore.selectedItemId = item.id
-        allDiseaseListStore.selectedItemName=item.name
+        myDiseaseListStore.selectedItem = item
+        allDiseaseListStore.selectedItem = item
         Actions.diseaseDetail({title: item.name, data: item})
         diseaseMethodStore.diseaseId = item.id
 	}
@@ -45,7 +44,7 @@ export default class Disease extends PureComponent {
 
 	render() {
         let {allDiseaseList} = allDiseaseListStore;
-        let {myDiseaseList,selectedItemId} = myDiseaseListStore;
+        let {myDiseaseList,selectedItem} = myDiseaseListStore;
         return (
 			<Container>
 				<Header {...this.props}/>
@@ -57,7 +56,7 @@ export default class Disease extends PureComponent {
 						data={myDiseaseList}
 						onItemPress={(item) => this.onItemPress(item)}
 						onItemRemove={(item,i) => this.onItemRemove(item,i)}
-						selectedItemId={selectedItemId}
+						selectedItemId={selectedItem.id}
 					/>
 					<AllDiseaseTabView
 						data={allDiseaseList}
