@@ -16,10 +16,11 @@ export default class TeachModal extends PureComponent {
         }
     }
     fetchData() {
-        request.getJson(urls.apis.DISEASE_ACUPOINTS)
+        let {selectedItem} = allDiseaseListStore
+        request.getJson(urls.apis.DISEASE_ACUPOINTS,{diseaseType:selectedItem.type,disease: selectedItem.name})
             .then((result) => {
-                if (result.ok && result.obj) {
-                   this.setState({
+                if (result.ok) {
+                    this.setState({
                        data: result.obj
                    })
                 } else {
@@ -37,8 +38,7 @@ export default class TeachModal extends PureComponent {
     }
     render() {
         let {visible,pageKey} = this.props;
-        let data = this.state
-
+        let {data} = this.state
 
         return (
             <Modal
@@ -65,7 +65,7 @@ export default class TeachModal extends PureComponent {
                                         <Image style={styles.img} source={{uri:urls.getImage(item.img)}}/>
                                         <ScrollView>
                                             <View style={styles.box}>
-                                                <Text style={styles.text}>穴位名称：{item.acupoint}</Text>
+                                                <Text style={styles.text}>穴位名称：{item.name}</Text>
                                                 <Text style={styles.text}>部位：{item.part}</Text>
                                                 <Text style={styles.text}>相关器官：{item.location}</Text>
                                                 <Text style={styles.text}>穴位保健效果：{item.healthEffect}</Text>
