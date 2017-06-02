@@ -2,8 +2,7 @@ import {observable, runInAction, computed, action, reaction, autorun} from "mobx
 
 class MyExpectListStore {
 	@observable myExpectList = []
-	@observable selectedItemId = ''
-	@observable selectedItemName = ''
+	@observable selectedItem = {}
 	@observable deleteItemId = ''
 	@observable addItemId = ''
 	@observable errorMsg = ''

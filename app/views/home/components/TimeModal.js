@@ -117,6 +117,9 @@ const styles = {
         paddingBottom: 10,
         paddingRight: 6,
         flexDirection: 'row',
+        position: "absolute",
+        zIndex:10000
+
     },
     headerText: {
         fontSize: theme.fontSizeH4

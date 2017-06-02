@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {View, Image, TouchableHighlight, TextInput, ScrollView, TouchableOpacity, ListView} from "react-native";
+import {View, Image, TouchableHighlight, TextInput, ScrollView, TouchableOpacity, ListView,Slider} from "react-native";
 import {Text, Button, ListItem, CheckBox} from "native-base";
 import {Modal} from "../../../components/index";
 /**
@@ -25,15 +25,22 @@ export default class EmotionFactorModal extends PureComponent {
 
 	render() {
 		let {visible, emotion} = this.state;
+		let maxVal;
+		if(emotion){
+			if(emotion.grade.length==3){
+				maxVal=2;
+			}else if(emotion.grade.length==2){
+				maxVal=1;
+			}
+
+		}
 		return (
 			<Modal ref={(e)=>this._modal = e} visible={visible}>
 				{emotion != null && <ScrollView>
 					<View style={styles.container}>
 						<View style={styles.View}>
 							<View style={{flexDirection:'row'}}>
-								<Text style={styles.title}>这样的乌云让你</Text>
-								<Text style={styles.title}>{emotion.title}</Text>
-								<Text style={styles.title}>了</Text>
+								<Text style={styles.title}>您有受以下因素影响吗？</Text>
 							</View>
 							<Image source={require('../../../assets/emotion/wuyun.png')} style={styles.wuyunBox}
 								   resizeMode="contain">
@@ -48,14 +55,29 @@ export default class EmotionFactorModal extends PureComponent {
 
 							<View style={{justifyContent: 'center', alignItems: 'center'}}>
 								{emotion.grade.length > 1 && <View style={styles.slideBox}>
-									{emotion.grade.map((item, index) => this.renderGrade(item, index))}
+									<View style={{width:theme.deviceWidth*0.6,justifyContent: 'center'}}>
+										<View style={{flexDirection:'row',justifyContent:'space-between'}}>
+											{emotion.grade.map((item,index)=>{
+												return(
+													<Text style={{fontSize:theme.DefaultFontSize-2}} key={index}>{item.title}</Text>
+												)
+											})}
+										</View>
+										<Slider
+											maximumValue={maxVal}
+											minimumValue={0}
+											step={1}
+											value={0}
+											onSlidingComplete={(value) => {this._grade_Change(value,emotion.grade)}}
+										/>
+									</View>
 								</View>}
 							</View>
 
 							<View style={{marginTop:10,flexDirection:'row'}}>
-								<Text>还有什么让你</Text>
-								<Text>{emotion.title}</Text>
-								<Text>呢？</Text>
+								<Text style={{fontWeight:'bold'}}>请选择其他影响您</Text>
+								<Text style={{fontWeight:'bold'}}>{emotion.title}</Text>
+								<Text style={{fontWeight:'bold'}}>的原因：</Text>
 							</View>
 							<ListView
 								renderScrollComponent={props => <ScrollView {...props} showsVerticalScrollIndicator={true}/>}
@@ -90,7 +112,6 @@ export default class EmotionFactorModal extends PureComponent {
 			<View key={index} style={styles.hongGuanBox}>
 				<Image source={{uri:urls.getImage(item.img)}} style={styles.hongGuanImg}/>
 				<Text style={styles.itemText}>{item.name}</Text>
-
 			</View>
 		)
 	}
@@ -126,25 +147,23 @@ export default class EmotionFactorModal extends PureComponent {
 		})
 	}
 
-	renderGrade(item, index) {
-		let {selectedGradeIndex} = this.state;
-		let color = index <= selectedGradeIndex ? '#008F81' : '#fff';
-		return (
-			<TouchableOpacity key={index} onPress={()=> this._grade_onClick(item,index)}>
-				<View style={styles.slideItem}>
-					<View style={styles.slideText}>
-						<Text>{item.title}</Text>
-					</View>
-					<View style={{flexDirection: 'row', justifyContent: 'center'}}>
-						<View style={{marginRight:5,width:80,height:8,backgroundColor:color}}></View>
-					</View>
-				</View>
-			</TouchableOpacity>
-		)
-	}
+	_grade_Change(value,grade) {
+		if(grade.length==3){
+			if(value==1){
+				this.setState({selectedGradeName:"二级"})
+			}else if(value==0){
+				this.setState({selectedGradeName:"一级"})
+			}else{
+				this.setState({selectedGradeName:"三级"})
+			}
+		}else if(grade.length==2){
+			if(value==1){
+				this.setState({selectedGradeName:"二级"})
+			}else{
+				this.setState({selectedGradeName:"一级"})
+			}
+		}
 
-	_grade_onClick(item, index) {
-		this.setState({selectedGradeIndex: index, selectedGradeName: item.name})
 	}
 
 	show(emotion) {
@@ -177,7 +196,6 @@ export default class EmotionFactorModal extends PureComponent {
 const styles = {
 	container: {
 		flex: 1,
-		// backgroundColor: '#fff',
 		paddingTop: 10,
 		paddingBottom: 10,
 		paddingRight: 10,
@@ -189,12 +207,13 @@ const styles = {
 	},
 	title: {
 		fontSize: theme.DefaultFontSize,
+		fontWeight:'bold'
 	},
 	wuyunBox: {
 		width: theme.deviceWidth * 0.82,
-		height: 180,
+		height: 170,
 		paddingLeft: 35,
-		paddingRight: 35
+		paddingRight: 35,
 	},
 	box: {
 		marginLeft: 10,
@@ -203,7 +222,7 @@ const styles = {
 		justifyContent: 'space-around',
 	},
 	itemText: {
-		fontSize: theme.DefaultFontSize - 6,
+		fontSize: theme.DefaultFontSize - 4,
 		textAlign:'center'
 	},
 	hongGuanBox: {
@@ -225,12 +244,13 @@ const styles = {
 	},
 	slideBox: {
 		width: theme.deviceWidth * 0.8,
-		height: 35,
-		borderRadius: 10,
+		height: 49,
+		borderRadius: 20,
 		backgroundColor: "#EFEFEF",
-		justifyContent: 'center',
-		flexDirection: 'row',
-
+		padding:2,
+		marginTop:2,
+		justifyContent:'center',
+		alignItems:'center'
 	},
 	slideItem: {
 		flex: 1,

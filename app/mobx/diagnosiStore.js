@@ -50,13 +50,13 @@ class DiagnosisStore {
         request.getJson(urls.apis.DIAGNOSIS_ADDMYDISEASES,{
             ids
         });
-        this.diagnosisDisease = [];
-        this.diagnosisDiseaseOrderBy = {};
+        // this.diagnosisDisease = [];
+        // this.diagnosisDiseaseOrderBy = {};
     }
 
     @computed
     get isFetching() {
-        return this.diagnosisList.length == 0 && this.errorMsg == ''
+        return this.diagnosisList.length == 0 && this.errorMsg == '';
     }
 }
 const diagnosisStore = new DiagnosisStore();

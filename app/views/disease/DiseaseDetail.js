@@ -8,6 +8,7 @@ import DiseaseMethodTabView from "./components/DiseaseMethodTabView";
 import QuestionText from "../components/QuestionText"
 import DetailModal from "./components/DetailModal"
 import BodyModal from "./components/BodyModal"
+import TeachModal from "./components/TeachModal"
 import allDiseaseListStore from "../../mobx/allDiseaseListStore";
 import myDiseaseListStore from "../../mobx/myDiseaseListStore";
 import diseaseMethodStore from "../../mobx/diseaseMethodStore";
@@ -21,9 +22,8 @@ export default class DiseaseDetail extends PureComponent {
     }
 
     onTransPress(item){
-        myDiseaseListStore.selectedItemName = item.name
-        myDiseaseListStore.selectedItemId = item.id
-        allDiseaseListStore.selectedItemName=item.name
+        myDiseaseListStore.selectedItem = item
+        allDiseaseListStore.selectedItem = item
         diseaseMethodStore.diseaseId = item.id
         diseaseMethodStore.fetchDiseaseMethod()
 	}
@@ -36,12 +36,12 @@ export default class DiseaseDetail extends PureComponent {
     }
 
 	render() {
-        let {myDiseaseList,selectedItemId,selectedItemName} = myDiseaseListStore;
+        let {myDiseaseList,selectedItem} = myDiseaseListStore;
         const {diseaseMethod} = diseaseMethodStore;
         const {modalShow,questionId} = questionStore;
 		return (
 			<Container>
-				<Header title = {selectedItemName || this.props.title}/>
+				<Header title = {selectedItem.name || this.props.title}/>
 				<Content delay>
 					<View>
 						<Text style={styles.title}>我的问题</Text>
@@ -50,17 +50,18 @@ export default class DiseaseDetail extends PureComponent {
 						data={myDiseaseList}
 						onTransPress = {(item) => this.onTransPress(item)}
 						onItemRemove={(item,i) => this.onItemRemove(item,i)}
-						selectedItemId={selectedItemId}
+						selectedItemId={selectedItem.id}
 					/>
 					<DiseaseMethodTabView data={diseaseMethod} pageKey={'disease'}/>
-					<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jModalShow =true}>
+					<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jlModalShow =true}>
 						<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
 					</Button>
 				</Content>
                 <DetailModal visible={modalShow}>
                     <QuestionText data={questionId} from={'disease'}/>
                 </DetailModal>
-                <BodyModal visible={questionStore.jModalShow} pageKey={'disease'}/>
+                <BodyModal visible={questionStore.jlModalShow} pageKey={'disease'}/>
+                <TeachModal visible={questionStore.teachModalShow} pageKey={'disease'}/>
 			</Container>
 		)
 	}

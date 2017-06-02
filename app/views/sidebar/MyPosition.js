@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {Content, WebView} from "../../components/index";
+import positionStore from "../../mobx/positionStore"
 
 /**
  * 我的位置
@@ -8,7 +9,7 @@ import {Content, WebView} from "../../components/index";
 export default class MyEnergy extends PureComponent {
 
 	render() {
-		let {lastPosition}=this.props;
+		let {currentPosition}=positionStore;
 		return (
 			<Content>
 				<WebView
