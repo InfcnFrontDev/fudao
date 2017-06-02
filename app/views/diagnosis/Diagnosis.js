@@ -199,8 +199,7 @@ export default class Diagnosis extends PureComponent {
             request.getJson(urls.apis.DISEASE_GETMYDISEASELIST).then((res) => {
                 var item = res.obj[0];
                 myDiseaseListStore.myDiseaseList = res.obj
-                myDiseaseListStore.selectedItemName = item.name
-                myDiseaseListStore.selectedItemId = item.id
+                myDiseaseListStore.selectedItem = item
                 allDiseaseListStore.selectedItemName = item.name
                 diseaseMethodStore.diseaseId = item.id
                 Actions.diseaseDetail({title: item.name, data: item})

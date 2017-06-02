@@ -32,14 +32,9 @@ export default class EmotionSolveModal extends PureComponent {
 							<Image source={emotion.img} style={{width:60,height:60}}/>
 							<Text style={{color:'#fff'}}>{emotion.title}</Text>
 						</View>
-						<View style={{width:theme.deviceWidth*0.9-95,paddingRight:10,paddingTop:30}}>
-							<Text style={{fontWeight:"bold",marginBottom:10,fontSize: theme.DefaultFontSize -2,color:'#fff'}}>{emotion.threeCharacterClassic}</Text>
-							<View style={{height:100}}>
-							<ScrollView>
-									<Text
-										style={{color:'#fff',fontSize:theme.DefaultFontSize-2}}>        {emotion.influence}</Text>
-							</ScrollView>
-							</View>
+						<View style={{width:theme.deviceWidth*0.9-95,paddingRight:10,justifyContent:'center',alignItems:'center'}}>
+							<Text style={{fontWeight:"bold",marginBottom:5,fontSize: theme.DefaultFontSize+4,color:'#fff'}}>{emotion.threeCharacterClassic.substring(0,8) }</Text>
+							<Text style={{fontWeight:"bold",fontSize: theme.DefaultFontSize+4,color:'#fff'}}>{emotion.threeCharacterClassic.substring(8,16)}</Text>
 						</View>
 					</View>
 					<View style={styles.imgViewBox}>
@@ -66,22 +61,42 @@ export default class EmotionSolveModal extends PureComponent {
 		}
 	}
 	renderSolve(item, index) {
-		if (item.type == 1) {
-			return (
-				<ImageSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
-							img={item.img}/>
-			)
-		} else if (item.type == 2) {
-			return (
-				<TextSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}/>
-			)
-		} else if (item.type == 3) {
-			var str = "video"+index;
-			return (
-				<VideoSolve key={index}  index={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
-							video={item.img} ref= {str}/>
-			)
+		if(this.state.emotion.methods.length==1){
+			if (item.type == 1) {
+				return (
+					<ImageSolve key={index}  tabLabel={item.title}  title={''} content={item.content}
+								img={item.img}/>
+				)
+			} else if (item.type == 2) {
+				return (
+					<TextSolve key={index} tabLabel={item.title}  title={''} content={item.content}/>
+				)
+			} else if (item.type == 3) {
+				var str = "video"+index;
+				return (
+					<VideoSolve key={index}  tabLabel={item.title} index={index}  title={item.title} content={item.content} time={item.length}
+								video={item.img} ref= {str}/>
+				)
+			}
+		}else{
+			if (item.type == 1) {
+				return (
+					<ImageSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}
+								img={item.img}/>
+				)
+			} else if (item.type == 2) {
+				return (
+					<TextSolve key={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content}/>
+				)
+			} else if (item.type == 3) {
+				var str = "video"+index;
+				return (
+					<VideoSolve key={index}  index={index} tabLabel={"第"+item.fenji} title={item.title} content={item.content} time={item.length}
+								video={item.img} ref= {str}/>
+				)
+			}
 		}
+
 	}
 
 

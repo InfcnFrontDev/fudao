@@ -1,8 +1,9 @@
 import React, {PureComponent} from "react";
 import {Actions, ActionConst} from "react-native-router-flux";
 import {observer} from "mobx-react/native";
-import {Container} from "native-base";
-import {View, Image, AsyncStorage} from "react-native";
+import {Text} from "native-base";
+import {Container} from "../../components/index";
+import {View, Image,TouchableOpacity} from "react-native";
 import CommitBtn from "./components/commitBtn";
 import UserStore from "../../mobx/userStore";
 
@@ -14,14 +15,17 @@ export default class Start extends PureComponent {
 
 	render() {
 		return (
-			<Container style={styles.container}>
-				<View style={styles.view}>
-					<Image source={require('./assets/logo.png')} style={styles.img}/>
-					<View style={styles.viewButton}>
-						<CommitBtn border={true} block={false} title="登录" onPress={()=>Actions['login']()}/>
-						<CommitBtn border={false} block={false} title="注册" onPress={()=>Actions['register']()}/>
-					</View>
-				</View>
+			<Container>
+					<Image source={require('./assets/launch_screen.png')} style={styles.img}>
+						<View style={styles.viewButton}>
+							<TouchableOpacity style={styles.btn} onPress={()=>Actions['login']()}>
+								<Text style={styles.text}>登录</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.btn}  onPress={()=>Actions['register']()}>
+								<Text style={styles.text}>注册</Text>
+							</TouchableOpacity>
+						</View>
+					</Image>
 			</Container>
 		)
 	}
@@ -38,23 +42,29 @@ export default class Start extends PureComponent {
 
 }
 const styles = {
-	container: {
-		flexDirection: 'row',
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	view: {
-		width: 300,
-		height: 500,
-	},
 	img: {
-		marginTop: -80,
-		width: 300,
-		height: 500,
-		resizeMode: 'contain',
+		width: theme.deviceWidth+4,
+		height: theme.deviceHeight,
+		alignItems:'center',
 	},
 	viewButton: {
+		marginTop:200,
+		width:theme.deviceWidth*0.86,
+		height:100,
+		backgroundColor:"rgba(255,255,255,0.2)",
 		flexDirection: 'row',
 		justifyContent: 'space-around',
+		alignItems:'center'
+	},
+	btn:{
+		width:100,
+		height:40,
+		backgroundColor:'rgba(255,255,255,0.24)',
+		justifyContent:'center',
+		alignItems:'center'
+	},
+	text:{
+		color:'#fff',
+		fontSize:theme.DefaultFontSize+2
 	}
 };
