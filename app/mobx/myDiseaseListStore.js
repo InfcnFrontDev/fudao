@@ -3,8 +3,7 @@ import {observable, runInAction, computed, action, reaction, autorun} from "mobx
 
 class MyDiseaseListStore {
 	@observable myDiseaseList = []
-	@observable selectedItemName = ''
-	@observable selectedItemId = ''
+	@observable selectedItem = {}
 	@observable deleteItemId = ''
 	@observable addItemId = ''
 	@observable errorMsg = ''

@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
-import {Modal, View, ScrollView,WebView,Text} from "react-native";
+import {Modal, View, ScrollView,Text} from "react-native";
+import {WebView} from "../../../components/index";
 import {Button} from "native-base";
 import {Container, Content} from "../../../components/index";
 import allDiseaseListStore from "../../../mobx/allDiseaseListStore";
@@ -21,7 +22,8 @@ export default class BodyModal extends PureComponent {
     }
     render() {
         let {visible,pageKey} = this.props;
-        let id = pageKey === 'disease' ? encodeURI(allDiseaseListStore.selectedItemName) :encodeURI(allExpectListStore.selectedItemName)
+        let diseaseType = pageKey === 'disease' ? encodeURI(allDiseaseListStore.selectedItem.type) :encodeURI(allExpectListStore.selectedItem.type)
+        let disease = pageKey === 'disease' ? encodeURI(allDiseaseListStore.selectedItem.name) :encodeURI(allExpectListStore.selectedItem.name)
         return (
             <Modal
                 animationType={'fade'}
@@ -32,10 +34,8 @@ export default class BodyModal extends PureComponent {
                 <View style={styles.opacityView}/>
                 <View style={styles.content}>
                     <ScrollView style={styles.child}>
-                        <WebView
-                            source={{uri:urls.pages.MY_QUESTION_PERSON + '?targetPageId='+ id}}
-                            style={styles.webViewStyle}
-                        />
+                        <WebView uri={urls.pages.MY_QUESTION_PERSON + '?disease='+ disease + 'diseaseType=' + diseaseType} style={styles.webViewStyle}/>
+
                         <View style={styles.closeBox}>
                             <View style={{width: theme.deviceWidth -60}}>
                                 <Text style={{lineHeight: 20,fontSize: 15}}>
