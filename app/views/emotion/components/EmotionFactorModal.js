@@ -75,7 +75,7 @@ export default class EmotionFactorModal extends PureComponent {
 								</View>}
 							</View>
 
-							<View style={{marginTop:10,flexDirection:'row'}}>
+							<View style={{marginTop:12,flexDirection:'row',marginBottom:5}}>
 								<Text style={{fontWeight:'bold'}}>请选择其他影响您</Text>
 								<Text style={{fontWeight:'bold'}}>{emotion.title}</Text>
 								<Text style={{fontWeight:'bold'}}>的原因：</Text>
@@ -86,7 +86,7 @@ export default class EmotionFactorModal extends PureComponent {
 								renderRow={this.renderReasonRow.bind(this)}
 								enableEmptySections
 							/>
-							<View style={{alignItems:'center'}}>
+							<View style={{alignItems:'center',marginTop:10,marginBottom:10}}>
 								<View style={styles.input}>
 									<TextInput underlineColorAndroid="transparent" placeholder="请输入您的原因"
 											   onChangeText={(value)=>{this.selfReason=value}}/>
@@ -94,7 +94,7 @@ export default class EmotionFactorModal extends PureComponent {
 							</View>
 							<View style={{alignItems:'center',justifyContent:'center'}}>
 								<View>
-									<Button style={{marginTop:10,height:30}} onPress={()=>this.submit()}>
+									<Button style={{marginTop:10,height:40}} onPress={()=>this.submit()}>
 										<Text>帮您缓解</Text>
 									</Button>
 								</View>
@@ -279,7 +279,7 @@ const styles = {
 		lineHeight: 28,
 	},
 	input: {
-		width: theme.deviceWidth * 0.8,
+		width: theme.deviceWidth * 0.75,
 		height: 40,
 		borderWidth: 1,
 		borderColor: '#666',

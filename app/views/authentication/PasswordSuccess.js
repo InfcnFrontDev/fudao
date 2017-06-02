@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import {Actions,ActionConst} from "react-native-router-flux";
 import {observer} from "mobx-react/native";
-import {Container,Content,Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
+import {Text, Thumbnail, Col, Button,Item,Label,Input,Form} from "native-base";
+import {Header,Content, Container} from "../../components/index";
 import {View, Alert,TextInput,ToastAndroid} from "react-native";
 import  CommitButton from "./components/CommitButton"
 import  {hex_md5} from "./components/md5"
@@ -27,13 +28,15 @@ export default class SetPassword extends PureComponent {
         );
 
         return (
-            <Container style={styles.container}>
-                <View style={styles.view}>
-                    <Text style={styles.titleText}>恭喜你注册成功！</Text>
-                    <Text style={{textAlign:'center',marginTop:120}}>{this.state.number}s后自动登录...</Text>
-                    <CommitButton title="登录" block={true} border={false} top={20}  onPress={this._login.bind(this,this.state.phone,this.state.password)} />
+            <Content white>
+                <View style={styles.container}>
+                    <View style={styles.view}>
+                        <Text style={styles.titleText}>恭喜你注册成功！</Text>
+                        <Text style={{textAlign:'center',marginTop:120}}>{this.state.number}s后自动登录...</Text>
+                        <CommitButton title="登录" block={true} border={false} top={20}  onPress={this._login.bind(this,this.state.phone,this.state.password)} />
+                    </View>
                 </View>
-            </Container>
+            </Content>
         );
     }
     interval(){
@@ -63,6 +66,7 @@ export default class SetPassword extends PureComponent {
 }
 const styles = {
     container:{
+        flex:1,
         justifyContent:'center',
         alignItems:'center',
     },
