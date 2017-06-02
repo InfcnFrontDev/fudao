@@ -16,7 +16,7 @@ import {toast, config} from "../../utils/index";*/
 export default class NewFriend extends PureComponent {
 
 	render() {
-		let {isNewFetching, NewFriendList} =friendStore,
+		let {NewFriendList} =friendStore,
 			count = NewFriendList.length;
 		return (
 			<Container>
