@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {Modal, View, Image, ListView} from "react-native";
 import {Icon, Button, ListItem, Text} from "native-base";
 import ImageText from './ImageText'
-
+import VideoText from '../../components/VideoText'
 
 /**
  * 我的能量场 > 资料填写
@@ -28,7 +28,18 @@ class DetailsModal extends PureComponent {
     render() {
         let {visible,text} = this.state;
         let data=JSON.parse(text);
-
+let mol=(null);
+let c=data.img+'';
+        let n=c.substring(c.length-3);
+       if(n=='mp3'){
+           mol=(
+               <VideoText title={data.name} content={data.detail} video={data.img}/>
+           )
+       }else{
+           mol=(
+               <ImageText title={data.name} content={data.detail} image={data.img}/>
+           )
+       }
         return (
             <Modal
                 animationType={'fade'}
@@ -49,7 +60,7 @@ class DetailsModal extends PureComponent {
                         </View>
                     </View>
                     <View style={{width:300,height:500}}>
-                        <ImageText title={data.name} content={data.detail} image={data.img}/>
+                        {mol}
                     </View>
 
                 </View>
@@ -121,6 +132,7 @@ const styles = {
         height: 24,
         paddingLeft: 0,
         paddingRight: 0,
+        zIndex:100
     },
 };
 

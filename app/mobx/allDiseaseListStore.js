@@ -4,7 +4,7 @@ import {ListView} from "react-native";
 
 class AllDiseaseListStore {
 	@observable allDiseaseList = []
-    @observable selectedItemName = ''
+    @observable selectedItem = {}
     @observable modalShow = false
     @observable allDiseaseListLiaoShen = []
 	@observable allDiseaseListLiaoXin = []

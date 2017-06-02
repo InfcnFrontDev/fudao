@@ -22,9 +22,8 @@ export default class DiseaseDetail extends PureComponent {
     }
 
     onTransPress(item){
-        myDiseaseListStore.selectedItemName = item.name
-        myDiseaseListStore.selectedItemId = item.id
-        allDiseaseListStore.selectedItemName=item.name
+        myDiseaseListStore.selectedItem = item
+        allDiseaseListStore.selectedItem = item
         diseaseMethodStore.diseaseId = item.id
         diseaseMethodStore.fetchDiseaseMethod()
 	}
@@ -37,12 +36,12 @@ export default class DiseaseDetail extends PureComponent {
     }
 
 	render() {
-        let {myDiseaseList,selectedItemId,selectedItemName} = myDiseaseListStore;
+        let {myDiseaseList,selectedItem} = myDiseaseListStore;
         const {diseaseMethod} = diseaseMethodStore;
         const {modalShow,questionId} = questionStore;
 		return (
 			<Container>
-				<Header title = {selectedItemName || this.props.title}/>
+				<Header title = {selectedItem.name || this.props.title}/>
 				<Content delay>
 					<View>
 						<Text style={styles.title}>我的问题</Text>
@@ -51,7 +50,7 @@ export default class DiseaseDetail extends PureComponent {
 						data={myDiseaseList}
 						onTransPress = {(item) => this.onTransPress(item)}
 						onItemRemove={(item,i) => this.onItemRemove(item,i)}
-						selectedItemId={selectedItemId}
+						selectedItemId={selectedItem.id}
 					/>
 					<DiseaseMethodTabView data={diseaseMethod} pageKey={'disease'}/>
 					<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jlModalShow =true}>
