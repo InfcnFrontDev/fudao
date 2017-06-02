@@ -37,7 +37,7 @@ export default class Evaluation extends PureComponent {
 
     gotoDeep(data) {
         if(data=="gotoHome"){
-            Actions.pop({popNum: 2})
+            Actions.pop()
         }else{
             Actions.deepDiagnosis();
         }
