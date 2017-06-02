@@ -92,7 +92,7 @@ export default class Diagnosis extends PureComponent {
             return (
                 <Container>
                     <Header {...this.props}/>
-                    <Loading isShow={isFetching}/>
+                    {/*<Loading isShow={isFetching}/>*/}
                 </Container>
             )
         }
@@ -202,7 +202,7 @@ export default class Diagnosis extends PureComponent {
                 myDiseaseListStore.selectedItem = item
                 allDiseaseListStore.selectedItem = item
                 diseaseMethodStore.diseaseId = item.id
-                Actions.diseaseDetail({title: item.name, data: item})
+                Actions.diseaseDetail({pageKey:'zicha'})
             })
         }
     }
