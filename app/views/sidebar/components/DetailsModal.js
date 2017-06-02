@@ -28,23 +28,63 @@ class DetailsModal extends PureComponent {
         let {visible,text} = this.state;
         //let data=JSON.parse(text);
         let m=(null);
-        //tools.showToast(text)
-        if(text.indexOf('#')>0){
 
-            m = (
-                <View>
-                    <Text>{text.split('#')[0]}</Text>
-                    <Text>{text.split('#')[1]}</Text>
-                </View>
+        let textHtml=text.substring(1)
+        if(text.charAt(0)=='1'){
+            if(textHtml.indexOf('#')>0){
+                m = (
+                    <View>
+                        <Text style={styles.zongText}>
+                            <Text style={styles.textstyle}>{textHtml.split('#')[0].substring(0,4)}</Text>
+                            <Text>{textHtml.split('#')[0].substring(4,textHtml.split('#')[0].length)}</Text>
+                        </Text>
+                        <Text style={styles.zongText}>
+                            <Text style={styles.textstyle}>{textHtml.split('#')[1].substring(0,4)}</Text>
+                            <Text>{textHtml.split('#')[1].substring(4,textHtml.split('#')[0].length)}</Text>
+                        </Text>
+                    </View>
 
-            );
-        }else{
-            m=(
+                );
+            }else{
+                m=(
+                    <View>
+                        <Text style={styles.zongText}>
+                            <Text style={styles.textstyle}>{textHtml.substring(0,4)}</Text>
+                            <Text>{textHtml.substring(4,textHtml.split('#')[0].length)}</Text>
+                        </Text>
+                    </View>
 
-                <Text>{text}</Text>
-
-            )
+                )
+            }
         }
+        if(text.charAt(0)=='2'){
+            if(textHtml.indexOf('#')>0){
+                m = (
+                    <View>
+                        <Text style={styles.zongText}>
+                            <Text style={styles.textstyle}>{textHtml.split('#')[0].substring(0,1)}</Text>
+                            <Text>{textHtml.split('#')[0].substring(1,textHtml.split('#')[0].length)}</Text>
+                        </Text>
+                        <Text style={styles.zongText}>
+                            <Text style={styles.textstyle}>{textHtml.split('#')[1].substring(0,1)}</Text>
+                            <Text>{textHtml.split('#')[1].substring(1,textHtml.split('#')[0].length)}</Text>
+                        </Text>
+                    </View>
+
+                );
+            }else{
+                m=(
+                    <View>
+                        <Text style={styles.zongText}>
+                            <Text style={styles.textstyle}>{textHtml.substring(0,1)}</Text>
+                            <Text>{textHtml.substring(1,textHtml.split('#')[0].length)}</Text>
+                        </Text>
+                    </View>
+
+                )
+            }
+        }
+
 
         return (
             <Modal
@@ -118,6 +158,10 @@ const styles = {
     },
     textstyle:{
         fontWeight:'bold'
+    },
+    zongText:{
+        fontSize:18,
+        lineHeight:24
     },
     content: {
         position: "absolute",
