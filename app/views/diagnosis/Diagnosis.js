@@ -75,7 +75,7 @@ export default class Diagnosis extends PureComponent {
                                     {this.renderChoosed(diagnosisDisease)}
                                 </ScrollView>
                                 <View style={styles.buttonContainer}>
-                                    <TouchableOpacity style={styles.button} onPress={() => this.gotoCeping(false)}>
+                                    <TouchableOpacity style={diagnosisDisease.length>0?styles.button:styles.button2} onPress={() => diagnosisDisease.length>0?this.gotoCeping(false):null}>
                                         <Text style={styles.buttonText}>完成自查</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.button} onPress={() => this.gotoCeping(true)}>
@@ -272,6 +272,12 @@ const styles = {
     },
     button: {
         backgroundColor: "#A1CF00",
+        width: (theme.deviceWidth - 30) / 2,
+        height: 36,
+        borderRadius: 5,
+    },
+    button2: {
+        backgroundColor: "#ccc",
         width: (theme.deviceWidth - 30) / 2,
         height: 36,
         borderRadius: 5,
