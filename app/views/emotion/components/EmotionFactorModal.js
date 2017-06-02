@@ -36,7 +36,8 @@ export default class EmotionFactorModal extends PureComponent {
 		}
 		return (
 			<Modal ref={(e)=>this._modal = e} visible={visible}>
-				{emotion != null && <ScrollView>
+				{emotion != null &&
+				<ScrollView style={{marginBottom:10,marginTop:10}}>
 					<View style={styles.container}>
 						<View style={styles.View}>
 							<View style={{flexDirection:'row'}}>
@@ -84,7 +85,6 @@ export default class EmotionFactorModal extends PureComponent {
 								dataSource={this.state.dataSource.cloneWithRows(emotion.reasons.slice(0))}
 								renderRow={this.renderReasonRow.bind(this)}
 								enableEmptySections
-								style={{height: 120}}
 							/>
 							<View style={{alignItems:'center'}}>
 								<View style={styles.input}>
@@ -196,14 +196,15 @@ export default class EmotionFactorModal extends PureComponent {
 const styles = {
 	container: {
 		flex: 1,
-		paddingTop: 10,
 		paddingBottom: 10,
 		paddingRight: 10,
-		paddingLeft: 10
+		paddingLeft: 10,
+		backgroundColor:'#fff'
 	},
 	View: {
-		flex: 1,
 		flexDirection: 'column',
+		marginBottom:10,
+		backgroundColor:'#fff'
 	},
 	title: {
 		fontSize: theme.DefaultFontSize,
