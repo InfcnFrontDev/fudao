@@ -116,9 +116,9 @@ export default class AppRouter extends PureComponent {
 					<Scene title="能量场" key="energy" component={Energy} hideNavBar/>
 
 					{/*自诊*/}
-					<Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
+					<Scene key="diagnosis" component={Diagnosis} title="自查" hideNavBar/>
 					<Scene key="evaluation" component={Evaluation} title="测评" hideNavBar/>
-					<Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自诊" hideNavBar/>
+					<Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自查" hideNavBar/>
 
 					{/*自疗*/}
 					<Scene title="自疗" key="disease" component={Disease} hideNavBar/>
@@ -132,11 +132,6 @@ export default class AppRouter extends PureComponent {
 
 					{/*自养*/}
 					<Scene key="health" component={Health} hideNavBar/>
-
-					{/*自诊*/}
-					<Scene key="diagnosis" component={Diagnosis} title="自诊" hideNavBar/>
-					<Scene key="evaluation" component={Evaluation} title="测评" hideNavBar/>
-					<Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自诊" hideNavBar/>
 
 					{/*动态*/}
 					<Scene key="newDynamic" component={NewDynamic} title="新动态" hideNavBar/>
