@@ -34,7 +34,7 @@ export default class BodyModal extends PureComponent {
                 <View style={styles.opacityView}/>
                 <View style={styles.content}>
                     <ScrollView style={styles.child}>
-                        <WebView uri={urls.pages.MY_QUESTION_PERSON + '?disease='+ disease + 'diseaseType=' + diseaseType} style={styles.webViewStyle}/>
+                        <WebView uri={urls.pages.MY_QUESTION_PERSON + '?disease='+ disease + '&diseaseType=' + diseaseType} style={styles.webViewStyle}/>
 
                         <View style={styles.closeBox}>
                             <View style={{width: theme.deviceWidth -60}}>
