@@ -105,8 +105,6 @@ export default class EmotionFactorModal extends PureComponent {
 			</Modal>
 		)
 	}
-
-
 	renderMacroscopic(item, index) {
 		return (
 			<View key={index} style={styles.hongGuanBox}>

@@ -18,11 +18,11 @@ export default class Start extends PureComponent {
 			<Container>
 					<Image source={require('./assets/launch_screen.png')} style={styles.img}>
 						<View style={styles.viewButton}>
-							<TouchableOpacity style={styles.btn} onPress={()=>Actions['login']()}>
-								<Text style={styles.text}>登录</Text>
-							</TouchableOpacity>
-							<TouchableOpacity style={styles.btn}  onPress={()=>Actions['register']()}>
+							<TouchableOpacity style={styles.btn} onPress={()=>Actions['register']()}>
 								<Text style={styles.text}>注册</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.btn}  onPress={()=>Actions['login']()}>
+								<Text style={styles.text}>登录</Text>
 							</TouchableOpacity>
 						</View>
 					</Image>
@@ -48,10 +48,8 @@ const styles = {
 		alignItems:'center',
 	},
 	viewButton: {
-		marginTop:200,
-		width:theme.deviceWidth*0.86,
-		height:100,
-		backgroundColor:"rgba(255,255,255,0.2)",
+		marginTop:120,
+		width:theme.deviceWidth*0.8,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		alignItems:'center'
