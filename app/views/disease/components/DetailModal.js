@@ -45,13 +45,6 @@ export default class DetailModal extends PureComponent {
 
     hide() {
         questionStore.modalShow = false
-        // if (this.props.pageKey === 'disease') {
-        //     diseaseMethodStore.modalShow = false
-        // } else if (this.props.pageKey === 'expect') {
-        //     expectMethodStore.modalShow = false
-        // } else {
-        //     healthMethodStore.modalShow = false
-        // }
     }
 }
 

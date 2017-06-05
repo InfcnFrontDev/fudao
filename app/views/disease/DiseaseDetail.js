@@ -27,7 +27,6 @@ export default class DiseaseDetail extends PureComponent {
         allDiseaseListStore.selectedItem = item
         diseaseMethodStore.diseaseId = item.id
         diseaseMethodStore.fetchDiseaseMethod()
-        allDiseaseListStore.fetchData()
 	}
 
     onItemRemove(item,i) {
