@@ -78,16 +78,18 @@ export default class Home extends PureComponent {
 							marginBottom: 10,
 							flexDirection: 'column',
 							width: Dimensions.get('window').width / 2 - 30,
-							flex: 0
+							flex: 0,
+							marginRight:10
 						}}
 								transparent
 								onPress={()=>Actions.search()}>
 							<Icon name="search"
 								  style={{color: "#fff",  position: 'absolute', right: 10}}/>
 						</Button>
-						<Button transparent onPress={()=> Actions.feedback()}>
-							<Icon name="ios-chatboxes" style={{color: "#fff"}}/>
-							{/*<View
+						<Button transparent  onPress={()=> Actions.feedback()}>
+							<Image source={require('../../assets/feedback.png')} style={{width:20,height:20}}/>
+							{/*<Icon name="ios-chatboxes" style={{color: "#fff"}}/>
+							<View
 								style={{backgroundColor:'#f00',width:15,height:15,borderRadius:15,paddingTop:1,position:'absolute',right:10,top:0}}>
 								<Text style={{color:'#fff',fontSize:10,textAlign:'center'}}>10</Text>
 							</View>*/}
@@ -105,7 +107,7 @@ export default class Home extends PureComponent {
 					<View style={{height:40,borderRadius:40,backgroundColor:'rgba(225,225,225,.0)',position: 'absolute',top:0,left:0,alignItems:'center',flexDirection:'row'}}>
 						<Button transparent style={{backgroundColor:'rgba(225,225,225,.0)'}} onPress={()=>this.changeStatus()}>
 							<Image source={require('../../assets/home/qiehuan.png')} style={{width:20,height:20}}/>
-							<Text style={{color:'#b7b7b7',fontSize:14}}>{this.state.status?'切换到个人版':'切换到通用版'}</Text>
+							<Text style={{color:'#b7b7b7',fontSize:14}}>{this.state.status?'个人版':'通用版'}</Text>
 						</Button>
 
 					</View>
