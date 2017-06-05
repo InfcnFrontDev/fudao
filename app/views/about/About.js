@@ -43,7 +43,7 @@ export default class About extends PureComponent {
 					</View>
 					<Row style={{marginTop: 30}}>
 						<Col style={styles.center}>
-							<Button onPress={()=> Actions.privacyStatement()}><Text>隐式声明</Text></Button>
+							<Button onPress={()=> Actions.privacyStatement()}><Text>隐私声明</Text></Button>
 						</Col>
 						<Col style={styles.center}>
 							<Button onPress={()=> Actions.userAgreement()}><Text>用户协议</Text></Button>
