@@ -117,7 +117,7 @@ export default class AppRouter extends PureComponent {
 
 					{/*自诊*/}
 					<Scene key="diagnosis" component={Diagnosis} title="自查" hideNavBar/>
-					<Scene key="evaluation" component={Evaluation} title="测评" hideNavBar/>
+					<Scene key="evaluation" component={Evaluation} title="测评" hideNavBar initial/>
 					<Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自查" hideNavBar/>
 
 					{/*自疗*/}

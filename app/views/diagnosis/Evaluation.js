@@ -5,7 +5,7 @@ import {Container, Header, Content, Loading,} from "../../components/index";
 import {Left, Button, Icon} from "native-base";
 import {Actions} from "react-native-router-flux";
 import userStore from "../../mobx/userStore";
-
+import EvaluationResult from "./components/EvaluationResult"
 /**
  * 自诊
  */
@@ -22,13 +22,12 @@ export default class Evaluation extends PureComponent {
         return (
             <Container>
                 <Content>
-
                     <WebView
                         onMessage={(event) => this.gotoDeep(event.nativeEvent.data)}
                         source={{uri: urls.pages.HEALTH_APPRAISAL + "?token=" + userStore.token}}
                         style={{backgroundColor: 'rgba(0,0,0,0)'}}
                     />
-
+                    <EvaluationResult ref={(e)=>this._EvaluationResult = e}/>
                 </Content>
             </Container>
         )
@@ -38,10 +37,20 @@ export default class Evaluation extends PureComponent {
     gotoDeep(data) {
         if(data=="gotoHome"){
             Actions.pop()
+        }else if(data=='sl'){
+            this._EvaluationResult.show();
+        }else if(data=='xl'){
+            this._EvaluationResult.show();
+        }else if(data=='sj'){
+            this._EvaluationResult.show();
+        }else if(data=='zc'){
+            this._EvaluationResult.show();
         }else{
             Actions.deepDiagnosis();
         }
     }
+
+
 
 
 }
