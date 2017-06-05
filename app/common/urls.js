@@ -7,8 +7,8 @@
  //const webPath = 'http://103.254.113.11:9191/web/'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
 
-const webPath = 'http://192.168.3.204:3000/'; // 王朋
-//const webPath = 'http://192.168.3.213:3000/'; // cxx
+// const webPath = 'http://192.168.3.204:3000/'; // 王朋
+const webPath = 'http://192.168.3.213:3000/'; // cxx
 // const webPath = 'http://192.168.3.203:3000/'; //
 
 
@@ -237,6 +237,8 @@ const urls = {
         // 自诊 ---------------------------------------------------------
         DIAGNOSIS_GETCOMMONDISEASELIST: apiPath + 'DiagnosisApi/getCommonDiseaseList',
         DIAGNOSIS_ADDMYDISEASES: apiPath + 'DiagnosisApi/addMyDiseases',
+        DIAGNOSIS_GETQUESTIONNAIRESCORES:apiPath +'DiagnosisApi/getQuestionnaireScores',
+
 
         // 意见反馈 ---------------------------------------------------------
         FEEDBACK_SUBMIT: apiPath + 'FeedbackApi/submit',

@@ -3,46 +3,48 @@ import {Modal, View, Image, ListView, WebView, Dimensions} from "react-native";
 import {Icon, Button, ListItem, Text} from "native-base";
 import GiftedListView from "../../../components/GiftedListView"
 
-var obj = [
-    {
-        id: 44,
-        title: '是否吸烟',
-        score: '5'
-    }, {
-        id: 44,
-        title: '是否吸烟',
-        score: '5'
-    }, {
-        id: 44,
-        title: '是否吸烟',
-        score: '2'
-    }, {
-        id: 44,
-        title: '是否吸烟',
-        score: '5'
-    }, {
-        id: 44,
-        title: '是否吸烟',
-        score: '3'
-    }, {
-        id: 44,
-        title: '是否吸烟',
-        score: '4'
-    }, {
-        id: 44,
-        title: '是否吸烟',
-        score: '5'
-    }, {
-        id: 44,
-        title: '是否吸烟',
-        score: '1'
-    }, {
-        id: 44,
-        title: '是否吸烟',
-        score: '5'
-    },
-]
 
+var res = {
+    obj : [
+        {
+            id: 44,
+            title: '是否吸烟',
+            score: '5'
+        }, {
+            id: 44,
+            title: '是否吸烟',
+            score: '5'
+        }, {
+            id: 44,
+            title: '是否吸烟',
+            score: '2'
+        }, {
+            id: 44,
+            title: '是否吸烟',
+            score: '5'
+        }, {
+            id: 44,
+            title: '是否吸烟',
+            score: '3'
+        }, {
+            id: 44,
+            title: '是否吸烟',
+            score: '4'
+        }, {
+            id: 44,
+            title: '是否吸烟',
+            score: '5'
+        }, {
+            id: 44,
+            title: '是否吸烟',
+            score: '1'
+        }, {
+            id: 44,
+            title: '是否吸烟',
+            score: '5'
+        },
+    ]
+}
 
 /**
  * 自查 > 测评结果展示
@@ -54,7 +56,7 @@ class EvaluationResult extends PureComponent {
         this.state = {
             ...props,
             visible: false,
-            type:'生理'
+            type:1
         }
     }
 
@@ -115,10 +117,12 @@ class EvaluationResult extends PureComponent {
     }
 
     _onFetch(page, callback) {
-        // request.getJson(, {}).then((res) => {
-        callback(obj,{
-            allLoaded:true
-        })
+        // request.getJson(urls.apiPath.DIAGNOSIS_GETQUESTIONNAIRESCORES, {
+        //     type:this.state.type
+        // }).then((res) => {
+            callback(res.obj, {
+                allLoaded: true
+            })
         // })
 
     }

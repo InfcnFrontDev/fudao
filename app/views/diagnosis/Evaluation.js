@@ -38,13 +38,13 @@ export default class Evaluation extends PureComponent {
         if(data=="gotoHome"){
             Actions.pop()
         }else if(data=='sl'){
-            this._EvaluationResult.show();
+            this._EvaluationResult.show(1);
         }else if(data=='xl'){
-            this._EvaluationResult.show();
+            this._EvaluationResult.show(2);
         }else if(data=='sj'){
-            this._EvaluationResult.show();
+            this._EvaluationResult.show(3);
         }else if(data=='zc'){
-            this._EvaluationResult.show();
+            this._EvaluationResult.show(4);
         }else{
             Actions.deepDiagnosis();
         }
