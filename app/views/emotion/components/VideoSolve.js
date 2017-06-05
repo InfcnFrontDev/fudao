@@ -58,13 +58,13 @@ class VideoSolve extends PureComponent {
                             volume={1.0}                 // 声音的放大倍数，0 代表没有声音，就是静音muted, 1 代表正常音量 normal，更大的数字表示放大的倍数
                             muted={false}                // true代表静音，默认为false.
                             resizeMode="cover"           // 视频的自适应伸缩铺放行为，
-                            repeat={true}                // 是否重复播放
+                            repeat={false}                // 是否重复播放
                             playInBackground={true}     // 当app转到后台运行的时候，播放是否暂停//
                             playWhenInactive={false}     // [iOS] Video continues to play when control or notification center are shown. 仅适用于IOS
                             onLoadStart={this.loadStart} // 当视频开始加载时的回调函数
                             onLoad={(data)=>this.onLoad}    // 当视频加载完毕时的回调函数
                             onProgress={(e) => this.onProgress(e)}    //  进度控制，每250ms调用一次，以获取视频播放的进度
-                            onEnd={this.onend}           // 当视频播放完毕后的回调函数
+                            onEnd={this.onEnd}           // 当视频播放完毕后的回调函数
                             onError={this.videoError}    // 当视频不能加载，或出错后的回调函数
                             style={styles.backgroundVideo}
                             paused={this.state.btn}               // true代表暂停，

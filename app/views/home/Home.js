@@ -78,16 +78,18 @@ export default class Home extends PureComponent {
 							marginBottom: 10,
 							flexDirection: 'column',
 							width: Dimensions.get('window').width / 2 - 30,
-							flex: 0
+							flex: 0,
+							marginRight:10
 						}}
 								transparent
 								onPress={()=>Actions.search()}>
 							<Icon name="search"
 								  style={{color: "#fff",  position: 'absolute', right: 10}}/>
 						</Button>
-						<Button transparent onPress={()=> Actions.feedback()}>
-							<Icon name="ios-chatboxes" style={{color: "#fff"}}/>
-							{/*<View
+						<Button transparent  onPress={()=> Actions.feedback()}>
+							<Image source={require('../../assets/feedback.png')} style={{width:20,height:20}}/>
+							{/*<Icon name="ios-chatboxes" style={{color: "#fff"}}/>
+							<View
 								style={{backgroundColor:'#f00',width:15,height:15,borderRadius:15,paddingTop:1,position:'absolute',right:10,top:0}}>
 								<Text style={{color:'#fff',fontSize:10,textAlign:'center'}}>10</Text>
 							</View>*/}
