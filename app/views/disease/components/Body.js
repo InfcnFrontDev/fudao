@@ -17,13 +17,9 @@ export default class BodyModal extends PureComponent {
         }
     }
 
-    componentDidMount() {
-        allDiseaseListStore.fetchData()
-    }
-
     onPressEvent() {
-        questionStore.jlModalShow = false
         Actions.teach({pageKey: 'disease',title: this.props.title})
+        // questionStore.jlModalShow = false
         // questionStore.teachModalShow = true
 
     }

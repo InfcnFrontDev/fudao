@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
+import {Actions} from "react-native-router-flux";
 import {View, Image, Text} from "react-native";
 import {Button} from "native-base";
 import {Container, Content, Header,Modal} from "../../components/index";
@@ -56,9 +57,12 @@ export default class ExpectDetail extends PureComponent {
 						selectedItemId={selectedItem.id}
 					/>
 					<DiseaseMethodTabView data={expectMethod} pageKey={'expect'}/>
-					<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jlModalShow=true}>
-						<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
-					</Button>
+					{/*<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jlModalShow=true}>*/}
+						{/*<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>*/}
+					{/*</Button>*/}
+                    <Button transparent style={styles.btnStyle} onPress={() => Actions.body({pageKey:'disease',title:selectedItem.name})}>
+                        <Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
+                    </Button>
 				</Content>
                 <DetailModal visible={modalShow}>
                     <QuestionText data={questionId} from={'expect'}/>
