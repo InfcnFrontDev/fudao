@@ -51,6 +51,7 @@ class TimeModal extends PureComponent {
                     </View>
                     <View style={{flex: 1}}>
                         <WebView
+                            onMessage={(event)=>this.openDetailsBox(event.nativeEvent.data)}
                             source={{uri:urls.pages.MODIFICATION_TIME+'?token='+userStore.token}}
                             style={{backgroundColor:'rgba(0,0,0,.0)'}}
                         />
@@ -61,6 +62,16 @@ class TimeModal extends PureComponent {
 
             </Modal>
         )
+    }
+    openDetailsBox(data){
+        //alert(data.substring(0,4));
+        if(data=='此阶段无法修改') {
+            tools.showToast('此阶段无法修改')
+        }else if(data=='保存成功'){
+            tools.showToast('保存成功')
+        }
+
+
     }
     layout(data){
         alert(JSON.stringify(data));
