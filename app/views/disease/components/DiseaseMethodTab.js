@@ -21,16 +21,6 @@ export default class DiseaseMethodTab extends PureComponent {
         questionStore.questionId = id
         questionStore.questionName = name
         questionStore.modalShow = true
-        // if (this.props.pageKey === 'disease') {
-        //     diseaseMethodStore.questionId = id
-        //     diseaseMethodStore.modalShow = true
-        // } else if (this.props.pageKey === 'expect') {
-        //     expectMethodStore.questionId = id
-        //     expectMethodStore.modalShow = true
-        // } else {
-        //     healthMethodStore.questionId = id
-        //     healthMethodStore.modalShow = true
-        // }
     }
 
     render() {
@@ -83,7 +73,7 @@ export default class DiseaseMethodTab extends PureComponent {
                         <Text style={styles.text}>{' - ' + method.timePeriod + ' : '}</Text>
                         <View style={{flexDirection: 'column'}}>
                             <View style={{flexDirection: 'row'}}>
-                                <Text style={styles.text}>{'宜食 '}</Text>
+                                <Text style={styles.text}>{'宜食：'}</Text>
                                 {
                                     (self.clearNullArr(method.suitable)).map((text, index) =>
                                     <TouchableOpacity key={index} onPress={() => this.onMethod0Press(text, method.suitable)}>
@@ -93,7 +83,7 @@ export default class DiseaseMethodTab extends PureComponent {
                             </View>
                             {
                                 method.fasting && method.fasting.length != 0 ? <View style={{flexDirection: 'row'}}>
-                                    <Text style={styles.text}>{'忌食 '}</Text>
+                                    <Text style={styles.redText}>{'忌食：'}</Text>
                                     {method.fasting.map((text, index) =>
                                         <Text key={index} style={styles.text}>{text + '; '}</Text>)}
                                 </View> : <View/>
@@ -144,6 +134,10 @@ const styles = {
     },
     text: {
         fontSize: theme.fontSizeH5
+    },
+    redText: {
+        fontSize: theme.fontSizeH5,
+        color: 'red'
     },
     textLink: {
         fontSize: theme.fontSizeH5,
