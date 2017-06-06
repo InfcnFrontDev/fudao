@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import {Text} from "native-base";
 import {View, Image, TouchableOpacity, TouchableHighlight, Dimensions, Modal} from "react-native";
-import {theme, urls, toast} from "../../utils/index";
 import Video from "react-native-video";
 /**
  * 播放器
