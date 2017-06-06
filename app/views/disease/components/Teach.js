@@ -19,13 +19,15 @@ export default class Teach extends PureComponent {
     }
 
     componentDidMount() {
-        let {pageKey} = this.props;
+        // let {pageKey,type} = this.props;
+        let {pageKey,type} = questionStore.data
         pageKey === 'disease' ?
-            allDiseaseListStore.fetchData() : allExpectListStore.fetchData()
+            allDiseaseListStore.fetchData(type) : allExpectListStore.fetchData(type)
     }
 
     render() {
-        let {visible, pageKey} = this.props;
+        // let {visible, pageKey} = this.props;
+        let {pageKey} = questionStore.data
         let {data} = pageKey === 'disease' ? allDiseaseListStore : allExpectListStore
 
         return (

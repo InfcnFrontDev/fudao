@@ -24,23 +24,12 @@ export default class BodyModal extends PureComponent {
 
     }
     onTransPress(data) {
-        switch (data) {
-            case 'xw':
-                alert('xw')
-                break
-            case 'xw':
-                alert('xw')
-                break
-            case 'xw':
-                alert('xw')
-                break
-            case 'xw':
-                alert('xw')
-                break
-            default:
-                return
-        }
+        let {title, pageKey} = this.props;
+        questionStore.data = {pageKey: pageKey,title: title,type: data}
+        Actions.teach()
+
     }
+
     render() {
         let {visible, pageKey} = this.props;
         let diseaseType = pageKey === 'disease' ? encodeURI(allDiseaseListStore.selectedItem.type) : encodeURI(allExpectListStore.selectedItem.type)
@@ -54,18 +43,18 @@ export default class BodyModal extends PureComponent {
                         uri={urls.pages.MY_QUESTION_PERSON + '?disease=' + disease + '&diseaseType=' + diseaseType + '&type=' + pageKey}
                         style={styles.webViewStyle}/>
 
-                    <View style={styles.closeBox}>
-                        <View style={{width: theme.deviceWidth - 60}}>
-                            <Text style={{lineHeight: 20, fontSize: 15}}>
-                                &nbsp;&nbsp;&nbsp;&nbsp;通过对自由基显影技术的改进与应用，在生物体内发现与经络吻合的清晰的线性路线，是目前全世界获得最清晰的经络显影照片
-                            </Text>
-                        </View>
-                        <View style={styles.buttonView}>
-                            <Button block onPress={this.onPressEvent.bind(this)}>
-                                <Text>教我自疗</Text>
-                            </Button>
-                        </View>
-                    </View>
+                    {/*<View style={styles.closeBox}>*/}
+                        {/*<View style={{width: theme.deviceWidth - 60}}>*/}
+                            {/*<Text style={{lineHeight: 20, fontSize: 15}}>*/}
+                                {/*&nbsp;&nbsp;&nbsp;&nbsp;通过对自由基显影技术的改进与应用，在生物体内发现与经络吻合的清晰的线性路线，是目前全世界获得最清晰的经络显影照片*/}
+                            {/*</Text>*/}
+                        {/*</View>*/}
+                        {/*<View style={styles.buttonView}>*/}
+                            {/*<Button block onPress={this.onPressEvent.bind(this)}>*/}
+                                {/*<Text>教我自疗</Text>*/}
+                            {/*</Button>*/}
+                        {/*</View>*/}
+                    {/*</View>*/}
                 </Content>
 
             </Container>
@@ -76,7 +65,8 @@ export default class BodyModal extends PureComponent {
 const styles = {
     webViewStyle: {
         width: theme.deviceWidth,
-        height: theme.deviceHeight - 80
+        height: theme.deviceHeight
+        // height: theme.deviceHeight - 80
     },
     closeBox: {
         height: 150,
