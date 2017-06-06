@@ -51,7 +51,7 @@ export default class BodyModal extends PureComponent {
                 <Content delay white>
                     <WebView
                         onMessage={(event) => this.onTransPress(event.nativeEvent.data)}
-                        uri={urls.pages.MY_QUESTION_PERSON + '?disease=' + disease + '&diseaseType=' + diseaseType}
+                        uri={urls.pages.MY_QUESTION_PERSON + '?disease=' + disease + '&diseaseType=' + diseaseType + '&type=' + pageKey}
                         style={styles.webViewStyle}/>
 
                     <View style={styles.closeBox}>

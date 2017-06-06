@@ -196,7 +196,8 @@ const urls = {
         COOKBOOK_GETCOOKBOOK: apiPath + 'CookbookApi/getCookbook',
        //获取疾病相关穴位
         DISEASE_ACUPOINTS: apiPath + 'DiseaseApi/getDiseaseAcupoints',
-
+        //获取自修相关穴位
+        EXPECT_ACUPOINTS: apiPath + 'ExpectApi/getExpectAcupoints',
 
 
         // 我的期望 ---------------------------------------------------------
