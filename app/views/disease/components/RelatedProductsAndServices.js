@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import {Text, Button} from "native-base";
+import {Actions} from "react-native-router-flux";
 import {View, Image, ToastAndroid, DeviceEventEmitter, TouchableHighlight} from "react-native";
 
 /**
@@ -41,7 +42,7 @@ export default class RelatedProductsAndServices extends PureComponent {
 					</View>
 				</View>
 				<View style={styles.buttonView}>
-					<Button block>
+					<Button block onPress={()=>Actions.shop()}>
 						<Text>更多养生产品</Text>
 					</Button>
 				</View>

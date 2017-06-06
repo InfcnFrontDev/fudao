@@ -4,6 +4,7 @@ class QuestionStore {
 	@observable questionId = ''
 	@observable questionName = ''
 	@observable questionType = ''
+	@observable data = ''
 	@observable modalShow = false
 	@observable jlModalShow = false
 	@observable teachModalShow = false

@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Text} from "native-base";
 import Video from "react-native-video";
 import VideoText from "../components/VideoText";
+import ImageText from "../components/ImageText";
 import questionStore from "../../mobx/questionStore";
 
 
@@ -55,19 +56,16 @@ class QuestionText extends PureComponent {
                 <VideoText title={data.name} content={data.detail} video={data.img} basis={data.threeCharacterClassic}/>
             )
         } else {
-            const title = questionStore.questionName
+            const title = questionStore.questionName;
             var content = data.threeCharacterClassic + "\n" + data.detail;
             content = content.split('\\t').join('');
             content = content.split('\\n').join('\n');
             var e = new RegExp('\n', "g");
             content = content.replace(e, '\n        ');
             return (
-                <View style={styles.view}>
-                    <Text style={styles.titleText}>{title}</Text>
-                    <Image source={{uri: urls.getImage(data.img)}} style={styles.image}/>
-                    <Text style={styles.contentText}>        {content}</Text>
-                </View>
+               <ImageText title={title} content={content} img={data.img} />
             )
+
         }
     }
 

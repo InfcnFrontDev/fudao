@@ -92,7 +92,6 @@ export default class MedicalExamination extends PureComponent {
 		// 当前编辑项
 		this.curentItem = item;
 		this.curentGroup = group;
-tools.showToast(JSON.stringify(item))
 		if (item.items)
 			if (item.items[0] == "阴性") {
 				item.limit = 'yinx_yangx';

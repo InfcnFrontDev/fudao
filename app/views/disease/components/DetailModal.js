@@ -26,18 +26,12 @@ export default class DetailModal extends PureComponent {
             >
                 <View style={styles.opacityView}/>
                 <View style={styles.content}>
-                    <View style={styles.header}>
-                        <View style={{width: 25}}>
                             <Button
                                 onPress={() => this.hide()}
                                 style={styles.closeButton}>
                                 <Icon name="close" style={{color: '#FFF', fontSize: 20}}/>
                             </Button>
-                        </View>
-                    </View>
-                    <ScrollView style={styles.child}>
                         {children}
-                    </ScrollView>
                 </View>
             </Modal>
         )
@@ -45,13 +39,6 @@ export default class DetailModal extends PureComponent {
 
     hide() {
         questionStore.modalShow = false
-        // if (this.props.pageKey === 'disease') {
-        //     diseaseMethodStore.modalShow = false
-        // } else if (this.props.pageKey === 'expect') {
-        //     expectMethodStore.modalShow = false
-        // } else {
-        //     healthMethodStore.modalShow = false
-        // }
     }
 }
 
@@ -63,16 +50,16 @@ const styles = {
         opacity: 0.5,
     },
     content: {
-        position: "absolute",
         backgroundColor: '#FFFFFF',
+        borderRadius: 3,
+        flexDirection: 'column',
+        position: "absolute",
         top: 30,
         bottom: 30,
         left: 20,
         right: 20,
-        borderRadius: 3,
         opacity: 1,
         flex: 1,
-        flexDirection: 'column',
     },
     header: {
         paddingLeft: 10,
@@ -92,6 +79,9 @@ const styles = {
         height: 24,
         paddingLeft: 0,
         paddingRight: 0,
+        marginLeft:10,
+        marginTop:10,
+        zIndex:100
     },
     child: {
         marginBottom: 20,

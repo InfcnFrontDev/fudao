@@ -27,7 +27,6 @@ export default class DiseaseDetail extends PureComponent {
         allDiseaseListStore.selectedItem = item
         diseaseMethodStore.diseaseId = item.id
         diseaseMethodStore.fetchDiseaseMethod()
-        allDiseaseListStore.fetchData()
 	}
 
     onItemRemove(item,i) {
@@ -60,9 +59,12 @@ export default class DiseaseDetail extends PureComponent {
 						selectedItemId={selectedItem.id}
 					/>
 					<DiseaseMethodTabView data={diseaseMethod} pageKey={'disease'}/>
-					<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jlModalShow =true}>
-						<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
-					</Button>
+					{/*<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jlModalShow =true}>*/}
+						{/*<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>*/}
+					{/*</Button>*/}
+                    <Button transparent style={styles.btnStyle} onPress={() => Actions.body({pageKey:'disease',title:selectedItem.name})}>
+                        <Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
+                    </Button>
 				</Content>
                 <DetailModal visible={modalShow}>
                     <QuestionText data={questionId} from={'disease'}/>

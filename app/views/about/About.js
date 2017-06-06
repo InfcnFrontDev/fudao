@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import {Actions} from "react-native-router-flux";
 import {observer} from "mobx-react/native";
+import {Image} from "react-native";
 import {View, Text, Row, Thumbnail, Col, Button} from "native-base";
 import {Container, Content, Header} from "../../components/index";
 
@@ -15,7 +16,7 @@ export default class About extends PureComponent {
 				<Header {...this.props}/>
 				<Content padder white>
 					<View style={styles.title}>
-						<Thumbnail square source={require('../../assets/logo.png')}/>
+						<Image  source={require('../../assets/logo-png.png')} style={styles.logo}/>
 						<Text style={styles.titleText}>{config.appName}</Text>
 						<Text>{config.appVersion}</Text>
 					</View>
@@ -74,5 +75,11 @@ const styles = {
 	center: {
 		flexDirection: "row",
 		justifyContent: 'center',
+	},
+	logo:{
+		height:60,
+		width:200,
+		resizeMode:'contain',
+		marginBottom:20,
 	}
 };

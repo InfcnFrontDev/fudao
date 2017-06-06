@@ -33,6 +33,9 @@ import DynamicDetail from "./views/dynamic/DynamicDetail";
 import DynamicPicture from "./views/dynamic/DynamicPicture";
 import MenuDetail from "./views/disease/components/MenuDetail";
 import MenuKinds from "./views/disease/components/MenuKinds";
+import Shop from "./views/disease/components/Shop";
+import Teach from "./views/disease/components/Teach";
+import Body from "./views/disease/components/Body";
 import Expect from "./views/disease/Expect";
 import ExpectDetail from "./views/disease/ExpectDetail";
 import Health from "./views/disease/Health";
@@ -125,6 +128,9 @@ export default class AppRouter extends PureComponent {
 					<Scene title="疾病详情" key="diseaseDetail" component={DiseaseDetail} hideNavBar/>
 					<Scene key="menuKinds" component={MenuKinds} hideNavBar/>
 					<Scene key="menuDetail" component={MenuDetail} hideNavBar/>
+					<Scene key="shop" component={Shop} hideNavBar/>
+					<Scene key="teach" component={Teach} hideNavBar/>
+					<Scene key="body" component={Body} hideNavBar/>
 
 					{/*自修*/}
 					<Scene key="expect" component={Expect} hideNavBar/>
