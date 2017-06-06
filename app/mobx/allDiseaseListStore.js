@@ -30,16 +30,16 @@ class AllDiseaseListStore {
 	    let url
 	    switch (type) {
             case '1':
-                url = urls.apis.DISEASE_ACUPOINTS;
+                url = urls.apis.DISEASE_MERIDIANS;
                 break
             case '2':
                 url = urls.apis.DISEASE_ACUPOINTS;
                 break
             case '3':
-                url = urls.apis.DISEASE_ACUPOINTS;
+                url = urls.apis.DISEASE_ORGANS;
                 break
             case '4':
-                url = urls.apis.DISEASE_ACUPOINTS;
+                url = urls.apis.DISEASE_CIRCULATORYSYSTEMS;
                 break
             default:
                 return

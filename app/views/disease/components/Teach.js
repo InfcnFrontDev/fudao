@@ -27,12 +27,12 @@ export default class Teach extends PureComponent {
 
     render() {
         // let {visible, pageKey} = this.props;
-        let {pageKey} = questionStore.data
+        let {pageKey,title} = questionStore.data
         let {data} = pageKey === 'disease' ? allDiseaseListStore : allExpectListStore
 
         return (
             <Container>
-                <Header {...this.props}/>
+                <Header {...this.props} title={title}/>
                 <Swiper
                     style={styles.wrapper}
                     showsButtons={false}
@@ -58,7 +58,9 @@ export default class Teach extends PureComponent {
                                     <View style={styles.headerView}>
                                         <Text style={styles.text}>{'  -' + item.name}</Text>
                                     </View>
-                                    <Image style={styles.img} source={{uri: urls.getImage(item.img)}}/>
+                                    {
+                                        item.img ? <Image style={styles.img} source={{uri: urls.getImage(item.img)}}/> : <View/>
+                                    }
 
                                     <View style={styles.box}>
                                         <Text style={styles.text}>部位：{item.part}</Text>
