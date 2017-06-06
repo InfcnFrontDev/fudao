@@ -64,7 +64,7 @@ class QuestionText extends PureComponent {
             return (
                 <View style={styles.view}>
                     <Text style={styles.titleText}>{title}</Text>
-                    <Image source={{uri: urls.getImage(data.img)}} style={styles.image}/>
+                    <Image source={{uri: urls.getImage(data.img.split(';')[0])}} style={styles.image}/>
                     <Text style={styles.contentText}>        {content}</Text>
                 </View>
             )

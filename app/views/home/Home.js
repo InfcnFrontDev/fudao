@@ -65,15 +65,21 @@ export default class Home extends PureComponent {
 							marginBottom: 10,
 							flexDirection: 'column',
 							width: Dimensions.get('window').width / 2 - 30,
-							flex: 0
+							flex: 0,
+							marginRight:10
 						}}
 								transparent
 								onPress={()=>Actions.search()}>
 							<Icon name="search"
 								  style={{color: "#fff",  position: 'absolute', right: 10}}/>
 						</Button>
-						<Button transparent onPress={()=> Actions.feedback()}>
-							<Icon name="ios-chatboxes" style={{color: "#fff"}}/>
+						<Button transparent  onPress={()=> Actions.feedback()}>
+							<Image source={require('../../assets/feedback.png')} style={{width:20,height:20}}/>
+							{/*<Icon name="ios-chatboxes" style={{color: "#fff"}}/>
+							<View
+								style={{backgroundColor:'#f00',width:15,height:15,borderRadius:15,paddingTop:1,position:'absolute',right:10,top:0}}>
+								<Text style={{color:'#fff',fontSize:10,textAlign:'center'}}>10</Text>
+							</View>*/}
 						</Button>
 					</Right>
 				</View>
@@ -90,7 +96,7 @@ export default class Home extends PureComponent {
 						<Button transparent style={{backgroundColor:'rgba(225,225,225,.0)'}}
 								onPress={()=>this.changeStatus()}>
 							<Image source={require('../../assets/home/qiehuan.png')} style={{width:20,height:20}}/>
-							<Text style={{color:'#b7b7b7',fontSize:14}}>{this.state.status ? '切换到个人版' : '切换到通用版'}</Text>
+							<Text style={{color:'#b7b7b7',fontSize:14}}>{this.state.status?'个人版':'通用版'}</Text>
 						</Button>
 
 					</View>
@@ -112,24 +118,24 @@ export default class Home extends PureComponent {
 			</Container>
 		)
 	}
-
-	changeStatus() {
+	changeStatus(){
 		this.setState({
-			status: !this.state.status
+			status:!this.state.status
 		})
 	}
 
-	openDetailsBox(data) {
+	openDetailsBox(data){
 		//alert(data.substring(0,4));
-		if (data == '修改时间') {
+		if(data=='修改时间'){
 			this._TimeModal.show(data);
-		} else if (data.substring(0, 4) == '获取运动') {
-			this._YunDongModal.show(data.substring(4, data.length));
-		} else {
+		}else if(data.substring(0,4)=='获取运动'){
+			this._YunDongModal.show(data.substring(4,data.length));
+		}else{
 			this._groupSelectModal.show(data);
 		}
 
 	}
+
 
 	setModalVisible(visible) {
 		this.setState({modalVisible: visible});
