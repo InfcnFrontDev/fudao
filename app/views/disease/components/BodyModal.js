@@ -15,6 +15,11 @@ export default class BodyModal extends PureComponent {
             visible: false,
         }
     }
+
+    componentDidMount(){
+        allDiseaseListStore.fetchData()
+    }
+
     onPressEvent(){
         questionStore.jlModalShow = false
         questionStore.teachModalShow = true
