@@ -73,13 +73,7 @@ export default class Home extends PureComponent {
 								  style={{color: "#fff",  position: 'absolute', right: 10}}/>
 						</Button>
 						<Button transparent onPress={()=> Actions.feedback()}>
-
-						<Button transparent onPress={() => tools.notOpen()}>
 							<Icon name="ios-chatboxes" style={{color: "#fff"}}/>
-							{/*<View
-							 style={{backgroundColor:'#f00',width:15,height:15,borderRadius:15,paddingTop:1,position:'absolute',right:10,top:0}}>
-							 <Text style={{color:'#fff',fontSize:10,textAlign:'center'}}>10</Text>
-							 </View>*/}
 						</Button>
 					</Right>
 				</View>
