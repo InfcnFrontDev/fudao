@@ -85,6 +85,7 @@ export default class EmotionFactorModal extends PureComponent {
 								dataSource={this.state.dataSource.cloneWithRows(emotion.reasons.slice(0))}
 								renderRow={this.renderReasonRow.bind(this)}
 								enableEmptySections
+								pageSize={20}
 							/>
 							<View style={{alignItems:'center',marginTop:10,marginBottom:10}}>
 								<View style={styles.input}>
