@@ -62,9 +62,9 @@ export default class DiseaseDetail extends PureComponent {
 					{/*<Button transparent style={styles.btnStyle} onPress={()=> questionStore.jlModalShow =true}>*/}
 						{/*<Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>*/}
 					{/*</Button>*/}
-                    <Button transparent style={styles.btnStyle} onPress={() => Actions.body({pageKey:'disease',title:selectedItem.name})}>
+                    {allDiseaseListStore.selectedItem.type == '精神' ? <View/> : <Button transparent style={styles.btnStyle} onPress={() => Actions.body({pageKey:'disease',title:selectedItem.name})}>
                         <Image source={require('../../assets/disease/jingluo.png')} style={styles.image}/>
-                    </Button>
+                    </Button>}
 				</Content>
                 <DetailModal visible={modalShow}>
                     <QuestionText data={questionId} from={'disease'}/>
