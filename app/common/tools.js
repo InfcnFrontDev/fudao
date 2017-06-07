@@ -1,4 +1,5 @@
 import {ToastAndroid} from "react-native";
+import Toast from '@remobile/react-native-toast';
 import DialogAndroid from "react-native-dialogs";
 import uuid from "uuid";
 import config from "./config";
@@ -24,7 +25,7 @@ const tools = {
 	 * @param text
 	 */
 	showToast(text){
-		ToastAndroid.show(text, ToastAndroid.SHORT);
+        Toast.showShortCenter(text);
 	},
 
 	showDialog(options){
