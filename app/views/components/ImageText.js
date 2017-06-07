@@ -12,7 +12,7 @@ class ImageText extends PureComponent {
 		let {title,content,img}=this.props;
 		return (
 			<View  style={styles.container}>
-				<View style={{flexDirection: 'column',alignItems: 'center',}}>
+				<View style={{flexDirection: 'column'}}>
 					<Text style={styles.title}>{title}</Text>
 					<Image source={{uri: urls.getImage(img)}} resizeMode='cover' style={styles.image}/>
 					<View style={{height:theme.deviceHeight * 0.8-240}}>

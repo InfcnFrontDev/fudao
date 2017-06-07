@@ -40,7 +40,8 @@ const styles = {
     },
     content: {
         fontSize: theme.DefaultFontSize,
-        color:'#6A6A6A'
+        color:'#6A6A6A',
+        lineHeight:20
     },
     image: {
         width: 220,
