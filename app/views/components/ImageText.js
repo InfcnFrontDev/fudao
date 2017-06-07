@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Modal, View, Image, TouchableHighlight} from "react-native";
+import {Modal, View, Image, TouchableHighlight,ScrollView} from "react-native";
 import {Text} from "native-base";
 
 
@@ -9,12 +9,17 @@ import {Text} from "native-base";
 class ImageText extends PureComponent {
 
 	render() {
+		let {title,content,img}=this.props;
 		return (
-			<View style={styles.container}>
-				<Text style={styles.title}>121212</Text>
-				<Text style={styles.content}>12121212</Text>
-				<View>
-					{/*<Image source={{uri: urls.getImage('/high_quality_population'+image)}} resizeMode='cover' style={styles.image}/>*/}
+			<View  style={styles.container}>
+				<View style={{flexDirection: 'column',alignItems: 'center',}}>
+					<Text style={styles.title}>{title}</Text>
+					<Image source={{uri: urls.getImage(img)}} resizeMode='cover' style={styles.image}/>
+					<View style={{height:theme.deviceHeight * 0.8-240}}>
+						<ScrollView showsHorizontalScrollIndicator ={true}>
+							<Text style={styles.content}>        {content}</Text>
+						</ScrollView>
+					</View>
 				</View>
 			</View>
 		)
@@ -25,36 +30,35 @@ const styles = {
 	container: {
 		flex: 1,
 		flexDirection: 'column',
-		justifyContent: 'center',
 		alignItems: 'center',
-		marginBottom: 30,
-		borderRadius: 10
 	},
 	title: {
 		textAlign: 'center',
-		fontSize: theme.DefaultFontSize + 6,
-		marginBottom: 30,
+		fontSize: theme.DefaultFontSize + 4,
 	},
 	content: {
-		textAlign: 'center',
-		fontSize: theme.DefaultFontSize + 2,
+		fontSize: theme.DefaultFontSize,
 		marginLeft: 30,
 		marginRight: 30,
 		lineHeight: 28,
 	},
 	image: {
-		marginTop: 20,
-		width: 250,
-		height: 200,
-		justifyContent: 'center',
+		margin: 20,
+		width: theme.deviceWidth * 0.78,
+		height: 180,
 	},
+	scrollV:{
+		height:theme.deviceHeight * 0.8-240,
+	}
 };
 
 ImageText.propsTypes = {
+	fenji:React.PropTypes.string,
 	title: React.PropTypes.string,
 	content: React.PropTypes.string,
-	image: React.PropTypes.string,
-}
+	img: React.PropTypes.string,
+};
 
 export default (ImageText);
+
 
