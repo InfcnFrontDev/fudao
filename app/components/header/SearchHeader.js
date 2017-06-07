@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {TouchableOpacity, StyleSheet} from "react-native";
+import {TouchableOpacity, StyleSheet,Platform} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Header, Icon, Input, Item, Button, Grid, Row, Col} from "native-base";
 
@@ -41,8 +41,8 @@ class SearchHeader extends PureComponent {
 									onChangeText={(text) => this._onChangeText(text)}
 									autoFocus={autoFocus}
 									onSubmitEditing={(text) => this._onSubmitEditing(text)}
-									style={styles.inputText}/>
-								{clearIcon}
+									style={Platform.OS=='ios'?styles.inputText_ios:styles.inputText_android}/>
+									{clearIcon}
 							</Item>
 						</Col>
 					</Row>
@@ -74,9 +74,10 @@ const styles = {
 	backCol: {width: 35, justifyContent: 'center'},
 	inputCol: {justifyContent: 'center'},
 	backButton: {marginLeft: -10},
-	inputGroup: {height: 35, backgroundColor: '#ffffff'},
-	inputIcon: {color: '#666666'},
-	inputText: {color: '#666666', marginBottom: 2},
+	inputGroup: {height: 35, backgroundColor: '#fff'},
+	inputIcon: {color: '#666666',backgroundColor:'transparent'},
+	inputText_android: {color: '#666666', marginBottom: 2},
+	inputText_ios: {height: 35,color: '#666666'},
 };
 
 SearchHeader.propsType = {
