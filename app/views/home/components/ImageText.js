@@ -13,7 +13,7 @@ class ImageText extends PureComponent {
 			<ScrollView  style={styles.container}>
 				<Text style={styles.title}>{title}</Text>
 				<Image source={{uri: urls.getImage(image)}} resizeMode='cover' style={styles.image}/>
-				<Text style={styles.content}>{content}</Text>
+				<Text style={styles.content}>        {content}</Text>
 			</ScrollView>
 		)
 	}

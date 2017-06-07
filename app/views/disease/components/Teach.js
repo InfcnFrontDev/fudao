@@ -33,49 +33,52 @@ export default class Teach extends PureComponent {
         return (
             <Container>
                 <Header {...this.props} title={title}/>
-                <Swiper
-                    style={styles.wrapper}
-                    showsButtons={false}
-                    showsPagination={true}
-                    height={theme.deviceHeight}
-                    paginationStyle={{bottom: 120}}
-                    activeDot={<View style={{
-                        backgroundColor: '#00cf92',
-                        width: 8,
-                        height: 8,
-                        borderRadius: 4,
-                        marginLeft: 3,
-                        marginRight: 3,
-                        marginTop: 3,
-                        marginBottom: 3,
-                    }}/>}
+                <ScrollView>
+                    <Swiper
+                        style={styles.wrapper}
+                        showsButtons={false}
+                        showsPagination={true}
+                        height={theme.deviceHeight}
+                        paginationStyle={{bottom: 120}}
+                        activeDot={<View style={{
+                            backgroundColor: '#00cf92',
+                            width: 8,
+                            height: 8,
+                            borderRadius: 4,
+                            marginLeft: 3,
+                            marginRight: 3,
+                            marginTop: 3,
+                            marginBottom: 3,
+                        }}/>}
 
-                >
-                    {
-                        data.length > 0 ? data.map((item, index) => {
-                            return (
-                                <ScrollView key={index} style={styles.container}>
-                                    <View style={styles.headerView}>
-                                        <Text style={styles.text}>{'  -' + item.name}</Text>
-                                    </View>
-                                    {
-                                        item.img ? <Image style={styles.img} source={{uri: urls.getImage(item.img)}}/> : <View/>
-                                    }
+                    >
+                        {
+                            data.length > 0 ? data.map((item, index) => {
+                                return (
+                                    <View key={index} style={styles.container}>
+                                        <View style={styles.headerView}>
+                                            <Text style={styles.text}>{'  -' + item.name}</Text>
+                                        </View>
+                                        {
+                                            item.img ? <Image style={styles.img} source={{uri: urls.getImage(item.img)}}/> : <View/>
+                                        }
 
-                                    <View style={styles.box}>
-                                        <Text style={styles.text}>部位：{item.part}</Text>
-                                        <Text style={styles.text}>相关器官：{item.location}</Text>
-                                        <Text style={styles.text}>穴位保健效果：{item.healthEffect}</Text>
-                                        <Text style={styles.text}>穴位保健方法：</Text>
-                                        <Text style={styles.text1}>{item.healthMethod}</Text>
-                                        <Text style={styles.text}>简便取穴法：</Text>
-                                        <Text style={styles.text1}>{item.simpleAcupointSelection}</Text>
+                                        <View style={styles.box}>
+                                            <Text style={styles.text}>部位：{item.part}</Text>
+                                            <Text style={styles.text}>相关器官：{item.location}</Text>
+                                            <Text style={styles.text}>穴位保健效果：{item.healthEffect}</Text>
+                                            <Text style={styles.text}>穴位保健方法：</Text>
+                                            <Text style={styles.text1}>{item.healthMethod}</Text>
+                                            <Text style={styles.text}>简便取穴法：</Text>
+                                            <Text style={styles.text1}>{item.simpleAcupointSelection}</Text>
+                                        </View>
                                     </View>
-                                </ScrollView>
-                            )
-                        }) : <View/>
-                    }
-                </Swiper>
+                                )
+                            }) : <View/>
+                        }
+                    </Swiper>
+                </ScrollView>
+
             </Container>
         )
     }
