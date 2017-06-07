@@ -24,7 +24,7 @@ class AllExpectListStore {
             console.log("Api call error");
         });
 	}
-    fetchData(){
+    fetchData(type){
         let url
         switch (type) {
             case '1':
