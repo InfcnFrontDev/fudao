@@ -25,8 +25,8 @@ const tools = {
 	 * @param text
 	 */
 	showToast(text){
-	    Toast.showShortBottom(text)
-		// ToastAndroid.show(text, ToastAndroid.SHORT);
+	    // Toast.showShortBottom(text)
+		ToastAndroid.show(text, ToastAndroid.SHORT);
 	},
 
 	showDialog(options){
