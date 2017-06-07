@@ -24,8 +24,25 @@ class AllExpectListStore {
             console.log("Api call error");
         });
 	}
-    fetchData(){
-        request.getJson(urls.apis.DISEASE_ACUPOINTS,{diseaseType:this.selectedItem.type,disease: this.selectedItem.name})
+    fetchData(type){
+        let url
+        switch (type) {
+            case '1':
+                url = urls.apis.EXPECT_MERIDIANS;
+                break
+            case '2':
+                url = urls.apis.EXPECT_ACUPOINTS;
+                break
+            case '3':
+                url = urls.apis.EXPECT_ORGANS;
+                break
+            case '4':
+                url = urls.apis.EXPECT_CIRCULATORYSYSTEMS;
+                break
+            default:
+                return
+        }
+        request.getJson(url,{diseaseType:this.selectedItem.type,disease: this.selectedItem.name})
             .then((result) => {
                 if (result.ok) {
                     this.data = result.obj

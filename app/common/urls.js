@@ -6,7 +6,8 @@
 //const webPath = 'http://103.254.113.11:9090/web/'; // 外网
  //const webPath = 'http://103.254.113.11:9191/web/'; // 内网
 // const webPath = 'http://192.168.3.137:3000/'; // 杨可可
-const webPath = 'http://192.168.3.204:3000/'; // 王朋
+// const webPath = 'http://192.168.3.204:3000/'; // 王朋
+const webPath = 'http://192.168.3.173:3000/'; // zy
 //const webPath = 'http://192.168.3.213:3000/'; // cxx
 // const webPath = 'http://192.168.3.203:3000/'; //
 
@@ -202,8 +203,14 @@ const urls = {
         DISEASE_ORGANS: apiPath + 'DiseaseApi/getDiseaseOrgans',
         //获取疾病相关循环系统
         DISEASE_CIRCULATORYSYSTEMS: apiPath + 'DiseaseApi/getDiseaseCirculatorySystems',
+        //获取自修相关经络
+        EXPECT_MERIDIANS: apiPath + 'ExpectApi/getExpectMeridians',
         //获取自修相关穴位
         EXPECT_ACUPOINTS: apiPath + 'ExpectApi/getExpectAcupoints',
+        //获取自修相关器官
+        EXPECT_ORGANS: apiPath + 'ExpectApi/getExpectOrgans',
+        //获取自修相关循环系统
+        EXPECT_CIRCULATORYSYSTEMS: apiPath + 'ExpectApi/getExpectCirculatorySystems',
 
 
         // 我的期望 ---------------------------------------------------------
