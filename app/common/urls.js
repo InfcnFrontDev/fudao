@@ -246,7 +246,7 @@ const urls = {
         // 自诊 ---------------------------------------------------------
         DIAGNOSIS_GETCOMMONDISEASELIST: apiPath + 'DiagnosisApi/getCommonDiseaseList',
         DIAGNOSIS_ADDMYDISEASES: apiPath + 'DiagnosisApi/addMyDiseases',
-
+        DIAGNOSIS_GETQUESTIONNAIRESCORES :apiPath + 'DiagnosisApi/getQuestionnaireScores',
         // 意见反馈 ---------------------------------------------------------
         FEEDBACK_SUBMIT: apiPath + 'FeedbackApi/submit',
 
