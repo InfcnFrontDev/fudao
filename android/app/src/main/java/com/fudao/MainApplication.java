@@ -16,6 +16,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import org.lovebing.reactnative.baidumap.BaiduMapPackage;
+import com.remobile.toast.RCTToastPackage;  // <--- import
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,7 +40,8 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactNativeDialogsPackage(),
             new RealmReactPackage(),
             new VectorIconsPackage(),
-			new ReactVideoPackage()
+			new ReactVideoPackage(),
+			new RCTToastPackage()
       );
     }
   };
