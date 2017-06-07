@@ -203,14 +203,8 @@ const urls = {
         DISEASE_ORGANS: apiPath + 'DiseaseApi/getDiseaseOrgans',
         //获取疾病相关循环系统
         DISEASE_CIRCULATORYSYSTEMS: apiPath + 'DiseaseApi/getDiseaseCirculatorySystems',
-        //获取自修相关经络
-        EXPECT_MERIDIANS: apiPath + 'ExpectApi/getExpectMeridians',
         //获取自修相关穴位
         EXPECT_ACUPOINTS: apiPath + 'ExpectApi/getExpectAcupoints',
-        //获取自修相关器官
-        EXPECT_ORGANS: apiPath + 'ExpectApi/getExpectOrgans',
-        //获取自修相关循环系统
-        EXPECT_CIRCULATORYSYSTEMS: apiPath + 'ExpectApi/getExpectCirculatorySystems',
 
 
         // 我的期望 ---------------------------------------------------------

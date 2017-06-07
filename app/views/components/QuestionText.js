@@ -57,11 +57,7 @@ class QuestionText extends PureComponent {
             )
         } else {
             const title = questionStore.questionName;
-            var content = data.threeCharacterClassic + "\n" + data.detail;
-            content = content.split('\\t').join('');
-            content = content.split('\\n').join('\n');
-            var e = new RegExp('\n', "g");
-            content = content.replace(e, '\n        ');
+            var content =data.detail;
             return (
                <ImageText title={title} content={content} img={data.img} />
             )
