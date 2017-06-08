@@ -3,6 +3,7 @@ import {Actions, ActionConst} from "react-native-router-flux";
 import {AsyncStorage} from "react-native";
 import {persist} from "mobx-persist";
 import hydrate from "../common/hydrate";
+var Geolocation = require('Geolocation');
 
 
 class UserStore {
@@ -11,6 +12,8 @@ class UserStore {
 	@persist @observable phone = ''
 	@persist @observable password = ''
 	@persist @observable token = ''
+	@persist @observable longitude = 0
+	@persist @observable latitude = 0
 	@observable position = {
 		name:'',
 		regionId:''
@@ -133,6 +136,45 @@ class UserStore {
 				tools.showToast("修改失败");
 			}
 		})
+	}
+	@action
+	getposition(){
+		Geolocation.getCurrentPosition(
+			location => {
+				var result = "速度：" + location.coords.speed +
+					"\n经度：" + location.coords.longitude +
+					"\n纬度：" + location.coords.latitude +
+					"\n准确度：" + location.coords.accuracy +
+					"\n行进方向：" + location.coords.heading +
+					"\n海拔：" + location.coords.altitude +
+					"\n海拔准确度：" + location.coords.altitudeAccuracy +
+					"\n时间戳：" + location.timestamp;
+				var coord=location.coords.longitude+","+location.coords.latitude;
+				request.getJson('http://api.map.baidu.com/geoconv/v1/', {
+					coords:coord,
+					from:1,
+					to:5,
+					ak:'trLEKMVBCc6MKGemHlUXdyy2'
+				}).then((data)=> {
+					var coo = data.result[0].y + "," + data.result[0].x;
+					request.getJson('http://api.map.baidu.com/geocoder/v2/', {
+						location: coo,
+						output: 'json',
+						pois: 1,
+						radius:20,
+						ak: 'trLEKMVBCc6MKGemHlUXdyy2'
+					}).then((data)=> {
+						this.location=data.result;
+
+					});
+				})
+
+			},
+			error => {
+				tools.showToast("获取位置失败")
+
+			}
+		);
 	}
 	@action
 	logout() {
