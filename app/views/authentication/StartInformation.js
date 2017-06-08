@@ -13,6 +13,8 @@ import CommitButton from "./components/CommitButton";
 import UserStore from "../../mobx/userStore";
 import WomanChoose from "./WomanChoose";
 
+
+var Geolocation = require('Geolocation');
 /**
  * 首次登录设置个人信息页
  */
@@ -40,12 +42,49 @@ export default class StartInformation extends PureComponent {
             flagD:true
         }
     }
+    componentWillMount(){
+        Geolocation.getCurrentPosition(
+            location => {
+                var result = "速度：" + location.coords.speed +
+                    "\n经度：" + location.coords.longitude +
+                    "\n纬度：" + location.coords.latitude +
+                    "\n准确度：" + location.coords.accuracy +
+                    "\n行进方向：" + location.coords.heading +
+                    "\n海拔：" + location.coords.altitude +
+                    "\n海拔准确度：" + location.coords.altitudeAccuracy +
+                    "\n时间戳：" + location.timestamp;
+                var coord=location.coords.longitude+","+location.coords.latitude;
+                request.getJson('http://api.map.baidu.com/geoconv/v1/', {
+                    coords:coord,
+                    from:1,
+                    to:5,
+                    ak:'trLEKMVBCc6MKGemHlUXdyy2'
+                }).then((data)=> {
+                    var coo = data.result[0].y + "," + data.result[0].x;
+                    request.getJson('http://api.map.baidu.com/geocoder/v2/', {
+                        location: coo,
+                        output: 'json',
+                        pois: 1,
+                        radius:20,
+                        ak: 'trLEKMVBCc6MKGemHlUXdyy2'
+                    }).then((data)=> {
+                       UserStore.location=data.result;
+                        UserStore.position.name=UserStore.location.addressComponent.city;
+                        UserStore.position.regionId=UserStore.location.addressComponent.adcode
 
+                    });
+                })
+
+            },
+            error => {
+               tools.showToast("获取位置失败")
+                UserStore.position.name="手动选择位置"
+            }
+        );
+    }
     componentDidMount(){
         let date=new Date;
-        this.date(date,this.state.sexChose)
-
-
+        this.date(date,this.state.sexChose);
     }
     async showPicker(stateKey, options,text) {
         try {
@@ -71,7 +110,7 @@ export default class StartInformation extends PureComponent {
 
 
     render() {
-        let position=UserStore.position.name;
+       let position=UserStore.position.name;
         var mbM=(
             <TouchableOpacity onPress={this.man.bind(this)}>
                 <Thumbnail style={styles.touxiang} size={80} source={require('./assets/m.png')}/>
@@ -241,7 +280,7 @@ export default class StartInformation extends PureComponent {
          sex: sex,
          crowd: crowd,
          birthday: maxText,
-         regionId:UserStore.position.city_id
+         regionId:UserStore.position.regionId
          }).then((data)=> {
          if (data.ok) {
          UserStore.login(phone,password, () => {

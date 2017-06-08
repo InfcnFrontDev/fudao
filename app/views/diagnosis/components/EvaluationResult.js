@@ -3,48 +3,48 @@ import {Modal, View, Image, ListView, WebView, Dimensions} from "react-native";
 import {Icon, Button, ListItem, Text} from "native-base";
 import GiftedListView from "../../../components/GiftedListView"
 
-
-var res = {
-    obj : [
-        {
-            id: 44,
-            title: '是否吸烟',
-            score: '5'
-        }, {
-            id: 44,
-            title: '是否吸烟',
-            score: '5'
-        }, {
-            id: 44,
-            title: '是否吸烟',
-            score: '2'
-        }, {
-            id: 44,
-            title: '是否吸烟',
-            score: '5'
-        }, {
-            id: 44,
-            title: '是否吸烟',
-            score: '3'
-        }, {
-            id: 44,
-            title: '是否吸烟',
-            score: '4'
-        }, {
-            id: 44,
-            title: '是否吸烟',
-            score: '5'
-        }, {
-            id: 44,
-            title: '是否吸烟',
-            score: '1'
-        }, {
-            id: 44,
-            title: '是否吸烟',
-            score: '5'
-        },
-    ]
-}
+//
+// var res = {
+//     obj : [
+//         {
+//             id: 44,
+//             title: '是否吸烟',
+//             score: '5'
+//         }, {
+//             id: 44,
+//             title: '是否吸烟',
+//             score: '5'
+//         }, {
+//             id: 44,
+//             title: '是否吸烟',
+//             score: '2'
+//         }, {
+//             id: 44,
+//             title: '是否吸烟',
+//             score: '5'
+//         }, {
+//             id: 44,
+//             title: '是否吸烟',
+//             score: '3'
+//         }, {
+//             id: 44,
+//             title: '是否吸烟',
+//             score: '4'
+//         }, {
+//             id: 44,
+//             title: '是否吸烟',
+//             score: '5'
+//         }, {
+//             id: 44,
+//             title: '是否吸烟',
+//             score: '1'
+//         }, {
+//             id: 44,
+//             title: '是否吸烟',
+//             score: '5'
+//         },
+//     ]
+// }
 
 /**
  * 自查 > 测评结果展示
@@ -56,7 +56,8 @@ class EvaluationResult extends PureComponent {
         this.state = {
             ...props,
             visible: false,
-            type:1
+            type:1,
+            show:false
         }
     }
 
@@ -81,9 +82,20 @@ class EvaluationResult extends PureComponent {
 
                     <View style={{flex: 1}}>
                         <View style={styles.title}>
-                            <Text style={styles.titleText}>测评题目</Text>
-                            <Text style={styles.titleText}>得分</Text>
+                            <View style={{flex:9}}>
+                                <Text style={styles.titleText}>测评题目</Text>
+                            </View>
+                            <View style={{flex:1}}>
+                                <Text style={styles.titleText}>得分</Text>
+                            </View>
                         </View>
+                        {
+                            this.state.show?(
+                                <View style={{marginTop:20}}>
+                                     <Text style={{textAlign:'center'}}>暂无答案</Text>
+                                </View>
+                            ):null
+                        }
                         <GiftedListView
                             rowView={this._renderRowView.bind(this)}
                             onFetch={this._onFetch.bind(this)}
@@ -110,20 +122,35 @@ class EvaluationResult extends PureComponent {
     _renderRowView(rowData) {
         return (
             <View style={[styles.oneLine,{backgroundColor:rowData.score<5?'#FFEEEE':'#fff'}]}>
-                <Text style={styles.titleText}>{rowData.id}、{rowData.title}</Text>
-                <Text style={styles.titleText}>{rowData.score}</Text>
+                <View style={{flex:15}}>
+                    <Text style={styles.titleText}>{parseInt(rowData.id)-43}、{rowData.title}</Text>
+                </View>
+                <View  style={{flex:1}}>
+                    <Text style={styles.titleText}>{rowData.score}</Text>
+                </View>
             </View>
         )
     }
 
     _onFetch(page, callback) {
-        // request.getJson(urls.apiPath.DIAGNOSIS_GETQUESTIONNAIRESCORES, {
-        //     type:this.state.type
-        // }).then((res) => {
-            callback(res.obj, {
-                allLoaded: true
-            })
-        // })
+        request.getJson(urls.apis.DIAGNOSIS_GETQUESTIONNAIRESCORES, {
+            type:this.state.type
+        }).then((res) => {
+            if(res.obj.length==0){
+                    this.setState({
+                        show:true
+                    })
+                }else{
+                    this.setState({
+                        show:false
+                    })
+                }
+                callback(res.obj, {
+                    allLoaded: true
+                })
+
+
+        })
 
     }
 
@@ -199,12 +226,12 @@ const styles = {
     title: {
         backgroundColor: '#eee',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         padding: 10,
     },
     oneLine: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         padding: 10,
         paddingRight:15,
         borderBottomWidth:0.5,

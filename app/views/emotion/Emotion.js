@@ -50,7 +50,7 @@ export default class Emotion extends PureComponent {
 				<Content delay padder>
 					<View style={styles.topBox}>
 						<Image style={styles.puImg} source={require('../../assets/emotion/pugongying.png')}/>
-						<View tyle={styles.titleBox}>
+						<View style={styles.titleBox}>
 							<Text style={styles.titleDoc}>天天好心情，快乐伴随您！</Text>
 						</View>
 					</View>
@@ -156,7 +156,8 @@ const styles = {
 	},
 	titleBox: {
 		width: theme.deviceWidth * 0.4,
-		justifyContent: 'center'
+		justifyContent: 'center',
+		backgroundColor:'transparent'
 	},
 	titleDoc: {
 		color: '#eef0f1',

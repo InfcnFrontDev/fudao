@@ -42,7 +42,7 @@ class AllExpectListStore {
             default:
                 return
         }
-        request.getJson(url,{diseaseType:this.selectedItem.type,disease: this.selectedItem.name})
+        request.getJson(url,{expect: this.selectedItem.name})
             .then((result) => {
                 if (result.ok) {
                     this.data = result.obj

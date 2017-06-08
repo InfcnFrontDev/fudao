@@ -47,7 +47,7 @@ export default class ExpectDetail extends PureComponent {
 			<Container>
                 <Header title = {selectedItem.name || this.props.title}/>
 				<Content delay>
-					<View>
+					<View style={{backgroundColor:'transparent'}}>
 						<Text style={styles.title}>我的问题</Text>
 					</View>
 					<MyDiseaseList

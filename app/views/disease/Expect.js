@@ -46,7 +46,7 @@ export default class Expect extends PureComponent {
 			<Container>
 				<Header {...this.props}/>
 				<Content delay>
-					<View>
+					<View style={{backgroundColor:'transparent'}}>
 						<Text style={styles.title}>我的问题</Text>
 					</View>
 					<MyDiseaseList
