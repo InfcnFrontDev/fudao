@@ -10,9 +10,9 @@ class UserStore {
 	@persist @observable isLogin = false
 	@persist @observable phone = ''
 	@persist @observable password = ''
-	@persist @observable token = ''
+	@persist @observable token = '';
 	@observable position = {
-		name:'',
+		name:'获取中...',
 		regionId:''
 	}
 	@persist('object') @observable loginUser = {};
@@ -138,6 +138,8 @@ class UserStore {
 	logout() {
 		this.isLogin = false;
 	}
+
+
 }
 
 
