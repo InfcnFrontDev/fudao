@@ -10,6 +10,7 @@ const webPath = 'http://103.254.113.11:9090/web/'; // 外网
 // const webPath = 'http://192.168.3.173:3000/'; // zy
 // const webPath = 'http://192.168.3.213:3000/'; // cxx
 // const webPath = 'http://192.168.3.203:3000/'; //
+const webPath = 'http://192.168.3.184:3000/'; //
 
 
 const urls = {
