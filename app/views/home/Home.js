@@ -30,7 +30,9 @@ export default class Home extends PureComponent {
 		status:true
 	};
 	componentWillMount(){
-		weatherStore.fetchCurrentWeather();
+		userStore.getposition();
+		weatherStore.fetchCurrentWeather(userStore.location.addressComponent.city);
+
 		let {currentWeather} = weatherStore;
 		this.setState({
 			img:currentWeather.weatid
@@ -39,7 +41,7 @@ export default class Home extends PureComponent {
 
 
 	render() {
-		let {loginUser} = userStore;
+		let {location} = userStore;
 		let {currentWeather} = weatherStore;
 
 		let imgStr='http://api.k780.com:88/upload/weather/d1/'+(currentWeather.weatid-1)+'.png'
@@ -60,7 +62,7 @@ export default class Home extends PureComponent {
 						</Button>
 					</View>
 					<View style={{flexDirection: 'column', justifyContent: 'center',width:80}}>
-						<Text style={styles.font}>北京.海淀</Text>
+						<Text style={styles.font}>{location.addressComponent.city}.{location.addressComponent.district}</Text>
 						<View style={{flexDirection: 'row',justifyContent:'center'}}>
 							<Text style={styles.font}>{currentWeather.weather}</Text>
 							<Image style={{width:20,height:20}} source={{uri:imgStr}}/>

@@ -63,6 +63,7 @@ export default class Disease extends PureComponent {
 						onItemPress={(item) => this.onItemPress(item)}
 						onItemAdd = {(item) => this.onItemAdd(item)}
 						selectedItem = {myDiseaseList}
+						pageKey = {'disease'}
 					/>
 				</Content>
 			</Container>

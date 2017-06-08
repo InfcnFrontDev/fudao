@@ -12,6 +12,7 @@ const webPath = 'http://192.168.3.204:3000/'; // 王朋
 // const webPath = 'http://192.168.3.203:3000/'; //
 
 
+
 const urls = {
     apiPath,
     webPath,
@@ -44,6 +45,8 @@ const urls = {
         MY_QUESTION_PERSON: webPath + 'myQuestionPerson.html',
         // 我的位置
         MY_LOCATION: webPath + 'myLocation.html',
+        // 获取位置
+        GRT_ADDRESS: webPath + 'getAddress.html',
         //首页
         HOME: webPath + 'home.html',
         //我的能量场

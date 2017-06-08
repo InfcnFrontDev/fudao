@@ -60,6 +60,7 @@ export default class Expect extends PureComponent {
 						onItemPress={(item) => this.onItemPress(item)}
 						onItemAdd = {(item) => this.onItemAdd(item)}
 						selectedItem = {myExpectList}
+                        pageKey = {'expect'}
 					/>
 				</Content>
 			</Container>
