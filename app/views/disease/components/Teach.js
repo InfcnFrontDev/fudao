@@ -24,10 +24,32 @@ export default class Teach extends PureComponent {
         pageKey === 'disease' ?
             allDiseaseListStore.fetchData(type) : allExpectListStore.fetchData(type)
     }
+    renderView(item){
+        let {type} = questionStore.data
 
+        switch (type) {
+            case '2':
+                return (<View style={styles.box}>
+                    <Text style={styles.text}>部位：{item.part}</Text>
+                    <Text style={styles.text}>相关器官：{item.location}</Text>
+                    <Text style={styles.text}>穴位保健效果：{item.healthEffect}</Text>
+                    <Text style={styles.text}>穴位保健方法：</Text>
+                    <Text style={styles.text1}>{item.healthMethod}</Text>
+                    <Text style={styles.text}>简便取穴法：</Text>
+                    <Text style={styles.text1}>{item.simpleAcupointSelection}</Text>
+                </View>)
+                break
+            default:
+                return (<View>
+                    <Text style={styles.text}>穴位保健方法：</Text>
+                    <Text style={styles.text1}>{item.healthMethod}</Text>
+                </View>)
+        }
+
+    }
     render() {
         // let {visible, pageKey} = this.props;
-        let {pageKey,title} = questionStore.data
+        let {pageKey,title,type} = questionStore.data
         let {data} = pageKey === 'disease' ? allDiseaseListStore : allExpectListStore
 
         return (
@@ -38,7 +60,6 @@ export default class Teach extends PureComponent {
                         style={styles.wrapper}
                         showsButtons={false}
                         showsPagination={true}
-                        height={theme.deviceHeight}
                         paginationStyle={{bottom: 120}}
                         activeDot={<View style={{
                             backgroundColor: '#00cf92',
@@ -57,21 +78,15 @@ export default class Teach extends PureComponent {
                                 return (
                                     <View key={index} style={styles.container}>
                                         <View style={styles.headerView}>
-                                            <Text style={styles.text}>{'  -' + item.name}</Text>
+                                            <Text>{'  -' + item.name}</Text>
                                         </View>
                                         {
                                             item.img ? <Image style={styles.img} source={{uri: urls.getImage(item.img)}}/> : <View/>
                                         }
+                                        {
+                                            this.renderView(item)
+                                        }
 
-                                        <View style={styles.box}>
-                                            <Text style={styles.text}>部位：{item.part}</Text>
-                                            <Text style={styles.text}>相关器官：{item.location}</Text>
-                                            <Text style={styles.text}>穴位保健效果：{item.healthEffect}</Text>
-                                            <Text style={styles.text}>穴位保健方法：</Text>
-                                            <Text style={styles.text1}>{item.healthMethod}</Text>
-                                            <Text style={styles.text}>简便取穴法：</Text>
-                                            <Text style={styles.text1}>{item.simpleAcupointSelection}</Text>
-                                        </View>
                                     </View>
                                 )
                             }) : <View/>

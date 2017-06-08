@@ -71,7 +71,7 @@ export default class DailyMethodResult extends PureComponent {
 const styles = {
     titleBox: {
         height: 30,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     title: {
         fontSize: 16

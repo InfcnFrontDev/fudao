@@ -1,12 +1,16 @@
 import React, {PureComponent} from "react";
-import {StyleSheet, View, Image} from "react-native";
+import {StyleSheet, View, Image,Platform} from "react-native";
 
 export default  class Container extends PureComponent {
 
 	render() {
 		let {children, isTabPanel} = this.props,
-			width = theme.deviceWidth,
+			width = theme.deviceWidth;
+		if(Platform.OS=='ios'){
+			height = theme.deviceHeight;
+		}else{
 			height = theme.deviceHeight - 20;
+		}
 
 		if (isTabPanel) {
 			height -= theme.navTabBarHeight;

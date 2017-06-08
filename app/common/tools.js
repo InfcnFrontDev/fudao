@@ -1,4 +1,6 @@
 import {ToastAndroid, Alert} from "react-native";
+import {ToastAndroid} from "react-native";
+import Toast from '@remobile/react-native-toast'
 import DialogAndroid from "react-native-dialogs";
 import uuid from "uuid";
 import config from "./config";
@@ -24,7 +26,8 @@ const tools = {
 	 * @param text
 	 */
 	showToast(text){
-		ToastAndroid.show(text, ToastAndroid.SHORT);
+	    Toast.showShortBottom(text)
+		// ToastAndroid.show(text, ToastAndroid.SHORT);
 	},
 
 	showDialog(options){
