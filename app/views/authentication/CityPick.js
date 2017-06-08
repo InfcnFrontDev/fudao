@@ -115,7 +115,7 @@ import UserStore from "../../mobx/userStore";
         return(
             <TouchableOpacity  style={{height:30}} onPress={()=>{
                 UserStore.position.name=item.item.name;
-                UserStore.position.city_id=item.item.city_id;
+                UserStore.position.regionId=item.item.city_id;
                 Actions.pop()
             }}>
                     <Text>{item.item.name}</Text>

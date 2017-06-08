@@ -68,106 +68,106 @@ export default class AppRouter extends PureComponent {
 	render() {
 		return (
 			<Router createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
-	<Scene key="root">
+				<Scene key="root">
 
-			<Scene key="start" component={Start} title="启动页" hideNavBar initial/>
+					<Scene key="start" component={Start} title="启动页" hideNavBar initial/>
 
-		{/*首页*/}
-		<Scene key="index" component={Index} title="首页" hideNavBar/>
-		{/*启动注册*/}
-		<Scene key="register" component={Register} title="注册" hideNavBar/>
-		<Scene key="login" component={Login} title="登录" hideNavBar/>
-		<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
-		<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar  />
-		<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
-		<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar />
-		<Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
-		<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
-		<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
+					{/*首页*/}
+					<Scene key="index" component={Index} title="首页" hideNavBar/>
+					{/*启动注册*/}
+					<Scene key="register" component={Register} title="注册" hideNavBar/>
+					<Scene key="login" component={Login} title="登录" hideNavBar/>
+					<Scene key="setPassword" component={SetPassword} title="设置密码" hideNavBar/>
+					<Scene key="rebuildPassword" component={RebuildPassword} title="请设置新密码" hideNavBar  />
+					<Scene key="passwordSuccess" component={PasswordSuccess} hideNavBar/>
+					<Scene key="startInformation" component={StartInformation} title="基本信息" hideNavBar initial/>
+					<Scene key="passwordValidate" component={PasswordValidate} title="找回密码" hideNavBar/>
+					<Scene key="womanChoose" component={WomanChoose} title="阶段选择" hideNavBar/>
+					<Scene key="rebuildSuccess" component={RebuildSuccess} hideNavBar/>
 
-		{/*主页*/}
-		<Scene title="主页" key="homeapp" component={Homeapp}/>
+					{/*主页*/}
+					<Scene title="主页" key="homeapp" component={Homeapp}/>
 
-			{/*好友*/}
-			<Scene key="friend" component={Friend} title="好友" hideNavBar/>
-		<Scene key="friendApply" component={FriendApply} title="好友申请" hideNavBar/>
-		<Scene key="newFriend" component={NewFriend} title="新的朋友" hideNavBar/>
-		<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
+					{/*好友*/}
+					<Scene key="friend" component={Friend} title="好友" hideNavBar/>
+					<Scene key="friendApply" component={FriendApply} title="好友申请" hideNavBar/>
+					<Scene key="newFriend" component={NewFriend} title="新的朋友" hideNavBar/>
+					<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
 
-		{/*用户*/}
-		<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
-		<Scene key="remarkSet" component={RemarkSet} title="设置备注" hideNavBar/>
-		{/*侧边栏*/}
-		<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
+					{/*用户*/}
+					<Scene key="userDetail" component={UserDetail} title="用户详情" hideNavBar/>
+					<Scene key="remarkSet" component={RemarkSet} title="设置备注" hideNavBar/>
+					{/*侧边栏*/}
+					<Scene key="sideBar" component={SideBar} title="侧边栏" hideNavBar/>
 
-		{/*资讯*/}
-		<Scene title="资讯详情" key="articleDetail" component={ArticleDetail} hideNavBar/>
+					{/*资讯*/}
+					<Scene title="资讯详情" key="articleDetail" component={ArticleDetail} hideNavBar/>
 
-		{/*收藏*/}
-		<Scene title="收藏" key="collection" component={Collection} hideNavBar/>
+					{/*收藏*/}
+					<Scene title="收藏" key="collection" component={Collection} hideNavBar/>
 
-		{/*我的*/}
-		<Scene title="关于福道" key="about" component={About} hideNavBar/>
-		<Scene title="隐私声明" key="privacyStatement" component={PrivacyStatement} hideNavBar/>
-		<Scene title="用户协议" key="userAgreement" component={UserAgreement} hideNavBar/>
-		<Scene title="基本信息" key="baseInfo" component={BaseInfo} hideNavBar/>
-		<Scene title="我的记录" key="record" component={Record} hideNavBar/>
-		<Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
-		<Scene title="系统设置" key="settings" component={Settings} hideNavBar/>
+					{/*我的*/}
+					<Scene title="关于福道" key="about" component={About} hideNavBar/>
+					<Scene title="隐私声明" key="privacyStatement" component={PrivacyStatement} hideNavBar/>
+					<Scene title="用户协议" key="userAgreement" component={UserAgreement} hideNavBar/>
+					<Scene title="基本信息" key="baseInfo" component={BaseInfo} hideNavBar/>
+					<Scene title="我的记录" key="record" component={Record} hideNavBar/>
+					<Scene title="体检信息" key="medicalExamination" component={MedicalExamination} hideNavBar/>
+					<Scene title="系统设置" key="settings" component={Settings} hideNavBar/>
 
-		{/*能量场*/}
-		<Scene title="能量场" key="energy" component={Energy} hideNavBar/>
+					{/*能量场*/}
+					<Scene title="能量场" key="energy" component={Energy} hideNavBar/>
 
-		{/*自诊*/}
-		<Scene key="diagnosis" component={Diagnosis} title="自查" hideNavBar/>
-		<Scene key="evaluation" component={Evaluation} title="测评" hideNavBar/>
-		<Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自查" hideNavBar/>
+					{/*自诊*/}
+					<Scene key="diagnosis" component={Diagnosis} title="自查" hideNavBar/>
+					<Scene key="evaluation" component={Evaluation} title="测评" hideNavBar/>
+					<Scene key="deepDiagnosis" component={DeepDiagnosis} title="深度自查" hideNavBar/>
 
-		{/*自疗*/}
-		<Scene title="自疗" key="disease" component={Disease} hideNavBar/>
-		<Scene title="疾病详情" key="diseaseDetail" component={DiseaseDetail} hideNavBar/>
-		<Scene key="menuKinds" component={MenuKinds} hideNavBar/>
-		<Scene key="menuDetail" component={MenuDetail} hideNavBar/>
-		<Scene key="shop" component={Shop} hideNavBar/>
-		<Scene key="teach" component={Teach} hideNavBar/>
-		<Scene key="body" component={Body} hideNavBar/>
+					{/*自疗*/}
+					<Scene title="自疗" key="disease" component={Disease} hideNavBar/>
+					<Scene title="疾病详情" key="diseaseDetail" component={DiseaseDetail} hideNavBar/>
+					<Scene key="menuKinds" component={MenuKinds} hideNavBar/>
+					<Scene key="menuDetail" component={MenuDetail} hideNavBar/>
+					<Scene key="shop" component={Shop} hideNavBar/>
+					<Scene key="teach" component={Teach} hideNavBar/>
+					<Scene key="body" component={Body} hideNavBar/>
 
-		{/*自修*/}
-		<Scene key="expect" component={Expect} hideNavBar/>
-		<Scene key="expectDetail" component={ExpectDetail} hideNavBar/>
+					{/*自修*/}
+					<Scene key="expect" component={Expect} hideNavBar/>
+					<Scene key="expectDetail" component={ExpectDetail} hideNavBar/>
 
-		{/*自养*/}
-		<Scene key="health" component={Health} hideNavBar/>
+					{/*自养*/}
+					<Scene key="health" component={Health} hideNavBar/>
 
-		{/*动态*/}
-		<Scene key="newDynamic" component={NewDynamic} title="新动态" hideNavBar/>
-		<Scene key="dynamicDetail" component={DynamicDetail} title="动态详情" hideNavBar/>
-		<Scene key="dynamicPicture" component={DynamicPicture} title="动态图片" hideNavBar/>
+					{/*动态*/}
+					<Scene key="newDynamic" component={NewDynamic} title="新动态" hideNavBar/>
+					<Scene key="dynamicDetail" component={DynamicDetail} title="动态详情" hideNavBar/>
+					<Scene key="dynamicPicture" component={DynamicPicture} title="动态图片" hideNavBar/>
 
-		{/*情绪*/}
-		<Scene key="emotion" component={Emotion} title="情绪" hideNavBar />
+					{/*情绪*/}
+					<Scene key="emotion" component={Emotion} title="情绪" hideNavBar />
 
-		{/*搜索*/}
-		<Scene title="搜索" key="search" component={Search} hideNavBar/>
-		<Scene title="搜索保健方法" key="searchDailyLife" component={SearchDailyMethod} hideNavBar/>
-		<Scene title="搜索朋友圈" key="searchFriendsCircle" component={SearchFriendsCircle} hideNavBar/>
-		<Scene title="搜索资讯" key="searchInformation" component={SearchInformation} hideNavBar/>
-		<Scene title="搜索症状与问题" key="searchSymptomProblem" component={SearchSymptomProblem} hideNavBar/>
-		<Scene title="搜索用户" key="searchUser" component={SearchUser} hideNavBar/>
+					{/*搜索*/}
+					<Scene title="搜索" key="search" component={Search} hideNavBar/>
+					<Scene title="搜索保健方法" key="searchDailyLife" component={SearchDailyMethod} hideNavBar/>
+					<Scene title="搜索朋友圈" key="searchFriendsCircle" component={SearchFriendsCircle} hideNavBar/>
+					<Scene title="搜索资讯" key="searchInformation" component={SearchInformation} hideNavBar/>
+					<Scene title="搜索症状与问题" key="searchSymptomProblem" component={SearchSymptomProblem} hideNavBar/>
+					<Scene title="搜索用户" key="searchUser" component={SearchUser} hideNavBar/>
 
-		{/*消息*/}
-		<Scene title="消息" key="message" component={Message} hideNavBar/>
-		<Scene title="聊天消息" key="chat" component={Chat} hideNavBar/>
-		<Scene title="系统消息" key="msgDetail" component={MsgDetail} hideNavBar/>
+					{/*消息*/}
+					<Scene title="消息" key="message" component={Message} hideNavBar/>
+					<Scene title="聊天消息" key="chat" component={Chat} hideNavBar/>
+					<Scene title="系统消息" key="msgDetail" component={MsgDetail} hideNavBar/>
 
-		{/*意见反馈*/}
-		<Scene title="意见反馈" key="feedback" component={Feedback} hideNavBar/>
+					{/*意见反馈*/}
+					<Scene title="意见反馈" key="feedback" component={Feedback} hideNavBar/>
 
-		{/*城市列表*/}
-		<Scene title="" key="cityPick" component={CityPick} hideNavBar/>
-		</Scene>
-		</Router>
-	)
+					{/*城市列表*/}
+					<Scene title="" key="cityPick" component={CityPick} hideNavBar/>
+				</Scene>
+			</Router>
+		)
 	}
 
 
