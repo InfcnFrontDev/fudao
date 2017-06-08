@@ -28,6 +28,12 @@ export default class Teach extends PureComponent {
         let {type} = questionStore.data
 
         switch (type) {
+            case '1':
+                return (<View>
+                    <Text style={styles.text}>经络保健方法：</Text>
+                    <Text style={styles.text1}>{item.healthMethod}</Text>
+                </View>)
+                break
             case '2':
                 return (<View style={styles.box}>
                     <Text style={styles.text}>部位：{item.part}</Text>
@@ -37,6 +43,18 @@ export default class Teach extends PureComponent {
                     <Text style={styles.text1}>{item.healthMethod}</Text>
                     <Text style={styles.text}>简便取穴法：</Text>
                     <Text style={styles.text1}>{item.simpleAcupointSelection}</Text>
+                </View>)
+                break
+            case '3':
+                return (<View>
+                    <Text style={styles.text}>器官保健方法：</Text>
+                    <Text style={styles.text1}>{item.healthMethod}</Text>
+                </View>)
+                break
+            case '4':
+                return (<View>
+                    <Text style={styles.text}>循环系统保健方法：</Text>
+                    <Text style={styles.text1}>{item.healthMethod}</Text>
                 </View>)
                 break
             default:

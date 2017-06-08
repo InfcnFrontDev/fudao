@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
 import {Content, WebView} from "../../components/index";
-import positionStore from "../../mobx/positionStore";
+import positionStore from "../../mobx/positionStore"
+import userStore from "../../mobx/userStore";
 
 /**
  * 我的位置
@@ -8,11 +10,11 @@ import positionStore from "../../mobx/positionStore";
 export default class MyEnergy extends PureComponent {
 
 	render() {
-		let {currentPosition}=positionStore;
+		let {lastPosition}=userStore;
 		return (
 			<Content>
 				<WebView
-					uri={urls.pages.MY_LOCATION + '?x=' + currentPosition.longitude +'&y='+ currentPosition.latitude}/>
+					uri={urls.pages.MY_LOCATION+'?x='+lastPosition.coords.longitude+'&y='+lastPosition.coords.latitude}/>
 			</Content>
 		)
 	}
