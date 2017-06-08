@@ -34,6 +34,7 @@ export default class BodyModal extends PureComponent {
         let {visible, pageKey} = this.props;
         let diseaseType = pageKey === 'disease' ? encodeURI(allDiseaseListStore.selectedItem.type) : encodeURI(allExpectListStore.selectedItem.type)
         let disease = pageKey === 'disease' ? encodeURI(allDiseaseListStore.selectedItem.name) : encodeURI(allExpectListStore.selectedItem.name)
+        console.log(urls.pages.MY_QUESTION_PERSON + '?disease=' + disease + '&diseaseType=' + diseaseType + '&type=' + pageKey)
         return (
             <Container >
                 <Header {...this.props}/>
