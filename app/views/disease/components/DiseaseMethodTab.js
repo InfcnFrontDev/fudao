@@ -37,7 +37,8 @@ export default class DiseaseMethodTab extends PureComponent {
     renderPrinciple0(data) {
         return (
             <View style={styles.principle}>
-                <Text style={styles.text}>{'\t\t宜食：' + data.suitable + '\n\t\t忌食：' + data.fasting}</Text>
+                <Text style={styles.text}>{'\t\t宜食：' + data.suitable}</Text>
+                {data.fasting ? <Text style={styles.text}>{'\t\t忌食：' + data.fasting}</Text> : null}
             </View>
         )
     }
@@ -46,7 +47,7 @@ export default class DiseaseMethodTab extends PureComponent {
         if(data.principle){
             return (
                 <View style={styles.principle}>
-                    <Text style={styles.text}>{'        ' + data.principle}</Text>
+                    <Text style={styles.text}>{'\t\t' + data.principle}</Text>
                 </View>
             )
         }
