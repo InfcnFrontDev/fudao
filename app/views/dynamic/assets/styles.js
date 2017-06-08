@@ -23,6 +23,7 @@ const styles = {
     position:'absolute',
     top:145,
     right:100,
+    backgroundColor:'transparent'
 
   },
   color9b:{

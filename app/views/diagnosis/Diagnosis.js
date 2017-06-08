@@ -54,7 +54,9 @@ export default class Diagnosis extends PureComponent {
                 <Container>
                     <Header {...this.props}/>
                     <View style={styles.content}>
-                        <Text style={styles.h1}>在以下问题中选出您存在的问题</Text>
+                        <View style={{backgroundColor:'transparent'}}>
+                            <Text style={styles.h1}>在以下问题中选出您存在的问题</Text>
+                        </View>
                         <View style={styles.questionList}>
                             <ScrollView style={{flex: 1}}>
                                 {this.renderList(diagnosisList)}
@@ -202,6 +204,7 @@ export default class Diagnosis extends PureComponent {
 const styles = {
     content: {
         flex: 1,
+
     },
     h1: {
         color: "#fff",

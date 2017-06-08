@@ -193,4 +193,3 @@ export default class AppRouter extends PureComponent {
 		return false
 	}
 }
-
