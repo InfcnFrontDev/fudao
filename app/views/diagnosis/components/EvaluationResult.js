@@ -122,7 +122,7 @@ class EvaluationResult extends PureComponent {
     _renderRowView(rowData) {
         return (
             <View style={[styles.oneLine,{backgroundColor:rowData.score<5?'#FFEEEE':'#fff'}]}>
-                <View style={{flex:10}}>
+                <View style={{flex:15}}>
                     <Text style={styles.titleText}>{parseInt(rowData.id)-43}、{rowData.title}</Text>
                 </View>
                 <View  style={{flex:1}}>
