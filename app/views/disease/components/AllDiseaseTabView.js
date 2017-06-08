@@ -23,7 +23,7 @@ export default class AllDiseaseTabView extends PureComponent {
         return (
 			<ScrollableTabView
 				style={styles.tabView}
-				renderTabBar={() => <AllDiseaseTabBar/>}
+				renderTabBar={() => <AllDiseaseTabBar pageKey = {this.props.pageKey}/>}
 				locked={false}
 			>
                 <AllDiseaseTabLiaoShen

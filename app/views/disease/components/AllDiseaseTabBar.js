@@ -17,7 +17,14 @@ export default class AllDiseaseTabBar extends Component {
 	};
 
 	render() {
-		let {activeTab} = this.props;
+		let {activeTab,pageKey} = this.props;
+		let tabImages = pageKey === 'disease' ? [
+            require('../../../assets/disease/liaoshen.png'),
+            require('../../../assets/disease/liaoxin.png')
+        ] : [
+            require('../../../assets/disease/xiushen.png'),
+            require('../../../assets/disease/xiuxin.png')
+        ]
 		return (
 			<View style={styles.tabs}>
 				{tabImages.map((img, i) => this.renderItem(img, i))}
