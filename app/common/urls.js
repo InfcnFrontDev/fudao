@@ -1,18 +1,13 @@
 // 接口服务器地址
- const apiPath = 'http://103.254.113.11:9191/api/'; // 开发服务器（外网）
-// const apiPath = 'http://192.168.10.69:9191/api/'; // 开发服务器（内网）
-// const apiPath = 'http://103.254.113.10:9090/api/'; // 生产服务器（外网）
-// const apiPath = 'http://192.168.10.165:9090/api/'; // 生产服务器（内网）
+//  const apiPath = 'http://103.254.113.11:9191/api/'; // 外网
+ const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 // web服务器地址
-const webPath = 'http://103.254.113.11:9191/web/'; // 开发服务器（外网）
-// const webPath = 'http://192.168.10.69:9191/web/'; // 开发服务器（内网）
-// const webPath = 'http://103.254.113.10:9090/web/'; // 生产服务器（外网）
-// const webPath = 'http://192.168.10.165:9090/web/'; // 生产服务器（内网）
-// 其他
-// const webPath = 'http://192.168.3.137:3000/'; // 杨可可
-// const webPath = 'http://192.168.3.204:3000/'; // 王朋
+//const webPath = 'http://103.254.113.11:9090/web/'; // 外网
+ //const webPath = 'http://103.254.113.11:9191/web/'; // 内网
+//const webPath = 'http://192.168.3.137:3000/'; // 杨可可
+ const webPath = 'http://192.168.3.204:3000/'; // 王朋
 // const webPath = 'http://192.168.3.173:3000/'; // zy
-// const webPath = 'http://192.168.3.213:3000/'; // cxx
+//const webPath = 'http://192.168.3.213:3000/'; // cxx
 // const webPath = 'http://192.168.3.203:3000/'; //
 
 

@@ -31,14 +31,7 @@ export default class Home extends PureComponent {
 	};
 	componentWillMount(){
 		userStore.getposition();
-		let m='';
-
-		if(userStore.location.addressComponent){
-			m=userStore.location.addressComponent.city
-		}else{
-			m="北京市"
-		}
-		weatherStore.fetchCurrentWeather(m);
+		// weatherStore.fetchCurrentWeather(userStore.location.addressComponent.city);
 
 		let {currentWeather} = weatherStore;
 		this.setState({
@@ -50,12 +43,6 @@ export default class Home extends PureComponent {
 	render() {
 		let {location} = userStore;
 		let {currentWeather} = weatherStore;
-		let m='';
-		if(location.addressComponent){
-			m=location.addressComponent.city+'.'+location.addressComponent.district
-		}else{
-			m='北京市';
-		}
 
 		let imgStr='http://api.k780.com:88/upload/weather/d1/'+(currentWeather.weatid-1)+'.png'
 		let leftBtnStyle = Object.assign({}, styles.floatBtn, styles.leftBtn)
@@ -75,7 +62,7 @@ export default class Home extends PureComponent {
 						</Button>
 					</View>
 					<View style={{flexDirection: 'column', justifyContent: 'center',width:80}}>
-						<Text style={styles.font}>{m}</Text>
+						{/*<Text style={styles.font}>{location.addressComponent.city}.{location.addressComponent.district}</Text>*/}
 						<View style={{flexDirection: 'row',justifyContent:'center'}}>
 							<Text style={styles.font}>{currentWeather.weather}</Text>
 							<Image style={{width:20,height:20}} source={{uri:imgStr}}/>
