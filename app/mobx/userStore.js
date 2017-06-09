@@ -12,8 +12,8 @@ class UserStore {
 	@persist @observable phone = ''
 	@persist @observable password = ''
 	@persist @observable token = ''
-	@persist @observable longitude = 0
-	@persist @observable latitude = 0
+	@persist @observable lon = 0
+	@persist @observable lat = 0
 	@observable position = {
 		name:'获取中...',
 		regionId:''
@@ -149,6 +149,8 @@ class UserStore {
 					"\n海拔：" + location.coords.altitude +
 					"\n海拔准确度：" + location.coords.altitudeAccuracy +
 					"\n时间戳：" + location.timestamp;
+				this.lon=location.coords.longitude;
+				this.lat=location.coords.latitude;
 				var coord=location.coords.longitude+","+location.coords.latitude;
 				request.getJson('http://api.map.baidu.com/geoconv/v1/', {
 					coords:coord,

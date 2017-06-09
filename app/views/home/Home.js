@@ -43,6 +43,12 @@ export default class Home extends PureComponent {
 	render() {
 		let {location} = userStore;
 		let {currentWeather} = weatherStore;
+		let m='';
+		if(location.addressComponent.city&&location.addressComponent.district){
+			m=location.addressComponent.city+'.'+location.addressComponent.district
+		}else{
+			m=userStore.position.name;
+		}
 
 		let imgStr='http://api.k780.com:88/upload/weather/d1/'+(currentWeather.weatid-1)+'.png'
 		let leftBtnStyle = Object.assign({}, styles.floatBtn, styles.leftBtn)
@@ -62,7 +68,7 @@ export default class Home extends PureComponent {
 						</Button>
 					</View>
 					<View style={{flexDirection: 'column', justifyContent: 'center',width:80}}>
-						<Text style={styles.font}>{location.addressComponent.city}.{location.addressComponent.district}</Text>
+						<Text style={styles.font}>{m}</Text>
 						<View style={{flexDirection: 'row',justifyContent:'center'}}>
 							<Text style={styles.font}>{currentWeather.weather}</Text>
 							<Image style={{width:20,height:20}} source={{uri:imgStr}}/>
