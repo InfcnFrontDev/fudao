@@ -14,10 +14,10 @@ export default class MyEnergy extends PureComponent {
 	}
 
 	render() {
-		let {location}=userStore;
+		let {lon,lat}=userStore;
 
-let x=location.location.lng;
- let y=location.location.lat;
+let x=lon;
+ let y=lat;
 			return (
 				<Content>
 					<WebView

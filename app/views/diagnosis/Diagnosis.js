@@ -6,6 +6,7 @@ import {Actions} from "react-native-router-flux";
 import {Container, Header, Content, Loading} from "../../components/index";
 import CommonList from "./components/CommonList"
 import diagnosisStore from "../../mobx/diagnosiStore";
+import userStore from "../../mobx/userStore";
 // import allDiseaseListStore from "../../mobx/allDiseaseListStore";
 // import diseaseMethodStore from "../../mobx/diseaseMethodStore";
 // import myDiseaseListStore from "../../mobx/myDiseaseListStore";
@@ -26,9 +27,10 @@ export default class Diagnosis extends PureComponent {
     }
 
     componentWillMount() {
+        userStore.getposition()
         // var that = this;
         request.getJson(urls.apis.DIAGNOSIS_GETCOMMONDISEASELIST, {
-            region: "北京市"
+            region: userStore.location.addressComponent.city||'北京市'
         }).then((result) => {
             if (result.ok) {
                 this.setState({
