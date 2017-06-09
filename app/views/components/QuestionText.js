@@ -51,9 +51,10 @@ class QuestionText extends PureComponent {
 
     renderImg(data) {
         let ext = data.img.substring(data.img.indexOf(".") + 1);
+
         if (ext == 'mp3' || ext == 'wav' || ext == 'm4a') {
             return (
-                <VideoText title={data.name} content={data.detail} video={data.img} basis={data.threeCharacterClassic}/>
+                <VideoText title={data.name} content={data.detail} video={data.img} basis={data.threeCharacterClassic} time={data.length}/>
             )
         } else {
             const title = questionStore.questionName;

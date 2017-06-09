@@ -54,7 +54,7 @@ class VideoSolve extends PureComponent {
                         <Video
                             ref='video'
                             source={{uri: urls.getImage(video)}} // 视频的URL地址，或者本地地址，都可以.
-                            rate={0}                   // 控制暂停/播放，0 代表暂停paused, 1代表播放normal.（初始进来是暂停或播放）
+                            rate={1.0}                   // 控制暂停/播放，0 代表暂停paused, 1代表播放normal.（初始进来是暂停或播放）
                             volume={1.0}                 // 声音的放大倍数，0 代表没有声音，就是静音muted, 1 代表正常音量 normal，更大的数字表示放大的倍数
                             muted={false}                // true代表静音，默认为false.
                             resizeMode="cover"           // 视频的自适应伸缩铺放行为，
