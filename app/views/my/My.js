@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {ScrollView} from "react-native";
+import {View,ScrollView,Text} from "react-native";
 import {Container, Content, Header} from "../../components/index";
 import Separator from "../../components/Separator";
 import {observer} from "mobx-react/native";
@@ -19,13 +19,15 @@ export default class My extends PureComponent {
 			<Container>
 				<Header menu {...this.props}/>
 				<Content gray>
-					<ScrollView>
-						<MyPhoto/>
-						<MyGrid/>
-						<Separator/>
-						<MyList />
-						<Separator/>
-					</ScrollView>
+					<View style={{height:theme.deviceHeight-130}}>
+						<ScrollView>
+							<MyPhoto/>
+							<MyGrid/>
+							<Separator/>
+							<MyList />
+							<Separator/>
+						</ScrollView>
+					</View>
 				</Content>
 			</Container>
 		)
