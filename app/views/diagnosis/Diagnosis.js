@@ -29,8 +29,15 @@ export default class Diagnosis extends PureComponent {
     componentWillMount() {
         userStore.getposition()
         // var that = this;
+		let m='';
+
+		if(userStore.location.addressComponent){
+			m=userStore.location.addressComponent.city
+		}else{
+			m="北京市"
+		}
         request.getJson(urls.apis.DIAGNOSIS_GETCOMMONDISEASELIST, {
-            region: userStore.location.addressComponent.city||'北京市'
+            region: m
         }).then((result) => {
             if (result.ok) {
                 this.setState({
