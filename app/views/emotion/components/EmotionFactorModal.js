@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {View, Image, TouchableHighlight, TextInput, ScrollView, TouchableOpacity, ListView,Slider} from "react-native";
+import {View, Image, TouchableHighlight, TextInput, ScrollView, TouchableOpacity, ListView,Slider,Platform} from "react-native"
 import {Text, Button, ListItem, CheckBox} from "native-base";
 import {Modal} from "../../../components/index";
 /**
@@ -36,6 +36,15 @@ export default class EmotionFactorModal extends PureComponent {
 		}
 		return (
 			<Modal ref={(e)=>this._modal = e} visible={visible}>
+				{
+					Platform.OS=='ios'?(
+						<TouchableOpacity
+							onPress={() => this.hide()}
+							style={styles.closeButton}>
+							<Text style={{textAlign:'right'}}> x </Text>
+						</TouchableOpacity>
+					):(null)
+				}
 				{emotion != null &&
 				<ScrollView style={{marginBottom:10,marginTop:10}}>
 					<View style={styles.container}>
@@ -90,7 +99,9 @@ export default class EmotionFactorModal extends PureComponent {
 							<View style={{alignItems:'center',marginTop:10,marginBottom:10}}>
 								<View style={styles.input}>
 									<TextInput underlineColorAndroid="transparent" placeholder="请输入您的原因"
-											   onChangeText={(value)=>{this.selfReason=value}}/>
+											   onChangeText={(value) => {
+												   this.selfReason = value
+											   }} style={Platform.OS == 'ios' ? {marginTop: 20} : {}}/>
 								</View>
 							</View>
 							<View style={{alignItems:'center',justifyContent:'center'}}>
@@ -284,6 +295,15 @@ const styles = {
 		borderColor: '#666',
 		padding: 0,
 
-	}
+	},
+	closeButton: {
+		// backgroundColor: '#C8C8C8',
+		// justifyContent: 'flex-end',
+		borderRadius: 12,
+		// width: 24,
+		height: 24,
+		paddingLeft: 0,
+		paddingRight: 10,
+	},
 };
 

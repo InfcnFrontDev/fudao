@@ -144,18 +144,19 @@ export default class Emotion extends PureComponent {
 const styles = {
 	topBox: {
 		height: 120,
+		width: theme.deviceWidth - 30,
+		alignItems: 'center',
 		flexDirection: "row",
 		justifyContent: 'center',
-		width: theme.deviceWidth - 30,
-		alignItems: 'center'
 	},
+
 	puImg: {
 		width: theme.deviceWidth * 0.4,
 		height: 120,
 		marginTop: 10,
 	},
 	titleBox: {
-		width: theme.deviceWidth * 0.4,
+		width: theme.deviceWidth * 0.5,
 		justifyContent: 'center',
 		backgroundColor:'transparent'
 	},
