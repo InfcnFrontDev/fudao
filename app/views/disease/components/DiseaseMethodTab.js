@@ -89,7 +89,7 @@ export default class DiseaseMethodTab extends PureComponent {
                                 method.fasting && method.fasting.length != 0 ? <View style={{flexDirection: 'row'}}>
                                     <Text style={styles.redText}>{'忌食：'}</Text>
                                     {method.fasting.map((text, index) =>
-                                        <Text key={index} style={styles.text}>{text + '; '}</Text>)}
+                                        <Text key={index} style={styles.text}>{text + (index == method.fasting.length-1 ? '。':'、')}</Text>)}
                                 </View> : <View/>
                             }
                         </View>
