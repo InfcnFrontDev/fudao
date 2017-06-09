@@ -72,15 +72,18 @@ export default class DiseaseMethodTab extends PureComponent {
                 {methods.map((method, index) => (
                     <View style={styles.method} key={index}>
                         <Text style={styles.text}>{'- ' + method.timePeriod + '：'}</Text>
-                        <View style={{flexDirection: 'column'}}>
+                        <View style={{flexDirection: 'column',flex: 1}}>
                             <View style={{flexDirection: 'row'}}>
                                 <Text style={styles.text}>{'宜食：'}</Text>
-                                {
-                                    (self.clearNullArr(method.suitable)).map((text, index) =>
-                                    <TouchableOpacity key={index} onPress={() => this.onMethod0Press(text, method.suitable)}>
-                                        <Text style={styles.textLink}>{text + '; '}</Text>
-                                    </TouchableOpacity>)
-                                }
+                                <View style={{flexDirection: 'row',flex: 1,flexWrap: 'wrap'}}>
+                                    {
+                                        (self.clearNullArr(method.suitable)).map((text, index) =>
+                                            <TouchableOpacity key={index} style={{height: 20}} onPress={() => this.onMethod0Press(text, method.suitable)}>
+                                                <Text style={styles.textLink}>{text + (index == self.clearNullArr(method.suitable).length-1 ? '。':'、')}</Text>
+                                            </TouchableOpacity>)
+                                    }
+                                </View>
+
                             </View>
                             {
                                 method.fasting && method.fasting.length != 0 ? <View style={{flexDirection: 'row'}}>
