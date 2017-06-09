@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {View, Image, TouchableHighlight,ScrollView} from "react-native";
+import {View, Image, TouchableHighlight,ScrollView,Platform,TouchableOpacity} from "react-native";
 import {Text} from "native-base";
 import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
 import {Modal} from "../../../components/index";
@@ -18,24 +18,54 @@ export default class EmotionSolveModal extends PureComponent {
 		this.state = {
 			visible: false,
 			emotion: null,
-			stop:true
+			stop:true,
+			Threeflag:true,
 		};
 	}
 
 	render() {
-		let {visible, emotion}=this.state;
-		return (
-			<Modal ref={(e)=>this._modal = e} visible={visible} transparent>
-				{emotion && <View style={styles.container}>
-					<View style={styles.View}>
-						<View style={styles.emotionBox}>
-							<Image source={emotion.img} style={{width:60,height:60}}/>
-							<Text style={{color:'#fff'}}>{emotion.title}</Text>
-						</View>
-						<View style={{width:theme.deviceWidth*0.9-95,paddingRight:10,justifyContent:'center',alignItems:'center'}}>
+		let {visible, emotion,Threeflag}=this.state;
+		let threeText=(null);
+		if(emotion){
+			if(Threeflag){
+				threeText=(
+					<TouchableOpacity onPress={()=>this.setState({Threeflag:!Threeflag})} style={{width:theme.deviceWidth*0.9-95,paddingRight:10,justifyContent:'center',alignItems:'center'}}>
+						<View style={{justifyContent:'center',alignItems:'center'}}>
 							<Text style={{fontWeight:"bold",marginBottom:5,fontSize: theme.DefaultFontSize+4,color:'#fff'}}>{emotion.threeCharacterClassic.substring(0,8) }</Text>
 							<Text style={{fontWeight:"bold",fontSize: theme.DefaultFontSize+4,color:'#fff'}}>{emotion.threeCharacterClassic.substring(8,16)}</Text>
 						</View>
+					</TouchableOpacity>
+
+				)
+			}else{
+				threeText=(
+					<TouchableOpacity onPress={()=>this.setState({Threeflag:!Threeflag})} style={{width:theme.deviceWidth*0.9-100,paddingRight:10,justifyContent:'center',alignItems:'center'}}>
+						<View>
+							<Text style={{marginBottom:5,fontSize: theme.DefaultFontSize,color:'#fff',lineHeight:24}}>{emotion.influence }</Text>
+						</View>
+					</TouchableOpacity>
+				)
+			}
+		}
+
+		return (
+			<Modal ref={(e)=>this._modal = e} visible={visible} transparent>
+				{emotion && <View style={styles.container}>
+					{
+						Platform.OS=='ios'?(
+							<TouchableOpacity
+								onPress={() => this.hide()}
+								style={styles.closeButton}>
+								<Text style={{textAlign:'right'}}> x </Text>
+							</TouchableOpacity>
+						):(null)
+					}
+					<View style={styles.View}>
+						<View style={styles.emotionBox}>
+							<Image source={emotion.img} style={{width:50,height:60}}/>
+							<Text style={{color:'#fff'}}>{emotion.title}</Text>
+						</View>
+						{threeText}
 					</View>
 					<View style={styles.imgViewBox}>
 						<ScrollableTabView
@@ -163,6 +193,15 @@ const styles = {
 		left: 0,
 		bottom: 0,
 		right: 0,
+	},
+	closeButton: {
+		backgroundColor: '#69769C',
+		// justifyContent: 'flex-end',
+		// width: 24,
+		paddingRight:20,
+		width: theme.deviceWidth * 0.9,
+		height: 24,
+		paddingLeft: 0,
 	},
 };
 
