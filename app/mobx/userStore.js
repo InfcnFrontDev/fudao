@@ -12,8 +12,8 @@ class UserStore {
 	@persist @observable phone = ''
 	@persist @observable password = ''
 	@persist @observable token = ''
-	@persist @observable lon = 0
-	@persist @observable lat = 0
+	@persist @observable lon = 116.33939
+	@persist @observable lat = 39.991599
 	@observable position = {
 		name:'获取中...',
 		regionId:''
