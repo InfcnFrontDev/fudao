@@ -71,7 +71,7 @@ export default class StartInformation extends PureComponent {
                     }).then((data)=> {
                        UserStore.location=data.result;
                         UserStore.position.name=UserStore.location.addressComponent.city;
-                       /* UserStore.position.regionId=UserStore.location.addressComponent.adcode;*/
+                        UserStore.position.regionId=UserStore.location.addressComponent.adcode;
                     });
                 })
 
