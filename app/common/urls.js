@@ -1,16 +1,16 @@
 // 接口服务器地址
-const apiPath = 'http://103.254.113.11:9191/api/'; // 外网
-// const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 
+ //const apiPath = 'http://103.254.113.11:9090/api/'; // 外网
+ const apiPath = 'http://192.168.10.69:9191/api/'; // 内网服务器
 // web服务器地址
-// const webPath = 'http://103.254.113.11:9191/web/'; // 外网
-// const webPath = 'http://192.168.10.69:9191/web/'; // 内网
-const webPath = 'http://192.168.3.137:3000/'; // 杨可可
-// const webPath = 'http://192.168.3.204:3000/'; // 王朋
+//const webPath = 'http://103.254.113.11:9090/web/'; // 外网
+ //const webPath = 'http://103.254.113.11:9191/web/'; // 内网
+// const webPath = 'http://192.168.3.137:3000/'; // 杨可可
+const webPath = 'http://192.168.3.204:3000/'; // 王朋
 // const webPath = 'http://192.168.3.173:3000/'; // zy
-// const webPath = 'http://192.168.3.213:3000/'; // cxx
+//const webPath = 'http://192.168.3.213:3000/'; // cxx
 // const webPath = 'http://192.168.3.203:3000/'; //
-// const webPath = 'http://192.168.3.184:3000/'; //
+
 
 
 const urls = {
@@ -45,6 +45,8 @@ const urls = {
         MY_QUESTION_PERSON: webPath + 'myQuestionPerson.html',
         // 我的位置
         MY_LOCATION: webPath + 'myLocation.html',
+        // 获取位置
+        GRT_ADDRESS: webPath + 'getAddress.html',
         //首页
         HOME: webPath + 'home.html',
         //我的能量场
@@ -250,12 +252,12 @@ const urls = {
         //修改体检结果
         MEDICALEXAMINATION_UPDATAMEDICALINFORMATIONRESULT: apiPath + 'MedicalExaminationApi/updataMedicalInformationResult',
 
-		// 自诊 ---------------------------------------------------------
-		DIAGNOSIS_GETCOMMONDISEASELIST: apiPath + 'DiagnosisApi/getCommonDiseaseList',
-		DIAGNOSIS_ADDMYDISEASES: apiPath + 'DiagnosisApi/addMyDiseases',
-		DIAGNOSIS_GETQUESTIONNAIRESCORES: apiPath + 'DiagnosisApi/getQuestionnaireScores',
-		// 意见反馈 ---------------------------------------------------------
-		FEEDBACK_SUBMIT: apiPath + 'FeedbackApi/submit',
+        // 自诊 ---------------------------------------------------------
+        DIAGNOSIS_GETCOMMONDISEASELIST: apiPath + 'DiagnosisApi/getCommonDiseaseList',
+        DIAGNOSIS_ADDMYDISEASES: apiPath + 'DiagnosisApi/addMyDiseases',
+        DIAGNOSIS_GETQUESTIONNAIRESCORES :apiPath + 'DiagnosisApi/getQuestionnaireScores',
+        // 意见反馈 ---------------------------------------------------------
+        FEEDBACK_SUBMIT: apiPath + 'FeedbackApi/submit',
 
     },
     // 获取图片完整路径

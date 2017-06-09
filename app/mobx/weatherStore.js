@@ -6,7 +6,10 @@ class WeatherStore {
 
 	@action
 	fetchCurrentWeather = async(weaid) => {
+
+
 		weaid = weaid.replace('市', '');
+
 		try {
 			const result = await this._fetchCurrentWeather(weaid)
 			runInAction(() => {

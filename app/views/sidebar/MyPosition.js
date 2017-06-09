@@ -8,15 +8,24 @@ import userStore from "../../mobx/userStore";
  * 我的位置
  */
 export default class MyEnergy extends PureComponent {
+	componentWillMount(){
+		userStore.getposition();
+
+	}
 
 	render() {
-		let {lastPosition}=userStore;
-		return (
-			<Content>
-				<WebView
-					uri={urls.pages.MY_LOCATION+'?x='+lastPosition.coords.longitude+'&y='+lastPosition.coords.latitude}/>
-			</Content>
-		)
+		let {location}=userStore;
+
+let x=location.location.lng;
+ let y=location.location.lat;
+			return (
+				<Content>
+					<WebView
+						uri={urls.pages.MY_LOCATION+"?x="+x+"&y="+y}/>
+				</Content>
+			)
+
+
 	}
 }
 

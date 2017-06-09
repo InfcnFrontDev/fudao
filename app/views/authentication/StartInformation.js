@@ -43,6 +43,7 @@ export default class StartInformation extends PureComponent {
         }
     }
     componentWillMount(){
+
         Geolocation.getCurrentPosition(
             location => {
                 var result = "速度：" + location.coords.speed +
@@ -70,8 +71,7 @@ export default class StartInformation extends PureComponent {
                     }).then((data)=> {
                        UserStore.location=data.result;
                         UserStore.position.name=UserStore.location.addressComponent.city;
-                        UserStore.position.regionId=UserStore.location.addressComponent.adcode
-
+                       /* UserStore.position.regionId=UserStore.location.addressComponent.adcode;*/
                     });
                 })
 
@@ -246,11 +246,12 @@ export default class StartInformation extends PureComponent {
         )
     }
     commit() {
-
         let {sex,position, maxText, phone, password,sexChose, jieduan} = this.state;
         let crowd;
         if(sex==0){
             tools.showToast("请点击选择您的性别")
+        }else if(UserStore.position.regionId==''){
+            tools.showToast("请点击选择您的位置")
         }else{
             if (sexChose == 2) {
                 switch(jieduan)
