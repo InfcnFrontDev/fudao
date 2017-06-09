@@ -7,6 +7,11 @@ import allExpectListStore from "../../../mobx/allExpectListStore";
 import questionStore from "../../../mobx/questionStore";
 import Swiper from "react-native-swiper"
 
+
+const imgWidth = theme.deviceWidth - 30;
+const imgHeight = 250;
+
+
 @observer
 export default class Teach extends PureComponent {
 
@@ -37,7 +42,7 @@ export default class Teach extends PureComponent {
             case '2':
                 return (<View style={styles.box}>
                     <Text style={styles.text}>部位：{item.part}</Text>
-                    <Text style={styles.text}>相关器官：{item.location}</Text>
+                    <Text style={styles.text}>体表定位：{item.location}</Text>
                     <Text style={styles.text}>穴位保健效果：{item.healthEffect}</Text>
                     <Text style={styles.text}>穴位保健方法：</Text>
                     <Text style={styles.text1}>{item.healthMethod}</Text>
@@ -47,7 +52,7 @@ export default class Teach extends PureComponent {
                 break
             case '3':
                 return (<View>
-                    <Text style={styles.text}>器官保健方法：</Text>
+                    <Text style={styles.text}>部位保健方法：</Text>
                     <Text style={styles.text1}>{item.healthMethod}</Text>
                 </View>)
                 break
@@ -59,7 +64,7 @@ export default class Teach extends PureComponent {
                 break
             default:
                 return (<View>
-                    <Text style={styles.text}>穴位保健方法：</Text>
+                    <Text style={styles.text}>经络保健方法：</Text>
                     <Text style={styles.text1}>{item.healthMethod}</Text>
                 </View>)
         }
@@ -99,7 +104,7 @@ export default class Teach extends PureComponent {
                                             <Text>{'  -' + item.name}</Text>
                                         </View>
                                         {
-                                            item.img ? <Image style={styles.img} source={{uri: urls.getImage(item.img)}}/> : <View/>
+                                            item.img ? <Image style={styles.img} source={{uri: urls.getImage(item.img, imgWidth*2, imgHeight*2)}}/> : <View/>
                                         }
                                         {
                                             this.renderView(item)
@@ -130,14 +135,17 @@ const styles = {
         backgroundColor: '#e4e4e4'
     },
     img: {
-        width: theme.deviceWidth - 30,
-        height: 200
+        width: imgWidth,
+        height: imgHeight
     },
     box: {
         margin: 10,
     },
     text: {
-        marginTop: 10,
+        marginBottom: 5,
+    },
+    text1: {
+        marginBottom: 10,
     },
 };
 

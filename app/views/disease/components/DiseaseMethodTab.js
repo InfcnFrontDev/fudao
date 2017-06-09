@@ -71,7 +71,7 @@ export default class DiseaseMethodTab extends PureComponent {
             <View style={styles.methods}>
                 {methods.map((method, index) => (
                     <View style={styles.method} key={index}>
-                        <Text style={styles.text}>{' - ' + method.timePeriod + ' : '}</Text>
+                        <Text style={styles.text}>{'- ' + method.timePeriod + '：'}</Text>
                         <View style={{flexDirection: 'column'}}>
                             <View style={{flexDirection: 'row'}}>
                                 <Text style={styles.text}>{'宜食：'}</Text>
@@ -104,7 +104,7 @@ export default class DiseaseMethodTab extends PureComponent {
                     methods ?
                     methods.map((method, index) => (
                     <View style={styles.method} key={index}>
-                        <Text style={styles.text}>{ ' - ' + method.timePeriod + ' : '}</Text>
+                        <Text style={styles.text}>{ '- ' + method.timePeriod + ' : '}</Text>
                         <TouchableOpacity onPress={() => this.onMethod1Press(method.id,method.name)}>
                             <Text style={styles.textLink}>{ method.name}</Text>
                         </TouchableOpacity>
