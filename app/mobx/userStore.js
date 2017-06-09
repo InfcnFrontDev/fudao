@@ -172,7 +172,6 @@ class UserStore {
 			},
 			error => {
 				tools.showToast("获取位置失败")
-
 			}
 		);
 	}
