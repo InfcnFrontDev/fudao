@@ -25,7 +25,7 @@ export default class Category extends PureComponent {
 						},
 						{
 							icon: 'images',
-							text: '咨询',
+							text: '资讯',
 							category: 'searchInformation',
 						},
 					]
