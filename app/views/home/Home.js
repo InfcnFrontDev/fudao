@@ -32,7 +32,8 @@ export default class Home extends PureComponent {
 	componentWillMount(){
 		userStore.getposition();
 		let m='';
-		if(userStore.location.addressComponent.city){
+
+		if(userStore.location.addressComponent){
 			m=userStore.location.addressComponent.city
 		}else{
 			m="北京市"
@@ -50,7 +51,7 @@ export default class Home extends PureComponent {
 		let {location} = userStore;
 		let {currentWeather} = weatherStore;
 		let m='';
-		if(location.addressComponent.city&&location.addressComponent.district){
+		if(location.addressComponent){
 			m=location.addressComponent.city+'.'+location.addressComponent.district
 		}else{
 			m='北京市';
