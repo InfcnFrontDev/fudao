@@ -31,7 +31,13 @@ export default class Home extends PureComponent {
 	};
 	componentWillMount(){
 		userStore.getposition();
-		weatherStore.fetchCurrentWeather(userStore.location.addressComponent.city);
+		let m='';
+		if(userStore.location.addressComponent.city){
+			m=userStore.location.addressComponent.city
+		}else{
+			m="北京市"
+		}
+		weatherStore.fetchCurrentWeather(m);
 
 		let {currentWeather} = weatherStore;
 		this.setState({
@@ -47,7 +53,7 @@ export default class Home extends PureComponent {
 		if(location.addressComponent.city&&location.addressComponent.district){
 			m=location.addressComponent.city+'.'+location.addressComponent.district
 		}else{
-			m=userStore.position.name;
+			m='北京市';
 		}
 
 		let imgStr='http://api.k780.com:88/upload/weather/d1/'+(currentWeather.weatid-1)+'.png'
