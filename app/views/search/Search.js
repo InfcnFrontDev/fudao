@@ -65,7 +65,7 @@ export default class Search extends PureComponent {
                             <DailyMethodResult key="dailyMethod" data={dailyMethod}/>
                         </View>: <View/>}
                         {this.isEmptyObject(information) ? <View/>: <View>
-                            <Separator title="咨询"/>
+                            <Separator title="资讯"/>
                             <InformationResult key="information" data={information}/>
                         </View>}
                         <DetailModal visible={modalShow}>
