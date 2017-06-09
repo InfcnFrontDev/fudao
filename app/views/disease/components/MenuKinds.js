@@ -68,57 +68,59 @@ export default class Menukinds extends PureComponent {
 				<Container>
 					<Header back {...this.props}></Header>
 					<Content white>
-						<View style={styles.bar}>
-							{tab.map((item, index) => this.renderTab(item, index))}
-						</View>
-						<View style={styles.imgBox}>
-							<Image source={{uri: urls.getImage(data.img,width,200)}}
-								   style={styles.img}></Image>
-						</View>
-						<View style={styles.textBox}>
-							<Text>        {data.abstract}</Text>
-						</View>
-						<View style={{flexDirection:'row',justifyContent:'center',marginTop:10}}>
-							<Text>{data.name}</Text>
-							<Text>的营养价值表(每100g)</Text>
-						</View>
-						<View style={styles.yyBox}>
-							<View style={styles.yyBag}>
-								<View style={styles.yyName}>
-									<Text style={styles.doc}>碳水化合物</Text>
+						<ScrollView>
+							<View style={styles.bar}>
+                                {tab.map((item, index) => this.renderTab(item, index))}
+							</View>
+							<View style={styles.imgBox}>
+								<Image source={{uri: urls.getImage(data.img,width,200)}}
+									   style={styles.img}></Image>
+							</View>
+							<View style={styles.textBox}>
+								<Text>        {data.abstract}</Text>
+							</View>
+							<View style={{flexDirection:'row',justifyContent:'center',marginTop:10}}>
+								<Text>{data.name}</Text>
+								<Text>的营养价值表(每100g)</Text>
+							</View>
+							<View style={styles.yyBox}>
+								<View style={styles.yyBag}>
+									<View style={styles.yyName}>
+										<Text style={styles.doc}>碳水化合物</Text>
+									</View>
+									<View style={styles.yyName}>
+										<Text style={styles.doc}>胆固醇(毫克)</Text>
+									</View>
+									<View style={styles.yyName}>
+										<Text style={styles.doc}>膳食纤维(克)</Text>
+									</View>
+									<View style={styles.yyName}>
+										<Text style={styles.doc}>能量(千卡)</Text>
+									</View>
+									<View style={styles.yyName}>
+										<Text style={styles.doc}>脂肪(克)</Text>
+									</View>
 								</View>
-								<View style={styles.yyName}>
-									<Text style={styles.doc}>胆固醇(毫克)</Text>
-								</View>
-								<View style={styles.yyName}>
-									<Text style={styles.doc}>膳食纤维(克)</Text>
-								</View>
-								<View style={styles.yyName}>
-									<Text style={styles.doc}>能量(千卡)</Text>
-								</View>
-								<View style={styles.yyName}>
-									<Text style={styles.doc}>脂肪(克)</Text>
+								<View style={styles.yyBag}>
+									<View style={styles.yyBz}>
+										<Text style={styles.doc}>{data.carbohydrate}</Text>
+									</View>
+									<View style={styles.yyBz}>
+										<Text style={styles.doc}>{data.cholesterol}</Text>
+									</View>
+									<View style={styles.yyBz}>
+										<Text style={styles.doc}>{data.dietary_fiber}</Text>
+									</View>
+									<View style={styles.yyBz}>
+										<Text style={styles.doc}>{data.energy}</Text>
+									</View>
+									<View style={styles.yyBz}>
+										<Text style={styles.doc}>{data.fat}</Text>
+									</View>
 								</View>
 							</View>
-							<View style={styles.yyBag}>
-								<View style={styles.yyBz}>
-									<Text style={styles.doc}>{data.carbohydrate}</Text>
-								</View>
-								<View style={styles.yyBz}>
-									<Text style={styles.doc}>{data.cholesterol}</Text>
-								</View>
-								<View style={styles.yyBz}>
-									<Text style={styles.doc}>{data.dietary_fiber}</Text>
-								</View>
-								<View style={styles.yyBz}>
-									<Text style={styles.doc}>{data.energy}</Text>
-								</View>
-								<View style={styles.yyBz}>
-									<Text style={styles.doc}>{data.fat}</Text>
-								</View>
-							</View>
-						</View>
-						{cai}
+                            {cai}
+						</ScrollView>
 					</Content>
 				</Container>
 			);
