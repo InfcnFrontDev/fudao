@@ -129,6 +129,7 @@ export default class Dynamic extends PureComponent {
      * 发表动态
      * */
     skipToNew() {
+        dynamicStore.clearImgList();
         Actions.newDynamic()
     }
 

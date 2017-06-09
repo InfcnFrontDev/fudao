@@ -337,6 +337,11 @@ class DynamicStore {
         this.info = info;
     }
 
+    @action
+    clearImgList() {
+        this.imgList = [];
+    }
+
 
     @computed
     get isFetching() {
