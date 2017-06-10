@@ -95,7 +95,9 @@ export default class UserDetail extends PureComponent {
 
 	renderButtons() {
 		let {friendNickMap} = friendStore,
+
 			{user} = this.state;
+		console.log(friendNickMap)
 
 		if (friendNickMap[user.id]) {// 好友
 			return (
@@ -173,7 +175,8 @@ export default class UserDetail extends PureComponent {
 			if (result.ok) {
 				ToastAndroid.show('删除成功', ToastAndroid.SHORT);
 				Actions.pop()
-				friendStore.fetchMyFriendList();
+				let {friendNickMap} = friendStore
+				delete friendNickMap[user.id]
 			} else {
 				ToastAndroid.show('删除失败', ToastAndroid.SHORT);
 

@@ -65,7 +65,7 @@ export default class AgreeFriendApply extends PureComponent {
 			friendRemark: friendRemark,
 		}).then(((result) => {
 			if (result.ok) {
-				toast.show('已发送');
+				alert('已发送');
 				// 返回上一页
 				Actions.pop();
 
