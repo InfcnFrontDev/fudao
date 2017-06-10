@@ -29,7 +29,11 @@ class DetailsModal extends PureComponent {
         let {visible,text} = this.state;
         let data=JSON.parse(text);
 let mol=(null);
-let c=data.img+'';
+        let c=data.img+'';
+        if(c.indexOf(';')>0){
+            c=c.split(';')[0]
+        }
+
         let n=c.substring(c.length-3);
        if(n=='mp3'){
            mol=(
@@ -37,7 +41,7 @@ let c=data.img+'';
            )
        }else{
            mol=(
-               <ImageText title={data.name} content={data.detail} image={data.img}/>
+               <ImageText title={data.name} content={data.detail} image={c}/>
            )
        }
         return (
