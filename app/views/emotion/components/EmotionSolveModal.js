@@ -41,7 +41,7 @@ export default class EmotionSolveModal extends PureComponent {
 				threeText=(
 					<TouchableOpacity onPress={()=>this.setState({Threeflag:!Threeflag})} style={{width:theme.deviceWidth*0.9-100,paddingRight:10,justifyContent:'center',alignItems:'center'}}>
 						<View>
-							<Text style={{marginBottom:5,fontSize: theme.DefaultFontSize-2,color:'#fff',lineHeight:24}}>{emotion.influence}</Text>
+							<Text style={{marginBottom:5,fontSize: theme.DefaultFontSize-2,color:'#fff',lineHeight:24}}>{'\t\t'+emotion.influence}</Text>
 						</View>
 					</TouchableOpacity>
 				)
