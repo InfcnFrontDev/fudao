@@ -7,9 +7,9 @@ export default  class Container extends PureComponent {
 		let {children, isTabPanel} = this.props,
 			width = theme.deviceWidth;
 		if(Platform.OS=='ios'){
-			height = theme.deviceHeight;
+			var height = theme.deviceHeight;
 		}else{
-			height = theme.deviceHeight - 20;
+			var height = theme.deviceHeight - 20;
 		}
 
 		if (isTabPanel) {
