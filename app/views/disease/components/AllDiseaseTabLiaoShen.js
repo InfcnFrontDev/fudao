@@ -77,12 +77,12 @@ const styles = {
 	contentContainer: {
 		flexDirection: 'row', //设置横向布局
 		flexWrap: 'wrap',    //设置换行显示
-		width: theme.deviceWidth + 5
+		width: theme.deviceWidth
 	},
 	sectionHeader: {
 		borderBottomColor: theme.listBorderColor,
 		borderBottomWidth: theme.borderWidth,
-		width: theme.deviceWidth + 5,
+		width: theme.deviceWidth,
 		height: 40,
 		paddingLeft: 8,
 		justifyContent: 'center',
