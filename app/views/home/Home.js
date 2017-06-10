@@ -10,6 +10,7 @@ import userStore from "../../mobx/userStore";
 import DetailsModal from "./components/DetailsModal";
 import TimeModal from "./components/TimeModal";
 import YunDongModal from "./components/YunDongModal";
+import GeolocationExample from "./components/GeolocationExample"
 
 import weatherStore from "../../mobx/weatherStore";
 

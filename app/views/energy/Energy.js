@@ -30,10 +30,19 @@ export default class Energy extends PureComponent {
 		}else{
 			m='北京市';
 		}
-		let city = m;
+		let city =m;
+		city = encodeURI(encodeURI(city));
+
 		let weather = currentWeather.weather;
+		weather = encodeURI(encodeURI(weather));
+
 		let winp = currentWeather.winp;
+		winp = encodeURI(encodeURI(winp));
+
 		let air_scope = "50-100";
+		air_scope = encodeURI(encodeURI(air_scope));
+
+		//alert(city+'-'+weather+'-'+winp+'-'+air_scope);
 		let uri = urls.pages.MY_ENERGY + "?city=" + city + "&weather=" + weather + "&winp=" + winp + "&air_scope=" + air_scope + "";
 		return (
 			<Container>
