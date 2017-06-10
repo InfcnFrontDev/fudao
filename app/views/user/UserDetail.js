@@ -97,7 +97,7 @@ export default class UserDetail extends PureComponent {
 	renderButtons() {
 		let {friendNickMap} = friendStore,
 			{user} = this.state;
-		alert(JSON.stringify(friendNickMap));
+
 		if (friendNickMap[user.id]) {// 好友
 			return (
 				<Button danger block style={styles.button} onPress={this._deleteFriend.bind(this)}>

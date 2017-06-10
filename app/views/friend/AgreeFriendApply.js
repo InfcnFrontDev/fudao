@@ -15,7 +15,6 @@ export default class AgreeFriendApply extends PureComponent {
 	constructor(props) {
 		super(props);
 		let {friend} = props;
-		alert(JSON.stringify(friend));
 		this.state = {
 			friendRemark: friend.nickname
 		}
@@ -66,7 +65,7 @@ export default class AgreeFriendApply extends PureComponent {
 			friendRemark: friendRemark,
 		}).then(((result) => {
 			if (result.ok) {
-				alert('已发送');
+				toast.show('已发送');
 				// 返回上一页
 				Actions.pop();
 
