@@ -50,6 +50,12 @@ export default class DiseaseMethodTab extends PureComponent {
                     <Text style={styles.text}>{'\t\t' + data.principle}</Text>
                 </View>
             )
+        }else{
+            return (
+                <View style={{marginTop: 20}}>
+                    <Text style={styles.text}>{'\t\t' + '内容更新中，敬请期待...'}</Text>
+                </View>
+            )
         }
 
     }
