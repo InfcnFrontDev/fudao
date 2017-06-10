@@ -37,7 +37,7 @@ let mol=(null);
         let n=c.substring(c.length-3);
        if(n=='mp3'){
            mol=(
-               <VideoText title={data.name} content={data.detail} video={data.img}/>
+               <VideoText title={data.name} content={data.detail} video={data.img} time={data.length}/>
            )
        }else{
            mol=(
