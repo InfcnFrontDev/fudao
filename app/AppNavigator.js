@@ -4,6 +4,7 @@ import {StyleProvider, Drawer} from "native-base";
 import SplashScreen from "react-native-splash-screen";
 import AppRouter from "./AppRouter";
 import getTheme from "../native-base-theme/components/";
+import positionStore from "./mobx/positionStore";
 
 
 /**
@@ -25,7 +26,10 @@ export default class AppNavigator extends PureComponent {
 	}
 
 	componentDidMount() {
+		// 关闭启动页
 		SplashScreen.hide();
+		// 获取当前位置
+		positionStore.fetchCurrentPosition();
 	}
 }
 
