@@ -10,17 +10,18 @@ import weatherStore from "../../mobx/weatherStore";
 export default class Energy extends PureComponent {
 
 	render() {
-		let {province, city} = positionStore.currentPosition.addressComponent;
-		let {weather, winp, air_scope} = weatherStore.currentWeather;
+		let {province, city} = positionStore.currentPosition;
+		let {weather, winp} = weatherStore.currentWeather;
+		let {aqi_scope} = weatherStore.pm25;
 
 		province = encodeURI(encodeURI(province));
 		city = encodeURI(encodeURI(city));
 		weather = encodeURI(encodeURI(weather));
 		winp = encodeURI(encodeURI(winp));
-		air_scope = encodeURI(encodeURI(air_scope));
+		aqi_scope = encodeURI(encodeURI(aqi_scope));
 
-		let uri = urls.pages.MY_ENERGY + "?province=" + province + "&city=" + city + "&weather=" + weather + "&winp=" + winp + "&air_scope=" + air_scope;
-		console.log(uri);
+		let uri = urls.pages.MY_ENERGY + "?province=" + province + "&city=" + city + "&weather=" + weather + "&winp=" + winp + "&air_scope=" + aqi_scope;
+		// console.log(uri);
 		return (
 			<Container>
 				<Header {...this.props} />

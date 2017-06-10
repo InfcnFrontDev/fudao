@@ -1,41 +1,73 @@
 import {observable, asMap, action, runInAction} from "mobx";
 import {persist} from "mobx-persist";
-import {Geolocation} from "react-native-baidu-map";
+
+var Geolocation = require('Geolocation');
 
 class PositionStore {
 	@persist('object') @observable currentPosition = {
-		addressComponent: {
-			adcode: "110108",
-			country_code: 0,
-			country: "中国",
-			province: "北京市",
-			city: "北京市",
-			district: "海淀区",
-			distance: "15",
-			street: "中关村东路",
-			direction: "附近",
-			street_number: "66号院-甲1号楼-27层",
-		},
-		location: {
-			lat: 39.99034788200354,
-			lng: 116.34033501776993,
-		}
+		adcode: "110108",
+		country_code: 0,
+		country: "中国",
+		province: "北京市",
+		city: "北京市",
+		district: "海淀区",
+		distance: "15",
+		street: "中关村东路",
+		direction: "附近",
+		street_number: "66号院-甲1号楼-27层",
+		lat: 39.99034788200354,
+		lng: 116.34033501776993,
 	}
 	@observable errorMsg = ''
 
 	@action
 	fetchCurrentPosition(callback) {
-		// 获取当前位置
-		Geolocation.getCurrentPosition()
-			.then(result => {
-				console.log(result);
-				this.currentPosition = result
-				callback(result)
-			})
-			.catch(error => {
-				this.errorMsg = error
-			})
+		Geolocation.getCurrentPosition(
+			location => {
+				// console.log(location);
+				let {longitude, latitude} = location.coords;
+				this.geoconv(longitude, latitude);
+			},
+			error => {
+				tools.showToast("获取位置失败")
+			}
+		);
 	}
+
+	/**
+	 * 转码
+	 * @param longitude
+	 * @param latitude
+	 */
+	geoconv(longitude, latitude) {
+		request.getJson('http://api.map.baidu.com/geoconv/v1/', {
+			coords: longitude + "," + latitude,
+			from: 1,
+			to: 5,
+			ak: 'trLEKMVBCc6MKGemHlUXdyy2'
+		}).then((data) => {
+			this.geocoder(data.result[0].y, data.result[0].x)
+		})
+	}
+
+	/**
+	 * 获取当前位置
+	 * @param longitude
+	 * @param latitude
+	 */
+	geocoder(longitude, latitude) {
+		request.getJson('http://api.map.baidu.com/geocoder/v2/', {
+			location: longitude + "," + latitude,
+			output: 'json',
+			pois: 1,
+			radius: 20,
+			ak: 'trLEKMVBCc6MKGemHlUXdyy2'
+		}).then((data) => {
+			if (data.status == 0)
+				this.currentPosition = Object.assign({}, data.result.addressComponent, data.result.location);
+		});
+	}
+
 }
 
 const positionStore = new PositionStore()
