@@ -55,7 +55,7 @@ class VideoText extends PureComponent {
 
 
 								<View style={styles.basisBox}>
-									<Text  style={styles.basis}>        {basis}</Text>
+									<Text  style={styles.basis}>{basis}</Text>
 								</View>
 							<Video
 								ref='video'
@@ -143,6 +143,9 @@ const styles = {
 		marginBottom: 30
 	},
 	content: {
+        width:'70%',
+        paddingLeft:10,
+        paddingRight:10,
 		textAlign: 'center',
 		fontSize: theme.DefaultFontSize + 2,
 		lineHeight: 28,
