@@ -142,6 +142,9 @@ const styles = {
         marginBottom:30
     },
     content: {
+        width:'70%',
+        paddingLeft:10,
+        paddingRight:10,
         textAlign: 'center',
         fontSize: theme.DefaultFontSize + 2,
         lineHeight: 28,
