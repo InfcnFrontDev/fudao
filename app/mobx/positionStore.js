@@ -15,10 +15,10 @@ class PositionStore {
 		street: "中关村东路",
 		direction: "附近",
 		street_number: "66号院-甲1号楼-27层",
-		lat: 39.99034788200354,
-		lng: 116.34033501776993,
 	}
 	@observable errorMsg = ''
+	@observable lat = 39.99034788200354
+	@observable lng = 116.34033501776993
 
 	@action
 	fetchCurrentPosition(callback) {
@@ -26,6 +26,8 @@ class PositionStore {
 			location => {
 				// console.log(location);
 				let {longitude, latitude} = location.coords;
+				this.lng=longitude;
+				this.lat=latitude;
 				this.geoconv(longitude, latitude);
 			},
 			error => {
@@ -64,7 +66,7 @@ class PositionStore {
 			ak: 'trLEKMVBCc6MKGemHlUXdyy2'
 		}).then((data) => {
 			if (data.status == 0)
-				this.currentPosition = Object.assign({}, data.result.addressComponent, data.result.location);
+				this.currentPosition = data.result.addressComponent;
 		});
 	}
 
