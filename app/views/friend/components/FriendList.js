@@ -49,8 +49,8 @@ class FriendList extends PureComponent {
 						{friendList.map((f, i) => (
 							<ListItem avatar last key={i} onPress={() => Actions.userDetail({userId: f.id})}>
 								<Left>
-									<Thumbnail style={{width: 40, height: 40}} square
-											   source={{uri:urls.getImage(f.img, 40, 40)}}/>
+									<Thumbnail style={{width: 250, height: 250}} square
+											   source={{uri:urls.getImage(f.photo, 50, 50)}}/>
 								</Left>
 								<Body>
 								<Text>{f.friendremark}</Text>

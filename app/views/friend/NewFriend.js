@@ -28,8 +28,8 @@ export default class NewFriend extends PureComponent {
 							{NewFriendList.map((f, i) => (
 								<ListItem avatar key={i}>
 									<Left>
-										<Thumbnail style={{width: 40, height: 40}} square
-												   source={{uri:'http://touxiang.qqzhi.com/uploads/2012-11/1111032758936.jpg'}}/>
+										<Thumbnail style={{width: 50, height: 50}} square
+												   source={{uri:urls.getImage(f.photo, 250, 250)}}/>
 									</Left>
 									<Body>
 									<Text>{f.nickname}</Text>

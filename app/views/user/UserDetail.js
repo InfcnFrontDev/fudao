@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Alert,ToastAndroid} from "react-native";
+import {Alert,ToastAndroid,Image} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Header, Content, List, Separator} from "../../components/index";
@@ -55,8 +55,7 @@ export default class UserDetail extends PureComponent {
 						<List>
 							<ListItem avatar last>
 								<Left>
-									<Thumbnail square
-											   source={{uri: urls.getImage(user.img, 50, 50)}}/>
+									<Thumbnail square source={{uri: urls.getImage(user.photo, 250, 250)}} style={{width:50,height:50}}/>
 								</Left>
 								<Body>
 								<Text>
