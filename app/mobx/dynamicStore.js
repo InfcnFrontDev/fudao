@@ -340,6 +340,7 @@ class DynamicStore {
     @action
     clearImgList() {
         this.imgList = [];
+		this.imgUpload=[];
     }
 
 
