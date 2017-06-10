@@ -1,49 +1,26 @@
 import React, {PureComponent} from "react";
 import {View, Image, DeviceEventEmitter} from "react-native";
 import {Container, Header, Content, WebView} from "../../components/index";
-import userStore from "../../mobx/userStore";
+import positionStore from "../../mobx/positionStore";
 import weatherStore from "../../mobx/weatherStore";
 
 /**
  * 我的能量场
  */
 export default class Energy extends PureComponent {
-	componentWillMount(){
-		userStore.getposition();
-		let m='';
-
-		if(userStore.location.addressComponent){
-			m=userStore.location.addressComponent.city
-		}else{
-			m="北京市"
-		}
-		weatherStore.fetchCurrentWeather(m);
-
-	}
 
 	render() {
-		let {location} = userStore;
-		let {currentWeather} = weatherStore;
-		let m='';
-		if(location.addressComponent){
-			m=location.addressComponent.city+'.'+location.addressComponent.district
-		}else{
-			m='北京市';
-		}
-		let city =m;
+		let {province, city} = positionStore.currentPosition.addressComponent;
+		let {weather, winp, air_scope} = weatherStore.currentWeather;
+
+		province = encodeURI(encodeURI(province));
 		city = encodeURI(encodeURI(city));
-
-		let weather = currentWeather.weather;
 		weather = encodeURI(encodeURI(weather));
-
-		let winp = currentWeather.winp;
 		winp = encodeURI(encodeURI(winp));
-
-		let air_scope = "50-100";
 		air_scope = encodeURI(encodeURI(air_scope));
 
-		//alert(city+'-'+weather+'-'+winp+'-'+air_scope);
-		let uri = urls.pages.MY_ENERGY + "?city=" + city + "&weather=" + weather + "&winp=" + winp + "&air_scope=" + air_scope + "";
+		let uri = urls.pages.MY_ENERGY + "?province=" + province + "&city=" + city + "&weather=" + weather + "&winp=" + winp + "&air_scope=" + air_scope;
+		console.log(uri);
 		return (
 			<Container>
 				<Header {...this.props} />
