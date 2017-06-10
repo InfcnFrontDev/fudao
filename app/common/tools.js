@@ -1,4 +1,4 @@
-import {ToastAndroid, Alert} from "react-native";
+import {ToastAndroid, Alert,Platform} from "react-native";
 import Toast from "@remobile/react-native-toast";
 import DialogAndroid from "react-native-dialogs";
 import uuid from "uuid";
@@ -26,7 +26,9 @@ const tools = {
 	 */
 	showToast(text){
 		// Toast.showShortBottom(text)
-		ToastAndroid.show(text, ToastAndroid.SHORT);
+		if(Platform.OS=='android'){
+			ToastAndroid.show(text, ToastAndroid.SHORT);
+		}
 	},
 
 	showDialog(options){
