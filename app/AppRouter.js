@@ -40,6 +40,9 @@ import Expect from "./views/disease/Expect";
 import ExpectDetail from "./views/disease/ExpectDetail";
 import Health from "./views/disease/Health";
 import FriendApply from "./views/friend/FriendApply";
+import BarcodeScannerApp from "./views/friend/components/BarcodeScanner"
+
+import Qrcode from "./views/friend/components/Qrcode"
 import AgreeFriendApply from "./views/friend/AgreeFriendApply";
 import NewFriend from "./views/friend/NewFriend";
 import UserDetail from "./views/user/UserDetail";
@@ -90,6 +93,9 @@ export default class AppRouter extends PureComponent {
 
 					{/*好友*/}
 					<Scene key="friend" component={Friend} title="好友" hideNavBar/>
+					<Scene key="barcodescanner" component={BarcodeScannerApp} title="二维码/条码" hideNavBar/>
+					<Scene key="qrcode" component={Qrcode} title="我的二维码" hideNavBar/>
+
 					<Scene key="friendApply" component={FriendApply} title="好友申请" hideNavBar/>
 					<Scene key="newFriend" component={NewFriend} title="新的朋友" hideNavBar/>
 					<Scene key="agreeFriendApply" component={AgreeFriendApply} title="好友验证" hideNavBar/>
