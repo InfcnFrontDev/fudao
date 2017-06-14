@@ -6,6 +6,7 @@ import {Container, Content, Header, List, PullView,Loading} from "../../componen
 import {Left, Body, Right, ListItem, Button, Icon, Text} from "native-base";
 import FriendList from "./components/FriendList";
 import friendStore from "../../mobx/friendStore";
+
 /*import {fetchMyFriendList} from "../../actions/friend";
 import {toast} from "../../utils/index";*/
 
@@ -25,10 +26,11 @@ export default class Friend extends PureComponent {
 			<Container>
 				<Header {...this.props} right={
 					<Right>
-						<Button transparent onPress={()=>Actions.searchUser()}><Icon name="add"/></Button>
+						<Button transparent onPress={()=>Actions.barcodescanner()}><Icon name="add"/></Button>
 					</Right>
 				}/>
 				<Content gray delay>
+
 					<PullView isRefreshing={false} onRefresh={this._onRefresh.bind(this)}>
 						<List>
 							<ListItem icon last style={{height: 55}} onPress={() => Actions.newFriend()}>
@@ -41,6 +43,16 @@ export default class Friend extends PureComponent {
 								<Text>新朋友</Text>
 								</Body>
 								<Right>
+								</Right>
+							</ListItem>
+						</List>
+						<List>
+							<ListItem icon last style={{height: 55}} onPress={() => Actions.qrcode()}>
+								<Body>
+								<Text>我的二维码</Text>
+								</Body>
+								<Right style={{justifyContent:'center'}}>
+									<Icon name="ios-arrow-forward"/>
 								</Right>
 							</ListItem>
 						</List>
