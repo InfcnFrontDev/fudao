@@ -174,11 +174,13 @@ export default class UserDetail extends PureComponent {
 		}).then((result) => {
 			if (result.ok) {
 				ToastAndroid.show('删除成功', ToastAndroid.SHORT);
+				friendStore.fetchMyFriendList()
 				Actions.pop()
 				let {friendNickMap} = friendStore
 				delete friendNickMap[user.id]
 			} else {
 				ToastAndroid.show('删除失败', ToastAndroid.SHORT);
+
 
 			}
 		}, (error) => {

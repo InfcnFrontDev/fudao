@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {ScrollView, View, ToastAndroid} from "react-native";
+import {ScrollView, View, ToastAndroid,TouchableNativeFeedback,Modal,ListView,Image} from "react-native";
 import {observer} from "mobx-react/native";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, PullView,Loading} from "../../components/index";
@@ -15,21 +15,70 @@ import {toast} from "../../utils/index";*/
  */
 @observer
 export default class Friend extends PureComponent {
+	state={
+		visible:false,
+	}
 
 	componentDidMount() {
 		friendStore.fetchMyFriendList();
 	}
 
 	render() {
+		let {visible} = this.state;
 		const {isFetching, MyFriendList} = friendStore;
 		return (
 			<Container>
 				<Header {...this.props} right={
 					<Right>
-						<Button transparent onPress={()=>Actions.barcodescanner()}><Icon name="add"/></Button>
+						<Button transparent onPress={()=>this.show()}><Icon name="add"/></Button>
 					</Right>
 				}/>
 				<Content gray delay>
+					<Modal
+						animationType={'fade'}
+						transparent={true}
+						visible={visible}
+						onRequestClose={() => this.hide()}
+						style={{backgroundColor:"rgba(0,0,0,.0)"}}
+					>
+						<TouchableNativeFeedback onPress={() => this.hide()} style={{backgroundColor:"rgba(0,0,0,.0)"}}>
+							<View style={styles.opacityView}/>
+						</TouchableNativeFeedback>
+						<View style={{		width: 0,
+							height: 0,
+							marginBottom: -12,
+							borderLeftWidth: 6,
+							borderLeftColor: 'transparent',
+							borderRightWidth: 6,
+							borderRightColor: 'transparent',
+							borderBottomWidth: 12,
+							borderBottomColor: '#3b3f48',
+							position:'absolute',
+							top:48,
+							right:20
+						}}>
+						</View>
+						<View style={{width:150,height:96,backgroundColor:'#3b3f48',position:'absolute',top:60,right:10,borderRadius:3}}>
+
+
+
+
+							<ListItem onPress={()=>this.phone()}>
+								<Left>
+									<Icon name={'md-create'} style={{color:"#fff"}}/>
+									<Text style={{color:"#fff"}}>输入手机号</Text>
+								</Left>
+							</ListItem>
+							<ListItem onPress={()=>this.scanner()}>
+								<Left>
+									<Icon name={'md-expand'} style={{color:"#fff"}}/>
+									<Text style={{color:"#fff"}}>扫一扫</Text>
+								</Left>
+
+							</ListItem>
+						</View>
+
+					</Modal>
 
 					<PullView isRefreshing={false} onRefresh={this._onRefresh.bind(this)}>
 						<List>
@@ -52,6 +101,7 @@ export default class Friend extends PureComponent {
 								<Text>我的二维码</Text>
 								</Body>
 								<Right style={{justifyContent:'center'}}>
+									<Image source={require('./components/assets/qrcode.png')}  style={{width:20,height:20,marginTop:3}}/>
 									<Icon name="ios-arrow-forward"/>
 								</Right>
 							</ListItem>
@@ -64,12 +114,34 @@ export default class Friend extends PureComponent {
 			</Container>
 		)
 	}
+	phone(){
+		Actions.searchUser()
+		this.hide();
+	}
+	scanner(){
+		Actions.barcodescanner()
+		this.hide();
+	}
 
 
 
 	_onRefresh() {
 		friendStore.fetchMyFriendList();
 		ToastAndroid.show('刷新成功', ToastAndroid.SHORT);
+	}
+	show() {
+		this.setState({
+			visible: true,
+		})
+	}
+
+	/**
+	 * 关闭对话框
+	 */
+	hide() {
+		this.setState({
+			visible: false
+		})
 	}
 
 }
@@ -86,6 +158,10 @@ const styles = {
 	icon: {
 		fontSize: 24,
 		color: '#FFFFFF'
+	},
+	opacityView: {
+		flex: 1,
+		backgroundColor: "rgba(0,0,0,.0)"
 	}
 }
 

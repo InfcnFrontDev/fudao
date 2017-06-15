@@ -58,7 +58,7 @@ export default class RmarkSet extends PureComponent {
             if (result.ok) {
                 ToastAndroid.show('修改成功',ToastAndroid.SHORT);
                 friendStore.fetchMyFriendList()
-                Actions.pop();
+                Actions.friend();
             } else {
                 ToastAndroid.show('发送申请失败，请重试',ToastAndroid.SHORT);
             }

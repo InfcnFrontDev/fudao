@@ -57,21 +57,10 @@ export default class NewFriend extends PureComponent {
 	componentDidMount() {
 		friendStore.fetchNewFriendList()
 
-		/*let {dispatch, loginUser} = this.props;
-		setTimeout(() => {
-			dispatch(fetchNewFriendList(loginUser.appid));
-		}, config.loadingDelayTime)*/
 	}
 
 	_onRefresh() {
-		/*let {loginUser, dispatch} = this.props;
-		dispatch(fetchNewFriendList(loginUser.appid, (success) => {
-			if (success) {
-				toast.show('刷新成功');
-			} else {
-				toast.show('刷新失败');
-			}
-		}));*/
+
 	}
 
 }
