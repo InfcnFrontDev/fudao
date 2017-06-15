@@ -22,6 +22,7 @@ class VideoSolve extends PureComponent {
 
     render() {
         let {title,content,video} = this.props;
+        // alert(JSON.stringify(urls.getImage(video)))
         return (
             <View style={styles.View}>
                         <Text style={styles.title}>{title}</Text>
@@ -62,17 +63,19 @@ class VideoSolve extends PureComponent {
                             playInBackground={true}     // 当app转到后台运行的时候，播放是否暂停//
                             playWhenInactive={false}     // [iOS] Video continues to play when control or notification center are shown. 仅适用于IOS
                             onLoadStart={this.loadStart} // 当视频开始加载时的回调函数
-                            onLoad={(data)=>this.onLoad}    // 当视频加载完毕时的回调函数
+                            onLoad={(e)=>this.onLoad(e)}    // 当视频加载完毕时的回调函数
                             onProgress={(e) => this.onProgress(e)}    //  进度控制，每250ms调用一次，以获取视频播放的进度
                             onEnd={this.onEnd}           // 当视频播放完毕后的回调函数
                             onError={this.videoError}    // 当视频不能加载，或出错后的回调函数
                             style={styles.backgroundVideo}
                             paused={this.state.btn}               // true代表暂停，
                         />
+
             </View>
         )
     }
     onProgress (data){
+            // alert(JSON.stringify(data))
       let val = parseInt(data.currentTime);
         this.setState({
             sliderValue: val,
@@ -113,6 +116,12 @@ class VideoSolve extends PureComponent {
         second = second >= 10 ? second : '0' + second
         return min + ':' + second
     }
+    onLoad (data){
+        this.setState({ duration: data.duration });
+    }
+
+    videoError(data){
+    }
 }
 
 const styles = {
@@ -128,6 +137,7 @@ const styles = {
         bottom: 0,
         right: 0,
         zIndex:-1,
+        backgroundColor:'#fff'
     },
     bj: {
         resizeMode: 'contain'
