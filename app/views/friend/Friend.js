@@ -91,7 +91,7 @@ export default class Friend extends PureComponent {
 
                     <PullView isRefreshing={false} onRefresh={this._onRefresh.bind(this)}>
                         <List>
-                            <ListItem icon last style={{height: 55}} onPress={() => Actions.newFriend()}>
+                            <ListItem icon last style={{height: 55,borderBottomWidth:0}} onPress={() => Actions.newFriend()}>
                                 <Left>
                                     <View style={styles.iconView}>
                                         <Icon name="person-add" style={styles.icon}/>
@@ -105,7 +105,7 @@ export default class Friend extends PureComponent {
                             </ListItem>
                         </List>
                         <List>
-                            <ListItem icon last style={{height: 55}} onPress={() => Actions.qrcode()}>
+                            <ListItem icon last style={{height: 55,borderBottomWidth:0}} onPress={() => Actions.qrcode()}>
                                 <Body>
                                 <Text>我的二维码</Text>
                                 </Body>

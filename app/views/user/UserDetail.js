@@ -43,11 +43,17 @@ export default class UserDetail extends PureComponent {
 	render() {
 		let {user}  = this.state;
 
-		let {userId} = this.props;
+		let {userId,from} = this.props;
 
 		return (
 			<Container>
-				<Header {...this.props}/>
+				<Header {...this.props} left={
+					<Left>
+						<Button transparent onPress={() => from=='sao'?Actions.pop({popNum: 2}):Actions.pop()}>
+							<Icon name="arrow-back"/>
+						</Button>
+					</Left>
+				}/>
 
 				<Content gray>{user ?
 					<View>
@@ -57,7 +63,7 @@ export default class UserDetail extends PureComponent {
 								<Left>
 									<Thumbnail square source={{uri: urls.getImage(user.photo, 250, 250)}} style={{width:50,height:50}}/>
 								</Left>
-								<Body>
+								<Body style={{borderBottomWidth:0}}>
 								<Text>
 									{/*{friendNickMap[user.appid] || user.title}*/}
 									&nbsp;
@@ -70,17 +76,17 @@ export default class UserDetail extends PureComponent {
 									用户名：{user.username}
 								</Text>
 								</Body>
-								<Right>
+								<Right style={{borderBottomWidth:0}}>
 								</Right>
 							</ListItem>
 						</List>
 						<Separator/>
 						<List>
-							<ListItem last onPress={() => Actions.remarkSet({userId: user.id})}>
-								<Body>
+							<ListItem last onPress={() => Actions.remarkSet({userId: user.id})} style={{borderBottomWidth:0}}>
+								<Body style={{borderBottomWidth:0}}>
 								<Text>设置备注</Text>
 								</Body>
-								<Right>
+								<Right style={{borderBottomWidth:0}}>
 									<Icon name="ios-arrow-forward"/>
 								</Right>
 							</ListItem>

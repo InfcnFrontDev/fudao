@@ -243,6 +243,7 @@ const styles = {
 		height: 40,
 		backgroundColor: '#C4D2DF',
 		borderRadius: 5,
+		justifyContent: 'center'
 	},
 	customizeButtonText: {
 		color: '#6B7577',
@@ -281,12 +282,14 @@ const styles = {
 		width: (theme.deviceWidth - 30) / 2,
 		height: 36,
 		borderRadius: 5,
+		justifyContent: 'center'
 	},
 	button2: {
 		backgroundColor: "#ccc",
 		width: (theme.deviceWidth - 30) / 2,
 		height: 36,
 		borderRadius: 5,
+		justifyContent: 'center'
 	},
 	buttonText: {
 		color: '#fff',
