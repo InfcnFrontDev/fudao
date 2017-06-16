@@ -7,11 +7,12 @@ import React, {PureComponent} from "react";
 import {Actions,ActionConst} from "react-native-router-flux";
 import {observer} from "mobx-react/native";
 import {Thumbnail, Text, Icon} from "native-base";
-import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePickerAndroid, Alert} from "react-native";
+import {View, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, DatePickerAndroid, Alert,Platform} from "react-native";
 import {Header, Container, Content} from "../../components/index";
 import CommitButton from "./components/CommitButton";
 import UserStore from "../../mobx/userStore";
 import WomanChoose from "./WomanChoose";
+import DatePickerIOS from "./components/DatePickerIOS"
 
 
 var Geolocation = require('Geolocation');
@@ -39,7 +40,8 @@ export default class StartInformation extends PureComponent {
             jieduan:'',
             sexChose:1,
             flagM:false,
-            flagD:true
+            flagD:true,
+            alertDialogVisible: false,
         }
     }
     componentWillMount(){
@@ -108,6 +110,28 @@ export default class StartInformation extends PureComponent {
         }
     }
 
+    showPickerIOS(){
+        this.setState({
+            alertDialogVisible: true,
+        });
+
+    }
+
+    dismissAlertDialog() {
+        this.setState({
+            alertDialogVisible: false
+        });
+    }
+
+    onRequestClose(maxText){
+        // alert(maxText.getFullYear())
+        this.setState({
+            maxText:maxText.getFullYear()+'-'+(maxText.getMonth()+1)+'-'+maxText.getDate(),
+            alertDialogVisible: false
+        });
+    }
+
+
 
     render() {
        let position=UserStore.position.name;
@@ -157,7 +181,7 @@ export default class StartInformation extends PureComponent {
                             </View>
                             <View  style={styles.row1}>
                                 <Text style={styles.text1}>请选择您的生日</Text>
-                                <TouchableOpacity style={styles.btn}  onPress={this.showPicker.bind(this, 'max', {date: this.state.maxDate,maxDate:new Date(this.state.year1, this.state.month1, this.state.day1),mode:'spinner'},this.state.maxText)}>
+                                <TouchableOpacity style={styles.btn}  onPress={Platform.OS=='ios'?this.showPickerIOS.bind(this):this.showPicker.bind(this, 'max', {date: this.state.maxDate,maxDate:new Date(this.state.year1, this.state.month1, this.state.day1),mode:'spinner'},this.state.maxText)}>
                                     <Text style={styles.text2}>{this.state.maxText}</Text>
                                 </TouchableOpacity>
                             </View>
@@ -167,6 +191,13 @@ export default class StartInformation extends PureComponent {
                             </TouchableOpacity>
                             <CommitButton  border={false} block={true} top={20} title="提交" onPress={this.tishi.bind(this)}/>
                         </View>
+                        {Platform.OS == 'ios' ? <DatePickerIOS
+                            visible={this.state.alertDialogVisible}
+                            onRequestClose={this.onRequestClose.bind(this)}
+                            onOutSidePress={this.dismissAlertDialog.bind(this)}
+                            checked={true}
+                            sexChose={this.state.sexChose}
+                        /> : null}
                     </View>
                     <WomanChoose ref={(e)=>this._modal = e}  _jieduan={this._jieduan.bind(this)}/>
                 </Content>
@@ -335,6 +366,7 @@ const styles = {
         fontSize:theme.DefaultFontSize+2,
     },
     text3:{
+        marginLeft:10,
         textAlign:'center',
         fontSize:theme.DefaultFontSize-3,
     },

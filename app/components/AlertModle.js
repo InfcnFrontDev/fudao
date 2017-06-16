@@ -234,7 +234,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         backgroundColor: '#fff',
-        borderRadius: 3
     },
     scrollview: {
         width: theme.deviceWidth * 0.85,
@@ -245,7 +244,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         backgroundColor: '#fff',
         justifyContent: 'center',
-        borderRadius: 3
+
     },
     item: {
         borderBottomColor: '#dddddd',

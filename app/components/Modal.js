@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Modal, View, Image, TouchableNativeFeedback} from "react-native";
+import {Modal, View, Image, TouchableOpacity} from "react-native";
 
 /**
  * BaseModal
@@ -49,9 +49,9 @@ export default class BaseModal extends PureComponent {
 				visible={visible}
 				onRequestClose={() => this.hide()}
 			>
-				<TouchableNativeFeedback onPress={() => this.hide()}>
+				<TouchableOpacity onPress={() => this.hide()}>
 					<View style={styles.opacityView}/>
-				</TouchableNativeFeedback>
+				</TouchableOpacity>
 				<View style={content}>
 					{children}
 				</View>

@@ -26,8 +26,8 @@ class VideoText extends PureComponent {
 					<View style={styles.View}>
 						<Image source={require('../../assets/videoBj1.png')} style={styles.bj}>
 							<View style={{flexDirection: 'column',justifyContent: 'center',alignItems: 'center',flex:1}}>
-								<Text style={styles.title}>{title}</Text>
-								<Text style={styles.content}>{content}</Text>
+								<View style={styles.tran}><Text style={styles.title}>{title}</Text></View>
+								<View style={styles.tran}><Text style={styles.content}>{content}</Text></View>
 								<View style={styles.btn}>
 									<TouchableOpacity onPress={this._btn.bind(this)}>
 										<View style={{width: 50, height: 50,justifyContent:'center',alignItems:'center'}}>
@@ -35,7 +35,7 @@ class VideoText extends PureComponent {
 										</View>
 									</TouchableOpacity>
 								</View>
-								<Text>{this.formatTime(Math.floor(this.state.currentTime))} - {this.formatTime(Math.floor(this.state.file_duration))}</Text>
+								<View style={styles.tran}><Text>{this.formatTime(Math.floor(this.state.currentTime))} - {this.formatTime(Math.floor(this.state.file_duration))}</Text></View>
 								<Slider
 									style={{ width:theme.deviceWidth*0.7,marginLeft: 10, marginRight: 10}}
 									value={this.state.sliderValue}
@@ -54,7 +54,7 @@ class VideoText extends PureComponent {
 								/>
 
 
-								<View style={styles.basisBox}>
+								<View style={[styles.basisBox,styles.tran]}>
 									<Text  style={styles.basis}>{basis}</Text>
 								</View>
 							<Video
@@ -129,6 +129,7 @@ const styles = {
 		bottom: 0,
 		right: 0,
 		zIndex:-1,
+		backgroundColor:'transparent'
 	},
 	bj: {
 		resizeMode: 'contain'
@@ -157,6 +158,9 @@ const styles = {
 	btn: {
 		marginTop: 30,
 		marginBottom: 30
+	},
+	tran:{
+		backgroundColor:'transparent'
 	}
 };
 VideoText.propsTypes = {
