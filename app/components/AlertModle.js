@@ -72,7 +72,7 @@ class CheckBox extends PureComponent {
 
         return (
             <TouchableOpacity onPress={this.onChange} underlayColor={this.props.underlayColor}
-                              style={styles.flexContainer}>
+                              style={{marginBottom:5,marginTop:5}}>
                 {container}
             </TouchableOpacity>
         );
@@ -107,7 +107,7 @@ class RadiuBox extends PureComponent {
 
         return (
             <TouchableOpacity onPress={this.onChange.bind(this)} underlayColor={this.props.underlayColor}
-                              style={styles.flexContainer}>
+                              style={{marginBottom:5,marginTop:5}}>
                 {container}
             </TouchableOpacity>
         );
@@ -185,7 +185,7 @@ class AlertDialog extends PureComponent {
                                         确定
                                     </Text>
                                 </TouchableOpacity>
-                            ) : <View style={{height: 20}}></View>}
+                            ) : <View style={{height: 10}}></View>}
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
@@ -255,7 +255,8 @@ const styles = StyleSheet.create({
         color: '#333333'
     },
     title: {
-        height: 40
+        height: 40,
+
     },
     titleText: {
         lineHeight: 40,
