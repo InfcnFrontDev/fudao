@@ -32,7 +32,7 @@ export default class UserDetail extends PureComponent {
 				})
 
 			} else {
-				ToastAndroid.show('发送申请失败，请重试', ToastAndroid.SHORT);
+				tools.showToast('发送申请失败，请重试', ToastAndroid.SHORT);
 
 			}
 		}).bind(this), (error) => {
@@ -132,7 +132,7 @@ export default class UserDetail extends PureComponent {
 					user
 				})
 			} else {
-				ToastAndroid.show('获取用户信息失败', ToastAndroid.SHORT);
+				tools.showToast('获取用户信息失败', ToastAndroid.SHORT);
 			}
 		}, (error) => {
 			dispatch(hideLoading());
@@ -173,13 +173,13 @@ export default class UserDetail extends PureComponent {
 			friendId:user.id
 		}).then((result) => {
 			if (result.ok) {
-				ToastAndroid.show('删除成功', ToastAndroid.SHORT);
+				tools.showToast('删除成功', ToastAndroid.SHORT);
 				friendStore.fetchMyFriendList()
 				Actions.pop()
 				let {friendNickMap} = friendStore
 				delete friendNickMap[user.id]
 			} else {
-				ToastAndroid.show('删除失败', ToastAndroid.SHORT);
+				tools.showToast('删除失败', ToastAndroid.SHORT);
 
 
 			}

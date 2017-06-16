@@ -56,11 +56,11 @@ export default class RmarkSet extends PureComponent {
 
         }).then(((result) => {
             if (result.ok) {
-                ToastAndroid.show('修改成功',ToastAndroid.SHORT);
+                tools.showToast('修改成功',ToastAndroid.SHORT);
                 friendStore.fetchMyFriendList()
                 Actions.friend();
             } else {
-                ToastAndroid.show('发送申请失败，请重试',ToastAndroid.SHORT);
+                tools.showToast('发送申请失败，请重试',ToastAndroid.SHORT);
             }
         }).bind(this), (error) => {
 

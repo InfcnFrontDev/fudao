@@ -81,10 +81,10 @@ export default class FriendApply extends PureComponent {
 		}).then(((result) => {
 
 			if (result.ok) {
-				ToastAndroid.show(''+result.obj+'', ToastAndroid.SHORT);
+				tools.showToast(''+result.obj+'');
 				Actions.friend();
 			} else {
-				ToastAndroid.show('发送申请失败，请重试',ToastAndroid.SHORT);
+				tools.showToast('发送申请失败，请重试');
 			}
 		}).bind(this), (error) => {
 			//dispatch(hideLoading());

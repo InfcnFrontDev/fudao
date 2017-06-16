@@ -5,7 +5,7 @@ import ScrollableTabView from "react-native-scrollable-tab-view";
 import TabBar from "./components/TabBar";
 import Home from "../home/Home";
 import Article from "../article/Article";
-import Dynamic from "../../views/dynamic/Dynamic";
+// import Dynamic from "../../views/dynamic/Dynamic";
 import My from "../../views/my/My";
 
 const tabTitles = [
@@ -18,7 +18,8 @@ const tabSelectedIcon = [
 	'ios-home', 'ios-list-box', 'ios-compass', 'ios-person'
 ];
 const tabComponents = [
-	Home, Article, Dynamic, My
+	// Home, Article, Dynamic, My
+	Home, Article, Article, My
 ];
 
 /**
