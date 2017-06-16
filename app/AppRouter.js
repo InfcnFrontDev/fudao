@@ -28,9 +28,9 @@ import Settings from "./views/settings/Settings";
 import Disease from "./views/disease/Disease";
 import DiseaseDetail from "./views/disease/DiseaseDetail";
 import Energy from "./views/energy/Energy";
-// import NewDynamic from "./views/dynamic/NewDynamic";
-// import DynamicDetail from "./views/dynamic/DynamicDetail";
-// import DynamicPicture from "./views/dynamic/DynamicPicture";
+import NewDynamic from "./views/dynamic/NewDynamic";
+import DynamicDetail from "./views/dynamic/DynamicDetail";
+import DynamicPicture from "./views/dynamic/DynamicPicture";
 import MenuDetail from "./views/disease/components/MenuDetail";
 import MenuKinds from "./views/disease/components/MenuKinds";
 import Shop from "./views/disease/components/Shop";
@@ -146,9 +146,9 @@ export default class AppRouter extends PureComponent {
 					<Scene key="health" component={Health} hideNavBar/>
 
 					{/*动态*/}
-					{/*<Scene key="newDynamic" component={NewDynamic} title="新动态" hideNavBar/>*/}
-					{/*<Scene key="dynamicDetail" component={DynamicDetail} title="动态详情" hideNavBar/>*/}
-					{/*<Scene key="dynamicPicture" component={DynamicPicture} title="动态图片" hideNavBar/>*/}
+					<Scene key="newDynamic" component={NewDynamic} title="新动态" hideNavBar/>
+					<Scene key="dynamicDetail" component={DynamicDetail} title="动态详情" hideNavBar/>
+					<Scene key="dynamicPicture" component={DynamicPicture} title="动态图片" hideNavBar/>
 
 					{/*情绪*/}
 					<Scene key="emotion" component={Emotion} title="情绪" hideNavBar />
