@@ -3342,9 +3342,28 @@ react-native-alphabetlistview@0.2.0:
   dependencies:
     merge "^1.2.0"
 
+react-native-barcode-scanner-universal@^1.0.5:
+  version "1.0.5"
+  resolved "http://registry.npm.taobao.org/react-native-barcode-scanner-universal/download/react-native-barcode-scanner-universal-1.0.5.tgz#8f6234e3e3d53c15aa115ae2798ffed4e4ed6e14"
+  dependencies:
+    react-native-barcodescanner cpunion/react-native-barcodescanner#patch-1
+    react-native-camera lwansbrough/react-native-camera#bff819c574eb60a1ffdb664aa2b03d9d15c57c28
+
 react-native-barcodescanner@^3.1.1:
   version "3.1.1"
   resolved "http://registry.npm.taobao.org/react-native-barcodescanner/download/react-native-barcodescanner-3.1.1.tgz#99cdc4e89caac8ac6d5fd844fb6b72b9c4485928"
+
+react-native-barcodescanner@cpunion/react-native-barcodescanner#patch-1:
+  version "1.0.1"
+  resolved "https://codeload.github.com/cpunion/react-native-barcodescanner/tar.gz/48da81b073059e65442209cb5df80aef0af89f47"
+
+react-native-camera@^0.6.0:
+  version "0.6.0"
+  resolved "http://registry.npm.taobao.org/react-native-camera/download/react-native-camera-0.6.0.tgz#dd2760b7857d660761c78f2da575b494fdc8dcb5"
+
+react-native-camera@lwansbrough/react-native-camera#bff819c574eb60a1ffdb664aa2b03d9d15c57c28:
+  version "0.3.8"
+  resolved "https://codeload.github.com/lwansbrough/react-native-camera/tar.gz/bff819c574eb60a1ffdb664aa2b03d9d15c57c28"
 
 react-native-check-box@1.0.4:
   version "1.0.4"
