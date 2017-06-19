@@ -629,7 +629,7 @@ babel-plugin-transform-es3-property-literals@^6.5.0, babel-plugin-transform-es3-
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-exponentiation-operator@^6.24.1, babel-plugin-transform-exponentiation-operator@^6.5.0:
+babel-plugin-transform-exponentiation-operator@^6.5.0:
   version "6.24.1"
   resolved "http://registry.npm.taobao.org/babel-plugin-transform-exponentiation-operator/download/babel-plugin-transform-exponentiation-operator-6.24.1.tgz#2ab0c9c7f3098fa48907772bb813fe41e8de3a0e"
   dependencies:
@@ -726,12 +726,6 @@ babel-preset-es2015-node@^6.1.1:
     babel-plugin-transform-es2015-sticky-regex "6.x"
     babel-plugin-transform-es2015-unicode-regex "6.x"
     semver "5.x"
-
-babel-preset-es2016@^6.22.0:
-  version "6.24.1"
-  resolved "http://registry.npm.taobao.org/babel-preset-es2016/download/babel-preset-es2016-6.24.1.tgz#f900bf93e2ebc0d276df9b8ab59724ebfd959f8b"
-  dependencies:
-    babel-plugin-transform-exponentiation-operator "^6.24.1"
 
 babel-preset-fbjs@^1.0.0:
   version "1.0.0"
@@ -3276,6 +3270,10 @@ punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
+qr.js@0.0.0:
+  version "0.0.0"
+  resolved "http://registry.npm.taobao.org/qr.js/download/qr.js-0.0.0.tgz#cace86386f59a0db8050fa90d9b6b0e88a1e364f"
+
 qs@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-4.0.0.tgz#c31d9b74ec27df75e543a86c78728ed8d4623607"
@@ -3344,9 +3342,28 @@ react-native-alphabetlistview@0.2.0:
   dependencies:
     merge "^1.2.0"
 
-react-native-baidu-map@0.6.0:
+react-native-barcode-scanner-universal@^1.0.5:
+  version "1.0.5"
+  resolved "http://registry.npm.taobao.org/react-native-barcode-scanner-universal/download/react-native-barcode-scanner-universal-1.0.5.tgz#8f6234e3e3d53c15aa115ae2798ffed4e4ed6e14"
+  dependencies:
+    react-native-barcodescanner cpunion/react-native-barcodescanner#patch-1
+    react-native-camera lwansbrough/react-native-camera#bff819c574eb60a1ffdb664aa2b03d9d15c57c28
+
+react-native-barcodescanner@^3.1.1:
+  version "3.1.1"
+  resolved "http://registry.npm.taobao.org/react-native-barcodescanner/download/react-native-barcodescanner-3.1.1.tgz#99cdc4e89caac8ac6d5fd844fb6b72b9c4485928"
+
+react-native-barcodescanner@cpunion/react-native-barcodescanner#patch-1:
+  version "1.0.1"
+  resolved "https://codeload.github.com/cpunion/react-native-barcodescanner/tar.gz/48da81b073059e65442209cb5df80aef0af89f47"
+
+react-native-camera@^0.6.0:
   version "0.6.0"
-  resolved "http://registry.npm.taobao.org/react-native-baidu-map/download/react-native-baidu-map-0.6.0.tgz#cb4937181e8e0cd2125d347a5b87ca13971647dd"
+  resolved "http://registry.npm.taobao.org/react-native-camera/download/react-native-camera-0.6.0.tgz#dd2760b7857d660761c78f2da575b494fdc8dcb5"
+
+react-native-camera@lwansbrough/react-native-camera#bff819c574eb60a1ffdb664aa2b03d9d15c57c28:
+  version "0.3.8"
+  resolved "https://codeload.github.com/lwansbrough/react-native-camera/tar.gz/bff819c574eb60a1ffdb664aa2b03d9d15c57c28"
 
 react-native-check-box@1.0.4:
   version "1.0.4"
@@ -3359,6 +3376,14 @@ react-native-chooser@1.4.0:
 react-native-communications@2.1.1:
   version "2.1.1"
   resolved "http://registry.npm.taobao.org/react-native-communications/download/react-native-communications-2.1.1.tgz#ff6f917c305e6d3fa935a89908aea5dc39b247d4"
+
+react-native-custom-action-sheet@0.0.11:
+  version "0.0.11"
+  resolved "http://registry.npm.taobao.org/react-native-custom-action-sheet/download/react-native-custom-action-sheet-0.0.11.tgz#9272ad018c7846880933289728fce7ac3f72c289"
+
+react-native-dialog@^1.0.7:
+  version "1.0.7"
+  resolved "http://registry.npm.taobao.org/react-native-dialog/download/react-native-dialog-1.0.7.tgz#5be6b84c47e1f7843555b9c6f0b516a89f5b06e2"
 
 react-native-dialogs@0.0.19:
   version "0.0.19"
@@ -3459,16 +3484,15 @@ react-native-picker@4.0.18:
   version "4.0.18"
   resolved "http://registry.npm.taobao.org/react-native-picker/download/react-native-picker-4.0.18.tgz#cd75244bb7819e29c2910171120e62be8bf690fb"
 
-react-native-popup-dialog@0.5.19:
-  version "0.5.19"
-  resolved "http://registry.npm.taobao.org/react-native-popup-dialog/download/react-native-popup-dialog-0.5.19.tgz#7df9b2af04c0ec6c2d63c15c0f3a05ffbdc3fd92"
-  dependencies:
-    babel-preset-es2016 "^6.22.0"
-    babel-preset-react-native "^1.9.1"
-
 react-native-pull@2.0.2:
   version "2.0.2"
   resolved "http://registry.npm.taobao.org/react-native-pull/download/react-native-pull-2.0.2.tgz#15264a737bcf56debd4bacaa2705254d9ef1b345"
+
+react-native-qrcode@^0.2.3:
+  version "0.2.3"
+  resolved "http://registry.npm.taobao.org/react-native-qrcode/download/react-native-qrcode-0.2.3.tgz#cce06c5a8509c1f55a18d79053ace6fa0cedb376"
+  dependencies:
+    qr.js "0.0.0"
 
 react-native-router-flux@3.37.0:
   version "3.37.0"

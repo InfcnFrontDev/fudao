@@ -20,7 +20,7 @@ export default class Settings extends PureComponent {
 				<Header {...this.props}/>
 				<Content gray>
 					<List>
-						<ListItem last>
+						<ListItem last style={{borderBottomWidth:0}}>
 							<Body>
 							<Text>是否推送</Text>
 							</Body>
@@ -32,7 +32,7 @@ export default class Settings extends PureComponent {
 					</List>
 					<Separator/>
 					<List>
-						<ListItem last onPress={this.quitAlert.bind(this)}>
+						<ListItem last onPress={this.quitAlert.bind(this)} style={{borderBottomWidth:0}}>
 							<Body style={{alignItems: 'center'}}>
 							<Text>退出</Text>
 							</Body>

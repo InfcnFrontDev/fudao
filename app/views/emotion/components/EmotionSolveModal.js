@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {View, Image, TouchableHighlight,ScrollView,Platform,TouchableOpacity} from "react-native";
-import {Text} from "native-base";
+import {Text,Button,Icon} from "native-base";
 import ScrollableTabView, {DefaultTabBar} from "react-native-scrollable-tab-view";
 import {Modal} from "../../../components/index";
 import ImageSolve from "./ImageSolve";
@@ -51,15 +51,15 @@ export default class EmotionSolveModal extends PureComponent {
 		return (
 			<Modal ref={(e)=>this._modal = e} visible={visible} transparent>
 				{emotion && <View style={styles.container}>
-					{
-						Platform.OS=='ios'?(
-							<TouchableOpacity
-								onPress={() => this.hide()}
-								style={styles.closeButton}>
-								<Text style={{textAlign:'right'}}> x </Text>
-							</TouchableOpacity>
-						):(null)
-					}
+					<View style={styles.header_close}>
+						<View style={{width:25}}>
+							<Button transparent
+									onPress={() => this.hide()}
+									style={styles.closeButton}>
+								<Icon name="close" style={{color:'#FFF', fontSize: 20}}/>
+							</Button>
+						</View>
+					</View>
 					<View style={styles.View}>
 						<View style={styles.emotionBox}>
 							<Image source={emotion.img} style={{width:50,height:60}}/>
@@ -195,13 +195,25 @@ const styles = {
 		right: 0,
 	},
 	closeButton: {
-		backgroundColor: '#69769C',
-		// justifyContent: 'flex-end',
-		// width: 24,
-		paddingRight:20,
-		width: theme.deviceWidth * 0.9,
+		backgroundColor: '#C8C8C8',
+		justifyContent: 'center',
+		borderRadius: 12,
+		width: 24,
 		height: 24,
 		paddingLeft: 0,
+		paddingRight: 0,
+	},
+	header_close: {
+		position:'absolute',
+		top:8,
+		right:8,
+		// paddingLeft: 10,
+		// paddingTop: 8,
+		// // paddingBottom: 10,
+		// paddingRight: 6,
+		flexDirection: 'row',
+		justifyContent:'flex-end',
+		zIndex:99
 	},
 };
 

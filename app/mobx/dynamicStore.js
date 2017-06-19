@@ -6,12 +6,14 @@ import Realm from "realm";
 import {Actions} from "react-native-router-flux";
 import schema from "../realm/schema.js";
 import userStore from "./userStore";
-var callB = ()=>{}
+var callB = ()=> {
+}
 
 class DynamicStore {
     @observable dynamicList = [];
     @observable imgList = [];
     @observable imgUpload = [];
+    @observable changeImg = true;
     @observable info = {};
     @observable page = 1;
     @observable refresh = false;
@@ -28,7 +30,7 @@ class DynamicStore {
     fetchDynamicList(options, callback) {
         this.nowShow = "";
         if (options.firstLoad) {
-            callB=callback;
+            callB = callback;
             this.fetchData((res, all) => {
 
                 this.dynamicList = all.slice(0, 5);
@@ -313,6 +315,7 @@ class DynamicStore {
 
     @action
     uploadImg(uri) {
+        // for(var a)
         let source = {uri: uri};
         this.imgList.push(source);
         this.right = '上传中';
@@ -333,6 +336,13 @@ class DynamicStore {
     }
 
     @action
+    delImg(i) {
+        this.imgList.splice(i, 1);
+        this.imgUpload.splice(i, 1);
+        this.changeImg=!this.changeImg;
+    }
+
+    @action
     dynamicDetail(info) {
         this.info = info;
     }
@@ -340,7 +350,7 @@ class DynamicStore {
     @action
     clearImgList() {
         this.imgList = [];
-		this.imgUpload=[];
+        this.imgUpload = [];
     }
 
 

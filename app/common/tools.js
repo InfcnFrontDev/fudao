@@ -32,9 +32,11 @@ const tools = {
 	},
 
 	showDialog(options){
-		let dialog = new DialogAndroid();
-		dialog.set(options);
-		dialog.show();
+		if(Platform.OS=='android') {
+			let dialog = new DialogAndroid();
+			dialog.set(options);
+			dialog.show();
+		}
 	},
 
 	/**

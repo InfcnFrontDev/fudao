@@ -23,7 +23,7 @@ export default class Feedback extends PureComponent {
                         <View style={styles.TextBox}>
                             <TextInput
                                 value={this.state.feed}
-                                style={{ textAlignVertical:"top"}}
+                                style={{ textAlignVertical:"top",height:160,}}
                                 underlineColorAndroid="transparent"
                                 placeholder={"您的意见是我们进步的动力！"}
                                 multiline={true}

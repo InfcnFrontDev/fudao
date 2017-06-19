@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {TouchableHighlight, Dimensions, Image, WebView} from "react-native";
+import {TouchableHighlight, Dimensions, Image, WebView,Platform} from "react-native";
 import {Actions} from "react-native-router-flux";
 import {Right, Text, View, Button, Icon} from "native-base";
 import {Container, Content} from "../../components/index";
@@ -52,7 +52,7 @@ export default class Home extends PureComponent {
 					height: 60,
 					backgroundColor: 'rgba(225,225,225,0.2)',
 					flexDirection: 'row',
-
+					marginTop:Platform.OS=='ios'?20:0
 				}}>
 					<View style={{flexDirection: 'column', justifyContent: 'center'}}>
 						<Button transparent onPress={()=> Actions.sideBar()}>

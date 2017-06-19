@@ -60,6 +60,7 @@ const styles = {
         right: 20,
         opacity: 1,
         flex: 1,
+        overflow:'hidden'
     },
     header: {
         paddingLeft: 10,

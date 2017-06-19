@@ -70,6 +70,7 @@ export default class FriendApply extends PureComponent {
 	_addApplyFriend() {
 		let {friend} = this.props;
 		let {myIntro, friendRemark} = this.state;
+		console.log(friend.id+"+"+myIntro+"+"+friendRemark)
 
 		// 申请加为好友
 
@@ -78,11 +79,12 @@ export default class FriendApply extends PureComponent {
 			introduce: myIntro,
 			friendRemark: friendRemark,
 		}).then(((result) => {
+
 			if (result.ok) {
-				ToastAndroid.show('已发送申请', ToastAndroid.SHORT);
-				Actions.pop();
+				tools.showToast(''+result.obj+'');
+				Actions.friend();
 			} else {
-				ToastAndroid.show('发送申请失败，请重试',ToastAndroid.SHORT);
+				tools.showToast('发送申请失败，请重试');
 			}
 		}).bind(this), (error) => {
 			//dispatch(hideLoading());

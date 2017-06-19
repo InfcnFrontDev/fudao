@@ -52,11 +52,11 @@ class FriendList extends PureComponent {
 									<Thumbnail style={{width: 50, height: 50}} square
 											   source={{uri:urls.getImage(f.photo, 250, 250)}}/>
 								</Left>
-								<Body>
+								<Body  style={{borderBottomWidth:0}}>
 								<Text>{f.friendremark}</Text>
 								<Text note>{f.phone}</Text>
 								</Body>
-								<Right style={{justifyContent:'center'}}>
+								<Right style={{justifyContent:'center',borderBottomWidth:0}}>
 									<Icon name="ios-arrow-forward"/>
 								</Right>
 							</ListItem>

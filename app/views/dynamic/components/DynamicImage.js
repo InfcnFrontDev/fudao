@@ -34,6 +34,8 @@ const styles = {
         marginRight: 7,
         width: 78,
         height: 78,
+        marginBottom:3,
+        marginTop:2,
     },
     allImage: {
         flexDirection: 'row',

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.beefe.picker.PickerViewPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -36,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNDeviceInfo(),
+            new RCTCameraPackage(),
             new BaiduMapPackage(getApplicationContext()),
             new PickerViewPackage(),
             new ImagePickerPackage(),

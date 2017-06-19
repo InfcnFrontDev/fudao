@@ -26,6 +26,7 @@ class DetailsModal extends PureComponent {
 
 
     render() {
+        console.log("hgjkfaghsdjkfdhskjfdhsakfh")
         let {visible,text} = this.state;
         let data=JSON.parse(text);
 let mol=(null);
@@ -53,17 +54,14 @@ let mol=(null);
             >
                 <View style={styles.opacityView}/>
                 <View style={styles.content}>
-                    <View style={styles.header}>
 
-                        <View style={{width:25}}>
                             <Button
                                 onPress={() => this.hide()}
                                 style={styles.closeButton}>
-                                <Icon name="close" style={{color:'#FFF', fontSize: 20}}/>
+                                <Icon name="close" style={{color:'#FFF', fontSize: 20,}}/>
                             </Button>
-                        </View>
-                    </View>
-                    <View style={{width:300,height:500}}>
+
+                    <View style={{height:500}}>
                         {mol}
                     </View>
 
@@ -117,8 +115,11 @@ const styles = {
         opacity: 1,
         flex: 1,
         flexDirection: 'column',
+        overflow:'hidden'
     },
     header: {
+        borderRadius: 3,
+        height: 30,
         paddingLeft: 10,
         paddingTop: 10,
         paddingBottom: 10,
@@ -136,6 +137,7 @@ const styles = {
         height: 24,
         paddingLeft: 0,
         paddingRight: 0,
+        margin:10,
         zIndex:100
     },
 };

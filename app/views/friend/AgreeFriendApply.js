@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, Separator} from "../../components/index";
 import {Text, ListItem, Item, Input,Button,Right} from "native-base";
+import friendStore from "../../mobx/friendStore";
 /*import {fetchNewFriendList, fetchMyFriendList} from "../actions/friend";
 import {request, urls, toast} from "../../utils/index";*/
 
@@ -65,10 +66,9 @@ export default class AgreeFriendApply extends PureComponent {
 			friendRemark: friendRemark,
 		}).then(((result) => {
 			if (result.ok) {
-				alert('已发送');
 				// 返回上一页
-				Actions.pop();
-
+				Actions.friend();
+				friendStore.fetchMyFriendList()
 				// 刷新新朋友列表, 我的好友列表
 				//this.refreshFriendList();
 

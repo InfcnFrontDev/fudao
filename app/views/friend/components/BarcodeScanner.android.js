@@ -33,7 +33,8 @@ export default class BarcodeScannerApp extends PureComponent {
                         notExist: false
                     })
                     Actions.userDetail({
-                        userId: result.obj.id
+                        userId: result.obj.id,
+                        from:'sao'
                     })
                 } else {
                     this.setState({

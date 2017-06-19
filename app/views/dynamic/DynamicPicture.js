@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {StyleSheet, View, Text, ToastAndroid, TouchableHighlight, TouchableOpacity, Image} from 'react-native'
+import {StyleSheet, View, Text, ToastAndroid, TouchableHighlight, TouchableOpacity, Image,Platform} from 'react-native'
 import {Actions} from "react-native-router-flux";
 import Swiper from 'react-native-swiper'
 var images = [];
@@ -14,14 +14,24 @@ export default class DynamicPicture extends PureComponent {
     render() {
         return (
             <View style={{backgroundColor: '#000'}}>
-                <Swiper
-                    style={{flex: 1}}
-                    paginationStyle={{bottom: 110}}
-                    loop={false}
-                    index={this.props.i}
-                    dot={<View style={styles.dot}></View>}
-                    activeDot={<View style={styles.activeDot}></View>}
+                {/*<Swiper*/}
+                {/*style={{flex: 1}}*/}
+                {/*paginationStyle={{bottom: 110}}*/}
+                {/*loop={false}*/}
+                {/*index={this.props.i}*/}
+                {/*dot={<View style={styles.dot}></View>}*/}
+                {/*activeDot={<View style={styles.activeDot}></View>}*/}
+                {/*>*/}
+                {/*{this.props.flag ? this.renderOneImg() : this.renderImg()}*/}
+                {/*</Swiper>*/}
+                <Swiper style={styles.wrapper}
+                        loop={false}
+                        paginationStyle={Platform.OS=='ios'?{}:{bottom: 110}}
+                        dot={<View style={styles.dot}></View>}
+                        index={this.props.i}
+                        activeDot={<View style={styles.activeDot}></View>}
                 >
+                    {/*{this.renderImg()}*/}
                     {this.props.flag ? this.renderOneImg() : this.renderImg()}
                 </Swiper>
             </View>
@@ -61,11 +71,12 @@ export default class DynamicPicture extends PureComponent {
     }
 }
 
-const styles = {
+var styles = StyleSheet.create({
+
     container: {
         flexGrow: 1
     },
-    dot :{
+    dot: {
         width: 8,
         height: 8,
         backgroundColor: 'gray',
@@ -73,12 +84,36 @@ const styles = {
         marginLeft: 3,
         marginRight: 3
     },
-    activeDot:{
+    activeDot: {
         width: 8,
         height: 8,
         backgroundColor: 'orange',
         borderRadius: 4,
         marginLeft: 3,
         marginRight: 3
-    }
-}
+    },
+
+})
+
+//
+// const styles = {
+//     container: {
+//         flexGrow: 1
+//     },
+//     dot :{
+//         width: 8,
+//         height: 8,
+//         backgroundColor: 'gray',
+//         borderRadius: 4,
+//         marginLeft: 3,
+//         marginRight: 3
+//     },
+//     activeDot:{
+//         width: 8,
+//         height: 8,
+//         backgroundColor: 'orange',
+//         borderRadius: 4,
+//         marginLeft: 3,
+//         marginRight: 3
+//     }
+// }
