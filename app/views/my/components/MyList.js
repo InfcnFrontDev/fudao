@@ -1,10 +1,16 @@
 import React, {PureComponent} from "react";
 import {Actions} from "react-native-router-flux";
+import {observer} from "mobx-react/native";
+import {Alert} from 'react-native';
 import {View, Icon, Left, Right, Body, Text, ListItem} from "native-base";
+import DeviceInfo from 'react-native-device-info';
+import UserStore from "../../../mobx/userStore";
+
 
 /**
  * my list menu
  */
+@observer
 export default class MyList extends PureComponent {
 
 	render() {
@@ -14,31 +20,43 @@ export default class MyList extends PureComponent {
 					icon: 'ios-list-box-outline',
 					text: '基本信息',
 					bordered: true,
-					route: 'baseInfo'
+					route: 'baseInfo',
+					type:1
 				})}
 				{this.renderItem({
 					icon: 'ios-stopwatch-outline',
 					text: '体检信息',
 					bordered: true,
-					route: 'medicalExamination'
+					route: 'medicalExamination',
+					type:1
 				})}
 				{this.renderItem({
 					icon: 'ios-film-outline',
 					text: '我的记录',
 					bordered: true,
-					route: 'record'
+					route: 'record',
+					type:1
 				})}
 				{this.renderItem({
 					icon: 'ios-create-outline',
 					text: '意见反馈',
 					bordered: true,
-					route: 'feedback'
+					route: 'feedback',
+					type:1
+				})}
+				{this.renderItem({
+				icon: 'ios-create-outline',
+				text: '版本信息',
+				bordered: true,
+				route: 'feedback',
+				type:2
 				})}
 				{this.renderItem({
 					icon: 'ios-information-circle-outline',
 					text: '关于福道',
 					bordered: false,
-					route: 'about'
+					route: 'about',
+					type:1
 				})}
 			</View>
 		)
@@ -46,8 +64,9 @@ export default class MyList extends PureComponent {
 
 
 	renderItem(item) {
+		let version= config.versionName;
 		return (
-			<ListItem icon onPress={()=> Actions[item.route]()}>
+			<ListItem icon onPress={item.type==1?()=> Actions[item.route]():()=>this.update()}>
 				<Left>
 					<Icon name={item.icon}/>
 				</Left>
@@ -55,6 +74,7 @@ export default class MyList extends PureComponent {
 				<Text style={styles.listText}>{item.text}</Text>
 				</Body>
 				<Right style={item.bordered ? {} : {borderBottomWidth: 0}}>
+					{item.type==1?null:<Text note>{version}</Text>}
 					<Icon name="ios-arrow-forward"/>
 				</Right>
 			</ListItem>
@@ -64,6 +84,11 @@ export default class MyList extends PureComponent {
 	shouldComponentUpdate() {
 		return false
 	}
+	update() {
+		//检测版本信息
+		UserStore.checkVersion('click');
+	}
+
 }
 
 const styles = {

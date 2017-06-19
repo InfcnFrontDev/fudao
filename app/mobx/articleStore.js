@@ -22,5 +22,5 @@ class ArticleStore {
 		return this.articleColumnList.length == 0 && this.errorMsg == ''
 	}
 }
-const articleStore = new ArticleStore()
+const articleStore = new ArticleStore();
 export default articleStore
