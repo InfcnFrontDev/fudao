@@ -18,21 +18,23 @@ import weatherStore from "../../mobx/weatherStore";
  */
 @observer
 export default class Home extends PureComponent {
+	constructor(props){
+		super(props);
+		this.state = {
+			modalVisible: false,
+			weather: '',
+			wendu: '',
+			img: '1',
+			status: true
+		};
 
-	state = {
-		modalVisible: false,
-		wendu: '',
-		weather: '',
-		img: '1',
-		status: true
-	};
-
+	}
 	componentWillMount() {
 		positionStore.fetchCurrentPosition();
-
 		let city = positionStore.currentPosition.city;
 		weatherStore.fetchCurrentWeather(city);
 		weatherStore.fetchPm25(city);
+		this.interval();
 	}
 
 
@@ -151,6 +153,14 @@ export default class Home extends PureComponent {
 
 	setModalVisible(visible) {
 		this.setState({modalVisible: visible});
+	}
+	interval(){
+		let self=this;
+		let number=10;
+		userStore.checkVersion()
+		self.timer=setInterval(function(){
+			userStore.checkVersion()
+		},600000)
 	}
 }
 

@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {Right, Button, Left,Text} from "native-base";
+import {Right, Button, Left, Text} from "native-base";
 import {Image, View, DeviceEventEmitter, TextInput, TouchableHighlight, TouchableOpacity, Alert} from 'react-native'
 import ImagePicker from 'react-native-image-picker';
 import {Container, Header, Content} from "../../components/index";
@@ -22,7 +22,7 @@ export default class NewDynamic extends PureComponent {
     }
 
     render() {
-        let {right,imgList} = dynamicStore;
+        let {right, imgList,imgUpload,changeImg} = dynamicStore;
         return (
             <Container>
                 <Header  {...this.props} right={
@@ -42,14 +42,17 @@ export default class NewDynamic extends PureComponent {
                         }}
                         text={this.state.text}/>
                     <NewPicture
+                        changeImg = {changeImg}
                         imgArr={imgList}
-                        addImage={this.addImage.bind(this)}/>
+                        imgUpload={imgUpload}
+                        addImage={this.addImage.bind(this)}
+                        delImage={this.delImage.bind(this)}/>
                 </Content>
             </Container>
         )
     }
 
-    addImage(){
+    addImage() {
         const options = {
             title: '选择图片',
             cancelButtonTitle: '取消',
@@ -69,13 +72,24 @@ export default class NewDynamic extends PureComponent {
         });
     }
 
-    send(){
+    delImage(i){
+        // alert(JSON.stringify(list)+"**************"+JSON.stringify(upload))
+        Alert.alert('', '确定删除图片吗?', [
+            {text: '取消'},
+            {
+                text: '删除',
+                onPress: () => dynamicStore.delImg(i)
+            }
+        ])
+    }
+
+    send() {
         let {text} =this.state;
         // if (this.state.text||dynamicStore.renderPicture.length!=0) {
-        if (text||dynamicStore.imgList.length>0) {
+        if (text || dynamicStore.imgList.length > 0) {
             dynamicStore.addNewDynamic(text)
-        }else{
-            Alert.alert('','内容不能为空~~',[{text:'确定'}])
+        } else {
+            Alert.alert('', '内容不能为空~~', [{text: '确定'}])
         }
     }
 }

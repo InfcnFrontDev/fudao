@@ -1,25 +1,26 @@
 import {observable, runInAction, computed, action, reaction} from "mobx";
 import {Actions, ActionConst} from "react-native-router-flux";
-import {AsyncStorage} from "react-native";
+import {AsyncStorage,Alert,Linking,Platform} from "react-native";
 import {persist} from "mobx-persist";
 import hydrate from "../common/hydrate";
+import DeviceInfo from 'react-native-device-info';
 var Geolocation = require('Geolocation');
 
 
 class UserStore {
-	@observable hydrated = false
-	@persist @observable isLogin = false
-	@persist @observable phone = ''
-	@persist @observable password = ''
-	@persist @observable token = ''
-	@persist @observable lon = 116.391350
-	@persist @observable lat = 39.907723
+	@observable hydrated = false;
+	@persist @observable isLogin = false;
+	@persist @observable phone = '';
+	@persist @observable password = '';
+	@persist @observable token = '';
+	@persist @observable lon = 116.391350;
+	@persist @observable lat = 39.907723;
 	@observable position = {
 		name:'获取中...',
 		regionId:''
 	}
 	@persist('object') @observable loginUser = {};
-	@persist('object') @observable location = {}
+	@persist('object') @observable location = {};
 
 
 
@@ -29,7 +30,7 @@ class UserStore {
 		'obstetricalHistory': 'obstetrical_history',
 		'medicationHistory': 'medication_history',
 		'mentalState': 'mental_state',
-	}
+	};
 
 
 	@action
@@ -44,12 +45,12 @@ class UserStore {
 			// this.saveData();
 			callback();
 		})
-	}
+	};
 
 	@action
 	relogin = (callback) => {
 		this.login(this.phone, this.password, callback)
-	}
+	};
 
 	@action
 	fetchLoginUser = async() => {
@@ -65,7 +66,7 @@ class UserStore {
 					});
 				}
 		})
-	}
+	};
 	@action
 	fetchLoginUserBase = async() => {
 		let loginUser = await this._fetchLoginUser();
@@ -73,7 +74,7 @@ class UserStore {
 			this.loginUser = loginUser;
 
 		})
-	}
+	};
 	_login(phone, password) {
 		return new Promise(function (resolve, reject) {
 			request.getJson(urls.apis.USER_LOGIN, {
@@ -181,6 +182,69 @@ class UserStore {
 	logout() {
 		this.isLogin = false;
 	}
+	@action
+	checkVersion(flag) {
+		if(flag=="click"){
+			tools.showToast("正在检测版本信息...")
+			request.getJson(urls.pages.Version).then((data) => {
+				var version=config.versionCode;
+				if(parseInt(data.versionCode)>parseInt(version)){
+					Alert.alert(
+						'版本更新:',
+						"有新版本可以更新了哦",
+						[
+							{text: '稍后更新', onPress: () => null},
+							{text: '现在更新', onPress: () => this.updateVersion(data.url)},
+						]
+					)
+				}else{
+					tools.showToast('当前已是最新版本')
+				}
+
+
+			}, (error) => {
+
+			})
+		}else{
+			request.getJson(urls.pages.Version).then((data) => {
+				var version=config.versionCode;
+				if(parseInt(data.versionCode)>parseInt(version)){
+					Alert.alert(
+						'版本更新:',
+						"有新版本可以更新了哦",
+						[
+							{text: '稍后更新', onPress: () => null},
+							{text: '现在更新', onPress: () => this.updateVersion(data.url)},
+						]
+					)
+				}
+
+	})
+		}
+	}
+	@action
+	updateVersion(url) {
+					if (Platform.OS === 'ios') {
+						let uri = 'itmss://itunes.apple.com/app/id1146391680?mt=8';
+						Linking.canOpenURL(url).then(supported => {
+							if (!supported) {
+								/*return Linking.openURL('http://static.houfadoc.com/share/');*/
+							} else {
+								return Linking.openURL(uri);
+							}
+						}).catch(err => console.error('An error occurred', err));
+					} else {
+
+						Linking.canOpenURL(url).then(supported => {
+							if (!supported) {
+								/*return Linking.openURL('http://static.houfadoc.com/share/');*/
+							} else {
+								return Linking.openURL(url);
+							}
+						}).catch(err => console.error('An error occurred', err));
+					 }
+				}
+
 }
 
 

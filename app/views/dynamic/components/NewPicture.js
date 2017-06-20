@@ -6,10 +6,10 @@ import {View, Image, TouchableHighlight} from "react-native";
  */
 export default class NewPicture extends Component {
     render() {
-        var {imgArr,addImage} = this.props;
+        var {imgArr,addImage,delImage,imgUpload} = this.props;
         var item = imgArr.map((p, i) => {
             return (
-                <TouchableHighlight key={i}>
+                <TouchableHighlight key={i} onPress={()=>delImage(i)}>
                     <Image source={p} style={styles.addPicture}/>
                 </TouchableHighlight>
             )

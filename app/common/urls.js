@@ -5,8 +5,8 @@ const apiPath = 'http://103.254.113.10:9090/api/'; // 生产服务器（外网�
 // const apiPath = 'http://192.168.10.165:9090/api/'; // 生产服务器（内网）
 // web服务器地址
 // const webPath = 'http://103.254.113.11:9191/web/'; // 开发服务器（外网）
-// const webPath = 'http://192.168.10.69:9191/web/'; // 开发服务器（内网）
-const webPath = 'http://103.254.113.10:9090/web/'; // 生产服务器（外网）
+const webPath = 'http://192.168.10.69:9191/web/'; // 开发服务器（内网）
+// const webPath = 'http://103.254.113.10:9090/web/'; // 生产服务器（外网）
 // const webPath = 'http://192.168.10.165:9090/web/'; // 生产服务器（内网）
 //
 // 其他
@@ -60,6 +60,7 @@ const urls = {
         SELFDIAGNOSIS: webPath + 'selfDiagnosis.html',
         //商城
         SHOP: webPath + 'shop.html',
+        Version: webPath + 'apk/version.json',
     },
     /**
      *  接口
