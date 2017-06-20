@@ -42,12 +42,13 @@ export default class Header_ extends PureComponent {
 		}
 
 		return (
-			<Header>
+			<Header style={{backgroundColor:'transparent'}}>
 				{left}
 				{center}
 				{right}
 			</Header>
 		)
+
 	}
 }
 

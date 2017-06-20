@@ -127,7 +127,7 @@ export default class Home extends PureComponent {
 					<YunDongModal ref={(e)=>this._YunDongModal = e}/>
 
 				</Content>
-				<View style={{width: Dimensions.get('window').width, height: 107,}}>
+				<View style={{width: Dimensions.get('window').width, height:Platform.OS=='ios'?103: 107,}}>
 					<MyEnter />
 				</View>
 			</Container>

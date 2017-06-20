@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {Text, Button} from "native-base";
 import {Actions} from "react-native-router-flux";
-import {View, Image, ToastAndroid, DeviceEventEmitter, TouchableHighlight} from "react-native";
+import {View, Image, ToastAndroid, DeviceEventEmitter, TouchableHighlight,Platform} from "react-native";
 
 /**
  * 我的问题列表组件
@@ -18,7 +18,10 @@ export default class RelatedProductsAndServices extends PureComponent {
 
 	render() {
 		let {data} = this.props;
-		return (
+		if(Platform.OS=='ios'){
+			return null;
+		}
+		return  (
 			<View>
 				<View style={styles.titleView}>
 					<Text style={styles.titleText}>相关产品和服务</Text>

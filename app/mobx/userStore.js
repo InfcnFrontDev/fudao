@@ -188,7 +188,9 @@ class UserStore {
 			tools.showToast("正在检测版本信息...")
 			request.getJson(urls.pages.Version).then((data) => {
 				var version=config.versionCode;
+				alert(parseInt(data.versionCode)+"   ****  "+parseInt(version))
 				if(parseInt(data.versionCode)>parseInt(version)){
+
 					Alert.alert(
 						'版本更新:',
 						"有新版本可以更新了哦",
@@ -225,7 +227,7 @@ class UserStore {
 	@action
 	updateVersion(url) {
 					if (Platform.OS === 'ios') {
-						let uri = 'itmss://itunes.apple.com/app/id1146391680?mt=8';
+						let uri = 'itms-apps://itunes.apple.com/cn/app/ben-tu-dou/id1071376858?l=en&mt=8';
 						Linking.canOpenURL(url).then(supported => {
 							if (!supported) {
 								/*return Linking.openURL('http://static.houfadoc.com/share/');*/

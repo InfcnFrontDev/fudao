@@ -18,6 +18,7 @@ export default class AppNavigator extends PureComponent {
 				<Drawer ref={(ref) => this._drawer = ref}>
 					<StatusBar
 						hidden={false}
+						barStyle="light-content"
 						backgroundColor={theme.statusBarColor}/>
 					<AppRouter/>
 				</Drawer>

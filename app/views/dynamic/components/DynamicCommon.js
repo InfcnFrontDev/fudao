@@ -19,7 +19,7 @@ export default class DynamicCommon extends Component {
                 <TouchableHighlight style={styles.dynamicDetail} underlayColor='#fafafa'
                                     onPress={this._skipToDetail.bind(this)}>
                     <View>
-                        <Text style={styles.dynamicName}>{info.user.nickname||"用户"+info.user.id.substr(0,4)}</Text>
+                        <Text style={styles.dynamicName}>{info.user.nickname||"用户"+JSON.stringify(info.user.id).substr(0,4)}</Text>
                         <Text style={styles.dynamicContent}>{info.content}</Text>
                         <DynamicImage imagePath={info.path}/>
                     </View>

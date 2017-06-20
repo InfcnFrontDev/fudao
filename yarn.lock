@@ -3381,6 +3381,10 @@ react-native-custom-action-sheet@0.0.11:
   version "0.0.11"
   resolved "http://registry.npm.taobao.org/react-native-custom-action-sheet/download/react-native-custom-action-sheet-0.0.11.tgz#9272ad018c7846880933289728fce7ac3f72c289"
 
+react-native-device-info@^0.10.2:
+  version "0.10.2"
+  resolved "http://registry.npm.taobao.org/react-native-device-info/download/react-native-device-info-0.10.2.tgz#350cd68ed43839022ddea0a3a423439f16fa4fba"
+
 react-native-dialog@^1.0.7:
   version "1.0.7"
   resolved "http://registry.npm.taobao.org/react-native-dialog/download/react-native-dialog-1.0.7.tgz#5be6b84c47e1f7843555b9c6f0b516a89f5b06e2"

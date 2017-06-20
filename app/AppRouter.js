@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import {Platform} from "react-native";
 import {Router, Scene, Reducer} from "react-native-router-flux";
 import Index from "./views/index/Index";
 import Login from "./views/authentication/Login";
@@ -70,8 +71,8 @@ export default class AppRouter extends PureComponent {
 
 	render() {
 		return (
-			<Router createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)}>
-				<Scene key="root">
+			<Router hideNavBar={true} createReducer={this.reducerCreate.bind(this)} onExitApp={this.appExit.bind(this)} navigationState={{style:{height:0}}}>
+				<Scene key="root"  hideNavBar>
 
 					<Scene key="start" component={Start} title="启动页" hideNavBar initial/>
 
@@ -199,3 +200,10 @@ export default class AppRouter extends PureComponent {
 		return false
 	}
 }
+
+// const styles={
+// 	tabBarStyle:{
+// 		marginTop:Platform.OS==='android'?0:20
+// 	}
+//
+// }

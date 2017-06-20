@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Alert} from "react-native";
+import {Alert,Platform} from "react-native";
 import {Actions, ActionConst} from "react-native-router-flux";
 import {observer} from "mobx-react/native";
 import {Container, Header, Content, List, Separator} from "../../components/index";
@@ -19,17 +19,19 @@ export default class Settings extends PureComponent {
 			<Container>
 				<Header {...this.props}/>
 				<Content gray>
-					<List>
-						<ListItem last style={{borderBottomWidth:0}}>
-							<Body>
-							<Text>是否推送</Text>
-							</Body>
-							<Right>
-								<Switch value={isRecommend}
-										onValueChange={()=> settingsStore.isRecommend = !isRecommend}/>
-							</Right>
-						</ListItem>
-					</List>
+					{Platform.OS=='ios'?null:(
+						<List>
+							<ListItem last style={{borderBottomWidth:0}}>
+								<Body>
+								<Text>是否推送</Text>
+								</Body>
+								<Right>
+									<Switch value={isRecommend}
+											onValueChange={()=> settingsStore.isRecommend = !isRecommend}/>
+								</Right>
+							</ListItem>
+						</List>
+					)}
 					<Separator/>
 					<List>
 						<ListItem last onPress={this.quitAlert.bind(this)} style={{borderBottomWidth:0}}>

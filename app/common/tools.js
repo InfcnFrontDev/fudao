@@ -24,10 +24,14 @@ const tools = {
 	 * ToastAndroid.show
 	 * @param text
 	 */
-	showToast(text){
+	showToast(text,flag){
 		// Toast.showShortBottom(text)
 		if(Platform.OS=='android'){
 			ToastAndroid.show(text, ToastAndroid.SHORT);
+		}else{
+			if(flag){
+				alert(text)
+			}
 		}
 	},
 

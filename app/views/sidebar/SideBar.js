@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Image, TouchableOpacity} from "react-native";
+import {Image, TouchableOpacity,Platform} from "react-native";
 import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Grid, Col, Text, Icon, Button, View} from "native-base";
@@ -63,7 +63,7 @@ export default class SideBar extends PureComponent {
 		return (
 			<Container>
 				<Content>
-					<Grid>
+					<Grid style={{marginTop:Platform.OS=='ios'?20:0}}>
 						<Col style={styles.sidebar}>
 							<Button transparent
 									style={styles.tabButton}

@@ -24,7 +24,7 @@ class DynamicSupports extends Component {
                 } else {
                     return (
                         <Text key={i} style={styles.commentName}>
-                            , {p.nickname||"用户"+p.id.substr(0,4)}
+                            , {p.nickname||"用户"+JSON.stringify(p.id).substr(0,4)}
                         </Text>
                     )
                 }

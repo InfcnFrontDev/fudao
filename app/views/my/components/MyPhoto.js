@@ -63,6 +63,7 @@ const styles = {
 		justifyContent: 'center',
 		width: theme.deviceWidth + 3,
 		height: 180,
+		borderRadius:0,
 	},
 	myPhoto: {
 		width: 100,

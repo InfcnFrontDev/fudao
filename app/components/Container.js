@@ -5,7 +5,7 @@ export default  class Container extends PureComponent {
 
 	render() {
 		let {children, isTabPanel} = this.props,
-			width = theme.deviceWidth;
+			width = theme.deviceWidth+3;
 		if(Platform.OS=='ios'){
 			var height = theme.deviceHeight;
 		}else{
@@ -19,9 +19,9 @@ export default  class Container extends PureComponent {
 		return (
 
 			<Image source={require('../assets/bg/qing/1.jpg')}
-				   style={{width,height,alignSelf: "flex-end"}}>
+				   style={{width,height,alignSelf: "stretch"}}>
 				<Image source={require('../assets/bg/container.gif')}
-					   style={{width,height,alignSelf: "flex-end"}}>
+					   style={{width,height,alignSelf: "stretch"}}>
 					{children}
 				</Image>
 			</Image>
