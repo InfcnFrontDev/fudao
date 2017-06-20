@@ -42,7 +42,9 @@ export default class Home extends PureComponent {
 		let {currentPosition} = positionStore;
 		let {currentWeather} = weatherStore;
 
-		let imgStr = 'http://api.k780.com:88/upload/weather/d1/' + (currentWeather.weatid - 1) + '.png'
+		let weatid = currentWeather || currentWeather.weatid || 1;
+
+		let imgStr = 'http://api.k780.com:88/upload/weather/d1/' + (weatid - 1) + '.png'
 		let leftBtnStyle = Object.assign({}, styles.floatBtn, styles.leftBtn)
 			, rightBtnStyle = Object.assign({}, styles.floatBtn, styles.rightBtn);
 		return (
