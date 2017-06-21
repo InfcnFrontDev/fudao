@@ -5,7 +5,7 @@ import {Text} from "native-base";
 const tabImages = {
 	"饮食": [require('../../../assets/disease/yinshi.png'), require('../../../assets/disease/yinshi1.png')],
 	"起居": [require('../../../assets/disease/qiju.png'), require('../../../assets/disease/qiju1.png')],
-	"动": [require('../../../assets/disease/dong.png'), require('../../../assets/disease/dong1.png')],
+	"动": [require('../../../assets/disease/yinshi.png'), require('../../../assets/disease/dong1.png')],
 	"静": [require('../../../assets/disease/jing.png'), require('../../../assets/disease/jing1.png')],
 	"娱乐": [require('../../../assets/disease/xiuxian.png'), require('../../../assets/disease/xiuxian1.png')],
 }
@@ -57,6 +57,8 @@ const styles = {
 	tabs: {
 		flexDirection: 'row',
 		height: 50,
+		backgroundColor: '#8294B4',
+
 	},
 
 	tab: {

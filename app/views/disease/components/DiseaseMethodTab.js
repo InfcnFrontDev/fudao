@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {ScrollView, View, Image, ListView, TouchableOpacity} from "react-native";
+import {ScrollView, View, Image, ListView, TouchableOpacity,Platform} from "react-native";
 import {Text} from "native-base";
 import RelatedProductsAndServices from "./RelatedProductsAndServices";
 import {Actions} from "react-native-router-flux";
@@ -24,6 +24,7 @@ export default class DiseaseMethodTab extends PureComponent {
     }
 
     render() {
+        this.t = Platform.OS=='ios'?"\t":'\t\t';
         let {data} = this.props;
         return (
             <ScrollView>
@@ -37,8 +38,8 @@ export default class DiseaseMethodTab extends PureComponent {
     renderPrinciple0(data) {
         return (
             <View style={styles.principle}>
-                <Text style={styles.text}>{'\t\t宜食：' + data.suitable}</Text>
-                {data.fasting ? <Text style={styles.text}>{'\t\t忌食：' + data.fasting}</Text> : null}
+                <Text style={styles.text}>{this.t+'宜食：' + data.suitable}</Text>
+                {data.fasting ? <Text style={styles.text}>{this.t+'忌食：' + data.fasting}</Text> : null}
             </View>
         )
     }
@@ -47,13 +48,13 @@ export default class DiseaseMethodTab extends PureComponent {
         if(data.principle){
             return (
                 <View style={styles.principle}>
-                    <Text style={styles.text}>{'\t\t' + data.principle}</Text>
+                    <Text style={styles.text}>{this.t+ data.principle}</Text>
                 </View>
             )
         }else{
             return (
                 <View style={{marginTop: 20}}>
-                    <Text style={styles.text}>{'\t\t' + '内容更新中，敬请期待...'}</Text>
+                    <Text style={styles.text}>{this.t + '内容更新中，敬请期待...'}</Text>
                 </View>
             )
         }
