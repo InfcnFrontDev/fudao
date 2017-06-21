@@ -188,7 +188,7 @@ class UserStore {
 			tools.showToast("正在检测版本信息...")
 			request.getJson(urls.pages.Version).then((data) => {
 				var version=config.versionCode;
-				alert(parseInt(data.versionCode)+"   ****  "+parseInt(version))
+				// alert(parseInt(data.versionCode)+"   ****  "+parseInt(version))
 				if(parseInt(data.versionCode)>parseInt(version)){
 
 					Alert.alert(
