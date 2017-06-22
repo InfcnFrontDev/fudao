@@ -61,15 +61,16 @@ export default class DiseaseMethodTab extends PureComponent {
 
     }
 
-    clearNullArr(arr){
-        for(let i=0,len = arr.length;i<len;i++){
-            if(!arr[i]||arr[i]==''||arr[i] === undefined || arr[i] === null){
-                arr.splice(i,1);
-                len--;
-                i--;
-            }
-        }
-        return arr;
+
+    renderSuitable(data){
+        let arr = []
+        arr = data.staple.concat(data.dishes)
+        return (
+            arr.map((text, index) =>
+                <TouchableOpacity key={index} style={{height: 20}} onPress={() => this.onMethod0Press(text, arr)}>
+                    <Text style={styles.textLink}>{text + (index == arr.length-1 ? '。':'、')}</Text>
+                </TouchableOpacity>)
+        )
     }
 
     renderMethod0(methods) {
@@ -84,10 +85,7 @@ export default class DiseaseMethodTab extends PureComponent {
                                 <Text style={styles.text}>{'宜食：'}</Text>
                                 <View style={{flexDirection: 'row',flex: 1,flexWrap: 'wrap'}}>
                                     {
-                                        (self.clearNullArr(method.suitable)).map((text, index) =>
-                                            <TouchableOpacity key={index} style={{height: 20}} onPress={() => this.onMethod0Press(text, method.suitable)}>
-                                                <Text style={styles.textLink}>{text + (index == self.clearNullArr(method.suitable).length-1 ? '。':'、')}</Text>
-                                            </TouchableOpacity>)
+                                       this.renderSuitable(method.suitable)
                                     }
                                 </View>
 
