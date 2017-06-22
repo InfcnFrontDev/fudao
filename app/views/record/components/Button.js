@@ -8,7 +8,9 @@ const {
 const Button = (props) => {
 	return <TouchableOpacity
 		delayPressIn={0}
-		 // eslint-disable-line new-cap
+		disabled={props.disabled}
+
+		// eslint-disable-line new-cap
 		{...props}
 	>
 		{props.children}

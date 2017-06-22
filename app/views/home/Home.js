@@ -157,7 +157,17 @@ export default class Home extends PureComponent {
         } else if (data.substring(0, 4) == '获取运动') {
             this._YunDongModal.show(data.substring(4, data.length));
         } else {
-            this._groupSelectModal.show(data);
+            let obj = JSON.parse(data)
+            if(obj.type==0){
+                // alert(obj.threeCharacterClassic.split(',')[0])
+                Actions.menuKinds({
+                    idOrName: obj.threeCharacterClassic.split('，')[0],
+                    arr: obj.threeCharacterClassic.split('，')
+                })
+            }else{
+                this._groupSelectModal.show(data);
+
+            }
         }
 
     }
