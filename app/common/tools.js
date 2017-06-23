@@ -14,13 +14,6 @@ const tools = {
 	},
 
 	/**
-	 * 延迟加载
-	 */
-	delayLoad(callback){
-		setTimeout(callback, config.loadingDelayTime)
-	},
-
-	/**
 	 * ToastAndroid.show
 	 * @param text
 	 */

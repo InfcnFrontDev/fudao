@@ -8,7 +8,8 @@ export default class Content extends PureComponent {
 		super(props);
 		this.state = {
 			isLoading: props.delay
-		}
+		};
+		this.timer = null;
 	}
 
 	render() {
@@ -37,13 +38,19 @@ export default class Content extends PureComponent {
 	componentDidMount() {
 		let {isLoading} = this.state;
 		if (isLoading) {
-			tools.delayLoad(() => {
-				this.setState({
-					isLoading: false
-				})
-			})
+
+            this.timer = setTimeout(() => {
+                this.setState({
+                    isLoading: false
+                })
+            }, config.loadingDelayTime)
+
 		}
 	}
+
+    componentWillUnmount() {
+        this.timer && clearTimeout(this.timer);
+    }
 }
 
 Content.propTypes = {

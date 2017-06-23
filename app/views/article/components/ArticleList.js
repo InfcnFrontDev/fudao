@@ -23,8 +23,7 @@ export default class ArticleList extends Component {
 	_onFetch(page = 1, callback, options) {
 		let {label} = this.props;
 		request.getJson(urls.apis.ARTICLE_GETARTICLELIST, {
-			crowd: 'aged',
-			columnId: label,
+            columnId: label,
 			page
 		}).then((result) => {
 			if (page === result.obj.pageCount) {

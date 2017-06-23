@@ -11,6 +11,7 @@ import DetailsModal from "./components/DetailsModal";
 import TimeModal from "./components/TimeModal";
 import YunDongModal from "./components/YunDongModal";
 import weatherStore from "../../mobx/weatherStore";
+import articleStore from "../../mobx/articleStore";
 
 
 /**
@@ -34,12 +35,21 @@ export default class Home extends PureComponent {
     }
 
     componentDidMount(){
+        // 获取当前位置
         positionStore.fetchCurrentPosition();
-        this.interval();
+        // 检测版本更新
+        userStore.checkVersion();
+        // 防止Token过期
+        this.timer = setInterval(
+            () => { articleStore.fetchArticleColumnList() },
+            1000 * 60 * 10
+        );
     }
 
     componentWillUnmount() {
-        navigator.geolocation.clearWatch(this.watchID);
+        // 如果存在this.timer，则使用clearTimeout清空。
+        // 如果你使用多个timer，那么用多个变量，或者用个数组来保存引用，然后逐个clear
+        this.timer && clearInterval(this.timer);
     }
 
     render() {
@@ -183,16 +193,6 @@ export default class Home extends PureComponent {
     setModalVisible(visible) {
         this.setState({modalVisible: visible});
     }
-
-    interval() {
-        let self = this;
-        let number = 10;
-        userStore.checkVersion()
-        self.timer = setInterval(function () {
-            userStore.checkVersion()
-        }, 600000)
-    }
-
 }
 
 const styles = {

@@ -9,6 +9,7 @@ class ArticleStore {
 	fetchArticleColumnList() {
 		request.getJson(urls.apis.ARTICLE_GETARTICLECOLUMNLIST)
 			.then((result) => {
+				console.log(result);
 				if (result.ok) {
 					this.articleColumnList = result.obj
 				} else {
