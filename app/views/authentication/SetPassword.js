@@ -69,7 +69,7 @@ export default class SetPassword extends PureComponent {
             }).then((data)=>{
                 /*dispatch(hideLoading());*/
                     if(data.ok) {
-                        setTimeout(function() {
+                        this.timerOut = setTimeout(function() {
                            Actions['passwordSuccess']({phone:phone,password:password})
                         }, 1000);
                     }else{
@@ -81,6 +81,10 @@ export default class SetPassword extends PureComponent {
         }
 
 
+    }
+
+    componentWillUnmount(){
+        this.timerOut&&clearTimeout(this.timerOut)
     }
 }
 const styles={

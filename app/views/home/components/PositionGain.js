@@ -48,7 +48,7 @@ export default class PositionGain extends PureComponent {
 
 
 
-        setTimeout(function(){
+        this.timerOut = setTimeout(function(){
             if(userStore.lastPosition!=null){
                 return (
                     <View>
@@ -76,6 +76,9 @@ export default class PositionGain extends PureComponent {
 
     }
 
+    componentWillUnmount(){
+        this.timerOut&&clearTimeout(this.timerOut)
+    }
 
 }
 

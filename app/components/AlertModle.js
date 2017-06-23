@@ -89,7 +89,7 @@ class RadiuBox extends PureComponent {
         this.setState({
             checked: true
         });
-        setTimeout(()=>this.props.onRequestClose(this.props.label), 200)
+        this.timerOut = setTimeout(()=>this.props.onRequestClose(this.props.label), 200)
     }
 
     render() {
@@ -112,6 +112,11 @@ class RadiuBox extends PureComponent {
             </TouchableOpacity>
         );
     }
+
+    componentWillUnmount(){
+        this.timerOut&&clearTimeout(this.timerOut)
+    }
+
 }
 
 

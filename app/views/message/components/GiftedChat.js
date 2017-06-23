@@ -108,6 +108,7 @@ class GiftedChat extends React.Component {
 
   componentWillUnmount() {
     this.setIsMounted(false);
+    this.timerOut&&clearTimeout(this.timerOut)
   }
 
   componentWillReceiveProps(nextProps = {}) {
@@ -304,7 +305,7 @@ class GiftedChat extends React.Component {
     this.scrollToBottom();
 
     if (shouldResetInputToolbar === true) {
-      setTimeout(() => {
+      this.timerOut = setTimeout(() => {
         if (this.getIsMounted() === true) {
           this.setIsTypingDisabled(false);
         }

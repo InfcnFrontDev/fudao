@@ -15,7 +15,7 @@ export default class MyRecordDay extends PureComponent {
         super(props);
         this.state = {
             flag: 'day',
-            tip:false,
+            tip: false,
             nowDate: new Date(),
         }
         this.days = new Date(this.state.nowDate.getFullYear(), this.state.nowDate.getMonth() + 1, 0).getDate();
@@ -28,45 +28,48 @@ export default class MyRecordDay extends PureComponent {
         // alert(typeof (this.days-now));
         // this.days = new Date(this.state.nowDate.getFullYear(), this.state.nowDate.getMonth() + 1, 0).getDate();
 
-        let {nowDate,tip} = this.state
+        let {nowDate, tip} = this.state
         return (
             <View style={styles.tabView}>
                 <View style={styles.topView}>
                     <TouchableOpacity onPress={()=> {
-                        var pre = new Date(nowDate.getTime() - 24 * 60 * 60 * 1000*this.days);
-                        var t = new Date(pre.getFullYear(), pre.getMonth()+1, 0).getDate();
-                        var preDate  = new Date(nowDate.getTime() - 24 * 60 * 60 * 1000*t);
+                        var pre = new Date(nowDate.getTime() - 24 * 60 * 60 * 1000 * this.days);
+                        var t = new Date(pre.getFullYear(), pre.getMonth() + 1, 0).getDate();
+                        var preDate = new Date(nowDate.getTime() - 24 * 60 * 60 * 1000 * t);
                         this.setState({
                             nowDate: preDate,
-                            tip:true
+                            tip: true
                         })
-                        setTimeout(()=>{
+                        this.timerOut1 = setTimeout(()=> {
                             that.setState({
-                                tip:false
+                                tip: false
                             })
-                        },100)
+                        }, 100)
                     }}>
-                        <Text>{nowDate.getMonth()==0?12:nowDate.getMonth()}月</Text>
+                        <Text>{nowDate.getMonth() == 0 ? 12 : nowDate.getMonth()}月</Text>
                     </TouchableOpacity>
                     <Text style={styles.topCenter}>{nowDate.getFullYear()}年{nowDate.getMonth() + 1}月</Text>
-                    <TouchableOpacity disabled={((new Date(nowDate.getFullYear(), nowDate.getMonth()+1,0))-(new Date()))>0  ? true : false}  onPress={()=> {
-                        var t = new Date(nowDate.getFullYear(), nowDate.getMonth()+1, 0).getDate()
-                        var nextDate = new Date(nowDate.getTime() + 24*60*60*1000*t);
-                        this.setState({
-                            nowDate: nextDate,
-                            tip:true
-                        })
-                        setTimeout(()=>{
-                            that.setState({
-                                tip:false
+                    <TouchableOpacity
+                        disabled={((new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, 0)) - (new Date())) > 0 ? true : false}
+                        onPress={()=> {
+                            var t = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, 0).getDate()
+                            var nextDate = new Date(nowDate.getTime() + 24 * 60 * 60 * 1000 * t);
+                            this.setState({
+                                nowDate: nextDate,
+                                tip: true
                             })
-                        },100)
-                    }}>
-                        <Text style={((new Date(nowDate.getFullYear(), nowDate.getMonth()+1,0))-(new Date()))>0  ? styles.colorAE:{}}>{nowDate.getMonth()==11?1:nowDate.getMonth() + 2}月</Text>
+                            this.timerOut2 = setTimeout(()=> {
+                                that.setState({
+                                    tip: false
+                                })
+                            }, 100)
+                        }}>
+                        <Text
+                            style={((new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, 0)) - (new Date())) > 0 ? styles.colorAE : {}}>{nowDate.getMonth() == 11 ? 1 : nowDate.getMonth() + 2}月</Text>
                     </TouchableOpacity>
 
                 </View>
-                {tip?null:(
+                {tip ? null : (
                     <ScrollableTabView
 
                         renderTabBar={() => (
@@ -99,16 +102,22 @@ export default class MyRecordDay extends PureComponent {
             accessibilityTraits='button'
             onPress={() => onPressHandler(page)}
             onLayout={onLayoutHandler}
-            disabled={((new Date(this.state.nowDate.getFullYear(), this.state.nowDate.getMonth(),parseInt(name)))-(new Date()))>0? true : false}
+            disabled={((new Date(this.state.nowDate.getFullYear(), this.state.nowDate.getMonth(), parseInt(name))) - (new Date())) > 0 ? true : false}
         >
             <View style={{flexDirection: 'row'}}>
                 <View style={isTabActive ? styles.tabBarViewActive : styles.tabBarView}>
-                    <Text style={((new Date(this.state.nowDate.getFullYear(), this.state.nowDate.getMonth(),parseInt(name)))-(new Date()))>0 ? {color: '#aeaeae'} : {}}>
+                    <Text
+                        style={((new Date(this.state.nowDate.getFullYear(), this.state.nowDate.getMonth(), parseInt(name))) - (new Date())) > 0 ? {color: '#aeaeae'} : {}}>
                         {name}
                     </Text>
                 </View>
             </View>
         </Btn>
+    }
+
+    componentWillUnmount(){
+        this.timerOut1&&clearTimeout(this.timerOut1);
+        this.timerOut2&&clearTimeout(this.timerOut2);
     }
 }
 const styles = {

@@ -40,9 +40,6 @@ export default class Diagnosis extends PureComponent {
 				tools.showToast('请求出错！')
 			}
 		});
-		setTimeout(() => {
-
-		}, 600)
 	}
 
 
