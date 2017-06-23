@@ -33,7 +33,9 @@ export default class MyRecordDay extends PureComponent {
             <View style={styles.tabView}>
                 <View style={styles.topView}>
                     <TouchableOpacity onPress={()=> {
-                        var preDate = new Date(nowDate.getTime() - 24 * 60 * 60 * 1000*this.days);
+                        var pre = new Date(nowDate.getTime() - 24 * 60 * 60 * 1000*this.days);
+                        var t = new Date(pre.getFullYear(), pre.getMonth()+1, 0).getDate();
+                        var preDate  = new Date(nowDate.getTime() - 24 * 60 * 60 * 1000*t);
                         this.setState({
                             nowDate: preDate,
                             tip:true
@@ -48,7 +50,8 @@ export default class MyRecordDay extends PureComponent {
                     </TouchableOpacity>
                     <Text style={styles.topCenter}>{nowDate.getFullYear()}年{nowDate.getMonth() + 1}月</Text>
                     <TouchableOpacity disabled={((new Date(nowDate.getFullYear(), nowDate.getMonth()+1,0))-(new Date()))>0  ? true : false}  onPress={()=> {
-                        var nextDate = new Date(nowDate.getTime() + 24*60*60*1000*this.days);
+                        var t = new Date(nowDate.getFullYear(), nowDate.getMonth()+1, 0).getDate()
+                        var nextDate = new Date(nowDate.getTime() + 24*60*60*1000*t);
                         this.setState({
                             nowDate: nextDate,
                             tip:true

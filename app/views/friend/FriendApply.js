@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Actions} from "react-native-router-flux";
 import {Container, Content, Header, List, Separator, HeaderButton} from "../../components/index";
 import {Text, Button, ListItem, Item, Input,Right} from "native-base";
+import userStore from "../../mobx/userStore";
 /*import {showLoading, hideLoading} from "../../actions/loading";
 import {request, urls, tools, toast} from "../../utils/index";*/
 
@@ -17,7 +18,7 @@ export default class FriendApply extends PureComponent {
 		let {friend} = props;
 
 		this.state = {
-			myIntro: '我叫'+friend.username ,
+			myIntro: '我叫'+userStore.loginUser.username ,
 			friendRemark: friend.username
 		}
 	}

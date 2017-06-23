@@ -6,14 +6,30 @@ import DetailsModal from "../../home/components/DetailsModal";
 import {Actions} from "react-native-router-flux";
 
 
-var len = 1;
+var len = [];
 
 export default class MyRecordeList extends Component {
+	constructor(props){
+		super(props);
+		for(var i=0;i<30;i++){
+			len[i]=""
+		}
+		this.state={
+			len:len,
+			none:'',
+		}
+	}
+	componentWillMount(){
+		this.setState({
+			none:this.state.len[this.props.btn]=='{}'?"暂无记录":''
+		})
+	}
 
 	render() {
 		return (
 			<View style={{flex:1}}>
 				<GiftedListView
+					style={{marginBottom:20}}
 					rowView={this._renderRowView.bind(this)}
 					onFetch={this._onFetch.bind(this)}
 					firstLoader={true}
@@ -22,9 +38,14 @@ export default class MyRecordeList extends Component {
 					withSections={true}
 					sectionHeaderView={this._renderSectionHeaderView}
 					enableEmptySections={true}
-					paginationAllLoadedView={this._renderPaginationAllLoadedView}
+					paginationAllLoadedView={this._renderPaginationAllLoadedView.bind(this)}
 				/>
 				<DetailsModal ref={(e)=>this._groupSelectModal = e}/>
+				{this.state.none==''?(
+					<View style={{flex:999}}>
+						<Text style={{textAlign:'center'}}>暂无记录</Text>
+					</View>
+				):null}
 			</View>
 
 		)
@@ -42,7 +63,10 @@ export default class MyRecordeList extends Component {
 		request.getJson(urls.apis.TIMEPERIODAPI_GETMYRECORD,{
 			dateTime:dateTime
 		}).then((res) => {
-			len = JSON.stringify(res.obj);
+			len[btn] = JSON.stringify(res.obj);
+			this.setState({
+				len:len
+			})
 			callback(res.obj, {
 				allLoaded: true
 			})
@@ -70,12 +94,12 @@ export default class MyRecordeList extends Component {
 
 	_renderPaginationAllLoadedView() {
 		// alert(len)
-		if(len=="{}"){
-			return <View style={{}}>
-				<Text style={{textAlign:'center',marginTop:20}}>暂无记录</Text>
-			</View>;
-		}
-
+		// if(len[this.props.btn]=="{}"){
+		// 	return <View style={{}}>
+		// 		<Text style={{textAlign:'center',marginTop:20}}>暂无记录</Text>
+		// 	</View>;
+		// }
+		return null;
 	}
 
 	_paginationFetchingView() {
