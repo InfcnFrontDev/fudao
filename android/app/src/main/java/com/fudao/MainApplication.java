@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.facebook.react.ReactApplication;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.beefe.picker.PickerViewPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.cboy.rn.splashscreen.SplashScreenReactPackage;
@@ -17,8 +16,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import org.lovebing.reactnative.baidumap.BaiduMapPackage;
-import com.remobile.toast.RCTToastPackage;  // <--- import
+import com.remobile.toast.RCTToastPackage;
 import com.eguma.barcodescanner.BarcodeScannerPackage;
 
 import java.util.Arrays;
@@ -36,9 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNDeviceInfo(),
             new RCTCameraPackage(),
-            new BaiduMapPackage(getApplicationContext()),
             new PickerViewPackage(),
             new ImagePickerPackage(),
             new SplashScreenReactPackage(),

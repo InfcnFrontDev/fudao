@@ -1,9 +1,7 @@
 import React, {PureComponent} from "react";
 import {Actions} from "react-native-router-flux";
 import {observer} from "mobx-react/native";
-import {Alert} from 'react-native';
 import {View, Icon, Left, Right, Body, Text, ListItem} from "native-base";
-import DeviceInfo from 'react-native-device-info';
 import UserStore from "../../../mobx/userStore";
 
 

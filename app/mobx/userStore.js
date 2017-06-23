@@ -3,7 +3,6 @@ import {Actions, ActionConst} from "react-native-router-flux";
 import {AsyncStorage,Alert,Linking,Platform} from "react-native";
 import {persist} from "mobx-persist";
 import hydrate from "../common/hydrate";
-import DeviceInfo from 'react-native-device-info';
 var Geolocation = require('Geolocation');
 
 

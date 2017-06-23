@@ -1,9 +1,7 @@
 rootProject.name = 'FuDao'
+
 include ':react-native-camera'
 project(':react-native-camera').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-camera/android')
-
-include ':react-native-baidu-map'
-project(':react-native-baidu-map').projectDir = new File(settingsDir, '../node_modules/react-native-baidu-map/android')
 
 include ':react-native-picker'
 project(':react-native-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-picker/android')
@@ -32,6 +30,3 @@ project(':react-native-toast').projectDir = new File(settingsDir, '../node_modul
 
 include':react-native-barcodescanner'
 project(':react-native-barcodescanner').projectDir =new File(rootProject.projectDir,'../node_modules/react-native-barcodescanner/android')
-
-include ':react-native-device-info'
-project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
