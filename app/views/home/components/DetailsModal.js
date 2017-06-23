@@ -26,7 +26,6 @@ class DetailsModal extends PureComponent {
 
 
     render() {
-        console.log("hgjkfaghsdjkfdhskjfdhsakfh")
         let {visible,text} = this.state;
         let data=JSON.parse(text);
 let mol=(null);

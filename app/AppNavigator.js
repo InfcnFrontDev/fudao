@@ -30,7 +30,7 @@ export default class AppNavigator extends PureComponent {
 		// 关闭启动页
 		SplashScreen.hide();
 		// 获取当前位置
-		positionStore.fetchCurrentPosition();
+		// positionStore.fetchCurrentPosition();
 	}
 }
 

@@ -1,5 +1,6 @@
 import {observable, asMap, action, runInAction} from "mobx";
 import {persist} from "mobx-persist";
+import weatherStore from "./weatherStore";
 
 var Geolocation = require('Geolocation');
 
@@ -20,21 +21,25 @@ class PositionStore {
 	@observable lat = 39.99034788200354
 	@observable lng = 116.34033501776993
 
-	@action
-	fetchCurrentPosition(callback) {
-		Geolocation.getCurrentPosition(
-			location => {
-				// console.log(location);
-				let {longitude, latitude} = location.coords;
-				this.lng=longitude;
-				this.lat=latitude;
-				this.geoconv(longitude, latitude);
-			},
-			error => {
-				tools.showToast("获取位置失败")
-			}
-		);
-	}
+
+    @action
+    fetchCurrentPosition() {
+        Geolocation.getCurrentPosition(
+            location => {
+                console.log('location');
+                console.log(location);
+                let {longitude, latitude} = location.coords;
+                this.lng=longitude;
+                this.lat=latitude;
+                this.geoconv(longitude, latitude);
+            },
+            error => {
+                console.log('error')
+                console.log(error)
+                tools.showToast("获取位置失败")
+            }
+        );
+    }
 
 	/**
 	 * 转码
@@ -65,8 +70,15 @@ class PositionStore {
 			radius: 20,
 			ak: 'trLEKMVBCc6MKGemHlUXdyy2'
 		}).then((data) => {
-			if (data.status == 0)
+			if (data.status == 0){
 				this.currentPosition = data.result.addressComponent;
+
+				// 获取天气
+                weatherStore.fetchCurrentWeather(this.currentPosition.city);
+                weatherStore.fetchPm25(this.currentPosition.city);
+            }
+
+
 		});
 	}
 

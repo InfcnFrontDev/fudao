@@ -18,7 +18,7 @@ export default class About extends PureComponent {
 					<View style={styles.title}>
 						<Image  source={require('../../assets/logo-png.png')} style={styles.logo}/>
 						<Text style={styles.titleText}>{config.appName}</Text>
-						<Text>{config.appVersion}</Text>
+						<Text>{config.versionName}</Text>
 					</View>
 					<View>
 						<Text style={styles.desc}>

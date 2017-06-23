@@ -18,6 +18,9 @@ import weatherStore from "../../mobx/weatherStore";
  */
 @observer
 export default class Home extends PureComponent {
+
+    watchID = null
+
     constructor(props) {
         super(props);
         this.state = {
@@ -30,22 +33,26 @@ export default class Home extends PureComponent {
 
     }
 
-    componentWillMount() {
+    componentDidMount(){
         positionStore.fetchCurrentPosition();
-        let city = positionStore.currentPosition.city;
-        weatherStore.fetchCurrentWeather(city);
-        weatherStore.fetchPm25(city);
         this.interval();
     }
 
+    componentWillUnmount() {
+        navigator.geolocation.clearWatch(this.watchID);
+    }
 
     render() {
         let {currentPosition} = positionStore;
         let {currentWeather} = weatherStore;
 
-        let weatid = currentWeather || currentWeather.weatid || 1;
+        let weatid = 1;
+        if(currentWeather!=null && currentWeather.weatid != null){
+            weatid = currentWeather.weatid;
+        }
+        let imgStr = 'http://api.k780.com:88/upload/weather/d1/' + (weatid - 1) + '.png';
 
-        let imgStr = 'http://api.k780.com:88/upload/weather/d1/' + (weatid - 1) + '.png'
+
         let leftBtnStyle = Object.assign({}, styles.floatBtn, styles.leftBtn)
             , rightBtnStyle = Object.assign({}, styles.floatBtn, styles.rightBtn);
         return (
@@ -65,7 +72,7 @@ export default class Home extends PureComponent {
                     <View style={{flexDirection: 'column', justifyContent: 'center', width: 80}}>
                         <Text style={styles.font}>{currentPosition.city + '.' + currentPosition.district}</Text>
                         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                            <Text style={styles.font}>{currentWeather.weather}</Text>
+                            <Text style={styles.font}>{currentWeather.weather_curr}</Text>
                             <Image style={{width: 20, height: 20}} source={{uri: imgStr}}/>
                         </View>
 
@@ -185,6 +192,7 @@ export default class Home extends PureComponent {
             userStore.checkVersion()
         }, 600000)
     }
+
 }
 
 const styles = {
