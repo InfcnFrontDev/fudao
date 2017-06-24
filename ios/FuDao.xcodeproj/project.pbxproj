@@ -47,6 +47,8 @@
 		5C2CD8451A1A4CB9AD78E55F /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE927A1098D94B8486991628 /* Rubik-BlackItalic.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		688055D6DAE0417EB187179A /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 862126898A734E20BE6732B3 /* Rubik-Regular.ttf */; };
+		6C46C6F31EFE36CE00750DBB /* ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 6C46C6F11EFE36CE00750DBB /* ios.jsbundle */; };
+		6C46C6F41EFE36CE00750DBB /* ios.jsbundle.meta in Resources */ = {isa = PBXBuildFile; fileRef = 6C46C6F21EFE36CE00750DBB /* ios.jsbundle.meta */; };
 		707986495FDB4E968A2CB297 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73CFF5DC65554DD2916347F8 /* Rubik-Italic.ttf */; };
 		718C25943D264FD0946873FF /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02C3097924774150B02218C6 /* Rubik-Black.ttf */; };
 		740B92FBF9AE471AB94315A7 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2C2B74D167941EDB85D4BEC /* Roboto.ttf */; };
@@ -365,6 +367,8 @@
 		65A08521B27340C681FA30F7 /* OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = OFL.txt; path = "../node_modules/native-base/Fonts/OFL.txt"; sourceTree = "<group>"; };
 		66DD1F3573B143C7A3691E3F /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		69B25BE972F84977A5209B02 /* libRCTToast.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTToast.a; sourceTree = "<group>"; };
+		6C46C6F11EFE36CE00750DBB /* ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios.jsbundle; sourceTree = "<group>"; };
+		6C46C6F21EFE36CE00750DBB /* ios.jsbundle.meta */ = {isa = PBXFileReference; lastKnownFileType = file; path = ios.jsbundle.meta; sourceTree = "<group>"; };
 		6F96D46C77664B9D889156A8 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		72F09164626D4FCCB7461BBB /* Courier New.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Courier New.ttf"; path = "../node_modules/native-base/Fonts/Courier New.ttf"; sourceTree = "<group>"; };
 		73CFF5DC65554DD2916347F8 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Italic.ttf"; path = "../node_modules/native-base/Fonts/Rubik-Italic.ttf"; sourceTree = "<group>"; };
@@ -530,6 +534,8 @@
 		13B07FAE1A68108700A75B9A /* FuDao */ = {
 			isa = PBXGroup;
 			children = (
+				6C46C6F11EFE36CE00750DBB /* ios.jsbundle */,
+				6C46C6F21EFE36CE00750DBB /* ios.jsbundle.meta */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1172,9 +1178,11 @@
 				AC05A847E5B4448A9A50434A /* FontAwesome.ttf in Resources */,
 				A5F817B61A5A4CF0ADDB547F /* Foundation.ttf in Resources */,
 				9CEA844451D949B598CE1FC0 /* Georgia.ttf in Resources */,
+				6C46C6F31EFE36CE00750DBB /* ios.jsbundle in Resources */,
 				09396681D8E5432C893905E1 /* Ionicons.ttf in Resources */,
 				9EF7BF33947342B681207766 /* MaterialIcons.ttf in Resources */,
 				0040D29DF88D427095CC737E /* Microsoft Sans Serif.ttf in Resources */,
+				6C46C6F41EFE36CE00750DBB /* ios.jsbundle.meta in Resources */,
 				26F7DD04F5A343ADA1E4C26B /* Octicons.ttf in Resources */,
 				316A973D684C4E7CBD358ED7 /* Roboto_medium.ttf in Resources */,
 				740B92FBF9AE471AB94315A7 /* Roboto.ttf in Resources */,
