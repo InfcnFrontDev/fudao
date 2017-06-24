@@ -38,7 +38,9 @@ export default class Home extends PureComponent {
         // 获取当前位置
         positionStore.fetchCurrentPosition();
         // 检测版本更新
-        userStore.checkVersion();
+        if(Platform.OS=='android'){
+            userStore.checkVersion();
+        }
         // 防止Token过期
         this.timer = setInterval(
             () => { articleStore.fetchArticleColumnList() },
