@@ -140,7 +140,8 @@ export default class EmotionSolveModal extends PureComponent {
 	hide() {
 		this.setState({
 			visible: false,
-			emotion: null
+			emotion: null,
+            Threeflag:true,
 		})
 	}
 }
