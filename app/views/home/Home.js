@@ -1,8 +1,8 @@
 import React, {PureComponent} from "react";
 import {observer} from "mobx-react/native";
-import {TouchableHighlight, Dimensions, Image, WebView, Platform} from "react-native";
+import {Dimensions, Image, Platform, WebView} from "react-native";
 import {Actions} from "react-native-router-flux";
-import {Right, Text, View, Button, Icon} from "native-base";
+import {Button, Icon, Right, Text, View} from "native-base";
 import {Container, Content} from "../../components/index";
 import MyEnter from "./components/MyEnter.js";
 import userStore from "../../mobx/userStore";
@@ -12,6 +12,7 @@ import TimeModal from "./components/TimeModal";
 import YunDongModal from "./components/YunDongModal";
 import weatherStore from "../../mobx/weatherStore";
 import articleStore from "../../mobx/articleStore";
+import versionStore from "../../mobx/versionStore";
 
 
 /**
@@ -34,18 +35,21 @@ export default class Home extends PureComponent {
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
         // 获取当前位置
         positionStore.fetchCurrentPosition();
         // 检测版本更新
-        if(Platform.OS=='android'){
-            userStore.checkVersion();
+        if (Platform.OS == 'android') {
+            versionStore.checkVersion();
         }
         // 防止Token过期
         this.timer = setInterval(
-            () => { articleStore.fetchArticleColumnList() },
+            () => {
+                articleStore.fetchArticleColumnList()
+            },
             1000 * 60 * 10
         );
+
     }
 
     componentWillUnmount() {
@@ -59,7 +63,7 @@ export default class Home extends PureComponent {
         let {currentWeather} = weatherStore;
 
         let weatid = 1;
-        if(currentWeather!=null && currentWeather.weatid != null){
+        if (currentWeather != null && currentWeather.weatid != null) {
             weatid = currentWeather.weatid;
         }
         let imgStr = 'http://api.k780.com:88/upload/weather/d1/' + (weatid - 1) + '.png';
@@ -77,7 +81,7 @@ export default class Home extends PureComponent {
                     marginTop: Platform.OS == 'ios' ? 20 : 0
                 }}>
                     <View style={{flexDirection: 'column', justifyContent: 'center'}}>
-                        <Button transparent onPress={()=> Actions.sideBar()}>
+                        <Button transparent onPress={() => Actions.sideBar()}>
                             <Icon name="menu" style={{color: "#fff"}}/>
                         </Button>
                     </View>
@@ -104,11 +108,11 @@ export default class Home extends PureComponent {
                             marginRight: 10
                         }}
                                 transparent
-                                onPress={()=>Actions.search()}>
+                                onPress={() => Actions.search()}>
                             <Icon name="search"
                                   style={{color: "#fff", position: 'absolute', right: 10}}/>
                         </Button>
-                        <Button transparent onPress={()=> Actions.feedback()}>
+                        <Button transparent onPress={() => Actions.feedback()}>
                             <Image source={require('../../assets/feedback.png')} style={{width: 20, height: 20}}/>
                             {/*<Icon name="ios-chatboxes" style={{color: "#fff"}}/>
                              <View
@@ -122,7 +126,7 @@ export default class Home extends PureComponent {
 
                     <WebView
                         source={{uri: urls.pages.HOME + '?status=' + this.state.status + '&token=' + userStore.token}}
-                        onMessage={(event)=>this.openDetailsBox(event.nativeEvent.data)}
+                        onMessage={(event) => this.openDetailsBox(event.nativeEvent.data)}
                         style={{backgroundColor: 'rgba(0,0,0,.0)'}}
                     />
 
@@ -138,22 +142,22 @@ export default class Home extends PureComponent {
                             flexDirection: 'row'
                         }}>
                         <Button transparent style={{backgroundColor: 'rgba(225,225,225,.0)'}}
-                                onPress={()=>this.changeStatus()}>
+                                onPress={() => this.changeStatus()}>
                             <Image source={require('../../assets/home/qiehuan.png')} style={{width: 20, height: 20}}/>
                             <Text style={{color: '#b7b7b7', fontSize: 14}}>{this.state.status ? '个人版' : '通用版'}</Text>
                         </Button>
 
                     </View>
 
-                    <Button transparent style={leftBtnStyle} onPress={()=> Actions.emotion()}>
+                    <Button transparent style={leftBtnStyle} onPress={() => Actions.emotion()}>
                         <Image source={require('../../assets/home/qingxu.png')} style={styles.image}/>
                     </Button>
-                    <Button transparent style={rightBtnStyle} onPress={()=> Actions.energy()}>
+                    <Button transparent style={rightBtnStyle} onPress={() => Actions.energy()}>
                         <Image source={require('../../assets/home/cengliangchang.png')} style={styles.image}/>
                     </Button>
-                    <DetailsModal ref={(e)=>this._groupSelectModal = e}/>
-                    <TimeModal ref={(e)=>this._TimeModal = e}/>
-                    <YunDongModal ref={(e)=>this._YunDongModal = e}/>
+                    <DetailsModal ref={(e) => this._groupSelectModal = e}/>
+                    <TimeModal ref={(e) => this._TimeModal = e}/>
+                    <YunDongModal ref={(e) => this._YunDongModal = e}/>
 
                 </Content>
                 <View style={{width: Dimensions.get('window').width, height: Platform.OS == 'ios' ? 103 : 107,}}>
@@ -177,13 +181,13 @@ export default class Home extends PureComponent {
             this._YunDongModal.show(data.substring(4, data.length));
         } else {
             let obj = JSON.parse(data)
-            if(obj.type==0){
+            if (obj.type == 0) {
                 // alert(obj.threeCharacterClassic.split(',')[0])
                 Actions.menuKinds({
                     idOrName: obj.threeCharacterClassic.split('，')[0],
                     arr: obj.threeCharacterClassic.split('，')
                 })
-            }else{
+            } else {
                 this._groupSelectModal.show(data);
 
             }

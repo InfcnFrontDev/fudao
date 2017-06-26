@@ -2,8 +2,8 @@ import React, {PureComponent} from "react";
 import {Actions} from "react-native-router-flux";
 import {Platform} from "react-native";
 import {observer} from "mobx-react/native";
-import {View, Icon, Left, Right, Body, Text, ListItem} from "native-base";
-import UserStore from "../../../mobx/userStore";
+import {Body, Icon, Left, ListItem, Right, Text, View} from "native-base";
+import versionStore from "../../../mobx/versionStore";
 
 
 /**
@@ -65,7 +65,8 @@ export default class MyList extends PureComponent {
     renderItem(item) {
         let version = config.versionName;
         return (
-            <ListItem icon onPress={item.type == 1 ? ()=> Actions[item.route]() : Platform.OS=='android'?()=>this.update():null}>
+            <ListItem icon
+                      onPress={item.type == 1 ? () => Actions[item.route]() : Platform.OS == 'android' ? () => versionStore.checkVersion(true) : null}>
                 <Left>
                     <Icon name={item.icon}/>
                 </Left>
@@ -83,12 +84,6 @@ export default class MyList extends PureComponent {
     shouldComponentUpdate() {
         return false
     }
-
-    update() {
-        //检测版本信息
-        UserStore.checkVersion('click');
-    }
-
 }
 
 const styles = {
