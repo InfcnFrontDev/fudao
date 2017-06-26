@@ -51,7 +51,7 @@ export default class AllDiseaseTabLiaoShen extends PureComponent {
 
 	render() {
         let {data} = this.props
-        if(data){
+        if(data !== null){
             let liaoShen = {}
             for(let k in data){
                 liaoShen[k] = data[k].slice()

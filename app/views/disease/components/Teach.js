@@ -83,7 +83,7 @@ export default class Teach extends PureComponent {
                         style={styles.wrapper}
                         showsButtons={false}
                         showsPagination={true}
-                        paginationStyle={{bottom: 120}}
+                        paginationStyle={{bottom: 100}}
                         activeDot={<View style={{
                             backgroundColor: '#00cf92',
                             width: 8,
@@ -99,7 +99,7 @@ export default class Teach extends PureComponent {
                         {
                             data.length > 0 ? data.map((item, index) => {
                                 return (
-                                    <View key={index} style={styles.container}>
+                                    <ScrollView key={index} style={styles.container}>
                                         <View style={styles.headerView}>
                                             <Text>{'  -' + item.name}</Text>
                                         </View>
@@ -110,7 +110,7 @@ export default class Teach extends PureComponent {
                                             this.renderView(item)
                                         }
 
-                                    </View>
+                                    </ScrollView>
                                 )
                             }) : <View/>
                         }

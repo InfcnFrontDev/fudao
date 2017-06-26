@@ -9,7 +9,9 @@ export default class AllDiseaseTabLiaoXin extends PureComponent {
     });
 	render() {
 		let {data} = this.props
-		data = data.slice()
+		if(data !== null){
+            data = data.slice()
+		}
         return (
 			<ListView
 				enableEmptySections={true}
