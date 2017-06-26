@@ -18,7 +18,7 @@ export default class RelatedProductsAndServices extends PureComponent {
 
 	render() {
 		let {data} = this.props;
-		if(Platform.OS=='ios'){
+		if(Platform.OS=='ios' || Platform.OS=='android'){
 			return null;
 		}
 		return  (

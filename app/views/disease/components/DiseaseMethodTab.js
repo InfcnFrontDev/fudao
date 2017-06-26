@@ -63,6 +63,8 @@ export default class DiseaseMethodTab extends PureComponent {
 
 
     renderSuitable(data){
+        console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        console.log(data)
         let arr = []
         arr = data.staple.concat(data.dishes)
         return (

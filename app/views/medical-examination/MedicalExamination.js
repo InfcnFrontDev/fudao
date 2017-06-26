@@ -102,7 +102,7 @@ export default class MedicalExamination extends PureComponent {
                 last={rowId == rowsAndSections[sectionId].length - 1}
             >
                 <Body>
-                <Text style={{fontSize: theme.fontSizeH5}}>{rowData.name}</Text>
+                <Text style={{fontSize: theme.fontSizeH5}}>{rowData.name} {rowData.unit?'('+rowData.unit+')':''}</Text>
                 </Body>
                 <Right>
                     <Text note>{rowData.value}</Text>
