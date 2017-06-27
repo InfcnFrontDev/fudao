@@ -5,6 +5,10 @@ export default class ArticleSingleImageItem extends Component {
 
 	render() {
 		let {article, onPress, onLongPress} = this.props;
+
+		// 多图分隔显示第一张
+        let imgs = article.img.split(',');
+
 		return (
 			<Item style={styles.item}
 				  onPress={()=> onPress && onPress(article)}
@@ -21,7 +25,7 @@ export default class ArticleSingleImageItem extends Component {
 							</Row>
 						</Col>
 						<Col style={{width: 115, justifyContent: 'flex-end', flexDirection: 'row'}}>
-							<Thumbnail square source={{uri: urls.apis.IMAGE + '?filePath=' + article.img}}
+							<Thumbnail square source={{uri: urls.apis.IMAGE + '?filePath=' + imgs[0]}}
 									   style={{width: 110, height: 70}}/>
 						</Col>
 					</Row>

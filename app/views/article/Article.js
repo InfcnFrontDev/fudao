@@ -16,7 +16,7 @@ export default class Article extends PureComponent {
 		return (
 			<Container>
 				<Header menu {...this.props}/>
-				<Content white>
+				<Content white style={{paddingBottom: 50}}>
 					{!isFetching &&
 					<ScrollableTabView
 						renderTabBar={() => (

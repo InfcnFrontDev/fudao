@@ -66,12 +66,12 @@ export default class Emotion extends PureComponent {
 	}
 
 	async _emotionFactorModal_onSubmit(emotion, selectedGrade, selectedReasons) {
-		const result = await this._fetchEmotionIntervene(emotion.title, selectedGrade, selectedReasons);
-		this._solveModal.show({
-			title: emotion.title,
-			img: emotion.img,
-			...result
-		});
+        const result = await this._fetchEmotionIntervene(emotion.title, selectedGrade, selectedReasons);
+        this._solveModal.show({
+            title: emotion.title,
+            img: emotion.img,
+            ...result
+        });
 	}
 
 	/**
@@ -113,6 +113,7 @@ export default class Emotion extends PureComponent {
 				emotion,
 				weather
 			}).then((data) => {
+                console.log(data)
 				if (data.ok) {
 					resolve(data.obj)
 				} else {
@@ -129,6 +130,7 @@ export default class Emotion extends PureComponent {
 			request.getJson(urls.apis.EMOTION_GETEMOTIONINTERVENE, {
 				emotion, grade, factors
 			}).then((data) => {
+				console.log(data)
 				if (data.ok) {
 					resolve(data.obj)
 				} else {

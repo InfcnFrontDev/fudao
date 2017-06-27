@@ -53,6 +53,8 @@ const request = {
 			}
 		}
 
+		console.log(url)
+
 		fetch(url, {
 			method: 'GET',
 			headers: {

@@ -14,8 +14,8 @@ export default class Content extends PureComponent {
 
 	render() {
 		let {isLoading} = this.state;
-		let {children, gray, white, padder} = this.props;
-		let contentStyle = {flex: 1};
+		let {children, gray, white, padder, style} = this.props;
+		let contentStyle = Object.assign({flex: 1}, style);
 
 		if (gray) {
 			contentStyle.backgroundColor = theme.contentBgColor;
@@ -57,7 +57,8 @@ Content.propTypes = {
 	gray: React.PropTypes.bool, // 背景灰色
 	white: React.PropTypes.bool, // 背景白色
 	padder: React.PropTypes.bool, // 加Padding
-	delay: React.PropTypes.bool, // 延迟加载
+    delay: React.PropTypes.bool, // 延迟加载
+	style: React.PropTypes.object
 }
 
 Content.defaultProps = {
@@ -65,4 +66,5 @@ Content.defaultProps = {
 	white: false,
 	padder: false,
 	delay: false,
+	style: {}
 }

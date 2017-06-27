@@ -39,7 +39,6 @@ export default class Disease extends PureComponent {
         myDiseaseList.splice(i, 1);
         deleteMyDiseaseListItem(item.id)
         allDiseaseListStore.fetchAllDiseaseList()
-
     }
 
 	render() {

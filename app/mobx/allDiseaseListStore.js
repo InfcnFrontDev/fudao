@@ -3,7 +3,7 @@ import {observable, runInAction, computed, action, reaction, autorun} from "mobx
 import {ListView} from "react-native";
 
 class AllDiseaseListStore {
-	@observable allDiseaseList = []
+	@observable allDiseaseList = {}
 	@observable data = []
     @observable selectedItem = {}
     @observable modalShow = false
