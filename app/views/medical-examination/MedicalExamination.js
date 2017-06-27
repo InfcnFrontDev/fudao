@@ -142,7 +142,7 @@ export default class MedicalExamination extends PureComponent {
                     keyboardType: 'numeric',
                     maxLength: 10,
                     minLength: 0,
-                    callback: (id, text) => this._yanzheng(id, item.id, item.inputType)
+                    callback: (id, text) => this._yanzheng(id, item.id, item.inputType,item.range)
                 }
             });
         } else if (item.inputType == "2") {
@@ -236,10 +236,19 @@ export default class MedicalExamination extends PureComponent {
         }
     }
 
-    _yanzheng(id, Id, inputType) {
+    _yanzheng(id, Id, inputType,range) {
+
         if (inputType == '1') {
+            let xia=range.split('~')[0];
+            let da=range.split('~')[1];
             if (this.reg("^[0-9]+([.]{1}[0-9]+){0,1}$", id) || id == '') {
-                this.updataMedicalExamination(Id, id);
+                if(id<xia||id>da){
+                    tools.showToast("请输入范围在"+range+"内")
+                }else{
+                    this.updataMedicalExamination(Id, id);
+                }
+
+
             } else {
                 tools.showToast("请输入数字")
             }
