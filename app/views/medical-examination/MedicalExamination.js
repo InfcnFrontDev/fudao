@@ -245,7 +245,7 @@ export default class MedicalExamination extends PureComponent {
             let xia=range.split('~')[0];
             let da=range.split('~')[1];
             if (this.reg("^[0-9]+([.]{1}[0-9]+){0,1}$", id) || id == '') {
-                if(id<xia||id>da){
+                if(parseInt(id)<xia||parseInt(id)>da){
                     tools.showToast("请输入范围在"+range+"内")
                 }else{
                     this.updataMedicalExamination(Id, id);
