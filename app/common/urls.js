@@ -61,7 +61,7 @@ const urls = {
         SELFDIAGNOSIS: webPath + 'selfDiagnosis.html',
         //商城
         SHOP: webPath + 'shop.html',
-        // 最新版本
+        // 检测新版本
         LATEST_VERSION: webPath + 'apk/version.json',
     },
     /**
