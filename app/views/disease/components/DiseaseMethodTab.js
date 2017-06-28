@@ -24,7 +24,7 @@ export default class DiseaseMethodTab extends PureComponent {
     }
 
     render() {
-        this.t = Platform.OS=='ios'?"\t":'\t\t';
+        this.t = Platform.OS=='ios'?"\t":"　　";
         let {data} = this.props;
         return (
             <ScrollView>
