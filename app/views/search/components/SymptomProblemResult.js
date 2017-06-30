@@ -4,14 +4,15 @@ import {Actions} from "react-native-router-flux";
 import {Text, View} from "native-base";
 import diseaseMethodStore from "../../../mobx/diseaseMethodStore";
 import myDiseaseListStore from "../../../mobx/myDiseaseListStore";
+import allDiseaseListStore from "../../../mobx/allDiseaseListStore";
 /**
  * result
  */
 export default class SymptomProblemResult extends PureComponent {
     onPress(item) {
         myDiseaseListStore.fetchMyDiseaseList()
-        myDiseaseListStore.selectedItemName = item.name
-        myDiseaseListStore.selectedItemId = item.id
+        myDiseaseListStore.selectedItem = item
+        allDiseaseListStore.selectedItem = item
         Actions.diseaseDetail()
         diseaseMethodStore.diseaseId = item.id
     }

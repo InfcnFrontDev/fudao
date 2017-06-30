@@ -24,7 +24,7 @@ export default class DiseaseMethodTab extends PureComponent {
     }
 
     render() {
-        this.t = Platform.OS=='ios'?"\t":'\t\t';
+        this.t = Platform.OS=='ios'?"\t":"　　";
         let {data} = this.props;
         return (
             <ScrollView>
@@ -63,8 +63,6 @@ export default class DiseaseMethodTab extends PureComponent {
 
 
     renderSuitable(data){
-        console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
-        console.log(data)
         let arr = []
         arr = data.staple.concat(data.dishes)
         return (
