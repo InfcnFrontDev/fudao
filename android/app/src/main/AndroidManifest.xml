@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.fudao"
-          android:versionCode="1"
+          android:versionCode="3"
           android:versionName="2.0.0">
 
     <uses-permission android:name="android.permission.INTERNET"/>
